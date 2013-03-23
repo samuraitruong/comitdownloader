@@ -90,6 +90,7 @@
     <Compile Include="Cx.Windows.Forms\NoResizeChildForm.Designer.cs">
       <DependentUpon>NoResizeChildForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Engines\BlogTruyenDownloader.cs" />
     <Compile Include="Engines\Downloader.cs" />
     <Compile Include="Engines\NetworkHelper.cs" />
     <Compile Include="Engines\StoryInfo.cs" />
