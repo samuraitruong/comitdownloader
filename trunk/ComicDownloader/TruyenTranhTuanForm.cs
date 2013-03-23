@@ -401,6 +401,7 @@ myHttpWebRequest.AutomaticDecompression = DecompressionMethods.GZip ;//Or Decomp
 
         private void bntInfo_Click(object sender, EventArgs e)
         {
+            
            // LockControl(false);
             var url = txtUrl.Text;
 
