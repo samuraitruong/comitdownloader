@@ -204,7 +204,7 @@ namespace ComicDownloader
 
                         size += file.Length;
                         total += file.Length;
-
+                        file.Close();
                         this.Invoke((MethodInvoker)delegate
                         {
                             this.progess.Value = count;
@@ -421,13 +421,17 @@ namespace ComicDownloader
         {
             using (new LongOperation())
             {
+                this.Invoke(new MethodInvoker(delegate() {
+
+                    this.Text = "Loading...";
+                }));
                 currentStoryInfo = Downloader.RequestInfo(txtUrl.Text);
 
                
                 txtTitle.Text = ddlList.Text;
                 txtTitle.Text = currentStoryInfo.Name;
 
-                this.Text = currentStoryInfo.Name;
+                this.Text = Downloader.Name + currentStoryInfo.Name;
 
                 tblChapters.Rows.Clear();
 

@@ -70,16 +70,10 @@ namespace ComicDownloader.Engines
                     Url = string.Format("{0}{1}doc-truyen/", HostUrl, item.Attributes["href"].Value),
                     Name = item.InnerText
                     ,
-                    ChapId = 0
+                    ChapId = ExtractID(node.InnerText)
 
                 };
-                var match=Regex.Match(chapter.Name, @".*\s(\d*)$");
-                if (match != null)
-                {
-                    int id = 0;
-                    int.TryParse(match.Groups[1].Value, out id);
-                    chapter.ChapId = id;
-                }
+               
 
                 info.Chapters.Add(chapter);
             }
@@ -87,6 +81,10 @@ namespace ComicDownloader.Engines
             info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
 
             return info;
+        }
+        public override string Name
+        {
+            get { return "[Truyen Tranh Tuan] - "; }
         }
         public override List<string> GetPages(string chapUrl)
         {
