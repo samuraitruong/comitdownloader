@@ -31,19 +31,22 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppMainForm));
             this.mdiTabStrip1 = new Cx.Windows.Forms.MdiTabStrip();
             this.ribbon1 = new System.Windows.Forms.Ribbon();
-            this.ribbonTab1 = new System.Windows.Forms.RibbonTab();
-            this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
-            this.ribbonTab2 = new System.Windows.Forms.RibbonTab();
-            this.ribbonPanel2 = new System.Windows.Forms.RibbonPanel();
-            this.ribbonPanel3 = new System.Windows.Forms.RibbonPanel();
-            this.txtVCHost = new System.Windows.Forms.RibbonTextBox();
-            this.txtVSList = new System.Windows.Forms.RibbonTextBox();
             this.ribbonOrbMenuItem1 = new System.Windows.Forms.RibbonOrbMenuItem();
             this.ribbonButton1 = new System.Windows.Forms.RibbonButton();
             this.ribbonButton2 = new System.Windows.Forms.RibbonButton();
+            this.ribbonTab1 = new System.Windows.Forms.RibbonTab();
+            this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
             this.btnAddNewTTT = new System.Windows.Forms.RibbonButton();
+            this.ribbonTab2 = new System.Windows.Forms.RibbonTab();
+            this.ribbonPanel2 = new System.Windows.Forms.RibbonPanel();
             this.btnVCAdd = new System.Windows.Forms.RibbonButton();
             this.bntRefeshList = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel3 = new System.Windows.Forms.RibbonPanel();
+            this.txtVCHost = new System.Windows.Forms.RibbonTextBox();
+            this.txtVSList = new System.Windows.Forms.RibbonTextBox();
+            this.ribbonTab3 = new System.Windows.Forms.RibbonTab();
+            this.ribbonPanel4 = new System.Windows.Forms.RibbonPanel();
+            this.btnAddTTTGeneric = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
             // mdiTabStrip1
@@ -82,51 +85,9 @@
             this.ribbon1.TabIndex = 1;
             this.ribbon1.Tabs.Add(this.ribbonTab1);
             this.ribbon1.Tabs.Add(this.ribbonTab2);
+            this.ribbon1.Tabs.Add(this.ribbonTab3);
             this.ribbon1.TabsMargin = new System.Windows.Forms.Padding(12, 26, 20, 0);
             this.ribbon1.Text = "ribbon1";
-            // 
-            // ribbonTab1
-            // 
-            this.ribbonTab1.Panels.Add(this.ribbonPanel1);
-            this.ribbonTab1.Text = "truyentranhtuan.com";
-            // 
-            // ribbonPanel1
-            // 
-            this.ribbonPanel1.Items.Add(this.btnAddNewTTT);
-            this.ribbonPanel1.Text = "Download";
-            this.ribbonPanel1.Click += new System.EventHandler(this.ribbonPanel1_Click);
-            // 
-            // ribbonTab2
-            // 
-            this.ribbonTab2.Panels.Add(this.ribbonPanel2);
-            this.ribbonTab2.Panels.Add(this.ribbonPanel3);
-            this.ribbonTab2.Text = "Vechai.info";
-            // 
-            // ribbonPanel2
-            // 
-            this.ribbonPanel2.Items.Add(this.btnVCAdd);
-            this.ribbonPanel2.Items.Add(this.bntRefeshList);
-            this.ribbonPanel2.Text = "Download";
-            // 
-            // ribbonPanel3
-            // 
-            this.ribbonPanel3.Items.Add(this.txtVCHost);
-            this.ribbonPanel3.Items.Add(this.txtVSList);
-            this.ribbonPanel3.Text = "Infomation";
-            // 
-            // txtVCHost
-            // 
-            this.txtVCHost.Text = "Host";
-            this.txtVCHost.TextBoxText = "http://vechai.info";
-            this.txtVCHost.TextBoxWidth = 150;
-            this.txtVCHost.Value = "http://vechai.info";
-            // 
-            // txtVSList
-            // 
-            this.txtVSList.Text = "List URL";
-            this.txtVSList.TextBoxText = "http://vechai.info/danh-sach/";
-            this.txtVSList.TextBoxWidth = 150;
-            this.txtVSList.Value = "http://vechai.info/danh-sach/";
             // 
             // ribbonOrbMenuItem1
             // 
@@ -156,6 +117,17 @@
             this.ribbonButton2.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton2.SmallImage")));
             this.ribbonButton2.Text = "ribbonButton2";
             // 
+            // ribbonTab1
+            // 
+            this.ribbonTab1.Panels.Add(this.ribbonPanel1);
+            this.ribbonTab1.Text = "truyentranhtuan.com";
+            // 
+            // ribbonPanel1
+            // 
+            this.ribbonPanel1.Items.Add(this.btnAddNewTTT);
+            this.ribbonPanel1.Text = "Download";
+            this.ribbonPanel1.Click += new System.EventHandler(this.ribbonPanel1_Click);
+            // 
             // btnAddNewTTT
             // 
             this.btnAddNewTTT.Image = global::ComicDownloader.Properties.Resources._1363939449_netvibes;
@@ -164,6 +136,18 @@
             this.btnAddNewTTT.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnAddNewTTT.SmallImage")));
             this.btnAddNewTTT.Text = "";
             this.btnAddNewTTT.Click += new System.EventHandler(this.btnAddNewTTT_Click);
+            // 
+            // ribbonTab2
+            // 
+            this.ribbonTab2.Panels.Add(this.ribbonPanel2);
+            this.ribbonTab2.Panels.Add(this.ribbonPanel3);
+            this.ribbonTab2.Text = "Vechai.info";
+            // 
+            // ribbonPanel2
+            // 
+            this.ribbonPanel2.Items.Add(this.btnVCAdd);
+            this.ribbonPanel2.Items.Add(this.bntRefeshList);
+            this.ribbonPanel2.Text = "Download";
             // 
             // btnVCAdd
             // 
@@ -180,6 +164,44 @@
             this.bntRefeshList.MinimumSize = new System.Drawing.Size(0, 0);
             this.bntRefeshList.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntRefeshList.SmallImage")));
             this.bntRefeshList.Click += new System.EventHandler(this.bntRefeshList_Click);
+            // 
+            // ribbonPanel3
+            // 
+            this.ribbonPanel3.Items.Add(this.txtVCHost);
+            this.ribbonPanel3.Items.Add(this.txtVSList);
+            this.ribbonPanel3.Text = "Infomation";
+            // 
+            // txtVCHost
+            // 
+            this.txtVCHost.Text = "Host";
+            this.txtVCHost.TextBoxText = "http://vechai.info";
+            this.txtVCHost.TextBoxWidth = 150;
+            this.txtVCHost.Value = "http://vechai.info";
+            // 
+            // txtVSList
+            // 
+            this.txtVSList.Text = "List URL";
+            this.txtVSList.TextBoxText = "http://vechai.info/danh-sach/";
+            this.txtVSList.TextBoxWidth = 150;
+            this.txtVSList.Value = "http://vechai.info/danh-sach/";
+            // 
+            // ribbonTab3
+            // 
+            this.ribbonTab3.Panels.Add(this.ribbonPanel4);
+            this.ribbonTab3.Text = "Test Generic";
+            // 
+            // ribbonPanel4
+            // 
+            this.ribbonPanel4.Items.Add(this.btnAddTTTGeneric);
+            this.ribbonPanel4.Text = "Truyen Tranh Tuan";
+            // 
+            // btnAddTTTGeneric
+            // 
+            this.btnAddTTTGeneric.Image = global::ComicDownloader.Properties.Resources._1363939449_netvibes;
+            this.btnAddTTTGeneric.MaximumSize = new System.Drawing.Size(0, 0);
+            this.btnAddTTTGeneric.MinimumSize = new System.Drawing.Size(0, 0);
+            this.btnAddTTTGeneric.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnAddTTTGeneric.SmallImage")));
+            this.btnAddTTTGeneric.Click += new System.EventHandler(this.btnAddTTTGeneric_Click);
             // 
             // AppMainForm
             // 
@@ -215,5 +237,8 @@
         private System.Windows.Forms.RibbonTextBox txtVCHost;
         private System.Windows.Forms.RibbonTextBox txtVSList;
         private System.Windows.Forms.RibbonButton bntRefeshList;
+        private System.Windows.Forms.RibbonTab ribbonTab3;
+        private System.Windows.Forms.RibbonPanel ribbonPanel4;
+        private System.Windows.Forms.RibbonButton btnAddTTTGeneric;
     }
 }

@@ -15,13 +15,18 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Diagnostics;
 using Cx.Windows.Forms;
+using ComicDownloader.Engines;
+using XPTable.Models;
+
 
 namespace ComicDownloader
 {
-    public partial class TruyenTranhTuanForm : MdiChildForm
+    public partial class DownloaderForm : MdiChildForm
     {
+        public  Downloader Downloader { get; set; }
+
         private const string HOST_URL = "http://truyentranhtuan.com";
-        public TruyenTranhTuanForm()
+        public DownloaderForm()
         {
             InitializeComponent();
         }
@@ -324,15 +329,7 @@ namespace ComicDownloader
             thread.Start();
         }
 
-        public class StoryInfo
-        {
-            public string URL { get; set; }
-            public string Title { get; set; }
-            public override string ToString()
-            {
-                return Title;
-            }
-        }
+      
         List<StoryInfo> stories = new List<StoryInfo>();
 
         public static string GetHtml(string url)
@@ -363,59 +360,46 @@ myHttpWebRequest.AutomaticDecompression = DecompressionMethods.GZip ;//Or Decomp
 
         private void LoadStoryList()
         {
-            string url = "http://truyentranhtuan.com/danh-sach-truyen/";
+            var stories = Downloader.GetListStories();
 
-            //using (WebClient client = new WebClient())
-            //{
-                string html = GetHtml(url);
-
-                string pattern = "<a class=\"ch-subject\" href=\"/(.+)/\" title=\"\">(.+)</a>";
-                var matches = Regex.Matches(html, pattern);
-                foreach (Match match in matches)
-                {
-                    stories.Add(new StoryInfo() {
-                        URL = HOST_URL+"/"+match.Groups[1].Value,
-                        Title = match.Groups[2].Value
-                    });
-                }
-
-                this.Invoke((MethodInvoker)delegate
-                {
-                    ddlList.Items.Clear();
-                    ddlList.Items.AddRange(stories.ToArray());
-                });
-
-
-            //};
-
+            this.Invoke((MethodInvoker)delegate
+            {
+                ddlList.Items.Clear();
+                ddlList.Items.AddRange(stories.ToArray());
+            });
 
         }
 
         private void ddlList_SelectedIndexChanged(object sender, EventArgs e)
         {
             var info = (ddlList.SelectedItem as StoryInfo);
-            string url = info.URL;
+            string url = info.Url;
             txtUrl.Text = url;
             bntInfo.Enabled = true;
         }
 
+        StoryInfo currentStoryInfo = null;
         private void bntInfo_Click(object sender, EventArgs e)
         {
-            
-           // LockControl(false);
-            var url = txtUrl.Text;
+            var currentStoryInfo = Downloader.RequestInfo(txtUrl.Text);
 
-            var html = GetHtml(url);
-
-            Match m = Regex.Match(html, @"Chương mới nhất: (\d+)");
-
-            //int chap = Convert.ToInt32(m.Groups[1].Value;
-            txtPages.Text = "1-"+ m.Groups[1].Value;
+            txtPages.Text = "1-" + currentStoryInfo.ChapterCount.ToString();
             txtTitle.Text = ddlList.Text;
+            txtTitle.Text = currentStoryInfo.Name;
 
-            m = Regex.Match(html, "<span class=\"series-info\">([\\d\\w\\s-;:]*)");
-            txtTitle.Text = m.Groups[1].Value;
 
+            tblChapters.Rows.Clear();
+
+            foreach (var item in currentStoryInfo.Chapters)
+            {
+                int index = tblChapters.Rows.Add(new Row());
+                tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId.ToString(), true));
+               // tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId));
+                tblChapters.Rows[index].Cells.Add(new Cell(item.Name, true));
+                tblChapters.Rows[index].Cells.Add(new Cell(item.Url, new CellStyle(){ForeColor= System.Drawing.Color.Green}));
+                //tblChapters.Rows[index].Cells[0].Data = true;
+            }
+             
             //LockControl(true);
         }
 

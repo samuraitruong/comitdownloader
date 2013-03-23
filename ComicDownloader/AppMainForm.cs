@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using ComicDownloader.Engines;
 
 namespace ComicDownloader
 {
@@ -80,6 +81,15 @@ namespace ComicDownloader
         private void bntRefeshList_Click(object sender, EventArgs e)
         {
             File.Delete(VeChaiForm.CACHED_FILE);
+        }
+
+        private void btnAddTTTGeneric_Click(object sender, EventArgs e)
+        {
+            DownloaderForm childForm = new DownloaderForm();
+            childForm.MdiParent = this;
+            childForm.Downloader = new TruyenTranhTuanDownloader();
+            childForm.Text = "Generic Form Tester";
+            childForm.Show();
         }
     }
 }
