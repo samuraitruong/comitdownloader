@@ -34,6 +34,7 @@ using XPTable.Editors;
 using XPTable.Events;
 using XPTable.Models.Design;
 using XPTable.Renderers;
+using XPTable.Sorting;
 
 
 namespace XPTable.Models
@@ -107,6 +108,11 @@ namespace XPTable.Models
 		/// The height of the column headers
 		/// </summary>
 		private int headerHeight;
+
+        /// <summary>
+        /// Specifies a collection of underlying sort order(s)
+        /// </summary>
+        private SortColumnCollection secondarySortOrder;
 
 		#endregion
 
@@ -187,6 +193,8 @@ namespace XPTable.Models
 
 			this.cellEditors = new Hashtable();
 			this.SetCellEditor("TEXT", new TextCellEditor());
+
+            this.secondarySortOrder = new SortColumnCollection();
 		}
 
 		#endregion
@@ -768,6 +776,21 @@ namespace XPTable.Models
 			}
 		}
 
+        /// <summary>
+        /// Gets or sets a collection of underlying sort order(s)
+        /// </summary>
+        [Browsable(false)]
+        public SortColumnCollection SecondarySortOrders
+        {
+            get
+            {
+                return this.secondarySortOrder;
+            }
+            set
+            {
+                this.secondarySortOrder = value;
+            }
+        }
 
 		/// <summary>
 		/// Gets or sets the Table the ColumnModel belongs to

@@ -15,5 +15,7 @@ namespace ComicDownloader.Engines
 
         public abstract List<StoryInfo> GetListStories();
         public abstract StoryInfo RequestInfo(string urlSegment);
+
+        public abstract List<string> GetPages(string chapUrl);
     }
 }

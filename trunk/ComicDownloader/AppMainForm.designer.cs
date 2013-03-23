@@ -47,6 +47,8 @@
             this.ribbonTab3 = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel4 = new System.Windows.Forms.RibbonPanel();
             this.btnAddTTTGeneric = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel5 = new System.Windows.Forms.RibbonPanel();
+            this.btnVechaiForm = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
             // mdiTabStrip1
@@ -120,12 +122,13 @@
             // ribbonTab1
             // 
             this.ribbonTab1.Panels.Add(this.ribbonPanel1);
-            this.ribbonTab1.Text = "truyentranhtuan.com";
+            this.ribbonTab1.Panels.Add(this.ribbonPanel5);
+            this.ribbonTab1.Text = "Home";
             // 
             // ribbonPanel1
             // 
             this.ribbonPanel1.Items.Add(this.btnAddNewTTT);
-            this.ribbonPanel1.Text = "Download";
+            this.ribbonPanel1.Text = "truyentranhtuan.com";
             this.ribbonPanel1.Click += new System.EventHandler(this.ribbonPanel1_Click);
             // 
             // btnAddNewTTT
@@ -141,7 +144,7 @@
             // 
             this.ribbonTab2.Panels.Add(this.ribbonPanel2);
             this.ribbonTab2.Panels.Add(this.ribbonPanel3);
-            this.ribbonTab2.Text = "Vechai.info";
+            this.ribbonTab2.Text = "group2";
             // 
             // ribbonPanel2
             // 
@@ -188,7 +191,7 @@
             // ribbonTab3
             // 
             this.ribbonTab3.Panels.Add(this.ribbonPanel4);
-            this.ribbonTab3.Text = "Test Generic";
+            this.ribbonTab3.Text = "TO BE USED";
             // 
             // ribbonPanel4
             // 
@@ -202,6 +205,19 @@
             this.btnAddTTTGeneric.MinimumSize = new System.Drawing.Size(0, 0);
             this.btnAddTTTGeneric.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnAddTTTGeneric.SmallImage")));
             this.btnAddTTTGeneric.Click += new System.EventHandler(this.btnAddTTTGeneric_Click);
+            // 
+            // ribbonPanel5
+            // 
+            this.ribbonPanel5.Items.Add(this.btnVechaiForm);
+            this.ribbonPanel5.Text = "vechai.info";
+            // 
+            // btnVechaiForm
+            // 
+            this.btnVechaiForm.Image = global::ComicDownloader.Properties.Resources._1363942937_ark2;
+            this.btnVechaiForm.MaximumSize = new System.Drawing.Size(0, 0);
+            this.btnVechaiForm.MinimumSize = new System.Drawing.Size(0, 0);
+            this.btnVechaiForm.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnVechaiForm.SmallImage")));
+            this.btnVechaiForm.Click += new System.EventHandler(this.btnVechaiForm_Click);
             // 
             // AppMainForm
             // 
@@ -240,5 +256,7 @@
         private System.Windows.Forms.RibbonTab ribbonTab3;
         private System.Windows.Forms.RibbonPanel ribbonPanel4;
         private System.Windows.Forms.RibbonButton btnAddTTTGeneric;
+        private System.Windows.Forms.RibbonPanel ribbonPanel5;
+        private System.Windows.Forms.RibbonButton btnVechaiForm;
     }
 }

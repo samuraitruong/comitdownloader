@@ -56,6 +56,24 @@ namespace XPTable.Renderers
 
 		#endregion
 
+        /// <summary>
+        /// Returns the height that is required to render this cell. If zero is returned then the default row height is used.
+        /// </summary>
+        /// <param name="graphics"></param>
+        /// <param name="cell"></param>
+        /// <returns></returns>
+        public override int GetCellHeight(Graphics graphics, Cell cell)
+        {
+            if (cell != null)
+            {
+                this.Font = cell.Font;
+                // Need to set this.Bounds before we access Client rectangle
+                SizeF size = graphics.MeasureString(cell.Text, this.Font, this.ClientRectangle.Width, this.StringFormat);
+                return (int)Math.Ceiling(size.Height);
+            }
+            else
+                return 0;
+        }
 
 		#region Events
 
@@ -79,6 +97,8 @@ namespace XPTable.Renderers
 
 			if (text != null && text.Length != 0)
 			{
+				// v1.1.1 fix - removed hardcoded alignment
+
 				if (e.Enabled)
 				{
 					e.Graphics.DrawString(text, this.Font, this.ForeBrush, this.ClientRectangle, this.StringFormat);

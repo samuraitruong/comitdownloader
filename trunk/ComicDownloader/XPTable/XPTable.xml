@@ -4651,6 +4651,11 @@
             Specifies whether the Cell has been disposed
             </summary>
         </member>
+        <member name="F:XPTable.Models.Cell.colspan">
+            <summary>
+            Specifies how many columns this cell occupies.
+            </summary>
+        </member>
         <member name="M:XPTable.Models.Cell.#ctor">
             <summary>
             Initializes a new instance of the Cell class with default settings
@@ -4908,6 +4913,11 @@
             Gets or sets whether the Cell is selected
             </summary>
         </member>
+        <member name="P:XPTable.Models.Cell.WordWrap">
+            <summary>
+            Gets of sets whether text can wrap in this cell (and force the cell's height to increase)
+            </summary>
+        </member>
         <member name="P:XPTable.Models.Cell.BackColor">
             <summary>
             Gets or sets the background Color for the Cell
@@ -4969,6 +4979,11 @@
         <member name="P:XPTable.Models.Cell.ToolTipText">
             <summary>
             Gets or sets the text displayed in the Cells tooltip
+            </summary>
+        </member>
+        <member name="P:XPTable.Models.Cell.ColSpan">
+            <summary>
+            Gets or sets how many columns this cell occupies
             </summary>
         </member>
         <member name="P:XPTable.Models.Cell.RendererData">
@@ -5497,6 +5512,11 @@
             The amount of space between the Cells border and its contents
             </summary>
         </member>
+        <member name="F:XPTable.Models.CellStyle.wordWrap">
+            <summary>
+            Whether the text can wrap (and force the cell's height to increase)
+            </summary>
+        </member>
         <member name="M:XPTable.Models.CellStyle.#ctor">
             <summary>
             Initializes a new instance of the CellStyle class with default settings
@@ -5520,6 +5540,11 @@
         <member name="P:XPTable.Models.CellStyle.Padding">
             <summary>
             Gets or sets the amount of space between the Cells Border and its contents
+            </summary>
+        </member>
+        <member name="P:XPTable.Models.CellStyle.WordWrap">
+            <summary>
+            Gets of sets whether text can wrap in this cell (and force the cell's height to increase)
             </summary>
         </member>
         <member name="T:XPTable.Models.CheckBoxColumn">
@@ -6044,6 +6069,11 @@
             The height of the column headers
             </summary>
         </member>
+        <member name="F:XPTable.Models.ColumnModel.secondarySortOrder">
+            <summary>
+            Specifies a collection of underlying sort order(s)
+            </summary>
+        </member>
         <member name="M:XPTable.Models.ColumnModel.#ctor">
             <summary>
             Initializes a new instance of the ColumnModel class with default settings
@@ -6296,6 +6326,11 @@
         <member name="P:XPTable.Models.ColumnModel.Table">
             <summary>
             Gets the Table the ColumnModel belongs to
+            </summary>
+        </member>
+        <member name="P:XPTable.Models.ColumnModel.SecondarySortOrders">
+            <summary>
+            Gets or sets a collection of underlying sort order(s)
             </summary>
         </member>
         <member name="P:XPTable.Models.ColumnModel.InternalTable">
@@ -7176,6 +7211,26 @@
             The collection of Cells's contained in the Row
             </summary>
         </member>
+        <member name="F:XPTable.Models.Row.subrows">
+            <summary>
+            The collection of subrows contained in this Row
+            </summary>
+        </member>
+        <member name="F:XPTable.Models.Row.parentrow">
+            <summary>
+            The row that is the parent to this one (if this is a sub row)
+            </summary>
+        </member>
+        <member name="F:XPTable.Models.Row.childindex">
+            <summary>
+            The index that gives the order this row was added in
+            </summary>
+        </member>
+        <member name="F:XPTable.Models.Row.height">
+            <summary>
+            The actual rendered height of this row. If negative then it has not been rendered and height is unknown.
+            </summary>
+        </member>
         <member name="F:XPTable.Models.Row.tag">
             <summary>
             An object that contains data about the Row
@@ -7214,6 +7269,12 @@
         <member name="M:XPTable.Models.Row.#ctor">
             <summary>
             Initializes a new instance of the Row class with default settings
+            </summary>
+        </member>
+        <member name="M:XPTable.Models.Row.#ctor(XPTable.Models.Row)">
+            <summary>
+            Initializes a new instance of the Row class with default settings and a parent row. The new row
+            is a sub row
             </summary>
         </member>
         <member name="M:XPTable.Models.Row.#ctor(System.String[])">
@@ -7274,6 +7335,14 @@
             </summary>
             <param name="flag">A flag that represents the state to be set</param>
             <param name="value">The new value of the state</param>
+        </member>
+        <member name="M:XPTable.Models.Row.GetRenderedCellIndex(System.Int32)">
+            <summary>
+            Returns the column that contains the cell that renders over the given column.
+            This is only different if there is a colspan cell on this row, to the left of the given position.
+            </summary>
+            <param name="columnIndex"></param>
+            <returns></returns>
         </member>
         <member name="M:XPTable.Models.Row.ShouldSerializeBackColor">
             <summary>
@@ -7353,6 +7422,18 @@
             </summary>
             <param name="e">A RowEventArgs that contains the event data</param>
         </member>
+        <member name="M:XPTable.Models.Row.OnSubRowAdded(XPTable.Events.RowEventArgs)">
+            <summary>
+            Raises the SubRowAdded event
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:XPTable.Models.Row.OnSubRowRemoved(XPTable.Events.RowEventArgs)">
+            <summary>
+            Raises the SubRowRemoved event
+            </summary>
+            <param name="e"></param>
+        </member>
         <member name="M:XPTable.Models.Row.OnCellPropertyChanged(XPTable.Events.CellEventArgs)">
             <summary>
             Raises the CellPropertyChanged event
@@ -7369,6 +7450,16 @@
             Occurs when a Cell is removed from the Row
             </summary>
         </member>
+        <member name="E:XPTable.Models.Row.SubRowAdded">
+            <summary>
+            Occurs when a SubRow is added to the Row
+            </summary>
+        </member>
+        <member name="E:XPTable.Models.Row.SubRowRemoved">
+            <summary>
+            Occurs when a SubRow is removed from the Row
+            </summary>
+        </member>
         <member name="E:XPTable.Models.Row.PropertyChanged">
             <summary>
             Occurs when the value of a Row's property changes
@@ -7378,6 +7469,24 @@
             <summary>
             A CellCollection representing the collection of 
             Cells contained within the Row
+            </summary>
+        </member>
+        <member name="P:XPTable.Models.Row.SubRows">
+            <summary>
+            A RowCollection representing the collection of 
+            SubRows contained within the Row
+            </summary>
+        </member>
+        <member name="P:XPTable.Models.Row.Parent">
+            <summary>
+            A RowCollection representing the collection of 
+            SubRows contained within the Row
+            </summary>
+        </member>
+        <member name="P:XPTable.Models.Row.ChildIndex">
+            <summary>
+            If this is a sub-row (i.e. it has a Parent), this gets the index of the Row within its Parent.
+            Used when sorting.
             </summary>
         </member>
         <member name="P:XPTable.Models.Row.Tag">
@@ -7442,6 +7551,19 @@
             Gets or sets the index of the Row within its TableModel
             </summary>
         </member>
+        <member name="P:XPTable.Models.Row.InternalHeight">
+            <summary>
+            Gets or sets the height of the Row. If this row has not been rendered 
+            (and the so exact height has not been calculated) -1 is returned.
+            </summary>
+        </member>
+        <member name="P:XPTable.Models.Row.Height">
+            <summary>
+            Gets the height of the Row. If this row has not been rendered 
+            (and the so exact height has not been calculated) the table default
+            row height is returned.
+            </summary>
+        </member>
         <member name="P:XPTable.Models.Row.CanRaiseEvents">
             <summary>
             Gets whether the Row is able to raise events
@@ -7455,6 +7577,11 @@
         <member name="P:XPTable.Models.Row.InternalSelectedCellCount">
             <summary>
             Gets or sets the number of Cells that are selected within the Row
+            </summary>
+        </member>
+        <member name="P:XPTable.Models.Row.WordWrapCellIndex">
+            <summary>
+            Gets the index of the word wrap cell (if any).
             </summary>
         </member>
         <member name="P:XPTable.Models.Row.AnyCellsSelected">
@@ -7504,6 +7631,11 @@
             The TableModel that owns the RowCollection
             </summary>
         </member>
+        <member name="F:XPTable.Models.RowCollection.rowowner">
+            <summary>
+            A Row that owns this row
+            </summary>
+        </member>
         <member name="M:XPTable.Models.RowCollection.#ctor(XPTable.Models.TableModel)">
             <summary>
             Initializes a new instance of the RowCollection class 
@@ -7511,6 +7643,13 @@
             </summary>
             <param name="owner">A TableModel representing the tableModel that owns 
             the RowCollection</param>
+        </member>
+        <member name="M:XPTable.Models.RowCollection.#ctor(XPTable.Models.Row)">
+            <summary>
+            Initializes a new instance of the RowCollection class 
+            that belongs to the specified Row
+            </summary>
+            <param name="owner"></param>
         </member>
         <member name="M:XPTable.Models.RowCollection.Add(XPTable.Models.Row)">
             <summary>
@@ -7588,6 +7727,18 @@
             <param name="e">A TableModelEventArgs that contains the event data</param>
         </member>
         <member name="M:XPTable.Models.RowCollection.OnRowRemoved(XPTable.Events.TableModelEventArgs)">
+            <summary>
+            Raises the RowRemoved event
+            </summary>
+            <param name="e">A TableModelEventArgs that contains the event data</param>
+        </member>
+        <member name="M:XPTable.Models.RowCollection.OnRowAdded(XPTable.Events.RowEventArgs)">
+            <summary>
+            Raises the RowAdded event
+            </summary>
+            <param name="e">A TableModelEventArgs that contains the event data</param>
+        </member>
+        <member name="M:XPTable.Models.RowCollection.OnRowRemoved(XPTable.Events.RowEventArgs)">
             <summary>
             Raises the RowRemoved event
             </summary>
@@ -7920,6 +8071,11 @@
             in a ColumnColection editor
             </summary>
         </member>
+        <member name="F:XPTable.Models.Table.enableWordWrap">
+            <summary>
+            Specifies whether any cells are allowed to word-wrap.
+            </summary>
+        </member>
         <member name="M:XPTable.Models.Table.#ctor">
             <summary>
             Initializes a new instance of the Table class with default settings
@@ -8028,6 +8184,14 @@
             <returns>A Rectangle that specifies the size and location the specified 
             cell in client coordinates</returns>
         </member>
+        <member name="M:XPTable.Models.Table.ResolveColspan(XPTable.Models.CellPos)">
+            <summary>
+            Returns the position of the actual cell that renders to the given cell pos.
+            This looks at colspans and returns the cell that colspan overs the given cell (if any)
+            </summary>
+            <param name="cellPos"></param>
+            <returns></returns>
+        </member>
         <member name="M:XPTable.Models.Table.IsValidCell(System.Int32,System.Int32)">
             <summary>
             Returns whether Cell at the specified row and column indexes 
@@ -8134,6 +8298,22 @@
             <returns>The bounding rectangle of the specified 
             column</returns>
         </member>
+        <member name="M:XPTable.Models.Table.GetColumnWidth(System.Int32,XPTable.Models.Cell)">
+            <summary>
+            Returns the actual width that this cell can render over (taking colspan into account).
+            Normally its just the width of this column from the column model.
+            </summary>
+            <param name="column"></param>
+            <param name="cell"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XPTable.Models.Table.GetColumnLeft(System.Int32)">
+            <summary>
+            Returns the left position of the given column.
+            </summary>
+            <param name="column"></param>
+            <returns></returns>
+        </member>
         <member name="M:XPTable.Models.Table.RowIndexAt(System.Int32,System.Int32)">
             <summary>
             Returns the index of the Row at the specified client coordinates
@@ -8168,6 +8348,22 @@
             <param name="row">The row</param>
             <returns>The bounding rectangle of the specified 
             row</returns>
+        </member>
+        <member name="M:XPTable.Models.Table.RowY(System.Int32)">
+            <summary>
+            Returns the Y-coord of the top of the row at the 
+            specified index in client coordinates
+            </summary>
+            <param name="row"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XPTable.Models.Table.RowYDifference(System.Int32,System.Int32)">
+            <summary>
+            Returns the difference in Y-coords between the tops of the two given rows. May return a negative.
+            </summary>
+            <param name="row1">Index of first row</param>
+            <param name="row2">Index of second row</param>
+            <returns>Is positive if Row2 > Row1</returns>
         </member>
         <member name="M:XPTable.Models.Table.HitTest(System.Int32,System.Int32)">
             <summary>
@@ -8315,6 +8511,12 @@
             </summary>
             <param name="cellPos">A CellPos that specifies the Row to be invalidated</param>
         </member>
+        <member name="M:XPTable.Models.Table.InvalidateRect(System.Drawing.Rectangle)">
+            <summary>
+            Invalidates the given Rectangle
+            </summary>
+            <param name="rect"></param>
+        </member>
         <member name="M:XPTable.Models.Table.IsReservedKey(System.Windows.Forms.Keys)">
             <summary>
             Determines whether the specified key is reserved for use by the Table
@@ -8451,6 +8653,13 @@
             <param name="sortOrder">The direction the column is to be sorted</param>
             <param name="stable">Specifies whether a stable sorting method 
             should be used to sort the column</param>
+        </member>
+        <member name="M:XPTable.Models.Table.GetSecondaryComparers(XPTable.Sorting.SortColumnCollection)">
+            <summary>
+            Gets a collection of comparers for the underlying sort order(s)
+            </summary>
+            <param name="secondarySortOrders"></param>
+            <returns></returns>
         </member>
         <member name="M:XPTable.Models.Table.IsValidColumn(System.Int32)">
             <summary>
@@ -9640,6 +9849,11 @@
             a ColumnCollectionEditor
             </summary>
         </member>
+        <member name="P:XPTable.Models.Table.EnableWordWrap">
+            <summary>
+            Gets of sets whether word wrap is allowed in any cell in the table. If false then the WordWrap property on Cells is ignored.
+            </summary>
+        </member>
         <member name="P:XPTable.Models.Table.ToolTip">
             <summary>
             Gets the internal tooltip component
@@ -9742,6 +9956,14 @@
             <param name="yPosition">The y-coordinate to check</param>
             <returns>The index of the Row at the specified position or -1 if 
             no Row is found</returns>
+        </member>
+        <member name="M:XPTable.Models.TableModel.RowIndexAtExact(System.Int32)">
+            <summary>
+            Returns the index of the Row that lies on the specified position.
+            Found by iterating through all rows (i.e. copes with variable height rows).
+            </summary>
+            <param name="yPosition"></param>
+            <returns></returns>
         </member>
         <member name="M:XPTable.Models.TableModel.ShouldSerializeRowHeight">
             <summary>
@@ -9854,11 +10076,6 @@
         <member name="P:XPTable.Models.TableModel.RowHeight">
             <summary>
             Gets or sets the height of each Row in the TableModel
-            </summary>
-        </member>
-        <member name="P:XPTable.Models.TableModel.TotalRowHeight">
-            <summary>
-            Gets the total height of all the Rows in the TableModel
             </summary>
         </member>
         <member name="P:XPTable.Models.TableModel.Table">
@@ -10122,10 +10339,10 @@
         </member>
         <member name="M:XPTable.Models.TableModel.Selection.CalcSelectionBounds(System.Int32,System.Int32)">
             <summary>
-            
+            Returns a Rectange that bounds the currently selected Rows
             </summary>
-            <param name="start"></param>
-            <param name="end"></param>
+            <param name="start">First row index</param>
+            <param name="end">Last row index</param>
             <returns></returns>
         </member>
         <member name="P:XPTable.Models.TableModel.Selection.SelectedItems">
@@ -10542,6 +10759,14 @@
             </summary>
             <param name="e">A CellMouseEventArgs that contains the event data</param>
         </member>
+        <member name="M:XPTable.Renderers.ICellRenderer.GetCellHeight(System.Drawing.Graphics,XPTable.Models.Cell)">
+            <summary>
+            Returns the height that is required to render this cell. If zero is returned then the default row height is used.
+            </summary>
+            <param name="cell"></param>
+            <param name="graphics">The GDI+ drawing surface provided by the Paint event.</param>
+            <returns></returns>
+        </member>
         <member name="F:XPTable.Renderers.CellRenderer.format">
             <summary>
             A string that specifies how a Cells contents are formatted
@@ -10583,6 +10808,14 @@
             </summary>
             <param name="cell">The Cell for which the data is to be stored</param>
             <param name="value">The renderer specific data to be stored</param>
+        </member>
+        <member name="M:XPTable.Renderers.CellRenderer.GetCellHeight(System.Drawing.Graphics,XPTable.Models.Cell)">
+            <summary>
+            Returns the height that is required to render this cell. If zero is returned then the default row height is used.
+            </summary>
+            <param name="cell"></param>
+            <param name="graphics">The GDI+ drawing surface provided by the Paint event.</param>
+            <returns></returns>
         </member>
         <member name="M:XPTable.Renderers.CellRenderer.OnGotFocus(XPTable.Events.CellFocusEventArgs)">
             <summary>
@@ -11748,6 +11981,14 @@
             default settings
             </summary>
         </member>
+        <member name="M:XPTable.Renderers.TextCellRenderer.GetCellHeight(System.Drawing.Graphics,XPTable.Models.Cell)">
+            <summary>
+            Returns the height that is required to render this cell. If zero is returned then the default row height is used.
+            </summary>
+            <param name="graphics"></param>
+            <param name="cell"></param>
+            <returns></returns>
+        </member>
         <member name="M:XPTable.Renderers.TextCellRenderer.OnPaint(XPTable.Events.PaintCellEventArgs)">
             <summary>
             Raises the Paint event
@@ -11797,11 +12038,6 @@
             The index of the Column to be sorted
             </summary>
         </member>
-        <member name="F:XPTable.Sorting.ComparerBase.sortOrder">
-            <summary>
-            Specifies how the Column is to be sorted
-            </summary>
-        </member>
         <member name="M:XPTable.Sorting.ComparerBase.#ctor(XPTable.Models.TableModel,System.Int32,System.Windows.Forms.SortOrder)">
             <summary>
             Initializes a new instance of the ComparerBase class with the specified 
@@ -11814,11 +12050,21 @@
         <member name="M:XPTable.Sorting.ComparerBase.Compare(System.Object,System.Object)">
             <summary>
             Compares two objects and returns a value indicating whether one is less 
-            than, equal to or greater than the other
+            than, equal to or greater than the other.
             </summary>
             <param name="a">First object to compare</param>
             <param name="b">Second object to compare</param>
             <returns>-1 if a is less than b, 1 if a is greater than b, or 0 if a equals b</returns>
+        </member>
+        <member name="M:XPTable.Sorting.ComparerBase.CompareCells(XPTable.Models.Cell,XPTable.Models.Cell)">
+            <summary>
+            Compares two cells and returns a value indicating whether one is less 
+            than, equal to or greater than the other.
+            Both cells are non-null;
+            </summary>
+            <param name="cell1"></param>
+            <param name="cell2"></param>
+            <returns></returns>
         </member>
         <member name="P:XPTable.Sorting.ComparerBase.TableModel">
             <summary>
@@ -11830,11 +12076,6 @@
             Gets the index of the Column to be sorted
             </summary>
         </member>
-        <member name="P:XPTable.Sorting.ComparerBase.SortOrder">
-            <summary>
-            Gets how the Column is to be sorted
-            </summary>
-        </member>
         <member name="M:XPTable.Sorting.CheckBoxComparer.#ctor(XPTable.Models.TableModel,System.Int32,System.Windows.Forms.SortOrder)">
             <summary>
             Initializes a new instance of the CheckBoxComparer class with the specified 
@@ -11844,14 +12085,14 @@
             <param name="column">The index of the Column to be sorted</param>
             <param name="sortOrder">Specifies how the Column is to be sorted</param>
         </member>
-        <member name="M:XPTable.Sorting.CheckBoxComparer.Compare(System.Object,System.Object)">
+        <member name="M:XPTable.Sorting.CheckBoxComparer.CompareCells(XPTable.Models.Cell,XPTable.Models.Cell)">
             <summary>
-            Compares two objects and returns a value indicating whether one is less 
-            than, equal to or greater than the other
+            Compares two cells and returns a value indicating whether one is less 
+            than, equal to or greater than the other.
             </summary>
-            <param name="a">First object to compare</param>
-            <param name="b">Second object to compare</param>
-            <returns>-1 if a is less than b, 1 if a is greater than b, or 0 if a equals b</returns>
+            <param name="cell1"></param>
+            <param name="cell2"></param>
+            <returns></returns>
         </member>
         <member name="T:XPTable.Sorting.ColorComparer">
             <summary>
@@ -11867,14 +12108,14 @@
             <param name="column">The index of the Column to be sorted</param>
             <param name="sortOrder">Specifies how the Column is to be sorted</param>
         </member>
-        <member name="M:XPTable.Sorting.ColorComparer.Compare(System.Object,System.Object)">
+        <member name="M:XPTable.Sorting.ColorComparer.CompareCells(XPTable.Models.Cell,XPTable.Models.Cell)">
             <summary>
-            Compares two objects and returns a value indicating whether one is less 
-            than, equal to or greater than the other
+            Compares two cells and returns a value indicating whether one is less 
+            than, equal to or greater than the other.
             </summary>
-            <param name="a">First object to compare</param>
-            <param name="b">Second object to compare</param>
-            <returns>-1 if a is less than b, 1 if a is greater than b, or 0 if a equals b</returns>
+            <param name="cell1"></param>
+            <param name="cell2"></param>
+            <returns></returns>
         </member>
         <member name="T:XPTable.Sorting.DateTimeComparer">
             <summary>
@@ -11890,14 +12131,14 @@
             <param name="column">The index of the Column to be sorted</param>
             <param name="sortOrder">Specifies how the Column is to be sorted</param>
         </member>
-        <member name="M:XPTable.Sorting.DateTimeComparer.Compare(System.Object,System.Object)">
+        <member name="M:XPTable.Sorting.DateTimeComparer.CompareCells(XPTable.Models.Cell,XPTable.Models.Cell)">
             <summary>
-            Compares two objects and returns a value indicating whether one is less 
-            than, equal to or greater than the other
+            Compares two cells and returns a value indicating whether one is less 
+            than, equal to or greater than the other.
             </summary>
-            <param name="a">First object to compare</param>
-            <param name="b">Second object to compare</param>
-            <returns>-1 if a is less than b, 1 if a is greater than b, or 0 if a equals b</returns>
+            <param name="cell1"></param>
+            <param name="cell2"></param>
+            <returns></returns>
         </member>
         <member name="T:XPTable.Sorting.HeapSorter">
             <summary>
@@ -11929,6 +12170,16 @@
             Specifies how the Column is to be sorted
             </summary>
         </member>
+        <member name="F:XPTable.Sorting.SorterBase.secondarySortOrder">
+            <summary>
+            Specifies a collection of underlying sort order(s)
+            </summary>
+        </member>
+        <member name="F:XPTable.Sorting.SorterBase.secondaryComparers">
+            <summary>
+            Specifies a collection of comparers for the underlying sort order(s)
+            </summary>
+        </member>
         <member name="M:XPTable.Sorting.SorterBase.#ctor(XPTable.Models.TableModel,System.Int32,System.Collections.IComparer,System.Windows.Forms.SortOrder)">
             <summary>
             Initializes a new instance of the SorterBase class with the specified 
@@ -11939,14 +12190,36 @@
             <param name="comparer">The IComparer used to sort the Column's Cells</param>
             <param name="sortOrder">Specifies how the Column is to be sorted</param>
         </member>
-        <member name="M:XPTable.Sorting.SorterBase.Compare(XPTable.Models.Cell,XPTable.Models.Cell)">
+        <member name="M:XPTable.Sorting.SorterBase.Compare(XPTable.Models.Row,XPTable.Models.Row)">
             <summary>
-            Compares two objects and returns a value indicating whether one is less 
-            than, equal to or greater than the other
+            Compares two rows and returns a value indicating whether one is less 
+            than, equal to or greater than the other. Takes into account the sort order.
             </summary>
-            <param name="a">First object to compare</param>
-            <param name="b">Second object to compare</param>
+            <param name="row1">First row to compare</param>
+            <param name="row2">Second row to compare</param>
             <returns>-1 if a is less than b, 1 if a is greater than b, or 0 if a equals b</returns>
+        </member>
+        <member name="M:XPTable.Sorting.SorterBase.CompareRows(XPTable.Models.Row,XPTable.Models.Row)">
+            <summary>
+            Compares two rows and returns a value indicating whether one is less 
+            than, equal to or greater than the other.
+            Compares the given rows without considering parent/sub-rows.
+            </summary>
+            <param name="row1"></param>
+            <param name="row2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XPTable.Sorting.SorterBase.CompareRows(XPTable.Models.Row,XPTable.Models.Row,System.Int32,System.Collections.IComparer)">
+            <summary>
+            Compares two rows and returns a value indicating whether one is less 
+            than, equal to or greater than the other.
+            Compares the given rows without considering parent/sub-rows.
+            </summary>
+            <param name="row1"></param>
+            <param name="row2"></param>
+            <param name="column"></param>
+            <param name="comparer"></param>
+            <returns></returns>
         </member>
         <member name="M:XPTable.Sorting.SorterBase.Sort">
             <summary>
@@ -11995,6 +12268,16 @@
             Gets how the Column is to be sorted
             </summary>
         </member>
+        <member name="P:XPTable.Sorting.SorterBase.SecondarySortOrders">
+            <summary>
+            Gets or sets a collection of underlying sort order(s)
+            </summary>
+        </member>
+        <member name="P:XPTable.Sorting.SorterBase.SecondaryComparers">
+            <summary>
+            Gets or sets a collection of comparers for the underlying sort order(s)
+            </summary>
+        </member>
         <member name="M:XPTable.Sorting.HeapSorter.#ctor(XPTable.Models.TableModel,System.Int32,System.Collections.IComparer,System.Windows.Forms.SortOrder)">
             <summary>
             Initializes a new instance of the HeapSorter class with the specified 
@@ -12017,6 +12300,27 @@
             <param name="k"></param>
             <param name="n"></param>
         </member>
+        <member name="T:XPTable.Sorting.IComparerCollection">
+            <summary>
+            Represents a collection of IComparer objects
+            </summary>
+        </member>
+        <member name="M:XPTable.Sorting.IComparerCollection.#ctor">
+            <summary>
+            Initializes a new instance of the IComparerCollection class 
+            </summary>
+        </member>
+        <member name="M:XPTable.Sorting.IComparerCollection.Add(System.Collections.IComparer)">
+            <summary>
+            Adds the specified IComparer to the end of the collection
+            </summary>
+            <param name="comparer">The IComparer to add</param>
+        </member>
+        <member name="P:XPTable.Sorting.IComparerCollection.Item(System.Int32)">
+            <summary>
+            Gets the IComparer at the specified index
+            </summary>
+        </member>
         <member name="T:XPTable.Sorting.ImageComparer">
             <summary>
             An IComparer for sorting Cells that contain Images
@@ -12031,14 +12335,14 @@
             <param name="column">The index of the Column to be sorted</param>
             <param name="sortOrder">Specifies how the Column is to be sorted</param>
         </member>
-        <member name="M:XPTable.Sorting.ImageComparer.Compare(System.Object,System.Object)">
+        <member name="M:XPTable.Sorting.ImageComparer.CompareCells(XPTable.Models.Cell,XPTable.Models.Cell)">
             <summary>
-            Compares two objects and returns a value indicating whether one is less 
-            than, equal to or greater than the other
+            Compares two cells and returns a value indicating whether one is less 
+            than, equal to or greater than the other.
             </summary>
-            <param name="a">First object to compare</param>
-            <param name="b">Second object to compare</param>
-            <returns>-1 if a is less than b, 1 if a is greater than b, or 0 if a equals b</returns>
+            <param name="cell1"></param>
+            <param name="cell2"></param>
+            <returns></returns>
         </member>
         <member name="T:XPTable.Sorting.InsertionSorter">
             <summary>
@@ -12101,14 +12405,14 @@
             <param name="column">The index of the Column to be sorted</param>
             <param name="sortOrder">Specifies how the Column is to be sorted</param>
         </member>
-        <member name="M:XPTable.Sorting.NumberComparer.Compare(System.Object,System.Object)">
+        <member name="M:XPTable.Sorting.NumberComparer.CompareCells(XPTable.Models.Cell,XPTable.Models.Cell)">
             <summary>
-            Compares two objects and returns a value indicating whether one is less 
-            than, equal to or greater than the other
+            Compares two cells and returns a value indicating whether one is less 
+            than, equal to or greater than the other.
             </summary>
-            <param name="a">First object to compare</param>
-            <param name="b">Second object to compare</param>
-            <returns>-1 if a is less than b, 1 if a is greater than b, or 0 if a equals b</returns>
+            <param name="cell1"></param>
+            <param name="cell2"></param>
+            <returns></returns>
         </member>
         <member name="T:XPTable.Sorting.ShellSorter">
             <summary>
@@ -12130,6 +12434,60 @@
             Starts sorting the Cells in the TableModel
             </summary>
         </member>
+        <member name="T:XPTable.Sorting.SortColumn">
+            <summary>
+            Represents a single sortable column 
+            </summary>
+        </member>
+        <member name="F:XPTable.Sorting.SortColumn.sortOrder">
+            <summary>
+            Specifies how the Column is to be sorted
+            </summary>
+        </member>
+        <member name="F:XPTable.Sorting.SortColumn.column">
+            <summary>
+            The index of the Column to be sorted
+            </summary>
+        </member>
+        <member name="M:XPTable.Sorting.SortColumn.#ctor(System.Int32,System.Windows.Forms.SortOrder)">
+            <summary>
+            Initializes a new instance of the SortColumn class with the specified 
+            Column index and SortOrder
+            </summary>
+            <param name="column">The index of the Column to be sorted</param>
+            <param name="sortOrder">Specifies how the Column is to be sorted</param>
+        </member>
+        <member name="P:XPTable.Sorting.SortColumn.SortColumnIndex">
+            <summary>
+            Gets the index of the Column to be sorted
+            </summary>
+        </member>
+        <member name="P:XPTable.Sorting.SortColumn.SortOrder">
+            <summary>
+            Gets how the Column is to be sorted
+            </summary>
+        </member>
+        <member name="T:XPTable.Sorting.SortColumnCollection">
+            <summary>
+            Represents a collection of SortColumn objects
+            </summary>
+        </member>
+        <member name="M:XPTable.Sorting.SortColumnCollection.#ctor">
+            <summary>
+            Initializes a new instance of the SortColumnCollection class 
+            </summary>
+        </member>
+        <member name="M:XPTable.Sorting.SortColumnCollection.Add(XPTable.Sorting.SortColumn)">
+            <summary>
+            Adds the specified SortColumn to the end of the collection
+            </summary>
+            <param name="sortColumn">The SortColumn to add</param>
+        </member>
+        <member name="P:XPTable.Sorting.SortColumnCollection.Item(System.Int32)">
+            <summary>
+            Gets the Cell at the specified index
+            </summary>
+        </member>
         <member name="T:XPTable.Sorting.TextComparer">
             <summary>
             An IComparer for sorting Cells that contain strings
@@ -12144,14 +12502,14 @@
             <param name="column">The index of the Column to be sorted</param>
             <param name="sortOrder">Specifies how the Column is to be sorted</param>
         </member>
-        <member name="M:XPTable.Sorting.TextComparer.Compare(System.Object,System.Object)">
+        <member name="M:XPTable.Sorting.TextComparer.CompareCells(XPTable.Models.Cell,XPTable.Models.Cell)">
             <summary>
-            Compares two objects and returns a value indicating whether one is less 
-            than, equal to or greater than the other
+            Compares two cells and returns a value indicating whether one is less 
+            than, equal to or greater than the other.
             </summary>
-            <param name="a">First object to compare</param>
-            <param name="b">Second object to compare</param>
-            <returns>-1 if a is less than b, 1 if a is greater than b, or 0 if a equals b</returns>
+            <param name="cell1"></param>
+            <param name="cell2"></param>
+            <returns></returns>
         </member>
         <member name="T:XPTable.Themes.ButtonParts">
             <summary>

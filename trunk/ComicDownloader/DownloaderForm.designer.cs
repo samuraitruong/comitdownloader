@@ -29,9 +29,8 @@ namespace ComicDownloader
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtUrl = new System.Windows.Forms.MaskedTextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtPages = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.MaskedTextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,8 +51,14 @@ namespace ComicDownloader
             this.lstChapters = new XPTable.Models.Table();
             this.columnModel1 = new XPTable.Models.ColumnModel();
             this.chkSelect = new XPTable.Models.CheckBoxColumn();
+            this.colChapId = new XPTable.Models.NumberColumn();
             this.txtChapName = new XPTable.Models.TextColumn();
             this.txtChapLink = new XPTable.Models.TextColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuSelectAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSelectNone = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSelectInverse = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSelectSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.tblChapters = new XPTable.Models.TableModel();
             this.groupDownload = new System.Windows.Forms.GroupBox();
             this.btnExitThread = new System.Windows.Forms.Button();
@@ -76,6 +81,7 @@ namespace ComicDownloader
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lstChapters)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.groupDownload.SuspendLayout();
             this.groupInfo.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -87,29 +93,12 @@ namespace ComicDownloader
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.Size = new System.Drawing.Size(219, 20);
             this.txtUrl.TabIndex = 0;
-            this.txtUrl.Text = "http://truyentranhtuan.com/one-piece";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 101);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(121, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "CHAPTER(1,2 or 1-10..)";
-            // 
-            // txtPages
-            // 
-            this.txtPages.Location = new System.Drawing.Point(17, 117);
-            this.txtPages.Name = "txtPages";
-            this.txtPages.Size = new System.Drawing.Size(219, 20);
-            this.txtPages.TabIndex = 2;
-            this.txtPages.Text = "1-100";
+            this.txtUrl.Text = "http://truyentranhtuan.com/9-faces-of-love";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 141);
+            this.label3.Location = new System.Drawing.Point(16, 101);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 5;
@@ -117,7 +106,7 @@ namespace ComicDownloader
             // 
             // txtTitle
             // 
-            this.txtTitle.Location = new System.Drawing.Point(17, 157);
+            this.txtTitle.Location = new System.Drawing.Point(19, 117);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(219, 20);
             this.txtTitle.TabIndex = 4;
@@ -239,9 +228,9 @@ namespace ComicDownloader
             // 
             this.groupBox1.Controls.Add(this.lstChapters);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 192);
+            this.groupBox1.Location = new System.Drawing.Point(0, 149);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(278, 72);
+            this.groupBox1.Size = new System.Drawing.Size(278, 115);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select chapter to download";
@@ -249,35 +238,87 @@ namespace ComicDownloader
             // lstChapters
             // 
             this.lstChapters.ColumnModel = this.columnModel1;
+            this.lstChapters.ContextMenuStrip = this.contextMenuStrip1;
             this.lstChapters.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstChapters.GridLines = XPTable.Models.GridLines.Columns;
             this.lstChapters.Location = new System.Drawing.Point(3, 16);
             this.lstChapters.MultiSelect = true;
             this.lstChapters.Name = "lstChapters";
             this.lstChapters.SelectionStyle = XPTable.Models.SelectionStyle.Grid;
-            this.lstChapters.Size = new System.Drawing.Size(272, 53);
+            this.lstChapters.Size = new System.Drawing.Size(272, 96);
             this.lstChapters.TabIndex = 0;
             this.lstChapters.TableModel = this.tblChapters;
+            this.lstChapters.SelectionChanged += new XPTable.Events.SelectionEventHandler(this.lstChapters_SelectionChanged);
             // 
             // columnModel1
             // 
             this.columnModel1.Columns.AddRange(new XPTable.Models.Column[] {
             this.chkSelect,
+            this.colChapId,
             this.txtChapName,
             this.txtChapLink});
             // 
             // chkSelect
             // 
-            this.chkSelect.Text = "Select";
-            this.chkSelect.Width = 35;
+            this.chkSelect.Text = "ID";
+            this.chkSelect.Width = 60;
+            // 
+            // colChapId
+            // 
+            this.colChapId.Text = "ChapId";
+            this.colChapId.Visible = false;
             // 
             // txtChapName
             // 
             this.txtChapName.Text = "Name";
-            this.txtChapName.Width = 150;
+            this.txtChapName.Width = 200;
             // 
             // txtChapLink
             // 
             this.txtChapLink.Text = "Link";
+            this.txtChapLink.Visible = false;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuSelectAll,
+            this.mnuSelectNone,
+            this.mnuSelectInverse,
+            this.mnuSelectSelected});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(171, 92);
+            // 
+            // mnuSelectAll
+            // 
+            this.mnuSelectAll.Enabled = false;
+            this.mnuSelectAll.Name = "mnuSelectAll";
+            this.mnuSelectAll.Size = new System.Drawing.Size(170, 22);
+            this.mnuSelectAll.Text = "Check all";
+            this.mnuSelectAll.Click += new System.EventHandler(this.mnuSelectAll_Click);
+            // 
+            // mnuSelectNone
+            // 
+            this.mnuSelectNone.Enabled = false;
+            this.mnuSelectNone.Name = "mnuSelectNone";
+            this.mnuSelectNone.Size = new System.Drawing.Size(170, 22);
+            this.mnuSelectNone.Text = "Uncheck All";
+            this.mnuSelectNone.Click += new System.EventHandler(this.mnuSelectNone_Click);
+            // 
+            // mnuSelectInverse
+            // 
+            this.mnuSelectInverse.Enabled = false;
+            this.mnuSelectInverse.Name = "mnuSelectInverse";
+            this.mnuSelectInverse.Size = new System.Drawing.Size(170, 22);
+            this.mnuSelectInverse.Text = "Check Inverse";
+            this.mnuSelectInverse.Click += new System.EventHandler(this.mnuSelectInverse_Click);
+            // 
+            // mnuSelectSelected
+            // 
+            this.mnuSelectSelected.Enabled = false;
+            this.mnuSelectSelected.Name = "mnuSelectSelected";
+            this.mnuSelectSelected.Size = new System.Drawing.Size(170, 22);
+            this.mnuSelectSelected.Text = "Check all select item";
+            this.mnuSelectSelected.Click += new System.EventHandler(this.mnuSelectSelected_Click);
             // 
             // groupDownload
             // 
@@ -321,16 +362,14 @@ namespace ComicDownloader
             this.groupInfo.Controls.Add(this.label5);
             this.groupInfo.Controls.Add(this.label3);
             this.groupInfo.Controls.Add(this.txtTitle);
-            this.groupInfo.Controls.Add(this.label2);
             this.groupInfo.Controls.Add(this.label1);
             this.groupInfo.Controls.Add(this.bntInfo);
             this.groupInfo.Controls.Add(this.txtUrl);
             this.groupInfo.Controls.Add(this.ddlList);
-            this.groupInfo.Controls.Add(this.txtPages);
             this.groupInfo.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupInfo.Location = new System.Drawing.Point(0, 0);
             this.groupInfo.Name = "groupInfo";
-            this.groupInfo.Size = new System.Drawing.Size(278, 192);
+            this.groupInfo.Size = new System.Drawing.Size(278, 149);
             this.groupInfo.TabIndex = 20;
             this.groupInfo.TabStop = false;
             this.groupInfo.Text = "Info";
@@ -455,6 +494,7 @@ namespace ComicDownloader
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lstChapters)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.groupDownload.ResumeLayout(false);
             this.groupDownload.PerformLayout();
             this.groupInfo.ResumeLayout(false);
@@ -468,8 +508,6 @@ namespace ComicDownloader
         #endregion
 
         private System.Windows.Forms.MaskedTextBox txtUrl;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.MaskedTextBox txtPages;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.MaskedTextBox txtTitle;
         private System.Windows.Forms.Label label4;
@@ -510,6 +548,12 @@ namespace ComicDownloader
         private XPTable.Models.TextColumn txtChapName;
         private XPTable.Models.TextColumn txtChapLink;
         private XPTable.Models.TableModel tblChapters;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem mnuSelectAll;
+        private System.Windows.Forms.ToolStripMenuItem mnuSelectNone;
+        private System.Windows.Forms.ToolStripMenuItem mnuSelectInverse;
+        private System.Windows.Forms.ToolStripMenuItem mnuSelectSelected;
+        private XPTable.Models.NumberColumn colChapId;
         
     }
 }

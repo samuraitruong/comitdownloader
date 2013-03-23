@@ -12,6 +12,18 @@ namespace ComicDownloader.Engines
         public string Page { get; set; }
 
         public int ChapId { get; set; }
+
+        public string Folder { get; set; }
+
+        public string FolderName { get; set; }
+
+        public string PdfFileName { get; set; }
+
+        public string PdfPath { get; set; }
+
+        public List<string> Pages { get; set; }
+
+        public int PageCount { get; set; }
     }
     public class StoryInfo
     {

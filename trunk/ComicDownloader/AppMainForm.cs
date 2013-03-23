@@ -20,31 +20,20 @@ namespace ComicDownloader
 
         private void btnAddNewTTT_Click(object sender, EventArgs e)
         {
-            TruyenTranhTuanForm childForm = new TruyenTranhTuanForm();
+            DownloaderForm childForm = new DownloaderForm();
             childForm.MdiParent = this;
+            childForm.Downloader = new TruyenTranhTuanDownloader();
+            childForm.Text = "Truyen Tranh Tuan";
             childForm.Show();
-            //childForm.TabCtrl = this.tabControl1;
-            //TabPage tp = new TabPage();
-            //tp.Parent = tabControl1;
-            //tp.Text = childForm.Text;
-            //tp.Show();
-            //childForm.TabPag = tp;
-            //childForm.Show();
-            
-            //tabControl1.SelectedTab = tp;
-
-            
         }
 
+        public void UpdateActiveTabTitle(string title)
+        {
+            mdiTabStrip1.SelectedTab.Text = title;
+        }
         private void tabControl1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            //foreach (FormBase childForm in this.MdiChildren)
-            //{
-            //    //if (childForm.TabPag.Equals(tabControl1.SelectedTab))
-            //    //{
-            //    //    childForm.Select();
-            //    //}
-            //}
+            
         }
 
         private void btnVCAdd_Click(object sender, EventArgs e)
@@ -89,6 +78,15 @@ namespace ComicDownloader
             childForm.MdiParent = this;
             childForm.Downloader = new TruyenTranhTuanDownloader();
             childForm.Text = "Generic Form Tester";
+            childForm.Show();
+        }
+
+        private void btnVechaiForm_Click(object sender, EventArgs e)
+        {
+            DownloaderForm childForm = new DownloaderForm();
+            childForm.MdiParent = this;
+            childForm.Downloader = new VechaiDownloader();
+            childForm.Text = "Vechai.Info";
             childForm.Show();
         }
     }
