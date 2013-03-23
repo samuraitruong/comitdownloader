@@ -55,7 +55,17 @@ namespace XPTable.Models
 		/// </summary>
 		public event RowEventHandler CellRemoved;
 
-		/// <summary>
+        /// <summary>
+        /// Occurs when a SubRow is added to the Row
+        /// </summary>
+        public event RowEventHandler SubRowAdded;
+
+        /// <summary>
+        /// Occurs when a SubRow is removed from the Row
+        /// </summary>
+        public event RowEventHandler SubRowRemoved;
+        
+        /// <summary>
 		/// Occurs when the value of a Row's property changes
 		/// </summary>
 		public event RowEventHandler PropertyChanged;
@@ -73,6 +83,26 @@ namespace XPTable.Models
 		/// The collection of Cells's contained in the Row
 		/// </summary>
 		private CellCollection cells;
+
+        /// <summary>
+        /// The collection of subrows contained in this Row
+        /// </summary>
+        private RowCollection subrows;
+
+        /// <summary>
+        /// The row that is the parent to this one (if this is a sub row)
+        /// </summary>
+        private Row parentrow;
+
+        /// <summary>
+        /// The index that gives the order this row was added in
+        /// </summary>
+        private int childindex;
+
+        /// <summary>
+        /// The actual rendered height of this row. If negative then it has not been rendered and height is unknown.
+        /// </summary>
+        private int height;
 
 		/// <summary>
 		/// An object that contains data about the Row
@@ -109,6 +139,10 @@ namespace XPTable.Models
 		/// </summary>
 		private bool disposed = false;
 
+        private bool hasWordWrapCell;
+
+        private int wordWrapIndex;
+
 		#endregion
 
 
@@ -122,6 +156,15 @@ namespace XPTable.Models
 			this.Init();
 		}
 
+        /// <summary>
+        /// Initializes a new instance of the Row class with default settings and a parent row. The new row
+        /// is a sub row
+        /// </summary>
+        public Row(Row parent)
+        {
+            this.Init();
+            this.parentrow = parent;
+        }
 
 		/// <summary>
 		/// Initializes a new instance of the Row class with an array of strings 
@@ -248,6 +291,9 @@ namespace XPTable.Models
 			this.index = -1;
 			this.rowStyle = null;
 			this.selectedCellCount = 0;
+            this.hasWordWrapCell = false;
+            this.wordWrapIndex = 0;
+            this.height = -1;
 
 			this.state = (byte) (STATE_EDITABLE | STATE_ENABLED);
 		}
@@ -318,6 +364,35 @@ namespace XPTable.Models
 			this.state = (byte) (value ? (this.state | flag) : (this.state & ~flag));
 		}
 
+        /// <summary>
+        /// Returns the column that contains the cell that renders over the given column.
+        /// This is only different if there is a colspan cell on this row, to the left of the given position.
+        /// </summary>
+        /// <param name="columnIndex"></param>
+        /// <returns></returns>
+        internal int GetRenderedCellIndex(int columnIndex)
+        {
+            if (columnIndex == 0)
+                return columnIndex;
+
+            if (this.cells != null)
+            {
+                for (int i = columnIndex; i > -1 ; i--)
+                {
+                    Cell cell = this.cells[i];
+
+                    if (cell.ColSpan > 1 && (i + cell.ColSpan >= columnIndex))
+                    {
+                        // Then this cell (i) covers the cell at columnIndex for this row
+                        return i;
+                    }
+                }
+            }
+
+            // If no cells have colspan > 0 then the answer is the column we were given:
+            return columnIndex;
+
+        }
 		#endregion
 
 
@@ -327,7 +402,7 @@ namespace XPTable.Models
 		/// A CellCollection representing the collection of 
 		/// Cells contained within the Row
 		/// </summary>
-		[Category("Behavior"),
+		[Category("Data"),
 		Description("Cell Collection"),
 		DesignerSerializationVisibility(DesignerSerializationVisibility.Content), 
 		Editor(typeof(CellCollectionEditor), typeof(UITypeEditor))]
@@ -344,6 +419,62 @@ namespace XPTable.Models
 			}
 		}
 
+        /// <summary>
+        /// A RowCollection representing the collection of 
+        /// SubRows contained within the Row
+        /// </summary>
+        [Category("Data"),
+        Description("SubRow Collection"),
+        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+        Editor(typeof(RowCollectionEditor), typeof(UITypeEditor))]
+        public RowCollection SubRows
+        {
+            get
+            {
+                if (this.subrows == null)
+                {
+                    this.subrows = new RowCollection(this);
+                }
+
+                return this.subrows;
+            }
+        }
+
+        /// <summary>
+        /// A RowCollection representing the collection of 
+        /// SubRows contained within the Row
+        /// </summary>
+        [Category("Data"),
+        Description("Parent Row"),
+        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Row Parent
+        {
+            get
+            {
+                return this.parentrow;
+            }
+            set
+            {
+                this.parentrow = value;
+            }
+        }
+
+        /// <summary>
+        /// If this is a sub-row (i.e. it has a Parent), this gets the index of the Row within its Parent.
+        /// Used when sorting.
+        /// </summary>
+        [Browsable(false)]
+        public int ChildIndex
+        {
+            get
+            {
+                return this.childindex;
+            }
+            set
+            {
+                this.childindex = value;
+            }
+        }
 
 		/// <summary>
 		/// Gets or sets the object that contains data about the Row
@@ -757,6 +888,38 @@ namespace XPTable.Models
 			}
 		}
 
+		/// <summary>
+        /// Gets or sets the height of the Row. If this row has not been rendered 
+        /// (and the so exact height has not been calculated) -1 is returned.
+		/// </summary>
+		internal int InternalHeight
+		{
+			get
+			{
+				return this.height;
+			}
+
+			set
+			{
+                this.height = value;
+			}
+		}
+
+        /// <summary>
+        /// Gets the height of the Row. If this row has not been rendered 
+        /// (and the so exact height has not been calculated) the table default
+        /// row height is returned.
+        /// </summary>
+        [Browsable(false)]
+        public int Height
+        {
+            get
+            {
+                if (this.height < 0)
+                    return this.TableModel.RowHeight;
+                return this.height;
+            }
+        }
 
 		/// <summary>
 		/// Updates the Cell's Index property so that it matches the Cells 
@@ -823,6 +986,32 @@ namespace XPTable.Models
 			}
 		}
 
+        /// <summary>
+        /// Gets the index of the word wrap cell (if any).
+        /// </summary>
+        internal int WordWrapCellIndex
+        {
+            get
+            {
+                return wordWrapIndex;
+            }
+            set
+            {
+                wordWrapIndex = value;
+            }
+        }
+
+        internal bool HasWordWrapCell
+        {
+            get
+            {
+                return hasWordWrapCell;
+            }
+            set
+            {
+                hasWordWrapCell = value;
+            }
+        }
 
 		/// <summary>
 		/// Gets whether any Cells within the Row are selected
@@ -975,7 +1164,13 @@ namespace XPTable.Models
 			e.Cell.SetSelected(false);
 
 			this.UpdateCellIndicies(e.CellFromIndex);
-			
+
+            if (e.Cell.WordWrap)
+            {
+                this.WordWrapCellIndex = e.CellFromIndex;
+                this.HasWordWrapCell = true;
+            }
+
 			if (this.CanRaiseEvents)
 			{
 				if (this.TableModel != null)
@@ -1047,6 +1242,34 @@ namespace XPTable.Models
 				}
 			}
 		}
+
+        /// <summary>
+        /// Raises the SubRowAdded event
+        /// </summary>
+        /// <param name="e"></param>
+        protected internal virtual void OnSubRowAdded(RowEventArgs e)
+        {
+            this.TableModel.Rows.Add(e.Row);
+
+            if (SubRowAdded != null)
+            {
+                SubRowAdded(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Raises the SubRowRemoved event
+        /// </summary>
+        /// <param name="e"></param>
+        protected internal virtual void OnSubRowRemoved(RowEventArgs e)
+        {
+            this.TableModel.Rows.Remove(e.Row);
+
+            if (SubRowRemoved != null)
+            {
+                SubRowRemoved(this, e);
+            }
+        }
 
 
 		/// <summary>

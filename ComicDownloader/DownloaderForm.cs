@@ -23,14 +23,14 @@ namespace ComicDownloader
 {
     public partial class DownloaderForm : MdiChildForm
     {
-        public  Downloader Downloader { get; set; }
+        public Downloader Downloader { get; set; }
 
         private const string HOST_URL = "http://truyentranhtuan.com";
         public DownloaderForm()
         {
             InitializeComponent();
         }
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -46,34 +46,22 @@ namespace ComicDownloader
 
         private void bntDownload_Click(object sender, EventArgs e)
         {
-            
-            StartDownload();
 
+            StartDownload();
 
         }
 
-        string url = "";
-        List<int> chapters = new List<int>();
-        string dir = "";
+
+        private List<ChapterInfo> toBeDownloadedChapters = new List<ChapterInfo>();
+
+
         long total = 0;
         private void StartDownload()
         {
-            dir = txtDir.Text;
-            url = txtUrl.Text + "/{0}/doc-truyen/";
-            listHistory.Items.Clear();
-            chapters.Clear();
-            if (txtPages.Text.Contains('-'))
-            {
-                var arr = txtPages.Text.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
-                for (int i = Convert.ToInt32(arr[0]); i <= Convert.ToInt32(arr[1]); i++)
-                {
-                    chapters.Add(i);
-                }
-            }
-            else
-            {
-                chapters.Add(Convert.ToInt32(txtPages.Text));
-            }
+            //clear UI
+
+            CollectChaptersToBeDownloaded();
+
             bntDownload.Enabled = false;
             bntStop.Enabled = true;
             btnExitThread.Enabled = true;
@@ -83,188 +71,40 @@ namespace ComicDownloader
             //DownloadProcess();
 
         }
+
+
+
+
         private Thread downloadThread;
 
         private void DownloadProcess()
         {
             int chapterCount = 0;
-            foreach (var item in chapters)
+            foreach (var chapInfo in toBeDownloadedChapters)
             {
-                chapterCount++;
-                string path = txtTitle.Text  +" Chapter "+ item.ToString();
-                string chapter  = path;
-                this.Invoke((MethodInvoker)delegate
-                {
-                    lblStatus.Text = path;
-                });
-
-                string pdfFile = path + ".pdf";
-                string pdfPath = dir+"\\PDF";
-                pdfFile = Path.Combine(pdfPath, pdfFile);
-                
-                path = Path.Combine(dir, path);
                 try
                 {
-                    //Directory.Delete(path, true);
-                    //Directory.Delete(pdfPath, true);
-                }
-                catch { }
+                    chapterCount++;
+                    
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        lblStatus.Text = chapInfo.Name;
+                    });
 
-                var di = Directory.CreateDirectory(path);
-                Directory.CreateDirectory(pdfPath);
+                    chapInfo.Pages = Downloader.GetPages(chapInfo.Url);
+                    chapInfo.PageCount = chapInfo.Pages.Count;
 
-                var page = string.Format(url, item);
-                string html = "";
-                using (WebClient client = new WebClient())
-                {
-                    html = client.DownloadString(page);
-                }
+                    // display Info on UI
+                    DisplayChap(chapInfo, chapterCount);
+                    DownloadChapter(chapInfo);
 
+                    GeneratePDF(chapInfo);
 
-
-                
-                Document pdfDoc = new Document(PageSize.A4);
-                float docw = pdfDoc.PageSize.Width;
-                float doch = pdfDoc.PageSize.Width;
-
-                try
-                {
-                    var stream = File.Create(pdfFile);
-                    PdfWriter.GetInstance(pdfDoc, stream);
-                    pdfDoc.Open();
-                }
-                catch (Exception ex)
-                {
-                    //Log error;
                 }
                 finally
                 {
-                    //doc.Close();
-                }
-
-                var matches = Regex.Matches(html, @"/manga/[0-9a-zA-Z//s-]*(?:.png|.jpg|.PNG|.JPG)");
-                
-                this.Invoke((MethodInvoker)delegate
-                {
-                    this.progess.Minimum = 1;
-                    this.progess.Value = 1;
-                    this.progess.Maximum = matches.Count;
-                    var listItem = new EXListViewItem(chapterCount.ToString());
-                    listItem.SubItems.Add(chapter);
-                    listItem.SubItems.Add(matches.Count.ToString());
-                    listItem.SubItems.Add("0");
-                    EXControlListViewSubItem cs = new EXControlListViewSubItem();
-                    ProgressBar b = new ProgressBar();
-                    //b.Tag = item;
-                    b.Minimum = 0;
-                    b.Maximum = matches.Count;
-                    b.Step = 1;
-                    
-                    listItem.SubItems.Add(cs);
-                    this.listHistory.AddControlToSubItem(b, cs);
-
-                    
-                    listItem.SubItems.Add(di.FullName);
-
-                    EXControlListViewSubItem pdfLinkCol = new EXControlListViewSubItem();
-                    LinkLabel llbl = new LinkLabel();
-                    llbl.Height = 12;
-                    llbl.Text = pdfFile;
-                    llbl.Tag = cs;
-                    llbl.LinkClicked += new LinkLabelLinkClickedEventHandler(llbl_LinkClicked);
-                    listItem.SubItems.Add(pdfLinkCol);
-                    listHistory.AddControlToSubItem(llbl, pdfLinkCol);
-
-                    listItem.SubItems.Add(pdfFile);
-                    this.listHistory.Items.Add(listItem);
-                    lblPageCount.Text = string.Format("{0:D2}/{1:D2}", "0", matches.Count);
-
-                });
-
-                int count = 0;
-                long size = 0;
-                var links = matches.Cast<Match>()
-                    .OrderBy(p => p.Value)
-                    .Select(p => p.Value)
-                    .ToList();
-
-                foreach (string link in links)
-                {
-
-
-                    var pageUrl = "http://truyentranhtuan.com" + link;
-
-                    string filename = Path.Combine(di.FullName, Path.GetFileName(pageUrl));
-                    //Console.WriteLine(pageUrl);
-
-                    using (WebClient client = new WebClient())
-                    {
-                        try
-                        {
-                            count++;
-
-                            client.DownloadFile(pageUrl, filename);
-
-                            this.Invoke((MethodInvoker)delegate
-                            {
-                                this.progess.Value = count;
-                                 lblPageCount.Text = string.Format("{0:D2}/{1:D2}", count, links.Count);
-                                 
-
-                            });
-
-                            var file = File.Open(filename, FileMode.Open);
-
-                            size += file.Length;
-                            total += file.Length;
-
-                            this.Invoke((MethodInvoker)delegate
-                            {
-                                var listItem = listHistory.Items[listHistory.Items.Count - 1];
-                                listItem.SubItems[3].Text = size.ToKB();
-                                lblTotalDownloadCount.Text = total.ToKB();
-                                var subItem = listItem.SubItems[4] as EXControlListViewSubItem;
-                                var pp = subItem.MyControl as ProgressBar;
-                                pp.Value = count;
-                               
-                            });
-                            if (file.Length < 20 * 1024)
-                            {
-                                file.Close();
-                                File.Delete(filename);
-
-                            }
-                            else
-                            {
-                                Image img = Image.GetInstance(file);
-                                float h = img.Height;
-                                float w = img.Width;
-
-                                float hp =  doch/h;
-                                float wp = docw/w;
-
-                                img.ScaleToFit(docw * 1.35f, doch * 1.35f);
-                               // img.ScaleToFit(750, 550);
-                                pdfDoc.Add(img);
-                                pdfDoc.NewPage();
-                            }
-                            file.Close();
-                        }
-                        catch
-                        {
-                        }
-                        finally
-                        {
-
-                        }
-                    }
 
                 }
-                try
-                {
-                    pdfDoc.Close();
-                }
-                catch (Exception ex) { }
 
 
             }
@@ -278,10 +118,200 @@ namespace ComicDownloader
 
         }
 
+        private void GeneratePDF(ChapterInfo chapInfo)
+        {
+            //create PDF folder
+
+            try
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(chapInfo.PdfPath));
+            }
+            finally
+            {
+
+            }
+            Document pdfDoc = new Document(PageSize.A4);
+            float docw = pdfDoc.PageSize.Width;
+            float doch = pdfDoc.PageSize.Width;
+
+            try
+            {
+                var stream = File.Create(chapInfo.PdfPath);
+                PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+
+                DirectoryInfo di = new DirectoryInfo(chapInfo.Folder);
+                var files = di.GetFiles();
+                if (files != null)
+                {
+                    foreach (var fi in files)
+                    {
+                        Image img = Image.GetInstance(fi.FullName);
+                        float h = img.Height;
+                        float w = img.Width;
+
+                        float hp = doch / h;
+                        float wp = docw / w;
+
+                        img.ScaleToFit(docw * 1.35f, doch * 1.35f);
+                        // img.ScaleToFit(750, 550);
+                        pdfDoc.Add(img);
+                        pdfDoc.NewPage();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //Log error;
+            }
+            finally
+            {
+
+                try
+                {
+                    pdfDoc.Close();
+                }
+                finally
+                {
+
+                }
+                //doc.Close();
+            }
+
+        }
+
+        private void DownloadChapter(ChapterInfo chapInfo)
+        {
+            CreateChapterFolder(chapInfo);
+
+            int count = 0;
+            long size = 0;
+
+            foreach (string pageUrl in chapInfo.Pages)
+            {
+                string filename = Path.Combine(chapInfo.Folder, Path.GetFileName(pageUrl));
+
+                using (WebClient client = new WebClient())
+                {
+                    try
+                    {
+                        count++;
+
+                        client.DownloadFile(pageUrl, filename);
+
+
+                        var file = File.Open(filename, FileMode.Open);
+
+                        size += file.Length;
+                        total += file.Length;
+
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            this.progess.Value = count;
+                            lblPageCount.Text = string.Format("{0:D2}/{1:D2}", count, chapInfo.PageCount);
+
+                            var listItem = listHistory.Items[listHistory.Items.Count - 1];
+                            listItem.SubItems[3].Text = size.ToKB();
+                            lblTotalDownloadCount.Text = total.ToKB();
+                            var subItem = listItem.SubItems[4] as EXControlListViewSubItem;
+                            var pp = subItem.MyControl as ProgressBar;
+                            pp.Value = count;
+
+                        });
+
+
+                    }
+                    catch
+                    {
+                    }
+                    finally
+                    {
+
+                    }
+                }
+
+            }
+        }
+
+        private void DisplayChap(ChapterInfo chapInfo, int chapCount)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                this.progess.Minimum = 1;
+                this.progess.Value = 1;
+                this.progess.Maximum = chapInfo.PageCount;
+                var listItem = new EXListViewItem(chapCount.ToString());
+                listItem.SubItems.Add(chapInfo.Name);
+                listItem.SubItems.Add(chapInfo.PageCount.ToString());
+                listItem.SubItems.Add("0");
+                EXControlListViewSubItem cs = new EXControlListViewSubItem();
+                ProgressBar b = new ProgressBar();
+                //b.Tag = item;
+                b.Minimum = 0;
+                b.Maximum = chapInfo.PageCount;
+                b.Step = 1;
+
+                listItem.SubItems.Add(cs);
+                this.listHistory.AddControlToSubItem(b, cs);
+
+
+                listItem.SubItems.Add(chapInfo.Folder);
+
+                EXControlListViewSubItem pdfLinkCol = new EXControlListViewSubItem();
+                LinkLabel llbl = new LinkLabel();
+                llbl.Height = 12;
+                llbl.Text = chapInfo.PdfPath;
+                llbl.Tag = cs;
+                llbl.LinkClicked += new LinkLabelLinkClickedEventHandler(llbl_LinkClicked);
+                listItem.SubItems.Add(pdfLinkCol);
+                listHistory.AddControlToSubItem(llbl, pdfLinkCol);
+
+                listItem.SubItems.Add(chapInfo.PdfPath);
+                this.listHistory.Items.Add(listItem);
+                lblPageCount.Text = string.Format("{0:D2}/{1:D2}", "0", chapInfo.PageCount);
+
+            });
+        }
+
+        private void CollectChaptersToBeDownloaded()
+        {
+            string rootPath = txtDir.Text;
+            toBeDownloadedChapters.Clear();
+            using (new LongOperation())
+            {
+                foreach (Row item in tblChapters.Rows)
+                {
+                    if (item.Cells[0].Checked)
+                    {
+                        int id = Convert.ToInt32(item.Cells[1].Data);
+                        var chap = this.currentStoryInfo.Chapters.FirstOrDefault(p => p.ChapId == id);
+                        chap.FolderName = txtTitle.Text + " " + chap.ChapId.ToString();
+                        chap.Folder = Path.Combine(rootPath, chap.FolderName);
+                        chap.PdfFileName = chap.FolderName + ".pdf";
+                        chap.PdfPath = Path.Combine(rootPath, "PDF\\" + chap.PdfFileName);
+                        toBeDownloadedChapters.Add(chap);
+                    }
+                }
+            }
+        }
+
+        private void CreateChapterFolder(ChapterInfo chapInfo)
+        {
+            try
+            {
+                Directory.CreateDirectory(chapInfo.Folder);
+                //Directory.CreateDirectory(Path.GetFullPath(chapInfo.PdfPath));
+            }
+            finally
+            {
+
+            }
+        }
+
         void llbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             LinkLabel link = sender as LinkLabel;
-            Process.Start(string.Format("\"{0}\"",link.Text));
+            Process.Start(string.Format("\"{0}\"", link.Text));
         }
 
         private void lblStatus_Click(object sender, EventArgs e)
@@ -315,7 +345,7 @@ namespace ComicDownloader
             }
 
             //bntDownload.Enabled = true;
-            
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -329,7 +359,7 @@ namespace ComicDownloader
             thread.Start();
         }
 
-      
+
         List<StoryInfo> stories = new List<StoryInfo>();
 
         public static string GetHtml(string url)
@@ -341,7 +371,7 @@ namespace ComicDownloader
                 HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(myUri);
                 myHttpWebRequest.Method = "GET";
                 myHttpWebRequest.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-myHttpWebRequest.AutomaticDecompression = DecompressionMethods.GZip ;//Or DecompressionMethods.Deflate
+                myHttpWebRequest.AutomaticDecompression = DecompressionMethods.GZip;//Or DecompressionMethods.Deflate
 
                 // Set the user agent as if we were a web browser
                 myHttpWebRequest.UserAgent = @"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.4) Gecko/20060508 Firefox/1.5.0.4";
@@ -379,28 +409,48 @@ myHttpWebRequest.AutomaticDecompression = DecompressionMethods.GZip ;//Or Decomp
         }
 
         StoryInfo currentStoryInfo = null;
+
+        public void UpdateTabTitle(string title)
+        {
+            var form = this.MdiParent as AppMainForm;
+            form.UpdateActiveTabTitle(title);
+            
+        }
+
         private void bntInfo_Click(object sender, EventArgs e)
         {
-            var currentStoryInfo = Downloader.RequestInfo(txtUrl.Text);
-
-            txtPages.Text = "1-" + currentStoryInfo.ChapterCount.ToString();
-            txtTitle.Text = ddlList.Text;
-            txtTitle.Text = currentStoryInfo.Name;
-
-
-            tblChapters.Rows.Clear();
-
-            foreach (var item in currentStoryInfo.Chapters)
+            using (new LongOperation())
             {
-                int index = tblChapters.Rows.Add(new Row());
-                tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId.ToString(), true));
-               // tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId));
-                tblChapters.Rows[index].Cells.Add(new Cell(item.Name, true));
-                tblChapters.Rows[index].Cells.Add(new Cell(item.Url, new CellStyle(){ForeColor= System.Drawing.Color.Green}));
-                //tblChapters.Rows[index].Cells[0].Data = true;
+                currentStoryInfo = Downloader.RequestInfo(txtUrl.Text);
+
+               
+                txtTitle.Text = ddlList.Text;
+                txtTitle.Text = currentStoryInfo.Name;
+
+                this.Text = currentStoryInfo.Name;
+
+                tblChapters.Rows.Clear();
+
+                foreach (var item in currentStoryInfo.Chapters)
+                {
+                    int index = tblChapters.Rows.Add(new Row());
+                    tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId.ToString(), true));
+                    tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId));
+                    tblChapters.Rows[index].Cells.Add(new Cell(item.Name, true));
+                    tblChapters.Rows[index].Cells.Add(new Cell(item.Url, new CellStyle() { ForeColor = System.Drawing.Color.Green }));
+
+                }
+
+
+                ToggleControl(true);
             }
-             
-            //LockControl(true);
+        }
+
+        private void ToggleControl(bool state)
+        {
+            mnuSelectAll.Enabled = state;
+            mnuSelectInverse.Enabled = state;
+            mnuSelectNone.Enabled = state;
         }
 
         private void LockControl(bool p)
@@ -408,8 +458,8 @@ myHttpWebRequest.AutomaticDecompression = DecompressionMethods.GZip ;//Or Decomp
             ddlList.Enabled = p;
             txtTitle.Enabled = p;
             txtUrl.Enabled = p;
-            txtPages.Enabled = p;
             
+
             bntDownload.Enabled = p;
 
         }
@@ -429,12 +479,61 @@ myHttpWebRequest.AutomaticDecompression = DecompressionMethods.GZip ;//Or Decomp
             btnExitThread.Enabled = false;
         }
 
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            foreach (Row item in tblChapters.Rows)
+            {
+                Console.WriteLine(item.Cells[0].Data);
+                item.Cells[0].Checked = false;
+            }
+        }
+
+        private void mnuSelectAll_Click(object sender, EventArgs e)
+        {
+            foreach (Row item in tblChapters.Rows)
+            {
+                item.Cells[0].Checked = true;
+            }
+        }
+
+        private void mnuSelectNone_Click(object sender, EventArgs e)
+        {
+            foreach (Row item in tblChapters.Rows)
+            {
+                item.Cells[0].Checked = false;
+            }
+        }
+
+        private void mnuSelectInverse_Click(object sender, EventArgs e)
+        {
+            foreach (Row item in tblChapters.Rows)
+            {
+                item.Cells[0].Checked = !item.Cells[0].Checked;
+            }
+        }
+
+        private void mnuSelectSelected_Click(object sender, EventArgs e)
+        {
+            foreach (Row item in tblChapters.Rows)
+            {
+                if (item.Cells[0].Selected)
+                    item.Cells[0].Checked = !item.Cells[0].Checked;
+            }
+        }
+
+        private void lstChapters_SelectionChanged(object sender, XPTable.Events.SelectionEventArgs e)
+        {
+            mnuSelectSelected.Enabled = true;
+        }
+
         
 
-      
 
 
-        
+
+
+
+
 
 
     }

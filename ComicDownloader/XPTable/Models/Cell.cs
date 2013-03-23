@@ -122,6 +122,11 @@ namespace XPTable.Models
 		/// </summary>
 		private bool disposed = false;
 
+        /// <summary>
+        /// Specifies how many columns this cell occupies.
+        /// </summary>
+        private int colspan;
+
 		#endregion
 
 
@@ -407,6 +412,7 @@ namespace XPTable.Models
 			this.checkStyle = null;
 			this.imageStyle = null;
 			this.tooltipText = null;
+            this.colspan = 1;
 
 			this.state = (byte) (STATE_EDITABLE | STATE_ENABLED);
 		}
@@ -598,6 +604,38 @@ namespace XPTable.Models
 			this.SetState(STATE_SELECTED, selected);
 		}
 
+		/// <summary>
+		/// Gets of sets whether text can wrap in this cell (and force the cell's height to increase)
+		/// </summary>
+        [Category("Appearance"),
+        Description("Whether the text can wrap (and force the cell's height to increase)")]
+        public bool WordWrap
+        {
+            get
+            {
+                if (this.CellStyle == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.CellStyle.WordWrap;
+                }
+            }
+
+            set
+            {
+                if (this.CellStyle == null)
+                {
+                    this.CellStyle = new CellStyle();
+                }
+
+                if (this.CellStyle.WordWrap != value)
+                {
+                    this.CellStyle.WordWrap = value;
+                }
+            }
+        }
 
 		/// <summary>
 		/// Gets or sets the background Color for the Cell
@@ -1144,6 +1182,26 @@ namespace XPTable.Models
 				}
 			}
 		}
+
+
+        /// <summary>
+        /// Gets or sets how many columns this cell occupies
+        /// </summary>
+        [Category("Appearance"),
+        DefaultValue(1),
+        Description("How many columns this cell occupies")]
+        public int ColSpan
+        {
+            get
+            {
+                return this.colspan;
+            }
+
+            set
+            {
+                this.colspan = value;
+            }
+        }
 
 
 		/// <summary>

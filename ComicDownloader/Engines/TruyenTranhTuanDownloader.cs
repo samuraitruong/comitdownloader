@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
+using System.Net;
 
 namespace ComicDownloader.Engines
 {
@@ -86,6 +87,22 @@ namespace ComicDownloader.Engines
             info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
 
             return info;
+        }
+        public override List<string> GetPages(string chapUrl)
+        {
+            List<string> pages = new List<string>();
+
+            using (WebClient client = new WebClient())
+            {
+                string html = client.DownloadString(chapUrl);
+                var matches = Regex.Matches(html, @"/manga/[0-9a-zA-Z//s-]*(?:.png|.jpg|.PNG|.JPG)");
+                pages = matches.Cast<Match>()
+                    .OrderBy(p => p.Value)
+                    .Select(p => this.HostUrl+p.Value)
+                    .ToList();
+            }
+
+            return pages;
         }
         public override string StoryUrlPattern
         {
