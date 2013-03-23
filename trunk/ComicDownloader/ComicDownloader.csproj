@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E3BB4F32-9C5C-4F11-BF27-F79EED48AE21}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ComicDownloader</RootNamespace>
+    <AssemblyName>ComicDownloader</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>3rd\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.4.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>3rd\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AppMainForm.designer.cs">
+      <DependentUpon>AppMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Cx.Windows.Forms\MdiChildForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cx.Windows.Forms\MdiChildForm.Designer.cs">
+      <DependentUpon>MdiChildForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cx.Windows.Forms\MdiTabStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Cx.Windows.Forms\MdiTabStrip.Designer.cs">
+      <DependentUpon>MdiTabStrip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cx.Windows.Forms\MdiTabStripButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Cx.Windows.Forms\MdiTabStripButton.Designer.cs">
+      <DependentUpon>MdiTabStripButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cx.Windows.Forms\NoResizeChildForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cx.Windows.Forms\NoResizeChildForm.Designer.cs">
+      <DependentUpon>NoResizeChildForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EXComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EXListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Intro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Intro.Designer.cs">
+      <DependentUpon>Intro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerializationHelper.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\GlobalHook.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\IContainsRibbonComponents.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\IContainsSelectableRibbonItems.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\IDropDownRibbonItem.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\IRibbonElement.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\IRibbonForm.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\IRibbonToolTip.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\IScrollableRibbonItem.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\Ribbon.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonArrowDirection.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonButtonCollection.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonButtonDesigner.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonButtonList.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonButtonListDesigner.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonButtonStyle.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonCanvasEventArgs.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonCaptionButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonColorChooser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonColorPart.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonComboBoxDesigner.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonContext.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonContextCollection.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonDescriptionMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonDesigner.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonElementMeasureSizeEventArgs.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonElementPaintEventArgs.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonElementPopUpEventArgs.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonElementWithItemCollectionDesigner.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonFormHelper.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonHost.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonHostSizeModeHandledEventArgs.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonItemBoundsEventArgs.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonItemCollection.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonItemCollectionEditor.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonItemEventArgs.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonItemGroup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonItemGroupDesigner.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonItemGroupItemCollection.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonItemRenderEventArgs.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonMouseSensor.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonNonClientMode.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonOrbAdornerGlyph.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonOrbDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonOrbDropDownEventArgs.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonOrbMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonOrbMenuItemDesigner.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonOrbOptionButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonOrbRecentItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonOrbStyle.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonPanelCollection.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonPanelDesigner.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonPanelFlowDirection.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonPanelGlyph.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonPanelPopup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonPanelRenderEventArgs.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonPanelSizeMode.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonPopup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonPopupManager.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonProfesionalRendererColorTable.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonProfesionalRendererColorTableBlack.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonProfessionalRenderer.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonQuickAccessToolbar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonQuickAccessToolbarGlyph.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonQuickAccessToolbarItemCollection.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonRenderer.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonRenderEventArgs.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonSeparator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonTab.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonTabCollection.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonTabDesigner.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonTabGlyph.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonTabRenderEventArgs.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonTextEventArgs.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonToolTip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonToolTipRenderEventArgs.cs" />
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\RibbonWrappedDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="System.Windows.Forms.Ribbon35\WinApi.cs" />
+    <Compile Include="TruyenTranhTuanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TruyenTranhTuanForm.designer.cs">
+      <DependentUpon>TruyenTranhTuanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VeChaiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VeChaiForm.designer.cs">
+      <DependentUpon>VeChaiForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AppMainForm.resx">
+      <DependentUpon>AppMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cx.Windows.Forms\MdiChildForm.resx">
+      <DependentUpon>MdiChildForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cx.Windows.Forms\NoResizeChildForm.resx">
+      <DependentUpon>NoResizeChildForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Intro.resx">
+      <DependentUpon>Intro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="TruyenTranhTuanForm.resx">
+      <DependentUpon>TruyenTranhTuanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VeChaiForm.resx">
+      <DependentUpon>VeChaiForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="1363852385_info.png" />
+    <Content Include="1363939449_netvibes.png" />
+    <Content Include="1363942937_ark2.png" />
+    <Content Include="1363960953_adept_update.png" />
+    <Content Include="14747480-bang-comic-book-explosion.jpg" />
+    <Content Include="3rd\itextsharp.dll" />
+    <Content Include="Cx.Windows.Forms\MdiTabStrip.bmp" />
+    <Content Include="gtk-about.png" />
+    <Content Include="3rd\HtmlAgilityPack.dll" />
+    <Content Include="System.Windows.Forms.Ribbon35\Updates.txt" />
+    <Content Include="the_marvel_universe.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
