@@ -93,7 +93,7 @@ namespace ComicDownloader
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.Size = new System.Drawing.Size(219, 20);
             this.txtUrl.TabIndex = 0;
-            this.txtUrl.Text = "http://truyentranhtuan.com/9-faces-of-love";
+            this.txtUrl.Text = "http://vechai.info/blood-alone";
             // 
             // label3
             // 
