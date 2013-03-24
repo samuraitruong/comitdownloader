@@ -116,5 +116,32 @@ namespace ComicDownloader
             childForm.Text = "Truyentranh8.com";
             childForm.Show();
         }
+
+        private void btnTVNSAdd_Click(object sender, EventArgs e)
+        {
+            DownloaderForm childForm = new DownloaderForm();
+            childForm.MdiParent = this;
+            childForm.Downloader = new TruyenVnSharingDownloader();
+            childForm.Text = "Truyen.VnSharing.net";
+            childForm.Show();
+        }
+
+        private void btnTTNAdd_Click(object sender, EventArgs e)
+        {
+            DownloaderForm childForm = new DownloaderForm();
+            childForm.MdiParent = this;
+            childForm.Downloader = new TruyenTranhNhanhDownloader();
+            childForm.Text = "TruyenTranhNhanh.com";
+            childForm.Show();
+        }
+
+        private void btnVuiLenAdd_Click(object sender, EventArgs e)
+        {
+            DownloaderForm childForm = new DownloaderForm();
+            childForm.MdiParent = this;
+            childForm.Downloader = new ComicVuiLenDownloader();
+            childForm.Text = "Comic.Vuilen.com";
+            childForm.Show();
+        }
     }
 }

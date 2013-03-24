@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace ComicDownloader
 {
-    public static class Class1
+    public static class Extension
     {
         public static string ToKB(this long number){
             if(number>1024 * 1024 * 1024)

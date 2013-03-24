@@ -69,7 +69,7 @@
     <Compile Include="AsyncDialog\LoadingCircle.Designer.cs">
       <DependentUpon>LoadingCircle.cs</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Extension.cs" />
     <Compile Include="DownloaderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,12 +101,15 @@
       <DependentUpon>NoResizeChildForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Engines\BlogTruyenDownloader.cs" />
+    <Compile Include="Engines\ComicVuiLenDownloader.cs" />
+    <Compile Include="Engines\TruyenTranhNhanhDownloader.cs" />
     <Compile Include="Engines\Downloader.cs" />
     <Compile Include="Engines\NetworkHelper.cs" />
     <Compile Include="Engines\StoryInfo.cs" />
     <Compile Include="Engines\TruyenTranh8Downloader.cs" />
     <Compile Include="Engines\TruyenTranhTuanDownloader.cs" />
     <Compile Include="Engines\TruyenVietBoomDownloader.cs" />
+    <Compile Include="Engines\TruyenVnSharingDownloader.cs" />
     <Compile Include="Engines\VechaiDownloader.cs" />
     <Compile Include="EXComboBox.cs">
       <SubType>Component</SubType>

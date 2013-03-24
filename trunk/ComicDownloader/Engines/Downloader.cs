@@ -43,9 +43,9 @@ namespace ComicDownloader.Engines
             return null;
         }
 
-        public int ExtractID(string name)
+        public int ExtractID(string name, string pattern)
         {
-            var match = Regex.Match(name, @".*\s(\d*)$");
+            var match = Regex.Match(name, pattern, RegexOptions.IgnoreCase);
             if (match != null)
             {
                 int id = 0;
@@ -54,6 +54,12 @@ namespace ComicDownloader.Engines
             }
             return 0;
 
+        }
+
+        public int ExtractID(string name)
+        {
+            return ExtractID(name, @".*\s(\d*)$");
+            
         }
 
         internal  void DeleteCached()
