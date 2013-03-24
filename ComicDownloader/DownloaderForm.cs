@@ -199,6 +199,7 @@ namespace ComicDownloader
 
                 using (WebClient client = new WebClient())
                 {
+                    client.Headers.Add("Referer", chapInfo.Url);
                     try
                     {
                         count++;

@@ -96,7 +96,7 @@ namespace ComicDownloader
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.Size = new System.Drawing.Size(219, 20);
             this.txtUrl.TabIndex = 0;
-            this.txtUrl.Text = "http://home.blogtruyen.com/2011/06/ace-of-hearts-full-3-chap.html";
+            this.txtUrl.Text = "http://truyen.vietboom.com/truyen/6-no-Trigger";
             // 
             // label3
             // 
@@ -263,10 +263,10 @@ namespace ComicDownloader
             // columnModel1
             // 
             this.columnModel1.Columns.AddRange(new XPTable.Models.Column[] {
-            ((XPTable.Models.Column)(this.chkSelect)),
-            ((XPTable.Models.Column)(this.colChapId)),
-            ((XPTable.Models.Column)(this.txtChapName)),
-            ((XPTable.Models.Column)(this.txtChapLink))});
+            this.chkSelect,
+            this.colChapId,
+            this.txtChapName,
+            this.txtChapLink});
             // 
             // chkSelect
             // 
