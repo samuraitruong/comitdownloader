@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -59,6 +60,15 @@
     <Compile Include="AppMainForm.designer.cs">
       <DependentUpon>AppMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AsyncDialog\AsyncBaseDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AsyncDialog\LoadingCircle.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AsyncDialog\LoadingCircle.Designer.cs">
+      <DependentUpon>LoadingCircle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="DownloaderForm.cs">
       <SubType>Form</SubType>
@@ -95,6 +105,7 @@
     <Compile Include="Engines\NetworkHelper.cs" />
     <Compile Include="Engines\StoryInfo.cs" />
     <Compile Include="Engines\TruyenTranhTuanDownloader.cs" />
+    <Compile Include="Engines\TruyenVietBoomDownloader.cs" />
     <Compile Include="Engines\VechaiDownloader.cs" />
     <Compile Include="EXComboBox.cs">
       <SubType>Component</SubType>
@@ -505,6 +516,8 @@
     <Content Include="1363939449_netvibes.png" />
     <Content Include="1363942937_ark2.png" />
     <Content Include="1363960953_adept_update.png" />
+    <Content Include="1364078951_insert-object.png" />
+    <Content Include="1364131990_document_add.png" />
     <Content Include="14747480-bang-comic-book-explosion.jpg" />
     <Content Include="3rd\itextsharp.dll" />
     <Content Include="Cx.Windows.Forms\MdiTabStrip.bmp" />

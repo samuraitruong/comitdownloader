@@ -59,7 +59,7 @@ namespace ComicDownloader
         private void StartDownload()
         {
             //clear UI
-
+            listHistory.Items.Clear();
             CollectChaptersToBeDownloaded();
 
             bntDownload.Enabled = false;
@@ -189,7 +189,13 @@ namespace ComicDownloader
 
             foreach (string pageUrl in chapInfo.Pages)
             {
-                string filename = Path.Combine(chapInfo.Folder, Path.GetFileName(pageUrl));
+                string tempUrl =  pageUrl;
+                if (tempUrl.Contains("?"))
+                {
+                    tempUrl = tempUrl.Substring(0, tempUrl.IndexOf("?"));
+                }
+
+                string filename = Path.Combine(chapInfo.Folder, Path.GetFileName(tempUrl));
 
                 using (WebClient client = new WebClient())
                 {
@@ -202,9 +208,14 @@ namespace ComicDownloader
 
                         var file = File.Open(filename, FileMode.Open);
 
+                        if (file.Length < 50000)
+                        {
+                           // File.Delete(filename); 
+                        }
                         size += file.Length;
                         total += file.Length;
                         file.Close();
+                        
                         this.Invoke((MethodInvoker)delegate
                         {
                             this.progess.Value = count;
@@ -390,12 +401,24 @@ namespace ComicDownloader
 
         private void LoadStoryList()
         {
+            this.Invoke((MethodInvoker)delegate
+            {
+
+                ddlList.Text = "Loading....";
+                bntRefresh.Enabled = false;
+                ddlList.Enabled = false;
+            });
+
             var stories = Downloader.GetListStories();
 
             this.Invoke((MethodInvoker)delegate
             {
+                ddlList.Enabled = true;
                 ddlList.Items.Clear();
                 ddlList.Items.AddRange(stories.ToArray());
+                lblStoriesCount.Text = "Stories : " + stories.Count.ToString();
+                ddlList.Text = string.Format("There are {0} in list", stories.Count);
+                bntRefresh.Enabled = true;
             });
 
         }
@@ -528,6 +551,18 @@ namespace ComicDownloader
         private void lstChapters_SelectionChanged(object sender, XPTable.Events.SelectionEventArgs e)
         {
             mnuSelectSelected.Enabled = true;
+        }
+
+        private void button2_Click_2(object sender, EventArgs e)
+        {
+           // this.BeginAsyncIndication();
+        }
+
+        private void bntRefresh_Click(object sender, EventArgs e)
+        {
+            Downloader.DeleteCached();
+            Thread thread = new Thread(new ThreadStart(this.LoadStoryList));
+            thread.Start();
         }
 
         
