@@ -107,5 +107,14 @@ namespace ComicDownloader
             childForm.Text = "Truyen.VietBoom.com";
             childForm.Show();
         }
+
+        private void btnTT8Add_Click(object sender, EventArgs e)
+        {
+            DownloaderForm childForm = new DownloaderForm();
+            childForm.MdiParent = this;
+            childForm.Downloader = new TruyenTranh8Downloader();
+            childForm.Text = "Truyentranh8.com";
+            childForm.Show();
+        }
     }
 }

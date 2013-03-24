@@ -35,6 +35,7 @@
             this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
             this.ribbonPanel5 = new System.Windows.Forms.RibbonPanel();
             this.ribbonPanel6 = new System.Windows.Forms.RibbonPanel();
+            this.ribbonPanel7 = new System.Windows.Forms.RibbonPanel();
             this.ribbonTab2 = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel2 = new System.Windows.Forms.RibbonPanel();
             this.ribbonPanel3 = new System.Windows.Forms.RibbonPanel();
@@ -42,7 +43,7 @@
             this.txtVSList = new System.Windows.Forms.RibbonTextBox();
             this.ribbonTab3 = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel4 = new System.Windows.Forms.RibbonPanel();
-            this.ribbonPanel7 = new System.Windows.Forms.RibbonPanel();
+            this.ribbonPanel8 = new System.Windows.Forms.RibbonPanel();
             this.ribbonOrbMenuItem1 = new System.Windows.Forms.RibbonOrbMenuItem();
             this.ribbonButton1 = new System.Windows.Forms.RibbonButton();
             this.ribbonButton2 = new System.Windows.Forms.RibbonButton();
@@ -50,6 +51,7 @@
             this.btnVechaiForm = new System.Windows.Forms.RibbonButton();
             this.btnBlogTruyenAdd = new System.Windows.Forms.RibbonButton();
             this.btnTruyenVietBoomAdd = new System.Windows.Forms.RibbonButton();
+            this.btnTT8Add = new System.Windows.Forms.RibbonButton();
             this.btnVCAdd = new System.Windows.Forms.RibbonButton();
             this.bntRefeshList = new System.Windows.Forms.RibbonButton();
             this.btnAddTTTGeneric = new System.Windows.Forms.RibbonButton();
@@ -101,6 +103,7 @@
             this.ribbonTab1.Panels.Add(this.ribbonPanel5);
             this.ribbonTab1.Panels.Add(this.ribbonPanel6);
             this.ribbonTab1.Panels.Add(this.ribbonPanel7);
+            this.ribbonTab1.Panels.Add(this.ribbonPanel8);
             this.ribbonTab1.Text = "Home";
             // 
             // ribbonPanel1
@@ -118,6 +121,11 @@
             // 
             this.ribbonPanel6.Items.Add(this.btnBlogTruyenAdd);
             this.ribbonPanel6.Text = "BlogTruyen.Com";
+            // 
+            // ribbonPanel7
+            // 
+            this.ribbonPanel7.Items.Add(this.btnTruyenVietBoomAdd);
+            this.ribbonPanel7.Text = "Truyen.VietBoom.Com";
             // 
             // ribbonTab2
             // 
@@ -161,10 +169,10 @@
             this.ribbonPanel4.Items.Add(this.btnAddTTTGeneric);
             this.ribbonPanel4.Text = "Truyen Tranh Tuan";
             // 
-            // ribbonPanel7
+            // ribbonPanel8
             // 
-            this.ribbonPanel7.Items.Add(this.btnTruyenVietBoomAdd);
-            this.ribbonPanel7.Text = "Truyen.VietBoom.Com";
+            this.ribbonPanel8.Items.Add(this.btnTT8Add);
+            this.ribbonPanel8.Text = "TruyenTranh8.com";
             // 
             // ribbonOrbMenuItem1
             // 
@@ -226,6 +234,14 @@
             this.btnTruyenVietBoomAdd.MinimumSize = new System.Drawing.Size(0, 0);
             this.btnTruyenVietBoomAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnTruyenVietBoomAdd.SmallImage")));
             this.btnTruyenVietBoomAdd.Click += new System.EventHandler(this.btnTruyenVietBoomAdd_Click);
+            // 
+            // btnTT8Add
+            // 
+            this.btnTT8Add.Image = global::ComicDownloader.Properties.Resources._1364150669_folder_add;
+            this.btnTT8Add.MaximumSize = new System.Drawing.Size(0, 0);
+            this.btnTT8Add.MinimumSize = new System.Drawing.Size(0, 0);
+            this.btnTT8Add.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnTT8Add.SmallImage")));
+            this.btnTT8Add.Click += new System.EventHandler(this.btnTT8Add_Click);
             // 
             // btnVCAdd
             // 
@@ -294,5 +310,7 @@
         private System.Windows.Forms.RibbonButton btnBlogTruyenAdd;
         private System.Windows.Forms.RibbonPanel ribbonPanel7;
         private System.Windows.Forms.RibbonButton btnTruyenVietBoomAdd;
+        private System.Windows.Forms.RibbonPanel ribbonPanel8;
+        private System.Windows.Forms.RibbonButton btnTT8Add;
     }
 }
