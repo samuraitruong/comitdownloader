@@ -38,6 +38,7 @@ namespace ComicDownloader
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblStoriesCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblPageCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -64,6 +65,8 @@ namespace ComicDownloader
             this.btnExitThread = new System.Windows.Forms.Button();
             this.bntStop = new System.Windows.Forms.Button();
             this.groupInfo = new System.Windows.Forms.GroupBox();
+            this.bntRefresh = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.bntInfo = new System.Windows.Forms.Button();
@@ -93,7 +96,7 @@ namespace ComicDownloader
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.Size = new System.Drawing.Size(219, 20);
             this.txtUrl.TabIndex = 0;
-            this.txtUrl.Text = "http://vechai.info/blood-alone";
+            this.txtUrl.Text = "http://home.blogtruyen.com/2011/06/ace-of-hearts-full-3-chap.html";
             // 
             // label3
             // 
@@ -146,6 +149,7 @@ namespace ComicDownloader
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblStoriesCount,
             this.lblStatus,
             this.toolStripStatusLabel1,
             this.lblPageCount,
@@ -158,6 +162,12 @@ namespace ComicDownloader
             this.statusStrip1.Size = new System.Drawing.Size(949, 22);
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblStoriesCount
+            // 
+            this.lblStoriesCount.BorderStyle = System.Windows.Forms.Border3DStyle.Adjust;
+            this.lblStoriesCount.Name = "lblStoriesCount";
+            this.lblStoriesCount.Size = new System.Drawing.Size(0, 17);
             // 
             // lblStatus
             // 
@@ -253,10 +263,10 @@ namespace ComicDownloader
             // columnModel1
             // 
             this.columnModel1.Columns.AddRange(new XPTable.Models.Column[] {
-            this.chkSelect,
-            this.colChapId,
-            this.txtChapName,
-            this.txtChapLink});
+            ((XPTable.Models.Column)(this.chkSelect)),
+            ((XPTable.Models.Column)(this.colChapId)),
+            ((XPTable.Models.Column)(this.txtChapName)),
+            ((XPTable.Models.Column)(this.txtChapLink))});
             // 
             // chkSelect
             // 
@@ -359,6 +369,8 @@ namespace ComicDownloader
             // 
             // groupInfo
             // 
+            this.groupInfo.Controls.Add(this.bntRefresh);
+            this.groupInfo.Controls.Add(this.button2);
             this.groupInfo.Controls.Add(this.label5);
             this.groupInfo.Controls.Add(this.label3);
             this.groupInfo.Controls.Add(this.txtTitle);
@@ -373,6 +385,27 @@ namespace ComicDownloader
             this.groupInfo.TabIndex = 20;
             this.groupInfo.TabStop = false;
             this.groupInfo.Text = "Info";
+            // 
+            // bntRefresh
+            // 
+            this.bntRefresh.Enabled = false;
+            this.bntRefresh.Image = global::ComicDownloader.Properties.Resources._1363960953_adept_update;
+            this.bntRefresh.Location = new System.Drawing.Point(242, 32);
+            this.bntRefresh.Name = "bntRefresh";
+            this.bntRefresh.Size = new System.Drawing.Size(33, 23);
+            this.bntRefresh.TabIndex = 18;
+            this.bntRefresh.UseVisualStyleBackColor = true;
+            this.bntRefresh.Click += new System.EventHandler(this.bntRefresh_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(245, 113);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 17;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_2);
             // 
             // label5
             // 
@@ -554,6 +587,9 @@ namespace ComicDownloader
         private System.Windows.Forms.ToolStripMenuItem mnuSelectInverse;
         private System.Windows.Forms.ToolStripMenuItem mnuSelectSelected;
         private XPTable.Models.NumberColumn colChapId;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ToolStripStatusLabel lblStoriesCount;
+        private System.Windows.Forms.Button bntRefresh;
         
     }
 }

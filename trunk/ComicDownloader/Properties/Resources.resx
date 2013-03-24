@@ -124,6 +124,9 @@
   <data name="1363942937_ark2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\1363942937_ark2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="1364078951_insert-object" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\1364078951_insert-object.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="1363939449_netvibes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\1363939449_netvibes.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -136,8 +139,11 @@
   <data name="1363852385_info" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\1363852385_info.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="1363960953_adept_update" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\1363960953_adept_update.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="1364131990_document_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\1364131990_document_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

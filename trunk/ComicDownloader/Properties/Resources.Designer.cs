@@ -88,6 +88,20 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _1364078951_insert_object {
+            get {
+                object obj = ResourceManager.GetObject("1364078951_insert-object", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364131990_document_add {
+            get {
+                object obj = ResourceManager.GetObject("1364131990_document_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap _14747480_bang_comic_book_explosion {
             get {
                 object obj = ResourceManager.GetObject("14747480-bang-comic-book-explosion", resourceCulture);

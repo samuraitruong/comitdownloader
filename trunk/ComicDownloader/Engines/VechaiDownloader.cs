@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define DEBUG
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,7 +56,11 @@ namespace ComicDownloader.Engines
                     {
                         var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='list-manga-paging']/span");
 
-                        foreach (var item in nodes.Take(2))
+                        int count = nodes.Count;
+                    #if DEBUG
+                        count = 1;
+                    #endif
+                        foreach (var item in nodes.Take(count))
                         {
                             string requestListPage = string.Format("http://vechai.info/list.php?job=ajaxlist&letter=all&page={0}&sort=1", item.InnerText);
                             var pageHtml = NetworkHelper.GetHtml(requestListPage);

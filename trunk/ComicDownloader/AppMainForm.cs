@@ -89,5 +89,23 @@ namespace ComicDownloader
             childForm.Text = "Vechai.Info";
             childForm.Show();
         }
+
+        private void btnBlogTruyenAdd_Click(object sender, EventArgs e)
+        {
+            DownloaderForm childForm = new DownloaderForm();
+            childForm.MdiParent = this;
+            childForm.Downloader = new BlogTruyenDownloader();
+            childForm.Text = "BlogTruyen.com";
+            childForm.Show();
+        }
+
+        private void btnTruyenVietBoomAdd_Click(object sender, EventArgs e)
+        {
+            DownloaderForm childForm = new DownloaderForm();
+            childForm.MdiParent = this;
+            childForm.Downloader = new TruyenVietBoomDownloader();
+            childForm.Text = "Truyen.VietBoom.com";
+            childForm.Show();
+        }
     }
 }
