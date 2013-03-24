@@ -65,11 +65,8 @@ namespace ComicDownloader
             this.btnExitThread = new System.Windows.Forms.Button();
             this.bntStop = new System.Windows.Forms.Button();
             this.groupInfo = new System.Windows.Forms.GroupBox();
-            this.bntRefresh = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.bntInfo = new System.Windows.Forms.Button();
             this.ddlList = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.listHistory = new ComicDownloader.EXListView();
@@ -80,6 +77,8 @@ namespace ComicDownloader
             this.columnHeaderProgress = ((ComicDownloader.EXColumnHeader)(new ComicDownloader.EXColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((ComicDownloader.EXColumnHeader)(new ComicDownloader.EXColumnHeader()));
+            this.bntRefresh = new System.Windows.Forms.Button();
+            this.bntInfo = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -96,7 +95,7 @@ namespace ComicDownloader
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.Size = new System.Drawing.Size(219, 20);
             this.txtUrl.TabIndex = 0;
-            this.txtUrl.Text = "http://truyen.vietboom.com/truyen/6-no-Trigger";
+            this.txtUrl.Text = "http://truyentranh8.com/Dau-La-Dai-Luc/";
             // 
             // label3
             // 
@@ -370,7 +369,6 @@ namespace ComicDownloader
             // groupInfo
             // 
             this.groupInfo.Controls.Add(this.bntRefresh);
-            this.groupInfo.Controls.Add(this.button2);
             this.groupInfo.Controls.Add(this.label5);
             this.groupInfo.Controls.Add(this.label3);
             this.groupInfo.Controls.Add(this.txtTitle);
@@ -385,27 +383,6 @@ namespace ComicDownloader
             this.groupInfo.TabIndex = 20;
             this.groupInfo.TabStop = false;
             this.groupInfo.Text = "Info";
-            // 
-            // bntRefresh
-            // 
-            this.bntRefresh.Enabled = false;
-            this.bntRefresh.Image = global::ComicDownloader.Properties.Resources._1363960953_adept_update;
-            this.bntRefresh.Location = new System.Drawing.Point(242, 32);
-            this.bntRefresh.Name = "bntRefresh";
-            this.bntRefresh.Size = new System.Drawing.Size(33, 23);
-            this.bntRefresh.TabIndex = 18;
-            this.bntRefresh.UseVisualStyleBackColor = true;
-            this.bntRefresh.Click += new System.EventHandler(this.bntRefresh_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(245, 113);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_2);
             // 
             // label5
             // 
@@ -424,16 +401,6 @@ namespace ComicDownloader
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "URL";
-            // 
-            // bntInfo
-            // 
-            this.bntInfo.Image = global::ComicDownloader.Properties.Resources.gtk_about;
-            this.bntInfo.Location = new System.Drawing.Point(242, 72);
-            this.bntInfo.Name = "bntInfo";
-            this.bntInfo.Size = new System.Drawing.Size(30, 23);
-            this.bntInfo.TabIndex = 16;
-            this.bntInfo.UseVisualStyleBackColor = true;
-            this.bntInfo.Click += new System.EventHandler(this.bntInfo_Click);
             // 
             // ddlList
             // 
@@ -509,6 +476,27 @@ namespace ComicDownloader
             // columnHeader5
             // 
             this.columnHeader5.Text = "PDF";
+            // 
+            // bntRefresh
+            // 
+            this.bntRefresh.Enabled = false;
+            this.bntRefresh.Image = global::ComicDownloader.Properties.Resources._1364155386_gtk_refresh;
+            this.bntRefresh.Location = new System.Drawing.Point(242, 32);
+            this.bntRefresh.Name = "bntRefresh";
+            this.bntRefresh.Size = new System.Drawing.Size(33, 25);
+            this.bntRefresh.TabIndex = 18;
+            this.bntRefresh.UseVisualStyleBackColor = true;
+            this.bntRefresh.Click += new System.EventHandler(this.bntRefresh_Click);
+            // 
+            // bntInfo
+            // 
+            this.bntInfo.Image = global::ComicDownloader.Properties.Resources.gtk_about;
+            this.bntInfo.Location = new System.Drawing.Point(242, 72);
+            this.bntInfo.Name = "bntInfo";
+            this.bntInfo.Size = new System.Drawing.Size(30, 23);
+            this.bntInfo.TabIndex = 16;
+            this.bntInfo.UseVisualStyleBackColor = true;
+            this.bntInfo.Click += new System.EventHandler(this.bntInfo_Click);
             // 
             // DownloaderForm
             // 
@@ -587,7 +575,6 @@ namespace ComicDownloader
         private System.Windows.Forms.ToolStripMenuItem mnuSelectInverse;
         private System.Windows.Forms.ToolStripMenuItem mnuSelectSelected;
         private XPTable.Models.NumberColumn colChapId;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ToolStripStatusLabel lblStoriesCount;
         private System.Windows.Forms.Button bntRefresh;
         

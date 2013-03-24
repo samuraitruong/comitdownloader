@@ -1,0 +1,142 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using HtmlAgilityPack;
+using System.Text.RegularExpressions;
+
+namespace ComicDownloader.Engines
+{
+    public class TruyenTranh8Downloader: Downloader
+    {
+        public override string Name
+        {
+            get { return "[Truyen Tranh 8] - "; }
+        }
+
+        public override string ListStoryURL
+        {
+            get { return "http://truyentranh8.com/danh_sach_truyen/"; }
+        }
+
+        public override string HostUrl
+        {
+            get { return "http://truyentranh8.com"; }
+        }
+
+        public override string StoryUrlPattern
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override List<StoryInfo> GetListStories()
+        {
+            string urlPattern = this.ListStoryURL + "page={0}";
+
+            List<StoryInfo> results = base.ReloadChachedData();
+
+            if (results == null || results.Count == 0)
+            {
+                results = new List<StoryInfo>();
+                int currentPage = 1;
+                bool isStillHasPage = true;
+                while (isStillHasPage)
+                {
+                    string url = string.Format(urlPattern, currentPage);
+
+                    string html = NetworkHelper.GetHtml(url);
+                    HtmlDocument htmlDoc = new HtmlDocument();
+                    htmlDoc.LoadHtml(html);
+
+                    var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"tblChap\"]//a[@class=\"tipsy\"]");
+                    if (nodes != null && nodes.Count > 0)
+                    {
+                        currentPage++;
+                        foreach (var node in nodes)
+                        {
+                            StoryInfo info = new StoryInfo()
+                            {
+                                Url = HostUrl+"/" + node.Attributes["href"].Value,
+                                Name = node.InnerText
+                            };
+                            results.Add(info);
+                        }
+                    }
+                    else
+                    {
+                        isStillHasPage = false;
+                    }
+
+                }
+
+            }
+            this.SaveCache(results);
+            return results;
+        }
+
+        public override StoryInfo RequestInfo(string storyUrl)
+        {
+            
+
+            var html = NetworkHelper.GetHtml(storyUrl);
+
+            HtmlDocument htmlDoc = new HtmlDocument();
+
+            htmlDoc.LoadHtml(html);
+
+            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//h1[@itemprop=\"name\"]");
+
+            
+             
+            StoryInfo info = new StoryInfo()
+            {
+                Url = storyUrl,
+                Name = nameNode.InnerText
+            };
+
+              var chapNodes = htmlDoc.DocumentNode.SelectNodes("//*[@itemprop=\"itemListElement\"]");
+
+              foreach (HtmlNode node in chapNodes)
+              {
+                  ChapterInfo chapInfo = new ChapterInfo()
+                  {
+                      Name = node.Descendants("strong").FirstOrDefault().InnerText,
+                      Url = node.Descendants("a").FirstOrDefault().Attributes["href"].Value.Trim(),
+                      ChapId = ExtractID(node.Descendants("strong").FirstOrDefault().InnerText)
+                  };
+                  info.Chapters.Add(chapInfo);
+              }
+
+              info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
+            return info;
+        }
+
+        public override List<string> GetPages(string chapUrl)
+        {
+            List<string> pages = new List<string>();
+
+            var html = NetworkHelper.GetHtml(chapUrl);
+            string pvip = "lstImagesVIP.push\\(\"(.*)\"\\)";
+
+            string p = "lstImages.push\\(\"(.*)\"\\)";
+
+            var matches = Regex.Matches(html, pvip);
+            if(matches== null || matches.Count ==0)
+             matches = Regex.Matches(html,p );
+
+            foreach (Match match in matches)
+            {
+                pages.Add(match.Groups[1].Value);
+            }
+            //HtmlDocument htmlDoc = new HtmlDocument();
+            //htmlDoc.LoadHtml(html);
+
+            //var pageNodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"wrapper\"]//img");
+            //foreach (HtmlNode node in pageNodes)
+            //{
+            //    pages.Add(node.Attributes["src"].Value);
+            //}
+            return pages;
+        }
+    }
+}

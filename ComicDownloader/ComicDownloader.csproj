@@ -104,6 +104,7 @@
     <Compile Include="Engines\Downloader.cs" />
     <Compile Include="Engines\NetworkHelper.cs" />
     <Compile Include="Engines\StoryInfo.cs" />
+    <Compile Include="Engines\TruyenTranh8Downloader.cs" />
     <Compile Include="Engines\TruyenTranhTuanDownloader.cs" />
     <Compile Include="Engines\TruyenVietBoomDownloader.cs" />
     <Compile Include="Engines\VechaiDownloader.cs" />
@@ -518,6 +519,8 @@
     <Content Include="1363960953_adept_update.png" />
     <Content Include="1364078951_insert-object.png" />
     <Content Include="1364131990_document_add.png" />
+    <Content Include="1364150669_folder_add.png" />
+    <Content Include="1364155386_gtk-refresh.png" />
     <Content Include="14747480-bang-comic-book-explosion.jpg" />
     <Content Include="3rd\itextsharp.dll" />
     <Content Include="Cx.Windows.Forms\MdiTabStrip.bmp" />
