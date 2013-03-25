@@ -118,7 +118,7 @@ namespace ComicDownloader.Engines
             return info;
         }
 
-        string ReplaceText(string s)
+        public static string ReplaceText(string s)
         {
 
             s = s.Replace("http:\\x1.blogtruyen.com", "prereplinkx1");
@@ -161,8 +161,8 @@ namespace ComicDownloader.Engines
             s = s.Replace("%20", "");
             s = s.Replace("%3a", ":");
             s = s.Replace("%2f", "/");
-
-
+            s = s.Replace("%3d", "=");
+            s = s.Replace("%3f", "?");
             s = s.Replace("lstImages.push(\"", "[IMG]");
             s = s.Replace("\"\\);", "[/IMG]");
             s = s.Replace("https://lh6", "http://4");

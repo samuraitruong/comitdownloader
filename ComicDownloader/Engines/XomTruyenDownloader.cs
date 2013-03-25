@@ -8,7 +8,7 @@ using System.Net;
 
 namespace ComicDownloader.Engines
 {
-    public class MangaKungDownloader
+    public class XomTruyenDownloader
         : Downloader
     {
 
@@ -22,7 +22,7 @@ namespace ComicDownloader.Engines
 
                 HtmlDocument htmlDoc = new HtmlDocument();
                 htmlDoc.LoadHtml(html);
-                var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"ddsg-wrapper\"]/ul/li[1]/ul/li/a");
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"maincol\"]/div[2]//span[1]/a[contains(@href,\"http\")]");
                 
 
                 foreach (HtmlNode node in nodes)
@@ -46,7 +46,7 @@ namespace ComicDownloader.Engines
 
             HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
             htmlDoc.LoadHtml(html);
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class=\"postcontent\"]//h1");
+            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"mangainfo\"]//h3");
 
             StoryInfo info = new StoryInfo()
             {
@@ -54,7 +54,7 @@ namespace ComicDownloader.Engines
                 Name = nameNode.InnerText.Trim()
             };
 
-            var chapterLinks = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"postcontent\"]//a[contains(@href,'http://img')]");
+            var chapterLinks = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"scroll-pane\"]//span[1]/a");
 
             info.ChapterCount = chapterLinks.Count;
             foreach (HtmlNode item in chapterLinks)
@@ -79,34 +79,30 @@ namespace ComicDownloader.Engines
         }
         public override string Name
         {
-            get { return "[Manga Kung] - "; }
+            get { return "[Xom Truyen] - "; }
         }
-        public override void DownloadPage(string pageUrl, string filename, string httpReferer)
-        {
-            var html = NetworkHelper.GetHtml(pageUrl);
-            HtmlDocument htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-            var imgNode = htmlDoc.DocumentNode.SelectSingleNode("//img[@class=\"1picture\"]");
+        //public override void DownloadPage(string pageUrl, string filename, string httpReferer)
+        //{
+        //    var html = NetworkHelper.GetHtml(pageUrl);
+        //    HtmlDocument htmlDoc = new HtmlDocument();
+        //    htmlDoc.LoadHtml(html);
+        //    var imgNode = htmlDoc.DocumentNode.SelectSingleNode("//img[@class=\"1picture\"]");
 
-            var url = imgNode.Attributes["src"].Value;
+        //    var url = "http://img.mangakung.com/read/"+imgNode.Attributes["src"].Value;
 
-            base.DownloadPage(url, filename, httpReferer);
-        }
+        //    base.DownloadPage(url, filename, httpReferer);
+        //}
         public override List<string> GetPages(string chapUrl)
         {
             List<string> pages = new List<string>();
 
             
                 string html = NetworkHelper.GetHtml(chapUrl);
-                HtmlDocument htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(html);
-                var options = htmlDoc.DocumentNode.SelectNodes("//select[@name=\"page\"]//option");
+                var p = "var images = \\[(.*)\\]";
+                var match = Regex.Match(html, p);
+                var arr = match.Groups[1].Value.Split("',".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                foreach (var item in options)
-	            {
-                    pages.Add(chapUrl + item.Attributes["value"].Value);
-	            }
-            
+                pages.AddRange(arr);
 
             return pages;
         }
@@ -122,18 +118,18 @@ namespace ComicDownloader.Engines
         {
             get
             {
-                return "http://www.mangakung.com/";
+                return "http://xomtruyen.com/";
             }
         }
         public override string ListStoryURL
         {
             get
             {
-                return "http://www.mangakung.com/directory/";
+                return "http://xomtruyen.com/browse/";
             }
             
         }
-        public MangaKungDownloader()
+        public XomTruyenDownloader()
         {
             
         }

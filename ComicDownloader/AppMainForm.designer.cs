@@ -51,18 +51,24 @@
             this.btnTTNAdd = new System.Windows.Forms.RibbonButton();
             this.ribbonPanel11 = new System.Windows.Forms.RibbonPanel();
             this.btnVuiLenAdd = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel12 = new System.Windows.Forms.RibbonPanel();
+            this.bntMangaKungAdd = new System.Windows.Forms.RibbonButton();
             this.ribbonTab2 = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel2 = new System.Windows.Forms.RibbonPanel();
-            this.btnVCAdd = new System.Windows.Forms.RibbonButton();
-            this.bntRefeshList = new System.Windows.Forms.RibbonButton();
-            this.ribbonPanel3 = new System.Windows.Forms.RibbonPanel();
-            this.txtVCHost = new System.Windows.Forms.RibbonTextBox();
-            this.txtVSList = new System.Windows.Forms.RibbonTextBox();
+            this.btnXomTruyenAdd = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel14 = new System.Windows.Forms.RibbonPanel();
+            this.bntMangaFCAdd = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel15 = new System.Windows.Forms.RibbonPanel();
+            this.btnTruyen18 = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel16 = new System.Windows.Forms.RibbonPanel();
+            this.btnLauPhimAdd = new System.Windows.Forms.RibbonButton();
             this.ribbonTab3 = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel4 = new System.Windows.Forms.RibbonPanel();
             this.btnAddTTTGeneric = new System.Windows.Forms.RibbonButton();
-            this.ribbonPanel12 = new System.Windows.Forms.RibbonPanel();
-            this.bntMangaKungAdd = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel13 = new System.Windows.Forms.RibbonPanel();
+            this.ribbonPanel3 = new System.Windows.Forms.RibbonPanel();
+            this.ribbonPanel17 = new System.Windows.Forms.RibbonPanel();
+            this.bntNTruyenAdd = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
             // mdiTabStrip1
@@ -144,7 +150,7 @@
             this.ribbonTab1.Panels.Add(this.ribbonPanel10);
             this.ribbonTab1.Panels.Add(this.ribbonPanel11);
             this.ribbonTab1.Panels.Add(this.ribbonPanel12);
-            this.ribbonTab1.Text = "Home[VN translated Host]";
+            this.ribbonTab1.Text = "VN translated Host 1";
             // 
             // ribbonPanel1
             // 
@@ -252,53 +258,79 @@
             this.btnVuiLenAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnVuiLenAdd.SmallImage")));
             this.btnVuiLenAdd.Click += new System.EventHandler(this.btnVuiLenAdd_Click);
             // 
+            // ribbonPanel12
+            // 
+            this.ribbonPanel12.Items.Add(this.bntMangaKungAdd);
+            this.ribbonPanel12.Text = "MangaKung.com";
+            // 
+            // bntMangaKungAdd
+            // 
+            this.bntMangaKungAdd.Image = global::ComicDownloader.Properties.Resources._1364078951_insert_object;
+            this.bntMangaKungAdd.MaximumSize = new System.Drawing.Size(0, 0);
+            this.bntMangaKungAdd.MinimumSize = new System.Drawing.Size(0, 0);
+            this.bntMangaKungAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntMangaKungAdd.SmallImage")));
+            this.bntMangaKungAdd.Click += new System.EventHandler(this.bntMangaKungAdd_Click);
+            // 
             // ribbonTab2
             // 
             this.ribbonTab2.Panels.Add(this.ribbonPanel2);
-            this.ribbonTab2.Panels.Add(this.ribbonPanel3);
-            this.ribbonTab2.Text = "group2";
+            this.ribbonTab2.Panels.Add(this.ribbonPanel14);
+            this.ribbonTab2.Panels.Add(this.ribbonPanel15);
+            this.ribbonTab2.Panels.Add(this.ribbonPanel16);
+            this.ribbonTab2.Panels.Add(this.ribbonPanel17);
+            this.ribbonTab2.Text = "VN translated Host 2";
             // 
             // ribbonPanel2
             // 
-            this.ribbonPanel2.Items.Add(this.btnVCAdd);
-            this.ribbonPanel2.Items.Add(this.bntRefeshList);
-            this.ribbonPanel2.Text = "Download";
+            this.ribbonPanel2.Items.Add(this.btnXomTruyenAdd);
+            this.ribbonPanel2.Text = "XomTruyen.com";
             // 
-            // btnVCAdd
+            // btnXomTruyenAdd
             // 
-            this.btnVCAdd.Image = global::ComicDownloader.Properties.Resources._1363942937_ark2;
-            this.btnVCAdd.MaximumSize = new System.Drawing.Size(0, 0);
-            this.btnVCAdd.MinimumSize = new System.Drawing.Size(0, 0);
-            this.btnVCAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnVCAdd.SmallImage")));
-            this.btnVCAdd.Click += new System.EventHandler(this.btnVCAdd_Click);
+            this.btnXomTruyenAdd.Image = global::ComicDownloader.Properties.Resources._1364150669_folder_add;
+            this.btnXomTruyenAdd.MaximumSize = new System.Drawing.Size(0, 0);
+            this.btnXomTruyenAdd.MinimumSize = new System.Drawing.Size(0, 0);
+            this.btnXomTruyenAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnXomTruyenAdd.SmallImage")));
+            this.btnXomTruyenAdd.Click += new System.EventHandler(this.btnXomTruyenAdd_Click);
             // 
-            // bntRefeshList
+            // ribbonPanel14
             // 
-            this.bntRefeshList.Image = global::ComicDownloader.Properties.Resources._1363960953_adept_update;
-            this.bntRefeshList.MaximumSize = new System.Drawing.Size(0, 0);
-            this.bntRefeshList.MinimumSize = new System.Drawing.Size(0, 0);
-            this.bntRefeshList.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntRefeshList.SmallImage")));
-            this.bntRefeshList.Click += new System.EventHandler(this.bntRefeshList_Click);
+            this.ribbonPanel14.Items.Add(this.bntMangaFCAdd);
+            this.ribbonPanel14.Text = "MangaFC.com";
             // 
-            // ribbonPanel3
+            // bntMangaFCAdd
             // 
-            this.ribbonPanel3.Items.Add(this.txtVCHost);
-            this.ribbonPanel3.Items.Add(this.txtVSList);
-            this.ribbonPanel3.Text = "Infomation";
+            this.bntMangaFCAdd.Image = global::ComicDownloader.Properties.Resources._1364078951_insert_object;
+            this.bntMangaFCAdd.MaximumSize = new System.Drawing.Size(0, 0);
+            this.bntMangaFCAdd.MinimumSize = new System.Drawing.Size(0, 0);
+            this.bntMangaFCAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntMangaFCAdd.SmallImage")));
+            this.bntMangaFCAdd.Click += new System.EventHandler(this.bntMangaFCAdd_Click);
             // 
-            // txtVCHost
+            // ribbonPanel15
             // 
-            this.txtVCHost.Text = "Host";
-            this.txtVCHost.TextBoxText = "http://vechai.info";
-            this.txtVCHost.TextBoxWidth = 150;
-            this.txtVCHost.Value = "http://vechai.info";
+            this.ribbonPanel15.Items.Add(this.btnTruyen18);
+            this.ribbonPanel15.Text = "Truyen18.org";
             // 
-            // txtVSList
+            // btnTruyen18
             // 
-            this.txtVSList.Text = "List URL";
-            this.txtVSList.TextBoxText = "http://vechai.info/danh-sach/";
-            this.txtVSList.TextBoxWidth = 150;
-            this.txtVSList.Value = "http://vechai.info/danh-sach/";
+            this.btnTruyen18.Image = global::ComicDownloader.Properties.Resources._1364150669_folder_add;
+            this.btnTruyen18.MaximumSize = new System.Drawing.Size(0, 0);
+            this.btnTruyen18.MinimumSize = new System.Drawing.Size(0, 0);
+            this.btnTruyen18.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnTruyen18.SmallImage")));
+            this.btnTruyen18.Click += new System.EventHandler(this.btnTruyen18_Click);
+            // 
+            // ribbonPanel16
+            // 
+            this.ribbonPanel16.Items.Add(this.btnLauPhimAdd);
+            this.ribbonPanel16.Text = "Truyen.Lauphim.com";
+            // 
+            // btnLauPhimAdd
+            // 
+            this.btnLauPhimAdd.Image = global::ComicDownloader.Properties.Resources._1364131990_document_add;
+            this.btnLauPhimAdd.MaximumSize = new System.Drawing.Size(0, 0);
+            this.btnLauPhimAdd.MinimumSize = new System.Drawing.Size(0, 0);
+            this.btnLauPhimAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnLauPhimAdd.SmallImage")));
+            this.btnLauPhimAdd.Click += new System.EventHandler(this.btnLauPhimAdd_Click);
             // 
             // ribbonTab3
             // 
@@ -318,18 +350,26 @@
             this.btnAddTTTGeneric.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnAddTTTGeneric.SmallImage")));
             this.btnAddTTTGeneric.Click += new System.EventHandler(this.btnAddTTTGeneric_Click);
             // 
-            // ribbonPanel12
+            // ribbonPanel13
             // 
-            this.ribbonPanel12.Items.Add(this.bntMangaKungAdd);
-            this.ribbonPanel12.Text = "MangaKung.com";
+            this.ribbonPanel13.Text = "XomTruyen.com";
             // 
-            // bntMangaKungAdd
+            // ribbonPanel3
             // 
-            this.bntMangaKungAdd.Image = global::ComicDownloader.Properties.Resources._1364078951_insert_object;
-            this.bntMangaKungAdd.MaximumSize = new System.Drawing.Size(0, 0);
-            this.bntMangaKungAdd.MinimumSize = new System.Drawing.Size(0, 0);
-            this.bntMangaKungAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntMangaKungAdd.SmallImage")));
-            this.bntMangaKungAdd.Click += new System.EventHandler(this.bntMangaKungAdd_Click);
+            this.ribbonPanel3.Text = "XomTruyen.com";
+            // 
+            // ribbonPanel17
+            // 
+            this.ribbonPanel17.Items.Add(this.bntNTruyenAdd);
+            this.ribbonPanel17.Text = "Ntruyen.net";
+            // 
+            // bntNTruyenAdd
+            // 
+            this.bntNTruyenAdd.Image = global::ComicDownloader.Properties.Resources._1364131990_document_add;
+            this.bntNTruyenAdd.MaximumSize = new System.Drawing.Size(0, 0);
+            this.bntNTruyenAdd.MinimumSize = new System.Drawing.Size(0, 0);
+            this.bntNTruyenAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntNTruyenAdd.SmallImage")));
+            this.bntNTruyenAdd.Click += new System.EventHandler(this.bntNTruyenAdd_Click);
             // 
             // AppMainForm
             // 
@@ -358,13 +398,7 @@
         private System.Windows.Forms.RibbonButton btnAddNewTTT;
         public System.Windows.Forms.RibbonPanel ribbonPanel1;
         private Cx.Windows.Forms.MdiTabStrip mdiTabStrip1;
-        private System.Windows.Forms.RibbonPanel ribbonPanel2;
-        private System.Windows.Forms.RibbonButton btnVCAdd;
         private System.Windows.Forms.RibbonOrbMenuItem ribbonOrbMenuItem1;
-        private System.Windows.Forms.RibbonPanel ribbonPanel3;
-        private System.Windows.Forms.RibbonTextBox txtVCHost;
-        private System.Windows.Forms.RibbonTextBox txtVSList;
-        private System.Windows.Forms.RibbonButton bntRefeshList;
         private System.Windows.Forms.RibbonTab ribbonTab3;
         private System.Windows.Forms.RibbonPanel ribbonPanel4;
         private System.Windows.Forms.RibbonButton btnAddTTTGeneric;
@@ -384,5 +418,17 @@
         private System.Windows.Forms.RibbonButton btnVuiLenAdd;
         private System.Windows.Forms.RibbonPanel ribbonPanel12;
         private System.Windows.Forms.RibbonButton bntMangaKungAdd;
+        private System.Windows.Forms.RibbonPanel ribbonPanel2;
+        private System.Windows.Forms.RibbonButton btnXomTruyenAdd;
+        private System.Windows.Forms.RibbonPanel ribbonPanel13;
+        private System.Windows.Forms.RibbonPanel ribbonPanel3;
+        private System.Windows.Forms.RibbonPanel ribbonPanel14;
+        private System.Windows.Forms.RibbonButton bntMangaFCAdd;
+        private System.Windows.Forms.RibbonPanel ribbonPanel15;
+        private System.Windows.Forms.RibbonButton btnTruyen18;
+        private System.Windows.Forms.RibbonPanel ribbonPanel16;
+        private System.Windows.Forms.RibbonButton btnLauPhimAdd;
+        private System.Windows.Forms.RibbonPanel ribbonPanel17;
+        private System.Windows.Forms.RibbonButton bntNTruyenAdd;
     }
 }

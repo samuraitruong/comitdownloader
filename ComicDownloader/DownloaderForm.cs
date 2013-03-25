@@ -133,7 +133,8 @@ namespace ComicDownloader
             Document pdfDoc = new Document(PageSize.A4);
             float docw = pdfDoc.PageSize.Width;
             float doch = pdfDoc.PageSize.Width;
-
+            
+            
             try
             {
                 var stream = File.Create(chapInfo.PdfPath);
@@ -189,56 +190,68 @@ namespace ComicDownloader
 
             int count = 0;
             long size = 0;
-
+            ManualResetEvent resetEvent = new ManualResetEvent(false);
+            int toProcess = chapInfo.Pages.Count;
+            int index = 1;
             foreach (string pageUrl in chapInfo.Pages)
             {
-                string tempUrl = pageUrl;
-                if (tempUrl.Contains("?"))
+                new Thread(delegate()
                 {
-                    tempUrl = tempUrl.Substring(0, tempUrl.IndexOf("?"));
-                }
+                    
+                    Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
 
-                string filename = Path.Combine(chapInfo.Folder, Path.GetFileName(tempUrl));
-
-
-                try
-                {
-                    count++;
-
-                    Downloader.DownloadPage(pageUrl, filename, chapInfo.Url);
-
-                    var file = File.Open(filename, FileMode.Open);
-
-                    size += file.Length;
-                    total += file.Length;
-                    file.Close();
-
-                    this.Invoke((MethodInvoker)delegate
+                    string tempUrl = pageUrl;
+                    if (tempUrl.Contains("?"))
                     {
-                        this.progess.Value = count;
-                        lblPageCount.Text = string.Format("{0:D2}/{1:D2}", count, chapInfo.PageCount);
+                        tempUrl = tempUrl.Substring(0, tempUrl.IndexOf("?"));
+                    }
 
-                        var listItem = listHistory.Items[listHistory.Items.Count - 1];
-                        listItem.SubItems[3].Text = size.ToKB();
-                        lblTotalDownloadCount.Text = total.ToKB();
-                        var subItem = listItem.SubItems[4] as EXControlListViewSubItem;
-                        var pp = subItem.MyControl as ProgressBar;
-                        pp.Value = count;
-
-                    });
+                    string filename = Path.Combine(chapInfo.Folder, (index++).ToString() +". "+Path.GetFileName(tempUrl));
 
 
-                }
-                catch
-                {
-                }
-                finally
-                {
+                    try
+                    {
+                        Downloader.DownloadPage(pageUrl, filename, chapInfo.Url);
+                        count++;
+                        var file = File.Open(filename, FileMode.Open);
 
-                }
+                        size += file.Length;
+                        total += file.Length;
+                        file.Close();
 
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            this.progess.Value = count;
+                            lblPageCount.Text = string.Format("{0:D2}/{1:D2}", count, chapInfo.PageCount);
+
+                            var listItem = listHistory.Items[listHistory.Items.Count - 1];
+                            listItem.SubItems[3].Text = size.ToKB();
+                            lblTotalDownloadCount.Text = total.ToKB();
+                            var subItem = listItem.SubItems[4] as EXControlListViewSubItem;
+                            var pp = subItem.MyControl as ProgressBar;
+                            pp.Value = count;
+
+                        });
+
+
+                    }
+                    catch
+                    {
+                    }
+                    finally
+                    {
+
+                    }
+
+                    if (Interlocked.Decrement(ref toProcess) == 0)
+                        resetEvent.Set();
+                }).Start();
 
             }
+           
+
+            resetEvent.WaitOne();
+            Console.Write("xxx");
         }
 
         private void DisplayChap(ChapterInfo chapInfo, int chapCount)

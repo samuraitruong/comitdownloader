@@ -45,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -69,6 +70,12 @@
     <Compile Include="AsyncDialog\LoadingCircle.Designer.cs">
       <DependentUpon>LoadingCircle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Engines\ComicVuiLenDownloader.cs" />
+    <Compile Include="Engines\NTruyenDownloader.cs" />
+    <Compile Include="Engines\TruyenLauPhimDownloader.cs" />
+    <Compile Include="Engines\Truyen18Downloader.cs" />
+    <Compile Include="Engines\MangaFcDownloader.cs" />
+    <Compile Include="Engines\XomTruyenDownloader.cs" />
     <Compile Include="Engines\MangaKungDownloader.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="DownloaderForm.cs">
@@ -102,7 +109,6 @@
       <DependentUpon>NoResizeChildForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Engines\BlogTruyenDownloader.cs" />
-    <Compile Include="Engines\ComicVuiLenDownloader.cs" />
     <Compile Include="Engines\TruyenTranhNhanhDownloader.cs" />
     <Compile Include="Engines\Downloader.cs" />
     <Compile Include="Engines\NetworkHelper.cs" />

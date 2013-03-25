@@ -95,7 +95,7 @@ namespace ComicDownloader
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.Size = new System.Drawing.Size(219, 20);
             this.txtUrl.TabIndex = 0;
-            this.txtUrl.Text = "http://truyentranhtuan.com/3x3-eyes";
+            this.txtUrl.Text = "http://www.truyen18.org/truyen/qua-tang-giang-sinh-18/3176.html";
             // 
             // label3
             // 

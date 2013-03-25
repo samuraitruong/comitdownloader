@@ -1,0 +1,157 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using HtmlAgilityPack;
+using System.Text.RegularExpressions;
+
+namespace ComicDownloader.Engines
+{
+    public class TruyenLauPhimDownloader : Downloader
+    {
+        public override string Name
+        {
+            get { return "[Truyen Lau Phim] - "; }
+        }
+
+        public override string ListStoryURL
+        {
+            get { return "http://truyen.lauphim.com/manga-list/"; }
+        }
+
+        public override string HostUrl
+        {
+            get { return "http://truyen.lauphim.com/"; }
+        }
+
+        public override string StoryUrlPattern
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override List<StoryInfo> GetListStories()
+        {
+            string urlPattern = "http://truyen.lauphim.com/manga-list/all/any/name-az/{0}/";
+            //*[@id="sct_content"]/div/div/div[1]/ul
+            List<StoryInfo> results = base.ReloadChachedData();
+            if (results == null || results.Count == 0)
+            {
+                results = new List<StoryInfo>();
+
+                string html = NetworkHelper.GetHtml(ListStoryURL);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var node = htmlDoc.DocumentNode.SelectSingleNode("//*[@class=\"pgg\"]//li[last()]/a");
+                
+                var match = Regex.Match(node.Attributes["href"].Value,@"/(\d*)/$");
+                
+                int totalPage = int.Parse(match.Groups[1].Value);;
+                for (int i = 1; i <= totalPage; i++)
+			{
+                    string url = string.Format(urlPattern, i);
+
+                     html = NetworkHelper.GetHtml(url);
+                     htmlDoc.LoadHtml(html);
+
+                     var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"sct_content\"]//div[contains(@class,\"img_wrp\")]//a[1]");
+                    if (nodes != null && nodes.Count > 0)
+                    {
+                        
+                        foreach (var currentNode in nodes)
+                        {
+                            StoryInfo info = new StoryInfo()
+                            {
+                                Url = currentNode.Attributes["href"].Value,
+                                Name = currentNode.Attributes["title"].Value.Trim()
+                            };
+                            results.Add(info);
+                        }
+                    }
+                   
+                                        
+                }
+
+            }
+            
+            this.SaveCache(results);
+            return results;
+        }
+
+        public override StoryInfo RequestInfo(string storyUrl)
+        {
+            var html = NetworkHelper.GetHtml(storyUrl);
+            //detect hentai
+            HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlDocument();
+
+            htmlDoc.LoadHtml(html);
+
+           
+            
+
+            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"sct_content\"]//h1");
+
+            StoryInfo info = new StoryInfo()
+            {
+                Url = storyUrl,
+                Name = nameNode.InnerText
+            };
+
+            List<string> urls = new List<string>();
+
+            var pagingNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class=\"pgg\"]");
+
+            if (pagingNode == null) urls.Add(storyUrl);
+            else
+            {
+                var paging = pagingNode.Descendants("a");
+                foreach (HtmlNode pNode  in paging)
+                {
+                    if (!urls.Contains(pNode.Attributes["href"].Value.Trim()))
+                        urls.Add(pNode.Attributes["href"].Value.Trim());
+                }
+            }
+            foreach (var pageUrl in urls)
+            {
+                html = NetworkHelper.GetHtml(pageUrl);
+                htmlDoc.LoadHtml(html);
+
+                var chapterNodes = htmlDoc.DocumentNode.SelectNodes("//ul[@class=\"lst\"][1]//a");
+
+                foreach (HtmlNode chapter in chapterNodes)
+                {
+                    ChapterInfo chap = new ChapterInfo()
+                    {
+                        Name = chapter.ChildNodes[1].InnerText.Trim(),
+                        Url = chapter.Attributes["href"].Value,
+                        
+                    };
+                    var p = @"&(\d*); (.*)";
+                    chap.Name = Regex.Replace(chap.Name, @"&#(\d*);(.*)", "$2");
+                    chap.ChapId = ExtractID(chap.Name);
+                    info.Chapters.Add(chap);
+                }
+            }
+            info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
+            return info;
+        }
+        
+
+        public override List<string> GetPages(string chapUrl)
+        {
+            var html = NetworkHelper.GetHtml(chapUrl);
+
+            HtmlDocument htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"prw\"]//img");
+            List<string> results = new List<string>();
+           if(nodes!= null)
+            foreach (HtmlNode match in nodes)
+            {
+                results.Add(match.Attributes["src"].Value);
+                
+            }
+            return results;
+        }
+    }
+}
