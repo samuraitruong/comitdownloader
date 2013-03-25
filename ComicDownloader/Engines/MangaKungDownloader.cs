@@ -8,7 +8,7 @@ using System.Net;
 
 namespace ComicDownloader.Engines
 {
-    public class TruyenTranhTuanDownloader
+    public class MangaKungDownloader
         : Downloader
     {
 
@@ -20,16 +20,18 @@ namespace ComicDownloader.Engines
                 results = new List<StoryInfo>();
                 var html = NetworkHelper.GetHtml(this.ListStoryURL);
 
-                string pattern = "<a class=\"ch-subject\" href=\"/(.+)/\" title=\"\">(.+)</a>";
-                var matches = Regex.Matches(html, pattern);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"ddsg-wrapper\"]/ul/li[1]/ul/li/a");
+                
 
-                foreach (Match match in matches)
+                foreach (HtmlNode node in nodes)
                 {
                     results.Add(new StoryInfo()
                     {
-                        UrlSegment = match.Groups[1].Value,
-                        Name = match.Groups[2].Value,
-                        Url = HostUrl + "/" + match.Groups[1].Value
+                        
+                        Name = node.InnerText.Trim(),
+                        Url = node.Attributes["href"].Value
                     });
                 }
             }
@@ -39,30 +41,20 @@ namespace ComicDownloader.Engines
 
         public override StoryInfo RequestInfo(string url)
         {
-            StoryInfo info = new StoryInfo();
-
-            // LockControl(false);
-            //string url = string.Format(StoryUrlPattern, urlSegment);
-
+         
             var html = NetworkHelper.GetHtml(url);
 
             HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
             htmlDoc.LoadHtml(html);
+            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class=\"postcontent\"]//h1");
 
-            var node = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"fontsize-chitiet\"]/span[1]");
-            info.Name = node.InnerText;
-            var node2 = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"fontsize-chitiet\"]/span[2]");
-            info.AltName = node2.InnerText;
-            var node3 = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"fontsize-chitiet\"]/span[2]");
-            info.Categories = node3.InnerText;
-            info.Url = url;
+            StoryInfo info = new StoryInfo()
+            {
+                Url = url,
+                Name = nameNode.InnerText.Trim()
+            };
 
-            var ccontentmain = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"content-main\"]");
-            
-
-            htmlDoc.LoadHtml(ccontentmain.InnerHtml);
-
-            var chapterLinks = htmlDoc.DocumentNode.SelectNodes("//a[@href!='']");
+            var chapterLinks = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"postcontent\"]//a[contains(@href,'http://img')]");
 
             info.ChapterCount = chapterLinks.Count;
             foreach (HtmlNode item in chapterLinks)
@@ -70,10 +62,10 @@ namespace ComicDownloader.Engines
 
                 ChapterInfo chapter = new ChapterInfo()
                 {
-                    Url = string.Format("{0}{1}doc-truyen/", HostUrl, item.Attributes["href"].Value),
+                    Url = item.Attributes["href"].Value,
                     Name = item.InnerText
                     ,
-                    ChapId = ExtractID(item.InnerText)
+                    ChapId = ExtractID(item.InnerText,@"Chapter (\d*)")
 
                 };
                
@@ -87,21 +79,34 @@ namespace ComicDownloader.Engines
         }
         public override string Name
         {
-            get { return "[Truyen Tranh Tuan] - "; }
+            get { return "[Manga Kung] - "; }
+        }
+        public override void DownloadPage(string pageUrl, string filename, string httpReferer)
+        {
+            var html = NetworkHelper.GetHtml(pageUrl);
+            HtmlDocument htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var imgNode = htmlDoc.DocumentNode.SelectSingleNode("//img[@class=\"1picture\"]");
+
+            var url = "http://img.mangakung.com/read/"+imgNode.Attributes["src"].Value;
+
+            base.DownloadPage(url, filename, httpReferer);
         }
         public override List<string> GetPages(string chapUrl)
         {
             List<string> pages = new List<string>();
 
-            using (WebClient client = new WebClient())
-            {
-                string html = client.DownloadString(chapUrl);
-                var matches = Regex.Matches(html, @"/manga/[0-9a-zA-Z//s-]*(?:.png|.jpg|.PNG|.JPG)");
-                pages = matches.Cast<Match>()
-                    .OrderBy(p => p.Value)
-                    .Select(p => this.HostUrl+p.Value)
-                    .ToList();
-            }
+            
+                string html = NetworkHelper.GetHtml(chapUrl);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+                var options = htmlDoc.DocumentNode.SelectNodes("//select[@name=\"page\"]//option");
+
+                foreach (var item in options)
+	            {
+                    pages.Add(chapUrl + item.Attributes["value"].Value);
+	            }
+            
 
             return pages;
         }
@@ -117,18 +122,18 @@ namespace ComicDownloader.Engines
         {
             get
             {
-                return "http://truyentranhtuan.com";
+                return "http://www.mangakung.com/";
             }
         }
         public override string ListStoryURL
         {
             get
             {
-                return "http://truyentranhtuan.com/danh-sach-truyen/";
+                return "http://www.mangakung.com/directory/";
             }
             
         }
-        public TruyenTranhTuanDownloader()
+        public MangaKungDownloader()
         {
             
         }

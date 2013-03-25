@@ -95,7 +95,7 @@ namespace ComicDownloader
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.Size = new System.Drawing.Size(219, 20);
             this.txtUrl.TabIndex = 0;
-            this.txtUrl.Text = "http://comic.vuilen.com/viewbook.php?bookid=906";
+            this.txtUrl.Text = "http://truyentranhtuan.com/3x3-eyes";
             // 
             // label3
             // 
@@ -249,15 +249,18 @@ namespace ComicDownloader
             this.lstChapters.ColumnModel = this.columnModel1;
             this.lstChapters.ContextMenuStrip = this.contextMenuStrip1;
             this.lstChapters.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstChapters.FullRowSelect = true;
             this.lstChapters.GridLines = XPTable.Models.GridLines.Columns;
+            this.lstChapters.HideSelection = true;
             this.lstChapters.Location = new System.Drawing.Point(3, 16);
             this.lstChapters.MultiSelect = true;
             this.lstChapters.Name = "lstChapters";
-            this.lstChapters.SelectionStyle = XPTable.Models.SelectionStyle.Grid;
             this.lstChapters.Size = new System.Drawing.Size(272, 96);
             this.lstChapters.TabIndex = 0;
             this.lstChapters.TableModel = this.tblChapters;
+            this.lstChapters.CellCheckChanged += new XPTable.Events.CellCheckBoxEventHandler(this.lstChapters_CellCheckChanged);
             this.lstChapters.SelectionChanged += new XPTable.Events.SelectionEventHandler(this.lstChapters_SelectionChanged);
+            this.lstChapters.ContextMenuStripChanged += new System.EventHandler(this.lstChapters_ContextMenuStripChanged);
             // 
             // columnModel1
             // 

@@ -36,17 +36,7 @@ namespace ComicDownloader
             
         }
 
-        private void btnVCAdd_Click(object sender, EventArgs e)
-        {
-            VeChaiForm childForm = new VeChaiForm();
-            childForm.MdiParent = this;
-            
-
-            childForm.ListStoryURL = txtVSList._textBoxText;
-            childForm.HostUrl = txtVCHost._textBoxText;
-            childForm.Text = "VeChai.Info";
-            childForm.Show();
-        }
+       
 
         private void ribbonOrbMenuItem1_Click(object sender, EventArgs e)
         {
@@ -69,7 +59,7 @@ namespace ComicDownloader
 
         private void bntRefeshList_Click(object sender, EventArgs e)
         {
-            File.Delete(VeChaiForm.CACHED_FILE);
+            
         }
 
         private void btnAddTTTGeneric_Click(object sender, EventArgs e)
@@ -141,6 +131,15 @@ namespace ComicDownloader
             childForm.MdiParent = this;
             childForm.Downloader = new ComicVuiLenDownloader();
             childForm.Text = "Comic.Vuilen.com";
+            childForm.Show();
+        }
+
+        private void bntMangaKungAdd_Click(object sender, EventArgs e)
+        {
+            DownloaderForm childForm = new DownloaderForm();
+            childForm.MdiParent = this;
+            childForm.Downloader = new MangaKungDownloader();
+            childForm.Text = "MangaKung.com";
             childForm.Show();
         }
     }

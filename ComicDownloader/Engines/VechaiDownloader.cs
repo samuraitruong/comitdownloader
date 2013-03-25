@@ -28,12 +28,12 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetListStories()
         {
-            List<StoryInfo> stories = new List<StoryInfo>();
-
-            if (stories != null && stories.Count == 0)
+             List<StoryInfo> results = ReloadChachedData();
+            if (results == null || results.Count == 0)
             {
+                results = new List<StoryInfo>();
 
-                string html = NetworkHelper.GetHtml(this.ListStoryURL);
+            string html = NetworkHelper.GetHtml(this.ListStoryURL);
                 HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
 
                 // There are various options, set as needed
@@ -57,9 +57,7 @@ namespace ComicDownloader.Engines
                         var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='list-manga-paging']/span");
 
                         int count = nodes.Count;
-                    #if DEBUG
-                        count = 1;
-                    #endif
+                   
                         foreach (var item in nodes.Take(count))
                         {
                             string requestListPage = string.Format("http://vechai.info/list.php?job=ajaxlist&letter=all&page={0}&sort=1", item.InnerText);
@@ -76,7 +74,7 @@ namespace ComicDownloader.Engines
 
                                     Name = match.Groups[3].Value
                                 };
-                                stories.Add(story);
+                                results.Add(story);
 
                             }
                         }
@@ -84,7 +82,8 @@ namespace ComicDownloader.Engines
                 }
                 
             }
-            return stories;
+            SaveCache(results);
+            return results;
         }
 
         public override StoryInfo RequestInfo(string url)
