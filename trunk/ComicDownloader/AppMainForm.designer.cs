@@ -49,6 +49,8 @@
             this.btnTVNSAdd = new System.Windows.Forms.RibbonButton();
             this.ribbonPanel10 = new System.Windows.Forms.RibbonPanel();
             this.btnTTNAdd = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel11 = new System.Windows.Forms.RibbonPanel();
+            this.btnVuiLenAdd = new System.Windows.Forms.RibbonButton();
             this.ribbonTab2 = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel2 = new System.Windows.Forms.RibbonPanel();
             this.btnVCAdd = new System.Windows.Forms.RibbonButton();
@@ -59,8 +61,8 @@
             this.ribbonTab3 = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel4 = new System.Windows.Forms.RibbonPanel();
             this.btnAddTTTGeneric = new System.Windows.Forms.RibbonButton();
-            this.ribbonPanel11 = new System.Windows.Forms.RibbonPanel();
-            this.btnVuiLenAdd = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel12 = new System.Windows.Forms.RibbonPanel();
+            this.bntMangaKungAdd = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
             // mdiTabStrip1
@@ -141,7 +143,8 @@
             this.ribbonTab1.Panels.Add(this.ribbonPanel9);
             this.ribbonTab1.Panels.Add(this.ribbonPanel10);
             this.ribbonTab1.Panels.Add(this.ribbonPanel11);
-            this.ribbonTab1.Text = "Home";
+            this.ribbonTab1.Panels.Add(this.ribbonPanel12);
+            this.ribbonTab1.Text = "Home[VN translated Host]";
             // 
             // ribbonPanel1
             // 
@@ -236,6 +239,19 @@
             this.btnTTNAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnTTNAdd.SmallImage")));
             this.btnTTNAdd.Click += new System.EventHandler(this.btnTTNAdd_Click);
             // 
+            // ribbonPanel11
+            // 
+            this.ribbonPanel11.Items.Add(this.btnVuiLenAdd);
+            this.ribbonPanel11.Text = "Comic.Vuilen.com";
+            // 
+            // btnVuiLenAdd
+            // 
+            this.btnVuiLenAdd.Image = global::ComicDownloader.Properties.Resources._1364150669_folder_add;
+            this.btnVuiLenAdd.MaximumSize = new System.Drawing.Size(0, 0);
+            this.btnVuiLenAdd.MinimumSize = new System.Drawing.Size(0, 0);
+            this.btnVuiLenAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnVuiLenAdd.SmallImage")));
+            this.btnVuiLenAdd.Click += new System.EventHandler(this.btnVuiLenAdd_Click);
+            // 
             // ribbonTab2
             // 
             this.ribbonTab2.Panels.Add(this.ribbonPanel2);
@@ -302,18 +318,18 @@
             this.btnAddTTTGeneric.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnAddTTTGeneric.SmallImage")));
             this.btnAddTTTGeneric.Click += new System.EventHandler(this.btnAddTTTGeneric_Click);
             // 
-            // ribbonPanel11
+            // ribbonPanel12
             // 
-            this.ribbonPanel11.Items.Add(this.btnVuiLenAdd);
-            this.ribbonPanel11.Text = "Comic.Vuilen.com";
+            this.ribbonPanel12.Items.Add(this.bntMangaKungAdd);
+            this.ribbonPanel12.Text = "MangaKung.com";
             // 
-            // btnVuiLenAdd
+            // bntMangaKungAdd
             // 
-            this.btnVuiLenAdd.Image = global::ComicDownloader.Properties.Resources._1364150669_folder_add;
-            this.btnVuiLenAdd.MaximumSize = new System.Drawing.Size(0, 0);
-            this.btnVuiLenAdd.MinimumSize = new System.Drawing.Size(0, 0);
-            this.btnVuiLenAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnVuiLenAdd.SmallImage")));
-            this.btnVuiLenAdd.Click += new System.EventHandler(this.btnVuiLenAdd_Click);
+            this.bntMangaKungAdd.Image = global::ComicDownloader.Properties.Resources._1364078951_insert_object;
+            this.bntMangaKungAdd.MaximumSize = new System.Drawing.Size(0, 0);
+            this.bntMangaKungAdd.MinimumSize = new System.Drawing.Size(0, 0);
+            this.bntMangaKungAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntMangaKungAdd.SmallImage")));
+            this.bntMangaKungAdd.Click += new System.EventHandler(this.bntMangaKungAdd_Click);
             // 
             // AppMainForm
             // 
@@ -366,5 +382,7 @@
         private System.Windows.Forms.RibbonButton btnTTNAdd;
         private System.Windows.Forms.RibbonPanel ribbonPanel11;
         private System.Windows.Forms.RibbonButton btnVuiLenAdd;
+        private System.Windows.Forms.RibbonPanel ribbonPanel12;
+        private System.Windows.Forms.RibbonButton bntMangaKungAdd;
     }
 }

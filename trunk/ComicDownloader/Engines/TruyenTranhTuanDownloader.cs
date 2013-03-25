@@ -14,23 +14,26 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetListStories()
         {
-            List<StoryInfo> results = new List<StoryInfo>();
-
-            var html = NetworkHelper.GetHtml(this.ListStoryURL);
-
-            string pattern = "<a class=\"ch-subject\" href=\"/(.+)/\" title=\"\">(.+)</a>";
-            var matches = Regex.Matches(html, pattern);
-
-            foreach (Match match in matches)
+            List<StoryInfo> results = ReloadChachedData();
+            if (results == null || results.Count == 0)
             {
-                results.Add(new StoryInfo()
-                {
-                    UrlSegment = match.Groups[1].Value,
-                    Name = match.Groups[2].Value,
-                    Url = HostUrl + "/" + match.Groups[1].Value
-                });
-            }
+                results = new List<StoryInfo>();
+                var html = NetworkHelper.GetHtml(this.ListStoryURL);
 
+                string pattern = "<a class=\"ch-subject\" href=\"/(.+)/\" title=\"\">(.+)</a>";
+                var matches = Regex.Matches(html, pattern);
+
+                foreach (Match match in matches)
+                {
+                    results.Add(new StoryInfo()
+                    {
+                        UrlSegment = match.Groups[1].Value,
+                        Name = match.Groups[2].Value,
+                        Url = HostUrl + "/" + match.Groups[1].Value
+                    });
+                }
+            }
+            SaveCache(results);
             return results;
         }
 
@@ -70,7 +73,7 @@ namespace ComicDownloader.Engines
                     Url = string.Format("{0}{1}doc-truyen/", HostUrl, item.Attributes["href"].Value),
                     Name = item.InnerText
                     ,
-                    ChapId = ExtractID(node.InnerText)
+                    ChapId = ExtractID(item.InnerText)
 
                 };
                

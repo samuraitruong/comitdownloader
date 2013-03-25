@@ -69,6 +69,7 @@
     <Compile Include="AsyncDialog\LoadingCircle.Designer.cs">
       <DependentUpon>LoadingCircle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Engines\MangaKungDownloader.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="DownloaderForm.cs">
       <SubType>Form</SubType>
@@ -272,18 +273,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="System.Windows.Forms.Ribbon35\WinApi.cs" />
-    <Compile Include="TruyenTranhTuanForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TruyenTranhTuanForm.designer.cs">
-      <DependentUpon>TruyenTranhTuanForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VeChaiForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VeChaiForm.designer.cs">
-      <DependentUpon>VeChaiForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="XPTable\Editors\CellEditor.cs" />
     <Compile Include="XPTable\Editors\ColorCellEditor.cs" />
     <Compile Include="XPTable\Editors\ComboBoxCellEditor.cs" />
@@ -490,12 +479,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="TruyenTranhTuanForm.resx">
-      <DependentUpon>TruyenTranhTuanForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VeChaiForm.resx">
-      <DependentUpon>VeChaiForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="XPTable\Editors\DropDownContainer.resx">
       <DependentUpon>DropDownContainer.cs</DependentUpon>
     </EmbeddedResource>

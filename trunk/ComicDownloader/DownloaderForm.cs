@@ -113,7 +113,7 @@ namespace ComicDownloader
             {
                 bntDownload.Enabled = true;
                 lblStatus.Text = "Completed!";
-                MessageBox.Show("Download completed!");
+                //MessageBox.Show("Download completed!");
             });
 
         }
@@ -171,6 +171,9 @@ namespace ComicDownloader
                 {
                     pdfDoc.Close();
                 }
+                catch
+                {
+                }
                 finally
                 {
 
@@ -189,7 +192,7 @@ namespace ComicDownloader
 
             foreach (string pageUrl in chapInfo.Pages)
             {
-                string tempUrl =  pageUrl;
+                string tempUrl = pageUrl;
                 if (tempUrl.Contains("?"))
                 {
                     tempUrl = tempUrl.Substring(0, tempUrl.IndexOf("?"));
@@ -197,50 +200,43 @@ namespace ComicDownloader
 
                 string filename = Path.Combine(chapInfo.Folder, Path.GetFileName(tempUrl));
 
-                using (WebClient client = new WebClient())
+
+                try
                 {
-                    client.Headers.Add("Referer", chapInfo.Url);
-                    try
+                    count++;
+
+                    Downloader.DownloadPage(pageUrl, filename, chapInfo.Url);
+
+                    var file = File.Open(filename, FileMode.Open);
+
+                    size += file.Length;
+                    total += file.Length;
+                    file.Close();
+
+                    this.Invoke((MethodInvoker)delegate
                     {
-                        count++;
+                        this.progess.Value = count;
+                        lblPageCount.Text = string.Format("{0:D2}/{1:D2}", count, chapInfo.PageCount);
 
-                        client.DownloadFile(pageUrl, filename);
+                        var listItem = listHistory.Items[listHistory.Items.Count - 1];
+                        listItem.SubItems[3].Text = size.ToKB();
+                        lblTotalDownloadCount.Text = total.ToKB();
+                        var subItem = listItem.SubItems[4] as EXControlListViewSubItem;
+                        var pp = subItem.MyControl as ProgressBar;
+                        pp.Value = count;
 
-
-                        var file = File.Open(filename, FileMode.Open);
-
-                        if (file.Length < 50000)
-                        {
-                           // File.Delete(filename); 
-                        }
-                        size += file.Length;
-                        total += file.Length;
-                        file.Close();
-                        
-                        this.Invoke((MethodInvoker)delegate
-                        {
-                            this.progess.Value = count;
-                            lblPageCount.Text = string.Format("{0:D2}/{1:D2}", count, chapInfo.PageCount);
-
-                            var listItem = listHistory.Items[listHistory.Items.Count - 1];
-                            listItem.SubItems[3].Text = size.ToKB();
-                            lblTotalDownloadCount.Text = total.ToKB();
-                            var subItem = listItem.SubItems[4] as EXControlListViewSubItem;
-                            var pp = subItem.MyControl as ProgressBar;
-                            pp.Value = count;
-
-                        });
+                    });
 
 
-                    }
-                    catch
-                    {
-                    }
-                    finally
-                    {
-
-                    }
                 }
+                catch
+                {
+                }
+                finally
+                {
+
+                }
+
 
             }
         }
@@ -564,6 +560,20 @@ namespace ComicDownloader
             Downloader.DeleteCached();
             Thread thread = new Thread(new ThreadStart(this.LoadStoryList));
             thread.Start();
+        }
+
+        private void lstChapters_CellCheckChanged(object sender, XPTable.Events.CellCheckBoxEventArgs e)
+        {
+            //foreach (Row item in tblChapters.Rows)
+            //{
+            //    if (item.Cells[0].Selected)
+            //        MessageBox.Show(item.Cells[0].Text);
+            //}
+        }
+
+        private void lstChapters_ContextMenuStripChanged(object sender, EventArgs e)
+        {
+            
         }
 
         

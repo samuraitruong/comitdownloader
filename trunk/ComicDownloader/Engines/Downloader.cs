@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Reflection;
 using System.IO;
+using System.Net;
 
 namespace ComicDownloader.Engines
 {
@@ -21,6 +22,21 @@ namespace ComicDownloader.Engines
 
         public abstract List<string> GetPages(string chapUrl);
         public string CachedFile { get {return this.GetType().Name + ".CACHED"; } }
+
+        public virtual void DownloadPage(string pageUrl, string filename, string httpReferer)
+        {
+            using (WebClient client = new WebClient())
+            {
+                client.Headers.Add("Referer", httpReferer);
+                try
+                {
+                    client.DownloadFile(pageUrl, filename);
+                }
+                catch
+                {
+                }
+            }
+        }
         public void SaveCache(List<StoryInfo> stories)
         {
             var xml = SerializationHelper.SerializeToXml<List<StoryInfo>>(stories);
