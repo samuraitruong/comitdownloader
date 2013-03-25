@@ -88,7 +88,7 @@ namespace ComicDownloader.Engines
             htmlDoc.LoadHtml(html);
             var imgNode = htmlDoc.DocumentNode.SelectSingleNode("//img[@class=\"1picture\"]");
 
-            var url = "http://img.mangakung.com/read/"+imgNode.Attributes["src"].Value;
+            var url = imgNode.Attributes["src"].Value;
 
             base.DownloadPage(url, filename, httpReferer);
         }

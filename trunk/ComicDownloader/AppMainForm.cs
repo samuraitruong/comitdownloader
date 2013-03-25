@@ -142,5 +142,47 @@ namespace ComicDownloader
             childForm.Text = "MangaKung.com";
             childForm.Show();
         }
+
+        
+
+        private void btnXomTruyenAdd_Click(object sender, EventArgs e)
+        {
+            DownloaderForm childForm = new DownloaderForm();
+            childForm.MdiParent = this;
+            childForm.Downloader = new XomTruyenDownloader();
+            childForm.Text = "XomTruyen.com";
+            childForm.Show();
+        }
+
+        private void bntMangaFCAdd_Click(object sender, EventArgs e)
+        {
+            AddChildForm("Manga FC", new MangaFcDownloader());
+        }
+
+        private void AddChildForm(string title, Downloader dl)
+        {
+            DownloaderForm childForm = new DownloaderForm();
+            childForm.MdiParent = this;
+            childForm.Downloader = dl;
+            childForm.Text = title;
+            childForm.Show();
+        }
+
+        private void btnTruyen18_Click(object sender, EventArgs e)
+        {
+            AddChildForm("Truyen 18", new Truyen18Downloader());
+        }
+
+        private void btnLauPhimAdd_Click(object sender, EventArgs e)
+        {
+            AddChildForm("Truyen Alo8", new TruyenLauPhimDownloader());
+        }
+
+      
+
+        private void bntNTruyenAdd_Click(object sender, EventArgs e)
+        {
+            AddChildForm("NTruyen", new NTruyenDownloader());
+        }
     }
 }
