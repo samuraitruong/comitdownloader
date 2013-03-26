@@ -133,6 +133,7 @@
     <Compile Include="LongOperation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecureHelper.cs" />
     <Compile Include="SerializationHelper.cs" />
     <Compile Include="System.Windows.Forms.Ribbon35\GlobalHook.cs" />
     <Compile Include="System.Windows.Forms.Ribbon35\IContainsRibbonComponents.cs" />
