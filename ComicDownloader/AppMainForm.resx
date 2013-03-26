@@ -121,10 +121,10 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="bntNTruyenAdd.SmallImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="bntMangaReaderAdd.SmallImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAVSURBVDhPY2AYBaMhMBoCoyEACQEABBAAAXKlE3YAAAAA
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAVSURBVDhPY2AYBaMhMBoCoyEACQEABBAAAXKlE3YAAAAA
         SUVORK5CYII=
 </value>
   </data>
@@ -236,35 +236,35 @@
   <data name="btnXomTruyenAdd.SmallImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAVSURBVDhPY2AYBaMhMBoCoyEACQEABBAAAXKlE3YAAAAA
+        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAAAVSURBVDhPY2AYBaMhMBoCoyEACQEABBAAAXKlE3YAAAAA
         SUVORK5CYII=
 </value>
   </data>
   <data name="bntMangaFCAdd.SmallImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAAVSURBVDhPY2AYBaMhMBoCoyEACQEABBAAAXKlE3YAAAAA
+        YQUAAAAJcEhZcwAADr4AAA6+AepCscAAAAAVSURBVDhPY2AYBaMhMBoCoyEACQEABBAAAXKlE3YAAAAA
         SUVORK5CYII=
 </value>
   </data>
   <data name="btnTruyen18.SmallImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAAVSURBVDhPY2AYBaMhMBoCoyEACQEABBAAAXKlE3YAAAAA
+        YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAAVSURBVDhPY2AYBaMhMBoCoyEACQEABBAAAXKlE3YAAAAA
         SUVORK5CYII=
 </value>
   </data>
   <data name="btnLauPhimAdd.SmallImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAVSURBVDhPY2AYBaMhMBoCoyEACQEABBAAAXKlE3YAAAAA
+        YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAAVSURBVDhPY2AYBaMhMBoCoyEACQEABBAAAXKlE3YAAAAA
         SUVORK5CYII=
 </value>
   </data>
-  <data name="btnAddTTTGeneric.SmallImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="bntNTruyenAdd.SmallImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAVSURBVDhPY2AYBaMhMBoCoyEACQEABBAAAXKlE3YAAAAA
+        YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAAVSURBVDhPY2AYBaMhMBoCoyEACQEABBAAAXKlE3YAAAAA
         SUVORK5CYII=
 </value>
   </data>

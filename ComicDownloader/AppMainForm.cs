@@ -62,14 +62,7 @@ namespace ComicDownloader
             
         }
 
-        private void btnAddTTTGeneric_Click(object sender, EventArgs e)
-        {
-            DownloaderForm childForm = new DownloaderForm();
-            childForm.MdiParent = this;
-            childForm.Downloader = new TruyenTranhTuanDownloader();
-            childForm.Text = "Generic Form Tester";
-            childForm.Show();
-        }
+       
 
         private void btnVechaiForm_Click(object sender, EventArgs e)
         {
@@ -183,6 +176,12 @@ namespace ComicDownloader
         private void bntNTruyenAdd_Click(object sender, EventArgs e)
         {
             AddChildForm("NTruyen", new NTruyenDownloader());
+        }
+
+        private void bntMangaReaderAdd_Click(object sender, EventArgs e)
+        {
+            AddChildForm("Manga Reader", new MangaReaderDownloader());
+        
         }
     }
 }
