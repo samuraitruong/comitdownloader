@@ -70,6 +70,7 @@
     <Compile Include="AsyncDialog\LoadingCircle.Designer.cs">
       <DependentUpon>LoadingCircle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Engines\En\MangaReaderDownloader.cs" />
     <Compile Include="Engines\Vn\ComicVuiLenDownloader.cs" />
     <Compile Include="Engines\Vn\NTruyenDownloader.cs" />
     <Compile Include="Engines\Vn\TruyenLauPhimDownloader.cs" />
@@ -529,7 +530,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Engines\18+\" />
-    <Folder Include="Engines\En\" />
     <Folder Include="XPTable\doc\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
