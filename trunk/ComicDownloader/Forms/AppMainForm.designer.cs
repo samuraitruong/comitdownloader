@@ -69,11 +69,13 @@
             this.bntMangaReaderAdd = new System.Windows.Forms.RibbonButton();
             this.ribbonPanel14 = new System.Windows.Forms.RibbonPanel();
             this.bntMangaFoxAdd = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel15 = new System.Windows.Forms.RibbonPanel();
+            this.bntMangaEdenAdd = new System.Windows.Forms.RibbonButton();
             this.rbn18Plus = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel13 = new System.Windows.Forms.RibbonPanel();
             this.ribbonPanel3 = new System.Windows.Forms.RibbonPanel();
-            this.ribbonPanel15 = new System.Windows.Forms.RibbonPanel();
-            this.bntMangaEdenAdd = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel18 = new System.Windows.Forms.RibbonPanel();
+            this.bntMangaHereAdd = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
             // mdiTabStrip1
@@ -356,6 +358,7 @@
             this.rbnEN.Panels.Add(this.ribbonPanel4);
             this.rbnEN.Panels.Add(this.ribbonPanel14);
             this.rbnEN.Panels.Add(this.ribbonPanel15);
+            this.rbnEN.Panels.Add(this.ribbonPanel18);
             this.rbnEN.Text = "EN";
             this.rbnEN.ToolTip = "This will include all English manga site";
             // 
@@ -385,6 +388,19 @@
             this.bntMangaFoxAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntMangaFoxAdd.SmallImage")));
             this.bntMangaFoxAdd.Click += new System.EventHandler(this.bntMangaFoxAdd_Click);
             // 
+            // ribbonPanel15
+            // 
+            this.ribbonPanel15.Items.Add(this.bntMangaEdenAdd);
+            this.ribbonPanel15.Text = "Mangaeden.com";
+            // 
+            // bntMangaEdenAdd
+            // 
+            this.bntMangaEdenAdd.Image = global::ComicDownloader.Properties.Resources._1364150669_folder_add;
+            this.bntMangaEdenAdd.MaximumSize = new System.Drawing.Size(0, 0);
+            this.bntMangaEdenAdd.MinimumSize = new System.Drawing.Size(0, 0);
+            this.bntMangaEdenAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntMangaEdenAdd.SmallImage")));
+            this.bntMangaEdenAdd.Click += new System.EventHandler(this.bntMangaEdenAdd_Click);
+            // 
             // rbn18Plus
             // 
             this.rbn18Plus.Panels.Add(this.pnlTruyen18);
@@ -398,18 +414,18 @@
             // 
             this.ribbonPanel3.Text = "XomTruyen.com";
             // 
-            // ribbonPanel15
+            // ribbonPanel18
             // 
-            this.ribbonPanel15.Items.Add(this.bntMangaEdenAdd);
-            this.ribbonPanel15.Text = "Mangaeden.com";
+            this.ribbonPanel18.Items.Add(this.bntMangaHereAdd);
+            this.ribbonPanel18.Text = "MangaHere.com";
             // 
-            // bntMangaEdenAdd
+            // bntMangaHereAdd
             // 
-            this.bntMangaEdenAdd.Image = global::ComicDownloader.Properties.Resources._1364150669_folder_add;
-            this.bntMangaEdenAdd.MaximumSize = new System.Drawing.Size(0, 0);
-            this.bntMangaEdenAdd.MinimumSize = new System.Drawing.Size(0, 0);
-            this.bntMangaEdenAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntMangaEdenAdd.SmallImage")));
-            this.bntMangaEdenAdd.Click += new System.EventHandler(this.bntMangaEdenAdd_Click);
+            this.bntMangaHereAdd.Image = global::ComicDownloader.Properties.Resources._1364078951_insert_object;
+            this.bntMangaHereAdd.MaximumSize = new System.Drawing.Size(0, 0);
+            this.bntMangaHereAdd.MinimumSize = new System.Drawing.Size(0, 0);
+            this.bntMangaHereAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntMangaHereAdd.SmallImage")));
+            this.bntMangaHereAdd.Click += new System.EventHandler(this.bntMangaHereAdd_Click);
             // 
             // AppMainForm
             // 
@@ -475,6 +491,8 @@
         private System.Windows.Forms.RibbonButton bntMangaFoxAdd;
         private System.Windows.Forms.RibbonPanel ribbonPanel15;
         private System.Windows.Forms.RibbonButton bntMangaEdenAdd;
+        private System.Windows.Forms.RibbonPanel ribbonPanel18;
+        private System.Windows.Forms.RibbonButton bntMangaHereAdd;
         
     }
 }

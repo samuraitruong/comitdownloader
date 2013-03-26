@@ -193,5 +193,10 @@ namespace ComicDownloader
         {
             AddChildForm("Manga Eden", new MangaEdenDownloader());
         }
+
+        private void bntMangaHereAdd_Click(object sender, EventArgs e)
+        {
+            AddChildForm("Manga Here", new MangaHereDownloader());
+        }
     }
 }

@@ -165,6 +165,13 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        internal static byte[] Intro {
+            get {
+                object obj = ResourceManager.GetObject("Intro", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to 0904199253TRUONG.
         /// </summary>
