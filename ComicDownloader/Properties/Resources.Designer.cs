@@ -130,6 +130,15 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to 0904199253TRUONG.
+        /// </summary>
+        internal static string SecureKey {
+            get {
+                return ResourceManager.GetString("SecureKey", resourceCulture);
+            }
+        }
+        
         internal static System.Drawing.Bitmap the_marvel_universe {
             get {
                 object obj = ResourceManager.GetObject("the_marvel_universe", resourceCulture);

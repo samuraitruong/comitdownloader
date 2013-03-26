@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Reflection;
 using System.IO;
 using System.Net;
+using ComicDownloader.Properties;
 
 namespace ComicDownloader.Engines
 {
@@ -39,11 +40,14 @@ namespace ComicDownloader.Engines
         }
         public void SaveCache(List<StoryInfo> stories)
         {
+            var temp = Path.GetTempPath() + Path.GetRandomFileName();
             var xml = SerializationHelper.SerializeToXml<List<StoryInfo>>(stories);
-            using (var file = new StreamWriter(File.Open(CachedFile, FileMode.OpenOrCreate)))
+            using (var file = new StreamWriter(File.Open(temp, FileMode.OpenOrCreate)))
             {
                 file.Write(xml);
             }
+
+            SecureHelper.EncryptFile(temp, CachedFile, Resources.SecureKey);
         }
 
         public List<StoryInfo> ReloadChachedData()
@@ -51,7 +55,11 @@ namespace ComicDownloader.Engines
 
             if (File.Exists(this.CachedFile))
             {
-                using (var file = File.OpenText(CachedFile))
+                var temp = Path.GetTempPath()+ Path.GetRandomFileName();
+
+                SecureHelper.DecryptFile(CachedFile, temp, Resources.SecureKey);
+
+                using (var file = File.OpenText(temp))
                 {
                     return SerializationHelper.DeserializeFromXml<List<StoryInfo>>(file.ReadToEnd());
                 }
