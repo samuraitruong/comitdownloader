@@ -70,6 +70,8 @@
     <Compile Include="AsyncDialog\LoadingCircle.Designer.cs">
       <DependentUpon>LoadingCircle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Engines\En\MangaEdenDownloader.cs" />
+    <Compile Include="Engines\En\MangaFoxDownloader.cs" />
     <Compile Include="Engines\En\MangaReaderDownloader.cs" />
     <Compile Include="Engines\Vn\ComicVuiLenDownloader.cs" />
     <Compile Include="Engines\Vn\NTruyenDownloader.cs" />
