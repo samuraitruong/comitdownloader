@@ -183,5 +183,15 @@ namespace ComicDownloader
             AddChildForm("Manga Reader", new MangaReaderDownloader());
         
         }
+
+        private void bntMangaFoxAdd_Click(object sender, EventArgs e)
+        {
+            AddChildForm("Manga Fox", new MangaFoxDownloader());
+        }
+
+        private void bntMangaEdenAdd_Click(object sender, EventArgs e)
+        {
+            AddChildForm("Manga Eden", new MangaEdenDownloader());
+        }
     }
 }
