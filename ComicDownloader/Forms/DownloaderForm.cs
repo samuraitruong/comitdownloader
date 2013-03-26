@@ -17,6 +17,7 @@ using System.Diagnostics;
 using Cx.Windows.Forms;
 using ComicDownloader.Engines;
 using XPTable.Models;
+using ComicDownloader.Properties;
 
 
 namespace ComicDownloader
@@ -48,6 +49,11 @@ namespace ComicDownloader
         private void bntDownload_Click(object sender, EventArgs e)
         {
             Directory.CreateDirectory(txtDir.Text);
+            if (txtTitle.Text.AsEnumerable().Any(p => Path.GetInvalidFileNameChars().Contains(p)))
+            {
+                errInvalidFileName.SetError(txtTitle, "Invalided");
+                return;
+            }
             StartDownload();
 
         }
@@ -131,16 +137,31 @@ namespace ComicDownloader
             {
 
             }
+
+            PdfReader reader = new PdfReader(Resources.Intro);
+
             Document pdfDoc = new Document(PageSize.A4);
             float docw = pdfDoc.PageSize.Width;
             float doch = pdfDoc.PageSize.Width;
             
+
             
+
+            
+
+            PdfDate st = new PdfDate(DateTime.Today);
             try
             {
                 var stream = File.Create(chapInfo.PdfPath);
-                PdfWriter.GetInstance(pdfDoc, stream);
+                var writer = PdfWriter.GetInstance(pdfDoc, stream);
+
                 pdfDoc.Open();
+                pdfDoc.NewPage();
+                PdfContentByte cb = writer.DirectContent;
+                PdfImportedPage page = writer.GetImportedPage(reader, 1); ;
+
+                //cb.AddTemplate(page, 0, -1f, 1f, 0, 0, reader.GetPageSizeWithRotation(1).Height);
+                cb.AddTemplate(page, 0, 0);
 
                 DirectoryInfo di = new DirectoryInfo(chapInfo.Folder);
                 var files = di.GetFiles();
@@ -157,8 +178,9 @@ namespace ComicDownloader
 
                         img.ScaleToFit(docw * 1.35f, doch * 1.35f);
                         // img.ScaleToFit(750, 550);
-                        pdfDoc.Add(img);
                         pdfDoc.NewPage();
+                        pdfDoc.Add(img);
+                        
                     }
                 }
             }
@@ -654,6 +676,24 @@ namespace ComicDownloader
         private void button2_Click_3(object sender, EventArgs e)
         {
 
+        }
+
+        private void tblChapters_RowAdded(object sender, XPTable.Events.TableModelEventArgs e)
+        {
+            bntDownload.Enabled = true;
+        }
+
+        private void txtTitle_TextChanged(object sender, EventArgs e)
+        {
+            this.Text = txtTitle.Text;
+            if (txtTitle.Text.AsEnumerable().Any(p => Path.GetInvalidFileNameChars().Contains(p)))
+            {
+                errInvalidFileName.SetError(txtTitle, "Invalided");
+            }
+            else
+            {
+                errInvalidFileName.Clear();
+            }
         }
 
         

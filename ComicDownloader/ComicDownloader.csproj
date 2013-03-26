@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engines\En\MangaHereDownloader.cs" />
     <Compile Include="Forms\AppMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -625,6 +626,7 @@
     <None Include="Resources\clear-filter.png" />
     <None Include="Resources\filter-icons3.png" />
     <None Include="Resources\filter.png" />
+    <None Include="Resources\Intro.pdf" />
     <None Include="Resources\sort-ascending.png" />
     <None Include="Resources\sort-descending.png" />
     <Content Include="3rd\System.Windows.Forms.Ribbon35\Updates.txt" />

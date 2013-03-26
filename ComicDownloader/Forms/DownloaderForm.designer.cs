@@ -67,7 +67,6 @@ namespace ComicDownloader
             this.btnExitThread = new System.Windows.Forms.Button();
             this.bntStop = new System.Windows.Forms.Button();
             this.groupInfo = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.bntRefresh = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -83,6 +82,7 @@ namespace ComicDownloader
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colPDF = ((ComicDownloader.EXColumnHeader)(new ComicDownloader.EXColumnHeader()));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.errInvalidFileName = new System.Windows.Forms.ErrorProvider(this.components);
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -91,6 +91,7 @@ namespace ComicDownloader
             this.groupDownload.SuspendLayout();
             this.groupInfo.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errInvalidFileName)).BeginInit();
             this.SuspendLayout();
             // 
             // txtUrl
@@ -99,7 +100,7 @@ namespace ComicDownloader
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.Size = new System.Drawing.Size(219, 20);
             this.txtUrl.TabIndex = 0;
-            this.txtUrl.Text = "http://www.truyen18.org/truyen/qua-tang-giang-sinh-18/3176.html";
+            this.txtUrl.Text = "[[Select a story from list]]";
             this.txtUrl.TextChanged += new System.EventHandler(this.txtUrl_TextChanged);
             // 
             // label3
@@ -117,7 +118,8 @@ namespace ComicDownloader
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(219, 20);
             this.txtTitle.TabIndex = 4;
-            this.txtTitle.Text = "DAO HAI TAC";
+            this.txtTitle.Text = "[[Select a story from list]]";
+            this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
             // 
             // label4
             // 
@@ -262,7 +264,7 @@ namespace ComicDownloader
             this.groupBox1.Size = new System.Drawing.Size(278, 105);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Select chapter to download";
+            this.groupBox1.Text = "Select chapter(s) to download";
             // 
             // lstChapters
             // 
@@ -353,6 +355,10 @@ namespace ComicDownloader
             this.mnuSelectSelected.Text = "Check all select item";
             this.mnuSelectSelected.Click += new System.EventHandler(this.mnuSelectSelected_Click);
             // 
+            // tblChapters
+            // 
+            this.tblChapters.RowAdded += new XPTable.Events.TableModelEventHandler(this.tblChapters_RowAdded);
+            // 
             // groupDownload
             // 
             this.groupDownload.Controls.Add(this.txtDir);
@@ -393,7 +399,6 @@ namespace ComicDownloader
             // 
             // groupInfo
             // 
-            this.groupInfo.Controls.Add(this.button2);
             this.groupInfo.Controls.Add(this.bntRefresh);
             this.groupInfo.Controls.Add(this.label5);
             this.groupInfo.Controls.Add(this.label3);
@@ -409,19 +414,6 @@ namespace ComicDownloader
             this.groupInfo.TabIndex = 20;
             this.groupInfo.TabStop = false;
             this.groupInfo.Text = "Info";
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button2.Image = global::ComicDownloader.Properties.Resources._1364326694_stock_save_pdf_24;
-            this.button2.Location = new System.Drawing.Point(248, 123);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(25, 25);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "xxxxxxxxxxxx";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click_3);
             // 
             // bntRefresh
             // 
@@ -547,6 +539,10 @@ namespace ComicDownloader
             this.imageList1.ImageSize = new System.Drawing.Size(24, 24);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // errInvalidFileName
+            // 
+            this.errInvalidFileName.ContainerControl = this;
+            // 
             // DownloaderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -570,6 +566,7 @@ namespace ComicDownloader
             this.groupInfo.ResumeLayout(false);
             this.groupInfo.PerformLayout();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errInvalidFileName)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -629,7 +626,7 @@ namespace ComicDownloader
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblSelected;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ErrorProvider errInvalidFileName;
         
     }
 }
