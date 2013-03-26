@@ -70,13 +70,13 @@
     <Compile Include="AsyncDialog\LoadingCircle.Designer.cs">
       <DependentUpon>LoadingCircle.cs</DependentUpon>
     </Compile>
-    <Compile Include="Engines\ComicVuiLenDownloader.cs" />
-    <Compile Include="Engines\NTruyenDownloader.cs" />
-    <Compile Include="Engines\TruyenLauPhimDownloader.cs" />
-    <Compile Include="Engines\Truyen18Downloader.cs" />
-    <Compile Include="Engines\MangaFcDownloader.cs" />
-    <Compile Include="Engines\XomTruyenDownloader.cs" />
-    <Compile Include="Engines\MangaKungDownloader.cs" />
+    <Compile Include="Engines\Vn\ComicVuiLenDownloader.cs" />
+    <Compile Include="Engines\Vn\NTruyenDownloader.cs" />
+    <Compile Include="Engines\Vn\TruyenLauPhimDownloader.cs" />
+    <Compile Include="Engines\Vn\Truyen18Downloader.cs" />
+    <Compile Include="Engines\Vn\MangaFcDownloader.cs" />
+    <Compile Include="Engines\Vn\XomTruyenDownloader.cs" />
+    <Compile Include="Engines\Vn\MangaKungDownloader.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="DownloaderForm.cs">
       <SubType>Form</SubType>
@@ -108,16 +108,16 @@
     <Compile Include="Cx.Windows.Forms\NoResizeChildForm.Designer.cs">
       <DependentUpon>NoResizeChildForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Engines\BlogTruyenDownloader.cs" />
-    <Compile Include="Engines\TruyenTranhNhanhDownloader.cs" />
+    <Compile Include="Engines\Vn\BlogTruyenDownloader.cs" />
+    <Compile Include="Engines\Vn\TruyenTranhNhanhDownloader.cs" />
     <Compile Include="Engines\Downloader.cs" />
-    <Compile Include="Engines\NetworkHelper.cs" />
+    <Compile Include="Helpers\NetworkHelper.cs" />
     <Compile Include="Engines\StoryInfo.cs" />
-    <Compile Include="Engines\TruyenTranh8Downloader.cs" />
-    <Compile Include="Engines\TruyenTranhTuanDownloader.cs" />
-    <Compile Include="Engines\TruyenVietBoomDownloader.cs" />
-    <Compile Include="Engines\TruyenVnSharingDownloader.cs" />
-    <Compile Include="Engines\VechaiDownloader.cs" />
+    <Compile Include="Engines\Vn\TruyenTranh8Downloader.cs" />
+    <Compile Include="Engines\Vn\TruyenTranhTuanDownloader.cs" />
+    <Compile Include="Engines\Vn\TruyenVietBoomDownloader.cs" />
+    <Compile Include="Engines\Vn\TruyenVnSharingDownloader.cs" />
+    <Compile Include="Engines\Vn\VechaiDownloader.cs" />
     <Compile Include="EXComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -133,8 +133,8 @@
     <Compile Include="LongOperation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SecureHelper.cs" />
-    <Compile Include="SerializationHelper.cs" />
+    <Compile Include="Helpers\SecureHelper.cs" />
+    <Compile Include="Helpers\SerializationHelper.cs" />
     <Compile Include="System.Windows.Forms.Ribbon35\GlobalHook.cs" />
     <Compile Include="System.Windows.Forms.Ribbon35\IContainsRibbonComponents.cs" />
     <Compile Include="System.Windows.Forms.Ribbon35\IContainsSelectableRibbonItems.cs" />
@@ -528,6 +528,8 @@
     <Content Include="XPTable\XPTable.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Engines\18+\" />
+    <Folder Include="Engines\En\" />
     <Folder Include="XPTable\doc\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
