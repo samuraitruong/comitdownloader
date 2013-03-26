@@ -25,7 +25,7 @@ namespace ComicDownloader
     {
         public Downloader Downloader { get; set; }
 
-        private const string HOST_URL = "http://truyentranhtuan.com";
+        
         public DownloaderForm()
         {
             InitializeComponent();
@@ -33,6 +33,7 @@ namespace ComicDownloader
 
         private void button1_Click(object sender, EventArgs e)
         {
+            folderBrowserDialog1.SelectedPath = txtDir.Text;
             if (folderBrowserDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 txtDir.Text = folderBrowserDialog1.SelectedPath;
@@ -46,7 +47,7 @@ namespace ComicDownloader
 
         private void bntDownload_Click(object sender, EventArgs e)
         {
-
+            Directory.CreateDirectory(txtDir.Text);
             StartDownload();
 
         }
@@ -171,6 +172,17 @@ namespace ComicDownloader
                 try
                 {
                     pdfDoc.Close();
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        var listItem = listHistory.Items[listHistory.Items.Count - 1];
+                       
+                        var subItem = listItem.SubItems[6] as EXControlListViewSubItem;
+                        var pp = subItem.MyControl as Button;
+                        pp.Enabled = true;
+                        pp.Tag = chapInfo.PdfPath;
+
+                    });
+
                 }
                 catch
                 {
@@ -279,19 +291,39 @@ namespace ComicDownloader
                 listItem.SubItems.Add(chapInfo.Folder);
 
                 EXControlListViewSubItem pdfLinkCol = new EXControlListViewSubItem();
-                LinkLabel llbl = new LinkLabel();
-                llbl.Height = 12;
-                llbl.Text = chapInfo.PdfPath;
-                llbl.Tag = cs;
-                llbl.LinkClicked += new LinkLabelLinkClickedEventHandler(llbl_LinkClicked);
+                Button bntOpenPDF = new Button()
+                {
+
+
+                    Image = global::ComicDownloader.Properties.Resources._1364326694_stock_save_pdf_24,
+                    //Location = new System.Drawing.Point(248, 123);
+                    //Name = "button2";
+                    Size = new System.Drawing.Size(24, 24),
+
+                    TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay,
+                    UseVisualStyleBackColor = true,
+                    Tag = cs,
+                    //Text = chapInfo.PdfPath,
+                    Enabled = false,
+                    
+                };
+
+                bntOpenPDF.Click += new EventHandler(bntOpenPDF_Click);
+               // llbl.LinkClicked += new LinkLabelLinkClickedEventHandler(llbl_LinkClicked);
                 listItem.SubItems.Add(pdfLinkCol);
-                listHistory.AddControlToSubItem(llbl, pdfLinkCol);
+                listHistory.AddControlToSubItem(bntOpenPDF, pdfLinkCol);
 
                 listItem.SubItems.Add(chapInfo.PdfPath);
                 this.listHistory.Items.Add(listItem);
                 lblPageCount.Text = string.Format("{0:D2}/{1:D2}", "0", chapInfo.PageCount);
 
             });
+        }
+
+        void bntOpenPDF_Click(object sender, EventArgs e)
+        {
+            Button link = sender as Button;
+            Process.Start(string.Format("\"{0}\"", link.Tag.ToString()));
         }
 
         private void CollectChaptersToBeDownloaded()
@@ -563,10 +595,7 @@ namespace ComicDownloader
             mnuSelectSelected.Enabled = true;
         }
 
-        private void button2_Click_2(object sender, EventArgs e)
-        {
-           // this.BeginAsyncIndication();
-        }
+       
 
         private void bntRefresh_Click(object sender, EventArgs e)
         {
@@ -577,16 +606,54 @@ namespace ComicDownloader
 
         private void lstChapters_CellCheckChanged(object sender, XPTable.Events.CellCheckBoxEventArgs e)
         {
-            //foreach (Row item in tblChapters.Rows)
-            //{
-            //    if (item.Cells[0].Selected)
-            //        MessageBox.Show(item.Cells[0].Text);
-            //}
+            ToggleDownloadButtonBySelected();
+            
+        }
+
+        private void ToggleDownloadButtonBySelected()
+        {
+            int count = tblChapters.Rows.Cast<Row>().Count(p => p.Cells[0].Checked);
+
+            if (count > 0)
+            {
+                bntDownload.Enabled = true;
+                lblSelected.Text = "Selected Chapter : " + count.ToString();
+            }
+            else
+            {
+                bntDownload.Enabled = false;
+                lblSelected.Text = "No chapters selected";
+            }
         }
 
         private void lstChapters_ContextMenuStripChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void txtUrl_TextChanged(object sender, EventArgs e)
+        {
+            string urlPattern = @"^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)?((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.[a-zA-Z]{2,4})(\:[0-9]+)?(/[^/][a-zA-Z0-9\.\,\?\'\\/\+&amp;%\$#\=~_\-@]*)*$";
+            if (!string.IsNullOrEmpty(txtUrl.Text) &&
+                Regex.IsMatch(txtUrl.Text, urlPattern))
+            {
+
+                bntInfo.Enabled = true;
+            }
+            else
+            {
+                bntInfo.Enabled = false;
+            }
+        }
+
+        private void lstChapters_CellClick(object sender, XPTable.Events.CellMouseEventArgs e)
+        {
+            ToggleDownloadButtonBySelected();
+        }
+
+        private void button2_Click_3(object sender, EventArgs e)
+        {
+
         }
 
         
