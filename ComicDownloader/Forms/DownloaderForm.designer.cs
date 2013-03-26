@@ -46,6 +46,8 @@ namespace ComicDownloader
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblTotalDownloadCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblSelected = new System.Windows.Forms.ToolStripStatusLabel();
             this.bntDownload = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -65,6 +67,7 @@ namespace ComicDownloader
             this.btnExitThread = new System.Windows.Forms.Button();
             this.bntStop = new System.Windows.Forms.Button();
             this.groupInfo = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.bntRefresh = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -78,7 +81,8 @@ namespace ComicDownloader
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderProgress = ((ComicDownloader.EXColumnHeader)(new ComicDownloader.EXColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((ComicDownloader.EXColumnHeader)(new ComicDownloader.EXColumnHeader()));
+            this.colPDF = ((ComicDownloader.EXColumnHeader)(new ComicDownloader.EXColumnHeader()));
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -91,16 +95,17 @@ namespace ComicDownloader
             // 
             // txtUrl
             // 
-            this.txtUrl.Location = new System.Drawing.Point(17, 72);
+            this.txtUrl.Location = new System.Drawing.Point(17, 80);
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.Size = new System.Drawing.Size(219, 20);
             this.txtUrl.TabIndex = 0;
             this.txtUrl.Text = "http://www.truyen18.org/truyen/qua-tang-giang-sinh-18/3176.html";
+            this.txtUrl.TextChanged += new System.EventHandler(this.txtUrl_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 101);
+            this.label3.Location = new System.Drawing.Point(16, 109);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 5;
@@ -108,7 +113,7 @@ namespace ComicDownloader
             // 
             // txtTitle
             // 
-            this.txtTitle.Location = new System.Drawing.Point(19, 117);
+            this.txtTitle.Location = new System.Drawing.Point(19, 125);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(219, 20);
             this.txtTitle.TabIndex = 4;
@@ -155,7 +160,9 @@ namespace ComicDownloader
             this.progess,
             this.toolStripSplitButton1,
             this.toolStripStatusLabel2,
-            this.lblTotalDownloadCount});
+            this.lblTotalDownloadCount,
+            this.toolStripStatusLabel3,
+            this.lblSelected});
             this.statusStrip1.Location = new System.Drawing.Point(0, 358);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(949, 22);
@@ -211,8 +218,21 @@ namespace ComicDownloader
             this.lblTotalDownloadCount.Name = "lblTotalDownloadCount";
             this.lblTotalDownloadCount.Size = new System.Drawing.Size(0, 17);
             // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(11, 17);
+            this.toolStripStatusLabel3.Text = "|";
+            // 
+            // lblSelected
+            // 
+            this.lblSelected.Name = "lblSelected";
+            this.lblSelected.Size = new System.Drawing.Size(0, 17);
+            // 
             // bntDownload
             // 
+            this.bntDownload.Enabled = false;
             this.bntDownload.Location = new System.Drawing.Point(17, 58);
             this.bntDownload.Name = "bntDownload";
             this.bntDownload.Size = new System.Drawing.Size(70, 23);
@@ -237,9 +257,9 @@ namespace ComicDownloader
             // 
             this.groupBox1.Controls.Add(this.lstChapters);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 149);
+            this.groupBox1.Location = new System.Drawing.Point(0, 159);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(278, 115);
+            this.groupBox1.Size = new System.Drawing.Size(278, 105);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select chapter to download";
@@ -255,9 +275,10 @@ namespace ComicDownloader
             this.lstChapters.Location = new System.Drawing.Point(3, 16);
             this.lstChapters.MultiSelect = true;
             this.lstChapters.Name = "lstChapters";
-            this.lstChapters.Size = new System.Drawing.Size(272, 96);
+            this.lstChapters.Size = new System.Drawing.Size(272, 86);
             this.lstChapters.TabIndex = 0;
             this.lstChapters.TableModel = this.tblChapters;
+            this.lstChapters.CellClick += new XPTable.Events.CellMouseEventHandler(this.lstChapters_CellClick);
             this.lstChapters.CellCheckChanged += new XPTable.Events.CellCheckBoxEventHandler(this.lstChapters_CellCheckChanged);
             this.lstChapters.SelectionChanged += new XPTable.Events.SelectionEventHandler(this.lstChapters_SelectionChanged);
             this.lstChapters.ContextMenuStripChanged += new System.EventHandler(this.lstChapters_ContextMenuStripChanged);
@@ -350,6 +371,7 @@ namespace ComicDownloader
             // 
             // btnExitThread
             // 
+            this.btnExitThread.Enabled = false;
             this.btnExitThread.Location = new System.Drawing.Point(172, 58);
             this.btnExitThread.Name = "btnExitThread";
             this.btnExitThread.Size = new System.Drawing.Size(70, 23);
@@ -371,6 +393,7 @@ namespace ComicDownloader
             // 
             // groupInfo
             // 
+            this.groupInfo.Controls.Add(this.button2);
             this.groupInfo.Controls.Add(this.bntRefresh);
             this.groupInfo.Controls.Add(this.label5);
             this.groupInfo.Controls.Add(this.label3);
@@ -382,10 +405,23 @@ namespace ComicDownloader
             this.groupInfo.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupInfo.Location = new System.Drawing.Point(0, 0);
             this.groupInfo.Name = "groupInfo";
-            this.groupInfo.Size = new System.Drawing.Size(278, 149);
+            this.groupInfo.Size = new System.Drawing.Size(278, 159);
             this.groupInfo.TabIndex = 20;
             this.groupInfo.TabStop = false;
             this.groupInfo.Text = "Info";
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button2.Image = global::ComicDownloader.Properties.Resources._1364326694_stock_save_pdf_24;
+            this.button2.Location = new System.Drawing.Point(248, 123);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(25, 25);
+            this.button2.TabIndex = 19;
+            this.button2.Text = "xxxxxxxxxxxx";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click_3);
             // 
             // bntRefresh
             // 
@@ -410,7 +446,7 @@ namespace ComicDownloader
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 56);
+            this.label1.Location = new System.Drawing.Point(14, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 1;
@@ -419,7 +455,7 @@ namespace ComicDownloader
             // bntInfo
             // 
             this.bntInfo.Image = global::ComicDownloader.Properties.Resources.gtk_about;
-            this.bntInfo.Location = new System.Drawing.Point(242, 72);
+            this.bntInfo.Location = new System.Drawing.Point(242, 80);
             this.bntInfo.Name = "bntInfo";
             this.bntInfo.Size = new System.Drawing.Size(30, 23);
             this.bntInfo.TabIndex = 16;
@@ -428,10 +464,12 @@ namespace ComicDownloader
             // 
             // ddlList
             // 
+            this.ddlList.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddlList.FormattingEnabled = true;
+            this.ddlList.ItemHeight = 17;
             this.ddlList.Location = new System.Drawing.Point(19, 32);
             this.ddlList.Name = "ddlList";
-            this.ddlList.Size = new System.Drawing.Size(209, 21);
+            this.ddlList.Size = new System.Drawing.Size(209, 25);
             this.ddlList.TabIndex = 15;
             this.ddlList.SelectedIndexChanged += new System.EventHandler(this.ddlList_SelectedIndexChanged);
             // 
@@ -453,7 +491,7 @@ namespace ComicDownloader
             this.columnHeader3,
             this.columnHeaderProgress,
             this.columnHeader4,
-            this.columnHeader5});
+            this.colPDF});
             this.listHistory.ControlPadding = 4;
             this.listHistory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listHistory.FullRowSelect = true;
@@ -462,6 +500,7 @@ namespace ComicDownloader
             this.listHistory.Name = "listHistory";
             this.listHistory.OwnerDraw = true;
             this.listHistory.Size = new System.Drawing.Size(671, 358);
+            this.listHistory.StateImageList = this.imageList1;
             this.listHistory.TabIndex = 9;
             this.listHistory.UseCompatibleStateImageBehavior = false;
             this.listHistory.View = System.Windows.Forms.View.Details;
@@ -495,11 +534,18 @@ namespace ComicDownloader
             // columnHeader4
             // 
             this.columnHeader4.Text = "Folder";
-            this.columnHeader4.Width = 72;
+            this.columnHeader4.Width = 25;
             // 
-            // columnHeader5
+            // colPDF
             // 
-            this.columnHeader5.Text = "PDF";
+            this.colPDF.Text = "PDF";
+            this.colPDF.Width = 25;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(24, 24);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // DownloaderForm
             // 
@@ -548,7 +594,7 @@ namespace ComicDownloader
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
-        private EXColumnHeader columnHeader5;
+        private EXColumnHeader colPDF;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
@@ -580,6 +626,10 @@ namespace ComicDownloader
         private XPTable.Models.NumberColumn colChapId;
         private System.Windows.Forms.ToolStripStatusLabel lblStoriesCount;
         private System.Windows.Forms.Button bntRefresh;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel lblSelected;
+        private System.Windows.Forms.Button button2;
         
     }
 }

@@ -116,9 +116,44 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _1364325544_stock_save_pdf_16 {
+            get {
+                object obj = ResourceManager.GetObject("1364325544_stock_save-pdf-16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364326694_stock_save_pdf_24 {
+            get {
+                object obj = ResourceManager.GetObject("1364326694_stock_save-pdf_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap _14747480_bang_comic_book_explosion {
             get {
                 object obj = ResourceManager.GetObject("14747480-bang-comic-book-explosion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ClearFiltering {
+            get {
+                object obj = ResourceManager.GetObject("ClearFiltering", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ColumnFilterIndicator {
+            get {
+                object obj = ResourceManager.GetObject("ColumnFilterIndicator", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Filtering {
+            get {
+                object obj = ResourceManager.GetObject("Filtering", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -136,6 +171,20 @@ namespace ComicDownloader.Properties {
         internal static string SecureKey {
             get {
                 return ResourceManager.GetString("SecureKey", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap SortAscending {
+            get {
+                object obj = ResourceManager.GetObject("SortAscending", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap SortDescending {
+            get {
+                object obj = ResourceManager.GetObject("SortDescending", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

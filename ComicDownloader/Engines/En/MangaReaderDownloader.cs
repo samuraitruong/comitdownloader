@@ -99,6 +99,8 @@ namespace ComicDownloader.Engines
             htmlDoc.LoadHtml(html);
             var img = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"imgholder\"]//img");
             pageUrl = img.Attributes["src"].Value;
+
+            
             base.DownloadPage(pageUrl, filename, httpReferer);
         }
         public override List<string> GetPages(string chapUrl)

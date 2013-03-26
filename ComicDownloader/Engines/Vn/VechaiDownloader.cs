@@ -136,6 +136,12 @@ namespace ComicDownloader.Engines
             var htmlDoc = new HtmlAgilityPack.HtmlDocument();
             htmlDoc.LoadHtml(html);
             var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='entry2']/p/img");
+            if (nodes == null)
+            {
+                var text = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"vcfix\"]");
+                htmlDoc.LoadHtml(text.InnerHtml);
+                nodes = htmlDoc.DocumentNode.SelectNodes("//img");
+            }
             foreach (HtmlNode node in nodes)
             {
                 pages.Add(node.Attributes["src"].Value);
