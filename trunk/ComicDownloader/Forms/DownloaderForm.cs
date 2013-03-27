@@ -18,6 +18,8 @@ using Cx.Windows.Forms;
 using ComicDownloader.Engines;
 using XPTable.Models;
 using ComicDownloader.Properties;
+using ComicDownloader.Forms;
+using IView.UI.Forms;
 
 
 namespace ComicDownloader
@@ -240,7 +242,7 @@ namespace ComicDownloader
                         tempUrl = tempUrl.Substring(0, tempUrl.IndexOf("?"));
                     }
 
-                    string filename = Path.Combine(chapInfo.Folder, (index++).ToString() +". "+Path.GetFileName(tempUrl));
+                    string filename = Path.Combine(chapInfo.Folder, (index++).ToString("D2") +". "+Path.GetFileName(tempUrl));
 
 
                     try
@@ -309,8 +311,36 @@ namespace ComicDownloader
                 listItem.SubItems.Add(cs);
                 this.listHistory.AddControlToSubItem(b, cs);
 
+                //Add button to view folder
 
-                listItem.SubItems.Add(chapInfo.Folder);
+                EXControlListViewSubItem openFolderCol = new EXControlListViewSubItem();
+                Button bntOpenFolder = new Button()
+                {
+                    Image = global::ComicDownloader.Properties.Resources.folder_opened_16x16,
+                    //Location = new System.Drawing.Point(248, 123);
+                    //Name = "button2";
+                    Size = new System.Drawing.Size(24, 24),
+
+                    TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay,
+                    UseVisualStyleBackColor = true,
+                    Tag = openFolderCol,
+                    //Text = chapInfo.PdfPath,
+                    Enabled = true,
+
+                };
+
+                bntOpenFolder.Click += new EventHandler(delegate
+                {
+                     MainWindow window = new MainWindow(new string[] { chapInfo.Folder+"/dum.trick","1"});
+                    //window.ShowDialog();
+                    //window.SubStartSlideShow();
+                });
+                // llbl.LinkClicked += new LinkLabelLinkClickedEventHandler(llbl_LinkClicked);
+                listItem.SubItems.Add(openFolderCol);
+                listHistory.AddControlToSubItem(bntOpenFolder, openFolderCol);
+
+
+                //listItem.SubItems.Add(chapInfo.Folder);
 
                 EXControlListViewSubItem pdfLinkCol = new EXControlListViewSubItem();
                 Button bntOpenPDF = new Button()
@@ -324,7 +354,7 @@ namespace ComicDownloader
 
                     TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay,
                     UseVisualStyleBackColor = true,
-                    Tag = cs,
+                    Tag = pdfLinkCol,
                     //Text = chapInfo.PdfPath,
                     Enabled = false,
                     
@@ -467,7 +497,9 @@ namespace ComicDownloader
         {
             this.Invoke((MethodInvoker)delegate
             {
-
+                loading.Visible = true;
+                loading.Location = ddlList.Location;
+                loading.Size = ddlList.Size;
                 ddlList.Text = "Loading....";
                 bntRefresh.Enabled = false;
                 ddlList.Enabled = false;
@@ -483,6 +515,7 @@ namespace ComicDownloader
                 lblStoriesCount.Text = "Stories : " + stories.Count.ToString();
                 ddlList.Text = string.Format("There are {0} in list", stories.Count);
                 bntRefresh.Enabled = true;
+                loading.Visible = false;
             });
 
         }
@@ -511,6 +544,11 @@ namespace ComicDownloader
                 this.Invoke(new MethodInvoker(delegate() {
 
                     this.Text = "Loading...";
+
+                    loading.Location = new System.Drawing.Point(gpbChapters.Location.X + lstChapters.Location.X, gpbChapters.Location.Y + lstChapters.Location.Y);
+                    loading.Size = lstChapters.Size;
+                    loading.Visible = true;
+
                 }));
                 currentStoryInfo = Downloader.RequestInfo(txtUrl.Text);
 
@@ -532,6 +570,12 @@ namespace ComicDownloader
 
                 }
 
+
+                this.Invoke(new MethodInvoker(delegate()
+                {
+                    loading.Visible = false;
+
+                }));
 
                 ToggleControl(true);
             }
@@ -694,6 +738,11 @@ namespace ComicDownloader
             {
                 errInvalidFileName.Clear();
             }
+        }
+
+        private void button2_Click_2(object sender, EventArgs e)
+        {
+            
         }
 
         

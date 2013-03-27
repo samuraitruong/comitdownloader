@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using ComicDownloader.Engines;
+using ComicDownloader.Forms;
 
 namespace ComicDownloader
 {
@@ -197,6 +198,12 @@ namespace ComicDownloader
         private void bntMangaHereAdd_Click(object sender, EventArgs e)
         {
             AddChildForm("Manga Here", new MangaHereDownloader());
+        }
+
+        private void ribbonButton1_Click(object sender, EventArgs e)
+        {
+            Form a = new IView.UI.Forms.MainWindow();
+            a.ShowDialog();
         }
     }
 }

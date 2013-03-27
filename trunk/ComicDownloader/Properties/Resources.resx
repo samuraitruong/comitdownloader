@@ -175,8 +175,230 @@
   <data name="1364326694_stock_save-pdf_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364326694_stock_save-pdf_24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Intro" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Intro.pdf;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BlankCursor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blankcursor.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="EyeDropperCursor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\eyedroppercursor.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GPLv2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GPL v2.0.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="OpenFileFilter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\open file filter.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="pause_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pause_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="play_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\play_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedEyeCursor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\redeyecursor.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SaveFileFilter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Save File Filter.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="aqua_button_focus_24x241" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\aqua_button_focus_24x241.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="aqua_button_pressed_24x241" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\aqua_button_pressed_24x241.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_down_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\arrow_down_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cd_rom_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\cd_rom_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="computer_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\computer_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="desktop_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\desktop_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="documents_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\documents_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="favourites_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\favourites_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_closed_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\folder_closed_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_hidden_closed_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\folder_hidden_closed_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_hidden_opened_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\folder_hidden_opened_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_opened_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\folder_opened_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_up_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\folder_up_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hard_drive_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\hard_drive_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="histogramcross1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\histogramcross1.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="locked_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\locked_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="network_drive_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\network_drive_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pictures_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\pictures_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ram_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\ram_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="removable_disk_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\removable_disk_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="unknown_drive_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\unknown_drive_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="unlocked_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="aqua_button_focus_24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\aqua_button_focus_24x24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="aqua_button_focus_24x2411" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\aqua_button_focus_24x241.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="aqua_button_pressed_24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\aqua_button_pressed_24x24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="aqua_button_pressed_24x2411" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\aqua_button_pressed_24x241.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_down_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\arrow_down_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_down_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\arrow_down_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cd_rom_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\cd_rom_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cd_rom_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\cd_rom_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="computer_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\computer_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="computer_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\computer_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="desktop_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\desktop_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="desktop_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\desktop_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="documents_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\documents_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="documents_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\documents_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="favourites_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\favourites_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="favourites_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\favourites_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_closed_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\folder_closed_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_closed_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\folder_closed_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_hidden_closed_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\folder_hidden_closed_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_hidden_closed_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\folder_hidden_closed_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_hidden_opened_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\folder_hidden_opened_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_hidden_opened_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\folder_hidden_opened_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_opened_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\folder_opened_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_opened_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\folder_opened_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_up_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\folder_up_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_up_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\folder_up_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hard_drive_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\hard_drive_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hard_drive_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\hard_drive_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HistogramCross" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\histogramcross.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="histogramcross11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\histogramcross1.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="locked_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\locked_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="locked_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\locked_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="network_drive_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\network_drive_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="network_drive_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\network_drive_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pictures_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\pictures_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pictures_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\pictures_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ram_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\ram_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ram_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\ram_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="removable_disk_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\removable_disk_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="removable_disk_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\removable_disk_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="unknown_drive_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\unknown_drive_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="unknown_drive_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\unknown_drive_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="unlocked_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\unlocked_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="unlocked_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\unlocked_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
