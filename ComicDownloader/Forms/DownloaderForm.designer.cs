@@ -50,7 +50,7 @@ namespace ComicDownloader
             this.lblSelected = new System.Windows.Forms.ToolStripStatusLabel();
             this.bntDownload = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gpbChapters = new System.Windows.Forms.GroupBox();
             this.lstChapters = new XPTable.Models.Table();
             this.columnModel1 = new XPTable.Models.ColumnModel();
             this.chkSelect = new XPTable.Models.CheckBoxColumn();
@@ -67,6 +67,8 @@ namespace ComicDownloader
             this.btnExitThread = new System.Windows.Forms.Button();
             this.bntStop = new System.Windows.Forms.Button();
             this.groupInfo = new System.Windows.Forms.GroupBox();
+            this.loading = new MRG.Controls.UI.LoadingCircle();
+            this.button2 = new System.Windows.Forms.Button();
             this.bntRefresh = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -85,7 +87,7 @@ namespace ComicDownloader
             this.errInvalidFileName = new System.Windows.Forms.ErrorProvider(this.components);
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gpbChapters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lstChapters)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupDownload.SuspendLayout();
@@ -245,7 +247,7 @@ namespace ComicDownloader
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.gpbChapters);
             this.panel1.Controls.Add(this.groupDownload);
             this.panel1.Controls.Add(this.groupInfo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -255,16 +257,16 @@ namespace ComicDownloader
             this.panel1.TabIndex = 12;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // groupBox1
+            // gpbChapters
             // 
-            this.groupBox1.Controls.Add(this.lstChapters);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 159);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(278, 105);
-            this.groupBox1.TabIndex = 22;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Select chapter(s) to download";
+            this.gpbChapters.Controls.Add(this.lstChapters);
+            this.gpbChapters.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gpbChapters.Location = new System.Drawing.Point(0, 159);
+            this.gpbChapters.Name = "gpbChapters";
+            this.gpbChapters.Size = new System.Drawing.Size(278, 105);
+            this.gpbChapters.TabIndex = 22;
+            this.gpbChapters.TabStop = false;
+            this.gpbChapters.Text = "Select chapter(s) to download";
             // 
             // lstChapters
             // 
@@ -399,6 +401,8 @@ namespace ComicDownloader
             // 
             // groupInfo
             // 
+            this.groupInfo.Controls.Add(this.loading);
+            this.groupInfo.Controls.Add(this.button2);
             this.groupInfo.Controls.Add(this.bntRefresh);
             this.groupInfo.Controls.Add(this.label5);
             this.groupInfo.Controls.Add(this.label3);
@@ -414,6 +418,32 @@ namespace ComicDownloader
             this.groupInfo.TabIndex = 20;
             this.groupInfo.TabStop = false;
             this.groupInfo.Text = "Info";
+            // 
+            // loading
+            // 
+            this.loading.Active = true;
+            this.loading.Color = System.Drawing.Color.DarkGray;
+            this.loading.InnerCircleRadius = 8;
+            this.loading.Location = new System.Drawing.Point(172, 12);
+            this.loading.Name = "loading";
+            this.loading.NumberSpoke = 10;
+            this.loading.OuterCircleRadius = 10;
+            this.loading.RotationSpeed = 100;
+            this.loading.Size = new System.Drawing.Size(10, 10);
+            this.loading.SpokeThickness = 4;
+            this.loading.TabIndex = 20;
+            this.loading.Text = "loadingCircle1";
+            this.loading.Visible = false;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(242, 125);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(30, 23);
+            this.button2.TabIndex = 19;
+            this.button2.Text = "...";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_2);
             // 
             // bntRefresh
             // 
@@ -558,7 +588,7 @@ namespace ComicDownloader
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
+            this.gpbChapters.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lstChapters)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupDownload.ResumeLayout(false);
@@ -606,7 +636,7 @@ namespace ComicDownloader
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button bntInfo;
         private System.Windows.Forms.Button btnExitThread;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gpbChapters;
         private System.Windows.Forms.GroupBox groupDownload;
         private System.Windows.Forms.GroupBox groupInfo;
         private XPTable.Models.Table lstChapters;
@@ -627,6 +657,8 @@ namespace ComicDownloader
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblSelected;
         private System.Windows.Forms.ErrorProvider errInvalidFileName;
+        private System.Windows.Forms.Button button2;
+        private MRG.Controls.UI.LoadingCircle loading;
         
     }
 }

@@ -1,0 +1,1 @@
+Windows Bitmap (*.bmp)|*.bmp|Graphic Interchange Format (*.gif)|*.gif|Windows Icon (*.ico)|*.ico|Joint Photographic Experts Group (*.jpe, *.jpg, *.jpeg)|*.jpe;*.jpg;*.jpeg|Portable Network Graphic (*.png)|*.png|Tagged Image File Format (*.tif, *.tiff)|*.tif;*.tff

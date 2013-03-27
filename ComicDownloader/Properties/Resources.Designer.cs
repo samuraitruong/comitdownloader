@@ -137,6 +137,97 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap aqua_button_focus_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("aqua_button_focus_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap aqua_button_focus_24x241 {
+            get {
+                object obj = ResourceManager.GetObject("aqua_button_focus_24x241", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap aqua_button_focus_24x2411 {
+            get {
+                object obj = ResourceManager.GetObject("aqua_button_focus_24x2411", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap aqua_button_pressed_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("aqua_button_pressed_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap aqua_button_pressed_24x241 {
+            get {
+                object obj = ResourceManager.GetObject("aqua_button_pressed_24x241", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap aqua_button_pressed_24x2411 {
+            get {
+                object obj = ResourceManager.GetObject("aqua_button_pressed_24x2411", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap arrow_down_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("arrow_down_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap arrow_down_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("arrow_down_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap arrow_down_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("arrow_down_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static byte[] BlankCursor {
+            get {
+                object obj = ResourceManager.GetObject("BlankCursor", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap cd_rom_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("cd_rom_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap cd_rom_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("cd_rom_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap cd_rom_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("cd_rom_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap ClearFiltering {
             get {
                 object obj = ResourceManager.GetObject("ClearFiltering", resourceCulture);
@@ -151,10 +242,227 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap computer_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("computer_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap computer_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("computer_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap computer_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("computer_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap desktop_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("desktop_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap desktop_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("desktop_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap desktop_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("desktop_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap documents_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("documents_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap documents_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("documents_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap documents_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("documents_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static byte[] EyeDropperCursor {
+            get {
+                object obj = ResourceManager.GetObject("EyeDropperCursor", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap favourites_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("favourites_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap favourites_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("favourites_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap favourites_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("favourites_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Filtering {
             get {
                 object obj = ResourceManager.GetObject("Filtering", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_closed_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("folder_closed_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_closed_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("folder_closed_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_closed_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("folder_closed_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_hidden_closed_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("folder_hidden_closed_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_hidden_closed_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("folder_hidden_closed_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_hidden_closed_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("folder_hidden_closed_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_hidden_opened_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("folder_hidden_opened_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_hidden_opened_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("folder_hidden_opened_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_hidden_opened_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("folder_hidden_opened_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_opened_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("folder_opened_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_opened_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("folder_opened_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_opened_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("folder_opened_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_up_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("folder_up_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_up_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("folder_up_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_up_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("folder_up_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 		    GNU GENERAL PUBLIC LICENSE
+        ///		       Version 2, June 1991
+        ///
+        /// Copyright (C) 1989, 1991 Free Software Foundation, Inc.,
+        /// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+        /// Everyone is permitted to copy and distribute verbatim copies
+        /// of this license document, but changing it is not allowed.
+        ///
+        ///			    Preamble
+        ///
+        ///  The licenses for most software are designed to take away your
+        ///freedom to share and change it.  By contrast, the GNU General Public
+        ///License is intended to guarantee your freedom  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string GPLv2 {
+            get {
+                return ResourceManager.GetString("GPLv2", resourceCulture);
             }
         }
         
@@ -165,10 +473,196 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap hard_drive_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("hard_drive_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap hard_drive_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("hard_drive_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap hard_drive_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("hard_drive_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static byte[] HistogramCross {
+            get {
+                object obj = ResourceManager.GetObject("HistogramCross", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] histogramcross1 {
+            get {
+                object obj = ResourceManager.GetObject("histogramcross1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] histogramcross11 {
+            get {
+                object obj = ResourceManager.GetObject("histogramcross11", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
         internal static byte[] Intro {
             get {
                 object obj = ResourceManager.GetObject("Intro", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap locked_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("locked_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap locked_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("locked_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap locked_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("locked_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap network_drive_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("network_drive_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap network_drive_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("network_drive_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap network_drive_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("network_drive_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Image Files (*.bmp, *.gif, *.ico, *.jpe, *.jpg, *.jpeg, *.png, *.tif, *.tiff)|*.bmp;*.gif;*.ico;*.jpe;*.jpg;*.jpeg;*.png;*.tif;*.tiff|Windows Bitmap (*.bmp)|*.bmp|Graphic Interchange Format (*.gif)|*.gif|Windows Icon (*.ico)|*.ico|Joint Photographic Experts Group (*.jpe, *.jpg, *.jpeg)|*.jpe;*.jpg;*.jpeg|Portable Network Graphic (*.png)|*.png|Tagged Image File Format (*.tif, *.tiff)|*.tif;*.tff.
+        /// </summary>
+        internal static string OpenFileFilter {
+            get {
+                return ResourceManager.GetString("OpenFileFilter", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pause_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("pause_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pictures_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("pictures_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pictures_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("pictures_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pictures_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("pictures_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap play_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("play_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ram_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("ram_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ram_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("ram_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ram_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("ram_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static byte[] RedEyeCursor {
+            get {
+                object obj = ResourceManager.GetObject("RedEyeCursor", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap removable_disk_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("removable_disk_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap removable_disk_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("removable_disk_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap removable_disk_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("removable_disk_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windows Bitmap (*.bmp)|*.bmp|Graphic Interchange Format (*.gif)|*.gif|Windows Icon (*.ico)|*.ico|Joint Photographic Experts Group (*.jpe, *.jpg, *.jpeg)|*.jpe;*.jpg;*.jpeg|Portable Network Graphic (*.png)|*.png|Tagged Image File Format (*.tif, *.tiff)|*.tif;*.tff.
+        /// </summary>
+        internal static string SaveFileFilter {
+            get {
+                return ResourceManager.GetString("SaveFileFilter", resourceCulture);
             }
         }
         
@@ -198,6 +692,48 @@ namespace ComicDownloader.Properties {
         internal static System.Drawing.Bitmap the_marvel_universe {
             get {
                 object obj = ResourceManager.GetObject("the_marvel_universe", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap unknown_drive_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("unknown_drive_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap unknown_drive_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("unknown_drive_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap unknown_drive_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("unknown_drive_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap unlocked_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("unlocked_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap unlocked_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("unlocked_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap unlocked_16x1611 {
+            get {
+                object obj = ResourceManager.GetObject("unlocked_16x1611", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

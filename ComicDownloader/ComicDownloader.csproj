@@ -42,6 +42,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>3rd\itextsharp.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -55,6 +56,123 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="3rd\IView.NET\Data\ApplicationData.cs" />
+    <Compile Include="3rd\IView.NET\Data\Enumerations.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Data\Enumerations.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\AquaButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\BufferedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ColourPicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ColourPicker.Designer.cs">
+      <DependentUpon>ColourPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\CropPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\CropPanel.Designer.cs">
+      <DependentUpon>CropPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\DropDownPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ExplorerListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ExplorerTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\Histogram.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\Histogram.Designer.cs">
+      <DependentUpon>Histogram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ImageBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ImageBox.Designer.cs">
+      <DependentUpon>ImageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ImageBoxEventArgs.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ImageBoxMouseEventArgs.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\PropertiesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\PropertiesPanel.Designer.cs">
+      <DependentUpon>PropertiesPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\RedEyePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\RedEyePanel.Designer.cs">
+      <DependentUpon>RedEyePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ResizePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ResizePanel.Designer.cs">
+      <DependentUpon>ResizePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ScrollLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ShearPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ShearPanel.Designer.cs">
+      <DependentUpon>ShearPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\SplitButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ToolStripAddRemoveButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ToolStripDirectoryButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Engine\ColourTables\ArcticSilverColourTable.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\ColourTables\SkyBlueColourTable.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\CommandLine.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\DockChangedEventArgs.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\DockingWindow.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\DrawingTools.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ExifImageProperties.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ExifReader.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ExtensionMethods.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\Favourite.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\FavouritesCollection.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\FileFormatException.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\FileTools.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\IDockable.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ImageBrowser.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ImageBrowserEventArgs.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ImageBrowserItem.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ImageBrowserItemEventArgs.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ImageBrowserRenameEventArgs.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ImageEditManagement.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ImageProperties.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ImageSaver.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\NativeMethods.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\RecentPlace.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\RecentPlacesCollection.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\Resolution.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ResolutionTypeConverter.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ScaleHitTestTools.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\SlideShowDocument.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\SSFDescriptor.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\Tools.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\UpdateChecker.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\UpdateCheckFinishedEventArgs.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Data\Enumerations.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\ConvolutionMatrix.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\ImageProcessing.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\IProcessingType.cs" />
     <Compile Include="Engines\En\MangaHereDownloader.cs" />
     <Compile Include="Forms\AppMainForm.cs">
       <SubType>Form</SubType>
@@ -82,6 +200,12 @@
     <Compile Include="Engines\Vn\XomTruyenDownloader.cs" />
     <Compile Include="Engines\Vn\MangaKungDownloader.cs" />
     <Compile Include="Extension.cs" />
+    <Compile Include="Forms\ChapterReader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ChapterReader.Designer.cs">
+      <DependentUpon>ChapterReader.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DownloaderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +239,129 @@
     <Compile Include="Engines\Vn\BlogTruyenDownloader.cs" />
     <Compile Include="Engines\Vn\TruyenTranhNhanhDownloader.cs" />
     <Compile Include="Engines\Downloader.cs" />
+    <Compile Include="Forms\IView\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\AdjustTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\AdjustTime.Designer.cs">
+      <DependentUpon>AdjustTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\BatchEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\BatchEditor.Designer.cs">
+      <DependentUpon>BatchEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\BmpSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\BmpSettings.Designer.cs">
+      <DependentUpon>BmpSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\CreateContactSheet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\CreateContactSheet.Designer.cs">
+      <DependentUpon>CreateContactSheet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\CreateSlideShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\CreateSlideShow.Designer.cs">
+      <DependentUpon>CreateSlideShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\EyeDropper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\EyeDropper.Designer.cs">
+      <DependentUpon>EyeDropper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\FavouriteDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\FavouriteDialog.Designer.cs">
+      <DependentUpon>FavouriteDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\JpegSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\JpegSettings.Designer.cs">
+      <DependentUpon>JpegSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\License.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\License.Designer.cs">
+      <DependentUpon>License.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\MainWindowSubs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\NewWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\NewWindow.Designer.cs">
+      <DependentUpon>NewWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\Options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\Options.Designer.cs">
+      <DependentUpon>Options.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\ProcessingDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\ProcessingDialog.Designer.cs">
+      <DependentUpon>ProcessingDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\RenameFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\RenameFile.Designer.cs">
+      <DependentUpon>RenameFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\ScreenShot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\ScreenShot.Designer.cs">
+      <DependentUpon>ScreenShot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\SlideShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\SlideShow.Designer.cs">
+      <DependentUpon>SlideShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\SlideShowWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\SlideShowWindow.Designer.cs">
+      <DependentUpon>SlideShowWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\TiffSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\TiffSettings.Designer.cs">
+      <DependentUpon>TiffSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\UpdateLocations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\UpdateLocations.Designer.cs">
+      <DependentUpon>UpdateLocations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\NetworkHelper.cs" />
     <Compile Include="Engines\StoryInfo.cs" />
     <Compile Include="Engines\Vn\TruyenTranh8Downloader.cs" />
@@ -133,6 +380,11 @@
     </Compile>
     <Compile Include="Forms\Intro.Designer.cs">
       <DependentUpon>Intro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\IViewSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>IViewSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="LongOperation.cs" />
     <Compile Include="3rd\ObjectListView\CellEditing\CellEditKeyEngine.cs" />
@@ -552,8 +804,35 @@
     <Compile Include="3rd\XPTable\Win32\WindowExtendedStyles.cs" />
     <Compile Include="3rd\XPTable\Win32\WindowMessages.cs" />
     <Compile Include="3rd\XPTable\Win32\WindowStyles.cs" />
+    <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\ColourPicker.resx">
+      <DependentUpon>ColourPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\CropPanel.resx">
+      <DependentUpon>CropPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\Histogram.resx">
+      <DependentUpon>Histogram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\ImageBox.resx">
+      <DependentUpon>ImageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\PropertiesPanel.resx">
+      <DependentUpon>PropertiesPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\RedEyePanel.resx">
+      <DependentUpon>RedEyePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\ResizePanel.resx">
+      <DependentUpon>ResizePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\ShearPanel.resx">
+      <DependentUpon>ShearPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AppMainForm.resx">
       <DependentUpon>AppMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ChapterReader.resx">
+      <DependentUpon>ChapterReader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DownloaderForm.resx">
       <DependentUpon>DownloaderForm.cs</DependentUpon>
@@ -569,6 +848,66 @@
     </EmbeddedResource>
     <EmbeddedResource Include="3rd\ObjectListView\Utilities\ColumnSelectionForm.resx">
       <DependentUpon>ColumnSelectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\AdjustTime.resx">
+      <DependentUpon>AdjustTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\BatchEditor.resx">
+      <DependentUpon>BatchEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\BmpSettings.resx">
+      <DependentUpon>BmpSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\CreateContactSheet.resx">
+      <DependentUpon>CreateContactSheet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\CreateSlideShow.resx">
+      <DependentUpon>CreateSlideShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\EyeDropper.resx">
+      <DependentUpon>EyeDropper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\FavouriteDialog.resx">
+      <DependentUpon>FavouriteDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\JpegSettings.resx">
+      <DependentUpon>JpegSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\License.resx">
+      <DependentUpon>License.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\NewWindow.resx">
+      <DependentUpon>NewWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\Options.resx">
+      <DependentUpon>Options.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\ProcessingDialog.resx">
+      <DependentUpon>ProcessingDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\RenameFile.resx">
+      <DependentUpon>RenameFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\ScreenShot.resx">
+      <DependentUpon>ScreenShot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\SlideShow.resx">
+      <DependentUpon>SlideShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\SlideShowWindow.resx">
+      <DependentUpon>SlideShowWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\TiffSettings.resx">
+      <DependentUpon>TiffSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\UpdateLocations.resx">
+      <DependentUpon>UpdateLocations.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -590,6 +929,12 @@
       <DependentUpon>TableModel.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="3rd\ObjectListView\FullClassDiagram.cd" />
+    <None Include="app.config" />
+    <None Include="Properties\IViewSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>IViewSettings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -601,6 +946,50 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_focus_24x24.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_focus_24x241.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_pressed_24x24.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_pressed_24x241.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\arrow_down_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\arrow_down_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\cd_rom_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\cd_rom_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\computer_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\computer_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\desktop_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\desktop_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\documents_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\documents_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\favourites_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\favourites_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\folder_closed_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\folder_closed_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\folder_hidden_closed_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\folder_hidden_closed_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\folder_hidden_opened_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\folder_hidden_opened_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\folder_opened_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\folder_opened_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\folder_up_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\folder_up_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\hard_drive_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\hard_drive_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\HistogramCross.cur" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\histogramcross1.cur" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\locked_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\locked_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\network_drive_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\network_drive_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\pictures_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\pictures_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\ram_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\ram_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\removable_disk_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\removable_disk_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\unknown_drive_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\unknown_drive_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x161.png" />
     <Content Include="Resources\1363852385_info.png" />
     <Content Include="Resources\1363939449_netvibes.png" />
     <Content Include="Resources\1363942937_ark2.png" />
@@ -613,6 +1002,9 @@
     <Content Include="Resources\14747480-bang-comic-book-explosion.jpg" />
     <Content Include="3rd\itextsharp.dll" />
     <Content Include="3rd\Cx.Windows.Forms\MdiTabStrip.bmp" />
+    <None Include="Resources\blankcursor.cur" />
+    <None Include="Resources\eyedroppercursor.cur" />
+    <None Include="Resources\GPL v2.0.txt" />
     <Content Include="Resources\gtk-about.png" />
     <Content Include="3rd\HtmlAgilityPack.dll" />
     <Content Include="3rd\ObjectListView\CustomDictionary.xml" />
@@ -631,6 +1023,11 @@
     <None Include="Resources\sort-descending.png" />
     <Content Include="3rd\System.Windows.Forms.Ribbon35\Updates.txt" />
     <Content Include="Resources\1364325544_stock_save-pdf-16.png" />
+    <None Include="Resources\open file filter.txt" />
+    <None Include="Resources\redeyecursor.cur" />
+    <None Include="Resources\Save File Filter.txt" />
+    <None Include="Resources\pause_16x16.png" />
+    <None Include="Resources\play_16x16.png" />
     <Content Include="Resources\the_marvel_universe.jpg" />
     <Content Include="3rd\XPTable\Models\ColumnModel.bmp" />
     <Content Include="3rd\XPTable\Models\Table.bmp" />
