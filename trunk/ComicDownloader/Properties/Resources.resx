@@ -268,7 +268,6 @@
   <data name="unlocked_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="aqua_button_focus_24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\iview.net\iview.net controls\resources\aqua_button_focus_24x24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -400,5 +399,48 @@
   </data>
   <data name="unlocked_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\iview.net\iview.net controls\resources\unlocked_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1364392872_slideshow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364392872_slideshow.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1364410878_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364410878_Add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1364410881_plus_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364410881_plus_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1364410884_add1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364410884_add1-.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1364410887_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364410887_Add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1364410892_document_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364410892_document-new.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1364410895_001_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364410895_001_01.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1364410898_file_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364410898_file_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1364410901_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364410901_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1364410906_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364410906_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1364410910_edit_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364410910_edit_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1364410914_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364410914_plus.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1364410919_Add_Green_Button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364410919_Add Green Button.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="_1364413350_window_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364413350_window_new.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

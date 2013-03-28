@@ -88,8 +88,15 @@ namespace IView.UI.Forms
                 //play playslide show
                 if (sCmdArgs[1] == "1")
                 {
-                    this.ShowDialog();
-                   // SubStartSlideShow();
+                    SubStartSlideShow(true);
+                    
+                    //this.ShowDialog();
+                    //foreach (ListViewItem item in elvw_Images.Items)
+                    //{
+                    //    item.Selected = true;
+                    //}
+                    
+                   
                 }
             }
             

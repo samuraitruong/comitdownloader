@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ComicDownloader")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Comic Downloader V1.0")]
+[assembly: AssemblyDescription("This tool allow download comic from varied source")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("samuraitruong")]
 [assembly: AssemblyProduct("ComicDownloader")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2013")]
+[assembly: AssemblyCopyright("Copyright © Samuraitruon 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -704,6 +704,7 @@ namespace IView.UI.Forms
             if (e.KeyCode == Keys.Escape)
             {
                 this.Close();
+               //this.par.ParentForm.Show();
             }
         }
     }

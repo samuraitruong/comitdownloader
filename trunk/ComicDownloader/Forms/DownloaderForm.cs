@@ -316,7 +316,7 @@ namespace ComicDownloader
                 EXControlListViewSubItem openFolderCol = new EXControlListViewSubItem();
                 Button bntOpenFolder = new Button()
                 {
-                    Image = global::ComicDownloader.Properties.Resources.folder_opened_16x16,
+                    Image = global::ComicDownloader.Properties.Resources._1364392872_slideshow,
                     //Location = new System.Drawing.Point(248, 123);
                     //Name = "button2";
                     Size = new System.Drawing.Size(24, 24),
@@ -331,8 +331,9 @@ namespace ComicDownloader
 
                 bntOpenFolder.Click += new EventHandler(delegate
                 {
-                     MainWindow window = new MainWindow(new string[] { chapInfo.Folder+"/dum.trick","1"});
-                    //window.ShowDialog();
+                     MainWindow window = new MainWindow(new string[] { chapInfo.Folder+"/dum.trick","0"});
+                     window.WindowState = FormWindowState.Maximized;
+                    window.ShowDialog();
                     //window.SubStartSlideShow();
                 });
                 // llbl.LinkClicked += new LinkLabelLinkClickedEventHandler(llbl_LinkClicked);

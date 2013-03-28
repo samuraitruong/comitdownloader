@@ -146,6 +146,7 @@
             this.tssl_ImageDimensions = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsc_Main = new System.Windows.Forms.ToolStripContainer();
             this.sc_Explorer = new System.Windows.Forms.SplitContainer();
+            this.etvw_Directorys = new IView.Controls.Library.ExplorerTreeView();
             this.cms_ExplorerTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_etvw_NewFavourite = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_etvw_EditFavourite = new System.Windows.Forms.ToolStripMenuItem();
@@ -162,6 +163,7 @@
             this.tsddb_task_Dock = new System.Windows.Forms.ToolStripDropDownButton();
             this.sc_Tasks = new System.Windows.Forms.SplitContainer();
             this.sc_ImageList = new System.Windows.Forms.SplitContainer();
+            this.imgbx_MainImage = new IView.Controls.Library.ImageBox();
             this.cms_ImageBox = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_imgbx_Copy = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_imgbx_Paste = new System.Windows.Forms.ToolStripMenuItem();
@@ -177,8 +179,18 @@
             this.tss_imgbx_05 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_imgbx_Properties = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_imgbx_Tools = new System.Windows.Forms.ToolStrip();
+            this.tsddb_imgbx_Directorys = new IView.Controls.Library.ToolStripDirectoryButton();
             this.tlp_ImageBoxTools = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_nav_FirstImage = new IView.Controls.Library.AquaButton();
+            this.btn_nav_PreviousImage = new IView.Controls.Library.AquaButton();
+            this.btn_nav_NextImage = new IView.Controls.Library.AquaButton();
+            this.btn_nav_LastImage = new IView.Controls.Library.AquaButton();
             this.lbl_ImageIndexDisplay = new System.Windows.Forms.Label();
+            this.elvw_Images = new IView.Controls.Library.ExplorerListView();
+            this.ch_FileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch_Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch_FileType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ch_FileSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cms_ExplorerListView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_elvw_Copy = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_elvw_Delete = new System.Windows.Forms.ToolStripMenuItem();
@@ -230,18 +242,6 @@
             this.tss_tb_07 = new System.Windows.Forms.ToolStripSeparator();
             this.tsb_tb_ExplorerWindow = new System.Windows.Forms.ToolStripButton();
             this.tsb_tb_ImageListWindow = new System.Windows.Forms.ToolStripButton();
-            this.etvw_Directorys = new IView.Controls.Library.ExplorerTreeView();
-            this.imgbx_MainImage = new IView.Controls.Library.ImageBox();
-            this.tsddb_imgbx_Directorys = new IView.Controls.Library.ToolStripDirectoryButton();
-            this.btn_nav_FirstImage = new IView.Controls.Library.AquaButton();
-            this.btn_nav_PreviousImage = new IView.Controls.Library.AquaButton();
-            this.btn_nav_NextImage = new IView.Controls.Library.AquaButton();
-            this.btn_nav_LastImage = new IView.Controls.Library.AquaButton();
-            this.elvw_Images = new IView.Controls.Library.ExplorerListView();
-            this.ch_FileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ch_Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ch_FileType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ch_FileSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tsddb_tb_AddRemove = new IView.Controls.Library.ToolStripAddRemoveButton();
             this.ms_Main.SuspendLayout();
             this.cms_ImageListView.SuspendLayout();
@@ -1237,6 +1237,26 @@
             this.sc_Explorer.SplitterDistance = 184;
             this.sc_Explorer.TabIndex = 1;
             // 
+            // etvw_Directorys
+            // 
+            this.etvw_Directorys.BackColor = System.Drawing.Color.White;
+            this.etvw_Directorys.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.etvw_Directorys.ContextMenuStrip = this.cms_ExplorerTreeView;
+            this.etvw_Directorys.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.etvw_Directorys.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.etvw_Directorys.ImageIndex = 0;
+            this.etvw_Directorys.Location = new System.Drawing.Point(0, 25);
+            this.etvw_Directorys.Name = "etvw_Directorys";
+            this.etvw_Directorys.SelectedImageIndex = 0;
+            this.etvw_Directorys.ShowLines = false;
+            this.etvw_Directorys.ShowNodeToolTips = true;
+            this.etvw_Directorys.ShowPlusMinus = false;
+            this.etvw_Directorys.ShowRootLines = false;
+            this.etvw_Directorys.Size = new System.Drawing.Size(182, 222);
+            this.etvw_Directorys.TabIndex = 5;
+            this.etvw_Directorys.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.etvw_Directorys_AfterSelect);
+            this.etvw_Directorys.MouseClick += new System.Windows.Forms.MouseEventHandler(this.etvw_Directorys_MouseClick);
+            // 
             // cms_ExplorerTreeView
             // 
             this.cms_ExplorerTreeView.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1425,6 +1445,41 @@
             this.sc_ImageList.SplitterDistance = 139;
             this.sc_ImageList.TabIndex = 1;
             // 
+            // imgbx_MainImage
+            // 
+            this.imgbx_MainImage.AllowDrop = true;
+            this.imgbx_MainImage.AllowMouseMove = false;
+            this.imgbx_MainImage.AllowMouseResize = false;
+            this.imgbx_MainImage.AutoScroll = true;
+            this.imgbx_MainImage.AutoScrollMinSize = new System.Drawing.Size(3, 3);
+            this.imgbx_MainImage.AutoSize = true;
+            this.imgbx_MainImage.BackColor = System.Drawing.Color.White;
+            this.imgbx_MainImage.ContextMenuStrip = this.cms_ImageBox;
+            this.imgbx_MainImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imgbx_MainImage.FocusControl = false;
+            this.imgbx_MainImage.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.imgbx_MainImage.ImageBoxHeight = 1;
+            this.imgbx_MainImage.ImageBoxRectangle = new System.Drawing.Rectangle(0, 0, 1, 1);
+            this.imgbx_MainImage.ImageBoxSize = new System.Drawing.Size(1, 1);
+            this.imgbx_MainImage.ImageBoxSmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
+            this.imgbx_MainImage.ImageBoxWidth = 1;
+            this.imgbx_MainImage.Location = new System.Drawing.Point(0, 25);
+            this.imgbx_MainImage.Margin = new System.Windows.Forms.Padding(4);
+            this.imgbx_MainImage.Name = "imgbx_MainImage";
+            this.imgbx_MainImage.Size = new System.Drawing.Size(246, 78);
+            this.imgbx_MainImage.TabIndex = 7;
+            this.imgbx_MainImage.ImageBoxImageLoaded += new System.EventHandler<IView.Controls.Library.ImageBoxEventArgs>(this.imgbx_MainImage_ImageBoxImageLoaded);
+            this.imgbx_MainImage.ImageBoxMouseEnter += new System.EventHandler<IView.Controls.Library.ImageBoxEventArgs>(this.imgbx_MainImage_ImageBoxMouseEnter);
+            this.imgbx_MainImage.ImageBoxMouseLeave += new System.EventHandler<IView.Controls.Library.ImageBoxEventArgs>(this.imgbx_MainImage_ImageBoxMouseLeave);
+            this.imgbx_MainImage.ImageBoxMouseDown += new System.EventHandler<IView.Controls.Library.ImageBoxMouseEventArgs>(this.imgbx_MainImage_ImageBoxMouseDown);
+            this.imgbx_MainImage.ImageBoxMouseMove += new System.EventHandler<IView.Controls.Library.ImageBoxMouseEventArgs>(this.imgbx_MainImage_ImageBoxMouseMove);
+            this.imgbx_MainImage.ImageBoxMouseWheel += new System.EventHandler<System.Windows.Forms.MouseEventArgs>(this.imgbx_MainImage_ImageBoxMouseWheel);
+            this.imgbx_MainImage.SizeChanged += new System.EventHandler(this.imgbx_MainImage_SizeChanged);
+            this.imgbx_MainImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.imgbx_MainImage_DragDrop);
+            this.imgbx_MainImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.imgbx_MainImage_DragEnter);
+            this.imgbx_MainImage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.imgbx_MainImage_KeyDown);
+            this.imgbx_MainImage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.imgbx_MainImage_KeyUp);
+            // 
             // cms_ImageBox
             // 
             this.cms_ImageBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1553,6 +1608,19 @@
             this.ts_imgbx_Tools.Size = new System.Drawing.Size(246, 25);
             this.ts_imgbx_Tools.TabIndex = 6;
             // 
+            // tsddb_imgbx_Directorys
+            // 
+            this.tsddb_imgbx_Directorys.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsddb_imgbx_Directorys.Enabled = false;
+            this.tsddb_imgbx_Directorys.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsddb_imgbx_Directorys.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsddb_imgbx_Directorys.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
+            this.tsddb_imgbx_Directorys.Name = "tsddb_imgbx_Directorys";
+            this.tsddb_imgbx_Directorys.ShowDropDownArrow = false;
+            this.tsddb_imgbx_Directorys.Size = new System.Drawing.Size(58, 22);
+            this.tsddb_imgbx_Directorys.Text = "Computer";
+            this.tsddb_imgbx_Directorys.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tsddb_imgbx_Directorys_DropDownItemClicked);
+            // 
             // tlp_ImageBoxTools
             // 
             this.tlp_ImageBoxTools.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -1578,6 +1646,74 @@
             this.tlp_ImageBoxTools.Size = new System.Drawing.Size(246, 34);
             this.tlp_ImageBoxTools.TabIndex = 5;
             // 
+            // btn_nav_FirstImage
+            // 
+            this.btn_nav_FirstImage.BackColor = System.Drawing.Color.Transparent;
+            this.btn_nav_FirstImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btn_nav_FirstImage.Enabled = false;
+            this.btn_nav_FirstImage.FlatAppearance.BorderSize = 0;
+            this.btn_nav_FirstImage.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_nav_FirstImage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btn_nav_FirstImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_nav_FirstImage.Image = ((System.Drawing.Image)(resources.GetObject("btn_nav_FirstImage.Image")));
+            this.btn_nav_FirstImage.Location = new System.Drawing.Point(37, 3);
+            this.btn_nav_FirstImage.Name = "btn_nav_FirstImage";
+            this.btn_nav_FirstImage.Size = new System.Drawing.Size(28, 28);
+            this.btn_nav_FirstImage.TabIndex = 0;
+            this.btn_nav_FirstImage.UseVisualStyleBackColor = false;
+            this.btn_nav_FirstImage.Click += new System.EventHandler(this.btn_nav_FirstImage_Click);
+            // 
+            // btn_nav_PreviousImage
+            // 
+            this.btn_nav_PreviousImage.BackColor = System.Drawing.Color.Transparent;
+            this.btn_nav_PreviousImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btn_nav_PreviousImage.Enabled = false;
+            this.btn_nav_PreviousImage.FlatAppearance.BorderSize = 0;
+            this.btn_nav_PreviousImage.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_nav_PreviousImage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btn_nav_PreviousImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_nav_PreviousImage.Image = ((System.Drawing.Image)(resources.GetObject("btn_nav_PreviousImage.Image")));
+            this.btn_nav_PreviousImage.Location = new System.Drawing.Point(71, 3);
+            this.btn_nav_PreviousImage.Name = "btn_nav_PreviousImage";
+            this.btn_nav_PreviousImage.Size = new System.Drawing.Size(28, 28);
+            this.btn_nav_PreviousImage.TabIndex = 1;
+            this.btn_nav_PreviousImage.UseVisualStyleBackColor = false;
+            this.btn_nav_PreviousImage.Click += new System.EventHandler(this.btn_nav_PreviousImage_Click);
+            // 
+            // btn_nav_NextImage
+            // 
+            this.btn_nav_NextImage.BackColor = System.Drawing.Color.Transparent;
+            this.btn_nav_NextImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btn_nav_NextImage.Enabled = false;
+            this.btn_nav_NextImage.FlatAppearance.BorderSize = 0;
+            this.btn_nav_NextImage.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_nav_NextImage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btn_nav_NextImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_nav_NextImage.Image = ((System.Drawing.Image)(resources.GetObject("btn_nav_NextImage.Image")));
+            this.btn_nav_NextImage.Location = new System.Drawing.Point(146, 3);
+            this.btn_nav_NextImage.Name = "btn_nav_NextImage";
+            this.btn_nav_NextImage.Size = new System.Drawing.Size(28, 28);
+            this.btn_nav_NextImage.TabIndex = 2;
+            this.btn_nav_NextImage.UseVisualStyleBackColor = false;
+            this.btn_nav_NextImage.Click += new System.EventHandler(this.btn_nav_NextImage_Click);
+            // 
+            // btn_nav_LastImage
+            // 
+            this.btn_nav_LastImage.BackColor = System.Drawing.Color.Transparent;
+            this.btn_nav_LastImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btn_nav_LastImage.Enabled = false;
+            this.btn_nav_LastImage.FlatAppearance.BorderSize = 0;
+            this.btn_nav_LastImage.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_nav_LastImage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btn_nav_LastImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_nav_LastImage.Image = ((System.Drawing.Image)(resources.GetObject("btn_nav_LastImage.Image")));
+            this.btn_nav_LastImage.Location = new System.Drawing.Point(180, 3);
+            this.btn_nav_LastImage.Name = "btn_nav_LastImage";
+            this.btn_nav_LastImage.Size = new System.Drawing.Size(28, 28);
+            this.btn_nav_LastImage.TabIndex = 3;
+            this.btn_nav_LastImage.UseVisualStyleBackColor = false;
+            this.btn_nav_LastImage.Click += new System.EventHandler(this.btn_nav_LastImage_Click);
+            // 
             // lbl_ImageIndexDisplay
             // 
             this.lbl_ImageIndexDisplay.AutoSize = true;
@@ -1591,6 +1727,58 @@
             this.lbl_ImageIndexDisplay.TabIndex = 4;
             this.lbl_ImageIndexDisplay.Text = "0 of 0";
             this.lbl_ImageIndexDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // elvw_Images
+            // 
+            this.elvw_Images.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
+            this.elvw_Images.AllowDrop = true;
+            this.elvw_Images.BackColor = System.Drawing.Color.White;
+            this.elvw_Images.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.elvw_Images.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ch_FileName,
+            this.ch_Date,
+            this.ch_FileType,
+            this.ch_FileSize});
+            this.elvw_Images.ContextMenuStrip = this.cms_ExplorerListView;
+            this.elvw_Images.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.elvw_Images.DoubleBuffer = true;
+            this.elvw_Images.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.elvw_Images.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.elvw_Images.LabelEdit = true;
+            this.elvw_Images.Location = new System.Drawing.Point(0, 25);
+            this.elvw_Images.Name = "elvw_Images";
+            this.elvw_Images.ShowGroups = false;
+            this.elvw_Images.ShowItemToolTips = true;
+            this.elvw_Images.Size = new System.Drawing.Size(246, 79);
+            this.elvw_Images.SmallImageList = this.imgl_SmallImageList;
+            this.elvw_Images.TabIndex = 5;
+            this.elvw_Images.UseCompatibleStateImageBehavior = false;
+            this.elvw_Images.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.elvw_Images_AfterLabelEdit);
+            this.elvw_Images.BeforeLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.elvw_Images_BeforeLabelEdit);
+            this.elvw_Images.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.elvw_Images_ItemDrag);
+            this.elvw_Images.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.elvw_Images_ItemSelectionChanged);
+            this.elvw_Images.DoubleClick += new System.EventHandler(this.elvw_Images_DoubleClick);
+            // 
+            // ch_FileName
+            // 
+            this.ch_FileName.Text = "Name";
+            this.ch_FileName.Width = 200;
+            // 
+            // ch_Date
+            // 
+            this.ch_Date.Text = "Date";
+            this.ch_Date.Width = 150;
+            // 
+            // ch_FileType
+            // 
+            this.ch_FileType.Text = "Type";
+            this.ch_FileType.Width = 100;
+            // 
+            // ch_FileSize
+            // 
+            this.ch_FileSize.Text = "Size";
+            this.ch_FileSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ch_FileSize.Width = 100;
             // 
             // cms_ExplorerListView
             // 
@@ -2091,194 +2279,6 @@
             this.tsb_tb_ImageListWindow.Text = "Image List Panel (F3)";
             this.tsb_tb_ImageListWindow.ToolTipText = "Image List Panel (F3)";
             this.tsb_tb_ImageListWindow.Click += new System.EventHandler(this.tsb_tb_ImageListWindow_Click);
-            // 
-            // etvw_Directorys
-            // 
-            this.etvw_Directorys.BackColor = System.Drawing.Color.White;
-            this.etvw_Directorys.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.etvw_Directorys.ContextMenuStrip = this.cms_ExplorerTreeView;
-            this.etvw_Directorys.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.etvw_Directorys.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.etvw_Directorys.ImageIndex = 0;
-            this.etvw_Directorys.Location = new System.Drawing.Point(0, 25);
-            this.etvw_Directorys.Name = "etvw_Directorys";
-            this.etvw_Directorys.SelectedImageIndex = 0;
-            this.etvw_Directorys.ShowLines = false;
-            this.etvw_Directorys.ShowNodeToolTips = true;
-            this.etvw_Directorys.ShowPlusMinus = false;
-            this.etvw_Directorys.ShowRootLines = false;
-            this.etvw_Directorys.Size = new System.Drawing.Size(182, 222);
-            this.etvw_Directorys.TabIndex = 5;
-            this.etvw_Directorys.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.etvw_Directorys_AfterSelect);
-            this.etvw_Directorys.MouseClick += new System.Windows.Forms.MouseEventHandler(this.etvw_Directorys_MouseClick);
-            // 
-            // imgbx_MainImage
-            // 
-            this.imgbx_MainImage.AllowDrop = true;
-            this.imgbx_MainImage.AllowMouseMove = false;
-            this.imgbx_MainImage.AllowMouseResize = false;
-            this.imgbx_MainImage.AutoScroll = true;
-            this.imgbx_MainImage.AutoScrollMinSize = new System.Drawing.Size(3, 3);
-            this.imgbx_MainImage.AutoSize = true;
-            this.imgbx_MainImage.BackColor = System.Drawing.Color.White;
-            this.imgbx_MainImage.ContextMenuStrip = this.cms_ImageBox;
-            this.imgbx_MainImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imgbx_MainImage.FocusControl = false;
-            this.imgbx_MainImage.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.imgbx_MainImage.ImageBoxHeight = 1;
-            this.imgbx_MainImage.ImageBoxRectangle = new System.Drawing.Rectangle(0, 0, 1, 1);
-            this.imgbx_MainImage.ImageBoxSize = new System.Drawing.Size(1, 1);
-            this.imgbx_MainImage.ImageBoxSmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
-            this.imgbx_MainImage.ImageBoxWidth = 1;
-            this.imgbx_MainImage.Location = new System.Drawing.Point(0, 25);
-            this.imgbx_MainImage.Margin = new System.Windows.Forms.Padding(4);
-            this.imgbx_MainImage.Name = "imgbx_MainImage";
-            this.imgbx_MainImage.Size = new System.Drawing.Size(246, 78);
-            this.imgbx_MainImage.TabIndex = 7;
-            this.imgbx_MainImage.ImageBoxImageLoaded += new System.EventHandler<IView.Controls.Library.ImageBoxEventArgs>(this.imgbx_MainImage_ImageBoxImageLoaded);
-            this.imgbx_MainImage.ImageBoxMouseEnter += new System.EventHandler<IView.Controls.Library.ImageBoxEventArgs>(this.imgbx_MainImage_ImageBoxMouseEnter);
-            this.imgbx_MainImage.ImageBoxMouseLeave += new System.EventHandler<IView.Controls.Library.ImageBoxEventArgs>(this.imgbx_MainImage_ImageBoxMouseLeave);
-            this.imgbx_MainImage.ImageBoxMouseDown += new System.EventHandler<IView.Controls.Library.ImageBoxMouseEventArgs>(this.imgbx_MainImage_ImageBoxMouseDown);
-            this.imgbx_MainImage.ImageBoxMouseMove += new System.EventHandler<IView.Controls.Library.ImageBoxMouseEventArgs>(this.imgbx_MainImage_ImageBoxMouseMove);
-            this.imgbx_MainImage.ImageBoxMouseWheel += new System.EventHandler<System.Windows.Forms.MouseEventArgs>(this.imgbx_MainImage_ImageBoxMouseWheel);
-            this.imgbx_MainImage.SizeChanged += new System.EventHandler(this.imgbx_MainImage_SizeChanged);
-            this.imgbx_MainImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.imgbx_MainImage_DragDrop);
-            this.imgbx_MainImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.imgbx_MainImage_DragEnter);
-            this.imgbx_MainImage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.imgbx_MainImage_KeyDown);
-            this.imgbx_MainImage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.imgbx_MainImage_KeyUp);
-            // 
-            // tsddb_imgbx_Directorys
-            // 
-            this.tsddb_imgbx_Directorys.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsddb_imgbx_Directorys.Enabled = false;
-            this.tsddb_imgbx_Directorys.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsddb_imgbx_Directorys.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsddb_imgbx_Directorys.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
-            this.tsddb_imgbx_Directorys.Name = "tsddb_imgbx_Directorys";
-            this.tsddb_imgbx_Directorys.ShowDropDownArrow = false;
-            this.tsddb_imgbx_Directorys.Size = new System.Drawing.Size(58, 22);
-            this.tsddb_imgbx_Directorys.Text = "Computer";
-            this.tsddb_imgbx_Directorys.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tsddb_imgbx_Directorys_DropDownItemClicked);
-            // 
-            // btn_nav_FirstImage
-            // 
-            this.btn_nav_FirstImage.BackColor = System.Drawing.Color.Transparent;
-            this.btn_nav_FirstImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btn_nav_FirstImage.Enabled = false;
-            this.btn_nav_FirstImage.FlatAppearance.BorderSize = 0;
-            this.btn_nav_FirstImage.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btn_nav_FirstImage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btn_nav_FirstImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_nav_FirstImage.Image = ((System.Drawing.Image)(resources.GetObject("btn_nav_FirstImage.Image")));
-            this.btn_nav_FirstImage.Location = new System.Drawing.Point(37, 3);
-            this.btn_nav_FirstImage.Name = "btn_nav_FirstImage";
-            this.btn_nav_FirstImage.Size = new System.Drawing.Size(28, 28);
-            this.btn_nav_FirstImage.TabIndex = 0;
-            this.btn_nav_FirstImage.UseVisualStyleBackColor = false;
-            this.btn_nav_FirstImage.Click += new System.EventHandler(this.btn_nav_FirstImage_Click);
-            // 
-            // btn_nav_PreviousImage
-            // 
-            this.btn_nav_PreviousImage.BackColor = System.Drawing.Color.Transparent;
-            this.btn_nav_PreviousImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btn_nav_PreviousImage.Enabled = false;
-            this.btn_nav_PreviousImage.FlatAppearance.BorderSize = 0;
-            this.btn_nav_PreviousImage.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btn_nav_PreviousImage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btn_nav_PreviousImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_nav_PreviousImage.Image = ((System.Drawing.Image)(resources.GetObject("btn_nav_PreviousImage.Image")));
-            this.btn_nav_PreviousImage.Location = new System.Drawing.Point(71, 3);
-            this.btn_nav_PreviousImage.Name = "btn_nav_PreviousImage";
-            this.btn_nav_PreviousImage.Size = new System.Drawing.Size(28, 28);
-            this.btn_nav_PreviousImage.TabIndex = 1;
-            this.btn_nav_PreviousImage.UseVisualStyleBackColor = false;
-            this.btn_nav_PreviousImage.Click += new System.EventHandler(this.btn_nav_PreviousImage_Click);
-            // 
-            // btn_nav_NextImage
-            // 
-            this.btn_nav_NextImage.BackColor = System.Drawing.Color.Transparent;
-            this.btn_nav_NextImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btn_nav_NextImage.Enabled = false;
-            this.btn_nav_NextImage.FlatAppearance.BorderSize = 0;
-            this.btn_nav_NextImage.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btn_nav_NextImage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btn_nav_NextImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_nav_NextImage.Image = ((System.Drawing.Image)(resources.GetObject("btn_nav_NextImage.Image")));
-            this.btn_nav_NextImage.Location = new System.Drawing.Point(146, 3);
-            this.btn_nav_NextImage.Name = "btn_nav_NextImage";
-            this.btn_nav_NextImage.Size = new System.Drawing.Size(28, 28);
-            this.btn_nav_NextImage.TabIndex = 2;
-            this.btn_nav_NextImage.UseVisualStyleBackColor = false;
-            this.btn_nav_NextImage.Click += new System.EventHandler(this.btn_nav_NextImage_Click);
-            // 
-            // btn_nav_LastImage
-            // 
-            this.btn_nav_LastImage.BackColor = System.Drawing.Color.Transparent;
-            this.btn_nav_LastImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btn_nav_LastImage.Enabled = false;
-            this.btn_nav_LastImage.FlatAppearance.BorderSize = 0;
-            this.btn_nav_LastImage.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btn_nav_LastImage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btn_nav_LastImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_nav_LastImage.Image = ((System.Drawing.Image)(resources.GetObject("btn_nav_LastImage.Image")));
-            this.btn_nav_LastImage.Location = new System.Drawing.Point(180, 3);
-            this.btn_nav_LastImage.Name = "btn_nav_LastImage";
-            this.btn_nav_LastImage.Size = new System.Drawing.Size(28, 28);
-            this.btn_nav_LastImage.TabIndex = 3;
-            this.btn_nav_LastImage.UseVisualStyleBackColor = false;
-            this.btn_nav_LastImage.Click += new System.EventHandler(this.btn_nav_LastImage_Click);
-            // 
-            // elvw_Images
-            // 
-            this.elvw_Images.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
-            this.elvw_Images.AllowDrop = true;
-            this.elvw_Images.BackColor = System.Drawing.Color.White;
-            this.elvw_Images.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.elvw_Images.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ch_FileName,
-            this.ch_Date,
-            this.ch_FileType,
-            this.ch_FileSize});
-            this.elvw_Images.ContextMenuStrip = this.cms_ExplorerListView;
-            this.elvw_Images.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.elvw_Images.DoubleBuffer = true;
-            this.elvw_Images.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.elvw_Images.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.elvw_Images.LabelEdit = true;
-            this.elvw_Images.Location = new System.Drawing.Point(0, 25);
-            this.elvw_Images.Name = "elvw_Images";
-            this.elvw_Images.ShowGroups = false;
-            this.elvw_Images.ShowItemToolTips = true;
-            this.elvw_Images.Size = new System.Drawing.Size(246, 79);
-            this.elvw_Images.SmallImageList = this.imgl_SmallImageList;
-            this.elvw_Images.TabIndex = 5;
-            this.elvw_Images.UseCompatibleStateImageBehavior = false;
-            this.elvw_Images.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.elvw_Images_AfterLabelEdit);
-            this.elvw_Images.BeforeLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.elvw_Images_BeforeLabelEdit);
-            this.elvw_Images.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.elvw_Images_ItemDrag);
-            this.elvw_Images.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.elvw_Images_ItemSelectionChanged);
-            this.elvw_Images.DoubleClick += new System.EventHandler(this.elvw_Images_DoubleClick);
-            // 
-            // ch_FileName
-            // 
-            this.ch_FileName.Text = "Name";
-            this.ch_FileName.Width = 200;
-            // 
-            // ch_Date
-            // 
-            this.ch_Date.Text = "Date";
-            this.ch_Date.Width = 150;
-            // 
-            // ch_FileType
-            // 
-            this.ch_FileType.Text = "Type";
-            this.ch_FileType.Width = 100;
-            // 
-            // ch_FileSize
-            // 
-            this.ch_FileSize.Text = "Size";
-            this.ch_FileSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.ch_FileSize.Width = 100;
             // 
             // tsddb_tb_AddRemove
             // 
