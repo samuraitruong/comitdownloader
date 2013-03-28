@@ -5,6 +5,9 @@ using System.Text;
 using System.Linq.Expressions;
 using System.Windows.Forms;
 using System.Reflection;
+using System.Drawing;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace ComicDownloader
 {
@@ -45,6 +48,30 @@ namespace ComicDownloader
             {
                 @this.GetType().InvokeMember(propertyInfo.Name, BindingFlags.SetProperty, null, @this, new object[] { value });
             }
+        }
+
+        public static object GetPropertyValue(this object destination, string name)
+        {
+            var type = destination.GetType();
+            var pi = type.GetProperty(name);
+            object result = null;
+            if (pi != null)
+            {
+                result = pi.GetValue(destination, null);
+            }
+            return result;
+        }
+
+        public static byte[] GetBytes(this Image image)
+        {
+            byte[] data;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, ImageFormat.Png);
+                ms.Seek(0, SeekOrigin.Begin);
+                data = ms.GetBuffer();
+            }
+            return data;
         }
     }
 }

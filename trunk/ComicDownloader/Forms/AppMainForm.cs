@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.IO;
 using ComicDownloader.Engines;
 using ComicDownloader.Forms;
+using ComicDownloader.Properties;
+using System.Reflection;
 
 namespace ComicDownloader
 {
@@ -19,7 +21,101 @@ namespace ComicDownloader
             InitializeComponent();
             cobDownloaders.DropDownItems.Clear();
             // build menu
-            foreach (var downloader in Downloader.GetAllDownloaders().OrderBy(p=>p.Name))
+            BuildDropDownMenu();
+
+            ribbon1.Tabs.Add(new RibbonTab() { Text = "sss" });
+
+            var tags = GetRibbonMenuTags();
+
+            AddTagsToRibbonMenu(tags);
+        }
+
+        public class MenuInfo
+        {
+            public string TagName { get; set; }
+            public List<RibbonButton> Downloaders { get; set; }
+            public MenuInfo()
+            {
+                Downloaders = new List<RibbonButton>();
+            }
+            
+        }
+        private void AddTagsToRibbonMenu(List<MenuInfo> tags)
+        {
+            foreach (var tag in tags)
+            {
+                RibbonTab tab = new RibbonTab()
+                {
+                    Text = tag.TagName
+                };
+                ribbon1.Tabs.Add(tab);
+                
+                foreach (var button in tag.Downloaders)
+                {
+                    var pnl = new RibbonPanel()
+                    {
+                       Text = (button.Tag as Downloader).Name,
+                    };
+
+                   
+
+
+                    pnl.Items.Add(button);
+                    tab.Panels.Add(pnl);
+
+                }
+
+                
+            }
+            this.ResumeLayout(false);
+            this.PerformLayout();
+        }
+
+      
+
+        private List<MenuInfo> GetRibbonMenuTags()
+        {
+            List<MenuInfo> tags = new List<MenuInfo>();
+            foreach (var downloader in Downloader.GetAllDownloaders())
+            {
+                var attributes = downloader.GetType().GetCustomAttributes(typeof(DownloaderAttribute),true);
+                if (attributes != null)
+                {
+                    foreach (DownloaderAttribute att in attributes)
+                    {
+                        var tag = tags.Find(p => p.TagName == att.Category);
+                        if(tag == null){
+                            tag = new MenuInfo() ;
+                            tags.Add(tag);
+                        }
+                        tag.TagName = att.Category;
+
+                        global::System.Resources.ResourceManager resourceMan = new global::System.Resources.ResourceManager("ComicDownloader.Properties.Resources", typeof(Resources).Assembly);
+
+                        RibbonButton button = new RibbonButton()
+                        {
+                            Image =  resourceMan.GetObject(att.Image32) as Image,
+                            Tag = downloader,
+                            //Text = downloader.Name
+                        };
+
+                        button.Click += new EventHandler(delegate(object sender, EventArgs e)
+                        {
+                            var dl = ((RibbonButton)sender).Tag as Downloader;
+                            AddChildForm(dl.Name, dl);
+                        });
+
+                        tag.Downloaders.Add(button);
+                    }
+                }
+
+            }
+            return tags;
+        }
+
+        private void BuildDropDownMenu()
+        {
+            foreach (var downloader in Downloader.GetAllDownloaders().OrderBy(p => p.Name))
             {
                 //cobDownloaders.DropDownItems.Add(
                 RibbonButton downloaderMenuButton = new RibbonButton()
@@ -38,16 +134,9 @@ namespace ComicDownloader
 
                 cobDownloaders.DropDownItems.Add(downloaderMenuButton);
 
-                ////this.bntMyTest.Image = ((System.Drawing.Image)(resources.GetObject("bntMyTest.Image")));
-                //this.bntMyTest.MaximumSize = new System.Drawing.Size(0, 0);
-                //this.bntMyTest.MinimumSize = new System.Drawing.Size(0, 0);
-                ////this.bntMyTest.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntMyTest.SmallImage")));
-                //this.bntMyTest.Text = "[[MangaReader]]";
+
 
             }
-            
-
-
         }
 
        
