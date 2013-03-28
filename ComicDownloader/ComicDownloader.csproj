@@ -177,6 +177,13 @@
     <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\ConvolutionMatrix.cs" />
     <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\ImageProcessing.cs" />
     <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\IProcessingType.cs" />
+    <Compile Include="3rd\PagedList\BasePagedList.cs" />
+    <Compile Include="3rd\PagedList\IPagedList.cs" />
+    <Compile Include="3rd\PagedList\PagedList.cs" />
+    <Compile Include="3rd\PagedList\PagedListExtensions.cs" />
+    <Compile Include="3rd\PagedList\PagedListMetaData.cs" />
+    <Compile Include="3rd\PagedList\StaticPagedList.cs" />
+    <Compile Include="Engines\DownloaderAttribute.cs" />
     <Compile Include="Engines\En\TenMangaDownloader.cs" />
     <Compile Include="Engines\En\MangaParkDownloader.cs" />
     <Compile Include="Engines\En\MangaHereDownloader.cs" />
@@ -996,6 +1003,7 @@
     <None Include="3rd\IView.NET\iView.NET Controls\Resources\unknown_drive_16x161.png" />
     <Content Include="3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x16.png" />
     <None Include="3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x161.png" />
+    <Content Include="3rd\PagedList\PagedList.csproj" />
     <Content Include="Resources\1363852385_info.png" />
     <Content Include="Resources\1363939449_netvibes.png" />
     <Content Include="Resources\1363942937_ark2.png" />

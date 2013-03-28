@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
+using ComicDownloader.Properties;
 
 namespace ComicDownloader.Engines
 {
+    [Downloader("BlogTruyen", Category = "VN", Image32 = "_1364410878_Add")]
     public class BlogTruyenDownloader: Downloader
     {
-        
-
         public override string Name
         {
             get { return "[BlogTruyen] - "; }
