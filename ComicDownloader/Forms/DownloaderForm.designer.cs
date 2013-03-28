@@ -68,7 +68,6 @@ namespace ComicDownloader
             this.bntStop = new System.Windows.Forms.Button();
             this.groupInfo = new System.Windows.Forms.GroupBox();
             this.loading = new MRG.Controls.UI.LoadingCircle();
-            this.button2 = new System.Windows.Forms.Button();
             this.bntRefresh = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -402,7 +401,6 @@ namespace ComicDownloader
             // groupInfo
             // 
             this.groupInfo.Controls.Add(this.loading);
-            this.groupInfo.Controls.Add(this.button2);
             this.groupInfo.Controls.Add(this.bntRefresh);
             this.groupInfo.Controls.Add(this.label5);
             this.groupInfo.Controls.Add(this.label3);
@@ -431,19 +429,10 @@ namespace ComicDownloader
             this.loading.RotationSpeed = 100;
             this.loading.Size = new System.Drawing.Size(10, 10);
             this.loading.SpokeThickness = 4;
+            this.loading.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
             this.loading.TabIndex = 20;
             this.loading.Text = "loadingCircle1";
             this.loading.Visible = false;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(242, 125);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(30, 23);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "...";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_2);
             // 
             // bntRefresh
             // 
@@ -657,7 +646,6 @@ namespace ComicDownloader
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblSelected;
         private System.Windows.Forms.ErrorProvider errInvalidFileName;
-        private System.Windows.Forms.Button button2;
         private MRG.Controls.UI.LoadingCircle loading;
         
     }

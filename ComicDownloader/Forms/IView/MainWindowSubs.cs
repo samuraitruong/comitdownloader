@@ -2476,21 +2476,28 @@ namespace IView.UI.Forms
             return SResult.Completed;
         }
 
+
+        public SResult SubStartSlideShow()
+        {
+            return SubStartSlideShow(false);
+        }
+
         /// <summary>
         /// iView.NET subroutine. Starts the slide show with the currently selected files in the explorer listview.
         /// If no files have been selected, all files in the listview will be loaded.
         /// </summary>
         /// <returns></returns>
-        public SResult SubStartSlideShow()
+        public SResult SubStartSlideShow(bool all)
         {
             if (!m_oImageBrowser.IsLoaded)
                 return SResult.Void;
 
             SResult nResult = SResult.Void;
-            int n = 0, nSelectedItems = elvw_Images.SelectedItems.Count;
+            int n = 0, nSelectedItems = all ? 0 : elvw_Images.SelectedItems.Count;
             string[] sPaths = null;
 
-            if (nSelectedItems == 0)
+           
+            if (nSelectedItems == 0 )
             {
                 sPaths = new string[elvw_Images.Items.Count];
 
@@ -2504,7 +2511,7 @@ namespace IView.UI.Forms
                 foreach (ListViewItem oItem in elvw_Images.SelectedItems)
                     sPaths[n++] = oItem.Name;
             }
-
+        
             // Show the SlideShow if files have been loaded.
             if (n != 0)
             {

@@ -97,5 +97,20 @@ namespace ComicDownloader.Engines
 
             }
         }
+
+        public static List<Downloader> GetAllDownloaders()
+        {
+            List<Downloader> list = new List<Downloader>();
+            var types = Assembly.GetExecutingAssembly().GetTypes();
+            foreach (var item in types)
+            {
+                if (item.BaseType == typeof(Downloader))
+                {
+                    Downloader instance = (Downloader)Activator.CreateInstance(item);
+                    list.Add(instance);
+                }
+            }
+            return list;
+        }
     }
 }

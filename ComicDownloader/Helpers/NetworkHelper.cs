@@ -11,29 +11,38 @@ namespace ComicDownloader.Engines
     {
         public static string GetHtml(string url)
         {
-            if (url.Length > 0)
+            try
             {
-                Uri myUri = new Uri(url);
-                // Create a 'HttpWebRequest' object for the specified url. 
-                HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(myUri);
-                myHttpWebRequest.Method = "GET";
-                myHttpWebRequest.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-                myHttpWebRequest.AutomaticDecompression = DecompressionMethods.GZip;//Or DecompressionMethods.Deflate
+                if (url.Length > 0)
+                {
+                    Uri myUri = new Uri(url);
+                    // Create a 'HttpWebRequest' object for the specified url. 
+                    HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(myUri);
+                    myHttpWebRequest.Method = "GET";
+                    myHttpWebRequest.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
+                    myHttpWebRequest.AutomaticDecompression = DecompressionMethods.GZip;//Or DecompressionMethods.Deflate
 
-                // Set the user agent as if we were a web browser
-                myHttpWebRequest.UserAgent = @"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.4) Gecko/20060508 Firefox/1.5.0.4";
+                    // Set the user agent as if we were a web browser
+                    myHttpWebRequest.UserAgent = @"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.4) Gecko/20060508 Firefox/1.5.0.4";
 
-                HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttpWebRequest.GetResponse();
-                
-                var stream = myHttpWebResponse.GetResponseStream();
-                var reader = new StreamReader(stream);
-                var html = reader.ReadToEnd();
-                // Release resources of response object.
-                myHttpWebResponse.Close();
+                    HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttpWebRequest.GetResponse();
 
-                return html;
+                    var stream = myHttpWebResponse.GetResponseStream();
+                    var reader = new StreamReader(stream);
+                    var html = reader.ReadToEnd();
+                    // Release resources of response object.
+                    myHttpWebResponse.Close();
+
+                    return html;
+                }
+                else { return "NO URL"; }
             }
-            else { return "NO URL"; }
+            catch (Exception)
+            {
+                
+                //throw;
+            }
+            return "HTTP ERROR";
         }
     }
 }

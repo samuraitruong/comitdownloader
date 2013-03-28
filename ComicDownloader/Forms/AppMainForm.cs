@@ -17,7 +17,40 @@ namespace ComicDownloader
         public AppMainForm()
         {
             InitializeComponent();
+            cobDownloaders.DropDownItems.Clear();
+            // build menu
+            foreach (var downloader in Downloader.GetAllDownloaders().OrderBy(p=>p.Name))
+            {
+                //cobDownloaders.DropDownItems.Add(
+                RibbonButton downloaderMenuButton = new RibbonButton()
+                {
+                    MaximumSize = new System.Drawing.Size(0, 0),
+                    MinimumSize = new System.Drawing.Size(0, 0),
+                    Text = downloader.Name,
+                    Tag = downloader
+                };
+                downloaderMenuButton.Click += new EventHandler(delegate(object sender, EventArgs e)
+                {
+                    var dl = ((RibbonButton)sender).Tag as Downloader;
+
+                    AddChildForm(dl.Name, dl);
+                });
+
+                cobDownloaders.DropDownItems.Add(downloaderMenuButton);
+
+                ////this.bntMyTest.Image = ((System.Drawing.Image)(resources.GetObject("bntMyTest.Image")));
+                //this.bntMyTest.MaximumSize = new System.Drawing.Size(0, 0);
+                //this.bntMyTest.MinimumSize = new System.Drawing.Size(0, 0);
+                ////this.bntMyTest.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntMyTest.SmallImage")));
+                //this.bntMyTest.Text = "[[MangaReader]]";
+
+            }
+            
+
+
         }
+
+       
 
         private void btnAddNewTTT_Click(object sender, EventArgs e)
         {
@@ -46,6 +79,8 @@ namespace ComicDownloader
 
         private void AppMainForm_Load(object sender, EventArgs e)
         {
+
+
             Intro childForm = new Intro();
             childForm.MdiParent = this;
             //childForm.WindowState = FormWindowState.Maximized;
@@ -204,6 +239,11 @@ namespace ComicDownloader
         {
             Form a = new IView.UI.Forms.MainWindow();
             a.ShowDialog();
+        }
+
+        private void bntMangaparkAdd_Click(object sender, EventArgs e)
+        {
+            AddChildForm("Mangapark", new MangaParkDownloader());
         }
     }
 }

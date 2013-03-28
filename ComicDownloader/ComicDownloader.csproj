@@ -32,6 +32,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\1364394623_37693.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
@@ -173,6 +177,8 @@
     <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\ConvolutionMatrix.cs" />
     <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\ImageProcessing.cs" />
     <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\IProcessingType.cs" />
+    <Compile Include="Engines\En\TenMangaDownloader.cs" />
+    <Compile Include="Engines\En\MangaParkDownloader.cs" />
     <Compile Include="Engines\En\MangaHereDownloader.cs" />
     <Compile Include="Forms\AppMainForm.cs">
       <SubType>Form</SubType>
@@ -999,6 +1005,21 @@
     <Content Include="Resources\1364150669_folder_add.png" />
     <Content Include="Resources\1364155386_gtk-refresh.png" />
     <Content Include="Resources\1364326694_stock_save-pdf_24.png" />
+    <None Include="Resources\1364392872_slideshow.png" />
+    <Content Include="Resources\1364394623_37693.ico" />
+    <None Include="Resources\1364410919_Add Green Button.png" />
+    <None Include="Resources\1364410878_Add.png" />
+    <None Include="Resources\1364410881_plus_32.png" />
+    <None Include="Resources\1364410884_add1-.png" />
+    <None Include="Resources\1364410887_Add.png" />
+    <None Include="Resources\1364410892_document-new.png" />
+    <None Include="Resources\1364410895_001_01.gif" />
+    <None Include="Resources\1364410898_file_add.png" />
+    <None Include="Resources\1364410901_add.png" />
+    <None Include="Resources\1364410906_add.png" />
+    <None Include="Resources\1364410910_edit_add.png" />
+    <None Include="Resources\1364410914_plus.png" />
+    <None Include="Resources\1364413350_window_new.png" />
     <Content Include="Resources\14747480-bang-comic-book-explosion.jpg" />
     <Content Include="3rd\itextsharp.dll" />
     <Content Include="3rd\Cx.Windows.Forms\MdiTabStrip.bmp" />

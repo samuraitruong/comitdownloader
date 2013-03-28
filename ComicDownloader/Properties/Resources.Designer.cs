@@ -130,6 +130,104 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _1364392872_slideshow {
+            get {
+                object obj = ResourceManager.GetObject("_1364392872_slideshow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364410878_Add {
+            get {
+                object obj = ResourceManager.GetObject("_1364410878_Add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364410881_plus_32 {
+            get {
+                object obj = ResourceManager.GetObject("_1364410881_plus_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364410884_add1_ {
+            get {
+                object obj = ResourceManager.GetObject("_1364410884_add1_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364410887_Add {
+            get {
+                object obj = ResourceManager.GetObject("_1364410887_Add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364410892_document_new {
+            get {
+                object obj = ResourceManager.GetObject("_1364410892_document_new", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364410895_001_01 {
+            get {
+                object obj = ResourceManager.GetObject("_1364410895_001_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364410898_file_add {
+            get {
+                object obj = ResourceManager.GetObject("_1364410898_file_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364410901_add {
+            get {
+                object obj = ResourceManager.GetObject("_1364410901_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364410906_add {
+            get {
+                object obj = ResourceManager.GetObject("_1364410906_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364410910_edit_add {
+            get {
+                object obj = ResourceManager.GetObject("_1364410910_edit_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364410914_plus {
+            get {
+                object obj = ResourceManager.GetObject("_1364410914_plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364410919_Add_Green_Button {
+            get {
+                object obj = ResourceManager.GetObject("_1364410919_Add_Green_Button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364413350_window_new {
+            get {
+                object obj = ResourceManager.GetObject("_1364413350_window_new", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap _14747480_bang_comic_book_explosion {
             get {
                 object obj = ResourceManager.GetObject("14747480-bang-comic-book-explosion", resourceCulture);

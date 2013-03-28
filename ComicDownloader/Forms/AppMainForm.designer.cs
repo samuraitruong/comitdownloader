@@ -34,6 +34,10 @@
             this.ribbonOrbMenuItem1 = new System.Windows.Forms.RibbonOrbMenuItem();
             this.ribbonButton1 = new System.Windows.Forms.RibbonButton();
             this.ribbonButton2 = new System.Windows.Forms.RibbonButton();
+            this.rbtHome = new System.Windows.Forms.RibbonTab();
+            this.pnlDownload = new System.Windows.Forms.RibbonPanel();
+            this.cobDownloaders = new System.Windows.Forms.RibbonComboBox();
+            this.bntMyTest = new System.Windows.Forms.RibbonButton();
             this.ribbonTab1 = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
             this.btnAddNewTTT = new System.Windows.Forms.RibbonButton();
@@ -73,6 +77,8 @@
             this.bntMangaEdenAdd = new System.Windows.Forms.RibbonButton();
             this.ribbonPanel18 = new System.Windows.Forms.RibbonPanel();
             this.bntMangaHereAdd = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel19 = new System.Windows.Forms.RibbonPanel();
+            this.bntMangaparkAdd = new System.Windows.Forms.RibbonButton();
             this.rbn18Plus = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel13 = new System.Windows.Forms.RibbonPanel();
             this.ribbonPanel3 = new System.Windows.Forms.RibbonPanel();
@@ -112,6 +118,7 @@
             this.ribbon1.QuickAcessToolbar.Items.Add(this.ribbonButton2);
             this.ribbon1.Size = new System.Drawing.Size(731, 110);
             this.ribbon1.TabIndex = 1;
+            this.ribbon1.Tabs.Add(this.rbtHome);
             this.ribbon1.Tabs.Add(this.ribbonTab1);
             this.ribbon1.Tabs.Add(this.ribbonTab2);
             this.ribbon1.Tabs.Add(this.rbnEN);
@@ -147,6 +154,31 @@
             this.ribbonButton2.MinimumSize = new System.Drawing.Size(0, 0);
             this.ribbonButton2.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton2.SmallImage")));
             this.ribbonButton2.Text = "ribbonButton2";
+            // 
+            // rbtHome
+            // 
+            this.rbtHome.Panels.Add(this.pnlDownload);
+            this.rbtHome.Text = "Home";
+            // 
+            // pnlDownload
+            // 
+            this.pnlDownload.Items.Add(this.cobDownloaders);
+            this.pnlDownload.Text = null;
+            // 
+            // cobDownloaders
+            // 
+            this.cobDownloaders.DropDownItems.Add(this.bntMyTest);
+            this.cobDownloaders.Text = "Select a host provider";
+            this.cobDownloaders.TextBoxText = "";
+            this.cobDownloaders.TextBoxWidth = 150;
+            // 
+            // bntMyTest
+            // 
+            this.bntMyTest.Image = ((System.Drawing.Image)(resources.GetObject("bntMyTest.Image")));
+            this.bntMyTest.MaximumSize = new System.Drawing.Size(0, 0);
+            this.bntMyTest.MinimumSize = new System.Drawing.Size(0, 0);
+            this.bntMyTest.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntMyTest.SmallImage")));
+            this.bntMyTest.Text = "[[MangaReader]]";
             // 
             // ribbonTab1
             // 
@@ -360,6 +392,7 @@
             this.rbnEN.Panels.Add(this.ribbonPanel14);
             this.rbnEN.Panels.Add(this.ribbonPanel15);
             this.rbnEN.Panels.Add(this.ribbonPanel18);
+            this.rbnEN.Panels.Add(this.ribbonPanel19);
             this.rbnEN.Text = "EN";
             this.rbnEN.ToolTip = "This will include all English manga site";
             // 
@@ -414,6 +447,19 @@
             this.bntMangaHereAdd.MinimumSize = new System.Drawing.Size(0, 0);
             this.bntMangaHereAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntMangaHereAdd.SmallImage")));
             this.bntMangaHereAdd.Click += new System.EventHandler(this.bntMangaHereAdd_Click);
+            // 
+            // ribbonPanel19
+            // 
+            this.ribbonPanel19.Items.Add(this.bntMangaparkAdd);
+            this.ribbonPanel19.Text = "Mangapark.com";
+            // 
+            // bntMangaparkAdd
+            // 
+            this.bntMangaparkAdd.Image = global::ComicDownloader.Properties.Resources._1364410881_plus_32;
+            this.bntMangaparkAdd.MaximumSize = new System.Drawing.Size(0, 0);
+            this.bntMangaparkAdd.MinimumSize = new System.Drawing.Size(0, 0);
+            this.bntMangaparkAdd.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntMangaparkAdd.SmallImage")));
+            this.bntMangaparkAdd.Click += new System.EventHandler(this.bntMangaparkAdd_Click);
             // 
             // rbn18Plus
             // 
@@ -494,6 +540,12 @@
         private System.Windows.Forms.RibbonButton bntMangaEdenAdd;
         private System.Windows.Forms.RibbonPanel ribbonPanel18;
         private System.Windows.Forms.RibbonButton bntMangaHereAdd;
+        private System.Windows.Forms.RibbonPanel ribbonPanel19;
+        private System.Windows.Forms.RibbonButton bntMangaparkAdd;
+        private System.Windows.Forms.RibbonTab rbtHome;
+        private System.Windows.Forms.RibbonPanel pnlDownload;
+        private System.Windows.Forms.RibbonComboBox cobDownloaders;
+        private System.Windows.Forms.RibbonButton bntMyTest;
         
     }
 }
