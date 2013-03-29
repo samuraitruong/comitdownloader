@@ -9,6 +9,7 @@ using HtmlAgilityPack;
 
 namespace ComicDownloader.Engines
 {
+    [Downloader("Vechai.info", Category = "VN - 2", Image32 = "_1364410881_plus_32")]
     public class VechaiDownloader: Downloader
     {
         public override string ListStoryURL

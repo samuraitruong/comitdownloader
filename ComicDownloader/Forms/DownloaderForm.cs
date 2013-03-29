@@ -20,18 +20,25 @@ using XPTable.Models;
 using ComicDownloader.Properties;
 using ComicDownloader.Forms;
 using IView.UI.Forms;
+using System.Runtime.InteropServices;
 
 
 namespace ComicDownloader
 {
+   
     public partial class DownloaderForm : MdiChildForm
     {
-        public Downloader Downloader { get; set; }
+       
+        public ComicDownloaderSettings Settings { get; set; }
 
-        
+        List<Thread> threads = new List<Thread>();
+        public Downloader Downloader { get; set; }
+        EventWaitHandle waitHandle = new EventWaitHandle(false, EventResetMode.ManualReset);
+        private Object updateUIObj = "DUMMY";
         public DownloaderForm()
         {
             InitializeComponent();
+            Settings = SettingForm.GetSetting();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -72,17 +79,15 @@ namespace ComicDownloader
             CollectChaptersToBeDownloaded();
 
             bntDownload.Enabled = false;
-            bntStop.Enabled = true;
+            bntPauseThread.Enabled = true;
             btnExitThread.Enabled = true;
             downloadThread = new Thread(new ThreadStart(this.DownloadProcess));
             downloadThread.Start();
-
-            //DownloadProcess();
+            threads.Clear();
+            threads.Add(downloadThread);
+            
 
         }
-
-
-
 
         private Thread downloadThread;
 
@@ -129,7 +134,10 @@ namespace ComicDownloader
 
         private void GeneratePDF(ChapterInfo chapInfo)
         {
-            //create PDF folder
+            if (!Settings.CreatePDF)
+            {
+                return;
+            }
 
             try
             {
@@ -140,17 +148,12 @@ namespace ComicDownloader
 
             }
 
-            PdfReader reader = new PdfReader(Resources.Intro);
+            
 
             Document pdfDoc = new Document(PageSize.A4);
             float docw = pdfDoc.PageSize.Width;
             float doch = pdfDoc.PageSize.Width;
             
-
-            
-
-            
-
             PdfDate st = new PdfDate(DateTime.Today);
             try
             {
@@ -158,12 +161,8 @@ namespace ComicDownloader
                 var writer = PdfWriter.GetInstance(pdfDoc, stream);
 
                 pdfDoc.Open();
-                pdfDoc.NewPage();
-                PdfContentByte cb = writer.DirectContent;
-                PdfImportedPage page = writer.GetImportedPage(reader, 1); ;
-
-                //cb.AddTemplate(page, 0, -1f, 1f, 0, 0, reader.GetPageSizeWithRotation(1).Height);
-                cb.AddTemplate(page, 0, 0);
+                if(Settings.IncludePDFIntroPage && Settings.PdfIntroPagePosition == PagePosition.FirstPage)
+                EmbedeIntroPage(pdfDoc, writer);
 
                 DirectoryInfo di = new DirectoryInfo(chapInfo.Folder);
                 var files = di.GetFiles();
@@ -184,6 +183,8 @@ namespace ComicDownloader
                         pdfDoc.Add(img);
                         
                     }
+                    if (Settings.IncludePDFIntroPage && Settings.PdfIntroPagePosition == PagePosition.LastPage)
+                        EmbedeIntroPage(pdfDoc, writer);
                 }
             }
             catch (Exception ex)
@@ -220,8 +221,21 @@ namespace ComicDownloader
 
         }
 
+        private static void EmbedeIntroPage(Document pdfDoc, PdfWriter writer)
+        {
+            pdfDoc.NewPage();
+            PdfReader reader = new PdfReader(Resources.Intro);
+            PdfContentByte cb = writer.DirectContent;
+            PdfImportedPage page = writer.GetImportedPage(reader, 1); ;
+
+            //cb.AddTemplate(page, 0, -1f, 1f, 0, 0, reader.GetPageSizeWithRotation(1).Height);
+            cb.AddTemplate(page, 0, 0);
+        }
+
         private void DownloadChapter(ChapterInfo chapInfo)
         {
+            if (chapInfo.Pages == null) return;
+
             CreateChapterFolder(chapInfo);
 
             int count = 0;
@@ -229,47 +243,54 @@ namespace ComicDownloader
             ManualResetEvent resetEvent = new ManualResetEvent(false);
             int toProcess = chapInfo.Pages.Count;
             int index = 1;
+            //if (!Settings.UseMultiThreadToDownloadChapter)
+            //{
+            //   // resetEvent.Set();
+            //}
             foreach (string pageUrl in chapInfo.Pages)
             {
-                new Thread(delegate()
+                var subThread = new Thread(delegate()
                 {
-                    
-                    Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
-
                     string tempUrl = pageUrl;
                     if (tempUrl.Contains("?"))
                     {
                         tempUrl = tempUrl.Substring(0, tempUrl.IndexOf("?"));
                     }
 
-                    string filename = Path.Combine(chapInfo.Folder, (index++).ToString("D2") +". "+Path.GetFileName(tempUrl));
+                    string filename = Path.Combine(chapInfo.Folder, (index++).ToString("D2") + ". " + Path.GetFileName(tempUrl));
 
 
                     try
                     {
                         Downloader.DownloadPage(pageUrl, filename, chapInfo.Url);
-                        count++;
+                        
+                        
                         var file = File.Open(filename, FileMode.Open);
 
-                        size += file.Length;
-                        total += file.Length;
-                        file.Close();
-
-                        this.Invoke((MethodInvoker)delegate
+                        lock (updateUIObj)
                         {
-                            this.progess.Value = count;
-                            lblPageCount.Text = string.Format("{0:D2}/{1:D2}", count, chapInfo.PageCount);
+                            size += file.Length;
+                            total += file.Length;
+                            file.Close();
+                            count++;
+                            this.Invoke((MethodInvoker)delegate
+                            {
 
-                            var listItem = listHistory.Items[listHistory.Items.Count - 1];
-                            listItem.SubItems[3].Text = size.ToKB();
-                            lblTotalDownloadCount.Text = total.ToKB();
-                            var subItem = listItem.SubItems[4] as EXControlListViewSubItem;
-                            var pp = subItem.MyControl as ProgressBar;
-                            pp.Value = count;
+                                this.progess.Value = count;
+                                lblPageCount.Text = string.Format("{0:D2}/{1:D2}", count, chapInfo.PageCount);
 
-                        });
+                                var listItem = listHistory.Items[listHistory.Items.Count - 1];
+                                listItem.SubItems[3].Text = size.ToKB();
+                                lblTotalDownloadCount.Text = total.ToKB();
+                                var subItem = listItem.SubItems[4] as EXControlListViewSubItem;
+                                var pp = subItem.MyControl as ProgressBar;
+                                pp.Value = count;
 
 
+                            });
+                        }
+
+                       
                     }
                     catch
                     {
@@ -277,17 +298,23 @@ namespace ComicDownloader
                     finally
                     {
 
+                        if (Interlocked.Decrement(ref toProcess) == 0)
+                            resetEvent.Set();
                     }
+                });
 
-                    if (Interlocked.Decrement(ref toProcess) == 0)
-                        resetEvent.Set();
-                }).Start();
+                //if (!Settings.UseMultiThreadToDownloadChapter)
+                //{
+                //   // resetEvent.WaitOne();
 
+                //}
+                threads.Add(subThread);
+                subThread.Start();
             }
            
-
+            //if(Settings.UseMultiThreadToDownloadChapter)
             resetEvent.WaitOne();
-            Console.Write("xxx");
+            
         }
 
         private void DisplayChap(ChapterInfo chapInfo, int chapCount)
@@ -362,7 +389,7 @@ namespace ComicDownloader
                 };
 
                 bntOpenPDF.Click += new EventHandler(bntOpenPDF_Click);
-               // llbl.LinkClicked += new LinkLabelLinkClickedEventHandler(llbl_LinkClicked);
+               
                 listItem.SubItems.Add(pdfLinkCol);
                 listHistory.AddControlToSubItem(bntOpenPDF, pdfLinkCol);
 
@@ -406,7 +433,6 @@ namespace ComicDownloader
             try
             {
                 Directory.CreateDirectory(chapInfo.Folder);
-                //Directory.CreateDirectory(Path.GetFullPath(chapInfo.PdfPath));
             }
             finally
             {
@@ -425,33 +451,76 @@ namespace ComicDownloader
 
         }
 
-        private void Form1_Leave(object sender, EventArgs e)
+       
+        
+        private void bntPauseThread_Click(object sender, EventArgs e)
         {
-
-            //if (downloadThread != null)
-            //{
-            //    downloadThread.Abort();
-            //}
-        }
-
-        private void bntStop_Click(object sender, EventArgs e)
-        {
-            if (downloadThread != null && downloadThread.ThreadState == System.Threading.ThreadState.Running)
+            threads.RemoveAll(p => p.ThreadState == System.Threading.ThreadState.Stopped);
+            
+            foreach (var thread in threads)
             {
-                downloadThread.Suspend();
-                bntStop.Text = "Resume";
-            }
-            else
-            {
-                if (downloadThread != null && downloadThread.ThreadState == System.Threading.ThreadState.Suspended)
+
+                if (thread != null && thread.ThreadState == System.Threading.ThreadState.Running)
+                //|| 
+                //                      thread.ThreadState == System.Threading.ThreadState.WaitSleepJoin)
                 {
-                    downloadThread.Resume();
-                    bntStop.Text = "Pause";
+
+                    try
+                    {
+                        thread.Suspend();
+                        thread.Suspend();
+                    }
+                    catch (Exception)
+                    {
+                        
+                        
+                    }
+                    
                 }
+                else
+                {
+                    if (thread != null && thread.ThreadState == System.Threading.ThreadState.Suspended || 
+                                          thread.ThreadState == System.Threading.ThreadState.WaitSleepJoin ||
+                                          thread.ThreadState == System.Threading.ThreadState.SuspendRequested 
+                        )
+                    {
+                        try
+                        {
+                            thread.Resume();
+                            thread.Resume();
+                            thread.Resume();
+                            thread.Resume();
+                        }
+                        catch (Exception)
+                        {
+
+
+                        }
+                        finally
+                        {
+                            try
+                            {
+                                thread.Resume();
+                                thread.Resume();
+                                thread.Resume();
+                                thread.Resume();
+                            }
+                            catch (Exception)
+                            {
+
+
+                            }
+                        }
+                        
+                        
+                    }
+                }
+               
+                
             }
+            
 
-            //bntDownload.Enabled = true;
-
+            bntPauseThread.Text = bntPauseThread.Text == "Pause" ? "Resume" : "Pause";
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -514,7 +583,7 @@ namespace ComicDownloader
                 ddlList.Items.Clear();
                 ddlList.Items.AddRange(stories.ToArray());
                 lblStoriesCount.Text = "Stories : " + stories.Count.ToString();
-                ddlList.Text = string.Format("There are {0} in list", stories.Count);
+                ddlList.Text = string.Format("There are {0} stories in list", stories.Count);
                 bntRefresh.Enabled = true;
                 loading.Visible = false;
             });
@@ -607,11 +676,17 @@ namespace ComicDownloader
 
         private void btnExitThread_Click(object sender, EventArgs e)
         {
-            if (downloadThread != null && downloadThread.ThreadState == System.Threading.ThreadState.Running)
+            foreach (var item in threads)
+	        {
+		         if (item != null && item.IsAlive)
             {
-                downloadThread.Abort();
+                item.Abort();
             }
+	        }
+           
             bntDownload.Enabled = true;
+            bntPauseThread.Text = "Pause";
+            bntPauseThread.Enabled = false;
             btnExitThread.Enabled = false;
         }
 
@@ -706,6 +781,7 @@ namespace ComicDownloader
             {
 
                 bntInfo.Enabled = true;
+                if (Settings.AutoLoadChapter) bntInfo.PerformClick();
             }
             else
             {
@@ -718,10 +794,7 @@ namespace ComicDownloader
             ToggleDownloadButtonBySelected();
         }
 
-        private void button2_Click_3(object sender, EventArgs e)
-        {
-
-        }
+      
 
         private void tblChapters_RowAdded(object sender, XPTable.Events.TableModelEventArgs e)
         {
@@ -744,6 +817,11 @@ namespace ComicDownloader
         private void button2_Click_2(object sender, EventArgs e)
         {
             
+        }
+
+        private void DownloaderForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            btnExitThread.PerformClick();
         }
 
         

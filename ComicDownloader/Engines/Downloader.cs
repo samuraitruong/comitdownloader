@@ -106,6 +106,7 @@ namespace ComicDownloader.Engines
             {
                 if (item.BaseType == typeof(Downloader))
                 {
+                    
                     Downloader instance = (Downloader)Activator.CreateInstance(item);
                     list.Add(instance);
                 }

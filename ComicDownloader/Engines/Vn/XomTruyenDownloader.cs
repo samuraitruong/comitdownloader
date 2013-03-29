@@ -8,10 +8,11 @@ using System.Net;
 
 namespace ComicDownloader.Engines
 {
+    [Downloader("Xomtruyen.info", Category = "VN - 2", Image32 = "_1364410887_Add")]
     public class XomTruyenDownloader
         : Downloader
     {
-
+         
         public override List<StoryInfo> GetListStories()
         {
             List<StoryInfo> results = ReloadChachedData();
