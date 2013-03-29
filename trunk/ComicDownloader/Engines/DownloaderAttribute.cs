@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace ComicDownloader.Engines
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class,  AllowMultiple = true)]
     public class DownloaderAttribute : Attribute
     {
         public string Name { get; set; }

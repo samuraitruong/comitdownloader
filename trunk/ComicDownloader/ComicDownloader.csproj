@@ -183,10 +183,16 @@
     <Compile Include="3rd\PagedList\PagedListExtensions.cs" />
     <Compile Include="3rd\PagedList\PagedListMetaData.cs" />
     <Compile Include="3rd\PagedList\StaticPagedList.cs" />
+    <Compile Include="ComicDownloaderSettings.cs" />
+    <Compile Include="Engines\18+\HakihomeDownloader.cs" />
+    <Compile Include="Engines\18+\Manga16Downloader.cs" />
     <Compile Include="Engines\DownloaderAttribute.cs" />
+    <Compile Include="Engines\En\MangaChromeDownloader.cs" />
+    <Compile Include="Engines\En\KissMangaDownloader.cs" />
     <Compile Include="Engines\En\TenMangaDownloader.cs" />
     <Compile Include="Engines\En\MangaParkDownloader.cs" />
     <Compile Include="Engines\En\MangaHereDownloader.cs" />
+    <Compile Include="Engines\Vn\WebTruyenDownloader.cs" />
     <Compile Include="Forms\AppMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -817,6 +823,12 @@
     <Compile Include="3rd\XPTable\Win32\WindowExtendedStyles.cs" />
     <Compile Include="3rd\XPTable\Win32\WindowMessages.cs" />
     <Compile Include="3rd\XPTable\Win32\WindowStyles.cs" />
+    <Compile Include="Forms\SettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SettingForm.Designer.cs">
+      <DependentUpon>SettingForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\ColourPicker.resx">
       <DependentUpon>ColourPicker.cs</DependentUpon>
     </EmbeddedResource>
@@ -941,6 +953,9 @@
     <EmbeddedResource Include="3rd\XPTable\Models\TableModel.resx">
       <DependentUpon>TableModel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SettingForm.resx">
+      <DependentUpon>SettingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="3rd\ObjectListView\FullClassDiagram.cd" />
     <None Include="app.config" />
     <None Include="Properties\IViewSettings.settings">
@@ -1028,6 +1043,9 @@
     <None Include="Resources\1364410910_edit_add.png" />
     <None Include="Resources\1364410914_plus.png" />
     <None Include="Resources\1364413350_window_new.png" />
+    <None Include="Resources\1364561047_wheel.png" />
+    <None Include="Resources\1364561037_wheel.png" />
+    <None Include="Resources\1364561270_exit.png" />
     <Content Include="Resources\14747480-bang-comic-book-explosion.jpg" />
     <Content Include="3rd\itextsharp.dll" />
     <Content Include="3rd\Cx.Windows.Forms\MdiTabStrip.bmp" />
@@ -1065,7 +1083,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="3rd\XPTable\doc\" />
-    <Folder Include="Engines\18+\" />
+    <Folder Include="Engines\JP\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

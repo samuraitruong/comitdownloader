@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
+    [Downloader("MangaReader", Category = "English", Image32 = "_1364410898_file_add")]
     public class MangaHereDownloader :  Downloader
     {
         public override string Name

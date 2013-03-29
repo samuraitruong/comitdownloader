@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
+    [Downloader("Comic.Vuilen.com", Category = "VN - 2", Image32 = "_1364410884_add1_")]
     public class ComicVuiLenDownloader : Downloader
     {
         public override string Name
@@ -26,7 +27,7 @@ namespace ComicDownloader.Engines
 
         public override string StoryUrlPattern
         {
-            get { throw new NotImplementedException(); }
+            get { return string.Empty; }
         }
 
         public override List<StoryInfo> GetListStories()

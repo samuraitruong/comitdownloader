@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
+    [Downloader("TruyenTranh8.com", Category = "VN", Image32 = "1364078951_insert-object")]
     public class TruyenTranh8Downloader: Downloader
     {
         public override string Name

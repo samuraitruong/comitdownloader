@@ -10,7 +10,7 @@ using ComicDownloader.Properties;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("BlogTruyen", Category = "VN", Image32 = "_1364410878_Add")]
+    [Downloader("BlogTruyen", Category = "VN", Image32 = "_1364410895_001_01")]
     public class BlogTruyenDownloader: Downloader
     {
         public override string Name

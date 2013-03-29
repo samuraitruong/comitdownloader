@@ -65,7 +65,7 @@ namespace ComicDownloader
             this.tblChapters = new XPTable.Models.TableModel();
             this.groupDownload = new System.Windows.Forms.GroupBox();
             this.btnExitThread = new System.Windows.Forms.Button();
-            this.bntStop = new System.Windows.Forms.Button();
+            this.bntPauseThread = new System.Windows.Forms.Button();
             this.groupInfo = new System.Windows.Forms.GroupBox();
             this.loading = new MRG.Controls.UI.LoadingCircle();
             this.bntRefresh = new System.Windows.Forms.Button();
@@ -366,7 +366,7 @@ namespace ComicDownloader
             this.groupDownload.Controls.Add(this.label4);
             this.groupDownload.Controls.Add(this.button1);
             this.groupDownload.Controls.Add(this.btnExitThread);
-            this.groupDownload.Controls.Add(this.bntStop);
+            this.groupDownload.Controls.Add(this.bntPauseThread);
             this.groupDownload.Controls.Add(this.bntDownload);
             this.groupDownload.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupDownload.Location = new System.Drawing.Point(0, 264);
@@ -387,16 +387,16 @@ namespace ComicDownloader
             this.btnExitThread.UseVisualStyleBackColor = true;
             this.btnExitThread.Click += new System.EventHandler(this.btnExitThread_Click);
             // 
-            // bntStop
+            // bntPauseThread
             // 
-            this.bntStop.Enabled = false;
-            this.bntStop.Location = new System.Drawing.Point(93, 58);
-            this.bntStop.Name = "bntStop";
-            this.bntStop.Size = new System.Drawing.Size(70, 23);
-            this.bntStop.TabIndex = 13;
-            this.bntStop.Text = "Pause";
-            this.bntStop.UseVisualStyleBackColor = true;
-            this.bntStop.Click += new System.EventHandler(this.bntStop_Click);
+            this.bntPauseThread.Enabled = false;
+            this.bntPauseThread.Location = new System.Drawing.Point(93, 58);
+            this.bntPauseThread.Name = "bntPauseThread";
+            this.bntPauseThread.Size = new System.Drawing.Size(70, 23);
+            this.bntPauseThread.TabIndex = 13;
+            this.bntPauseThread.Text = "Pause";
+            this.bntPauseThread.UseVisualStyleBackColor = true;
+            this.bntPauseThread.Click += new System.EventHandler(this.bntPauseThread_Click);
             // 
             // groupInfo
             // 
@@ -421,14 +421,14 @@ namespace ComicDownloader
             // 
             this.loading.Active = true;
             this.loading.Color = System.Drawing.Color.DarkGray;
-            this.loading.InnerCircleRadius = 8;
+            this.loading.InnerCircleRadius = 5;
             this.loading.Location = new System.Drawing.Point(172, 12);
             this.loading.Name = "loading";
-            this.loading.NumberSpoke = 10;
-            this.loading.OuterCircleRadius = 10;
+            this.loading.NumberSpoke = 12;
+            this.loading.OuterCircleRadius = 11;
             this.loading.RotationSpeed = 100;
             this.loading.Size = new System.Drawing.Size(10, 10);
-            this.loading.SpokeThickness = 4;
+            this.loading.SpokeThickness = 2;
             this.loading.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
             this.loading.TabIndex = 20;
             this.loading.Text = "loadingCircle1";
@@ -572,8 +572,8 @@ namespace ComicDownloader
             this.Controls.Add(this.statusStrip1);
             this.Name = "DownloaderForm";
             this.Text = "Comic Downloader Form";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DownloaderForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.Leave += new System.EventHandler(this.Form1_Leave);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -619,7 +619,7 @@ namespace ComicDownloader
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel lblTotalDownloadCount;
         private System.Windows.Forms.ColumnHeader index;
-        private System.Windows.Forms.Button bntStop;
+        private System.Windows.Forms.Button bntPauseThread;
         private System.Windows.Forms.ComboBox ddlList;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
