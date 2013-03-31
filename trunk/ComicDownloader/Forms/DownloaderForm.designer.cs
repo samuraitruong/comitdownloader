@@ -54,6 +54,7 @@ namespace ComicDownloader
             this.lstChapters = new XPTable.Models.Table();
             this.columnModel1 = new XPTable.Models.ColumnModel();
             this.chkSelect = new XPTable.Models.CheckBoxColumn();
+            this.txtChapIdentify = new XPTable.Models.TextColumn();
             this.colChapId = new XPTable.Models.NumberColumn();
             this.txtChapName = new XPTable.Models.TextColumn();
             this.txtChapLink = new XPTable.Models.TextColumn();
@@ -64,6 +65,8 @@ namespace ComicDownloader
             this.mnuSelectSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuAddQueue = new System.Windows.Forms.ToolStripMenuItem();
+            this.addOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAddandStartQueue = new System.Windows.Forms.ToolStripMenuItem();
             this.tblChapters = new XPTable.Models.TableModel();
             this.groupDownload = new System.Windows.Forms.GroupBox();
             this.btnExitThread = new System.Windows.Forms.Button();
@@ -292,6 +295,7 @@ namespace ComicDownloader
             // 
             this.columnModel1.Columns.AddRange(new XPTable.Models.Column[] {
             this.chkSelect,
+            this.txtChapIdentify,
             this.colChapId,
             this.txtChapName,
             this.txtChapLink});
@@ -300,6 +304,10 @@ namespace ComicDownloader
             // 
             this.chkSelect.Text = "ID";
             this.chkSelect.Width = 60;
+            // 
+            // txtChapIdentify
+            // 
+            this.txtChapIdentify.Text = "Identity";
             // 
             // colChapId
             // 
@@ -326,12 +334,13 @@ namespace ComicDownloader
             this.toolStripSeparator1,
             this.mnuAddQueue});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(171, 142);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(171, 120);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // mnuSelectAll
             // 
             this.mnuSelectAll.Enabled = false;
+            this.mnuSelectAll.Image = global::ComicDownloader.Properties.Resources._1364718418_checked_checkbox;
             this.mnuSelectAll.Name = "mnuSelectAll";
             this.mnuSelectAll.Size = new System.Drawing.Size(170, 22);
             this.mnuSelectAll.Text = "Check all";
@@ -340,6 +349,7 @@ namespace ComicDownloader
             // mnuSelectNone
             // 
             this.mnuSelectNone.Enabled = false;
+            this.mnuSelectNone.Image = global::ComicDownloader.Properties.Resources._1364718448_checkbox_unchecked;
             this.mnuSelectNone.Name = "mnuSelectNone";
             this.mnuSelectNone.Size = new System.Drawing.Size(170, 22);
             this.mnuSelectNone.Text = "Uncheck All";
@@ -348,6 +358,7 @@ namespace ComicDownloader
             // mnuSelectInverse
             // 
             this.mnuSelectInverse.Enabled = false;
+            this.mnuSelectInverse.Image = global::ComicDownloader.Properties.Resources._1364718484_radio_unchecked;
             this.mnuSelectInverse.Name = "mnuSelectInverse";
             this.mnuSelectInverse.Size = new System.Drawing.Size(170, 22);
             this.mnuSelectInverse.Text = "Check Inverse";
@@ -356,6 +367,7 @@ namespace ComicDownloader
             // mnuSelectSelected
             // 
             this.mnuSelectSelected.Enabled = false;
+            this.mnuSelectSelected.Image = global::ComicDownloader.Properties.Resources._1364718512_to_do_list_cheked_all;
             this.mnuSelectSelected.Name = "mnuSelectSelected";
             this.mnuSelectSelected.Size = new System.Drawing.Size(170, 22);
             this.mnuSelectSelected.Text = "Check all select item";
@@ -368,12 +380,31 @@ namespace ComicDownloader
             // 
             // mnuAddQueue
             // 
+            this.mnuAddQueue.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addOnlyToolStripMenuItem,
+            this.mnuAddandStartQueue});
             this.mnuAddQueue.Enabled = false;
             this.mnuAddQueue.Image = global::ComicDownloader.Properties.Resources._1364647743_sheduled_task;
             this.mnuAddQueue.Name = "mnuAddQueue";
             this.mnuAddQueue.Size = new System.Drawing.Size(170, 22);
             this.mnuAddQueue.Text = "Add to Queue";
             this.mnuAddQueue.Click += new System.EventHandler(this.mnuAddQueue_Click);
+            // 
+            // addOnlyToolStripMenuItem
+            // 
+            this.addOnlyToolStripMenuItem.Image = global::ComicDownloader.Properties.Resources._1364718586_netvibes;
+            this.addOnlyToolStripMenuItem.Name = "addOnlyToolStripMenuItem";
+            this.addOnlyToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.addOnlyToolStripMenuItem.Text = "Add Only";
+            this.addOnlyToolStripMenuItem.Click += new System.EventHandler(this.addOnlyToolStripMenuItem_Click);
+            // 
+            // mnuAddandStartQueue
+            // 
+            this.mnuAddandStartQueue.Image = global::ComicDownloader.Properties.Resources._1364718804_start_here_ubuntustudio;
+            this.mnuAddandStartQueue.Name = "mnuAddandStartQueue";
+            this.mnuAddandStartQueue.Size = new System.Drawing.Size(144, 22);
+            this.mnuAddandStartQueue.Text = "And and Start ";
+            this.mnuAddandStartQueue.Click += new System.EventHandler(this.mnuAddandStartQueue_Click);
             // 
             // tblChapters
             // 
@@ -668,6 +699,9 @@ namespace ComicDownloader
         private MRG.Controls.UI.LoadingCircle loading;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem mnuAddQueue;
+        private System.Windows.Forms.ToolStripMenuItem addOnlyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuAddandStartQueue;
+        private XPTable.Models.TextColumn txtChapIdentify;
         
     }
 }

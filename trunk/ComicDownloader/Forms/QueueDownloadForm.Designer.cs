@@ -40,12 +40,20 @@
             this.olvProgress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.heightRenderer = new BrightIdeasSoftware.BarRenderer();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuRemovAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRemoveSelection = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuForceDownload = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveBottomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barRenderer1 = new BrightIdeasSoftware.BarRenderer();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.lsvItems)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -148,8 +156,66 @@
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuRemovAll,
+            this.mnuRemoveSelection,
+            this.mnuForceDownload,
+            this.moveUpToolStripMenuItem,
+            this.moveDownToolStripMenuItem,
+            this.moveTopToolStripMenuItem,
+            this.moveBottomToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(160, 180);
+            // 
+            // mnuRemovAll
+            // 
+            this.mnuRemovAll.Image = global::ComicDownloader.Properties.Resources._1364717902_list_remove;
+            this.mnuRemovAll.Name = "mnuRemovAll";
+            this.mnuRemovAll.Size = new System.Drawing.Size(159, 22);
+            this.mnuRemovAll.Text = "Remove All";
+            this.mnuRemovAll.Click += new System.EventHandler(this.mnuRemovAll_Click);
+            // 
+            // mnuRemoveSelection
+            // 
+            this.mnuRemoveSelection.Image = global::ComicDownloader.Properties.Resources._1364717999_delete;
+            this.mnuRemoveSelection.Name = "mnuRemoveSelection";
+            this.mnuRemoveSelection.Size = new System.Drawing.Size(159, 22);
+            this.mnuRemoveSelection.Text = "Remove Selection";
+            // 
+            // mnuForceDownload
+            // 
+            this.mnuForceDownload.Image = global::ComicDownloader.Properties.Resources._1364718151_stopwatch_start;
+            this.mnuForceDownload.Name = "mnuForceDownload";
+            this.mnuForceDownload.Size = new System.Drawing.Size(159, 22);
+            this.mnuForceDownload.Text = "Force Download";
+            // 
+            // moveUpToolStripMenuItem
+            // 
+            this.moveUpToolStripMenuItem.Image = global::ComicDownloader.Properties.Resources._1364718266_up;
+            this.moveUpToolStripMenuItem.Name = "moveUpToolStripMenuItem";
+            this.moveUpToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.moveUpToolStripMenuItem.Text = "Move Up";
+            // 
+            // moveDownToolStripMenuItem
+            // 
+            this.moveDownToolStripMenuItem.Image = global::ComicDownloader.Properties.Resources._1364718322_emblem_downloads;
+            this.moveDownToolStripMenuItem.Name = "moveDownToolStripMenuItem";
+            this.moveDownToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.moveDownToolStripMenuItem.Text = "Move Down";
+            // 
+            // moveTopToolStripMenuItem
+            // 
+            this.moveTopToolStripMenuItem.Image = global::ComicDownloader.Properties.Resources._1364718270_go_top;
+            this.moveTopToolStripMenuItem.Name = "moveTopToolStripMenuItem";
+            this.moveTopToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.moveTopToolStripMenuItem.Text = "Move Top";
+            // 
+            // moveBottomToolStripMenuItem
+            // 
+            this.moveBottomToolStripMenuItem.Image = global::ComicDownloader.Properties.Resources._1364718320_go_bottom;
+            this.moveBottomToolStripMenuItem.Name = "moveBottomToolStripMenuItem";
+            this.moveBottomToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.moveBottomToolStripMenuItem.Text = "Move Bottom";
             // 
             // barRenderer1
             // 
@@ -200,6 +266,7 @@
             this.MdiChildActivate += new System.EventHandler(this.QueueDownloadForm_MdiChildActivate);
             this.Enter += new System.EventHandler(this.QueueDownloadForm_Enter);
             ((System.ComponentModel.ISupportInitialize)(this.lsvItems)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -224,5 +291,12 @@
         private BrightIdeasSoftware.BarRenderer barRenderer1;
         private BrightIdeasSoftware.BarRenderer heightRenderer;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem mnuRemovAll;
+        private System.Windows.Forms.ToolStripMenuItem mnuRemoveSelection;
+        private System.Windows.Forms.ToolStripMenuItem mnuForceDownload;
+        private System.Windows.Forms.ToolStripMenuItem moveUpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem moveDownToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem moveTopToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem moveBottomToolStripMenuItem;
     }
 }

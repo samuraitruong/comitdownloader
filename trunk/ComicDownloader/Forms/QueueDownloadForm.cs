@@ -553,5 +553,13 @@ namespace ComicDownloader.Forms
 
 
         }
+
+        private void mnuRemovAll_Click(object sender, EventArgs e)
+        {
+            DownloadItems.Clear();
+            //Stop Thread
+            RefreshData();
+            SaveHistoryItem(DownloadItems);
+        }
     }
 }

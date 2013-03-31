@@ -215,10 +215,10 @@ namespace ComicDownloader
 
         private void bntQueueDownload_Click(object sender, EventArgs e)
         {
-            ShowQueueForm();
+            ShowQueueForm(false);
         }
 
-        public void ShowQueueForm()
+        public void ShowQueueForm(bool start)
         {
             if (QueueForm == null)
             {
@@ -246,10 +246,14 @@ namespace ComicDownloader
                     QueueForm.Tag = mdiTabStrip1.SelectedTab;
                     QueueForm.Show();
                 }
-              
+                
                
             }
 
+            if (start)
+            {
+                QueueForm.StartQueue();
+            }
             ribbon1.Tabs[0].SetActive(true);
                     
         }
@@ -257,8 +261,8 @@ namespace ComicDownloader
         
         private void bntStartQueue_Click(object sender, EventArgs e)
         {
-            ShowQueueForm();
-            QueueForm.StartQueue();
+            ShowQueueForm(true);
+            //QueueForm.StartQueue();
             
         }
 
