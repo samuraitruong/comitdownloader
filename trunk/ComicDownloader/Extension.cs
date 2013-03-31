@@ -24,7 +24,7 @@ namespace ComicDownloader
                 return Math.Round((decimal)number / (1024 ), 2).ToString() + " KB";
 
 
-            return number.ToString() + "Bytes";
+            return number.ToString() + " Bytes";
 
         }
         private delegate void SetPropertyThreadSafeDelegate<TResult>(Control @this, Expression<Func<TResult>> property, TResult value);

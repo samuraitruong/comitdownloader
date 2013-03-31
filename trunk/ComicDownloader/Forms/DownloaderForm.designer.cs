@@ -308,6 +308,7 @@ namespace ComicDownloader
             // txtChapIdentify
             // 
             this.txtChapIdentify.Text = "Identity";
+            this.txtChapIdentify.Visible = false;
             // 
             // colChapId
             // 

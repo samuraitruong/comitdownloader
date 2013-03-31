@@ -225,6 +225,11 @@ namespace ComicDownloader
                 QueueForm = new QueueDownloadForm();
                 QueueForm.MdiParent = this;
                 QueueForm.Tag = mdiTabStrip1.SelectedTab;
+                
+                QueueForm.OnQueueStart += new QueueDownloadForm.ExternalCall(QueueForm_OnQueueStart);
+                QueueForm.OnQueueCompleted += new QueueDownloadForm.ExternalCall(QueueForm_OnQueueCompleted);
+                QueueForm.OnFormActivate += new QueueDownloadForm.ExternalCall(QueueForm_OnFormActivate);
+
                 QueueForm.Show();
             }
             else
@@ -258,10 +263,44 @@ namespace ComicDownloader
                     
         }
 
-        
+        void QueueForm_OnFormActivate(object obj)
+        {
+            bntStopQueue.Enabled = true;
+            bntStartQueue.Enabled = true;
+            bntClearQueue.Enabled = true;
+            bntResumeError.Enabled = true;
+            //set activate tab
+            rbtHome.SetActive(true);
+        }
+
+        void QueueForm_OnQueueCompleted(object obj)
+        {
+            bntStopQueue.Enabled = false;
+            bntStartQueue.Enabled = true;
+            bntClearQueue.Enabled = true;
+            bntResumeError.Enabled = true;
+
+            //if (SettingForm.GetSetting().WhenDoneAction == FinishActions.Nothing)
+            {
+                Form p = new QueueCompleteForm();
+                p.ShowDialog();
+            }
+        }
+
+        void QueueForm_OnQueueStart(object obj)
+        {
+            bntStopQueue.Enabled = true;
+            bntStartQueue.Enabled = false;
+            bntClearQueue.Enabled = false;
+            bntResumeError.Enabled = false;
+        }
+
+       
+
         private void bntStartQueue_Click(object sender, EventArgs e)
         {
             ShowQueueForm(true);
+            
             //QueueForm.StartQueue();
             
         }
@@ -282,6 +321,11 @@ namespace ComicDownloader
         {
             //ShowQueueForm();
             QueueForm.ResumeDownloadItems(DownloadStatus.Error);
+        }
+
+        private void bntStopQueue_Click(object sender, EventArgs e)
+        {
+            QueueForm.AbortQueue();
         }
 
         

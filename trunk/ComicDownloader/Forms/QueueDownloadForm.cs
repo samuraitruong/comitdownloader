@@ -13,11 +13,18 @@ using System.Threading;
 using ComicDownloader.Engines;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
+using System.Diagnostics;
+using IView.UI.Forms;
 
 namespace ComicDownloader.Forms
 {
     public partial class QueueDownloadForm : MdiChildForm
     {
+        public delegate void ExternalCall(object obj);
+        public event ExternalCall OnQueueCompleted;
+        public event ExternalCall OnQueueStart;
+        public event ExternalCall OnFormActivate;
+
         public class DataSourceItem
         {
             
@@ -31,6 +38,10 @@ namespace ComicDownloader.Forms
             public string ChapterName { get; set; }
 
             public int Progress { get; set; }
+
+            public Guid Identify { get; set; }
+
+            public int Pages { get; set; }
         }
         private object updateUIObj = "DUMMY";
         public const string QUEUE_FILE_NAME = "history.000";
@@ -87,11 +98,38 @@ namespace ComicDownloader.Forms
             DownloadItems = GetHistoryItems();
             RefreshData();
         }
-
+        List<DataSourceItem> DataSource;
+        private void RefreshData(ChapterInfo chap)
+        {
+            var dsItem = DataSource.FirstOrDefault(p => p.Identify == chap.UniqueIdentify);
+            if (dsItem != null)
+            {
+                    //Progress = (new Random()).Next(1,100),
+                    dsItem.ChapterUrl = chap.Url;
+                    dsItem.Pages = chap.PageCount;
+                    dsItem.Size = chap.Size.ToKB();
+                    dsItem.Status = ((float)chap.DownloadedCount / chap.PageCount).ToString("p");
+                    if (chap.Status != DownloadStatus.Downloading)
+                    {
+                        dsItem.Status = chap.Status.ToString();
+                    }
+                    else
+                    {
+                        dsItem.Status = ((float)chap.DownloadedCount / chap.PageCount).ToString("p");
+                        if (dsItem.Status == "NaN") dsItem.Status = "Initializing...";
+                    }
+            }
+            lsvItems.RefreshObjects(DataSource);
+        }
         private void RefreshData()
         {
-//            DownloadItems = GetHistoryItems();
-            lsvItems.SetObjects(ConvertToDataSource(DownloadItems));
+            //            DownloadItems = GetHistoryItems();
+            // if (isContextMenuShowing) return;
+
+
+            DataSource = ConvertToDataSource(DownloadItems);
+            lsvItems.SetObjects(DataSource);
+
         }
 
         private List<DataSourceItem> ConvertToDataSource(List<QueueDownloadItem> DownloadItems)
@@ -108,8 +146,9 @@ namespace ComicDownloader.Forms
                         //Progress = (new Random()).Next(1,100),
                         ChapterUrl = item1.Url,
                         ChapterName = item1.Name,
-                        
-                        Size = item1.Size.ToKB()
+                        Pages = item1.PageCount,
+                        Size = item1.Size.ToKB(),
+                        Identify = item1.UniqueIdentify
                     };
 
                     if (item1.Status != DownloadStatus.Downloading)
@@ -119,6 +158,7 @@ namespace ComicDownloader.Forms
                     else
                     {
                         dsItem.Status = ((float)item1.DownloadedCount / item1.PageCount).ToString("p");
+                        if(dsItem.Status =="NaN") dsItem.Status = "Initializing...";
                     }
 
                     results.Add(dsItem);
@@ -146,7 +186,8 @@ namespace ComicDownloader.Forms
         public void DownloadQueueItems()
         {
             bool hasNextTask = true;
-
+            if(OnQueueStart!= null)
+            OnQueueStart(DownloadItems);
             while (hasNextTask)
             {
                 
@@ -158,7 +199,7 @@ namespace ComicDownloader.Forms
                     {
                         chapInfo.Status = DownloadStatus.Downloading;
                         this.Invoke(new MethodInvoker(delegate() {
-                            RefreshData();
+                            RefreshData(chapInfo);
                         }));
 
                         
@@ -184,7 +225,7 @@ namespace ComicDownloader.Forms
                     finally
                     {
                         SaveHistoryItem(DownloadItems);
-                        RefreshData();
+                        RefreshData(chapInfo);
                     }
                 }
                 else
@@ -192,6 +233,8 @@ namespace ComicDownloader.Forms
                     hasNextTask = false;
                 }
             }
+            if(OnQueueCompleted!= null)
+            OnQueueCompleted(DownloadItems);
 
         }
 
@@ -359,23 +402,8 @@ namespace ComicDownloader.Forms
                             file.Close();
                             count++;
                             chapInfo.Size = size;
-                            RefreshData();
                             chapInfo.DownloadedCount = count;
-                            //this.Invoke((MethodInvoker)delegate
-                            //{
-
-                            //    this.progess.Value = count;
-                            //    lblPageCount.Text = string.Format("{0:D2}/{1:D2}", count, chapInfo.PageCount);
-
-                            //    var listItem = listHistory.Items[listHistory.Items.Count - 1];
-                            //    listItem.SubItems[3].Text = size.ToKB();
-                            //    lblTotalDownloadCount.Text = total.ToKB();
-                            //    var subItem = listItem.SubItems[4] as EXControlListViewSubItem;
-                            //    var pp = subItem.MyControl as ProgressBar;
-                            //    pp.Value = count;
-
-
-                            //});
+                            RefreshData(chapInfo);
                         }
 
 
@@ -388,7 +416,7 @@ namespace ComicDownloader.Forms
 
                         if (Interlocked.Decrement(ref toProcess) == 0)
                             resetEvent.Set();
-                        RefreshData();
+                        RefreshData(chapInfo);
                     }
                 });
 
@@ -405,89 +433,7 @@ namespace ComicDownloader.Forms
             resetEvent.WaitOne();
 
         }
-        private void DisplayChap(ChapterInfo chapInfo, int chapCount)
-        {
-            //this.Invoke((MethodInvoker)delegate
-            //{
-            //    this.progess.Minimum = 1;
-            //    this.progess.Value = 1;
-            //    this.progess.Maximum = chapInfo.PageCount;
-            //    var listItem = new EXListViewItem(chapCount.ToString());
-            //    listItem.SubItems.Add(chapInfo.Name);
-            //    listItem.SubItems.Add(chapInfo.PageCount.ToString());
-            //    listItem.SubItems.Add("0");
-            //    EXControlListViewSubItem cs = new EXControlListViewSubItem();
-            //    ProgressBar b = new ProgressBar();
-            //    //b.Tag = item;
-            //    b.Minimum = 0;
-            //    b.Maximum = chapInfo.PageCount;
-            //    b.Step = 1;
-
-            //    listItem.SubItems.Add(cs);
-            //    this.listHistory.AddControlToSubItem(b, cs);
-
-            //    //Add button to view folder
-
-            //    EXControlListViewSubItem openFolderCol = new EXControlListViewSubItem();
-            //    Button bntOpenFolder = new Button()
-            //    {
-            //        Image = global::ComicDownloader.Properties.Resources._1364392872_slideshow,
-            //        //Location = new System.Drawing.Point(248, 123);
-            //        //Name = "button2";
-            //        Size = new System.Drawing.Size(24, 24),
-
-            //        TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay,
-            //        UseVisualStyleBackColor = true,
-            //        Tag = openFolderCol,
-            //        //Text = chapInfo.PdfPath,
-            //        Enabled = true,
-
-            //    };
-
-            //    bntOpenFolder.Click += new EventHandler(delegate
-            //    {
-            //        MainWindow window = new MainWindow(new string[] { chapInfo.Folder + "/dum.trick", "0" });
-            //        window.WindowState = FormWindowState.Maximized;
-            //        window.ShowDialog();
-            //        //window.SubStartSlideShow();
-            //    });
-            //    // llbl.LinkClicked += new LinkLabelLinkClickedEventHandler(llbl_LinkClicked);
-            //    listItem.SubItems.Add(openFolderCol);
-            //    listHistory.AddControlToSubItem(bntOpenFolder, openFolderCol);
-
-
-            //    //listItem.SubItems.Add(chapInfo.Folder);
-
-            //    EXControlListViewSubItem pdfLinkCol = new EXControlListViewSubItem();
-            //    Button bntOpenPDF = new Button()
-            //    {
-
-
-            //        Image = global::ComicDownloader.Properties.Resources._1364326694_stock_save_pdf_24,
-            //        //Location = new System.Drawing.Point(248, 123);
-            //        //Name = "button2";
-            //        Size = new System.Drawing.Size(24, 24),
-
-            //        TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay,
-            //        UseVisualStyleBackColor = true,
-            //        Tag = pdfLinkCol,
-            //        //Text = chapInfo.PdfPath,
-            //        Enabled = false,
-
-            //    };
-
-            //    bntOpenPDF.Click += new EventHandler(bntOpenPDF_Click);
-
-            //    listItem.SubItems.Add(pdfLinkCol);
-            //    listHistory.AddControlToSubItem(bntOpenPDF, pdfLinkCol);
-
-            //    listItem.SubItems.Add(chapInfo.PdfPath);
-            //    this.listHistory.Items.Add(listItem);
-            //    lblPageCount.Text = string.Format("{0:D2}/{1:D2}", "0", chapInfo.PageCount);
-
-            //});
-        }
-
+        
         private ChapterInfo GetNextChapter()
         {
             foreach (var item in DownloadItems)
@@ -509,8 +455,12 @@ namespace ComicDownloader.Forms
 
         private void QueueDownloadForm_Enter(object sender, EventArgs e)
         {
-            //Enable or disable button 
             RefreshData();
+            if (OnFormActivate != null)
+            {
+                OnFormActivate(DownloadItems);
+            }
+            
         }
 
         private void QueueDownloadForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -560,6 +510,115 @@ namespace ComicDownloader.Forms
             //Stop Thread
             RefreshData();
             SaveHistoryItem(DownloadItems);
+        }
+        private bool isContextMenuShowing = false;
+        private void contextMenuStrip1_Opened(object sender, EventArgs e)
+        {
+            var selectedItems = this.lsvItems.SelectedItems[0];
+            var col = selectedItems.ListView.Columns.Cast<ColumnHeader>().FirstOrDefault(p => p.Text == "Status");
+            var value = selectedItems.SubItems[col.Index].Text;
+            if (value == DownloadStatus.Completed.ToString())
+            {
+                viewPDFToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                viewPDFToolStripMenuItem.Enabled = false;
+            }
+            isContextMenuShowing = true;
+
+            //MessageBox.Show("contextMenuStrip1_Opened");
+        }
+
+        private void contextMenuStrip1_Closed(object sender, ToolStripDropDownClosedEventArgs e)
+        {
+            isContextMenuShowing = false;
+            //MessageBox.Show("contextMenuStrip1_Closed");
+        }
+
+        private ChapterInfo GetChapterByIdentity(Guid Identity)
+        {
+            ChapterInfo chap = null;
+
+            foreach (var item in DownloadItems)
+            {
+                chap = item.SelectedChapters.FirstOrDefault(p => p.UniqueIdentify == Identity);
+                if (chap != null) break;
+            }
+            return chap;
+        }
+        private void viewPDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var selectedItems = this.lsvItems.SelectedItems[0];
+            var col = selectedItems.ListView.Columns.Cast<ColumnHeader>().FirstOrDefault(p => p.Text == "Identify");
+            var value = selectedItems.SubItems[col.Index].Text;
+            var chap = GetChapterByIdentity(new Guid(value));
+            if(File.Exists(chap.PdfPath)){
+            Process.Start(string.Format("\"{0}\"", chap.PdfPath));
+            }
+            else{
+                MessageBox.Show(string.Format("File {0} was moved or deleted!", chap.PdfPath));
+            }
+
+
+        }
+
+        private void mnuForceDownload_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        internal void AbortQueue()
+        {
+            if (queueDownloadThread != null && queueDownloadThread.IsAlive)
+            {
+                queueDownloadThread.Abort();
+                SaveHistoryItem(DownloadItems);
+                if (OnQueueCompleted != null)
+                {
+                    OnQueueCompleted(DownloadItems);
+                }
+            }
+        }
+
+        private void readChapterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            var chap = GetSelectedChapterInfo();
+            SlideShow slideshow = new SlideShow(chap.Folder);
+            slideshow.Show(this);
+        }
+
+        private ChapterInfo GetSelectedChapterInfo()
+        {
+            var selectedItems = this.lsvItems.SelectedItems[0];
+            var col = selectedItems.ListView.Columns.Cast<ColumnHeader>().FirstOrDefault(p => p.Text == "Identify");
+            var value = selectedItems.SubItems[col.Index].Text;
+            var chap = GetChapterByIdentity(new Guid(value));
+            return chap;
+        }
+
+        private void exploreChapterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var chapInfo = GetSelectedChapterInfo();
+            MainWindow window = new MainWindow(new string[] { chapInfo.Folder + "/dum.trick", "0" });
+            window.WindowState = FormWindowState.Maximized;
+            window.ShowDialog();
+
+        }
+
+        private void allCompletedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DownloadStatus status = DownloadStatus.Completed;
+
+            foreach (var item in DownloadItems)
+            {
+                var chapterRemoves = item.SelectedChapters.RemoveAll(p => p.Status == status);
+            }
+            DownloadItems.RemoveAll(p => p.SelectedChapters.Count == 0);
+            SaveHistoryItem(DownloadItems);
+
+            RefreshData();
         }
     }
 }

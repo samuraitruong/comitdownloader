@@ -389,6 +389,41 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _1364728988_file_extension_pdf {
+            get {
+                object obj = ResourceManager.GetObject("1364728988_file_extension_pdf", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364729000_old_edit_find {
+            get {
+                object obj = ResourceManager.GetObject("1364729000_old-edit-find", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364729045_Gnome_Mail_Mark_Read_32 {
+            get {
+                object obj = ResourceManager.GetObject("1364729045_Gnome-Mail-Mark-Read-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364729079_folderopen1 {
+            get {
+                object obj = ResourceManager.GetObject("1364729079_folderopen1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364738251_folder_explore {
+            get {
+                object obj = ResourceManager.GetObject("1364738251_folder_explore", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap _14747480_bang_comic_book_explosion {
             get {
                 object obj = ResourceManager.GetObject("14747480-bang-comic-book-explosion", resourceCulture);

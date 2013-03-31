@@ -860,7 +860,7 @@ namespace ComicDownloader
             QueueDownloadForm.AddDownloadItem(item);
 
             var parent = this.MdiParent as AppMainForm;
-            parent.ShowQueueForm(true);
+            parent.ShowQueueForm(start);
 
         }
 
