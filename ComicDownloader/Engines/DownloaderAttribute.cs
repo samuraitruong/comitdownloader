@@ -10,7 +10,8 @@ namespace ComicDownloader.Engines
     public class DownloaderAttribute : Attribute
     {
         public string Name { get; set; }
-        public string Category { get; set; }
+        public string MenuGroup { get; set; }
+        public string Language { get; set; }
         public string Image32 { get; set; }
         public string Image24 { get; set; }
         public string Image16 { get; set; }

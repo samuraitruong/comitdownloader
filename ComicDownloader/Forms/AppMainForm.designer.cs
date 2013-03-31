@@ -46,13 +46,15 @@
             this.bntResumeError = new System.Windows.Forms.RibbonButton();
             this.bntClearQueue = new System.Windows.Forms.RibbonButton();
             this.ribbonSeparator1 = new System.Windows.Forms.RibbonSeparator();
-            this.ribbonPanel13 = new System.Windows.Forms.RibbonPanel();
-            this.ribbonPanel3 = new System.Windows.Forms.RibbonPanel();
-            this.ribbonComboBox1 = new System.Windows.Forms.RibbonComboBox();
             this.ribbonComboBox2 = new System.Windows.Forms.RibbonComboBox();
             this.ribbonButton3 = new System.Windows.Forms.RibbonButton();
             this.ribbonButton4 = new System.Windows.Forms.RibbonButton();
             this.ribbonButton5 = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
+            this.bntSupports = new System.Windows.Forms.RibbonButton();
+            this.ribbonPanel13 = new System.Windows.Forms.RibbonPanel();
+            this.ribbonPanel3 = new System.Windows.Forms.RibbonPanel();
+            this.ribbonComboBox1 = new System.Windows.Forms.RibbonComboBox();
             this.SuspendLayout();
             // 
             // mdiTabStrip1
@@ -139,6 +141,7 @@
             // 
             this.rbtHome.Panels.Add(this.pnlDownload);
             this.rbtHome.Panels.Add(this.rbtDownloadQueue);
+            this.rbtHome.Panels.Add(this.ribbonPanel1);
             this.rbtHome.Text = "Home";
             // 
             // pnlDownload
@@ -216,21 +219,6 @@
             this.bntClearQueue.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntClearQueue.SmallImage")));
             this.bntClearQueue.Click += new System.EventHandler(this.bntClearQueue_Click);
             // 
-            // ribbonPanel13
-            // 
-            this.ribbonPanel13.Text = "XomTruyen.com";
-            // 
-            // ribbonPanel3
-            // 
-            this.ribbonPanel3.Text = "XomTruyen.com";
-            // 
-            // ribbonComboBox1
-            // 
-            this.ribbonComboBox1.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
-            this.ribbonComboBox1.Text = "When queue complete?";
-            this.ribbonComboBox1.TextBoxText = "";
-            this.ribbonComboBox1.Value = "When queue complete?";
-            // 
             // ribbonComboBox2
             // 
             this.ribbonComboBox2.DropDownItems.Add(this.ribbonButton3);
@@ -264,6 +252,34 @@
             this.ribbonButton5.MinimumSize = new System.Drawing.Size(0, 0);
             this.ribbonButton5.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton5.SmallImage")));
             this.ribbonButton5.Text = "Do Nothing";
+            // 
+            // ribbonPanel1
+            // 
+            this.ribbonPanel1.Items.Add(this.bntSupports);
+            this.ribbonPanel1.Text = "Info?";
+            // 
+            // bntSupports
+            // 
+            this.bntSupports.Image = global::ComicDownloader.Properties.Resources._1364755245_network_support;
+            this.bntSupports.MaximumSize = new System.Drawing.Size(0, 0);
+            this.bntSupports.MinimumSize = new System.Drawing.Size(0, 0);
+            this.bntSupports.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntSupports.SmallImage")));
+            this.bntSupports.Click += new System.EventHandler(this.bntSupports_Click);
+            // 
+            // ribbonPanel13
+            // 
+            this.ribbonPanel13.Text = "XomTruyen.com";
+            // 
+            // ribbonPanel3
+            // 
+            this.ribbonPanel3.Text = "XomTruyen.com";
+            // 
+            // ribbonComboBox1
+            // 
+            this.ribbonComboBox1.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
+            this.ribbonComboBox1.Text = "When queue complete?";
+            this.ribbonComboBox1.TextBoxText = "";
+            this.ribbonComboBox1.Value = "When queue complete?";
             // 
             // AppMainForm
             // 
@@ -310,6 +326,8 @@
         private System.Windows.Forms.RibbonButton ribbonButton4;
         private System.Windows.Forms.RibbonButton ribbonButton5;
         private System.Windows.Forms.RibbonComboBox ribbonComboBox1;
+        private System.Windows.Forms.RibbonPanel ribbonPanel1;
+        private System.Windows.Forms.RibbonButton bntSupports;
         
     }
 }

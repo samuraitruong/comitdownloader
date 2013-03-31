@@ -21,9 +21,10 @@ namespace ComicDownloader
         public AppMainForm()
         {
             InitializeComponent();
+            var tags = GetRibbonMenuTags();
+            
             // build menu
             BuildDropDownMenu();
-            var tags = GetRibbonMenuTags();
 
             AddTagsToRibbonMenu(tags);
         }
@@ -81,12 +82,12 @@ namespace ComicDownloader
                 {
                     foreach (DownloaderAttribute att in attributes)
                     {
-                        var tag = tags.Find(p => p.TagName == att.Category);
+                        var tag = tags.Find(p => p.TagName == att.MenuGroup);
                         if(tag == null){
                             tag = new MenuInfo() ;
                             tags.Add(tag);
                         }
-                        tag.TagName = att.Category;
+                        tag.TagName = att.MenuGroup;
 
                         global::System.Resources.ResourceManager resourceMan = new global::System.Resources.ResourceManager("ComicDownloader.Properties.Resources", typeof(Resources).Assembly);
 
@@ -115,24 +116,48 @@ namespace ComicDownloader
         {
             cobDownloaders.DropDownItems.Clear();
 
-            foreach (var downloader in Downloader.GetAllDownloaders().OrderBy(p => p.Name))
+            List<RibbonComboBox> languages = new List<RibbonComboBox>();
+
+            foreach (var downloader in Downloader.GetAllDownloaders())
             {
-                //cobDownloaders.DropDownItems.Add(
-                RibbonButton downloaderMenuButton = new RibbonButton()
+                var attributes = downloader.GetType().GetCustomAttributes(typeof(DownloaderAttribute), true);
+                if (attributes != null)
                 {
-                    MaximumSize = new System.Drawing.Size(0, 0),
-                    MinimumSize = new System.Drawing.Size(0, 0),
-                    Text = downloader.Name,
-                    Tag = downloader
-                };
-                downloaderMenuButton.Click += new EventHandler(delegate(object sender, EventArgs e)
-                {
-                    var dl = ((RibbonButton)sender).Tag as Downloader;
+                    foreach (DownloaderAttribute att in attributes)
+                    {
+                        var tag = languages.Find(p => p.Tag!=null && p.Tag.ToString() == att.Language);
+                        if (tag == null)
+                        {
+                            tag = new RibbonComboBox()
+                            {
+                                Text = att.Language,
+                                Value = att.Language,
+                                Tag = att.Language,
+                                TextBoxText= att.Language
+                            };
+                            languages.Add(tag);
+                        }
+                        RibbonButton downloaderMenuButton = new RibbonButton()
+                        {
+                            MaximumSize = new System.Drawing.Size(0, 0),
+                            MinimumSize = new System.Drawing.Size(0, 0),
+                            Text = downloader.Name,
+                            Tag = downloader
+                        };
+                        downloaderMenuButton.Click += new EventHandler(delegate(object sender, EventArgs e)
+                        {
+                            var dl = ((RibbonButton)sender).Tag as Downloader;
 
-                    AddChildForm(dl.Name, dl);
-                });
+                            AddChildForm(dl.Name, dl);
+                        });
 
-                cobDownloaders.DropDownItems.Add(downloaderMenuButton);
+                        tag.DropDownItems.Add(downloaderMenuButton);
+                    }
+                }
+            }
+            foreach (var item in languages)
+            {
+                cobDownloaders.DropDownItems.Add(item);
 
 
 
@@ -326,6 +351,14 @@ namespace ComicDownloader
         private void bntStopQueue_Click(object sender, EventArgs e)
         {
             QueueForm.AbortQueue();
+        }
+
+        private void bntSupports_Click(object sender, EventArgs e)
+        {
+            HostProviderSupportForm childForm = new HostProviderSupportForm();
+            childForm.MdiParent = this;
+            
+            childForm.Show();
         }
 
         

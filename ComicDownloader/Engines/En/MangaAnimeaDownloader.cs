@@ -7,22 +7,22 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("KissManga", MenuGroup = "English", Language = "English", Image32 = "_1364410887_Add")]
-    public class KissMangaDownloader : Downloader
+    [Downloader("MangaAnimea", MenuGroup = "English - 2", Language = "English", Image32 = "_1364410884_add1_")]
+    public class MangaAnimeaDownloader : Downloader
     {
         public override string Name
         {
-            get { return "[Kiss Manga] - "; }
+            get { return "[Manga.Animea.NET] - "; }
         }
 
         public override string ListStoryURL
         {
-            get { return "http://kissmanga.com/MangaList"; }
+            get { return "http://manga.animea.net/browse.html"; }
         }
 
         public override string HostUrl
         {
-            get { return "http://kissmanga.com"; }
+            get { return "http://manga.animea.net"; }
         }
 
         public override string StoryUrlPattern
@@ -48,16 +48,17 @@ namespace ComicDownloader.Engines
                     HtmlDocument htmlDoc = new HtmlDocument();
                     htmlDoc.LoadHtml(html);
 
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"listing\"]//td[1]/a");
+                    var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"mangalist\"]//li/a");
                     if (nodes != null && nodes.Count > 0)
                     {
+                        
                         currentPage++;
                         foreach (var node in nodes)
                         {
                             StoryInfo info = new StoryInfo()
                             {
-                                Url = HostUrl + node.Attributes["href"].Value,
-                                Name = node.InnerText.Trim()
+                                Url = HostUrl+node.Attributes["href"].Value,
+                                Name = node.Attributes["title"].Value.Trim()
                             };
                             results.Add(info);
                         }
@@ -82,54 +83,57 @@ namespace ComicDownloader.Engines
 
             htmlDoc.LoadHtml(html);
 
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class=\"bigBarContainer\"]//a[1]");
+            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"content\"]//h1");
 
             StoryInfo info = new StoryInfo()
             {
                 Url = storyUrl,
-                Name = nameNode.InnerText.Trim().Replace("Manga",""),
+                Name = nameNode.InnerText.Trim(),
             };
 
-
-            var chapterNodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"listing\"]//td[1]/a");
+            var chapterNodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"chapters_list\"]//li/a");
+            if(chapterNodes!=null)
             foreach (HtmlNode chapter in chapterNodes)
             {
                 ChapterInfo chap = new ChapterInfo()
                 {
-                    Name =chapter.InnerText.Trim(),
-                    Url = HostUrl+ chapter.Attributes["href"].Value,
-                    //ChapId = ExtractID(chapter.InnerText)
+                    Name = chapter.InnerText.Trim(),
+                    Url =  HostUrl + chapter.Attributes["href"].Value,
+                    ChapId = ExtractID(chapter.InnerText)
                 };
-                chap.ChapId = ExtractID(chap.Name);
                 info.Chapters.Add(chap);
             }
-            
             info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
             return info;
         }
 
         public override void DownloadPage(string pageUrl, string filename, string httpReferer)
         {
-           
+            var html = NetworkHelper.GetHtml(pageUrl);
+            HtmlDocument htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var img = htmlDoc.DocumentNode.SelectSingleNode("//*[@class=\"mangaimg\"]");
+            pageUrl = img.Attributes["src"].Value;
+
+            
             base.DownloadPage(pageUrl, filename, httpReferer);
         }
         public override List<string> GetPages(string chapUrl)
         {
             var html = NetworkHelper.GetHtml(chapUrl);
 
-           string p = "lstImages.push\\(\"(.*)\"\\)";
+            HtmlDocument htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
 
-            var matches = Regex.Matches(html, p);
-            if (matches == null || matches.Count == 0)
-                matches = Regex.Matches(html, p);
-            List<string> pages = new List<string>();
+            var pages = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"mangaselecter pageselect\"]//option");
 
-            foreach (Match match in matches)
+            List<string> results = new List<string>();
+            foreach (HtmlNode page in pages)
             {
-                pages.Add(match.Groups[1].Value);
+                string url = chapUrl.Replace(".html", "-page-"+page.Attributes["value"].Value+".html");
+                results.Add(url);
             }
-
-            return pages;
+            return results;
         }
     }
 }

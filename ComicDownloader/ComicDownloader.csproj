@@ -194,6 +194,7 @@
     <Compile Include="Engines\18+\Manga16Downloader.cs" />
     <Compile Include="Engines\DownloaderAttribute.cs" />
     <Compile Include="Engines\En\BatotoDownloader.cs" />
+    <Compile Include="Engines\En\MangaAnimeaDownloader.cs" />
     <Compile Include="Engines\En\EatMangaDownloader.cs" />
     <Compile Include="Engines\En\MangagoDownloader.cs" />
     <Compile Include="Engines\En\JPMangaDownloader.cs" />
@@ -422,6 +423,12 @@
     </Compile>
     <Compile Include="Forms\Intro.Designer.cs">
       <DependentUpon>Intro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HostProviderSupportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HostProviderSupportForm.Designer.cs">
+      <DependentUpon>HostProviderSupportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\IViewSettings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -964,6 +971,9 @@
     <EmbeddedResource Include="Forms\QueueDownloadForm.resx">
       <DependentUpon>QueueDownloadForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HostProviderSupportForm.resx">
+      <DependentUpon>HostProviderSupportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -1103,6 +1113,7 @@
     <None Include="Resources\1364729045_Gnome-Mail-Mark-Read-32.png" />
     <None Include="Resources\1364729079_folderopen1.png" />
     <None Include="Resources\1364738251_folder_explore.png" />
+    <None Include="Resources\1364755245_network-support.png" />
     <Content Include="Resources\14747480-bang-comic-book-explosion.jpg" />
     <Content Include="3rd\itextsharp.dll" />
     <Content Include="3rd\Cx.Windows.Forms\MdiTabStrip.bmp" />

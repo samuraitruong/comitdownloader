@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 namespace ComicDownloader.Engines
 {
     //[Downloader("Truyen 18", Category = "VN", Image32 = "1364078951_insert-object")]
-    [Downloader("Hakihome", Category = "VN 18+", Image32 = "1364078951_insert-object")]
+    [Downloader("Hakihome", Language = "Tieng viet", MenuGroup = "VN 18+", Image32 = "1364078951_insert-object")]
 
     public class HakihomeDownloader : Downloader
     {
