@@ -11,6 +11,7 @@ namespace ComicDownloader.Engines
         public string Name { get; set; }
         public string Url { get; set; }
         public string Page { get; set; }
+        public Guid UniqueIdentify { get; set; }
 
         public int ChapId { get; set; }
 

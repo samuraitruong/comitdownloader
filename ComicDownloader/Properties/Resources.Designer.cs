@@ -298,6 +298,97 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _1364717902_list_remove {
+            get {
+                object obj = ResourceManager.GetObject("1364717902_list-remove", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364717999_delete {
+            get {
+                object obj = ResourceManager.GetObject("1364717999_delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364718151_stopwatch_start {
+            get {
+                object obj = ResourceManager.GetObject("1364718151_stopwatch_start", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364718266_up {
+            get {
+                object obj = ResourceManager.GetObject("1364718266_up", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364718270_go_top {
+            get {
+                object obj = ResourceManager.GetObject("1364718270_go-top", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364718320_go_bottom {
+            get {
+                object obj = ResourceManager.GetObject("1364718320_go-bottom", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364718322_emblem_downloads {
+            get {
+                object obj = ResourceManager.GetObject("1364718322_emblem-downloads", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364718418_checked_checkbox {
+            get {
+                object obj = ResourceManager.GetObject("1364718418_checked_checkbox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364718448_checkbox_unchecked {
+            get {
+                object obj = ResourceManager.GetObject("1364718448_checkbox_unchecked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364718484_radio_unchecked {
+            get {
+                object obj = ResourceManager.GetObject("1364718484_radio-unchecked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364718512_to_do_list_cheked_all {
+            get {
+                object obj = ResourceManager.GetObject("1364718512_to_do_list_cheked_all", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364718586_netvibes {
+            get {
+                object obj = ResourceManager.GetObject("1364718586_netvibes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364718804_start_here_ubuntustudio {
+            get {
+                object obj = ResourceManager.GetObject("1364718804_start-here-ubuntustudio", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap _14747480_bang_comic_book_explosion {
             get {
                 object obj = ResourceManager.GetObject("14747480-bang-comic-book-explosion", resourceCulture);

@@ -416,8 +416,8 @@ namespace ComicDownloader
                 {
                     if (item.Cells[0].Checked)
                     {
-                        int id = Convert.ToInt32(item.Cells[1].Data);
-                        var chap = this.currentStoryInfo.Chapters.FirstOrDefault(p => p.ChapId == id);
+                        Guid id = new Guid((item.Cells[1].Text));
+                        var chap = this.currentStoryInfo.Chapters.FirstOrDefault(p => p.UniqueIdentify == id);
                         chap.FolderName = txtTitle.Text + " " + chap.ChapId.ToString();
                         chap.Folder = Path.Combine(rootPath, chap.FolderName);
                         chap.PdfFileName = chap.FolderName + ".pdf";
@@ -634,8 +634,12 @@ namespace ComicDownloader
 
                 foreach (var item in currentStoryInfo.Chapters)
                 {
+                    item.UniqueIdentify = Guid.NewGuid();
+
                     int index = tblChapters.Rows.Add(new Row());
+                    
                     tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId.ToString(), true));
+                    tblChapters.Rows[index].Cells.Add(new Cell(item.UniqueIdentify.ToString(), true));
                     tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId));
                     tblChapters.Rows[index].Cells.Add(new Cell(item.Name, true));
                     tblChapters.Rows[index].Cells.Add(new Cell(item.Url, new CellStyle() { ForeColor = System.Drawing.Color.Green }));
@@ -834,6 +838,12 @@ namespace ComicDownloader
 
         private void mnuAddQueue_Click(object sender, EventArgs e)
         {
+            AddToQueue(false);
+
+        }
+
+        private void AddToQueue(bool start)
+        {
             QueueDownloadItem item = new QueueDownloadItem()
             {
                 ProviderName = Downloader.Name,
@@ -842,16 +852,27 @@ namespace ComicDownloader
                 StoryName = txtTitle.Text.Trim(),
                 Status = DownloadStatus.Waiting,
                 SaveFolder = txtDir.Text,
-               SelectedChapters = CollectChaptersToBeDownloaded()
+                SelectedChapters = CollectChaptersToBeDownloaded()
 
-                
+
             };
 
             QueueDownloadForm.AddDownloadItem(item);
 
             var parent = this.MdiParent as AppMainForm;
-            parent.ShowQueueForm();
+            parent.ShowQueueForm(true);
 
+        }
+
+        private void addOnlyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddToQueue(false);
+        }
+
+        private void mnuAddandStartQueue_Click(object sender, EventArgs e)
+        {
+            AddToQueue(true);
+            
         }
 
         
