@@ -8,7 +8,7 @@ using System.Net;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("nTruyen", Category = "VN - 2", Image32 = "_1364410884_add1_")]
+    [Downloader("nTruyen", Language = "Tieng viet", MenuGroup = "VN - 2", Image32 = "_1364410884_add1_")]
     public class MangaKungDownloader
         : Downloader
     {

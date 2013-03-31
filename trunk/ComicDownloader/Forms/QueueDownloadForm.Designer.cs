@@ -297,10 +297,11 @@
             this.olvIdentify.CellPadding = null;
             this.olvIdentify.Groupable = false;
             this.olvIdentify.IsVisible = false;
+            this.olvIdentify.Width = 0;
             this.olvIdentify.Searchable = false;
             this.olvIdentify.Sortable = false;
             this.olvIdentify.Text = "Identify";
-            this.olvIdentify.Width = 102;
+            
             // 
             // olvPages
             // 
