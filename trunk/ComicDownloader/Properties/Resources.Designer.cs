@@ -249,6 +249,55 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _1364647743_sheduled_task {
+            get {
+                object obj = ResourceManager.GetObject("1364647743_sheduled_task", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364647743_sheduled_task1 {
+            get {
+                object obj = ResourceManager.GetObject("1364647743_sheduled_task1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364647756_sheduled_task {
+            get {
+                object obj = ResourceManager.GetObject("1364647756_sheduled_task", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364671000_10 {
+            get {
+                object obj = ResourceManager.GetObject("1364671000_10", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364710944_clear_left {
+            get {
+                object obj = ResourceManager.GetObject("1364710944_clear_left", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364711392_media_play_pause_resume {
+            get {
+                object obj = ResourceManager.GetObject("1364711392_media-play-pause-resume", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1364712905_download {
+            get {
+                object obj = ResourceManager.GetObject("1364712905_download", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap _14747480_bang_comic_book_explosion {
             get {
                 object obj = ResourceManager.GetObject("14747480-bang-comic-book-explosion", resourceCulture);
@@ -658,6 +707,20 @@ namespace ComicDownloader.Properties {
         internal static System.Drawing.Bitmap locked_16x1611 {
             get {
                 object obj = ResourceManager.GetObject("locked_16x1611", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap media_playback_start__1_ {
+            get {
+                object obj = ResourceManager.GetObject("media_playback_start (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap media_playback_stop {
+            get {
+                object obj = ResourceManager.GetObject("media_playback_stop", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
