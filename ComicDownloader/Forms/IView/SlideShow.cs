@@ -33,6 +33,7 @@
 //:: Using Statements
 //::///////////////////////////////////////////////////////////////////////////
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -95,7 +96,30 @@ namespace IView.UI.Forms
             InitializeComponent();
             InitializeChildForm();
 
-            LoadSlideShowFile(sFilePath);
+            if (Directory.Exists(sFilePath))
+            {
+                m_sFilePaths = new List<string>();
+
+                DirectoryInfo di= new DirectoryInfo(sFilePath);
+                string[] extensions = new[] { ".jpg", ".tiff", ".bmp" };
+
+                FileInfo[] files =
+                    di.GetFiles()
+                         .Where(f => extensions.Contains(f.Extension.ToLower()))
+                         .ToArray();
+
+                //var files = di.GetFiles("*.jpg;*.png");
+                if(files!=null)
+                foreach (var fi in files)
+                {
+                    m_sFilePaths.Add(fi.FullName);
+                }
+
+            }
+            else
+            {
+                LoadSlideShowFile(sFilePath);
+            }
         }
 
         /// <summary>

@@ -11,6 +11,13 @@ namespace ComicDownloader
         FirstPage,
         LastPage
     }
+
+    public enum FinishActions
+    {
+        Nothing,
+        OpenInViewer,
+        ShutdownPC
+    }
     [DefaultPropertyAttribute("Comic")]
     public class ComicDownloaderSettings
     {
@@ -22,17 +29,25 @@ namespace ComicDownloader
         [CategoryAttribute("PDF Settings"), DescriptionAttribute("Select where is the introduction page located")]
         public PagePosition PdfIntroPagePosition { get; set; }
 
+         [CategoryAttribute("Queue download"), DescriptionAttribute("select action to execute when queue finish")]
+        public FinishActions WhenDoneAction { get; set; }
+
         public bool AutoLoadChapter { get; set; }
 
+         [CategoryAttribute("Download settings")]
         public bool EnableResizeImage { get; set; }
+        [CategoryAttribute("Download settings")]
         public bool KeepRatio { get; set; }
+        [CategoryAttribute("Download settings")]
         public int Width { get; set; }
+        [CategoryAttribute("Download settings")]
         public int Height { get; set; }
 
         /// <summary>
         /// {{PAGENUM}} .{FILENAME} {{CHAPTER} {{}}
         /// </summary>
         //public bool EnableRename { get; set; }
+        [CategoryAttribute("Download settings")]
         public string RenamePattern { get; set; }
 
 

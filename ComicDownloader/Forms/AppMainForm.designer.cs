@@ -43,10 +43,16 @@
             this.bntQueueDownload = new System.Windows.Forms.RibbonButton();
             this.bntStartQueue = new System.Windows.Forms.RibbonButton();
             this.bntStopQueue = new System.Windows.Forms.RibbonButton();
-            this.bntClearQueue = new System.Windows.Forms.RibbonButton();
             this.bntResumeError = new System.Windows.Forms.RibbonButton();
+            this.bntClearQueue = new System.Windows.Forms.RibbonButton();
+            this.ribbonSeparator1 = new System.Windows.Forms.RibbonSeparator();
             this.ribbonPanel13 = new System.Windows.Forms.RibbonPanel();
             this.ribbonPanel3 = new System.Windows.Forms.RibbonPanel();
+            this.ribbonComboBox1 = new System.Windows.Forms.RibbonComboBox();
+            this.ribbonComboBox2 = new System.Windows.Forms.RibbonComboBox();
+            this.ribbonButton3 = new System.Windows.Forms.RibbonButton();
+            this.ribbonButton4 = new System.Windows.Forms.RibbonButton();
+            this.ribbonButton5 = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
             // mdiTabStrip1
@@ -138,7 +144,7 @@
             // pnlDownload
             // 
             this.pnlDownload.Items.Add(this.cobDownloaders);
-            this.pnlDownload.Text = null;
+            this.pnlDownload.Text = "Add new";
             // 
             // cobDownloaders
             // 
@@ -160,8 +166,10 @@
             this.rbtDownloadQueue.Items.Add(this.bntQueueDownload);
             this.rbtDownloadQueue.Items.Add(this.bntStartQueue);
             this.rbtDownloadQueue.Items.Add(this.bntStopQueue);
-            this.rbtDownloadQueue.Items.Add(this.bntClearQueue);
             this.rbtDownloadQueue.Items.Add(this.bntResumeError);
+            this.rbtDownloadQueue.Items.Add(this.bntClearQueue);
+            this.rbtDownloadQueue.Items.Add(this.ribbonSeparator1);
+            this.rbtDownloadQueue.Items.Add(this.ribbonComboBox2);
             this.rbtDownloadQueue.Text = "Download Queue";
             // 
             // bntQueueDownload
@@ -174,6 +182,7 @@
             // 
             // bntStartQueue
             // 
+            this.bntStartQueue.Enabled = false;
             this.bntStartQueue.Image = global::ComicDownloader.Properties.Resources.media_playback_start__1_;
             this.bntStartQueue.MaximumSize = new System.Drawing.Size(0, 0);
             this.bntStartQueue.MinimumSize = new System.Drawing.Size(0, 0);
@@ -182,26 +191,30 @@
             // 
             // bntStopQueue
             // 
+            this.bntStopQueue.Enabled = false;
             this.bntStopQueue.Image = global::ComicDownloader.Properties.Resources.media_playback_stop;
             this.bntStopQueue.MaximumSize = new System.Drawing.Size(0, 0);
             this.bntStopQueue.MinimumSize = new System.Drawing.Size(0, 0);
             this.bntStopQueue.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntStopQueue.SmallImage")));
-            // 
-            // bntClearQueue
-            // 
-            this.bntClearQueue.Image = global::ComicDownloader.Properties.Resources._1364710944_clear_left;
-            this.bntClearQueue.MaximumSize = new System.Drawing.Size(0, 0);
-            this.bntClearQueue.MinimumSize = new System.Drawing.Size(0, 0);
-            this.bntClearQueue.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntClearQueue.SmallImage")));
-            this.bntClearQueue.Click += new System.EventHandler(this.bntClearQueue_Click);
+            this.bntStopQueue.Click += new System.EventHandler(this.bntStopQueue_Click);
             // 
             // bntResumeError
             // 
+            this.bntResumeError.Enabled = false;
             this.bntResumeError.Image = global::ComicDownloader.Properties.Resources._1364712905_download;
             this.bntResumeError.MaximumSize = new System.Drawing.Size(0, 0);
             this.bntResumeError.MinimumSize = new System.Drawing.Size(0, 0);
             this.bntResumeError.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntResumeError.SmallImage")));
             this.bntResumeError.Click += new System.EventHandler(this.bntResumeError_Click);
+            // 
+            // bntClearQueue
+            // 
+            this.bntClearQueue.Enabled = false;
+            this.bntClearQueue.Image = global::ComicDownloader.Properties.Resources._1364710944_clear_left;
+            this.bntClearQueue.MaximumSize = new System.Drawing.Size(0, 0);
+            this.bntClearQueue.MinimumSize = new System.Drawing.Size(0, 0);
+            this.bntClearQueue.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntClearQueue.SmallImage")));
+            this.bntClearQueue.Click += new System.EventHandler(this.bntClearQueue_Click);
             // 
             // ribbonPanel13
             // 
@@ -210,6 +223,47 @@
             // ribbonPanel3
             // 
             this.ribbonPanel3.Text = "XomTruyen.com";
+            // 
+            // ribbonComboBox1
+            // 
+            this.ribbonComboBox1.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
+            this.ribbonComboBox1.Text = "When queue complete?";
+            this.ribbonComboBox1.TextBoxText = "";
+            this.ribbonComboBox1.Value = "When queue complete?";
+            // 
+            // ribbonComboBox2
+            // 
+            this.ribbonComboBox2.DropDownItems.Add(this.ribbonButton3);
+            this.ribbonComboBox2.DropDownItems.Add(this.ribbonButton4);
+            this.ribbonComboBox2.DropDownItems.Add(this.ribbonButton5);
+            this.ribbonComboBox2.Text = "When finish?";
+            this.ribbonComboBox2.TextBoxText = "";
+            this.ribbonComboBox2.ToolTip = "When finish";
+            this.ribbonComboBox2.Value = "When finish?";
+            // 
+            // ribbonButton3
+            // 
+            this.ribbonButton3.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton3.Image")));
+            this.ribbonButton3.MaximumSize = new System.Drawing.Size(0, 0);
+            this.ribbonButton3.MinimumSize = new System.Drawing.Size(0, 0);
+            this.ribbonButton3.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton3.SmallImage")));
+            this.ribbonButton3.Text = "Shutdown PC";
+            // 
+            // ribbonButton4
+            // 
+            this.ribbonButton4.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton4.Image")));
+            this.ribbonButton4.MaximumSize = new System.Drawing.Size(0, 0);
+            this.ribbonButton4.MinimumSize = new System.Drawing.Size(0, 0);
+            this.ribbonButton4.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton4.SmallImage")));
+            this.ribbonButton4.Text = "Open Comic Viewer";
+            // 
+            // ribbonButton5
+            // 
+            this.ribbonButton5.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton5.Image")));
+            this.ribbonButton5.MaximumSize = new System.Drawing.Size(0, 0);
+            this.ribbonButton5.MinimumSize = new System.Drawing.Size(0, 0);
+            this.ribbonButton5.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton5.SmallImage")));
+            this.ribbonButton5.Text = "Do Nothing";
             // 
             // AppMainForm
             // 
@@ -250,6 +304,12 @@
         private System.Windows.Forms.RibbonButton bntStopQueue;
         private System.Windows.Forms.RibbonButton bntClearQueue;
         private System.Windows.Forms.RibbonButton bntResumeError;
+        private System.Windows.Forms.RibbonSeparator ribbonSeparator1;
+        private System.Windows.Forms.RibbonComboBox ribbonComboBox2;
+        private System.Windows.Forms.RibbonButton ribbonButton3;
+        private System.Windows.Forms.RibbonButton ribbonButton4;
+        private System.Windows.Forms.RibbonButton ribbonButton5;
+        private System.Windows.Forms.RibbonComboBox ribbonComboBox1;
         
     }
 }
