@@ -177,6 +177,12 @@
     <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\ConvolutionMatrix.cs" />
     <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\ImageProcessing.cs" />
     <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\IProcessingType.cs" />
+    <Compile Include="3rd\ObjectListView\DataTreeListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\Filtering\FlagClusteringStrategy.cs" />
+    <Compile Include="3rd\ObjectListView\Implementation\TreeDataSourceAdapter.cs" />
+    <Compile Include="3rd\ObjectListView\Utilities\OLVExporter.cs" />
     <Compile Include="3rd\PagedList\BasePagedList.cs" />
     <Compile Include="3rd\PagedList\IPagedList.cs" />
     <Compile Include="3rd\PagedList\PagedList.cs" />
@@ -187,11 +193,16 @@
     <Compile Include="Engines\18+\HakihomeDownloader.cs" />
     <Compile Include="Engines\18+\Manga16Downloader.cs" />
     <Compile Include="Engines\DownloaderAttribute.cs" />
+    <Compile Include="Engines\En\BatotoDownloader.cs" />
+    <Compile Include="Engines\En\EatMangaDownloader.cs" />
+    <Compile Include="Engines\En\MangagoDownloader.cs" />
+    <Compile Include="Engines\En\JPMangaDownloader.cs" />
     <Compile Include="Engines\En\MangaChromeDownloader.cs" />
     <Compile Include="Engines\En\KissMangaDownloader.cs" />
     <Compile Include="Engines\En\TenMangaDownloader.cs" />
     <Compile Include="Engines\En\MangaParkDownloader.cs" />
     <Compile Include="Engines\En\MangaHereDownloader.cs" />
+    <Compile Include="Engines\Proxies\BlogTruyenDownloaderProxy.cs" />
     <Compile Include="Engines\Vn\WebTruyenDownloader.cs" />
     <Compile Include="Forms\AppMainForm.cs">
       <SubType>Form</SubType>
@@ -380,6 +391,12 @@
     </Compile>
     <Compile Include="Forms\IView\UpdateLocations.Designer.cs">
       <DependentUpon>UpdateLocations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\QueueDownloadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\QueueDownloadForm.Designer.cs">
+      <DependentUpon>QueueDownloadForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\NetworkHelper.cs" />
     <Compile Include="Engines\StoryInfo.cs" />
@@ -829,6 +846,7 @@
     <Compile Include="Forms\SettingForm.Designer.cs">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="QueueDownloadItem.cs" />
     <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\ColourPicker.resx">
       <DependentUpon>ColourPicker.cs</DependentUpon>
     </EmbeddedResource>
@@ -934,6 +952,9 @@
     <EmbeddedResource Include="Forms\IView\UpdateLocations.resx">
       <DependentUpon>UpdateLocations.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\QueueDownloadForm.resx">
+      <DependentUpon>QueueDownloadForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -957,6 +978,7 @@
       <DependentUpon>SettingForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="3rd\ObjectListView\FullClassDiagram.cd" />
+    <None Include="3rd\ObjectListView\ObjectListView.FxCop" />
     <None Include="app.config" />
     <None Include="Properties\IViewSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -1046,6 +1068,14 @@
     <None Include="Resources\1364561047_wheel.png" />
     <None Include="Resources\1364561037_wheel.png" />
     <None Include="Resources\1364561270_exit.png" />
+    <None Include="Resources\1364647743_sheduled_task.png" />
+    <None Include="Resources\1364647743_sheduled_task1.png" />
+    <None Include="Resources\1364647756_sheduled_task.png" />
+    <None Include="Resources\1364671000_10.png" />
+    <None Include="Resources\1364710944_clear_left.png" />
+    <None Include="Resources\1364711392_media-play-pause-resume.png" />
+    <None Include="Resources\1364712905_download.png" />
+    <Content Include="Resources\1364714377_46796.ico" />
     <Content Include="Resources\14747480-bang-comic-book-explosion.jpg" />
     <Content Include="3rd\itextsharp.dll" />
     <Content Include="3rd\Cx.Windows.Forms\MdiTabStrip.bmp" />
@@ -1075,6 +1105,8 @@
     <None Include="Resources\Save File Filter.txt" />
     <None Include="Resources\pause_16x16.png" />
     <None Include="Resources\play_16x16.png" />
+    <None Include="Resources\media_playback_start %281%29.png" />
+    <None Include="Resources\media_playback_stop.png" />
     <Content Include="Resources\the_marvel_universe.jpg" />
     <Content Include="3rd\XPTable\Models\ColumnModel.bmp" />
     <Content Include="3rd\XPTable\Models\Table.bmp" />
@@ -1082,6 +1114,11 @@
     <Content Include="3rd\XPTable\XPTable.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="3rd\ObjectListView\bin\debug\" />
+    <Folder Include="3rd\ObjectListView\bin\Release\" />
+    <Folder Include="3rd\ObjectListView\obj\Debug\Refactor\" />
+    <Folder Include="3rd\ObjectListView\obj\Debug\TempPE\" />
+    <Folder Include="3rd\ObjectListView\obj\Release\TempPE\" />
     <Folder Include="3rd\XPTable\doc\" />
     <Folder Include="Engines\JP\" />
   </ItemGroup>

@@ -22,7 +22,7 @@ namespace ComicDownloader.Engines
 
         public override string HostUrl
         {
-            get { return "http://truyen.vnsharing.net"; }
+            get { return "http://truyentranhnhanh.com"; }
         }
 
         public override string StoryUrlPattern

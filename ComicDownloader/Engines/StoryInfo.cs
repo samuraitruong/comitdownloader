@@ -7,6 +7,7 @@ namespace ComicDownloader.Engines
 {
     public class ChapterInfo
     {
+        public string Downloader { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
         public string Page { get; set; }
@@ -20,10 +21,17 @@ namespace ComicDownloader.Engines
         public string PdfFileName { get; set; }
 
         public string PdfPath { get; set; }
-
+        public DownloadStatus Status { get; set; }
         public List<string> Pages { get; set; }
 
         public int PageCount { get; set; }
+
+        public long Size { get; set; }
+
+        public int DownloadedCount { get; set; }
+        public ChapterInfo() {
+            DownloadedCount = 0;
+        }
     }
     public class StoryInfo
     {
@@ -36,7 +44,7 @@ namespace ComicDownloader.Engines
         public List<ChapterInfo> Chapters { get; set; }
         public int ChapterCount { get; set; }
 
-
+        
         public string UrlSegment { get; set; }
 
         public StoryInfo()

@@ -11,6 +11,8 @@ using ComicDownloader.Engines;
 using ComicDownloader.Forms;
 using ComicDownloader.Properties;
 using System.Reflection;
+using System.Threading;
+using Cx.Windows.Forms;
 
 namespace ComicDownloader
 {
@@ -209,7 +211,75 @@ namespace ComicDownloader
             form.MdiParent = this;
             form.Show();
         }
+        public QueueDownloadForm QueueForm { get; set; } 
 
-       
+        private void bntQueueDownload_Click(object sender, EventArgs e)
+        {
+            ShowQueueForm();
+        }
+
+        public void ShowQueueForm()
+        {
+            if (QueueForm == null)
+            {
+                QueueForm = new QueueDownloadForm();
+                QueueForm.MdiParent = this;
+                QueueForm.Tag = mdiTabStrip1.SelectedTab;
+                QueueForm.Show();
+            }
+            else
+            {
+                bool found = false;
+                foreach (MdiTabStripButton item in mdiTabStrip1.Items)
+                {
+                    if (item.GetMdiChild() == QueueForm)
+                    {
+                        item.PerformButtonClick();
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    QueueForm = new QueueDownloadForm();
+                    QueueForm.MdiParent = this;
+                    QueueForm.Tag = mdiTabStrip1.SelectedTab;
+                    QueueForm.Show();
+                }
+              
+               
+            }
+
+            ribbon1.Tabs[0].SetActive(true);
+                    
+        }
+
+        
+        private void bntStartQueue_Click(object sender, EventArgs e)
+        {
+            ShowQueueForm();
+            QueueForm.StartQueue();
+            
+        }
+
+        private void mdiTabStrip1_TabIndexChanged(object sender, EventArgs e)
+        {
+            var item = mdiTabStrip1.Items[mdiTabStrip1.TabIndex];
+            
+        }
+
+        private void bntClearQueue_Click(object sender, EventArgs e)
+        {
+           // ShowQueueForm();
+            QueueForm.ClearQueue();
+        }
+
+        private void bntResumeError_Click(object sender, EventArgs e)
+        {
+            //ShowQueueForm();
+            QueueForm.ResumeDownloadItems(DownloadStatus.Error);
+        }
+
+        
     }
 }

@@ -406,7 +406,7 @@ namespace ComicDownloader
             Process.Start(string.Format("\"{0}\"", link.Tag.ToString()));
         }
 
-        private void CollectChaptersToBeDownloaded()
+        private List<ChapterInfo> CollectChaptersToBeDownloaded()
         {
             string rootPath = txtDir.Text;
             toBeDownloadedChapters.Clear();
@@ -422,10 +422,12 @@ namespace ComicDownloader
                         chap.Folder = Path.Combine(rootPath, chap.FolderName);
                         chap.PdfFileName = chap.FolderName + ".pdf";
                         chap.PdfPath = Path.Combine(rootPath, "PDF\\" + chap.PdfFileName);
+                        chap.Status = DownloadStatus.Waiting;
                         toBeDownloadedChapters.Add(chap);
                     }
                 }
             }
+            return toBeDownloadedChapters;
         }
 
         private void CreateChapterFolder(ChapterInfo chapInfo)
@@ -656,6 +658,7 @@ namespace ComicDownloader
             mnuSelectAll.Enabled = state;
             mnuSelectInverse.Enabled = state;
             mnuSelectNone.Enabled = state;
+            mnuAddQueue.Enabled = state;
         }
 
         private void LockControl(bool p)
@@ -822,6 +825,33 @@ namespace ComicDownloader
         private void DownloaderForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             btnExitThread.PerformClick();
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void mnuAddQueue_Click(object sender, EventArgs e)
+        {
+            QueueDownloadItem item = new QueueDownloadItem()
+            {
+                ProviderName = Downloader.Name,
+                Downloader = Downloader.GetType().FullName,
+                StoryUrl = txtUrl.Text,
+                StoryName = txtTitle.Text.Trim(),
+                Status = DownloadStatus.Waiting,
+                SaveFolder = txtDir.Text,
+               SelectedChapters = CollectChaptersToBeDownloaded()
+
+                
+            };
+
+            QueueDownloadForm.AddDownloadItem(item);
+
+            var parent = this.MdiParent as AppMainForm;
+            parent.ShowQueueForm();
+
         }
 
         

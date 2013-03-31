@@ -5,6 +5,10 @@
  * Date: 4-March-2011 11:59 pm
  *
  * Change log:
+ * 2012-05-20  JPP  - Allow the same model object to be in multiple clusters
+ *                    Useful for xor'ed flag fields, and multi-value strings
+ *                    (e.g. hobbies that are stored as comma separated values).
+ * v2.5.1
  * 2012-04-14  JPP  - Fixed rare bug with clustering an empty list (SF #3445118)
  * v2.5
  * 2011-04-12  JPP  - Added some images to menu
@@ -34,7 +38,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Collections;
 using System.Drawing;
-using ComicDownloader.Properties;
 
 namespace BrightIdeasSoftware {
 
@@ -80,12 +83,12 @@ namespace BrightIdeasSoftware {
         /// <summary>
         /// Gets or sets the image that will be placed next to the Clear Filtering menu item
         /// </summary>
-        static public Bitmap ClearFilteringImage =Resources.ClearFiltering;
+        static public Bitmap ClearFilteringImage = ComicDownloader.Properties.Resources.ClearFiltering;
 
         /// <summary>
         /// Gets or sets the image that will be placed next to all "Apply" menu items on the filtering menu
         /// </summary>
-        static public Bitmap FilteringImage = Resources.Filtering;
+        static public Bitmap FilteringImage = ComicDownloader.Properties.Resources.Filtering;
 
         #endregion
 
@@ -153,20 +156,10 @@ namespace BrightIdeasSoftware {
             // Build a map that correlates cluster key to clusters
             NullableDictionary<object, ICluster> map = new NullableDictionary<object, ICluster>();
             int count = 0;
-            foreach (object model in listView.Objects) {
-                object key = strategy.GetClusterKey(model);
-                if (key == System.DBNull.Value)
-                    key = null;
-                if (key == null && !this.TreatNullAsDataValue)
-                    continue;
-                if (map.ContainsKey(key))
-                    map[key].Count += 1;
-                else
-                    map[key] = strategy.CreateCluster(key);
+            foreach (object model in listView.ObjectsForClustering) {
+                this.ClusterOneModel(strategy, map, model);
 
-                // Check our limit
-                count += 1;
-                if (count > this.MaxObjectsToConsider)
+                if (count++ > this.MaxObjectsToConsider)
                     break;
             }
 
@@ -175,6 +168,32 @@ namespace BrightIdeasSoftware {
                 cluster.DisplayLabel = strategy.GetClusterDisplayLabel(cluster);
 
             return new List<ICluster>(map.Values);
+        }
+
+        private void ClusterOneModel(IClusteringStrategy strategy, NullableDictionary<object, ICluster> map, object model) {
+            object clusterKey = strategy.GetClusterKey(model);
+
+            // If the returned value is an IEnumerable, that means the given model can belong to more than one cluster
+            IEnumerable keyEnumerable = clusterKey as IEnumerable;
+            if (clusterKey is string || keyEnumerable == null)
+                keyEnumerable = new object[] {clusterKey};
+
+            // Deal with nulls and DBNulls
+            ArrayList nullCorrected = new ArrayList();
+            foreach (object key in keyEnumerable) {
+                if (key == null || key == System.DBNull.Value) {
+                    if (this.TreatNullAsDataValue)
+                        nullCorrected.Add(null);
+                } else nullCorrected.Add(key);
+            }
+
+            // Group by key
+            foreach (object key in nullCorrected) {
+                if (map.ContainsKey(key))
+                    map[key].Count += 1;
+                else
+                    map[key] = strategy.CreateCluster(key);
+            }
         }
 
         /// <summary>

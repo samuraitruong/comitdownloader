@@ -62,6 +62,8 @@ namespace ComicDownloader
             this.mnuSelectNone = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSelectInverse = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSelectSelected = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuAddQueue = new System.Windows.Forms.ToolStripMenuItem();
             this.tblChapters = new XPTable.Models.TableModel();
             this.groupDownload = new System.Windows.Forms.GroupBox();
             this.btnExitThread = new System.Windows.Forms.Button();
@@ -320,9 +322,12 @@ namespace ComicDownloader
             this.mnuSelectAll,
             this.mnuSelectNone,
             this.mnuSelectInverse,
-            this.mnuSelectSelected});
+            this.mnuSelectSelected,
+            this.toolStripSeparator1,
+            this.mnuAddQueue});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(171, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(171, 142);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // mnuSelectAll
             // 
@@ -355,6 +360,20 @@ namespace ComicDownloader
             this.mnuSelectSelected.Size = new System.Drawing.Size(170, 22);
             this.mnuSelectSelected.Text = "Check all select item";
             this.mnuSelectSelected.Click += new System.EventHandler(this.mnuSelectSelected_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(167, 6);
+            // 
+            // mnuAddQueue
+            // 
+            this.mnuAddQueue.Enabled = false;
+            this.mnuAddQueue.Image = global::ComicDownloader.Properties.Resources._1364647743_sheduled_task;
+            this.mnuAddQueue.Name = "mnuAddQueue";
+            this.mnuAddQueue.Size = new System.Drawing.Size(170, 22);
+            this.mnuAddQueue.Text = "Add to Queue";
+            this.mnuAddQueue.Click += new System.EventHandler(this.mnuAddQueue_Click);
             // 
             // tblChapters
             // 
@@ -647,6 +666,8 @@ namespace ComicDownloader
         private System.Windows.Forms.ToolStripStatusLabel lblSelected;
         private System.Windows.Forms.ErrorProvider errInvalidFileName;
         private MRG.Controls.UI.LoadingCircle loading;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem mnuAddQueue;
         
     }
 }
