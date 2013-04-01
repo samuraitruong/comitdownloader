@@ -96,14 +96,14 @@ namespace ComicDownloader.Engines
             return info;
         }
 
-        public override void DownloadPage(string pageUrl, string filename, string httpReferer)
+        public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
         {
             //var html = NetworkHelper.GetHtml(pageUrl);
             //HtmlDocument htmlDoc = new HtmlDocument();
             //htmlDoc.LoadHtml(html);
             //var img = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"image\"]//img");
             //pageUrl = img.Attributes["src"].Value;
-            base.DownloadPage(pageUrl, filename, httpReferer);
+            return base.DownloadPage(pageUrl, renamePattern, folder, httpReferer);
         }
         public override List<string> GetPages(string chapUrl)
         {

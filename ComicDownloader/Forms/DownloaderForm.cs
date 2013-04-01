@@ -257,12 +257,12 @@ namespace ComicDownloader
                         tempUrl = tempUrl.Substring(0, tempUrl.IndexOf("?"));
                     }
 
-                    string filename = Path.Combine(chapInfo.Folder, (index++).ToString("D2") + ". " + Path.GetFileName(tempUrl));
+                    //string filename = Path.Combine(chapInfo.Folder, (index++).ToString("D2") + ". " + Path.GetFileName(tempUrl));
 
 
                     try
                     {
-                        Downloader.DownloadPage(pageUrl, filename, chapInfo.Url);
+                        string filename = Downloader.DownloadPage(pageUrl, Settings.RenamePattern.Replace("{{PAGENUM}}", (index++).ToString("D2")), chapInfo.Folder, chapInfo.Url);
                         
                         
                         var file = File.Open(filename, FileMode.Open);
