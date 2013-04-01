@@ -24,19 +24,26 @@ namespace ComicDownloader.Engines
         public abstract List<string> GetPages(string chapUrl);
         public string CachedFile { get {return this.GetType().Name + ".CACHED"; } }
 
-        public virtual void DownloadPage(string pageUrl, string filename, string httpReferer)
+        public virtual string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
         {
+            string filename = Path.GetFileName(pageUrl);
+
             using (WebClient client = new WebClient())
             {
                 client.Headers.Add("Referer", httpReferer);
                 try
                 {
+
+                    string replaceFileName = renamePattern.Replace("{FILENAME}", filename);
+
+                    filename = Path.Combine(folder, replaceFileName);
                     client.DownloadFile(pageUrl, filename);
                 }
                 catch
                 {
                 }
             }
+            return filename;
         }
         public void SaveCache(List<StoryInfo> stories)
         {

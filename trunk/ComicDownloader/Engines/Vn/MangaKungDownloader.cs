@@ -78,11 +78,12 @@ namespace ComicDownloader.Engines
 
             return info;
         }
+
         public override string Name
         {
             get { return "[Manga Kung] - "; }
         }
-        public override void DownloadPage(string pageUrl, string filename, string httpReferer)
+        public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
         {
             var html = NetworkHelper.GetHtml(pageUrl);
             HtmlDocument htmlDoc = new HtmlDocument();
@@ -91,7 +92,7 @@ namespace ComicDownloader.Engines
 
             var url = imgNode.Attributes["src"].Value;
 
-            base.DownloadPage(url, filename, httpReferer);
+            return base.DownloadPage(url, renamePattern, folder, httpReferer);
         }
         public override List<string> GetPages(string chapUrl)
         {

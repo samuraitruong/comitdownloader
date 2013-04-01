@@ -59,6 +59,7 @@ namespace ComicDownloader
             CreatePDF = true;
             IncludePDFIntroPage = true;
             PdfIntroPagePosition = PagePosition.LastPage;
+            RenamePattern = "{{PAGENUM}} .{FILENAME}";
         }
     }
 }

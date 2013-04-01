@@ -37,7 +37,7 @@ namespace ComicDownloader.Engines
                 }
                 else { return "NO URL"; }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 
                 //throw;

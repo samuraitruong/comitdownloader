@@ -194,6 +194,7 @@
     <Compile Include="Engines\18+\Manga16Downloader.cs" />
     <Compile Include="Engines\DownloaderAttribute.cs" />
     <Compile Include="Engines\En\BatotoDownloader.cs" />
+    <Compile Include="Engines\En\MangaVolumeDownloader.cs" />
     <Compile Include="Engines\En\MangaWallDownloader.cs" />
     <Compile Include="Engines\En\Manga4Downloader.cs" />
     <Compile Include="Engines\En\MangaAccessDownloader.cs" />
@@ -1165,7 +1166,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(SolutionDir)ComicDownloader\bin\Release" "$(SolutionDir)Release" /y</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
