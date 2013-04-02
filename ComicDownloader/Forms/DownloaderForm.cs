@@ -35,6 +35,7 @@ namespace ComicDownloader
         public Downloader Downloader { get; set; }
         EventWaitHandle waitHandle = new EventWaitHandle(false, EventResetMode.ManualReset);
         private Object updateUIObj = "DUMMY";
+
         public DownloaderForm()
         {
             InitializeComponent();
@@ -292,7 +293,7 @@ namespace ComicDownloader
 
                        
                     }
-                    catch
+                    catch(Exception ex)
                     {
                     }
                     finally
@@ -626,7 +627,7 @@ namespace ComicDownloader
 
                
                 txtTitle.Text = ddlList.Text;
-                txtTitle.Text = currentStoryInfo.Name;
+                txtTitle.Text = currentStoryInfo.Name.Replace('"',' ');
 
                 this.Text = Downloader.Name + currentStoryInfo.Name;
 
@@ -641,7 +642,7 @@ namespace ComicDownloader
                     tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId.ToString(), true));
                     tblChapters.Rows[index].Cells.Add(new Cell(item.UniqueIdentify.ToString(), true));
                     tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId));
-                    tblChapters.Rows[index].Cells.Add(new Cell(item.Name, true));
+                    tblChapters.Rows[index].Cells.Add(new Cell(item.Name.Replace('"', ' '), true));
                     tblChapters.Rows[index].Cells.Add(new Cell(item.Url, new CellStyle() { ForeColor = System.Drawing.Color.Green }));
 
                 }
