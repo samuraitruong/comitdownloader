@@ -27,6 +27,7 @@ namespace ComicDownloader.Engines
         public virtual string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
         {
             string filename = Path.GetFileName(pageUrl);
+            filename = filename.Substring(0, filename.IndexOf("?"));
 
             using (WebClient client = new WebClient())
             {

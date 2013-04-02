@@ -194,6 +194,7 @@
     <Compile Include="Engines\18+\Manga16Downloader.cs" />
     <Compile Include="Engines\DownloaderAttribute.cs" />
     <Compile Include="Engines\En\BatotoDownloader.cs" />
+    <Compile Include="Engines\En\MangaInnDownloader.cs" />
     <Compile Include="Engines\En\MangaTradersDownloader.cs" />
     <Compile Include="Engines\En\MangaVolumeDownloader.cs" />
     <Compile Include="Engines\En\MangaWallDownloader.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Engines\En\MangaParkDownloader.cs" />
     <Compile Include="Engines\En\MangaHereDownloader.cs" />
     <Compile Include="Engines\Proxies\BlogTruyenDownloaderProxy.cs" />
+    <Compile Include="Engines\Vn\ThienDuongMangaDownloader.cs" />
     <Compile Include="Engines\Vn\WebTruyenDownloader.cs" />
     <Compile Include="Forms\AppMainForm.cs">
       <SubType>Form</SubType>
