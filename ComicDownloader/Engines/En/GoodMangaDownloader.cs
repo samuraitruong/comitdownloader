@@ -7,22 +7,22 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("MangaTraders", MenuGroup = "English - 2", Language = "English", Image32 = "_1364410884_add1_")]
-    public class MangaTradersDownloader : Downloader
+    [Downloader("GoodManga", MenuGroup = "English - 2", Language = "English", Image32 = "_1364410884_add1_")]
+    public class GoodMangaDownloader : Downloader
     {
         public override string Name
         {
-            get { return "[MangaTraders] - "; }
+            get { return "[GoodManga] - "; }
         }
 
         public override string ListStoryURL
         {
-            get { return "http://www.mangatraders.com/manga/serieslistext/all/page/"; }
+            get { return "http://www.goodmanga.net/manga-list"; }
         }
 
         public override string HostUrl
         {
-            get { return "http://www.mangatraders.com/"; }
+            get { return "http://www.goodmanga.net/"; }
         }
 
         public override string StoryUrlPattern
@@ -32,43 +32,36 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetListStories()
         {
-            string urlPattern = this.ListStoryURL + "{0}";
+            string urlPattern = this.ListStoryURL;
 
             List<StoryInfo> results = base.ReloadChachedData();
             if (results == null || results.Count == 0)
             {
                 results = new List<StoryInfo>();
                 int currentPage = 1;
-                bool isStillHasPage = true;
-                while (isStillHasPage)
+               
+                    
+                string html = NetworkHelper.GetHtml(this.ListStoryURL);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"series_index\"]//a");
+                if (nodes != null && nodes.Count > 0)
                 {
-                    string url = string.Format(urlPattern, currentPage);
-                    string html = NetworkHelper.GetHtml(url);
-                    HtmlDocument htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(html);
-
-                    var urlNodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"footer bg9 leftBoxFtr\"]/p/a");
-                    var titleNodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"infoBox-title\"]/h2");
-                    if (urlNodes != null && urlNodes.Count > 0)
+                    currentPage++;
+                    foreach (var node in nodes)
                     {
-                        currentPage++;
-
-                        for(int i = 0; i < urlNodes.Count; i++)
+                        StoryInfo info = new StoryInfo()
                         {
-                            StoryInfo info = new StoryInfo()
-                            {
-                                Url = HostUrl.Substring(0,HostUrl.Length-1) + urlNodes[i].Attributes["href"].Value,
-                                Name = titleNodes[i].InnerText.Trim()
-                            };
-                            results.Add(info);
-                        }
-                    }
-                    else
-                    {
-                        isStillHasPage = false;
+                            Url = node.Attributes["href"].Value,
+                            Name = node.InnerText.Trim()
+                        };
+                        results.Add(info);
                     }
 
+                       
                 }
+                
 
             }
             this.SaveCache(results);
@@ -83,22 +76,22 @@ namespace ComicDownloader.Engines
 
             htmlDoc.LoadHtml(html);
 
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"box2\"]/h2");
+            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class=\"right_col\"]/h1");
 
             StoryInfo info = new StoryInfo()
             {
                 Url = storyUrl,
-                Name = nameNode.FirstChild.InnerText.Trim(),
+                Name = nameNode.InnerText.Trim(),
             };
 
-            var chapterNodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"files\"]//table[1]//a");
+            var chapterNodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"chapters\"]//a");
 
             foreach (HtmlNode chapter in chapterNodes)
             {
                 ChapterInfo chap = new ChapterInfo()
                 {
                     Name = chapter.InnerText.Trim(),
-                    Url =  HostUrl.Substring(0,HostUrl.Length-1) + chapter.Attributes["href"].Value,
+                    Url =  chapter.Attributes["href"].Value,
                     ChapId = ExtractID(chapter.InnerText)
                 };
                 info.Chapters.Add(chap);
@@ -112,7 +105,7 @@ namespace ComicDownloader.Engines
             var html = NetworkHelper.GetHtml(pageUrl);
             HtmlDocument htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
-            var img = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='image_display']//a[1]/img");
+            var img = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='manga_viewer']/a/img");
             pageUrl = img.Attributes["src"].Value;
 
             return base.DownloadPage(pageUrl, renamePattern, folder, httpReferer);
@@ -124,12 +117,12 @@ namespace ComicDownloader.Engines
             HtmlDocument htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
-            var pages = htmlDoc.DocumentNode.SelectNodes("//*[@name=\"page_top2\"]//option");
+            var pages = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"page_select\"]//option[@value]");
 
             List<string> results = new List<string>();
             foreach (HtmlNode page in pages)
             {
-                results.Add(chapUrl + "/page/" + page.Attributes["value"].Value);
+                results.Add(page.Attributes["value"].Value);
             }
             return results;
         }

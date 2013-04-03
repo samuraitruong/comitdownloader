@@ -312,7 +312,7 @@
  *                  - Correctly handle space filling columns when columns are added/removed
  * 2008-09-16  JPP  - Consistently use try..finally for BeginUpdate()/EndUpdate() pairs
  * 2008-08-24  JPP  - If LastSortOrder is None when adding objects, don't force a resort.
- * 2008-08-22  JPP  - Catch and ignore some problems with setting TopIndex on FastObjectListViews.
+ * 2008-08-22  JPP  - catch and ignore some problems with setting TopIndex on FastObjectListViews.
  * 2008-08-05  JPP  - In the right-click column select menu, columns are now sorted by display order, rather than alphabetically
  * v1.13
  * 2008-07-23  JPP  - Consistently use copy-on-write semantics with Add/RemoveObject methods
@@ -5586,7 +5586,7 @@ namespace BrightIdeasSoftware
         }
 
         /// <summary>
-        /// Catch the Left Button down event.
+        /// catch the Left Button down event.
         /// </summary>
         /// <param name="m">The m to be processed</param>
         /// <returns>bool to indicate if the msg has been handled</returns>
@@ -5643,7 +5643,7 @@ namespace BrightIdeasSoftware
         }
 
         /// <summary>
-        /// Catch the Left Button up event.
+        /// catch the Left Button up event.
         /// </summary>
         /// <param name="m">The m to be processed</param>
         /// <returns>bool to indicate if the msg has been handled</returns>
@@ -5676,7 +5676,7 @@ namespace BrightIdeasSoftware
         }
 
         /// <summary>
-        /// Catch the Right Button down event.
+        /// catch the Right Button down event.
         /// </summary>
         /// <param name="m">The m to be processed</param>
         /// <returns>bool to indicate if the msg has been handled</returns>
@@ -5702,7 +5702,7 @@ namespace BrightIdeasSoftware
         }
 
         /// <summary>
-        /// Catch the Left Button double click event.
+        /// catch the Left Button double click event.
         /// </summary>
         /// <param name="m">The m to be processed</param>
         /// <returns>bool to indicate if the msg has been handled</returns>
@@ -5726,7 +5726,7 @@ namespace BrightIdeasSoftware
         }
 
         /// <summary>
-        /// Catch the right Button double click event.
+        /// catch the right Button double click event.
         /// </summary>
         /// <param name="m">The m to be processed</param>
         /// <returns>bool to indicate if the msg has been handled</returns>
@@ -5750,7 +5750,7 @@ namespace BrightIdeasSoftware
         }
 
         /// <summary>
-        /// Catch the MouseMove event.
+        /// catch the MouseMove event.
         /// </summary>
         /// <param name="m">The m to be processed</param>
         /// <returns>bool to indicate if the msg has been handled</returns>

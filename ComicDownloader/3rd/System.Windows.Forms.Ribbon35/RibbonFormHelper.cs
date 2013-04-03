@@ -327,7 +327,7 @@ namespace System.Windows.Forms
          {
 				if (m.Msg == WinApi.WM_NCCALCSIZE && (int)m.WParam == 1) //0x83
 				{
-					#region Catch the margins of what the client area would be
+					#region catch the margins of what the client area would be
 					WinApi.NCCALCSIZE_PARAMS nccsp = (WinApi.NCCALCSIZE_PARAMS)Marshal.PtrToStructure(m.LParam, typeof(WinApi.NCCALCSIZE_PARAMS));
 
 					if (!MarginsChecked)
