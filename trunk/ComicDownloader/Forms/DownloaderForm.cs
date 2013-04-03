@@ -190,7 +190,7 @@ namespace ComicDownloader
             }
             catch (Exception ex)
             {
-                //Log error;
+                MyLogger.Log(ex);
             }
             finally
             {
@@ -210,8 +210,9 @@ namespace ComicDownloader
                     });
 
                 }
-                catch
+                catch(Exception ex)
                 {
+                    MyLogger.Log(ex);
                 }
                 finally
                 {
@@ -295,6 +296,7 @@ namespace ComicDownloader
                     }
                     catch(Exception ex)
                     {
+                        MyLogger.Log(ex);
                     }
                     finally
                     {
@@ -473,9 +475,9 @@ namespace ComicDownloader
                         thread.Suspend();
                         thread.Suspend();
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        
+                        MyLogger.Log(ex);
                         
                     }
                     
@@ -494,9 +496,9 @@ namespace ComicDownloader
                             thread.Resume();
                             thread.Resume();
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
-
+                            MyLogger.Log(ex);
 
                         }
                         finally
@@ -508,10 +510,10 @@ namespace ComicDownloader
                                 thread.Resume();
                                 thread.Resume();
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
 
-
+                                MyLogger.Log(ex);
                             }
                         }
                         

@@ -47,6 +47,10 @@
       <HintPath>3rd\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>3rd\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -438,6 +442,7 @@
     <Compile Include="Forms\HostProviderSupportForm.Designer.cs">
       <DependentUpon>HostProviderSupportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyLogger.cs" />
     <Compile Include="Properties\IViewSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -1067,6 +1072,8 @@
     <None Include="3rd\IView.NET\iView.NET Controls\Resources\unknown_drive_16x161.png" />
     <Content Include="3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x16.png" />
     <None Include="3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x161.png" />
+    <Content Include="3rd\NLog.dll" />
+    <Content Include="3rd\NLog.Extended.dll" />
     <Content Include="3rd\PagedList\PagedList.csproj" />
     <Content Include="Resources\1363852385_info.png" />
     <Content Include="Resources\1363939449_netvibes.png" />
