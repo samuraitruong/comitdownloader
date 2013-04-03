@@ -326,7 +326,7 @@ namespace ComicDownloader
                 this.progess.Value = 1;
                 this.progess.Maximum = chapInfo.PageCount;
                 var listItem = new EXListViewItem(chapCount.ToString());
-                listItem.SubItems.Add(chapInfo.Name);
+                listItem.SubItems.Add(chapInfo.Name.Replace('"',' ').Replace('.',' '));
                 listItem.SubItems.Add(chapInfo.PageCount.ToString());
                 listItem.SubItems.Add("0");
                 EXControlListViewSubItem cs = new EXControlListViewSubItem();
@@ -627,7 +627,7 @@ namespace ComicDownloader
 
                
                 txtTitle.Text = ddlList.Text;
-                txtTitle.Text = currentStoryInfo.Name.Replace('"',' ');
+                txtTitle.Text = currentStoryInfo.Name.Replace('"',' ').Replace('.',' ');
 
                 this.Text = Downloader.Name + currentStoryInfo.Name;
 
@@ -642,7 +642,7 @@ namespace ComicDownloader
                     tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId.ToString(), true));
                     tblChapters.Rows[index].Cells.Add(new Cell(item.UniqueIdentify.ToString(), true));
                     tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId));
-                    tblChapters.Rows[index].Cells.Add(new Cell(item.Name.Replace('"', ' '), true));
+                    tblChapters.Rows[index].Cells.Add(new Cell(item.Name.Replace('"', ' ').Replace('.', ' '), true));
                     tblChapters.Rows[index].Cells.Add(new Cell(item.Url, new CellStyle() { ForeColor = System.Drawing.Color.Green }));
 
                 }

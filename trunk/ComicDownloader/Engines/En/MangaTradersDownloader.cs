@@ -12,7 +12,7 @@ namespace ComicDownloader.Engines
     {
         public override string Name
         {
-            get { return "[mangatraders.com] - "; }
+            get { return "[MangaTraders] - "; }
         }
 
         public override string ListStoryURL
