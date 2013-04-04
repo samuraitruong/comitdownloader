@@ -38,7 +38,6 @@ namespace ComicDownloader.Engines
             if (results == null || results.Count == 0)
             {
                 results = new List<StoryInfo>();
-                int currentPage = 1;
                
                     
                 string html = NetworkHelper.GetHtml(this.ListStoryURL);
@@ -48,7 +47,6 @@ namespace ComicDownloader.Engines
                 var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"series_index\"]//a");
                 if (nodes != null && nodes.Count > 0)
                 {
-                    currentPage++;
                     foreach (var node in nodes)
                     {
                         StoryInfo info = new StoryInfo()
