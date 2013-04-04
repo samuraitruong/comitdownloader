@@ -67,7 +67,7 @@ namespace ComicDownloader.Extensions
         //    return regex.IsMatch(s);
         //}
 
-        public static string ConvertToValidSharePointFileName(this string fileName)
+        public static string ConvertToValidFileName(this string fileName)
         {
             char[] invalidFilenameCharacters = new[] { '\\', '/', ':', '*', '?', '"', '<', '>', '|', '#', '{', '}', '%', '~', '&' };
             string[] invalidFileNameStrings = new[] { ".files", "_files",
