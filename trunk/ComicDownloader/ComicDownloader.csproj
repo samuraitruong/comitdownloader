@@ -218,6 +218,7 @@
     <Compile Include="Engines\Proxies\BlogTruyenDownloaderProxy.cs" />
     <Compile Include="Engines\Vn\ThienDuongMangaDownloader.cs" />
     <Compile Include="Engines\Vn\WebTruyenDownloader.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Forms\AppMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
