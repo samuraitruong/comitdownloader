@@ -39,6 +39,7 @@
             this.pnlDownload = new System.Windows.Forms.RibbonPanel();
             this.cobDownloaders = new System.Windows.Forms.RibbonComboBox();
             this.bntMyTest = new System.Windows.Forms.RibbonButton();
+            this.btnLastestUpdate = new System.Windows.Forms.RibbonButton();
             this.rbtDownloadQueue = new System.Windows.Forms.RibbonPanel();
             this.bntQueueDownload = new System.Windows.Forms.RibbonButton();
             this.bntStartQueue = new System.Windows.Forms.RibbonButton();
@@ -147,6 +148,7 @@
             // pnlDownload
             // 
             this.pnlDownload.Items.Add(this.cobDownloaders);
+            this.pnlDownload.Items.Add(this.btnLastestUpdate);
             this.pnlDownload.Text = "Add new";
             // 
             // cobDownloaders
@@ -163,6 +165,14 @@
             this.bntMyTest.MinimumSize = new System.Drawing.Size(0, 0);
             this.bntMyTest.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntMyTest.SmallImage")));
             this.bntMyTest.Text = "[[MangaReader]]";
+            // 
+            // btnLastestUpdate
+            // 
+            this.btnLastestUpdate.Image = global::ComicDownloader.Properties.Resources._1365103950_interact;
+            this.btnLastestUpdate.MaximumSize = new System.Drawing.Size(0, 0);
+            this.btnLastestUpdate.MinimumSize = new System.Drawing.Size(0, 0);
+            this.btnLastestUpdate.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnLastestUpdate.SmallImage")));
+            this.btnLastestUpdate.Click += new System.EventHandler(this.btnLastestUpdate_Click);
             // 
             // rbtDownloadQueue
             // 
@@ -328,6 +338,7 @@
         private System.Windows.Forms.RibbonComboBox ribbonComboBox1;
         private System.Windows.Forms.RibbonPanel ribbonPanel1;
         private System.Windows.Forms.RibbonButton bntSupports;
+        private System.Windows.Forms.RibbonButton btnLastestUpdate;
         
     }
 }

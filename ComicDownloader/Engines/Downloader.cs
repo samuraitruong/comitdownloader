@@ -24,6 +24,11 @@ namespace ComicDownloader.Engines
         public abstract List<string> GetPages(string chapUrl);
         public string CachedFile { get {return this.GetType().Name + ".CACHED"; } }
 
+        public virtual List<StoryInfo> GetLastestUpdates()
+        {
+            return new List<StoryInfo>();
+        }
+      
         public virtual string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
         {
             string filename = Path.GetFileName(pageUrl);
@@ -124,5 +129,7 @@ namespace ComicDownloader.Engines
             }
             return list;
         }
+
+        
     }
 }

@@ -87,6 +87,7 @@
             // 
             this.olvColumn2.AspectName = "HostUrl";
             this.olvColumn2.CellPadding = null;
+            this.olvColumn2.Hyperlink = true;
             this.olvColumn2.Text = "Url";
             this.olvColumn2.Width = 200;
             // 
