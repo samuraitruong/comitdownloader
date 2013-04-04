@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("MangaReader", MenuGroup = "English", Language = "English", Image32 = "_1364410906_add")]
+    [Downloader("MangaFox", MenuGroup = "English", Language = "English", Image32 = "_1364410906_add")]
     public class MangaFoxDownloader :  Downloader
     {
         public override string Name
@@ -124,6 +124,39 @@ namespace ComicDownloader.Engines
                 results.Add(string.Format(patternUrl,page.Attributes["value"].Value));
             }
             return results;
+        }
+
+        public override List<StoryInfo> GetLastestUpdates()
+        {
+            string lastestUpdateUrl = "http://mangafox.me/releases/";
+            List<StoryInfo> stories = new List<StoryInfo>();
+            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//h3[@class=\"title\"]/a");
+
+            foreach (HtmlNode node in nodes)
+            {
+                StoryInfo info = new StoryInfo()
+                {
+                    Url = node.Attributes["href"].Value,
+                    Name = node.InnerText.Trim(),
+                    Chapters = new List<ChapterInfo>(),
+                };
+                var chapters = node.ParentNode.ParentNode.SelectNodes("dl/dt/span/a");
+                if (chapters != null)
+                    foreach (HtmlNode chap in chapters)
+                    {
+                        info.Chapters.Add(new ChapterInfo()
+                        {
+                            Name = chap.InnerText.Trim(),
+                            Url = chap.Attributes["href"].Value,
+                        });
+                    }
+                stories.Add(info);
+            }
+            return stories;
         }
     }
 }

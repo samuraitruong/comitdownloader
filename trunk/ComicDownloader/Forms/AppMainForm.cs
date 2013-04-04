@@ -361,6 +361,14 @@ namespace ComicDownloader
             childForm.Show();
         }
 
+        private void btnLastestUpdate_Click(object sender, EventArgs e)
+        {
+            LastestChapterUpdateForm childForm = new LastestChapterUpdateForm();
+            childForm.MdiParent = this;
+
+            childForm.Show();
+        }
+
         
     }
 }
