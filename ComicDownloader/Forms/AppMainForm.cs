@@ -220,7 +220,9 @@ namespace ComicDownloader
             childForm.MdiParent = this;
             childForm.Downloader = dl;
             childForm.Text = title;
+            childForm.WindowState = FormWindowState.Minimized;
             childForm.Show();
+            childForm.WindowState = FormWindowState.Maximized;
         }
 
        
