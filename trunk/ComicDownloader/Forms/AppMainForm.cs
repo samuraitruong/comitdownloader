@@ -365,8 +365,10 @@ namespace ComicDownloader
         {
             LastestChapterUpdateForm childForm = new LastestChapterUpdateForm();
             childForm.MdiParent = this;
+            childForm.WindowState = FormWindowState.Minimized;
 
             childForm.Show();
+            childForm.WindowState = FormWindowState.Maximized;
         }
 
         

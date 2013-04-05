@@ -129,7 +129,7 @@ namespace ComicDownloader.Forms
 
         private void LastestChapterUpdateForm_Resize(object sender, EventArgs e)
         {
-            progressBar.Size = new Size(this.Width - 80, progressBar.Height);
+            progressBar.Size = new Size(this.statusStrip1.Width - 15, statusStrip1.Height);
 
             
         }
