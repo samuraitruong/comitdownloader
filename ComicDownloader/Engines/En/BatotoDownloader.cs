@@ -134,5 +134,46 @@ namespace ComicDownloader.Engines
             }
             return results;
         }
+
+        public override List<StoryInfo> GetLastestUpdates()
+        {
+            List<StoryInfo> stories = new List<StoryInfo>();
+            var html = NetworkHelper.GetHtml(this.HostUrl);
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"ipb_table chapters_list\"]//tr/td/a[@style=\"font-weight:bold;\"]");
+
+            foreach (HtmlNode node in nodes.Where(p=>!string.IsNullOrEmpty(p.InnerText)))
+            {
+                
+                string url = node.Attributes["href"].Value;
+                string key = Regex.Replace(url,@"(.*)_/(.*)(-r\d+)","$2");
+
+
+                StoryInfo info = new StoryInfo()
+                {
+                    Url = url,
+                    Name = node.InnerText.Trim(),
+                    Chapters = new List<ChapterInfo>(),
+                };
+
+
+                var chapters = htmlDoc.DocumentNode.SelectNodes("//a[contains(@href,'" + key + "')]");
+                if (chapters != null)
+                    foreach (HtmlNode chap in chapters.Skip(1))
+                    {
+                        if (chap.SelectSingleNode("img") == null || chap.ChildNodes.Count !=2) continue;
+                        info.Chapters.Add(new ChapterInfo()
+                        {
+                            Name = chap.ChildNodes[1].InnerText.Trim(),
+                            Url = chap.Attributes["href"].Value,
+                        });
+                    }
+                stories.Add(info);
+            }
+            return stories;
+        }
+
     }
 }
