@@ -198,6 +198,7 @@
     <Compile Include="Engines\18+\Manga16Downloader.cs" />
     <Compile Include="Engines\DownloaderAttribute.cs" />
     <Compile Include="Engines\En\BatotoDownloader.cs" />
+    <Compile Include="Engines\En\MangarunDownloader.cs" />
     <Compile Include="Engines\En\MangaPandaDownloader.cs" />
     <Compile Include="Engines\En\GoodMangaDownloader.cs" />
     <Compile Include="Engines\En\MangaInnDownloader.cs" />
