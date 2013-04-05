@@ -125,5 +125,48 @@ namespace ComicDownloader.Engines
             }
             return results;
         }
+
+        public override List<StoryInfo> GetLastestUpdates()
+        {
+            string lastestUpdateUrl = "http://eatmanga.com/latest/";
+            List<StoryInfo> stories = new List<StoryInfo>();
+            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//th[@class=\"title\"]/a");
+
+            foreach (HtmlNode node in nodes)
+            {
+                string chapterUrl = HostUrl + node.Attributes["href"].Value.Substring(0, node.Attributes["href"].Value.LastIndexOf("/"));
+                string pageUrl = chapterUrl.Substring(0, chapterUrl.LastIndexOf("/"));
+                StoryInfo info;
+
+                if (stories.Any(p => p.Url == pageUrl))
+                {
+                    info = stories.Where(p => p.Url == pageUrl).Single();
+                }
+                else
+                {
+                    info = new StoryInfo()
+                    {
+                        Url = pageUrl,
+                        Name = pageUrl.Substring(pageUrl.LastIndexOf("/") + 1).Replace("-"," "),
+                        Chapters = new List<ChapterInfo>()
+                    };
+
+                    stories.Add(info);
+                }
+
+                var chapter = new ChapterInfo()
+                {
+                    Url = chapterUrl,
+                    Name = node.InnerText.Trim()
+                };
+
+                info.Chapters.Add(chapter);
+            }
+            return stories;
+        }
     }
 }
