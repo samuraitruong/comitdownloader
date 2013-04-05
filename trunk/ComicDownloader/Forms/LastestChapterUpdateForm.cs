@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Cx.Windows.Forms;
 using System.Threading;
 using ComicDownloader.Engines;
+using MRG.Controls.UI;
 
 namespace ComicDownloader.Forms
 {
@@ -27,50 +28,73 @@ namespace ComicDownloader.Forms
         public LastestChapterUpdateForm()
         {
             InitializeComponent();
+            LoadingCircle ci = new LoadingCircle();
+            
+            this.Controls.Add(ci);
+            ci.BringToFront();
+            ci.Active = true;
         }
-
-        
+        struct ThreadParam
+        {
+            public Downloader Downloader { get; set; }
+            public ManualResetEvent ResetEvent { get; set; }
+            
+        }
+             
         private void LastestChapterUpdateForm_Load(object sender, EventArgs e)
         {
             lvLastestUpdates.SetObjects(DataSource);
 
             var downloaders = ComicDownloader.Engines.Downloader.GetAllDownloaders();
+            progressBar.Maximum = downloaders.Count;
+            progressBar.Step = 1;
+            progressBar.Value = 0;
 
             ManualResetEvent[] doneEvents = new ManualResetEvent[downloaders.Count];
-            
-            for (int i = 0; i < downloaders.Count; i++)
+            new Thread(delegate()
             {
-                //doneEvents[i] = new ManualResetEvent(false);
-                
-                ThreadPool.QueueUserWorkItem(this.GetUpdateChapters, downloaders[i]);
-            }
+
+                for (int i = 0; i < downloaders.Count; i++)
+                {
+                    doneEvents[i] = new ManualResetEvent(false);
+
+                    ThreadPool.QueueUserWorkItem(this.GetUpdateChapters, new ThreadParam()
+                    {
+                        Downloader = downloaders[i],
+                        ResetEvent = doneEvents[i]
+                    });
+                }
+                foreach (var doneEvent in doneEvents) doneEvent.WaitOne();
+            }).Start();
+
             
         }
         private void GetUpdateChapters(object obj)
         {
-            Downloader dl = obj as Downloader;
+            ThreadParam param = (ThreadParam)obj;
 
             List<StoryInfo> list = new List<StoryInfo>();
 
             try
             {
-                list = dl.GetLastestUpdates();
-
-                lock (DataSource)
+                list = param.Downloader.GetLastestUpdates();
+                if (list.Count > 0)
                 {
-                    foreach (var item in list)
-                    
+                    lock (DataSource)
                     {
-                        foreach (var chap in item.Chapters)
+                        foreach (var item in list)
                         {
-
-                            DataSource.Add(new UpdatedChapterItem()
+                            foreach (var chap in item.Chapters)
                             {
-                                Provider = dl.Name,
-                                StoryName = item.Name,
-                                ChapterName = chap.Name,
-                                ChapterUrl = chap.Url
-                            });
+
+                                DataSource.Add(new UpdatedChapterItem()
+                                {
+                                    Provider = param.Downloader.Name,
+                                    StoryName = item.Name,
+                                    ChapterName = chap.Name,
+                                    ChapterUrl = chap.Url
+                                });
+                            }
                         }
                     }
                 }
@@ -81,7 +105,18 @@ namespace ComicDownloader.Forms
             }
             finally
             {
-                lvLastestUpdates.SetObjects(DataSource);
+                if (list.Count > 0)
+                {
+                    lvLastestUpdates.SetObjects(DataSource);
+                }
+
+                param.ResetEvent.Set();
+                this.Invoke(new MethodInvoker(delegate()
+                {
+                    progressBar.Increment(1);
+
+                    this.Text = "Lastest updates - Loading[" + ((float)progressBar.Value / progressBar.Maximum).ToString("p") +"]";
+                }));
             }
 
 
@@ -90,6 +125,13 @@ namespace ComicDownloader.Forms
         private void addChapterToQueueToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void LastestChapterUpdateForm_Resize(object sender, EventArgs e)
+        {
+            progressBar.Size = new Size(this.Width - 80, progressBar.Height);
+
+            
         }
     }
 }

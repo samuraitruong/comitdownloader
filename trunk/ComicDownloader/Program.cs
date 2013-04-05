@@ -15,7 +15,7 @@ namespace ComicDownloader
         [STAThread]
         static void Main()
         {
-            if (CheckInternetConnection())
+            //if (CheckInternetConnection())
             {
                 Application.ThreadException += OnThreadException;
                 AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
@@ -24,9 +24,9 @@ namespace ComicDownloader
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new AppMainForm());
             }
-            else
+            //else
             {
-                Application.Exit();
+             //   Application.Exit();
             }
         }
 
