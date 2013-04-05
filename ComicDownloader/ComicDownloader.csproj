@@ -218,6 +218,7 @@
     <Compile Include="Engines\Proxies\BlogTruyenDownloaderProxy.cs" />
     <Compile Include="Engines\Vn\ThienDuongMangaDownloader.cs" />
     <Compile Include="Engines\Vn\WebTruyenDownloader.cs" />
+    <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Forms\AppMainForm.cs">
       <SubType>Form</SubType>
@@ -424,6 +425,12 @@
     </Compile>
     <Compile Include="Forms\QueueDownloadForm.Designer.cs">
       <DependentUpon>QueueDownloadForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ReadOnlineForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ReadOnlineForm.Designer.cs">
+      <DependentUpon>ReadOnlineForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\NetworkHelper.cs" />
     <Compile Include="Engines\StoryInfo.cs" />
@@ -997,6 +1004,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\HostProviderSupportForm.resx">
       <DependentUpon>HostProviderSupportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ReadOnlineForm.resx">
+      <DependentUpon>ReadOnlineForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -45,9 +45,9 @@
             this.addAllChapterUpdatesToQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readThisChapterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.hyperlinkStyle1 = new BrightIdeasSoftware.HyperlinkStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.hyperlinkStyle1 = new BrightIdeasSoftware.HyperlinkStyle();
             ((System.ComponentModel.ISupportInitialize)(this.lvLastestUpdates)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -121,7 +121,7 @@
             this.addAllChapterUpdatesToQueueToolStripMenuItem,
             this.readThisChapterToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(245, 136);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(245, 158);
             // 
             // downloadThisChapterToolStripMenuItem
             // 
@@ -165,6 +165,7 @@
             this.readThisChapterToolStripMenuItem.Name = "readThisChapterToolStripMenuItem";
             this.readThisChapterToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.readThisChapterToolStripMenuItem.Text = "Read this chapter";
+            this.readThisChapterToolStripMenuItem.Click += new System.EventHandler(this.readThisChapterToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -181,19 +182,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(869, 344);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
-            // hyperlinkStyle1
-            // 
-            cellStyle1.Font = null;
-            cellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.hyperlinkStyle1.Normal = cellStyle1;
-            cellStyle2.Font = null;
-            cellStyle2.FontStyle = System.Drawing.FontStyle.Underline;
-            this.hyperlinkStyle1.Over = cellStyle2;
-            this.hyperlinkStyle1.OverCursor = System.Windows.Forms.Cursors.Hand;
-            cellStyle3.Font = null;
-            cellStyle3.ForeColor = System.Drawing.Color.Purple;
-            this.hyperlinkStyle1.Visited = cellStyle3;
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -208,6 +196,19 @@
             // 
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(100, 14);
+            // 
+            // hyperlinkStyle1
+            // 
+            cellStyle1.Font = null;
+            cellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.hyperlinkStyle1.Normal = cellStyle1;
+            cellStyle2.Font = null;
+            cellStyle2.FontStyle = System.Drawing.FontStyle.Underline;
+            this.hyperlinkStyle1.Over = cellStyle2;
+            this.hyperlinkStyle1.OverCursor = System.Windows.Forms.Cursors.Hand;
+            cellStyle3.Font = null;
+            cellStyle3.ForeColor = System.Drawing.Color.Purple;
+            this.hyperlinkStyle1.Visited = cellStyle3;
             // 
             // LastestChapterUpdateForm
             // 

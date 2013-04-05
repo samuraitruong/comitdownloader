@@ -109,12 +109,14 @@ namespace ComicDownloader.Engines
 
         public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
         {
-            var html = NetworkHelper.GetHtml(pageUrl);
-            HtmlDocument htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-            var img = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"comic_page\"]");
-            pageUrl = img.Attributes["src"].Value;
-
+            if (!Regex.IsMatch(pageUrl, "(.jpg|.JPG|.png|.PNG)$"))
+            {
+                var html = NetworkHelper.GetHtml(pageUrl);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+                var img = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"comic_page\"]");
+                pageUrl = img.Attributes["src"].Value;
+            }
             
             return base.DownloadPage(pageUrl, renamePattern, folder, httpReferer);
         }
@@ -128,9 +130,23 @@ namespace ComicDownloader.Engines
             var pages = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"page_select\"]//option");
 
             List<string> results = new List<string>();
-            foreach (HtmlNode page in pages)
+            if (pages != null)
             {
-                results.Add(page.Attributes["value"].Value);
+                foreach (HtmlNode page in pages)
+                {
+                    results.Add(page.Attributes["value"].Value);
+                }
+            }
+            else
+            {
+                //var pageSettingNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"read_settings\"]");
+
+                //pages = pageSettingNode.NextSibling.NextSibling.SelectNodes("img")
+                pages = htmlDoc.DocumentNode.SelectSingleNode("//div[@style='width:77%; text-align:center; padding-right: 15px;']").SelectNodes("img");
+                foreach (HtmlNode page in pages)
+                {
+                    results.Add(page.Attributes["src"].Value);
+                }
             }
             return results;
         }

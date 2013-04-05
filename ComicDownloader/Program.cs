@@ -33,13 +33,13 @@ namespace ComicDownloader
         private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             MyLogger.Log(e.ExceptionObject as Exception);
-            Application.Exit();
+            //Application.Exit();
         }
 
         private static void OnThreadException(object sender, ThreadExceptionEventArgs e)
         {
             MyLogger.Log(e.Exception);
-            Application.Exit();
+            //Application.Exit();
         }
 
         public static bool CheckInternetConnection()

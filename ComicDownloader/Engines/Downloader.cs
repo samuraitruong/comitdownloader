@@ -113,10 +113,17 @@ namespace ComicDownloader.Engines
 
             }
         }
+        private static List<Downloader> _downloaders;
 
+        public static Downloader Resolve(string url)
+        {
+            return GetAllDownloaders().FirstOrDefault(p => url.Contains(p.HostUrl));
+        }
         public static List<Downloader> GetAllDownloaders()
         {
-            List<Downloader> list = new List<Downloader>();
+           
+            if (_downloaders != null) return _downloaders;
+            _downloaders = new List<Downloader>();
             var types = Assembly.GetExecutingAssembly().GetTypes();
             foreach (var item in types)
             {
@@ -124,10 +131,10 @@ namespace ComicDownloader.Engines
                 {
                     
                     Downloader instance = (Downloader)Activator.CreateInstance(item);
-                    list.Add(instance);
+                    _downloaders.Add(instance);
                 }
             }
-            return list;
+            return _downloaders;
         }
 
         
