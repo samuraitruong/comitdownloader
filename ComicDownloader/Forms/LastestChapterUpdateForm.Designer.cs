@@ -45,11 +45,13 @@
             this.addAllChapterUpdatesToQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readThisChapterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.hyperlinkStyle1 = new BrightIdeasSoftware.HyperlinkStyle();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.lvLastestUpdates)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lvLastestUpdates
@@ -73,7 +75,7 @@
             this.lvLastestUpdates.GridLines = true;
             this.lvLastestUpdates.Location = new System.Drawing.Point(3, 3);
             this.lvLastestUpdates.Name = "lvLastestUpdates";
-            this.lvLastestUpdates.Size = new System.Drawing.Size(735, 231);
+            this.lvLastestUpdates.Size = new System.Drawing.Size(863, 318);
             this.lvLastestUpdates.TabIndex = 0;
             this.lvLastestUpdates.UseCompatibleStateImageBehavior = false;
             this.lvLastestUpdates.UseHyperlinks = true;
@@ -175,17 +177,9 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89.47369F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.52632F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(741, 266);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(869, 344);
             this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 244);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(741, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
             // 
             // hyperlinkStyle1
             // 
@@ -200,19 +194,37 @@
             cellStyle3.ForeColor = System.Drawing.Color.Purple;
             this.hyperlinkStyle1.Visited = cellStyle3;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.progressBar});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 324);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(869, 20);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(100, 14);
+            // 
             // LastestChapterUpdateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(741, 266);
+            this.ClientSize = new System.Drawing.Size(869, 344);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "LastestChapterUpdateForm";
             this.Text = "Lastest Updates";
             this.Load += new System.EventHandler(this.LastestChapterUpdateForm_Load);
+            this.Resize += new System.EventHandler(this.LastestChapterUpdateForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.lvLastestUpdates)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -221,7 +233,6 @@
 
         private BrightIdeasSoftware.DataListView lvLastestUpdates;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.StatusStrip statusStrip1;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private BrightIdeasSoftware.OLVColumn olvColumn3;
@@ -234,5 +245,7 @@
         private System.Windows.Forms.ToolStripMenuItem addAllChapterUpdatesToQueueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem readThisChapterToolStripMenuItem;
         private BrightIdeasSoftware.HyperlinkStyle hyperlinkStyle1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripProgressBar progressBar;
     }
 }
