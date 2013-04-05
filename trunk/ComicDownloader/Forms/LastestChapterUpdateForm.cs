@@ -10,6 +10,7 @@ using Cx.Windows.Forms;
 using System.Threading;
 using ComicDownloader.Engines;
 using MRG.Controls.UI;
+using ComicDownoader.Forms;
 
 namespace ComicDownloader.Forms
 {
@@ -132,6 +133,17 @@ namespace ComicDownloader.Forms
             progressBar.Size = new Size(this.statusStrip1.Width - 15, statusStrip1.Height);
 
             
+        }
+
+        private void readThisChapterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+             var selectedItems = this.lvLastestUpdates.SelectedItems[0];
+            var col = selectedItems.ListView.Columns.Cast<ColumnHeader>().FirstOrDefault(p => p.Text == "ChapterUrl");
+            var value = selectedItems.SubItems[col.Index].Text;
+            
+            ReadOnlineForm form = new ReadOnlineForm(value);
+            form.Show(this);
+
         }
     }
 }
