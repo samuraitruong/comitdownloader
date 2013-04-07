@@ -452,6 +452,27 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _1365316352_mark_as_read_32 {
+            get {
+                object obj = ResourceManager.GetObject("1365316352_mark_as_read_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365319718_Globe {
+            get {
+                object obj = ResourceManager.GetObject("1365319718_Globe", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365319718_Globe1 {
+            get {
+                object obj = ResourceManager.GetObject("1365319718_Globe1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap _14747480_bang_comic_book_explosion {
             get {
                 object obj = ResourceManager.GetObject("14747480-bang-comic-book-explosion", resourceCulture);
@@ -582,6 +603,15 @@ namespace ComicDownloader.Properties {
             get {
                 object obj = ResourceManager.GetObject("computer_16x1611", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Web Browser.
+        /// </summary>
+        internal static string DefaultBrowserTitle {
+            get {
+                return ResourceManager.GetString("DefaultBrowserTitle", resourceCulture);
             }
         }
         
@@ -897,6 +927,15 @@ namespace ComicDownloader.Properties {
             get {
                 object obj = ResourceManager.GetObject("network_drive_16x1611", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Html files (*.htm &amp; *.html)|*.htm;*.html|All files (*.*)|*.*.
+        /// </summary>
+        internal static string OpenFileDialogFilter {
+            get {
+                return ResourceManager.GetString("OpenFileDialogFilter", resourceCulture);
             }
         }
         

@@ -64,6 +64,58 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="3rd\ExtendedWebBrowser2\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\BrowserCommands.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\BrowserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\BrowserControl.Designer.cs">
+      <DependentUpon>BrowserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\BrowserExtendedNavigatingEventArgs.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\CommandStateEventArgs.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\ExtendedWebBrowser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\BrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\BrowserForm.Designer.cs">
+      <DependentUpon>BrowserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\NativeMethods.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\NotifyCollection.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\OpenUrlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\OpenUrlForm.Designer.cs">
+      <DependentUpon>OpenUrlForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\OptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\OptionsForm.Designer.cs">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\PopupBlockerFilterLevel.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\ScriptError.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\ScriptErrorManager.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\ScriptErrorWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\ScriptErrorWindow.Designer.cs">
+      <DependentUpon>ScriptErrorWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\SettingsHelper.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\TextChangedEventArgs.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\UnsafeNativeMethods.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\UrlContext.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\WindowManager.cs" />
     <Compile Include="3rd\IView.NET\Data\ApplicationData.cs" />
     <Compile Include="3rd\IView.NET\Data\Enumerations.cs" />
     <Compile Include="3rd\IView.NET\iView.NET Controls\Data\Enumerations.cs" />
@@ -888,6 +940,24 @@
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="QueueDownloadItem.cs" />
+    <EmbeddedResource Include="3rd\ExtendedWebBrowser2\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\ExtendedWebBrowser2\BrowserControl.resx">
+      <DependentUpon>BrowserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\ExtendedWebBrowser2\BrowserForm.resx">
+      <DependentUpon>BrowserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\ExtendedWebBrowser2\OpenUrlForm.resx">
+      <DependentUpon>OpenUrlForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\ExtendedWebBrowser2\OptionsForm.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\ExtendedWebBrowser2\ScriptErrorWindow.resx">
+      <DependentUpon>ScriptErrorWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\ColourPicker.resx">
       <DependentUpon>ColourPicker.cs</DependentUpon>
     </EmbeddedResource>
@@ -1030,6 +1100,7 @@
     <EmbeddedResource Include="Forms\SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="3rd\ExtendedWebBrowser2\app.config" />
     <None Include="3rd\ObjectListView\FullClassDiagram.cd" />
     <None Include="3rd\ObjectListView\ObjectListView.FxCop" />
     <None Include="app.config" />
@@ -1153,6 +1224,8 @@
     <None Include="Resources\1365100868_interact.png" />
     <None Include="Resources\1365100861_interact.png" />
     <None Include="Resources\1365103950_interact.png" />
+    <None Include="Resources\1365316352_mark_as_read_32.png" />
+    <None Include="Resources\1365319718_Globe1.png" />
     <Content Include="Resources\14747480-bang-comic-book-explosion.jpg" />
     <Content Include="3rd\itextsharp.dll" />
     <Content Include="3rd\Cx.Windows.Forms\MdiTabStrip.bmp" />

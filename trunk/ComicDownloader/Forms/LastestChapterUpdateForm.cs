@@ -11,6 +11,7 @@ using System.Threading;
 using ComicDownloader.Engines;
 using MRG.Controls.UI;
 using ComicDownoader.Forms;
+using ExtendedWebBrowser2;
 
 namespace ComicDownloader.Forms
 {
@@ -144,6 +145,16 @@ namespace ComicDownloader.Forms
             ReadOnlineForm form = new ReadOnlineForm(value);
             form.Show(this);
 
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var selectedItems = this.lvLastestUpdates.SelectedItems[0];
+            var col = selectedItems.ListView.Columns.Cast<ColumnHeader>().FirstOrDefault(p => p.Text == "ChapterUrl");
+            var value = selectedItems.SubItems[col.Index].Text;
+
+            BrowserForm form = new BrowserForm(value);
+            form.ShowDialog(this);
         }
     }
 }

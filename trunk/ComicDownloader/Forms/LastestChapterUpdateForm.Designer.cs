@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            BrightIdeasSoftware.CellStyle cellStyle1 = new BrightIdeasSoftware.CellStyle();
-            BrightIdeasSoftware.CellStyle cellStyle2 = new BrightIdeasSoftware.CellStyle();
-            BrightIdeasSoftware.CellStyle cellStyle3 = new BrightIdeasSoftware.CellStyle();
+            BrightIdeasSoftware.CellStyle cellStyle4 = new BrightIdeasSoftware.CellStyle();
+            BrightIdeasSoftware.CellStyle cellStyle5 = new BrightIdeasSoftware.CellStyle();
+            BrightIdeasSoftware.CellStyle cellStyle6 = new BrightIdeasSoftware.CellStyle();
             this.lvLastestUpdates = new BrightIdeasSoftware.DataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -48,6 +48,9 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.hyperlinkStyle1 = new BrightIdeasSoftware.HyperlinkStyle();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lvLastestUpdates)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -114,14 +117,17 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.readThisChapterToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.toolStripSeparator1,
             this.downloadThisChapterToolStripMenuItem,
             this.downloadAllChapterToolStripMenuItem,
+            this.toolStripSeparator2,
             this.addChapterToQueueToolStripMenuItem,
             this.addThisStoryToQueueToolStripMenuItem,
-            this.addAllChapterUpdatesToQueueToolStripMenuItem,
-            this.readThisChapterToolStripMenuItem});
+            this.addAllChapterUpdatesToQueueToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(245, 158);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(245, 192);
             // 
             // downloadThisChapterToolStripMenuItem
             // 
@@ -199,16 +205,34 @@
             // 
             // hyperlinkStyle1
             // 
-            cellStyle1.Font = null;
-            cellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.hyperlinkStyle1.Normal = cellStyle1;
-            cellStyle2.Font = null;
-            cellStyle2.FontStyle = System.Drawing.FontStyle.Underline;
-            this.hyperlinkStyle1.Over = cellStyle2;
+            cellStyle4.Font = null;
+            cellStyle4.ForeColor = System.Drawing.Color.Blue;
+            this.hyperlinkStyle1.Normal = cellStyle4;
+            cellStyle5.Font = null;
+            cellStyle5.FontStyle = System.Drawing.FontStyle.Underline;
+            this.hyperlinkStyle1.Over = cellStyle5;
             this.hyperlinkStyle1.OverCursor = System.Windows.Forms.Cursors.Hand;
-            cellStyle3.Font = null;
-            cellStyle3.ForeColor = System.Drawing.Color.Purple;
-            this.hyperlinkStyle1.Visited = cellStyle3;
+            cellStyle6.Font = null;
+            cellStyle6.ForeColor = System.Drawing.Color.Purple;
+            this.hyperlinkStyle1.Visited = cellStyle6;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(241, 6);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(241, 6);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Image = global::ComicDownloader.Properties.Resources._1365319718_Globe1;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(244, 22);
+            this.toolStripMenuItem1.Text = "Browse";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // LastestChapterUpdateForm
             // 
@@ -248,5 +272,8 @@
         private BrightIdeasSoftware.HyperlinkStyle hyperlinkStyle1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripProgressBar progressBar;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
