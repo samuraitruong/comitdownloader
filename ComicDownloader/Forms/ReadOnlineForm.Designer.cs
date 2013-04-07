@@ -50,8 +50,13 @@
             this.tsmi_FadeTransition = new System.Windows.Forms.ToolStripMenuItem();
             this.tss_03 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_Close = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadingCircle1 = new MRG.Controls.UI.LoadingCircle();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.bntNext = new System.Windows.Forms.Button();
+            this.bntPre = new System.Windows.Forms.Button();
+            this.bntPlay = new System.Windows.Forms.Button();
             this.cms_Options.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tim_SlideShowTimer
@@ -138,21 +143,60 @@
             this.tsmi_Close.Text = "&Close";
             this.tsmi_Close.Click += new System.EventHandler(this.tsmi_Close_Click);
             // 
-            // loadingCircle1
+            // panel1
             // 
-            this.loadingCircle1.Active = true;
-            this.loadingCircle1.Color = System.Drawing.Color.DarkGray;
-            this.loadingCircle1.InnerCircleRadius = 5;
-            this.loadingCircle1.Location = new System.Drawing.Point(70, 88);
-            this.loadingCircle1.Name = "loadingCircle1";
-            this.loadingCircle1.NumberSpoke = 12;
-            this.loadingCircle1.OuterCircleRadius = 11;
-            this.loadingCircle1.RotationSpeed = 100;
-            this.loadingCircle1.Size = new System.Drawing.Size(41, 30);
-            this.loadingCircle1.SpokeThickness = 2;
-            this.loadingCircle1.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.MacOSX;
-            this.loadingCircle1.TabIndex = 1;
-            this.loadingCircle1.Text = "loadingCircle1";
+            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel1.BackColor = System.Drawing.Color.Linen;
+            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.bntNext);
+            this.panel1.Controls.Add(this.bntPre);
+            this.panel1.Controls.Add(this.bntPlay);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(32, 200);
+            this.panel1.TabIndex = 2;
+            this.panel1.Visible = false;
+            // 
+            // button3
+            // 
+            this.button3.Image = global::ComicDownloader.Properties.Resources._1365339875_Close;
+            this.button3.Location = new System.Drawing.Point(3, 138);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(25, 25);
+            this.button3.TabIndex = 3;
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // bntNext
+            // 
+            this.bntNext.Image = global::ComicDownloader.Properties.Resources._1365339806_Next;
+            this.bntNext.Location = new System.Drawing.Point(3, 107);
+            this.bntNext.Name = "bntNext";
+            this.bntNext.Size = new System.Drawing.Size(25, 25);
+            this.bntNext.TabIndex = 2;
+            this.bntNext.UseVisualStyleBackColor = true;
+            this.bntNext.Click += new System.EventHandler(this.bntNext_Click);
+            // 
+            // bntPre
+            // 
+            this.bntPre.Image = global::ComicDownloader.Properties.Resources._1365339812_Previous;
+            this.bntPre.Location = new System.Drawing.Point(3, 49);
+            this.bntPre.Name = "bntPre";
+            this.bntPre.Size = new System.Drawing.Size(25, 25);
+            this.bntPre.TabIndex = 1;
+            this.bntPre.UseVisualStyleBackColor = true;
+            this.bntPre.Click += new System.EventHandler(this.bntPre_Click);
+            // 
+            // bntPlay
+            // 
+            this.bntPlay.Image = global::ComicDownloader.Properties.Resources._1365339292_play;
+            this.bntPlay.Location = new System.Drawing.Point(3, 78);
+            this.bntPlay.Name = "bntPlay";
+            this.bntPlay.Size = new System.Drawing.Size(25, 25);
+            this.bntPlay.TabIndex = 0;
+            this.bntPlay.UseVisualStyleBackColor = true;
+            this.bntPlay.Click += new System.EventHandler(this.bntPlay_Click);
             // 
             // ReadOnlineForm
             // 
@@ -160,7 +204,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(200, 200);
-            this.Controls.Add(this.loadingCircle1);
+            this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ReadOnlineForm";
@@ -169,9 +213,11 @@
             this.Text = "iView.NET Slide Show";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SlideShow_KeyPress);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ReadOnlineForm_MouseMove);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.SlideShow_PreviewKeyDown);
             this.Resize += new System.EventHandler(this.ReadOnlineForm_Resize);
             this.cms_Options.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -189,6 +235,10 @@
         private System.Windows.Forms.ToolStripSeparator tss_02;
         private System.Windows.Forms.ToolStripSeparator tss_03;
         private System.Windows.Forms.ToolStripMenuItem tsmi_FadeTransition;
-        private MRG.Controls.UI.LoadingCircle loadingCircle1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button bntPlay;
+        private System.Windows.Forms.Button bntNext;
+        private System.Windows.Forms.Button bntPre;
+        private System.Windows.Forms.Button button3;
     }
 }
