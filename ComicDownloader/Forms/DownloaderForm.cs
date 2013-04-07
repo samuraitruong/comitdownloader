@@ -21,6 +21,7 @@ using ComicDownloader.Properties;
 using ComicDownloader.Forms;
 using IView.UI.Forms;
 using System.Runtime.InteropServices;
+using ComicDownoader.Forms;
 
 
 namespace ComicDownloader
@@ -876,6 +877,19 @@ namespace ComicDownloader
         {
             AddToQueue(true);
             
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            foreach (Row item in tblChapters.Rows)
+            {
+                if (item.Cells[0].Selected)
+                {
+                    string url = item.Cells[4].Text;
+                    ReadOnlineForm form = new ReadOnlineForm(url);
+                    form.Show(this);
+                }
+            }
         }
 
         

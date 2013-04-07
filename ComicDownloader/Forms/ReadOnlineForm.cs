@@ -112,9 +112,11 @@ namespace ComicDownoader.Forms
 
                 //Precache data
                  new Thread(new ThreadStart(delegate() {
-                     foreach (var item in m_sFilePaths)
+                     for (int i = 0; i < m_sFilePaths.Count; i++)
                      {
-                         GetImage(item);
+
+
+                         GetImage(m_sFilePaths[i]);
                      }
                  
                  })).Start();
@@ -373,6 +375,7 @@ namespace ComicDownoader.Forms
         /// <param name="bHideWindow">Specifies whether to hide the child window when loading a new image.</param>
         private void LoadPreviousImage(bool bHideWindow)
         {
+            
             if ((m_sFilePaths == null) || (m_sFilePaths.Count == 0))
                 return;
 
@@ -523,20 +526,26 @@ namespace ComicDownoader.Forms
         /// <summary>
         /// 
         /// </summary>
-        private void NormalTransition()
+        private void NormalTransition(bool previous)
         {
             if (m_oImageForm.Opacity != 1.00F)
                 m_oImageForm.Opacity = 1.00F;
 
-            LoadNextImage(true);
-
+            if (previous)
+            {
+                LoadPreviousImage(true);
+            }
+            else
+            {
+                LoadNextImage(true);
+            }
             m_nSpinWait = (100 * m_WaitInterval) * tim_SlideShowTimer.Interval;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        private void FadeTransition()
+        private void FadeTransition(bool previous)
         {
             if (m_bFadeIn)
             {
@@ -557,7 +566,15 @@ namespace ComicDownoader.Forms
                     m_bFadeIn = true;
                     m_nSpinWait = 500;
 
-                    LoadNextImage((m_nTransitionMode == TransitionMode.Normal));
+                    if (previous)
+                    {
+
+                        LoadPreviousImage((m_nTransitionMode == TransitionMode.Normal));
+                    }
+                    else
+                    {
+                        LoadNextImage((m_nTransitionMode == TransitionMode.Normal));
+                    }
                 }
             }
         }
@@ -601,10 +618,10 @@ namespace ComicDownoader.Forms
             switch (m_nTransitionMode)
             {
                 case TransitionMode.Normal:
-                    NormalTransition();
+                    NormalTransition(false);
                     break;
                 case TransitionMode.Fade:
-                    FadeTransition();
+                    FadeTransition(false);
                     break;
             }
         }
@@ -722,12 +739,14 @@ namespace ComicDownoader.Forms
         protected override void OnLoad(EventArgs e)
         {
             // Load an image right away unless the transition mode is currently set to normal.
-            if (m_nTransitionMode != TransitionMode.Normal)
+            //if (m_nTransitionMode != TransitionMode.Normal)
+           
+
                 LoadNextImage(false);
 
             // Start the slide show.
             //StartStop();
-            LoadNextImage(true);
+            
             base.OnLoad(e);
         }
 
@@ -778,12 +797,29 @@ namespace ComicDownoader.Forms
         {
             if (e.KeyCode == Keys.Left)
             {
-                LoadPreviousImage((m_nTransitionMode == TransitionMode.Normal));
+
+                switch (m_nTransitionMode)
+                {
+                    case TransitionMode.Normal:
+                        NormalTransition(true);
+                        break;
+                    case TransitionMode.Fade:
+                        FadeTransition(true);
+                        break;
+                }
             }
 
             if (e.KeyCode == Keys.Right)
             {
-                LoadNextImage((m_nTransitionMode == TransitionMode.Normal));
+                switch (m_nTransitionMode)
+                {
+                    case TransitionMode.Normal:
+                        NormalTransition(true);
+                        break;
+                    case TransitionMode.Fade:
+                        FadeTransition(true);
+                        break;
+                }
             }
             if (e.KeyCode == Keys.Escape)
             {

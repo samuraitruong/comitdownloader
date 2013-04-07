@@ -104,6 +104,8 @@ namespace ComicDownloader.Engines
             HtmlDocument htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
             var img = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"eatmanga_image_big\"]");
+            if(img == null)
+                img = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"eatmanga_image\"]");
             pageUrl = img.Attributes["src"].Value;
 
             

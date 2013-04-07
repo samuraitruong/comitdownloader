@@ -59,6 +59,8 @@ namespace ComicDownloader
             this.txtChapName = new XPTable.Models.TextColumn();
             this.txtChapLink = new XPTable.Models.TextColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuReadOnline = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuSelectAll = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSelectNone = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSelectInverse = new System.Windows.Forms.ToolStripMenuItem();
@@ -328,6 +330,8 @@ namespace ComicDownloader
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuReadOnline,
+            this.toolStripSeparator2,
             this.mnuSelectAll,
             this.mnuSelectNone,
             this.mnuSelectInverse,
@@ -335,8 +339,21 @@ namespace ComicDownloader
             this.toolStripSeparator1,
             this.mnuAddQueue});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(171, 120);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(171, 170);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // mnuReadOnline
+            // 
+            this.mnuReadOnline.Image = global::ComicDownloader.Properties.Resources._1365316352_mark_as_read_32;
+            this.mnuReadOnline.Name = "mnuReadOnline";
+            this.mnuReadOnline.Size = new System.Drawing.Size(170, 22);
+            this.mnuReadOnline.Text = "Read Online";
+            this.mnuReadOnline.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(167, 6);
             // 
             // mnuSelectAll
             // 
@@ -703,6 +720,8 @@ namespace ComicDownloader
         private System.Windows.Forms.ToolStripMenuItem addOnlyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuAddandStartQueue;
         private XPTable.Models.TextColumn txtChapIdentify;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem mnuReadOnline;
         
     }
 }
