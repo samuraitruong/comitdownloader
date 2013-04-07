@@ -1226,6 +1226,14 @@
     <None Include="Resources\1365103950_interact.png" />
     <None Include="Resources\1365316352_mark_as_read_32.png" />
     <None Include="Resources\1365319718_Globe1.png" />
+    <None Include="Resources\1365339292_play.png" />
+    <None Include="Resources\1365339653_Previous.png" />
+    <None Include="Resources\1365339706_go-last-page.png" />
+    <None Include="Resources\1365339736_go-last-page.png" />
+    <None Include="Resources\1365339812_Previous.png" />
+    <None Include="Resources\1365339806_Next.png" />
+    <None Include="Resources\1365339875_Close.png" />
+    <None Include="Resources\1365340186_Pause.png" />
     <Content Include="Resources\14747480-bang-comic-book-explosion.jpg" />
     <Content Include="3rd\itextsharp.dll" />
     <Content Include="3rd\Cx.Windows.Forms\MdiTabStrip.bmp" />

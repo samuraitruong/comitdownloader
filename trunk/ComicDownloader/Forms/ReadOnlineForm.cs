@@ -365,7 +365,7 @@ namespace ComicDownoader.Forms
             catch(Exception ex) {
             }
             finally{
-                loadingCircle1.Visible = false;
+                
             }
         }
 
@@ -797,7 +797,6 @@ namespace ComicDownoader.Forms
         {
             if (e.KeyCode == Keys.Left)
             {
-
                 switch (m_nTransitionMode)
                 {
                     case TransitionMode.Normal:
@@ -807,6 +806,7 @@ namespace ComicDownoader.Forms
                         FadeTransition(true);
                         break;
                 }
+                
             }
 
             if (e.KeyCode == Keys.Right)
@@ -832,6 +832,73 @@ namespace ComicDownoader.Forms
         {
             //loadingCircle1.Size = this.Size;
 
+        }
+
+        private void ReadOnlineForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            //e.Location 
+            var x = e.Location.X;
+            var y = e.Location.Y;
+
+            if (x >= panel1.Left && x <= panel1.Right && y >= panel1.Top && y <= panel1.Bottom)
+            {
+                panel1.Visible = true;
+                panel1.BringToFront();
+            }
+            else
+            {
+                panel1.Visible = false;
+            }
+
+               
+        }
+
+        private void bntPlay_Click(object sender, EventArgs e)
+        {
+            StartStop();
+
+            if (tim_SlideShowTimer.Enabled)
+            {
+                //tsmi_PlayPause.Text = "Pause";
+                bntPlay.Image = Resources._1365340186_Pause;
+            }
+            else
+            {
+                //tsmi_PlayPause.Text = "Play";
+                bntPlay.Image = Resources._1365339292_play;
+            }
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void bntPre_Click(object sender, EventArgs e)
+        {
+            switch (m_nTransitionMode)
+            {
+                case TransitionMode.Normal:
+                    NormalTransition(true);
+                    break;
+                case TransitionMode.Fade:
+                    FadeTransition(true);
+                    break;
+            }
+        }
+
+        private void bntNext_Click(object sender, EventArgs e)
+        {
+            switch (m_nTransitionMode)
+            {
+                case TransitionMode.Normal:
+                    NormalTransition(true);
+                    break;
+                case TransitionMode.Fade:
+                    FadeTransition(true);
+                    break;
+            }
         }
     }
 }

@@ -473,6 +473,62 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _1365339292_play {
+            get {
+                object obj = ResourceManager.GetObject("1365339292_play", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365339653_Previous {
+            get {
+                object obj = ResourceManager.GetObject("1365339653_Previous", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365339706_go_last_page {
+            get {
+                object obj = ResourceManager.GetObject("1365339706_go-last-page", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365339736_go_last_page {
+            get {
+                object obj = ResourceManager.GetObject("1365339736_go-last-page", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365339806_Next {
+            get {
+                object obj = ResourceManager.GetObject("1365339806_Next", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365339812_Previous {
+            get {
+                object obj = ResourceManager.GetObject("1365339812_Previous", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365339875_Close {
+            get {
+                object obj = ResourceManager.GetObject("1365339875_Close", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365340186_Pause {
+            get {
+                object obj = ResourceManager.GetObject("1365340186_Pause", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap _14747480_bang_comic_book_explosion {
             get {
                 object obj = ResourceManager.GetObject("14747480-bang-comic-book-explosion", resourceCulture);
