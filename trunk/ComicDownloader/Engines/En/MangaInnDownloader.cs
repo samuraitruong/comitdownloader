@@ -121,5 +121,59 @@ namespace ComicDownloader.Engines
             }
             return results;
         }
+
+        public override List<StoryInfo> GetLastestUpdates()
+        {
+            string lastestUpdateUrl = HostUrl;
+            List<StoryInfo> stories = new List<StoryInfo>();
+            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"content\"]/table[position()=2]/tr/td[position()=1]/div/a[@title=\"ongoing\"]");
+
+            foreach (HtmlNode node in nodes)
+            {
+                StoryInfo info = new StoryInfo()
+                {
+                    Url = node.Attributes["href"].Value,
+                    Name = node.SelectSingleNode("span").InnerText,
+                    Chapters = new List<ChapterInfo>(),
+                };
+
+                HtmlNode tag = node.NextSibling;
+                while (true)
+                {
+                    if (tag == null)
+                    {
+                        break;
+                    }
+
+                    if (tag.Name == "div" && tag.Attributes.Contains("class") && tag.Attributes["class"].Value == "ayirac")
+                    {
+                        break;
+                    }
+
+                    if (tag.Name == "a" && tag.Attributes["href"].Value != "latest/1_page")
+                    {
+                        info.Chapters.Add(new ChapterInfo()
+                        {
+                            Name = tag.SelectSingleNode("span").InnerText,
+                            Url = tag.Attributes["href"].Value,
+                        });
+                    }
+                    else if (tag.Name == "a" && tag.Attributes["href"].Value == "latest/1_page")
+                    {
+                        break;
+                    }
+
+                    tag = tag.NextSibling;
+                }
+
+                stories.Add(info);
+            }
+
+            return stories;
+        }
     }
 }

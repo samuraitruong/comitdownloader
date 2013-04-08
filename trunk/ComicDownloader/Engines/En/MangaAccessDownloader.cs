@@ -121,5 +121,59 @@ namespace ComicDownloader.Engines
             }
             return results;
         }
+
+        public override List<StoryInfo> GetLastestUpdates()
+        {
+            string lastestUpdateUrl = HostUrl;
+            List<StoryInfo> stories = new List<StoryInfo>();
+            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@id=\"inner_page\"]/div[position()>2]//a");
+
+            foreach (HtmlNode node in nodes)
+            {
+                string chapterUrl = HostUrl + node.Attributes["href"].Value;
+                string pageUrl;
+                if (chapterUrl.Contains("chapter"))
+                {
+                    pageUrl = chapterUrl.Substring(0, chapterUrl.LastIndexOf("/"));
+                    pageUrl = pageUrl.Substring(0, pageUrl.LastIndexOf("/"));
+                }
+                else
+                {
+                    pageUrl = chapterUrl;
+                }
+                StoryInfo info;
+
+                if (stories.Any(p => p.Url == pageUrl))
+                {
+                    info = stories.Where(p => p.Url == pageUrl).Single();
+                }
+                else
+                {
+                    info = new StoryInfo()
+                    {
+                        Url = pageUrl,
+                        Name = node.ChildNodes[0].InnerText.Trim(),
+                        Chapters = new List<ChapterInfo>()
+                    };
+
+                    stories.Add(info);
+                }
+
+                var chapter = new ChapterInfo()
+                {
+                    Url = chapterUrl,
+                    Name = node.ChildNodes[0].InnerText.Trim() + ' ' + node.ChildNodes[1].InnerText.Trim() + ' ' + node.ChildNodes[2].NextSibling.InnerText.Trim()
+                };
+
+                info.Chapters.Add(chapter);
+            }
+
+            
+            return stories;
+        }
     }
 }
