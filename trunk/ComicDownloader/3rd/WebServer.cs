@@ -199,7 +199,7 @@ namespace NetduinoLibrary.Toolbox
         {
             cancel = true;
             Thread.Sleep(100);
-            serverThread.Suspend();
+            serverThread.Abort();
             Debug.Print("Stoped server in thread ");
         }
 
