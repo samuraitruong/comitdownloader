@@ -45,7 +45,7 @@ namespace ComicDownloader.Forms
         {
             try
             {
-                if (bntStart.Tag != null && bntStart.Tag == "Running")
+                if (bntStart.Tag != null && bntStart.Tag.ToString() == "Running")
                 {
                     
                     httpServer.Stop();
@@ -113,7 +113,7 @@ namespace ComicDownloader.Forms
             DirectoryInfo info = new DirectoryInfo(p);
             string fileName = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + ".html");
 
-            var template = File.OpenText("HTML/INDEX.html").ReadToEnd();
+            var template = File.OpenText("HTML\\treetable\\TEMPLATE.html").ReadToEnd();
 
             using (var stream = new StreamWriter(File.Open(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite)))
             {
@@ -124,14 +124,60 @@ namespace ComicDownloader.Forms
                 //    stream.Write(string.Format("<a href='{0}' >{1}</a> </br>", fi.Name, fi.Name));
                 //}
                 StringBuilder sb = new StringBuilder();
-                sb.AppendFormat("<ul>");
+                //sb.AppendFormat("<ul>");
                 string path = "";
-                string list = GetListing(info, sb, path);
-                sb.AppendFormat("<ul>");
+                //string list = GetListing(info, sb, path);
+                string parentNode = "";
+                int level = 0;
+                GenerateHtml(info, sb, path, parentNode,level);
+                //sb.AppendFormat("</ul>");
                 template = template.Replace("[[$LISTING]]", sb.ToString());
                 stream.Write(template);
             }
             return fileName;
+        }
+
+        private void GenerateHtml(DirectoryInfo info, StringBuilder sb, string path, string parentNode, int level)
+        {
+            int count = 1;
+            var subDirs  = info.GetDirectories();
+            if(subDirs!=null)
+            foreach (var item in subDirs)
+            {
+                if(string.IsNullOrEmpty(parentNode))
+                    sb.AppendFormat("<tr data-tt-id='{0}'>", count, parentNode);
+                else
+                    sb.AppendFormat("<tr data-tt-id='{0}' data-tt-parent-id='{1}'>", parentNode + "-" + count.ToString(), parentNode);
+               sb.AppendFormat("     <td>");
+               sb.AppendFormat("         <span class='folder'>{0}</span>", item.Name);
+               sb.AppendFormat("    </td>");
+                sb.AppendFormat("      <td> {0} </td>","Folder");
+                sb.AppendFormat("      <td> {0} </td>","---");
+                sb.AppendFormat("</tr>");
+                string node = string.IsNullOrEmpty( parentNode)? count.ToString(): parentNode+"-"+count.ToString();
+
+                GenerateHtml(item, sb, path + "/" + item.Name, node, level++);
+                count++;
+            }
+
+            var files = info.GetFiles();
+            if (files != null)
+            {
+                foreach (var item in files)
+                {
+                    if (string.IsNullOrEmpty(parentNode))
+                        sb.AppendFormat("<tr data-tt-id='{0}'>", count, parentNode);
+                    else
+                        sb.AppendFormat("<tr data-tt-id='{0}' data-tt-parent-id='{1}'>", parentNode+"-"+count.ToString(), parentNode);
+                    sb.AppendFormat("     <td>");
+                    sb.AppendFormat("         <span class='file'><a href='{0}' target='_blank'>{1}</a></span>", path+"/"+ item.Name,item.Name);
+                    sb.AppendFormat("    </td>");
+                    sb.AppendFormat("      <td> {0} </td>", "File");
+                    sb.AppendFormat("      <td> {0} </td>", item.Length.ToKB());
+                    sb.AppendFormat("</tr>");
+                    count++;
+                }
+            }
         }
 
         private string GetListing(DirectoryInfo info, StringBuilder sb, string path)
@@ -147,6 +193,7 @@ namespace ComicDownloader.Forms
                     sb.AppendFormat("<label for='{0}'>{1}</label>", "0", sub.Name);
                     //sb.AppendFormat("<ul>");
                     GetListing(sub, sb, path + "/" + sub.Name);
+                    
                     //sb.AppendFormat("</ul>");
                 }
                 sb.AppendFormat("</ul>");
@@ -164,6 +211,11 @@ namespace ComicDownloader.Forms
 
             }
             return sb.ToString();
+        }
+
+        private void GenerateHtml(DirectoryInfo sub, StringBuilder sb, string p, int p_2)
+        {
+            throw new NotImplementedException();
         }
 
         private void linkLabel1_Click(object sender, EventArgs e)
