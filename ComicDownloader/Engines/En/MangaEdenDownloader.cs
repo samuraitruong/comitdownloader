@@ -139,5 +139,53 @@ namespace ComicDownloader.Engines
             }
             return results;
         }
+
+        public override List<StoryInfo> GetLastestUpdates()
+        {
+            string lastestUpdateUrl = HostUrl;
+            List<StoryInfo> stories = new List<StoryInfo>();
+            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+
+            var chapters = htmlDoc.DocumentNode.SelectNodes("//ul[@id=\"news\"]/li/a[contains(@href,\"en-manga\")]");
+            if (chapters != null)
+            {
+                foreach (HtmlNode chap in chapters)
+                {
+                    var item = new ChapterInfo()
+                    {
+                        Name = chap.InnerText.Trim(),
+                        Url = HostUrl + chap.Attributes["href"].Value
+                    };
+
+                    var page = chap.ParentNode.SelectSingleNode("div[position()=1]/a[position()=1]");
+                    var pageUrl = page.Attributes["href"].Value;
+                    if (pageUrl.Contains("it-manga"))
+                    {
+                        pageUrl = pageUrl.Replace("it-manga", "en-manga");
+                    }
+
+                    if (stories.Any(p => p.Url == page.Attributes["href"].Value))
+                    {
+                        stories.Where(p => p.Url == page.Attributes["href"].Value).Single().Chapters.Add(item);
+                    }
+                    else
+                    {
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = HostUrl + pageUrl,
+                            Name = page.InnerText.Trim(),
+                            Chapters = new List<ChapterInfo>() { item }
+                        };
+
+                        stories.Add(info);
+                    }
+                }
+            }
+                
+            return stories;
+        }
     }
 }
