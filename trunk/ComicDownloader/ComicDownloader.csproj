@@ -46,6 +46,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>3rd\itextsharp.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.SPOT.Net">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft .NET Micro Framework\v3.0\Assemblies\Microsoft.SPOT.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -245,6 +248,7 @@
     <Compile Include="3rd\PagedList\PagedListExtensions.cs" />
     <Compile Include="3rd\PagedList\PagedListMetaData.cs" />
     <Compile Include="3rd\PagedList\StaticPagedList.cs" />
+    <Compile Include="3rd\WebServer.cs" />
     <Compile Include="ComicDownloaderSettings.cs" />
     <Compile Include="Engines\18+\HakihomeDownloader.cs" />
     <Compile Include="Engines\18+\Manga16Downloader.cs" />
@@ -483,6 +487,12 @@
     </Compile>
     <Compile Include="Forms\ReadOnlineForm.Designer.cs">
       <DependentUpon>ReadOnlineForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StartServerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StartServerForm.Designer.cs">
+      <DependentUpon>StartServerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\NetworkHelper.cs" />
     <Compile Include="Engines\StoryInfo.cs" />
@@ -1078,6 +1088,9 @@
     <EmbeddedResource Include="Forms\ReadOnlineForm.resx">
       <DependentUpon>ReadOnlineForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StartServerForm.resx">
+      <DependentUpon>StartServerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -1104,6 +1117,9 @@
     <None Include="3rd\ObjectListView\FullClassDiagram.cd" />
     <None Include="3rd\ObjectListView\ObjectListView.FxCop" />
     <None Include="app.config" />
+    <None Include="HTML\treetable\.gitignore" />
+    <None Include="HTML\treetable\README.md" />
+    <None Include="HTML\treetable\treetable.jquery.json" />
     <None Include="Properties\IViewSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>IViewSettings.Designer.cs</LastGenOutput>
@@ -1167,6 +1183,37 @@
     <Content Include="3rd\NLog.dll" />
     <Content Include="3rd\NLog.Extended.dll" />
     <Content Include="3rd\PagedList\PagedList.csproj" />
+    <Content Include="HTML\INDEX.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\icons.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\CHANGELOG.txt" />
+    <Content Include="HTML\treetable\GPL-LICENSE.txt" />
+    <Content Include="HTML\treetable\images\bg-table-thead.png" />
+    <Content Include="HTML\treetable\images\collapse-light.png" />
+    <Content Include="HTML\treetable\images\collapse.png" />
+    <Content Include="HTML\treetable\images\expand-light.png" />
+    <Content Include="HTML\treetable\images\expand.png" />
+    <Content Include="HTML\treetable\images\file.png" />
+    <Content Include="HTML\treetable\images\folder.png" />
+    <Content Include="HTML\treetable\index.html" />
+    <Content Include="HTML\treetable\javascripts\src\jquery.treetable.js" />
+    <Content Include="HTML\treetable\javascripts\test\jquery.treetable.test.js" />
+    <Content Include="HTML\treetable\MIT-LICENSE.txt" />
+    <Content Include="HTML\treetable\stylesheets\jquery.treetable.css" />
+    <Content Include="HTML\treetable\stylesheets\jquery.treetable.theme.default.css" />
+    <Content Include="HTML\treetable\stylesheets\screen.css" />
+    <Content Include="HTML\treetable\test.html" />
+    <Content Include="HTML\treetable\vendor\chai-jquery.js" />
+    <Content Include="HTML\treetable\vendor\chai.js" />
+    <Content Include="HTML\treetable\vendor\jquery-ui.js" />
+    <Content Include="HTML\treetable\vendor\jquery.js" />
+    <Content Include="HTML\treetable\vendor\mocha.css" />
+    <Content Include="HTML\treetable\vendor\mocha.js" />
+    <Content Include="HTML\treetable\vendor\sinon.js" />
+    <Content Include="HTML\treetable\vendor\underscore.js" />
     <Content Include="Resources\1363852385_info.png" />
     <Content Include="Resources\1363939449_netvibes.png" />
     <Content Include="Resources\1363942937_ark2.png" />
@@ -1234,6 +1281,7 @@
     <None Include="Resources\1365339806_Next.png" />
     <None Include="Resources\1365339875_Close.png" />
     <None Include="Resources\1365340186_Pause.png" />
+    <None Include="Resources\1365430905_internet-radio-new.png" />
     <Content Include="Resources\14747480-bang-comic-book-explosion.jpg" />
     <Content Include="3rd\itextsharp.dll" />
     <Content Include="3rd\Cx.Windows.Forms\MdiTabStrip.bmp" />

@@ -13,6 +13,7 @@ using ComicDownloader.Properties;
 using System.Reflection;
 using System.Threading;
 using Cx.Windows.Forms;
+using NetduinoLibrary.Toolbox;
 
 namespace ComicDownloader
 {
@@ -373,6 +374,15 @@ namespace ComicDownloader
             childForm.WindowState = FormWindowState.Maximized;
         }
 
-        
+        private void ribbonButton2_Click(object sender, EventArgs e)
+        {
+            StartServerForm serverForm = new StartServerForm();
+            serverForm.MdiParent= this;
+            serverForm.WindowState = FormWindowState.Minimized;
+            serverForm.Show();
+            serverForm.WindowState = FormWindowState.Maximized;
+        }
+
+      
     }
 }
