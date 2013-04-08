@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Comic Downloader 1.0 http server</title>
+    <link rel="stylesheet" href="[[$ROOT]]/treetable/stylesheets/screen.css" media="screen" />
+    <link rel="stylesheet" href="[[$ROOT]]/treetable/stylesheets/jquery.treetable.css" />
+    <link rel="stylesheet" href="[[$ROOT]]/treetable/stylesheets/jquery.treetable.theme.default.css" />
+    <style type="text/css">
+        .style1
+        {
+            width: 85px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <h1 style="font-weight: bold; font-style: oblique; font-variant: normal; color: #0000FF">
+            Comic Downloader 1.0 Server</h1>
+        <br />
+        <table id="example-advanced">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                    <th class="style1">
+                        Size
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                [[$LISTING]]
+            </tbody>
+        </table>
+    </div>
+    <script src="[[$ROOT]]/treetable/vendor/jquery.js"></script>
+    <script src="[[$ROOT]]/treetable/vendor/jquery-ui.js"></script>
+    <script src="[[$ROOT]]/treetable/javascripts/src/jquery.treetable.js"></script>
+    <script>
+       
+
+        $("#example-advanced").treetable({ expandable: true });
+
+        // Highlight selected row
+        $("#example-advanced tbody tr").mousedown(function () {
+            $("tr.selected").removeClass("selected");
+            $(this).addClass("selected");
+        });
+
+        // Drag & Drop Example Code
+        $("#example-advanced .file, #example-advanced .folder").draggable({
+            helper: "clone",
+            opacity: .75,
+            refreshPositions: true, // Performance?
+            revert: "invalid",
+            revertDuration: 300,
+            scroll: true
+        });
+
+        $("#example-advanced .folder").each(function () {
+            $(this).parents("tr").droppable({
+                accept: ".file, .folder",
+                drop: function (e, ui) {
+                    var droppedEl = ui.draggable.parents("tr");
+                    $("#example-advanced").treetable("move", droppedEl.data("ttId"), $(this).data("ttId"));
+                },
+                hoverClass: "accept",
+                over: function (e, ui) {
+                    var droppedEl = ui.draggable.parents("tr");
+                    if (this != droppedEl[0] && !$(this).is(".expanded")) {
+                        $("#example-advanced").treetable("expandNode", $(this).data("ttId"));
+                    }
+                }
+            });
+        });
+
+        
+    </script>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p style="text-align: right">
+        Comic Downloader v1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </p>
+    <p style="text-align: right">
+        Author: <a href="mailto:samuraitruong@hotmail.com">samuraitruong@hotmail.com</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </p>
+    <p style="text-align: right">
+        View update: 
+        <a href="http://www.facebook.com/pages/Comic-Downloader/137897009722629">
+       www.facebook.com/pages/Comic-Downloader/137897009722629</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </p>
+    <p style="text-align: right">
+        &nbsp;</p>
+    <p style="text-align: right">
+        &nbsp;</p>
+</body>
+</html>

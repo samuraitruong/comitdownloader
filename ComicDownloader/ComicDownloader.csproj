@@ -46,8 +46,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>3rd\itextsharp.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SPOT.Net">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft .NET Micro Framework\v3.0\Assemblies\Microsoft.SPOT.Net.dll</HintPath>
+    <Reference Include="Microsoft.SPOT.Net, Version=3.0.7186.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>3rd\Microsoft.SPOT.Net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
@@ -1180,6 +1181,9 @@
     <None Include="3rd\IView.NET\iView.NET Controls\Resources\unknown_drive_16x161.png" />
     <Content Include="3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x16.png" />
     <None Include="3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x161.png" />
+    <Content Include="3rd\Microsoft.SPOT.Hardware.dll" />
+    <Content Include="3rd\Microsoft.SPOT.Native.dll" />
+    <Content Include="3rd\Microsoft.SPOT.Net.dll" />
     <Content Include="3rd\NLog.dll" />
     <Content Include="3rd\NLog.Extended.dll" />
     <Content Include="3rd\PagedList\PagedList.csproj" />
@@ -1190,30 +1194,76 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="HTML\treetable\CHANGELOG.txt" />
+    <Content Include="HTML\treetable\Copy of TEMPLATE.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\TEMPLATE.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="HTML\treetable\GPL-LICENSE.txt" />
-    <Content Include="HTML\treetable\images\bg-table-thead.png" />
-    <Content Include="HTML\treetable\images\collapse-light.png" />
-    <Content Include="HTML\treetable\images\collapse.png" />
-    <Content Include="HTML\treetable\images\expand-light.png" />
-    <Content Include="HTML\treetable\images\expand.png" />
-    <Content Include="HTML\treetable\images\file.png" />
-    <Content Include="HTML\treetable\images\folder.png" />
+    <Content Include="HTML\treetable\images\bg-table-thead.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\images\collapse-light.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\images\collapse.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\images\expand-light.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\images\expand.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\images\file.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\images\folder.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="HTML\treetable\index.html" />
-    <Content Include="HTML\treetable\javascripts\src\jquery.treetable.js" />
-    <Content Include="HTML\treetable\javascripts\test\jquery.treetable.test.js" />
+    <Content Include="HTML\treetable\javascripts\src\jquery.treetable.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\javascripts\test\jquery.treetable.test.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="HTML\treetable\MIT-LICENSE.txt" />
-    <Content Include="HTML\treetable\stylesheets\jquery.treetable.css" />
-    <Content Include="HTML\treetable\stylesheets\jquery.treetable.theme.default.css" />
-    <Content Include="HTML\treetable\stylesheets\screen.css" />
+    <Content Include="HTML\treetable\stylesheets\jquery.treetable.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\stylesheets\jquery.treetable.theme.default.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\stylesheets\screen.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="HTML\treetable\test.html" />
-    <Content Include="HTML\treetable\vendor\chai-jquery.js" />
-    <Content Include="HTML\treetable\vendor\chai.js" />
-    <Content Include="HTML\treetable\vendor\jquery-ui.js" />
-    <Content Include="HTML\treetable\vendor\jquery.js" />
-    <Content Include="HTML\treetable\vendor\mocha.css" />
-    <Content Include="HTML\treetable\vendor\mocha.js" />
-    <Content Include="HTML\treetable\vendor\sinon.js" />
-    <Content Include="HTML\treetable\vendor\underscore.js" />
+    <Content Include="HTML\treetable\vendor\chai-jquery.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\vendor\chai.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\vendor\jquery-ui.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\vendor\jquery.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\vendor\mocha.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\vendor\mocha.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\vendor\sinon.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTML\treetable\vendor\underscore.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\1363852385_info.png" />
     <Content Include="Resources\1363939449_netvibes.png" />
     <Content Include="Resources\1363942937_ark2.png" />

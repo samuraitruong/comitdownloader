@@ -33,7 +33,7 @@ namespace NetduinoLibrary.Toolbox
         public const char ParamSeparator = '&';
         public const char ParamStart = '?';
         public const char ParamEqual = '=';
-        const int MAX_BUFF = 10240;
+        const int MAX_BUFF = 20480;
 
         public class Param
         {
@@ -255,6 +255,9 @@ namespace NetduinoLibrary.Toolbox
             {
                 ContentType = "text/css";
             }
+            if(strFilePath.IndexOf(".pdf")!=-1){
+                ContentType = "application/pdf";
+            }
 
             string strResp = "HTTP/1.1 200 OK\r\nContent-Type: " + ContentType + "; charset=UTF-8\r\nCache-Control: no-cache\r\nConnection: close\r\n\r\n";
             OutPutStream(response, strResp);
@@ -343,8 +346,12 @@ namespace NetduinoLibrary.Toolbox
                                 //string header = "HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\nCache-Control: no-cache\r\nConnection: close\r\n\r\n";
                                 //connection.Send(Encoding.UTF8.GetBytes(header), header.Length, SocketFlags.None);
                                 //and then you can return HTML code
-                                if (CommandReceived != null)
-                                    CommandReceived(this, new WebServerEventArgs(connection, mURI));
+
+                               // new Thread(new ThreadStart(delegate()
+                                //{
+                                    if (CommandReceived != null)
+                                        CommandReceived(this, new WebServerEventArgs(connection, mURI));
+                                //})).Start();
                             }
                         }
                     }
