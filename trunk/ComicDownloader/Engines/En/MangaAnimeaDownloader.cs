@@ -136,53 +136,39 @@ namespace ComicDownloader.Engines
             return results;
         }
 
-        //public override List<StoryInfo> GetLastestUpdates()
-        //{
-        //    string lastestUpdateUrl = HostUrl;
-        //    List<StoryInfo> stories = new List<StoryInfo>();
-        //    var html = NetworkHelper.GetHtml(lastestUpdateUrl);
+        public override List<StoryInfo> GetLastestUpdates()
+        {
+            string lastestUpdateUrl = HostUrl;
+            List<StoryInfo> stories = new List<StoryInfo>();
+            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
 
-        //    var htmlDoc = new HtmlDocument();
-        //    htmlDoc.LoadHtml(html);
-        //    var nodes = htmlDoc.DocumentNode.SelectNodes("//ul[@class=\"updated_list\"]/li/a");
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//ul[@class=\"updated_list\"]/li/a[position()=1]");
 
-        //    foreach (HtmlNode node in nodes)
-        //    {
-        //        string chapterUrl = HostUrl + node.Attributes["href"].Value;
-        //        StoryInfo info;
-
-        //        var html01 = NetworkHelper.GetHtml(chapterUrl);
-        //        htmlDoc = new HtmlDocument();
-        //        htmlDoc.LoadHtml(html01);
-        //        var link = htmlDoc.DocumentNode.SelectSingleNode("//ul[@class=\"crumbler\"]/li[position()=3]/a");
-
-        //        string pageUrl = "http://mangawall.com" + link.Attributes["href"].Value;
-
-        //        if (stories.Any(p => p.Url == pageUrl))
-        //        {
-        //            info = stories.Where(p => p.Url == pageUrl).Single();
-        //        }
-        //        else
-        //        {
-        //            info = new StoryInfo()
-        //            {
-        //                Url = pageUrl,
-        //                Name = link.InnerText.Trim(),
-        //                Chapters = new List<ChapterInfo>()
-        //            };
-
-        //            stories.Add(info);
-        //        }
-
-        //        var chapter = new ChapterInfo()
-        //        {
-        //            Url = chapterUrl,
-        //            Name = node.FirstChild.InnerText.Trim()
-        //        };
-
-        //        info.Chapters.Add(chapter);
-        //    }
-        //    return stories;
-        //}
+            foreach (HtmlNode node in nodes)
+            {
+                StoryInfo info = new StoryInfo()
+                {
+                    Url = HostUrl + node.Attributes["href"].Value,
+                    Name = node.FirstChild.InnerText.Trim(),
+                    Chapters = new List<ChapterInfo>(),
+                };
+                var chapters = node.ParentNode.SelectNodes("a[position()>1]");
+                if (chapters != null)
+                {
+                    foreach (HtmlNode chap in chapters)
+                    {
+                        info.Chapters.Add(new ChapterInfo()
+                        {
+                            Name = chap.InnerText.Trim(),
+                            Url = HostUrl + "/" + chap.Attributes["href"].Value,
+                        });
+                    }
+                }
+                stories.Add(info);
+            }
+            return stories;
+        }
     }
 }
