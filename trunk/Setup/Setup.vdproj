@@ -15,38 +15,56 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_B91C1EB208C4C62823ACFBC73D449646"
-        "OwnerKey" = "8:_DBBACE80A8BE4283B512D76661617E3C"
+        "MsmKey" = "8:_66D76F6B340B05503D975482DA0C6560"
+        "OwnerKey" = "8:_FF99F23C4CEE4A7091216EA20EA8AAF5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_DBBACE80A8BE4283B512D76661617E3C"
+        "MsmKey" = "8:_6D46D430B3D7499CA6C3F878753B3680"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E964932E6F3A910AEC4D19BB95B7136A"
-        "OwnerKey" = "8:_DBBACE80A8BE4283B512D76661617E3C"
+        "MsmKey" = "8:_756F8476F3EB448BA0E9BE7D7292BA3C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9BBACD69C47A4629847F816541B39ED4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AFC5D0EF187E4401A2EC3BD14F5BC205"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FF99F23C4CEE4A7091216EA20EA8AAF5"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B91C1EB208C4C62823ACFBC73D449646"
+        "OwnerKey" = "8:_FF99F23C4CEE4A7091216EA20EA8AAF5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DBBACE80A8BE4283B512D76661617E3C"
+        "OwnerKey" = "8:_66D76F6B340B05503D975482DA0C6560"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E964932E6F3A910AEC4D19BB95B7136A"
+        "OwnerKey" = "8:_9BBACD69C47A4629847F816541B39ED4"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -67,6 +85,27 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -92,11 +131,6 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
-                    {
-                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
-                    }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5.SP1"
                     {
                     "Name" = "8:.NET Framework 3.5 SP1"
@@ -130,7 +164,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                "FrameworkVersion" = "8:.NETFramework,Version=v3.5"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=131000"
                 }
@@ -138,20 +172,20 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B91C1EB208C4C62823ACFBC73D449646"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_66D76F6B340B05503D975482DA0C6560"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_B91C1EB208C4C62823ACFBC73D449646"
+                    "_66D76F6B340B05503D975482DA0C6560"
                     {
-                    "Name" = "8:HtmlAgilityPack.dll"
+                    "Name" = "8:NLog.DLL"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:HtmlAgilityPack.dll"
+            "SourcePath" = "8:NLog.DLL"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
@@ -169,20 +203,60 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E964932E6F3A910AEC4D19BB95B7136A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D46D430B3D7499CA6C3F878753B3680"
+            {
+            "SourcePath" = "8:..\\Release\\ComicDownloader.exe.config"
+            "TargetName" = "8:ComicDownloader.exe.config"
+            "Tag" = "8:"
+            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_756F8476F3EB448BA0E9BE7D7292BA3C"
+            {
+            "SourcePath" = "8:..\\Release\\log.txt"
+            "TargetName" = "8:log.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9BBACD69C47A4629847F816541B39ED4"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:itextsharp, Version=5.4.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_E964932E6F3A910AEC4D19BB95B7136A"
+                    "_9BBACD69C47A4629847F816541B39ED4"
                     {
-                    "Name" = "8:itextsharp.dll"
+                    "Name" = "8:NLog.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:itextsharp.dll"
+            "SourcePath" = "8:..\\Release\\NLog.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
@@ -197,7 +271,58 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AFC5D0EF187E4401A2EC3BD14F5BC205"
+            {
+            "SourcePath" = "8:..\\ComicDownloader\\Resources\\1364394623_37693.ico"
+            "TargetName" = "8:1364394623_37693.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FF99F23C4CEE4A7091216EA20EA8AAF5"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:ComicDownloader, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1caba167bd85aed6, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_FF99F23C4CEE4A7091216EA20EA8AAF5"
+                    {
+                    "Name" = "8:ComicDownloader.exe"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\Release\\ComicDownloader.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
@@ -255,26 +380,26 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Setup"
+        "ProductName" = "8:Comic Downloader V1"
         "ProductCode" = "8:{B272C882-A26C-4FDA-AE48-64933A2077A9}"
-        "PackageCode" = "8:{E1A0FB58-C09E-4064-BF49-FF29128081DA}"
-        "UpgradeCode" = "8:{E31563EE-8F93-49A6-BDC2-EE8F60386801}"
+        "PackageCode" = "8:{AE667B61-8F59-4485-AE98-338D9C041331}"
+        "UpgradeCode" = "8:{7F4E4438-E618-4DAC-8DD3-DEC09F6F24D4}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
-        "DetectNewerInstalledVersion" = "11:TRUE"
+        "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:samuraitruong@hotmail.com"
+        "Manufacturer" = "8:Comic"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:Setup"
+        "Title" = "8:Comic Downloader Setup"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Truong Nguyen"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Comic Downloader"
-        "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
+        "ARPURLINFOABOUT" = "8:http://www.facebook.com/pages/Comic-Downloader/137897009722629"
+        "ARPPRODUCTICON" = "8:_AFC5D0EF187E4401A2EC3BD14F5BC205"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -377,18 +502,32 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_00BB06C687D54C3BAD0AA6DD9FA933BA"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_371521B724434B3F907C831929A61074"
             {
-            "Name" = "8:Shortcut to Primary output from ComicDownloader (Release x86)"
+            "Name" = "8:Comic Downloader"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_DBBACE80A8BE4283B512D76661617E3C"
+            "Target" = "8:_FF99F23C4CEE4A7091216EA20EA8AAF5"
             "Folder" = "8:_D75FE0982D73401A9273025F2CB681D7"
             "WorkingFolder" = "8:_16495D796CE84539AEC87DD81F268A2D"
-            "Icon" = "8:"
+            "Icon" = "8:_AFC5D0EF187E4401A2EC3BD14F5BC205"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_DD3B8F777DD548D09BF50B9EB0F4DEAA"
+            {
+            "Name" = "8:Comic Downloader"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_FF99F23C4CEE4A7091216EA20EA8AAF5"
+            "Folder" = "8:_FCAA4A6AD1384F77B4372E0BDE76DC9C"
+            "WorkingFolder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Icon" = "8:_AFC5D0EF187E4401A2EC3BD14F5BC205"
             "Feature" = "8:"
             }
         }
@@ -790,34 +929,6 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_DBBACE80A8BE4283B512D76661617E3C"
-            {
-            "SourcePath" = "8:..\\ComicDownloader\\obj\\x86\\Release\\ComicDownloader.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:Release|x86"
-            "OutputGroupCanonicalName" = "8:Built"
-            "OutputProjectGuid" = "8:{E3BB4F32-9C5C-4F11-BF27-F79EED48AE21}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
         }
     }
 }
