@@ -139,6 +139,7 @@
             this.ribbonButton2.MinimumSize = new System.Drawing.Size(0, 0);
             this.ribbonButton2.SmallImage = global::ComicDownloader.Properties.Resources._1365430905_internet_radio_new;
             this.ribbonButton2.Text = "ribbonButton2";
+            this.ribbonButton2.Visible = false;
             this.ribbonButton2.Click += new System.EventHandler(this.ribbonButton2_Click);
             // 
             // bntCasiniServer

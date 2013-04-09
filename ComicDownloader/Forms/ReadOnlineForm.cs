@@ -114,8 +114,6 @@ namespace ComicDownoader.Forms
                  new Thread(new ThreadStart(delegate() {
                      for (int i = 0; i < m_sFilePaths.Count; i++)
                      {
-
-
                          GetImage(m_sFilePaths[i]);
                      }
                  
