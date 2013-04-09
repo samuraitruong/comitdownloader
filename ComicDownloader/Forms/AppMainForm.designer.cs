@@ -56,6 +56,7 @@
             this.ribbonPanel13 = new System.Windows.Forms.RibbonPanel();
             this.ribbonPanel3 = new System.Windows.Forms.RibbonPanel();
             this.ribbonComboBox1 = new System.Windows.Forms.RibbonComboBox();
+            this.bntCasiniServer = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
             // mdiTabStrip1
@@ -92,6 +93,7 @@
             // 
             this.ribbon1.QuickAcessToolbar.Items.Add(this.ribbonButton1);
             this.ribbon1.QuickAcessToolbar.Items.Add(this.ribbonButton2);
+            this.ribbon1.QuickAcessToolbar.Items.Add(this.bntCasiniServer);
             this.ribbon1.Size = new System.Drawing.Size(731, 110);
             this.ribbon1.TabIndex = 1;
             this.ribbon1.Tabs.Add(this.rbtHome);
@@ -292,6 +294,16 @@
             this.ribbonComboBox1.TextBoxText = "";
             this.ribbonComboBox1.Value = "When queue complete?";
             // 
+            // bntCasiniServer
+            // 
+            this.bntCasiniServer.Image = ((System.Drawing.Image)(resources.GetObject("bntCasiniServer.Image")));
+            this.bntCasiniServer.MaximumSize = new System.Drawing.Size(0, 0);
+            this.bntCasiniServer.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
+            this.bntCasiniServer.MinimumSize = new System.Drawing.Size(0, 0);
+            this.bntCasiniServer.SmallImage = global::ComicDownloader.Properties.Resources._1364718804_start_here_ubuntustudio;
+            this.bntCasiniServer.Text = "ribbonButton6";
+            this.bntCasiniServer.Click += new System.EventHandler(this.bntCasiniServer_Click);
+            // 
             // AppMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -340,6 +352,7 @@
         private System.Windows.Forms.RibbonPanel ribbonPanel1;
         private System.Windows.Forms.RibbonButton bntSupports;
         private System.Windows.Forms.RibbonButton btnLastestUpdate;
+        private System.Windows.Forms.RibbonButton bntCasiniServer;
         
     }
 }
