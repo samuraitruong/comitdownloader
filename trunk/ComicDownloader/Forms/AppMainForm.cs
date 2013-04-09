@@ -14,6 +14,7 @@ using System.Reflection;
 using System.Threading;
 using Cx.Windows.Forms;
 using NetduinoLibrary.Toolbox;
+using CassiniDev;
 
 namespace ComicDownloader
 {
@@ -381,6 +382,13 @@ namespace ComicDownloader
             serverForm.WindowState = FormWindowState.Minimized;
             serverForm.Show();
             serverForm.WindowState = FormWindowState.Maximized;
+        }
+
+        private void bntCasiniServer_Click(object sender, EventArgs e)
+        {
+            //Server server = new Server(0,"/","c:\\", false, true);
+            WebServerFormView form = new WebServerFormView(null);
+            form.ShowDialog();
         }
 
       

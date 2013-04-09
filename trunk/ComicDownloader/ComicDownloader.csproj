@@ -38,6 +38,10 @@
     <ApplicationIcon>Resources\1364394623_37693.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>3rd\Common.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>3rd\HtmlAgilityPack.dll</HintPath>
@@ -56,8 +60,11 @@
       <HintPath>3rd\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -68,6 +75,63 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="3rd\CassiniDev\BrowserTestResultItem.cs" />
+    <Compile Include="3rd\CassiniDev\BrowserTestResults.cs" />
+    <Compile Include="3rd\CassiniDev\CassiniDevBrowserTest.cs" />
+    <Compile Include="3rd\CassiniDev\CassiniDevServerOP.cs" />
+    <Compile Include="3rd\CassiniDev\CassiniServer.cs" />
+    <Compile Include="3rd\CassiniDev\Configuration\CassiniDevConfigurationSection.cs" />
+    <Compile Include="3rd\CassiniDev\Configuration\CassiniDevProfileElement.cs" />
+    <Compile Include="3rd\CassiniDev\Configuration\CassiniDevProfileElementCollection.cs" />
+    <Compile Include="3rd\CassiniDev\Configuration\PluginElement.cs" />
+    <Compile Include="3rd\CassiniDev\Configuration\PluginElementCollection.cs" />
+    <Compile Include="3rd\CassiniDev\ContentLocator.cs" />
+    <Compile Include="3rd\CassiniDev\Core\Connection.cs" />
+    <Compile Include="3rd\CassiniDev\Core\Host.cs" />
+    <Compile Include="3rd\CassiniDev\Core\Messages.cs" />
+    <Compile Include="3rd\CassiniDev\Core\NtlmAuth.cs" />
+    <Compile Include="3rd\CassiniDev\Core\Request.cs" />
+    <Compile Include="3rd\CassiniDev\Core\RequestEventArgs.cs" />
+    <Compile Include="3rd\CassiniDev\Core\Server.cs" />
+    <Compile Include="3rd\CassiniDev\IContentLocator.cs" />
+    <Compile Include="3rd\CassiniDev\LocalContentLocator.cs" />
+    <Compile Include="3rd\CassiniDev\Logging\LogInfo.cs" />
+    <Compile Include="3rd\CassiniDev\Misc\CommandLine.cs" />
+    <Compile Include="3rd\CassiniDev\Misc\CommandLineArguments.cs" />
+    <Compile Include="3rd\CassiniDev\Misc\CommandLineParser.cs" />
+    <Compile Include="3rd\CassiniDev\Misc\Common.cs" />
+    <Compile Include="3rd\CassiniDev\Misc\HostsFile.cs" />
+    <Compile Include="3rd\CassiniDev\Misc\Interop.cs" />
+    <Compile Include="3rd\CassiniDev\Misc\NetworkUtils.cs" />
+    <Compile Include="3rd\CassiniDev\Misc\ServiceInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\CassiniDev\QUnitExBrowserTestResultItem.cs" />
+    <Compile Include="3rd\CassiniDev\Resources\CassiniDev.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CassiniDev.resx</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\CassiniDev\Resources\SR.cs" />
+    <Compile Include="3rd\CassiniDev\Views\BodyView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\CassiniDev\Views\BodyView.Designer.cs">
+      <DependentUpon>BodyView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\CassiniDev\Views\WebServerFormView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\CassiniDev\Views\WebServerFormView.Designer.cs">
+      <DependentUpon>WebServerFormView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\CassiniDev\Views\LogView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\CassiniDev\Views\LogView.Designer.cs">
+      <DependentUpon>LogView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\CassiniDev\WebBrowser.cs" />
     <Compile Include="3rd\ExtendedWebBrowser2\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -951,6 +1015,19 @@
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="QueueDownloadItem.cs" />
+    <EmbeddedResource Include="3rd\CassiniDev\Resources\CassiniDev.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CassiniDev.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\CassiniDev\Views\BodyView.resx">
+      <DependentUpon>BodyView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\CassiniDev\Views\WebServerFormView.resx">
+      <DependentUpon>WebServerFormView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\CassiniDev\Views\LogView.resx">
+      <DependentUpon>LogView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="3rd\ExtendedWebBrowser2\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1114,6 +1191,7 @@
     <EmbeddedResource Include="Forms\SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="3rd\CassiniDev\app.config" />
     <None Include="3rd\ExtendedWebBrowser2\app.config" />
     <None Include="3rd\ObjectListView\FullClassDiagram.cd" />
     <None Include="3rd\ObjectListView\ObjectListView.FxCop" />
@@ -1137,6 +1215,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="3rd\CassiniDev\Resources\preferences-web-browser-shortcuts.ico" />
+    <Content Include="3rd\Common.Logging.dll" />
     <Content Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_focus_24x24.png" />
     <None Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_focus_24x241.png" />
     <Content Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_pressed_24x24.png" />
