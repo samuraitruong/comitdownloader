@@ -180,6 +180,8 @@ namespace ComicDownloader.Engines
                     foreach (HtmlNode chap in chapters.Skip(1))
                     {
                         if (chap.SelectSingleNode("img") == null || chap.ChildNodes.Count !=2) continue;
+                        if (info.Chapters.Exists(p => p.Url == chap.Attributes["href"].Value)) continue;
+
                         info.Chapters.Add(new ChapterInfo()
                         {
                             Name = chap.ChildNodes[1].InnerText.Trim(),
