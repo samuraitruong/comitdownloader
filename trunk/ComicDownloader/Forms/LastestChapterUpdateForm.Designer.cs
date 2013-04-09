@@ -29,28 +29,29 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            BrightIdeasSoftware.CellStyle cellStyle4 = new BrightIdeasSoftware.CellStyle();
-            BrightIdeasSoftware.CellStyle cellStyle5 = new BrightIdeasSoftware.CellStyle();
-            BrightIdeasSoftware.CellStyle cellStyle6 = new BrightIdeasSoftware.CellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LastestChapterUpdateForm));
+            BrightIdeasSoftware.CellStyle cellStyle10 = new BrightIdeasSoftware.CellStyle();
+            BrightIdeasSoftware.CellStyle cellStyle11 = new BrightIdeasSoftware.CellStyle();
+            BrightIdeasSoftware.CellStyle cellStyle12 = new BrightIdeasSoftware.CellStyle();
             this.lvLastestUpdates = new BrightIdeasSoftware.DataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.readThisChapterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.downloadThisChapterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadAllChapterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.addChapterToQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addThisStoryToQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addAllChapterUpdatesToQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.readThisChapterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.hyperlinkStyle1 = new BrightIdeasSoftware.HyperlinkStyle();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.lvLastestUpdates)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -59,10 +60,6 @@
             // 
             // lvLastestUpdates
             // 
-            this.lvLastestUpdates.AllColumns.Add(this.olvColumn1);
-            this.lvLastestUpdates.AllColumns.Add(this.olvColumn2);
-            this.lvLastestUpdates.AllColumns.Add(this.olvColumn3);
-            this.lvLastestUpdates.AllColumns.Add(this.olvColumn4);
             this.lvLastestUpdates.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
             this.olvColumn2,
@@ -129,6 +126,27 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(245, 192);
             // 
+            // readThisChapterToolStripMenuItem
+            // 
+            this.readThisChapterToolStripMenuItem.Image = global::ComicDownloader.Properties.Resources._1364392872_slideshow;
+            this.readThisChapterToolStripMenuItem.Name = "readThisChapterToolStripMenuItem";
+            this.readThisChapterToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.readThisChapterToolStripMenuItem.Text = "Read this chapter";
+            this.readThisChapterToolStripMenuItem.Click += new System.EventHandler(this.readThisChapterToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Image = global::ComicDownloader.Properties.Resources._1365319718_Globe1;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(244, 22);
+            this.toolStripMenuItem1.Text = "Browse";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(241, 6);
+            // 
             // downloadThisChapterToolStripMenuItem
             // 
             this.downloadThisChapterToolStripMenuItem.Image = global::ComicDownloader.Properties.Resources._1364671000_10;
@@ -142,6 +160,11 @@
             this.downloadAllChapterToolStripMenuItem.Name = "downloadAllChapterToolStripMenuItem";
             this.downloadAllChapterToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.downloadAllChapterToolStripMenuItem.Text = "Download all chapter in select story";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(241, 6);
             // 
             // addChapterToQueueToolStripMenuItem
             // 
@@ -164,14 +187,6 @@
             this.addAllChapterUpdatesToQueueToolStripMenuItem.Name = "addAllChapterUpdatesToQueueToolStripMenuItem";
             this.addAllChapterUpdatesToQueueToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.addAllChapterUpdatesToQueueToolStripMenuItem.Text = "Add all chapter updates to Queue";
-            // 
-            // readThisChapterToolStripMenuItem
-            // 
-            this.readThisChapterToolStripMenuItem.Image = global::ComicDownloader.Properties.Resources._1364392872_slideshow;
-            this.readThisChapterToolStripMenuItem.Name = "readThisChapterToolStripMenuItem";
-            this.readThisChapterToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.readThisChapterToolStripMenuItem.Text = "Read this chapter";
-            this.readThisChapterToolStripMenuItem.Click += new System.EventHandler(this.readThisChapterToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -205,34 +220,16 @@
             // 
             // hyperlinkStyle1
             // 
-            cellStyle4.Font = null;
-            cellStyle4.ForeColor = System.Drawing.Color.Blue;
-            this.hyperlinkStyle1.Normal = cellStyle4;
-            cellStyle5.Font = null;
-            cellStyle5.FontStyle = System.Drawing.FontStyle.Underline;
-            this.hyperlinkStyle1.Over = cellStyle5;
+            cellStyle10.Font = null;
+            cellStyle10.ForeColor = System.Drawing.Color.Blue;
+            this.hyperlinkStyle1.Normal = cellStyle10;
+            cellStyle11.Font = null;
+            cellStyle11.FontStyle = System.Drawing.FontStyle.Underline;
+            this.hyperlinkStyle1.Over = cellStyle11;
             this.hyperlinkStyle1.OverCursor = System.Windows.Forms.Cursors.Hand;
-            cellStyle6.Font = null;
-            cellStyle6.ForeColor = System.Drawing.Color.Purple;
-            this.hyperlinkStyle1.Visited = cellStyle6;
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(241, 6);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(241, 6);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Image = global::ComicDownloader.Properties.Resources._1365319718_Globe1;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(244, 22);
-            this.toolStripMenuItem1.Text = "Browse";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            cellStyle12.Font = null;
+            cellStyle12.ForeColor = System.Drawing.Color.Purple;
+            this.hyperlinkStyle1.Visited = cellStyle12;
             // 
             // LastestChapterUpdateForm
             // 

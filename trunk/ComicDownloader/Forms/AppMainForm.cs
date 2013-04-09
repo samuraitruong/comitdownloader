@@ -361,8 +361,9 @@ namespace ComicDownloader
         {
             HostProviderSupportForm childForm = new HostProviderSupportForm();
             childForm.MdiParent = this;
-            
+            childForm.WindowState = FormWindowState.Minimized;
             childForm.Show();
+            childForm.WindowState = FormWindowState.Maximized;
         }
 
         private void btnLastestUpdate_Click(object sender, EventArgs e)
