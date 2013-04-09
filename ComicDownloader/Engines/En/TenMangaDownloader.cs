@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("MangaReader", MenuGroup = "English", Language = "English", Image32 = "1364078951_insert-object")]
+    [Downloader("TenManga", MenuGroup = "English", Language = "English", Image32 = "1364078951_insert-object")]
     public class TenMangaDownloader : Downloader
     {
         public override string Name
@@ -145,6 +145,41 @@ namespace ComicDownloader.Engines
                 results.Add(url);
             }
             return results;
+        }
+
+        public override List<StoryInfo> GetLastestUpdates()
+        {
+            string lastestUpdateUrl = "http://www.tenmanga.com/list/New-Update/";
+            List<StoryInfo> stories = new List<StoryInfo>();
+            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"clistChr\"]/ul/li/div[@class=\"intro\"]/h2/a");
+
+            foreach (HtmlNode node in nodes)
+            {
+                StoryInfo info = new StoryInfo()
+                {
+                    Url = node.Attributes["href"].Value,
+                    Name = node.InnerText.Trim(),
+                    Chapters = new List<ChapterInfo>(),
+                };
+                var chapters = node.ParentNode.ParentNode.SelectNodes("span/a[position()=1]");
+                if (chapters != null)
+                {
+                    foreach (HtmlNode chap in chapters)
+                    {
+                        info.Chapters.Add(new ChapterInfo()
+                        {
+                            Name = chap.FirstChild.InnerText.Trim(),
+                            Url = chap.Attributes["href"].Value,
+                        });
+                    }
+                }
+                stories.Add(info);
+            }
+            return stories;
         }
     }
 }
