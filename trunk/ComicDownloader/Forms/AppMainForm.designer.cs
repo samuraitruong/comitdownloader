@@ -35,6 +35,7 @@
             this.mnuOptions = new System.Windows.Forms.RibbonOrbMenuItem();
             this.ribbonButton1 = new System.Windows.Forms.RibbonButton();
             this.ribbonButton2 = new System.Windows.Forms.RibbonButton();
+            this.bntCasiniServer = new System.Windows.Forms.RibbonButton();
             this.rbtHome = new System.Windows.Forms.RibbonTab();
             this.pnlDownload = new System.Windows.Forms.RibbonPanel();
             this.cobDownloaders = new System.Windows.Forms.RibbonComboBox();
@@ -56,7 +57,6 @@
             this.ribbonPanel13 = new System.Windows.Forms.RibbonPanel();
             this.ribbonPanel3 = new System.Windows.Forms.RibbonPanel();
             this.ribbonComboBox1 = new System.Windows.Forms.RibbonComboBox();
-            this.bntCasiniServer = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
             // mdiTabStrip1
@@ -140,6 +140,16 @@
             this.ribbonButton2.SmallImage = global::ComicDownloader.Properties.Resources._1365430905_internet_radio_new;
             this.ribbonButton2.Text = "ribbonButton2";
             this.ribbonButton2.Click += new System.EventHandler(this.ribbonButton2_Click);
+            // 
+            // bntCasiniServer
+            // 
+            this.bntCasiniServer.Image = ((System.Drawing.Image)(resources.GetObject("bntCasiniServer.Image")));
+            this.bntCasiniServer.MaximumSize = new System.Drawing.Size(0, 0);
+            this.bntCasiniServer.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
+            this.bntCasiniServer.MinimumSize = new System.Drawing.Size(0, 0);
+            this.bntCasiniServer.SmallImage = global::ComicDownloader.Properties.Resources._1365493287_web;
+            this.bntCasiniServer.Text = "ribbonButton6";
+            this.bntCasiniServer.Click += new System.EventHandler(this.bntCasiniServer_Click);
             // 
             // rbtHome
             // 
@@ -293,16 +303,6 @@
             this.ribbonComboBox1.Text = "When queue complete?";
             this.ribbonComboBox1.TextBoxText = "";
             this.ribbonComboBox1.Value = "When queue complete?";
-            // 
-            // bntCasiniServer
-            // 
-            this.bntCasiniServer.Image = ((System.Drawing.Image)(resources.GetObject("bntCasiniServer.Image")));
-            this.bntCasiniServer.MaximumSize = new System.Drawing.Size(0, 0);
-            this.bntCasiniServer.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
-            this.bntCasiniServer.MinimumSize = new System.Drawing.Size(0, 0);
-            this.bntCasiniServer.SmallImage = global::ComicDownloader.Properties.Resources._1364718804_start_here_ubuntustudio;
-            this.bntCasiniServer.Text = "ribbonButton6";
-            this.bntCasiniServer.Click += new System.EventHandler(this.bntCasiniServer_Click);
             // 
             // AppMainForm
             // 
