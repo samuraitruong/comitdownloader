@@ -179,10 +179,16 @@ namespace ComicDownloader
                         float hp = doch / h;
                         float wp = docw / w;
 
-                        img.ScaleToFit(docw * 1.35f, doch * 1.35f);
+                        ///img.ScaleToFit(docw * 1.35f, doch * 1.35f);
                         // img.ScaleToFit(750, 550);
                         pdfDoc.NewPage();
-                        pdfDoc.Add(img);
+                        //pdfDoc.Add(img);
+                        PdfPTable nestedTable = new PdfPTable(1);
+                        PdfPCell cell = new PdfPCell(img);
+                        cell.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                        nestedTable.AddCell(cell);
+                        pdfDoc.Add(nestedTable);
+
                         
                     }
                     if (Settings.IncludePDFIntroPage && Settings.PdfIntroPagePosition == PagePosition.LastPage)
