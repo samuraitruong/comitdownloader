@@ -131,5 +131,50 @@ namespace ComicDownloader.Engines
             }
             return results;
         }
+
+        public override List<StoryInfo> GetLastestUpdates()
+        {
+            string lastestUpdateUrl = HostUrl;
+            List<StoryInfo> stories = new List<StoryInfo>();
+            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//fieldset[@class=\"most most_latest\"]/table//tr/td/a");
+
+            foreach (HtmlNode node in nodes)
+            {
+                string chapterUrl = HostUrl + node.Attributes["href"].Value;
+                string pageUrl = HostUrl + "/serie-archive/mangas-" + node.Attributes["href"].Value.Substring(1, node.Attributes["href"].Value.LastIndexOf("/"));
+                var chapterTitle = node.ChildNodes[2].InnerText.Trim();
+                StoryInfo info;
+
+                if (stories.Any(p => p.Url == pageUrl))
+                {
+                    info = stories.Where(p => p.Url == pageUrl).Single();
+                }
+                else
+                {
+                    var pageTitle = chapterTitle.Substring(0, chapterTitle.LastIndexOf(' '));
+                    info = new StoryInfo()
+                    {
+                        Url = pageUrl,
+                        Name = pageTitle,
+                        Chapters = new List<ChapterInfo>()
+                    };
+
+                    stories.Add(info);
+                }
+
+                var chapter = new ChapterInfo()
+                {
+                    Url = chapterUrl,
+                    Name = chapterTitle
+                };
+
+                info.Chapters.Add(chapter);
+            }
+            return stories;
+        }
     }
 }
