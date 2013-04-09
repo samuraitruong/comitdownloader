@@ -136,14 +136,14 @@
   <data name="_1364410895_001_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364410895_001_01.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="1365100868_interact" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1365100868_interact.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="1365340186_Pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1365340186_Pause.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pictures_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\iview.net\iview.net controls\resources\pictures_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="1364647743_sheduled_task1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1364647743_sheduled_task1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="1363942937_ark2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1363942937_ark2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="unlocked_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -169,8 +169,8 @@
   <data name="1364718266_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364718266_up.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="_1364410881_plus_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1364410881_plus_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="_1364392872_slideshow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364392872_slideshow.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="folder_closed_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\IView.NET\iView.NET Controls\Resources\folder_closed_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -192,6 +192,9 @@
   </data>
   <data name="_1364410919_Add_Green_Button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364410919_Add Green Button.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SaveFileFilter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Save File Filter.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="favourites_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\iview.net\iview.net controls\resources\favourites_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,8 +220,8 @@
   <data name="1364729045_Gnome-Mail-Mark-Read-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364729045_Gnome-Mail-Mark-Read-32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SortAscending" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sort-ascending.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ram_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\ram_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="desktop_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\iview.net\iview.net controls\resources\desktop_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -229,8 +232,8 @@
   <data name="_1364410892_document_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364410892_document-new.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="folder_opened_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\3rd\iview.net\iview.net controls\resources\folder_opened_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ColumnFilterIndicator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\filter-icons3.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1364647756_sheduled_task" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364647756_sheduled_task.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -241,8 +244,8 @@
   <data name="Filtering" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\filter.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ColumnFilterIndicator" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\filter-icons3.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="1365430905_internet-radio-new" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1365430905_internet-radio-new.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1364718418_checked_checkbox" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364718418_checked_checkbox.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -256,8 +259,8 @@
   <data name="1364647743_sheduled_task" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364647743_sheduled_task.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ram_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\3rd\iview.net\iview.net controls\resources\ram_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="1364078951_insert-object" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364078951_insert-object.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1364671000_10" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364671000_10.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -265,17 +268,17 @@
   <data name="1364561270_exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364561270_exit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="folder_up_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\3rd\IView.NET\iView.NET Controls\Resources\folder_up_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="network_drive_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\3rd\iview.net\iview.net controls\resources\network_drive_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="_1364410881_plus_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364410881_plus_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1364728988_file_extension_pdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364728988_file_extension_pdf.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="HistogramCross" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\iview.net\iview.net controls\resources\histogramcross.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_1364410884_add1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364410884_add1-.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1365339812_Previous" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1365339812_Previous.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -301,8 +304,8 @@
   <data name="media_playback_start (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\media_playback_start (1).png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="1364155386_gtk-refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\\Resources\1364155386_gtk-refresh.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="1365100868_interact" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1365100868_interact.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="play_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\play_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -312,12 +315,6 @@
   </data>
   <data name="1365339806_Next" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1365339806_Next.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="1364718320_go-bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1364718320_go-bottom.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="_1364392872_slideshow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1364392872_slideshow.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="histogramcross11" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\iview.net\iview.net controls\resources\histogramcross1.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -331,8 +328,8 @@
   <data name="GPLv2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GPL v2.0.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="folder_hidden_opened_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\3rd\iview.net\iview.net controls\resources\folder_hidden_opened_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="folder_up_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\folder_up_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1364718484_radio-unchecked" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364718484_radio-unchecked.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -351,9 +348,6 @@
   </data>
   <data name="removable_disk_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\iview.net\iview.net controls\resources\removable_disk_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="1363942937_ark2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1363942937_ark2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="desktop_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\IView.NET\iView.NET Controls\Resources\desktop_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -391,20 +385,17 @@
   <data name="aqua_button_focus_24x2411" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\iview.net\iview.net controls\resources\aqua_button_focus_24x241.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="1365103950_interact" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1365103950_interact.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="_1364561037_wheel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364561037_wheel.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="folder_closed_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\3rd\iview.net\iview.net controls\resources\folder_closed_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="locked_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\locked_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1365339292_play" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1365339292_play.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="locked_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\3rd\iview.net\iview.net controls\resources\locked_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SortAscending" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sort-ascending.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SortDescending" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sort-descending.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -445,8 +436,8 @@
   <data name="aqua_button_focus_24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\iview.net\iview.net controls\resources\aqua_button_focus_24x24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="1364078951_insert-object" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1364078951_insert-object.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="1364647743_sheduled_task1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364647743_sheduled_task1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_1364410914_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364410914_plus.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -456,6 +447,9 @@
   </data>
   <data name="locked_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\iview.net\iview.net controls\resources\locked_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="favourites_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\favourites_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1365316352_mark_as_read_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1365316352_mark_as_read_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -472,14 +466,20 @@
   <data name="1365319718_Globe" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1365319718_Globe.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="folder_closed_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\folder_closed_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="pictures_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\IView.NET\iView.NET Controls\Resources\pictures_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="folder_opened_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\iview.net\iview.net controls\resources\folder_opened_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="locked_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\3rd\IView.NET\iView.NET Controls\Resources\locked_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="1364155386_gtk-refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\\Resources\1364155386_gtk-refresh.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="1364718320_go-bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1364718320_go-bottom.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="OpenFileFilter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\open file filter.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
@@ -487,8 +487,8 @@
   <data name="1364718270_go-top" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364718270_go-top.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="1365340186_Pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1365340186_Pause.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="folder_opened_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\folder_opened_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1364729000_old-edit-find" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364729000_old-edit-find.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -523,8 +523,8 @@
   <data name="arrow_down_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\iview.net\iview.net controls\resources\arrow_down_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SaveFileFilter" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Save File Filter.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="locked_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\locked_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="favourites_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\IView.NET\iView.NET Controls\Resources\favourites_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -532,14 +532,17 @@
   <data name="Intro" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Intro.pdf;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="folder_opened_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\IView.NET\iView.NET Controls\Resources\folder_opened_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="folder_up_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\iview.net\iview.net controls\resources\folder_up_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1364718586_netvibes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364718586_netvibes.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="favourites_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\3rd\iview.net\iview.net controls\resources\favourites_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="network_drive_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\network_drive_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="folder_up_16x1611" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\iview.net\iview.net controls\resources\folder_up_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -562,8 +565,8 @@
   <data name="BlankCursor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\blankcursor.cur;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="folder_opened_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\3rd\IView.NET\iView.NET Controls\Resources\folder_opened_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="1365103950_interact" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1365103950_interact.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1364711392_media-play-pause-resume" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1364711392_media-play-pause-resume.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -571,8 +574,8 @@
   <data name="1365339875_Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1365339875_Close.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="_1364410884_add1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1364410884_add1-.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="folder_hidden_opened_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\3rd\iview.net\iview.net controls\resources\folder_hidden_opened_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="aqua_button_pressed_24x2411" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\3rd\iview.net\iview.net controls\resources\aqua_button_pressed_24x241.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -584,7 +587,7 @@
     <value>..\Resources\1364729079_folderopen1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="1365430905_internet-radio-new" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1365430905_internet-radio-new.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="1365493287_web" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1365493287_web.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

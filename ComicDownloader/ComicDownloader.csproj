@@ -1412,6 +1412,7 @@
     <None Include="Resources\1365339875_Close.png" />
     <None Include="Resources\1365340186_Pause.png" />
     <None Include="Resources\1365430905_internet-radio-new.png" />
+    <None Include="Resources\1365493287_web.png" />
     <Content Include="Resources\14747480-bang-comic-book-explosion.jpg" />
     <Content Include="3rd\itextsharp.dll" />
     <Content Include="3rd\Cx.Windows.Forms\MdiTabStrip.bmp" />
