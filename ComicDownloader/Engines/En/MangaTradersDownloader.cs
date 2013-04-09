@@ -142,28 +142,34 @@ namespace ComicDownloader.Engines
 
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
+
             var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@id=\"dataTable\"]/table/tr[position()>1]/td[position()=3]/a");
 
-            foreach (HtmlNode node in nodes)
+            if (nodes != null)
             {
-                StoryInfo info = new StoryInfo()
+                foreach (HtmlNode node in nodes)
                 {
-                    Url = HostUrl + node.Attributes["href"].Value,
-                    Name = node.InnerText.Trim(),
-                    Chapters = new List<ChapterInfo>(),
-                };
-                var chapters = node.ParentNode.ParentNode.SelectNodes("td[position()=5]/a");
-                if (chapters != null)
-                    foreach (HtmlNode chap in chapters)
+                    StoryInfo info = new StoryInfo()
                     {
-                        var title = chap.ParentNode.ParentNode.SelectSingleNode("td[position()=2]");
-                        info.Chapters.Add(new ChapterInfo()
+                        Url = HostUrl + node.Attributes["href"].Value,
+                        Name = node.InnerText.Trim(),
+                        Chapters = new List<ChapterInfo>(),
+                    };
+                    var chapters = node.ParentNode.ParentNode.SelectNodes("td[position()=5]/a");
+                    if (chapters != null)
+                    {
+                        foreach (HtmlNode chap in chapters)
                         {
-                            Name = title.FirstChild.InnerText.Trim(),
-                            Url = HostUrl + chap.Attributes["href"].Value,
-                        });
+                            var title = chap.ParentNode.ParentNode.SelectSingleNode("td[position()=2]");
+                            info.Chapters.Add(new ChapterInfo()
+                            {
+                                Name = title.FirstChild.InnerText.Trim(),
+                                Url = HostUrl + chap.Attributes["href"].Value,
+                            });
+                        }
                     }
-                stories.Add(info);
+                    stories.Add(info);
+                }
             }
             return stories;
         }

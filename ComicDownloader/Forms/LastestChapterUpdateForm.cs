@@ -76,27 +76,24 @@ namespace ComicDownloader.Forms
             ThreadParam param = (ThreadParam)obj;
 
             List<StoryInfo> list = new List<StoryInfo>();
-
+            var tempLst = new List<UpdatedChapterItem>();
             try
             {
                 list = param.Downloader.GetLastestUpdates();
                 if (list.Count > 0)
                 {
-                    lock (DataSource)
+                    foreach (var item in list)
                     {
-                        foreach (var item in list)
+                        foreach (var chap in item.Chapters)
                         {
-                            foreach (var chap in item.Chapters)
-                            {
 
-                                DataSource.Add(new UpdatedChapterItem()
-                                {
-                                    Provider = param.Downloader.Name,
-                                    StoryName = item.Name,
-                                    ChapterName = chap.Name,
-                                    ChapterUrl = chap.Url
-                                });
-                            }
+                            tempLst.Add(new UpdatedChapterItem()
+                            {
+                                Provider = param.Downloader.Name,
+                                StoryName = item.Name,
+                                ChapterName = chap.Name,
+                                ChapterUrl = chap.Url
+                            });
                         }
                     }
                 }
@@ -107,9 +104,13 @@ namespace ComicDownloader.Forms
             }
             finally
             {
-                if (list.Count > 0)
+                if (tempLst.Count > 0)
                 {
-                    lvLastestUpdates.SetObjects(DataSource);
+                    lock (DataSource)
+                    {
+                        DataSource.AddRange(tempLst);
+                        lvLastestUpdates.SetObjects(DataSource);
+                    }
                 }
 
                 param.ResetEvent.Set();
