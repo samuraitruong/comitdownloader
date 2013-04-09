@@ -543,6 +543,27 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _1365535542_reload {
+            get {
+                object obj = ResourceManager.GetObject("1365535542_reload", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365535653_Process_Accept {
+            get {
+                object obj = ResourceManager.GetObject("1365535653_Process-Accept", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365535741_select_by_adding_to_selection {
+            get {
+                object obj = ResourceManager.GetObject("1365535741_select_by_adding_to_selection", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap _14747480_bang_comic_book_explosion {
             get {
                 object obj = ResourceManager.GetObject("14747480-bang-comic-book-explosion", resourceCulture);

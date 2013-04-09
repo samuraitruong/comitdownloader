@@ -144,6 +144,24 @@ namespace ComicDownloader.Engines
             return _downloaders;
         }
 
-        
+
+
+        public List<StoryInfo> GetListStories(bool force)
+        {
+            if (force)
+            {
+                File.Delete(this.CachedFile);
+                return GetListStories();
+            }
+            else
+            {
+                if (!File.Exists(CachedFile)) return new List<StoryInfo>();
+
+
+            }
+
+            return ReloadChachedData();
+
+        }
     }
 }

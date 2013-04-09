@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.IO;
+using System.Threading;
 
 namespace ComicDownloader.Engines
 {
@@ -39,8 +40,12 @@ namespace ComicDownloader.Engines
             }
             catch (Exception ex)
             {
-                
+
                 //throw;
+            }
+            finally
+            {
+                Thread.Sleep(100);
             }
             return "HTTP ERROR";
         }
