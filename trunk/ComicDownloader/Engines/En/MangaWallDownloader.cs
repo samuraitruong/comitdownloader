@@ -122,5 +122,40 @@ namespace ComicDownloader.Engines
             }
             return results;
         }
+
+        public override List<StoryInfo> GetLastestUpdates()
+        {
+            string lastestUpdateUrl = HostUrl;
+            List<StoryInfo> stories = new List<StoryInfo>();
+            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//ul[@class=\"chapterlist\"]/li/h4/a");
+
+            foreach (HtmlNode node in nodes)
+            {
+                StoryInfo info = new StoryInfo()
+                {
+                    Url = HostUrl + node.Attributes["href"].Value,
+                    Name = node.InnerText.Trim(),
+                    Chapters = new List<ChapterInfo>(),
+                };
+                var chapters = node.ParentNode.ParentNode.SelectNodes("dl/dt/a");
+                if (chapters != null)
+                {
+                    foreach (HtmlNode chap in chapters)
+                    {
+                        info.Chapters.Add(new ChapterInfo()
+                        {
+                            Name = chap.InnerText.Trim(),
+                            Url = HostUrl + chap.Attributes["href"].Value,
+                        });
+                    }
+                }
+                stories.Add(info);
+            }
+            return stories;
+        }
     }
 }
