@@ -22,7 +22,12 @@ namespace ComicDownloader.Engines
         public abstract StoryInfo RequestInfo(string storyUrl);
 
         public abstract List<string> GetPages(string chapUrl);
-        public string CachedFile { get {return this.GetType().Name + ".CACHED"; } }
+        public string CachedFile { get {
+            
+            return Environment.GetFolderPath(
+    Environment.SpecialFolder.ApplicationData)+"\\ComicDownloader\\"+ this.GetType().Name + ".CACHED";
+        
+        } }
 
         public virtual List<StoryInfo> GetLastestUpdates()
         {
@@ -62,7 +67,9 @@ namespace ComicDownloader.Engines
             {
                 file.Write(xml);
             }
-
+            MyLogger.Info(CachedFile);
+            MyLogger.Info(temp);
+            Directory.CreateDirectory(Path.GetDirectoryName(CachedFile));
             SecureHelper.EncryptFile(temp, CachedFile, Resources.SecureKey);
         }
 

@@ -61,6 +61,7 @@
             // 
             // tim_SlideShowTimer
             // 
+            this.tim_SlideShowTimer.Enabled = true;
             this.tim_SlideShowTimer.Interval = 10;
             this.tim_SlideShowTimer.Tick += new System.EventHandler(this.tim_SlideShowTimer_Tick);
             // 
