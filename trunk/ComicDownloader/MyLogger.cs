@@ -13,5 +13,10 @@ namespace ComicDownloader
         {
             logger.Error(ex.Message + ex.StackTrace);
         }
+
+        internal static void Info(string message)
+        {
+            logger.Info(message);
+        }
     }
 }

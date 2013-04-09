@@ -44,7 +44,7 @@ namespace ComicDownloader.Forms
             public int Pages { get; set; }
         }
         private object updateUIObj = "DUMMY";
-        public const string QUEUE_FILE_NAME = "history.000";
+        public  static string QUEUE_FILE_NAME = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\ComicDownloader\\" + "history.000";
         public QueueDownloadForm()
         {
             InitializeComponent();
@@ -59,6 +59,7 @@ namespace ComicDownloader.Forms
             {
                 file.Write(xml);
             }
+            Directory.CreateDirectory(Path.GetDirectoryName(QUEUE_FILE_NAME));
 
             SecureHelper.EncryptFile(temp, QUEUE_FILE_NAME, Resources.SecureKey);
         }
