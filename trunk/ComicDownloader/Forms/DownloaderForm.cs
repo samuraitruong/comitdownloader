@@ -22,6 +22,7 @@ using ComicDownloader.Forms;
 using IView.UI.Forms;
 using System.Runtime.InteropServices;
 using ComicDownoader.Forms;
+using ComicDownloader.Helpers;
 
 
 namespace ComicDownloader
@@ -140,60 +141,21 @@ namespace ComicDownloader
             {
                 return;
             }
-
             try
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(chapInfo.PdfPath));
-            }
-            finally
-            {
+                PDFHelper.CreatePDF(chapInfo.Folder, chapInfo.PdfPath, chapInfo.Name, Settings);
 
-            }
-
-            
-
-            Document pdfDoc = new Document(PageSize.A4);
-            float docw = pdfDoc.PageSize.Width;
-            float doch = pdfDoc.PageSize.Width;
-            
-            PdfDate st = new PdfDate(DateTime.Today);
-            try
-            {
-                var stream = File.Create(chapInfo.PdfPath);
-                var writer = PdfWriter.GetInstance(pdfDoc, stream);
-
-                pdfDoc.Open();
-                if(Settings.IncludePDFIntroPage && Settings.PdfIntroPagePosition == PagePosition.FirstPage)
-                EmbedeIntroPage(pdfDoc, writer);
-
-                DirectoryInfo di = new DirectoryInfo(chapInfo.Folder);
-                var files = di.GetFiles();
-                if (files != null)
+                this.Invoke((MethodInvoker)delegate
                 {
-                    foreach (var fi in files)
-                    {
-                        Image img = Image.GetInstance(fi.FullName);
-                        float h = img.Height;
-                        float w = img.Width;
+                    var listItem = listHistory.Items[listHistory.Items.Count - 1];
 
-                        float hp = doch / h;
-                        float wp = docw / w;
+                    var subItem = listItem.SubItems[6] as EXControlListViewSubItem;
+                    var pp = subItem.MyControl as Button;
+                    pp.Enabled = true;
+                    pp.Tag = chapInfo.PdfPath;
 
-                        ///img.ScaleToFit(docw * 1.35f, doch * 1.35f);
-                        // img.ScaleToFit(750, 550);
-                        pdfDoc.NewPage();
-                        //pdfDoc.Add(img);
-                        PdfPTable nestedTable = new PdfPTable(1);
-                        PdfPCell cell = new PdfPCell(img);
-                        cell.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
-                        nestedTable.AddCell(cell);
-                        pdfDoc.Add(nestedTable);
+                });
 
-                        
-                    }
-                    if (Settings.IncludePDFIntroPage && Settings.PdfIntroPagePosition == PagePosition.LastPage)
-                        EmbedeIntroPage(pdfDoc, writer);
-                }
             }
             catch (Exception ex)
             {
@@ -202,44 +164,11 @@ namespace ComicDownloader
             finally
             {
 
-                try
-                {
-                    pdfDoc.Close();
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        var listItem = listHistory.Items[listHistory.Items.Count - 1];
-                       
-                        var subItem = listItem.SubItems[6] as EXControlListViewSubItem;
-                        var pp = subItem.MyControl as Button;
-                        pp.Enabled = true;
-                        pp.Tag = chapInfo.PdfPath;
-
-                    });
-
-                }
-                catch(Exception ex)
-                {
-                    MyLogger.Log(ex);
-                }
-                finally
-                {
-
-                }
-                //doc.Close();
             }
 
         }
 
-        private static void EmbedeIntroPage(Document pdfDoc, PdfWriter writer)
-        {
-            pdfDoc.NewPage();
-            PdfReader reader = new PdfReader(Resources.Intro);
-            PdfContentByte cb = writer.DirectContent;
-            PdfImportedPage page = writer.GetImportedPage(reader, 1); ;
-
-            //cb.AddTemplate(page, 0, -1f, 1f, 0, 0, reader.GetPageSizeWithRotation(1).Height);
-            cb.AddTemplate(page, 0, 0);
-        }
+        
 
         private void DownloadChapter(ChapterInfo chapInfo)
         {

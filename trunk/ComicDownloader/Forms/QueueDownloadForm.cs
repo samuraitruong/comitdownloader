@@ -15,6 +15,7 @@ using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.Diagnostics;
 using IView.UI.Forms;
+using ComicDownloader.Helpers;
 
 namespace ComicDownloader.Forms
 {
@@ -257,90 +258,15 @@ namespace ComicDownloader.Forms
             {
                 return;
             }
-
-            try
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(chapInfo.PdfPath));
-            }
-            finally
-            {
-
-            }
-
-
-
-            Document pdfDoc = new Document(PageSize.A4);
-            float docw = pdfDoc.PageSize.Width;
-            float doch = pdfDoc.PageSize.Width;
-
-            PdfDate st = new PdfDate(DateTime.Today);
-            try
-            {
-                var stream = File.Create(chapInfo.PdfPath);
-                var writer = PdfWriter.GetInstance(pdfDoc, stream);
-
-                pdfDoc.Open();
-                if (Settings.IncludePDFIntroPage && Settings.PdfIntroPagePosition == PagePosition.FirstPage)
-                    EmbedeIntroPage(pdfDoc, writer);
-
-                DirectoryInfo di = new DirectoryInfo(chapInfo.Folder);
-                var files = di.GetFiles();
-                if (files != null)
-                {
-                    foreach (var fi in files)
-                    {
-                       iTextSharp.text.Image img =  iTextSharp.text.Image.GetInstance(fi.FullName);
-                        float h = img.Height;
-                        float w = img.Width;
-
-                        float hp = doch / h;
-                        float wp = docw / w;
-
-                        img.ScaleToFit(docw * 1.35f, doch * 1.35f);
-                        // img.ScaleToFit(750, 550);
-                        pdfDoc.NewPage();
-                        PdfPTable nestedTable = new PdfPTable(1);
-                        PdfPCell cell = new PdfPCell(img);
-                        cell.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
-                        nestedTable.AddCell(cell);
-                        pdfDoc.Add(nestedTable);
-
-
-                    }
-                    if (Settings.IncludePDFIntroPage && Settings.PdfIntroPagePosition == PagePosition.LastPage)
-                        EmbedeIntroPage(pdfDoc, writer);
-                }
+            try{
+                PDFHelper.CreatePDF(chapInfo.Folder, chapInfo.PdfPath, chapInfo.Name, Settings);
             }
             catch (Exception ex)
             {
-                //Log error;
+                MyLogger.Log(ex);
             }
             finally
             {
-
-                try
-                {
-                    pdfDoc.Close();
-                    //this.Invoke((MethodInvoker)delegate
-                    //{
-                    //    var listItem = listHistory.Items[listHistory.Items.Count - 1];
-
-                    //    var subItem = listItem.SubItems[6] as EXControlListViewSubItem;
-                    //    var pp = subItem.MyControl as Button;
-                    //    pp.Enabled = true;
-                    //    pp.Tag = chapInfo.PdfPath;
-
-                    //});
-
-                }
-                catch
-                {
-                }
-                finally
-                {
-
-                }
-                //doc.Close();
             }
 
         }
