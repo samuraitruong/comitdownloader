@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 namespace ComicDownloader.Engines
 {
     [Downloader("MangaReader", MenuGroup = "English", Language = "English", Image32 = "_1364410884_add1_")]
-    public class MangaReaderDownloader :  Downloader
+    public class MangaReaderDownloader : Downloader
     {
         public override string Name
         {
@@ -101,7 +101,7 @@ namespace ComicDownloader.Engines
             var img = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"imgholder\"]//img");
             pageUrl = img.Attributes["src"].Value;
 
-            
+
             return base.DownloadPage(pageUrl, renamePattern, folder, httpReferer);
         }
         public override List<string> GetPages(string chapUrl)
@@ -116,7 +116,7 @@ namespace ComicDownloader.Engines
             List<string> results = new List<string>();
             foreach (HtmlNode page in pages)
             {
-                results.Add(HostUrl+ page.Attributes["value"].Value);
+                results.Add(HostUrl + page.Attributes["value"].Value);
             }
             return results;
         }
@@ -133,23 +133,66 @@ namespace ComicDownloader.Engines
             {
                 StoryInfo info = new StoryInfo()
                 {
-                    Url = HostUrl+node.Attributes["href"].Value,
+                    Url = HostUrl + node.Attributes["href"].Value,
                     Name = node.InnerText.Trim(),
                     Chapters = new List<ChapterInfo>(),
                 };
                 var chapters = node.ParentNode.SelectNodes("a[@class='chaptersrec']");
-                if(chapters!=null)
-                foreach (HtmlNode chap in chapters)
-                {
-                    info.Chapters.Add(new ChapterInfo()
+                if (chapters != null)
+                    foreach (HtmlNode chap in chapters)
                     {
-                        Name = chap.InnerText.Trim(),
-                        Url = HostUrl + chap.Attributes["href"].Value,
-                    });
-                }
+                        info.Chapters.Add(new ChapterInfo()
+                        {
+                            Name = chap.InnerText.Trim(),
+                            Url = HostUrl + chap.Attributes["href"].Value,
+                        });
+                    }
                 stories.Add(info);
             }
             return stories;
         }
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string urlPattern = string.Format("http://www.mangareader.net/search/?w={0}&rd=0&status=0&order=0&genre=0000000000000000000000000000000000000", keyword.Replace(" ", "+"));
+            urlPattern = urlPattern + "&p={0}";
+
+            var results = new List<StoryInfo>();
+
+            int currentPage = 0;
+            bool isStillHasPage = true;
+            while (isStillHasPage)
+            {
+                string url = string.Format(urlPattern, currentPage);
+
+                string html = NetworkHelper.GetHtml(url);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"manga_name\"]//h3/a");
+                if (nodes != null && nodes.Count > 0)
+                {
+
+                    foreach (var node in nodes)
+                    {
+
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = HostUrl + node.Attributes["href"].Value,
+                            Name = node.InnerText.Trim()
+                        };
+                        results.Add(info);
+                    }
+                }
+                else
+                {
+                    isStillHasPage = false;
+                }
+                currentPage = results.Count;
+            }
+            return results;
+        }
+
+
     }
 }

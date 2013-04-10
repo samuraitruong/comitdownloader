@@ -33,7 +33,44 @@ namespace ComicDownloader.Engines
         {
             return new List<StoryInfo>();
         }
-      
+
+        public virtual List<StoryInfo> OnlineSearch(string keyword)
+        {
+            return new List<StoryInfo>();
+        }
+        /// <summary>
+        /// online = true, will search online, false will search on cache data load before.
+        /// Recache = true,
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <param name="online"></param>
+        /// <param name="recache"></param>
+        /// <returns></returns>
+        public List<StoryInfo> Search(string keyword, bool online, bool recache)
+        {
+            if (online) return OnlineSearch(keyword);
+
+            List<StoryInfo> results = new List<StoryInfo>();
+
+            if (recache)
+            {
+                File.Delete(CachedFile);
+                results = GetListStories();
+            }
+            else
+            {
+                results = ReloadChachedData();
+            }
+
+
+            if (results != null)
+                {
+                    results = results.Where(p => p.Name.Contains(keyword)).ToList();
+                }
+            
+            return results;
+        }
+
         public virtual string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
         {
             string filename = Path.GetFileName(pageUrl);
