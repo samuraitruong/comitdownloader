@@ -313,6 +313,30 @@
     <Compile Include="3rd\PagedList\PagedListExtensions.cs" />
     <Compile Include="3rd\PagedList\PagedListMetaData.cs" />
     <Compile Include="3rd\PagedList\StaticPagedList.cs" />
+    <Compile Include="3rd\SmartThreadPool\CallerThreadContext.cs" />
+    <Compile Include="3rd\SmartThreadPool\CanceledWorkItemsGroup.cs" />
+    <Compile Include="3rd\SmartThreadPool\EventWaitHandle.cs" />
+    <Compile Include="3rd\SmartThreadPool\EventWaitHandleFactory.cs" />
+    <Compile Include="3rd\SmartThreadPool\Exceptions.cs" />
+    <Compile Include="3rd\SmartThreadPool\Interfaces.cs" />
+    <Compile Include="3rd\SmartThreadPool\InternalInterfaces.cs" />
+    <Compile Include="3rd\SmartThreadPool\PriorityQueue.cs" />
+    <Compile Include="3rd\SmartThreadPool\SLExt.cs" />
+    <Compile Include="3rd\SmartThreadPool\SmartThreadPool.cs" />
+    <Compile Include="3rd\SmartThreadPool\SmartThreadPool.ThreadEntry.cs" />
+    <Compile Include="3rd\SmartThreadPool\STPEventWaitHandle.cs" />
+    <Compile Include="3rd\SmartThreadPool\STPPerformanceCounter.cs" />
+    <Compile Include="3rd\SmartThreadPool\STPStartInfo.cs" />
+    <Compile Include="3rd\SmartThreadPool\SynchronizedDictionary.cs" />
+    <Compile Include="3rd\SmartThreadPool\WIGStartInfo.cs" />
+    <Compile Include="3rd\SmartThreadPool\WorkItem.cs" />
+    <Compile Include="3rd\SmartThreadPool\WorkItem.WorkItemResult.cs" />
+    <Compile Include="3rd\SmartThreadPool\WorkItemFactory.cs" />
+    <Compile Include="3rd\SmartThreadPool\WorkItemInfo.cs" />
+    <Compile Include="3rd\SmartThreadPool\WorkItemResultTWrapper.cs" />
+    <Compile Include="3rd\SmartThreadPool\WorkItemsGroup.cs" />
+    <Compile Include="3rd\SmartThreadPool\WorkItemsGroupBase.cs" />
+    <Compile Include="3rd\SmartThreadPool\WorkItemsQueue.cs" />
     <Compile Include="3rd\WebServer.cs" />
     <Compile Include="ComicDownloaderSettings.cs" />
     <Compile Include="Engines\18+\HakihomeDownloader.cs" />
@@ -590,6 +614,7 @@
     <Compile Include="Forms\HostProviderSupportForm.Designer.cs">
       <DependentUpon>HostProviderSupportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\PDFHelper.cs" />
     <Compile Include="MyLogger.cs" />
     <Compile Include="Properties\IViewSettings.Designer.cs">
       <AutoGen>True</AutoGen>
