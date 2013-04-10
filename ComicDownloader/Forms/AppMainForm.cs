@@ -392,6 +392,15 @@ namespace ComicDownloader
             form.ShowDialog();
         }
 
+        private void bntSearch_Click(object sender, EventArgs e)
+        {
+            SearchForm searchForm = new SearchForm();
+            searchForm.MdiParent = this;
+            searchForm.WindowState = FormWindowState.Minimized;
+            searchForm.Show();
+            searchForm.WindowState = FormWindowState.Maximized;
+        }
+
       
     }
 }

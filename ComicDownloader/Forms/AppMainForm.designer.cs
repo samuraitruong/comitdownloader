@@ -41,6 +41,7 @@
             this.cobDownloaders = new System.Windows.Forms.RibbonComboBox();
             this.bntMyTest = new System.Windows.Forms.RibbonButton();
             this.btnLastestUpdate = new System.Windows.Forms.RibbonButton();
+            this.bntSearch = new System.Windows.Forms.RibbonButton();
             this.rbtDownloadQueue = new System.Windows.Forms.RibbonPanel();
             this.bntQueueDownload = new System.Windows.Forms.RibbonButton();
             this.bntStartQueue = new System.Windows.Forms.RibbonButton();
@@ -163,6 +164,7 @@
             // 
             this.pnlDownload.Items.Add(this.cobDownloaders);
             this.pnlDownload.Items.Add(this.btnLastestUpdate);
+            this.pnlDownload.Items.Add(this.bntSearch);
             this.pnlDownload.Text = "Add new";
             // 
             // cobDownloaders
@@ -187,6 +189,14 @@
             this.btnLastestUpdate.MinimumSize = new System.Drawing.Size(0, 0);
             this.btnLastestUpdate.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnLastestUpdate.SmallImage")));
             this.btnLastestUpdate.Click += new System.EventHandler(this.btnLastestUpdate_Click);
+            // 
+            // bntSearch
+            // 
+            this.bntSearch.Image = global::ComicDownloader.Properties.Resources._1365576100_Search;
+            this.bntSearch.MaximumSize = new System.Drawing.Size(0, 0);
+            this.bntSearch.MinimumSize = new System.Drawing.Size(0, 0);
+            this.bntSearch.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntSearch.SmallImage")));
+            this.bntSearch.Click += new System.EventHandler(this.bntSearch_Click);
             // 
             // rbtDownloadQueue
             // 
@@ -354,6 +364,7 @@
         private System.Windows.Forms.RibbonButton bntSupports;
         private System.Windows.Forms.RibbonButton btnLastestUpdate;
         private System.Windows.Forms.RibbonButton bntCasiniServer;
+        private System.Windows.Forms.RibbonButton bntSearch;
         
     }
 }

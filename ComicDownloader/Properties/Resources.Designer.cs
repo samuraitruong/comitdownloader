@@ -564,6 +564,20 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _1365576001_search {
+            get {
+                object obj = ResourceManager.GetObject("1365576001_search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365576100_Search {
+            get {
+                object obj = ResourceManager.GetObject("1365576100_Search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap _14747480_bang_comic_book_explosion {
             get {
                 object obj = ResourceManager.GetObject("14747480-bang-comic-book-explosion", resourceCulture);
