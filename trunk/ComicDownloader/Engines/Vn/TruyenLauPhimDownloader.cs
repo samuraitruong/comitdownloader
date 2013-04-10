@@ -137,7 +137,6 @@ namespace ComicDownloader.Engines
             return info;
         }
         
-
         public override List<string> GetPages(string chapUrl)
         {
             var html = NetworkHelper.GetHtml(chapUrl);
@@ -153,6 +152,41 @@ namespace ComicDownloader.Engines
                 
             }
             return results;
+        }
+
+        public override List<StoryInfo> GetLastestUpdates()
+        {
+            string lastestUpdateUrl = HostUrl;
+            List<StoryInfo> stories = new List<StoryInfo>();
+            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"wpm_pag mng_lts_chp grp\"]/div[@class=\"row\"]/div[@class=\"det\"]/a");
+
+            foreach (HtmlNode node in nodes)
+            {
+                StoryInfo info = new StoryInfo()
+                {
+                    Url = node.Attributes["href"].Value,
+                    Name = node.ChildNodes[1].InnerText.Trim(),
+                    Chapters = new List<ChapterInfo>(),
+                };
+                var chapters = node.ParentNode.SelectNodes("ul/li/a");
+                if (chapters != null)
+                {
+                    foreach (HtmlNode chap in chapters)
+                    {
+                        info.Chapters.Add(new ChapterInfo()
+                        {
+                            Name = chap.ChildNodes[1].InnerText.Trim(),
+                            Url = chap.Attributes["href"].Value,
+                        });
+                    }
+                }
+                stories.Add(info);
+            }
+            return stories;
         }
     }
 }

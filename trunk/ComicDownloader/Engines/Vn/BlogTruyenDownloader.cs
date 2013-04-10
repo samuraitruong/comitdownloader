@@ -326,5 +326,7 @@ namespace ComicDownloader.Engines
                     url.Contains("newGB1-zip");
 
         }
+
+
     }
 }

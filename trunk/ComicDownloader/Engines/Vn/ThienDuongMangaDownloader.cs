@@ -12,6 +12,29 @@ namespace ComicDownloader.Engines
     public class ThienDuongMangaDownloader
         : Downloader
     {
+        public override string StoryUrlPattern
+        {
+            get
+            {
+                return HostUrl + "/{0}/";
+            }
+
+        }
+        public override string HostUrl
+        {
+            get
+            {
+                return "http://thienduongmanga.com";
+            }
+        }
+        public override string ListStoryURL
+        {
+            get
+            {
+                return "http://thienduongmanga.com/danh-sach-truyen";
+            }
+
+        }
          
         public override List<StoryInfo> GetListStories()
         {
@@ -107,29 +130,43 @@ namespace ComicDownloader.Engines
 
             return pages;
         }
-        public override string StoryUrlPattern
+
+        public override List<StoryInfo> GetLastestUpdates()
         {
-            get
+            string lastestUpdateUrl = HostUrl;
+            List<StoryInfo> stories = new List<StoryInfo>();
+            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"slide4hinh\"]//div[@class=\"tentruyen\"]/a");
+
+            foreach (HtmlNode node in nodes)
             {
-                return HostUrl + "/{0}/";
+                StoryInfo info = new StoryInfo()
+                {
+                    Url = node.Attributes["href"].Value,
+                    Name = node.InnerText.Trim(),
+                    Chapters = new List<ChapterInfo>(),
+                };
+                var chapters = node.ParentNode.ParentNode.SelectNodes("div[@class=\"sochap\"]/a");
+                if (chapters != null)
+                {
+                    foreach (HtmlNode chap in chapters)
+                    {
+                        info.Chapters.Add(new ChapterInfo()
+                        {
+                            Name = chap.InnerText.Trim(),
+                            Url = chap.Attributes["href"].Value,
+                        });
+                    }
+                }
+
+                stories.Add(info);
             }
-            
+
+            return stories;
         }
-        public override string HostUrl
-        {
-            get
-            {
-                return "http://thienduongmanga.com";
-            }
-        }
-        public override string ListStoryURL
-        {
-            get
-            {
-                return "http://thienduongmanga.com/danh-sach-truyen";
-            }
-            
-        }
-       
     }
 }
