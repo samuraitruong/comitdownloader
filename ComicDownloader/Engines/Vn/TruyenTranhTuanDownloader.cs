@@ -12,6 +12,29 @@ namespace ComicDownloader.Engines
     public class TruyenTranhTuanDownloader
         : Downloader
     {
+        public override string StoryUrlPattern
+        {
+            get
+            {
+                return HostUrl + "/{0}/";
+            }
+
+        }
+        public override string HostUrl
+        {
+            get
+            {
+                return "http://truyentranhtuan.com";
+            }
+        }
+        public override string ListStoryURL
+        {
+            get
+            {
+                return "http://truyentranhtuan.com/danh-sach-truyen/";
+            }
+
+        }
 
         public override List<StoryInfo> GetListStories()
         {
@@ -106,32 +129,43 @@ namespace ComicDownloader.Engines
 
             return pages;
         }
-        public override string StoryUrlPattern
+
+        public override List<StoryInfo> GetLastestUpdates()
         {
-            get
+            string lastestUpdateUrl = HostUrl;
+            List<StoryInfo> stories = new List<StoryInfo>();
+            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"side-list\"]//td/a");
+
+            foreach (HtmlNode node in nodes)
             {
-                return HostUrl + "/{0}/";
+                var chapUrl = HostUrl + node.Attributes["href"].Value;
+                var storyUrl = chapUrl.Substring(0, chapUrl.LastIndexOf("/"));
+                storyUrl = storyUrl.Substring(0, storyUrl.LastIndexOf("/"));
+
+                var chapTitle = node.InnerText.Trim();
+                chapTitle = chapTitle.Substring(chapTitle.LastIndexOf("]") + 1);
+                var storyTitle = chapTitle.Substring(0, chapTitle.LastIndexOf(" "));
+
+                StoryInfo info = new StoryInfo()
+                {
+                    Url = storyUrl ,
+                    Name = storyTitle,
+                    Chapters = new List<ChapterInfo>(),
+                };
+
+                info.Chapters.Add(new ChapterInfo()
+                {
+                    Name = chapTitle,
+                    Url = chapUrl
+                });
+
+                stories.Add(info);
             }
-            
-        }
-        public override string HostUrl
-        {
-            get
-            {
-                return "http://truyentranhtuan.com";
-            }
-        }
-        public override string ListStoryURL
-        {
-            get
-            {
-                return "http://truyentranhtuan.com/danh-sach-truyen/";
-            }
-            
-        }
-        public TruyenTranhTuanDownloader()
-        {
-            
+            return stories;
         }
     }
 }

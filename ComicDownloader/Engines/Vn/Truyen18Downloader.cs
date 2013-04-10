@@ -120,7 +120,6 @@ namespace ComicDownloader.Engines
             return info;
         }
         
-
         public override List<string> GetPages(string chapUrl)
         {
             var html = NetworkHelper.GetHtml(chapUrl);
@@ -134,6 +133,42 @@ namespace ComicDownloader.Engines
                 
             }
             return results;
+        }
+
+        public override List<StoryInfo> GetLastestUpdates()
+        {
+            string lastestUpdateUrl = "http://www.truyen18.org/moi-cap-nhat/danhsach.html";
+            List<StoryInfo> stories = new List<StoryInfo>();
+            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//table[@class=\"listing\"]//tr[@class=\"odd\"]/td[position()=1]/a");
+
+            foreach (HtmlNode node in nodes)
+            {
+                StoryInfo info = new StoryInfo()
+                {
+                    Url = HostUrl.Substring(0, HostUrl.LastIndexOf("/")) + node.Attributes["href"].Value,
+                    Name = node.InnerText.Trim(),
+                    Chapters = new List<ChapterInfo>(),
+                };
+                var chapters = node.ParentNode.ParentNode.SelectNodes("td[position()=3]/a");
+                if (chapters != null)
+                {
+                    foreach (HtmlNode chap in chapters)
+                    {
+                        info.Chapters.Add(new ChapterInfo()
+                        {
+                            Name = chap.InnerText.Trim(),
+                            Url = chap.Attributes["href"].Value,
+                        });
+                    }
+                }
+
+                stories.Add(info);
+            }
+            return stories;
         }
     }
 }

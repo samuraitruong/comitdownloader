@@ -146,6 +146,7 @@ namespace ComicDownloader.Engines
                 };
                 var chapters = node.ParentNode.ParentNode.SelectNodes("dl/dt/span/a");
                 if (chapters != null)
+                {
                     foreach (HtmlNode chap in chapters)
                     {
                         info.Chapters.Add(new ChapterInfo()
@@ -154,6 +155,7 @@ namespace ComicDownloader.Engines
                             Url = chap.Attributes["href"].Value,
                         });
                     }
+                }
                 stories.Add(info);
             }
             return stories;
