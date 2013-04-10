@@ -152,8 +152,10 @@ namespace ComicDownloader.Forms
 
         private void DoSearch(string keyword, bool online, bool recache)
         {
-            lvLastestUpdates.SetObjects(DataSource);
+            DataSource.Clear();
 
+            lvLastestUpdates.SetObjects(DataSource);
+            
             var downloaders = ComicDownloader.Engines.Downloader.GetAllDownloaders();
             progressBar.Maximum = downloaders.Count;
             progressBar.Step = 1;

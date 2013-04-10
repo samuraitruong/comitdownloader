@@ -36,6 +36,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.addThisStoryToQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.hyperlinkStyle1 = new BrightIdeasSoftware.HyperlinkStyle();
             this.miniToolStrip = new System.Windows.Forms.StatusStrip();
             this.lvLastestUpdates = new BrightIdeasSoftware.DataListView();
@@ -50,7 +51,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lvLastestUpdates)).BeginInit();
             this.panel1.SuspendLayout();
@@ -87,6 +87,13 @@
             this.addThisStoryToQueueToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.addThisStoryToQueueToolStripMenuItem.Text = "Add this story to Queue";
             // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Image = global::ComicDownloader.Properties.Resources._1363942937_ark2;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(189, 22);
+            this.toolStripMenuItem2.Text = "Download";
+            // 
             // hyperlinkStyle1
             // 
             cellStyle1.Font = null;
@@ -119,8 +126,7 @@
             this.lvLastestUpdates.Cursor = System.Windows.Forms.Cursors.Default;
             this.lvLastestUpdates.DataSource = null;
             this.lvLastestUpdates.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvLastestUpdates.EmptyListMsg = "please waiting in a couple of second to system update lastest chapter from provid" +
-                "ers";
+            this.lvLastestUpdates.EmptyListMsg = "Searching will take few minutes to complete";
             this.lvLastestUpdates.FullRowSelect = true;
             this.lvLastestUpdates.GridLines = true;
             this.lvLastestUpdates.Location = new System.Drawing.Point(0, 48);
@@ -222,13 +228,6 @@
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(100, 16);
             this.progressBar.Click += new System.EventHandler(this.progressBar_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Image = global::ComicDownloader.Properties.Resources._1363942937_ark2;
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(189, 22);
-            this.toolStripMenuItem2.Text = "Download";
             // 
             // SearchForm
             // 
