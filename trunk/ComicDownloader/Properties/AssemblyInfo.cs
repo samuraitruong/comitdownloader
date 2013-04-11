@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Comic Downloader V1.0")]
 [assembly: AssemblyDescription("This tool allow download comic from varied source")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("samuraitruong")]
+[assembly: AssemblyCompany("http://www.facebook.com/pages/Comic-Downloader/137897009722629")]
 [assembly: AssemblyProduct("Comic Downloader")]
 [assembly: AssemblyCopyright("Copyright © Samuraitruong 2013")]
 [assembly: AssemblyTrademark("samuraitruong@hotmail.com")]

@@ -31,9 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppMainForm));
             this.mdiTabStrip1 = new Cx.Windows.Forms.MdiTabStrip();
             this.ribbon1 = new System.Windows.Forms.Ribbon();
-            this.ribbonOrbMenuItem1 = new System.Windows.Forms.RibbonOrbMenuItem();
             this.mnuOptions = new System.Windows.Forms.RibbonOrbMenuItem();
-            this.ribbonButton1 = new System.Windows.Forms.RibbonButton();
+            this.ribbonOrbMenuItem1 = new System.Windows.Forms.RibbonOrbMenuItem();
+            this.bntAbout = new System.Windows.Forms.RibbonButton();
             this.ribbonButton2 = new System.Windows.Forms.RibbonButton();
             this.bntCasiniServer = new System.Windows.Forms.RibbonButton();
             this.rbtHome = new System.Windows.Forms.RibbonTab();
@@ -83,8 +83,8 @@
             // 
             this.ribbon1.OrbDropDown.BorderRoundness = 8;
             this.ribbon1.OrbDropDown.Location = new System.Drawing.Point(0, 0);
-            this.ribbon1.OrbDropDown.MenuItems.Add(this.ribbonOrbMenuItem1);
             this.ribbon1.OrbDropDown.MenuItems.Add(this.mnuOptions);
+            this.ribbon1.OrbDropDown.MenuItems.Add(this.ribbonOrbMenuItem1);
             this.ribbon1.OrbDropDown.Name = "";
             this.ribbon1.OrbDropDown.Size = new System.Drawing.Size(527, 160);
             this.ribbon1.OrbDropDown.TabIndex = 0;
@@ -92,7 +92,7 @@
             // 
             // 
             // 
-            this.ribbon1.QuickAcessToolbar.Items.Add(this.ribbonButton1);
+            this.ribbon1.QuickAcessToolbar.Items.Add(this.bntAbout);
             this.ribbon1.QuickAcessToolbar.Items.Add(this.ribbonButton2);
             this.ribbon1.QuickAcessToolbar.Items.Add(this.bntCasiniServer);
             this.ribbon1.Size = new System.Drawing.Size(731, 110);
@@ -100,16 +100,6 @@
             this.ribbon1.Tabs.Add(this.rbtHome);
             this.ribbon1.TabsMargin = new System.Windows.Forms.Padding(12, 26, 20, 0);
             this.ribbon1.Text = "ribbon1";
-            // 
-            // ribbonOrbMenuItem1
-            // 
-            this.ribbonOrbMenuItem1.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
-            this.ribbonOrbMenuItem1.Image = global::ComicDownloader.Properties.Resources._1364561270_exit;
-            this.ribbonOrbMenuItem1.MaximumSize = new System.Drawing.Size(0, 0);
-            this.ribbonOrbMenuItem1.MinimumSize = new System.Drawing.Size(0, 0);
-            this.ribbonOrbMenuItem1.SmallImage = global::ComicDownloader.Properties.Resources._1364561270_exit;
-            this.ribbonOrbMenuItem1.Text = "Exit";
-            this.ribbonOrbMenuItem1.Click += new System.EventHandler(this.ribbonOrbMenuItem1_Click);
             // 
             // mnuOptions
             // 
@@ -122,15 +112,25 @@
             this.mnuOptions.ToolTipImage = global::ComicDownloader.Properties.Resources._1364561047_wheel;
             this.mnuOptions.Click += new System.EventHandler(this.mnuOptions_Click);
             // 
-            // ribbonButton1
+            // ribbonOrbMenuItem1
             // 
-            this.ribbonButton1.Image = global::ComicDownloader.Properties.Resources._1364155386_gtk_refresh;
-            this.ribbonButton1.MaximumSize = new System.Drawing.Size(0, 0);
-            this.ribbonButton1.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
-            this.ribbonButton1.MinimumSize = new System.Drawing.Size(0, 0);
-            this.ribbonButton1.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton1.SmallImage")));
-            this.ribbonButton1.Text = "ribbonButton1";
-            this.ribbonButton1.Click += new System.EventHandler(this.ribbonButton1_Click);
+            this.ribbonOrbMenuItem1.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
+            this.ribbonOrbMenuItem1.Image = global::ComicDownloader.Properties.Resources._1364561270_exit;
+            this.ribbonOrbMenuItem1.MaximumSize = new System.Drawing.Size(0, 0);
+            this.ribbonOrbMenuItem1.MinimumSize = new System.Drawing.Size(0, 0);
+            this.ribbonOrbMenuItem1.SmallImage = global::ComicDownloader.Properties.Resources._1364561270_exit;
+            this.ribbonOrbMenuItem1.Text = "Exit";
+            this.ribbonOrbMenuItem1.Click += new System.EventHandler(this.ribbonOrbMenuItem1_Click);
+            // 
+            // bntAbout
+            // 
+            this.bntAbout.Image = global::ComicDownloader.Properties.Resources._1364155386_gtk_refresh;
+            this.bntAbout.MaximumSize = new System.Drawing.Size(0, 0);
+            this.bntAbout.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
+            this.bntAbout.MinimumSize = new System.Drawing.Size(0, 0);
+            this.bntAbout.SmallImage = global::ComicDownloader.Properties.Resources._1365686491_Information;
+            this.bntAbout.Text = "ribbonButton1";
+            this.bntAbout.Click += new System.EventHandler(this.ribbonButton1_Click);
             // 
             // ribbonButton2
             // 
@@ -149,7 +149,7 @@
             this.bntCasiniServer.MaximumSize = new System.Drawing.Size(0, 0);
             this.bntCasiniServer.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
             this.bntCasiniServer.MinimumSize = new System.Drawing.Size(0, 0);
-            this.bntCasiniServer.SmallImage = global::ComicDownloader.Properties.Resources._1365493287_web;
+            this.bntCasiniServer.SmallImage = global::ComicDownloader.Properties.Resources._1365686523_web;
             this.bntCasiniServer.Text = "ribbonButton6";
             this.bntCasiniServer.Click += new System.EventHandler(this.bntCasiniServer_Click);
             // 
@@ -336,7 +336,7 @@
         #endregion
 
         private System.Windows.Forms.Ribbon ribbon1;
-        private System.Windows.Forms.RibbonButton ribbonButton1;
+        private System.Windows.Forms.RibbonButton bntAbout;
         private System.Windows.Forms.RibbonButton ribbonButton2;
         private Cx.Windows.Forms.MdiTabStrip mdiTabStrip1;
         private System.Windows.Forms.RibbonOrbMenuItem ribbonOrbMenuItem1;
