@@ -589,6 +589,7 @@
     <Compile Include="Forms\StartServerForm.Designer.cs">
       <DependentUpon>StartServerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AssemblyInfoHelper.cs" />
     <Compile Include="Helpers\NetworkHelper.cs" />
     <Compile Include="Engines\StoryInfo.cs" />
     <Compile Include="Engines\Vn\TruyenTranh8Downloader.cs" />
@@ -1452,6 +1453,7 @@
     <None Include="Resources\1365535741_select_by_adding_to_selection.png" />
     <None Include="Resources\1365576001_search.png" />
     <None Include="Resources\1365576100_Search.png" />
+    <Content Include="Resources\1365624464_27877.ico" />
     <Content Include="Resources\14747480-bang-comic-book-explosion.jpg" />
     <Content Include="3rd\itextsharp.dll" />
     <Content Include="3rd\Cx.Windows.Forms\MdiTabStrip.bmp" />

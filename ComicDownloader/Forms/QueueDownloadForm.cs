@@ -82,16 +82,19 @@ namespace ComicDownloader.Forms
         }
 
 
-
+        private static object locker = "DUM";
         internal static void AddDownloadItem(QueueDownloadItem item)
         {
-            if (DownloadItems == null)
+            lock (locker)
             {
-                DownloadItems = GetHistoryItems();
+                if (DownloadItems == null)
+                {
+                    DownloadItems = GetHistoryItems();
+                }
+                DownloadItems.Add(item);
+                //doing merge here :)
+                SaveHistoryItem(DownloadItems);
             }
-            DownloadItems.Add(item);
-            //doing merge here :)
-            SaveHistoryItem(DownloadItems);
         }
 
         private void QueueDownloadForm_Load(object sender, EventArgs e)

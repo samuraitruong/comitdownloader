@@ -32,6 +32,7 @@
             BrightIdeasSoftware.CellStyle cellStyle1 = new BrightIdeasSoftware.CellStyle();
             BrightIdeasSoftware.CellStyle cellStyle2 = new BrightIdeasSoftware.CellStyle();
             BrightIdeasSoftware.CellStyle cellStyle3 = new BrightIdeasSoftware.CellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchForm));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -45,11 +46,14 @@
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.loadingCircle1 = new MRG.Controls.UI.LoadingCircle();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnOnlineSearch = new System.Windows.Forms.Button();
             this.bntCacheSearch = new System.Windows.Forms.Button();
             this.txtKeyword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lvLastestUpdates)).BeginInit();
@@ -65,34 +69,38 @@
             this.addThisStoryToQueueToolStripMenuItem,
             this.toolStripMenuItem2});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 98);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 98);
+            this.contextMenuStrip1.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(this.contextMenuStrip1_Closed);
+            this.contextMenuStrip1.Opened += new System.EventHandler(this.contextMenuStrip1_Opened);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Image = global::ComicDownloader.Properties.Resources._1365319718_Globe1;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(189, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem1.Text = "Browse";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(186, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // addThisStoryToQueueToolStripMenuItem
             // 
             this.addThisStoryToQueueToolStripMenuItem.Image = global::ComicDownloader.Properties.Resources._1364410878_Add;
             this.addThisStoryToQueueToolStripMenuItem.Name = "addThisStoryToQueueToolStripMenuItem";
-            this.addThisStoryToQueueToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.addThisStoryToQueueToolStripMenuItem.Text = "Add this story to Queue";
+            this.addThisStoryToQueueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addThisStoryToQueueToolStripMenuItem.Text = "Add to Queue";
+            this.addThisStoryToQueueToolStripMenuItem.Click += new System.EventHandler(this.addThisStoryToQueueToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Image = global::ComicDownloader.Properties.Resources._1363942937_ark2;
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(189, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem2.Text = "Download";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // hyperlinkStyle1
             // 
@@ -167,6 +175,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.loadingCircle1);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.btnOnlineSearch);
             this.panel1.Controls.Add(this.bntCacheSearch);
             this.panel1.Controls.Add(this.txtKeyword);
@@ -176,6 +186,31 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(692, 48);
             this.panel1.TabIndex = 2;
+            // 
+            // loadingCircle1
+            // 
+            this.loadingCircle1.Active = false;
+            this.loadingCircle1.Color = System.Drawing.Color.DarkGray;
+            this.loadingCircle1.InnerCircleRadius = 6;
+            this.loadingCircle1.Location = new System.Drawing.Point(591, 13);
+            this.loadingCircle1.Name = "loadingCircle1";
+            this.loadingCircle1.NumberSpoke = 9;
+            this.loadingCircle1.OuterCircleRadius = 7;
+            this.loadingCircle1.RotationSpeed = 100;
+            this.loadingCircle1.Size = new System.Drawing.Size(75, 23);
+            this.loadingCircle1.SpokeThickness = 4;
+            this.loadingCircle1.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.Firefox;
+            this.loadingCircle1.TabIndex = 5;
+            this.loadingCircle1.Text = "loadingCircle1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(55, 29);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(151, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "(Ex: Dragon Ball, One Piece...)";
             // 
             // btnOnlineSearch
             // 
@@ -203,6 +238,7 @@
             this.txtKeyword.Name = "txtKeyword";
             this.txtKeyword.Size = new System.Drawing.Size(179, 20);
             this.txtKeyword.TabIndex = 1;
+            this.txtKeyword.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtKeyword_PreviewKeyDown);
             // 
             // label1
             // 
@@ -216,6 +252,7 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblStatus,
             this.progressBar});
             this.statusStrip1.Location = new System.Drawing.Point(0, 277);
             this.statusStrip1.Name = "statusStrip1";
@@ -223,10 +260,15 @@
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // lblStatus
+            // 
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(0, 17);
+            // 
             // progressBar
             // 
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(100, 16);
+            this.progressBar.Size = new System.Drawing.Size(400, 16);
             this.progressBar.Click += new System.EventHandler(this.progressBar_Click);
             // 
             // SearchForm
@@ -238,8 +280,9 @@
             this.Controls.Add(this.lvLastestUpdates);
             this.Controls.Add(this.panel1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SearchForm";
-            this.Text = "Lastest Updates";
+            this.Text = "Search";
             this.Load += new System.EventHandler(this.LastestChapterUpdateForm_Load);
             this.Resize += new System.EventHandler(this.LastestChapterUpdateForm_Resize);
             this.contextMenuStrip1.ResumeLayout(false);
@@ -274,5 +317,8 @@
         private System.Windows.Forms.TextBox txtKeyword;
         private System.Windows.Forms.ToolStripProgressBar progressBar;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripStatusLabel lblStatus;
+        private MRG.Controls.UI.LoadingCircle loadingCircle1;
+        private System.Windows.Forms.Label label2;
     }
 }

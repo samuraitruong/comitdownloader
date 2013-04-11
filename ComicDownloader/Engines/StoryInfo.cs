@@ -32,6 +32,8 @@ namespace ComicDownloader.Engines
         public int DownloadedCount { get; set; }
         public ChapterInfo() {
             DownloadedCount = 0;
+            Status = DownloadStatus.Waiting;
+            UniqueIdentify = new Guid();
         }
     }
     public class StoryInfo

@@ -9,9 +9,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("This tool allow download comic from varied source")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("samuraitruong")]
-[assembly: AssemblyProduct("ComicDownloader")]
-[assembly: AssemblyCopyright("Copyright © Samuraitruon 2013")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyProduct("Comic Downloader")]
+[assembly: AssemblyCopyright("Copyright © Samuraitruong 2013")]
+[assembly: AssemblyTrademark("samuraitruong@hotmail.com")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
