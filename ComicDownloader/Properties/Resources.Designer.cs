@@ -1169,6 +1169,13 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap star {
+            get {
+                object obj = ResourceManager.GetObject("star", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap the_marvel_universe {
             get {
                 object obj = ResourceManager.GetObject("the_marvel_universe", resourceCulture);

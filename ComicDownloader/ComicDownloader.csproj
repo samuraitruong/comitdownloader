@@ -301,6 +301,7 @@
     <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\ConvolutionMatrix.cs" />
     <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\ImageProcessing.cs" />
     <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\IProcessingType.cs" />
+    <Compile Include="3rd\ObjectListView\AnimatedDecoration.cs" />
     <Compile Include="3rd\ObjectListView\DataTreeListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -337,6 +338,21 @@
     <Compile Include="3rd\SmartThreadPool\WorkItemsGroup.cs" />
     <Compile Include="3rd\SmartThreadPool\WorkItemsGroupBase.cs" />
     <Compile Include="3rd\SmartThreadPool\WorkItemsQueue.cs" />
+    <Compile Include="3rd\SparkleLibrary\Adapters\AnimationAdapter.cs" />
+    <Compile Include="3rd\SparkleLibrary\Animation\Animateable.cs" />
+    <Compile Include="3rd\SparkleLibrary\Animation\Animation.cs" />
+    <Compile Include="3rd\SparkleLibrary\Animation\Events.cs" />
+    <Compile Include="3rd\SparkleLibrary\Effects\Effect.cs" />
+    <Compile Include="3rd\SparkleLibrary\Effects\Effects.cs" />
+    <Compile Include="3rd\SparkleLibrary\Locators\Locators.cs" />
+    <Compile Include="3rd\SparkleLibrary\Locators\PointLocator.cs" />
+    <Compile Include="3rd\SparkleLibrary\Locators\RectangleLocator.cs" />
+    <Compile Include="3rd\SparkleLibrary\Sprites\Audio.cs" />
+    <Compile Include="3rd\SparkleLibrary\Sprites\ImageSprite.cs" />
+    <Compile Include="3rd\SparkleLibrary\Sprites\ISprite.cs" />
+    <Compile Include="3rd\SparkleLibrary\Sprites\ShapeSprite.cs" />
+    <Compile Include="3rd\SparkleLibrary\Sprites\Sprite.cs" />
+    <Compile Include="3rd\SparkleLibrary\Sprites\TextSprite.cs" />
     <Compile Include="3rd\WebServer.cs" />
     <Compile Include="ComicDownloaderSettings.cs" />
     <Compile Include="Engines\18+\HakihomeDownloader.cs" />
@@ -1485,6 +1501,7 @@
     <None Include="Resources\play_16x16.png" />
     <None Include="Resources\media_playback_start %281%29.png" />
     <None Include="Resources\media_playback_stop.png" />
+    <None Include="Resources\star.png" />
     <Content Include="Resources\the_marvel_universe.jpg" />
     <Content Include="3rd\XPTable\Models\ColumnModel.bmp" />
     <Content Include="3rd\XPTable\Models\Table.bmp" />
