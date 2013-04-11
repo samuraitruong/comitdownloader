@@ -193,5 +193,46 @@ namespace ComicDownloader.Engines
             return stories;
         }
 
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string urlPattern = string.Format("http://www.batoto.net/search?name={0}&name_cond=c", keyword.Replace(" ", "+"));
+            urlPattern = urlPattern + "&p={0}";
+
+            var results = new List<StoryInfo>();
+
+            int currentPage = 0;
+            bool isStillHasPage = true;
+            while (isStillHasPage)
+            {
+                string url = string.Format(urlPattern, currentPage);
+
+                string html = NetworkHelper.GetHtml(url);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@id=\"comic_search_results\"]/table[@class=\"ipb_table chapters_list\"]//td[position()=1]//a");
+                if (nodes != null && nodes.Count > 0)
+                {
+
+                    foreach (var node in nodes)
+                    {
+
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = node.Attributes["href"].Value,
+                            Name = node.ChildNodes[1].InnerText.Trim()
+                        };
+                        results.Add(info);
+                    }
+                }
+                else
+                {
+                    isStillHasPage = false;
+                }
+                currentPage = results.Count;
+            }
+            return results;
+        }
+
     }
 }

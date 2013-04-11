@@ -169,5 +169,47 @@ namespace ComicDownloader.Engines
             }
             return stories;
         }
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string urlPattern = string.Format("http://www.mangago.com/r/l_search/?{1}&name={0}", keyword.Replace(" ", "+"), "page={0}");
+
+            var results = new List<StoryInfo>();
+
+            int currentPage = 0;
+            bool isStillHasPage = true;
+            while (isStillHasPage)
+            {
+                string url = string.Format(urlPattern, currentPage);
+
+                string html = NetworkHelper.GetHtml(url);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//ul[@id=\"search_list\"]/li//span[@class=\"tit\"]/h2/a");
+                if (nodes != null && nodes.Count > 0)
+                {
+                    foreach (var node in nodes)
+                    {
+                        var storyUrl = node.Attributes["href"].Value;
+                        var storyTitle = storyUrl.Substring(0, storyUrl.LastIndexOf("/"));
+                        storyTitle = storyTitle.Substring(storyTitle.LastIndexOf("/") + 1).Replace("_", " ");
+
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = storyUrl,
+                            Name = storyTitle.Trim()
+                        };
+                        results.Add(info);
+                    }
+                }
+                else
+                {
+                    isStillHasPage = false;
+                }
+                currentPage = results.Count;
+            }
+            return results;
+        }
     }
 }
