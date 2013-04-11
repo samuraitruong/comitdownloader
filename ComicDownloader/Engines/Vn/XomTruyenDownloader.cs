@@ -12,7 +12,30 @@ namespace ComicDownloader.Engines
     public class XomTruyenDownloader
         : Downloader
     {
-         
+        public override string StoryUrlPattern
+        {
+            get
+            {
+                return HostUrl + "/{0}/";
+            }
+
+        }
+        public override string HostUrl
+        {
+            get
+            {
+                return "http://xomtruyen.com/";
+            }
+        }
+        public override string ListStoryURL
+        {
+            get
+            {
+                return "http://xomtruyen.com/browse/";
+            }
+
+        }
+
         public override List<StoryInfo> GetListStories()
         {
             List<StoryInfo> results = ReloadChachedData();
@@ -107,32 +130,37 @@ namespace ComicDownloader.Engines
 
             return pages;
         }
-        public override string StoryUrlPattern
+
+        public override List<StoryInfo> GetLastestUpdates()
         {
-            get
+            string lastestUpdateUrl = HostUrl;
+            List<StoryInfo> stories = new List<StoryInfo>();
+            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@id=\"leftcol\"]/div[@style]/div/li[position()=1]/a");
+
+            foreach (HtmlNode node in nodes)
             {
-                return HostUrl + "/{0}/";
+                var chapterUrl = node.Attributes["href"].Value;
+                var storyUrl = chapterUrl.Substring(0, chapterUrl.LastIndexOf("-chap"));
+
+                StoryInfo info = new StoryInfo()
+                {
+                    Url = storyUrl,
+                    Name = node.InnerText.Trim(),
+                    Chapters = new List<ChapterInfo>(),
+                };
+
+                info.Chapters.Add(new ChapterInfo()
+                {
+                    Name = node.Attributes["title"].Value.Trim(),
+                    Url = chapterUrl
+                });
+                stories.Add(info);
             }
-            
-        }
-        public override string HostUrl
-        {
-            get
-            {
-                return "http://xomtruyen.com/";
-            }
-        }
-        public override string ListStoryURL
-        {
-            get
-            {
-                return "http://xomtruyen.com/browse/";
-            }
-            
-        }
-        public XomTruyenDownloader()
-        {
-            
+            return stories;
         }
     }
 }
