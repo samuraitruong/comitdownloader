@@ -160,5 +160,47 @@ namespace ComicDownloader.Engines
             }
             return stories;
         }
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string urlPattern = string.Format("http://mangafox.me/search.php?name={0}", keyword.Replace(" ", "+"));
+            urlPattern = urlPattern + "&page={0}";
+
+            var results = new List<StoryInfo>();
+
+            int currentPage = 0;
+            bool isStillHasPage = true;
+            while (isStillHasPage)
+            {
+                string url = string.Format(urlPattern, currentPage);
+
+                string html = NetworkHelper.GetHtml(url);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//table[@id=\"listing\"]//tr/td[position()=1]/a");
+                var endPage = htmlDoc.DocumentNode.SelectNodes("//div[@id=\"nav\"]/ul/li[position()>1]").Count - 1;
+                if (nodes != null && nodes.Count > 0 && currentPage < endPage)
+                {
+
+                    foreach (var node in nodes)
+                    {
+
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = node.Attributes["href"].Value,
+                            Name = node.InnerText.Trim()
+                        };
+                        results.Add(info);
+                    }
+                }
+                else
+                {
+                    isStillHasPage = false;
+                }
+                currentPage = results.Count;
+            }
+            return results;
+        }
     }
 }

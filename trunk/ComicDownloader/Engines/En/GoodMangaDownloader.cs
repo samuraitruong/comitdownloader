@@ -160,5 +160,46 @@ namespace ComicDownloader.Engines
             }
             return stories;
         }
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string urlPattern = string.Format("http://www.goodmanga.net/advanced-search?key={0}&wg=&wog=&status=", keyword.Replace(" ", "+"));
+            urlPattern = urlPattern + "&page={0}";
+
+            var results = new List<StoryInfo>();
+
+            int currentPage = 1;
+            bool isStillHasPage = true;
+            while (isStillHasPage)
+            {
+                string url = string.Format(urlPattern, currentPage);
+
+                string html = NetworkHelper.GetHtml(url);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"series_list\"]/ul/li/div[@class=\"right_col\"]/h3/a");
+                if (nodes != null && nodes.Count > 0)
+                {
+
+                    foreach (var node in nodes)
+                    {
+
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = node.Attributes["href"].Value,
+                            Name = node.InnerText.Trim()
+                        };
+                        results.Add(info);
+                    }
+                }
+                else
+                {
+                    isStillHasPage = false;
+                }
+                currentPage = results.Count;
+            }
+            return results;
+        }
     }
 }
