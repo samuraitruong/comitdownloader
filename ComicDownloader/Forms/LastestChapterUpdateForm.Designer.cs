@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LastestChapterUpdateForm));
-            BrightIdeasSoftware.CellStyle cellStyle10 = new BrightIdeasSoftware.CellStyle();
-            BrightIdeasSoftware.CellStyle cellStyle11 = new BrightIdeasSoftware.CellStyle();
-            BrightIdeasSoftware.CellStyle cellStyle12 = new BrightIdeasSoftware.CellStyle();
-            this.lvLastestUpdates = new BrightIdeasSoftware.DataListView();
+            BrightIdeasSoftware.CellStyle cellStyle1 = new BrightIdeasSoftware.CellStyle();
+            BrightIdeasSoftware.CellStyle cellStyle2 = new BrightIdeasSoftware.CellStyle();
+            BrightIdeasSoftware.CellStyle cellStyle3 = new BrightIdeasSoftware.CellStyle();
+            this.lvLastestUpdates = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -67,17 +66,22 @@
             this.olvColumn4});
             this.lvLastestUpdates.ContextMenuStrip = this.contextMenuStrip1;
             this.lvLastestUpdates.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lvLastestUpdates.DataSource = null;
             this.lvLastestUpdates.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvLastestUpdates.EmptyListMsg = "please waiting in a couple of second to system update lastest chapter from provid" +
                 "ers";
             this.lvLastestUpdates.FullRowSelect = true;
             this.lvLastestUpdates.GridLines = true;
+            this.lvLastestUpdates.HeaderUsesThemes = false;
             this.lvLastestUpdates.Location = new System.Drawing.Point(3, 3);
             this.lvLastestUpdates.Name = "lvLastestUpdates";
+            this.lvLastestUpdates.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.Submenu;
+            this.lvLastestUpdates.ShowCommandMenuOnRightClick = true;
             this.lvLastestUpdates.Size = new System.Drawing.Size(863, 318);
             this.lvLastestUpdates.TabIndex = 0;
             this.lvLastestUpdates.UseCompatibleStateImageBehavior = false;
+            this.lvLastestUpdates.UseFilterIndicator = true;
+            this.lvLastestUpdates.UseFiltering = true;
+            this.lvLastestUpdates.UseHotItem = true;
             this.lvLastestUpdates.UseHyperlinks = true;
             this.lvLastestUpdates.View = System.Windows.Forms.View.Details;
             // 
@@ -220,16 +224,16 @@
             // 
             // hyperlinkStyle1
             // 
-            cellStyle10.Font = null;
-            cellStyle10.ForeColor = System.Drawing.Color.Blue;
-            this.hyperlinkStyle1.Normal = cellStyle10;
-            cellStyle11.Font = null;
-            cellStyle11.FontStyle = System.Drawing.FontStyle.Underline;
-            this.hyperlinkStyle1.Over = cellStyle11;
+            cellStyle1.Font = null;
+            cellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.hyperlinkStyle1.Normal = cellStyle1;
+            cellStyle2.Font = null;
+            cellStyle2.FontStyle = System.Drawing.FontStyle.Underline;
+            this.hyperlinkStyle1.Over = cellStyle2;
             this.hyperlinkStyle1.OverCursor = System.Windows.Forms.Cursors.Hand;
-            cellStyle12.Font = null;
-            cellStyle12.ForeColor = System.Drawing.Color.Purple;
-            this.hyperlinkStyle1.Visited = cellStyle12;
+            cellStyle3.Font = null;
+            cellStyle3.ForeColor = System.Drawing.Color.Purple;
+            this.hyperlinkStyle1.Visited = cellStyle3;
             // 
             // LastestChapterUpdateForm
             // 
@@ -253,7 +257,7 @@
 
         #endregion
 
-        private BrightIdeasSoftware.DataListView lvLastestUpdates;
+        private BrightIdeasSoftware.ObjectListView lvLastestUpdates;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;

@@ -109,7 +109,8 @@ namespace ComicDownloader.Forms
                     lock (DataSource)
                     {
                         DataSource.AddRange(tempLst);
-                        lvLastestUpdates.SetObjects(DataSource);
+                        //lvLastestUpdates.SetObjects(DataSource);
+                        lvLastestUpdates.AddObjects(DataSource);
                     }
                 }
 

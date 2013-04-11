@@ -133,7 +133,6 @@
             this.olvColumn4});
             this.lvLastestUpdates.ContextMenuStrip = this.contextMenuStrip1;
             this.lvLastestUpdates.Cursor = System.Windows.Forms.Cursors.Default;
-            //this.lvLastestUpdates.DataSource = null;
             this.lvLastestUpdates.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvLastestUpdates.EmptyListMsg = "Searching will take few minutes to complete";
             this.lvLastestUpdates.FullRowSelect = true;
@@ -143,7 +142,6 @@
             this.lvLastestUpdates.Name = "lvLastestUpdates";
             this.lvLastestUpdates.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.Submenu;
             this.lvLastestUpdates.ShowCommandMenuOnRightClick = true;
-            this.lvLastestUpdates.ShowGroups = false;
             this.lvLastestUpdates.Size = new System.Drawing.Size(692, 251);
             this.lvLastestUpdates.TabIndex = 0;
             this.lvLastestUpdates.UseCompatibleStateImageBehavior = false;
