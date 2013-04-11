@@ -40,7 +40,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.hyperlinkStyle1 = new BrightIdeasSoftware.HyperlinkStyle();
             this.miniToolStrip = new System.Windows.Forms.StatusStrip();
-            this.lvLastestUpdates = new BrightIdeasSoftware.DataListView();
+            this.lvLastestUpdates = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -133,7 +133,7 @@
             this.olvColumn4});
             this.lvLastestUpdates.ContextMenuStrip = this.contextMenuStrip1;
             this.lvLastestUpdates.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lvLastestUpdates.DataSource = null;
+            //this.lvLastestUpdates.DataSource = null;
             this.lvLastestUpdates.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvLastestUpdates.EmptyListMsg = "Searching will take few minutes to complete";
             this.lvLastestUpdates.FullRowSelect = true;
@@ -324,7 +324,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.StatusStrip miniToolStrip;
-        private BrightIdeasSoftware.DataListView lvLastestUpdates;
+        private BrightIdeasSoftware.ObjectListView lvLastestUpdates;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private BrightIdeasSoftware.OLVColumn olvColumn3;

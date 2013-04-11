@@ -15,6 +15,8 @@ using System.Threading;
 using Cx.Windows.Forms;
 using NetduinoLibrary.Toolbox;
 using CassiniDev;
+using ComicDownloader.Helpers;
+using System.Diagnostics;
 
 namespace ComicDownloader
 {
@@ -230,8 +232,12 @@ namespace ComicDownloader
        
         private void ribbonButton1_Click(object sender, EventArgs e)
         {
-            Form a = new IView.UI.Forms.MainWindow();
-            a.ShowDialog();
+            //Form a = new IView.UI.Forms.MainWindow();
+            //a.ShowDialog();
+
+            var url =  new AssemblyInfoHelper(this.GetType()).Company;
+            Process.Start(url);
+
         }
 
         private void mnuOptions_Click(object sender, EventArgs e)

@@ -93,19 +93,11 @@ namespace ComicDownloader.Forms
                     {
                         itemCounts += tempLst.Count;
                         DataSource.AddRange(tempLst);
-                        if (!contextMenuShowing)
+                       // if (!contextMenuShowing)
                         {
-                           lvLastestUpdates.SetObjects(DataSource);
+                            lvLastestUpdates.AddObjects(tempLst);
                         }
-                        //foreach (var item in tempLst)
-                        //{
-                        //    this.Invoke(new MethodInvoker(delegate()
-                        //    {
-                        //        lvLastestUpdates.AddObject(item);
-                        //        lvLastestUpdates.EnsureModelVisible(item);
-                        //        lvLastestUpdates.Refresh();
-                        //    }));
-                        //}
+
                         hasChanged = true;
                     }
                 }
@@ -185,18 +177,10 @@ namespace ComicDownloader.Forms
             this.Text = "Search  - [" + (string.IsNullOrEmpty(keyword)?"All": keyword )+ "]";
             DataSource.Clear();
 
-            //TextMatchFilter filter = TextMatchFilter.Contains(this.lvLastestUpdates, keyword);
-            //this.lvLastestUpdates.ModelFilter = filter;
-            //this.lvLastestUpdates.DefaultRenderer = new HighlightTextRenderer(filter);
+            TextMatchFilter filter = TextMatchFilter.Contains(this.lvLastestUpdates, keyword);
+            this.lvLastestUpdates.ModelFilter = filter;
+            this.lvLastestUpdates.DefaultRenderer = new HighlightTextRenderer(filter);
             
-
-
-            //DataSource.Add(new SearchItem() { 
-            //Provider = "a",
-            //StoryName = "a",
-            //StoryUrl = "http://aaa"
-
-            //});
             lvLastestUpdates.SetObjects(DataSource);
             
             var downloaders = ComicDownloader.Engines.Downloader.GetAllDownloaders();
@@ -351,19 +335,19 @@ namespace ComicDownloader.Forms
         private bool hasChanged = false;
         private void contextMenuStrip1_Closed(object sender, ToolStripDropDownClosedEventArgs e)
         {
-            contextMenuShowing = false;
-            if (hasChanged)
-            {
-                hasChanged = false;
+            //contextMenuShowing = false;
+            //if (hasChanged)
+            //{
+            //    hasChanged = false;
 
-                lvLastestUpdates.SetObjects(DataSource);
-            }
+            //    lvLastestUpdates.SetObjects(DataSource);
+            //}
         }
 
         private void contextMenuStrip1_Opened(object sender, EventArgs e)
         {
-            hasChanged = false;
-            contextMenuShowing = true;
+            //hasChanged = false;
+            //contextMenuShowing = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
