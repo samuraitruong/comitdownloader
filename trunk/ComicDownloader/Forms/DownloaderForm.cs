@@ -44,6 +44,16 @@ namespace ComicDownloader
             Settings = SettingForm.GetSetting();
         }
 
+        private bool downloadNow;
+        public DownloaderForm(string storyUrl)
+        {
+            InitializeComponent();
+            Settings = SettingForm.GetSetting();
+            txtUrl.Text = storyUrl;
+            this.Downloader = Downloader.Resolve(txtUrl.Text);
+            downloadNow = true;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             folderBrowserDialog1.SelectedPath = txtDir.Text;
@@ -471,38 +481,20 @@ namespace ComicDownloader
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            txtDir.Text = Settings.StogareFolder;
             Thread thread = new Thread(new ThreadStart(this.LoadStoryList));
             thread.Start();
+
+            if (downloadNow)
+            {
+                bntInfo.PerformClick();
+            }
         }
 
 
         List<StoryInfo> stories = new List<StoryInfo>();
 
-        public static string GetHtml(string url)
-        {
-            if (url.Length > 0)
-            {
-                Uri myUri = new Uri(url);
-                // Create a 'HttpWebRequest' object for the specified url. 
-                HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(myUri);
-                myHttpWebRequest.Method = "GET";
-                myHttpWebRequest.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-                myHttpWebRequest.AutomaticDecompression = DecompressionMethods.GZip;//Or DecompressionMethods.Deflate
-
-                // Set the user agent as if we were a web browser
-                myHttpWebRequest.UserAgent = @"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.4) Gecko/20060508 Firefox/1.5.0.4";
-
-                HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttpWebRequest.GetResponse();
-                var stream = myHttpWebResponse.GetResponseStream();
-                var reader = new StreamReader(stream);
-                var html = reader.ReadToEnd();
-                // Release resources of response object.
-                myHttpWebResponse.Close();
-
-                return html;
-            }
-            else { return "NO URL"; }
-        }
+      
 
         private void LoadStoryList()
         {
@@ -550,50 +542,55 @@ namespace ComicDownloader
 
         private void bntInfo_Click(object sender, EventArgs e)
         {
-            using (new LongOperation())
+            new Thread(new ThreadStart(delegate()
             {
-                this.Invoke(new MethodInvoker(delegate() {
-
-                    this.Text = "Loading...";
-
-                    loading.Location = new System.Drawing.Point(gpbChapters.Location.X + lstChapters.Location.X, gpbChapters.Location.Y + lstChapters.Location.Y);
-                    loading.Size = lstChapters.Size;
-                    loading.Visible = true;
-
-                }));
-                currentStoryInfo = Downloader.RequestInfo(txtUrl.Text);
-
-               
-                txtTitle.Text = ddlList.Text;
-                txtTitle.Text = currentStoryInfo.Name.Replace('"',' ').Replace('.',' ');
-
-                this.Text = Downloader.Name + currentStoryInfo.Name;
-
-                tblChapters.Rows.Clear();
-
-                foreach (var item in currentStoryInfo.Chapters)
+                using (new LongOperation())
                 {
-                    item.UniqueIdentify = Guid.NewGuid();
+                    this.Invoke(new MethodInvoker(delegate()
+                    {
 
-                    int index = tblChapters.Rows.Add(new Row());
-                    
-                    tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId.ToString(), true));
-                    tblChapters.Rows[index].Cells.Add(new Cell(item.UniqueIdentify.ToString(), true));
-                    tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId));
-                    tblChapters.Rows[index].Cells.Add(new Cell(item.Name.Replace('"', ' ').Replace('.', ' '), true));
-                    tblChapters.Rows[index].Cells.Add(new Cell(item.Url, new CellStyle() { ForeColor = System.Drawing.Color.Green }));
+                        this.Text = "Loading...";
 
+                        loading.Location = new System.Drawing.Point(gpbChapters.Location.X + lstChapters.Location.X, gpbChapters.Location.Y + lstChapters.Location.Y);
+                        loading.Size = lstChapters.Size;
+                        loading.Visible = true;
+
+                    }));
+                    currentStoryInfo = Downloader.RequestInfo(txtUrl.Text);
+
+
+                    txtTitle.Text = ddlList.Text;
+                    txtTitle.Text = currentStoryInfo.Name.Replace('"', ' ').Replace('.', ' ');
+
+                    this.Text = Downloader.Name + currentStoryInfo.Name;
+
+                    tblChapters.Rows.Clear();
+
+                    foreach (var item in currentStoryInfo.Chapters)
+                    {
+                        item.UniqueIdentify = Guid.NewGuid();
+
+                        int index = tblChapters.Rows.Add(new Row());
+
+                        tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId.ToString(), true));
+                        tblChapters.Rows[index].Cells.Add(new Cell(item.UniqueIdentify.ToString(), true));
+                        tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId));
+                        tblChapters.Rows[index].Cells.Add(new Cell(item.Name.Replace('"', ' ').Replace('.', ' '), true));
+                        tblChapters.Rows[index].Cells.Add(new Cell(item.Url, new CellStyle() { ForeColor = System.Drawing.Color.Green }));
+
+                    }
+
+
+                    this.Invoke(new MethodInvoker(delegate()
+                    {
+                        loading.Visible = false;
+
+                    }));
+
+                    ToggleControl(true);
                 }
+            })).Start();
 
-
-                this.Invoke(new MethodInvoker(delegate()
-                {
-                    loading.Visible = false;
-
-                }));
-
-                ToggleControl(true);
-            }
         }
 
         private void ToggleControl(bool state)

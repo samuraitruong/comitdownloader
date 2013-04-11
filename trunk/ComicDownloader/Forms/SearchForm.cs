@@ -12,12 +12,13 @@ using ComicDownloader.Engines;
 using MRG.Controls.UI;
 using ComicDownoader.Forms;
 using ExtendedWebBrowser2;
+using Amib.Threading;
 
 namespace ComicDownloader.Forms
 {
     public partial class SearchForm : MdiChildForm
     {
-        public class SeaerchItem
+        public class SearchItem
         {
             public string Provider { get; set; }
             public string StoryName { get; set; }
@@ -25,7 +26,7 @@ namespace ComicDownloader.Forms
             //public string ChapterUrl { get; set; }
             public string StoryUrl { get; set; }
         }
-        private List<SeaerchItem> DataSource = new List<SeaerchItem>();
+        private List<SearchItem> DataSource = new List<SearchItem>();
 
         public SearchForm()
         {
@@ -51,12 +52,13 @@ namespace ComicDownloader.Forms
             
         }
 
+        private bool contextMenuShowing = false;
         private void GetSearchItems(object obj)
         {
             SearchThreadParam param = (SearchThreadParam)obj;
 
             List<StoryInfo> list = new List<StoryInfo>();
-            var tempLst = new List<SeaerchItem>();
+            var tempLst = new List<SearchItem>();
 
             try
             {
@@ -66,7 +68,7 @@ namespace ComicDownloader.Forms
                 {
                     foreach (var item in list)
                     {
-                        tempLst.Add(new SeaerchItem()
+                        tempLst.Add(new SearchItem()
                         {
                             Provider = param.Downloader.Name.TrimStart(" -".ToCharArray()),
                             StoryName = item.Name,
@@ -83,10 +85,16 @@ namespace ComicDownloader.Forms
             {
                 if (tempLst.Count > 0)
                 {
+                    
                     lock (DataSource)
                     {
+                        itemCounts += tempLst.Count;
                         DataSource.AddRange(tempLst);
-                        lvLastestUpdates.SetObjects(DataSource);
+                        if (!contextMenuShowing)
+                        {
+                            lvLastestUpdates.SetObjects(DataSource);
+                        }
+                        hasChanged = true;
                     }
                 }
 
@@ -94,7 +102,7 @@ namespace ComicDownloader.Forms
                 this.Invoke(new MethodInvoker(delegate()
                 {
                     progressBar.Increment(1);
-
+                    lblStatus.Text = "Item(s) found : " + itemCounts.ToString();
                     //this.Text = "Lastest updates - Loading[" + ((float)progressBar.Value / progressBar.Maximum).ToString("p") +"]";
                 }));
             }
@@ -109,7 +117,7 @@ namespace ComicDownloader.Forms
 
         private void LastestChapterUpdateForm_Resize(object sender, EventArgs e)
         {
-            progressBar.Size = new Size(this.statusStrip1.Width - 15, progressBar.Height);
+            //progressBar.Size = new Size(this.statusStrip1.Width - 15, progressBar.Height);
 
             
         }
@@ -149,9 +157,20 @@ namespace ComicDownloader.Forms
         {
             DoSearch(txtKeyword.Text, false,false);
         }
-
+        int itemCounts = 0;
         private void DoSearch(string keyword, bool online, bool recache)
         {
+            if(string.IsNullOrEmpty(keyword) || keyword.Length<3) {
+
+                if (MessageBox.Show("Keyword is empty of too short will have a lot of result. It will take long time to complete action. Do you want to continue?", "Short keyword search", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
+                {
+                    return;
+                }
+            }
+            loadingCircle1.Active = true;
+            loadingCircle1.Visible = true;
+            itemCounts = 0;
+            this.Text = "Search  - [" + (string.IsNullOrEmpty(keyword)?"All": keyword )+ "]";
             DataSource.Clear();
 
             lvLastestUpdates.SetObjects(DataSource);
@@ -179,6 +198,14 @@ namespace ComicDownloader.Forms
                     });
                 }
                 foreach (var doneEvent in doneEvents) doneEvent.WaitOne();
+                
+                this.Invoke(new MethodInvoker(delegate() {
+                    loadingCircle1.Visible = false;
+                    loadingCircle1.Active = false;
+                    lblStatus.Text = "Searching completed";
+                }));
+                
+
             }).Start();
         }
 
@@ -191,5 +218,82 @@ namespace ComicDownloader.Forms
         {
 
         }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            var selected = lvLastestUpdates.SelectedObjects[0] as SearchItem;
+            DownloaderForm form = new DownloaderForm(selected.StoryUrl);
+
+            form.MdiParent = this.MdiParent;
+
+            form.WindowState = FormWindowState.Minimized;
+            form.Show();
+            form.WindowState = FormWindowState.Maximized;
+        }
+
+        private void addThisStoryToQueueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SmartThreadPool pool = new SmartThreadPool();
+            foreach (SearchItem item in lvLastestUpdates.SelectedObjects)
+            {
+                
+                pool.QueueWorkItem(this.AddToQueue, item);
+            }
+
+            pool.Start();
+        }
+
+        private void AddToQueue(object obj)
+        {
+            string url = ((SearchItem)obj).StoryUrl;
+
+            Downloader dl = Downloader.Resolve(url);
+            var story = dl.RequestInfo(url);
+
+            QueueDownloadItem item = new QueueDownloadItem()
+            {
+                ProviderName = dl.Name,
+                Downloader = dl.GetType().FullName,
+                StoryUrl = url,
+                StoryName = story.Name,
+                SelectedChapters = story.Chapters,
+                Status = DownloadStatus.Waiting,
+                SaveFolder = SettingForm.GetSetting().StogareFolder,
+            };
+
+            QueueDownloadForm.AddDownloadItem(item);
+
+            this.Invoke(new MethodInvoker(delegate() {
+                lblStatus.Text = string.Format("Added {0}[{1} Chapters]", story.Name, story.Chapters.Count);
+            }));
+
+        }
+
+        private void txtKeyword_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                bntCacheSearch.PerformClick();
+            }
+        }
+
+        private bool hasChanged = false;
+        private void contextMenuStrip1_Closed(object sender, ToolStripDropDownClosedEventArgs e)
+        {
+            contextMenuShowing = false;
+            if (hasChanged)
+            {
+                hasChanged = false;
+
+                lvLastestUpdates.SetObjects(DataSource);
+            }
+        }
+
+        private void contextMenuStrip1_Opened(object sender, EventArgs e)
+        {
+            hasChanged = false;
+            contextMenuShowing = true;
+        }
+
     }
 }

@@ -6,6 +6,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
 using ComicDownloader.Properties;
+using System.Reflection;
 
 namespace ComicDownloader.Helpers
 {
@@ -31,6 +32,13 @@ namespace ComicDownloader.Helpers
            finally{}
 
             Document pdfDoc = new Document(PageSize.A4);
+           AssemblyInfoHelper info = new AssemblyInfoHelper(typeof(PDFHelper));
+
+           pdfDoc.AddAuthor(info.Company);
+           pdfDoc.AddCreationDate();
+           pdfDoc.AddTitle(name);
+           
+
             float docw = pdfDoc.PageSize.Width;
             float doch = pdfDoc.PageSize.Width;
             
@@ -74,8 +82,9 @@ namespace ComicDownloader.Helpers
                         {
                             Color = BaseColor.WHITE
                         }));
-                        section.Add(nestedTable);
-                        pdfDoc.Add(section);
+                        //section.Add(nestedTable);
+                        //pdfDoc.Add(section);
+                        pdfDoc.Add(nestedTable);
 
 
                     }

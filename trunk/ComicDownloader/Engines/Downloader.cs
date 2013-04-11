@@ -65,7 +65,7 @@ namespace ComicDownloader.Engines
 
             if (results != null)
                 {
-                    results = results.Where(p => p.Name.Contains(keyword)).ToList();
+                    results = results.Where(p => p.Name.ToLower().Contains(keyword.ToLower())).ToList();
                 }
             
             return results;
@@ -104,8 +104,7 @@ namespace ComicDownloader.Engines
             {
                 file.Write(xml);
             }
-            MyLogger.Info(CachedFile);
-            MyLogger.Info(temp);
+            
             Directory.CreateDirectory(Path.GetDirectoryName(CachedFile));
             SecureHelper.EncryptFile(temp, CachedFile, Resources.SecureKey);
         }

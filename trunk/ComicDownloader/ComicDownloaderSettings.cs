@@ -49,6 +49,8 @@ namespace ComicDownloader
         //public bool EnableRename { get; set; }
         [CategoryAttribute("Download settings")]
         public string RenamePattern { get; set; }
+        [CategoryAttribute("Download settings")]
+        public string StogareFolder { get; set; }
 
 
         [CategoryAttribute("Download settings"), DescriptionAttribute("Using multiple thread to download pages in a chapter, this will make increase download speed but need more CPU & Network usage. Use this option on slow netowrk will help you save a ton of time. :)")]
@@ -60,6 +62,7 @@ namespace ComicDownloader
             IncludePDFIntroPage = true;
             PdfIntroPagePosition = PagePosition.LastPage;
             RenamePattern = "{{PAGENUM}} .{FILENAME}";
+            StogareFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         }
     }
 }
