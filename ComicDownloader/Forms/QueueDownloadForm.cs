@@ -16,6 +16,7 @@ using iTextSharp.text;
 using System.Diagnostics;
 using IView.UI.Forms;
 using ComicDownloader.Helpers;
+using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Forms
 {
@@ -210,18 +211,25 @@ namespace ComicDownloader.Forms
                         
 
                         Downloader downloader = GetDownloader(chapInfo);
-                        chapInfo.Pages = downloader.GetPages(chapInfo.Url);
-                        chapInfo.PageCount = chapInfo.Pages.Count;
-                        
-                        // display Info on UI
-                        //DisplayChap(chapInfo, chapterCount);
-                        DownloadChapter(chapInfo, downloader);
+                        if (downloader != null)
+                        {
+                            chapInfo.Pages = downloader.GetPages(chapInfo.Url);
+                            chapInfo.PageCount = chapInfo.Pages.Count;
 
 
-                        GeneratePDF(chapInfo);
+                            DownloadChapter(chapInfo, downloader);
+
+
+                            GeneratePDF(chapInfo);
+                            chapInfo.Status = DownloadStatus.Completed;
+
+                        }
+                        else
+                        {
+                            chapInfo.Status = DownloadStatus.Error;
+                        }
                         //update chapter info
 
-                        chapInfo.Status = DownloadStatus.Completed;
                     }
                     catch
                     {
@@ -246,12 +254,21 @@ namespace ComicDownloader.Forms
         private Downloader GetDownloader(ChapterInfo chapInfo)
         {
             var downloaders = Downloader.GetAllDownloaders();
-
+            string pattern = @"https?://(?<DOMAIN>.*.com|me|net|info)";
             foreach (var item in downloaders)
             {
-                if(chapInfo.Url.Contains(item.HostUrl)) return item;
+                var m = Regex.Match(item.HostUrl, pattern);
+                string domain = m.Groups["DOMAIN"].Value;
+
+                var arr = domain.Split(".".ToCharArray());
+                var root = arr[arr.Length - 2] + "." + arr[arr.Length - 1];
+
+                if(m!=null) {
+
+                    if (chapInfo.Url.Contains(root)) return item;
+                }
             }
-            throw new Exception("Downloader now found for this chapter");
+            throw new Exception("No Downloader found for this chapter with url "+ chapInfo.Url);
         }
         public ComicDownloaderSettings Settings { get; set; }
 

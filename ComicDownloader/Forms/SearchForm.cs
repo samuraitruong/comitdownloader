@@ -13,7 +13,8 @@ using MRG.Controls.UI;
 using ComicDownoader.Forms;
 using ExtendedWebBrowser2;
 using Amib.Threading;
-
+using ComicDownloader.Extensions;
+using System.IO;
 namespace ComicDownloader.Forms
 {
     public partial class SearchForm : MdiChildForm
@@ -250,6 +251,18 @@ namespace ComicDownloader.Forms
             Downloader dl = Downloader.Resolve(url);
             var story = dl.RequestInfo(url);
 
+            string saveFolder = SettingForm.GetSetting().StogareFolder +"\\"+ story.Name.ConvertToValidFileName();
+
+
+            foreach (var chap in story.Chapters)
+            {
+
+                chap.FolderName = chap.Name.ConvertToValidFileName();
+                chap.Folder = Path.Combine(saveFolder, chap.FolderName);
+                chap.PdfFileName = chap.FolderName + ".pdf";
+                chap.PdfPath = Path.Combine(saveFolder, "PDF\\" + chap.PdfFileName);
+                chap.Status = DownloadStatus.Waiting;
+            }
             QueueDownloadItem item = new QueueDownloadItem()
             {
                 ProviderName = dl.Name,
