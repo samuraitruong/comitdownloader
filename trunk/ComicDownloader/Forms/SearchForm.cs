@@ -15,6 +15,8 @@ using ExtendedWebBrowser2;
 using Amib.Threading;
 using ComicDownloader.Extensions;
 using System.IO;
+using BrightIdeasSoftware;
+using ComicDownloader.Properties;
 namespace ComicDownloader.Forms
 {
     public partial class SearchForm : MdiChildForm
@@ -93,8 +95,17 @@ namespace ComicDownloader.Forms
                         DataSource.AddRange(tempLst);
                         if (!contextMenuShowing)
                         {
-                            lvLastestUpdates.SetObjects(DataSource);
+                           lvLastestUpdates.SetObjects(DataSource);
                         }
+                        //foreach (var item in tempLst)
+                        //{
+                        //    this.Invoke(new MethodInvoker(delegate()
+                        //    {
+                        //        lvLastestUpdates.AddObject(item);
+                        //        lvLastestUpdates.EnsureModelVisible(item);
+                        //        lvLastestUpdates.Refresh();
+                        //    }));
+                        //}
                         hasChanged = true;
                     }
                 }
@@ -174,6 +185,18 @@ namespace ComicDownloader.Forms
             this.Text = "Search  - [" + (string.IsNullOrEmpty(keyword)?"All": keyword )+ "]";
             DataSource.Clear();
 
+            //TextMatchFilter filter = TextMatchFilter.Contains(this.lvLastestUpdates, keyword);
+            //this.lvLastestUpdates.ModelFilter = filter;
+            //this.lvLastestUpdates.DefaultRenderer = new HighlightTextRenderer(filter);
+            
+
+
+            //DataSource.Add(new SearchItem() { 
+            //Provider = "a",
+            //StoryName = "a",
+            //StoryUrl = "http://aaa"
+
+            //});
             lvLastestUpdates.SetObjects(DataSource);
             
             var downloaders = ComicDownloader.Engines.Downloader.GetAllDownloaders();
@@ -204,10 +227,45 @@ namespace ComicDownloader.Forms
                     loadingCircle1.Visible = false;
                     loadingCircle1.Active = false;
                     lblStatus.Text = "Searching completed";
+
+                    DisplaySearchCompleteAnimation();
                 }));
                 
 
             }).Start();
+        }
+
+        private void DisplaySearchCompleteAnimation()
+        {
+            AnimatedDecoration listAnimation = new AnimatedDecoration(this.lvLastestUpdates);
+            Animation animation = listAnimation.Animation;
+
+            //Sprite image = new ImageSprite(Resource1.largestar);
+            //image.FixedLocation = Locators.SpriteAligned(Corner.MiddleCenter);
+            //image.Add(0, 2000, Effects.Rotate(0, 360 * 2f));
+            //image.Add(1000, 1000, Effects.Fade(1.0f, 0.0f));
+            //animation.Add(0, image);
+
+            Sprite image = new ImageSprite(Resources.star);
+            image.Add(0, 500, Effects.Move(Corner.BottomCenter, Corner.MiddleCenter));
+            image.Add(0, 500, Effects.Rotate(0, 180));
+            image.Add(500, 1500, Effects.Rotate(180, 360 * 2.5f));
+            image.Add(500, 1000, Effects.Scale(1.0f, 3.0f));
+            image.Add(500, 1000, Effects.Goto(Corner.MiddleCenter));
+            image.Add(1000, 900, Effects.Fade(1.0f, 0.0f));
+            animation.Add(0, image);
+
+            Sprite text = new TextSprite(string.Format("Search completed : {0} items found!", itemCounts), new Font("Tahoma", 32), Color.Blue, Color.AliceBlue, Color.Red, 3.0f);
+            text.Opacity = 0.0f;
+            text.FixedLocation = Locators.SpriteAligned(Corner.MiddleCenter);
+            text.Add(900, 900, Effects.Fade(0.0f, 1.0f));
+            text.Add(1000, 800, Effects.Rotate(180, 1440));
+            text.Add(2000, 500, Effects.Scale(1.0f, 0.5f));
+            text.Add(3500, 1000, Effects.Scale(0.5f, 3.0f));
+            text.Add(3500, 1000, Effects.Fade(1.0f, 0.0f));
+            animation.Add(0, text);
+
+            animation.Start();
         }
 
         private void btnOnlineSearch_Click(object sender, EventArgs e)
@@ -306,6 +364,18 @@ namespace ComicDownloader.Forms
         {
             hasChanged = false;
             contextMenuShowing = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SearchItem item = new SearchItem()
+            {
+                Provider="aa",
+                StoryName= "aaa",
+                StoryUrl = "url"
+            };
+            lvLastestUpdates.AddObject(item);
+            lvLastestUpdates.EnsureModelVisible(item);
         }
 
     }

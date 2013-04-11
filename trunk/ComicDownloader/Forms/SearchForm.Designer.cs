@@ -46,6 +46,7 @@
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.loadingCircle1 = new MRG.Controls.UI.LoadingCircle();
             this.label2 = new System.Windows.Forms.Label();
             this.btnOnlineSearch = new System.Windows.Forms.Button();
@@ -69,7 +70,7 @@
             this.addThisStoryToQueueToolStripMenuItem,
             this.toolStripMenuItem2});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 98);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(142, 76);
             this.contextMenuStrip1.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(this.contextMenuStrip1_Closed);
             this.contextMenuStrip1.Opened += new System.EventHandler(this.contextMenuStrip1_Opened);
             // 
@@ -77,20 +78,20 @@
             // 
             this.toolStripMenuItem1.Image = global::ComicDownloader.Properties.Resources._1365319718_Globe1;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
             this.toolStripMenuItem1.Text = "Browse";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(138, 6);
             // 
             // addThisStoryToQueueToolStripMenuItem
             // 
             this.addThisStoryToQueueToolStripMenuItem.Image = global::ComicDownloader.Properties.Resources._1364410878_Add;
             this.addThisStoryToQueueToolStripMenuItem.Name = "addThisStoryToQueueToolStripMenuItem";
-            this.addThisStoryToQueueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addThisStoryToQueueToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.addThisStoryToQueueToolStripMenuItem.Text = "Add to Queue";
             this.addThisStoryToQueueToolStripMenuItem.Click += new System.EventHandler(this.addThisStoryToQueueToolStripMenuItem_Click);
             // 
@@ -98,7 +99,7 @@
             // 
             this.toolStripMenuItem2.Image = global::ComicDownloader.Properties.Resources._1363942937_ark2;
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(141, 22);
             this.toolStripMenuItem2.Text = "Download";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
@@ -137,11 +138,18 @@
             this.lvLastestUpdates.EmptyListMsg = "Searching will take few minutes to complete";
             this.lvLastestUpdates.FullRowSelect = true;
             this.lvLastestUpdates.GridLines = true;
+            this.lvLastestUpdates.HeaderUsesThemes = false;
             this.lvLastestUpdates.Location = new System.Drawing.Point(0, 48);
             this.lvLastestUpdates.Name = "lvLastestUpdates";
+            this.lvLastestUpdates.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.Submenu;
+            this.lvLastestUpdates.ShowCommandMenuOnRightClick = true;
+            this.lvLastestUpdates.ShowGroups = false;
             this.lvLastestUpdates.Size = new System.Drawing.Size(692, 251);
             this.lvLastestUpdates.TabIndex = 0;
             this.lvLastestUpdates.UseCompatibleStateImageBehavior = false;
+            this.lvLastestUpdates.UseFilterIndicator = true;
+            this.lvLastestUpdates.UseFiltering = true;
+            this.lvLastestUpdates.UseHotItem = true;
             this.lvLastestUpdates.UseHyperlinks = true;
             this.lvLastestUpdates.View = System.Windows.Forms.View.Details;
             this.lvLastestUpdates.SelectedIndexChanged += new System.EventHandler(this.lvLastestUpdates_SelectedIndexChanged);
@@ -175,6 +183,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.loadingCircle1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.btnOnlineSearch);
@@ -186,6 +195,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(692, 48);
             this.panel1.TabIndex = 2;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(509, 13);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(68, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Search On Cache";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // loadingCircle1
             // 
@@ -238,6 +257,7 @@
             this.txtKeyword.Name = "txtKeyword";
             this.txtKeyword.Size = new System.Drawing.Size(179, 20);
             this.txtKeyword.TabIndex = 1;
+            this.txtKeyword.Text = "Dragon Ball";
             this.txtKeyword.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtKeyword_PreviewKeyDown);
             // 
             // label1
@@ -320,5 +340,6 @@
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private MRG.Controls.UI.LoadingCircle loadingCircle1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
     }
 }
