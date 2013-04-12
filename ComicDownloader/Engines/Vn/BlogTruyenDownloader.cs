@@ -13,6 +13,13 @@ namespace ComicDownloader.Engines
     [Downloader("BlogTruyen", MenuGroup = "VN" , MetroTab="Vietnamese" , Language="Tieng viet", Image32 = "_1364410895_001_01")]
     public class BlogTruyenDownloader: Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://d.f3.photo.zdn.vn/upload/original/2010/09/26/23/1285518514197142706.jpg";
+            }
+        }
         public override string Name
         {
             get { return "[BlogTruyen] - "; }

@@ -81,5 +81,14 @@ namespace ComicDownloader.Engines
         //    StreamReader reader = new StreamReader(request.GetResponse().GetResponseStream());
         //    Console.Write(reader.ReadToEnd());
         //}
+
+        internal static byte[] DownloadFile(string p)
+        {
+            using (WebClient client = new WebClient())
+            {
+                return client.DownloadData(p);
+            }
+            return null;
+        }
     }
 }

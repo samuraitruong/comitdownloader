@@ -51,6 +51,8 @@ namespace ComicDownloader.Forms
             this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(627, 305);
             this.metroTabControl1.TabIndex = 0;
+            this.metroTabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.metroTabControl1_Selected);
+            this.metroTabControl1.TabIndexChanged += new System.EventHandler(this.metroTabControl1_TabIndexChanged);
             // 
             // metroTabPage1
             // 
@@ -90,11 +92,16 @@ namespace ComicDownloader.Forms
             // metroTile1
             // 
             this.metroTile1.ActiveControl = null;
+            this.metroTile1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.metroTile1.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.metroTile1.Location = new System.Drawing.Point(20, 14);
             this.metroTile1.Name = "metroTile1";
             this.metroTile1.Size = new System.Drawing.Size(127, 86);
             this.metroTile1.TabIndex = 3;
             this.metroTile1.Text = "Open Downloader";
+            this.metroTile1.TileImage = global::ComicDownloader.Properties.Resources._1365100868_interact;
+            this.metroTile1.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.metroTile1.UseTileImage = true;
             this.metroTile1.Click += new System.EventHandler(this.metroTile1_Click);
             // 
             // metroLink1
@@ -121,6 +128,7 @@ namespace ComicDownloader.Forms
             this.Style = MetroFramework.MetroColorStyle.Default;
             this.Text = "Comic Downloader 1.0";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Resize += new System.EventHandler(this.ModernUIForm_Resize);
             this.metroTabControl1.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
             this.metroTabPage1.PerformLayout();

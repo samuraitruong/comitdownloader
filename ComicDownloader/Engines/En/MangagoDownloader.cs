@@ -10,6 +10,13 @@ namespace ComicDownloader.Engines
     [Downloader("Mangago", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
     public class MangagoDownloader : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://www.mangago.com/images/logo-chirstmas.png";
+            }
+        }
         public override string Name
         {
             get { return "[Mangago.com] - "; }
