@@ -32,8 +32,8 @@ namespace ComicDownloader.Forms
             this.components = new System.ComponentModel.Container();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
+            this.lblStatus = new MetroFramework.Controls.MetroLabel();
+            this.updateProgressBar = new MetroFramework.Controls.MetroProgressBar();
             this.metroTile1 = new MetroFramework.Controls.MetroTile();
             this.metroLink1 = new MetroFramework.Controls.MetroLink();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
@@ -49,45 +49,45 @@ namespace ComicDownloader.Forms
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
             this.metroTabControl1.SelectedIndex = 0;
-            this.metroTabControl1.Size = new System.Drawing.Size(627, 305);
+            this.metroTabControl1.Size = new System.Drawing.Size(760, 520);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.metroTabControl1_Selected);
             this.metroTabControl1.TabIndexChanged += new System.EventHandler(this.metroTabControl1_TabIndexChanged);
             // 
             // metroTabPage1
             // 
-            this.metroTabPage1.Controls.Add(this.metroLabel1);
-            this.metroTabPage1.Controls.Add(this.metroProgressBar1);
-            this.metroTabPage1.Controls.Add(this.metroTile1);
+            this.metroTabPage1.Controls.Add(this.lblStatus);
             this.metroTabPage1.Controls.Add(this.metroLink1);
+            this.metroTabPage1.Controls.Add(this.updateProgressBar);
+            this.metroTabPage1.Controls.Add(this.metroTile1);
             this.metroTabPage1.HorizontalScrollbarBarColor = true;
             this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.HorizontalScrollbarSize = 10;
             this.metroTabPage1.Location = new System.Drawing.Point(4, 35);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(619, 266);
+            this.metroTabPage1.Size = new System.Drawing.Size(752, 481);
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "Home";
             this.metroTabPage1.VerticalScrollbarBarColor = true;
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
             // 
-            // metroLabel1
+            // lblStatus
             // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(177, 44);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(118, 19);
-            this.metroLabel1.TabIndex = 5;
-            this.metroLabel1.Text = "Update database...";
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(177, 44);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(118, 19);
+            this.lblStatus.TabIndex = 5;
+            this.lblStatus.Text = "Update database...";
             // 
-            // metroProgressBar1
+            // updateProgressBar
             // 
-            this.metroProgressBar1.Location = new System.Drawing.Point(177, 14);
-            this.metroProgressBar1.Name = "metroProgressBar1";
-            this.metroProgressBar1.Size = new System.Drawing.Size(439, 23);
-            this.metroProgressBar1.TabIndex = 4;
-            this.metroProgressBar1.Value = 45;
+            this.updateProgressBar.Location = new System.Drawing.Point(177, 14);
+            this.updateProgressBar.Name = "updateProgressBar";
+            this.updateProgressBar.Size = new System.Drawing.Size(575, 23);
+            this.updateProgressBar.TabIndex = 4;
+            this.updateProgressBar.Value = 45;
             // 
             // metroTile1
             // 
@@ -106,7 +106,7 @@ namespace ComicDownloader.Forms
             // 
             // metroLink1
             // 
-            this.metroLink1.Location = new System.Drawing.Point(20, 206);
+            this.metroLink1.Location = new System.Drawing.Point(0, 455);
             this.metroLink1.Name = "metroLink1";
             this.metroLink1.Size = new System.Drawing.Size(114, 23);
             this.metroLink1.TabIndex = 2;
@@ -122,12 +122,13 @@ namespace ComicDownloader.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 385);
+            this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.metroTabControl1);
             this.Name = "ModernUIForm";
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.DropShadow;
             this.Style = MetroFramework.MetroColorStyle.Default;
             this.Text = "Comic Downloader 1.0";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.ModernUIForm_Load);
             this.Resize += new System.EventHandler(this.ModernUIForm_Resize);
             this.metroTabControl1.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
@@ -143,8 +144,8 @@ namespace ComicDownloader.Forms
         private MetroFramework.Controls.MetroTabPage metroTabPage1;
         private MetroFramework.Controls.MetroLink metroLink1;
         private MetroFramework.Controls.MetroTile metroTile1;
-        private MetroFramework.Controls.MetroLabel metroLabel1;
-        private MetroFramework.Controls.MetroProgressBar metroProgressBar1;
+        private MetroFramework.Controls.MetroLabel lblStatus;
+        private MetroFramework.Controls.MetroProgressBar updateProgressBar;
         private MetroFramework.Components.MetroStyleExtender metroStyleExtender1;
         
         
