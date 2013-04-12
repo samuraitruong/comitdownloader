@@ -173,5 +173,45 @@ namespace ComicDownloader.Engines
             }
             return stories;
         }
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string urlPattern = string.Format("http://www.mangatraders.com/search/?term={0}&searchSeries=1&showOnlySeries=1", keyword.Replace(" ", "+"));
+
+            var results = new List<StoryInfo>();
+
+            string html = NetworkHelper.GetHtml(urlPattern);
+            HtmlDocument htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//ul[@class=\"list1\"]/li/a");
+            //Ket qua search hien thi tren cung 1 trang, chi lay 200 item
+            int count = 0;
+
+            if (nodes != null)
+            {
+                foreach (HtmlNode node in nodes)
+                {
+                    if (count <= 200)
+                    {
+                        string title = string.Empty;
+                        foreach (HtmlNode n in node.ChildNodes)
+                        {
+                            title += n.InnerText.Trim() + " ";
+                        }
+
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = HostUrl.Substring(0, HostUrl.LastIndexOf("/")) + node.Attributes["href"].Value,
+                            Name = title
+                        };
+                        results.Add(info);
+
+                        count++;
+                    }
+                }
+            }
+            return results;
+        }
     }
 }

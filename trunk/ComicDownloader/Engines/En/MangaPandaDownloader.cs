@@ -167,6 +167,47 @@ namespace ComicDownloader.Engines
             }
             return stories;
         }
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string urlPattern = string.Format("http://www.mangapanda.com/search/?w={0}&rd=0&status=0&order=0&genre=0000000000000000000000000000000000000", keyword.Replace(" ", "+"));
+            urlPattern = urlPattern + "&p={0}";
+
+            var results = new List<StoryInfo>();
+
+            //&p= so item da hien 
+            int currentPage = 1;
+            int items = 0;
+
+            while (currentPage <= Constant.LimitedPageForSearch)
+            {
+                string url = string.Format(urlPattern, currentPage);
+
+                string html = NetworkHelper.GetHtml(url);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@id=\"mangaresults\"]/div[@class=\"mangaresultitem\"]//div[@class=\"manga_name\"]//a");
+                if (nodes != null && nodes.Count > 0)
+                {
+
+                    foreach (var node in nodes)
+                    {
+
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = HostUrl + node.Attributes["href"].Value,
+                            Name = node.InnerText.Trim()
+                        };
+                        results.Add(info);
+                    }
+                }
+
+                items = results.Count;
+                currentPage++;
+            }
+            return results;
+        }
     }
 
 }

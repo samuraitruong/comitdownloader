@@ -176,9 +176,9 @@ namespace ComicDownloader.Engines
 
             var results = new List<StoryInfo>();
 
+            //page 1 ung voi &page=0
             int currentPage = 0;
-            bool isStillHasPage = true;
-            while (isStillHasPage)
+            while (currentPage < Constant.LimitedPageForSearch)
             {
                 string url = string.Format(urlPattern, currentPage);
 
@@ -201,11 +201,8 @@ namespace ComicDownloader.Engines
                         results.Add(info);
                     }
                 }
-                else
-                {
-                    isStillHasPage = false;
-                }
-                currentPage = results.Count;
+
+                currentPage++;
             }
             return results;
         }

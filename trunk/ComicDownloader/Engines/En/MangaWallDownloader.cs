@@ -157,5 +157,40 @@ namespace ComicDownloader.Engines
             }
             return stories;
         }
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string urlPattern = string.Format("http://mangawall.com/browse?title_range=0&title={0}&author_range=0&author=&artist_range=0&artist=&completed=0&yor_range=0&yor=&genre%5BAction%5D=0&genre%5BAdventure%5D=0&genre%5BComedy%5D=0&genre%5BDoujinshi%5D=0&genre%5BDrama%5D=0&genre%5BEcchi%5D=0&genre%5BFantasy%5D=0&genre%5BGender_Bender%5D=0&genre%5BHarem%5D=0&genre%5BHistorical%5D=0&genre%5BHorror%5D=0&genre%5BJosei%5D=0&genre%5BMartial_Arts%5D=0&genre%5BMature%5D=0&genre%5BMecha%5D=0&genre%5BMystery%5D=0&genre%5BPsychological%5D=0&genre%5BRomance%5D=0&genre%5BSchool_Life%5D=0&genre%5BSci-fi%5D=0&genre%5BSeinen%5D=0&genre%5BShotacon%5D=0&genre%5BShoujo%5D=0&genre%5BShoujo_Ai%5D=0&genre%5BShounen%5D=0&genre%5BShounen_Ai%5D=0&genre%5BSlice_of_Life%5D=0&genre%5BSmut%5D=0&genre%5BSports%5D=0&genre%5BSupernatural%5D=0&genre%5BTragedy%5D=0&genre%5BYaoi%5D=0&genre%5BYuri%5D=0&input=Search", keyword.Replace(" ", "+"));
+
+            var results = new List<StoryInfo>();
+
+            string html = NetworkHelper.GetHtml(urlPattern);
+            HtmlDocument htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"half-page\"]/ul/li/a");
+            //ket qua search hien tren cung 1 trang, chi lay 200 item
+            int count = 0;
+
+            if (nodes != null)
+            {
+                foreach (var node in nodes)
+                {
+                    if (count <= 200)
+                    {
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = HostUrl + node.Attributes["href"].Value,
+                            Name = node.InnerText.Trim()
+                        };
+                        results.Add(info);
+                        count++;
+                    }
+
+                }
+            }
+
+            return results;
+        }
     }
 }
