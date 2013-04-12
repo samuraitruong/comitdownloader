@@ -176,5 +176,46 @@ namespace ComicDownloader.Engines
             }
             return stories;
         }
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string urlPattern = string.Format("http://www.mangavolume.com/manga-archive/mangas/search-{0}/", keyword.Replace(" ", string.Empty));
+
+            var results = new List<StoryInfo>();
+
+            int currentPage = 1;
+            while (currentPage <= Constant.LimitedPageForSearch)
+            {
+                string url = urlPattern;
+                if (currentPage > 1)
+                {
+                    url = url + "npage-{0}";
+                    url = string.Format(url, currentPage);
+                }
+
+                string html = NetworkHelper.GetHtml(url);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//table[@id=\"MostPopular\"]//tr/td/a");
+                if (nodes != null && nodes.Count > 0)
+                {
+
+                    foreach (var node in nodes)
+                    {
+
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = HostUrl + node.Attributes["href"].Value,
+                            Name = node.ChildNodes[2].InnerText.Trim()
+                        };
+                        results.Add(info);
+                    }
+                }
+
+                currentPage++;
+            }
+            return results;
+        }
     }
 }

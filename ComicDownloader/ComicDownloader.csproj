@@ -504,6 +504,7 @@
     <Compile Include="3rd\SparkleLibrary\Sprites\TextSprite.cs" />
     <Compile Include="3rd\WebServer.cs" />
     <Compile Include="ComicDownloaderSettings.cs" />
+    <Compile Include="Constant.cs" />
     <Compile Include="Engines\18+\HakihomeDownloader.cs" />
     <Compile Include="Engines\18+\Manga16Downloader.cs" />
     <Compile Include="Engines\DownloaderAttribute.cs" />

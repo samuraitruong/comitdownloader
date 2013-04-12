@@ -168,9 +168,9 @@ namespace ComicDownloader.Engines
 
             var results = new List<StoryInfo>();
 
-            int currentPage = 0;
-            bool isStillHasPage = true;
-            while (isStillHasPage)
+            int currentPage = 1;
+
+            while (currentPage <= Constant.LimitedPageForSearch)
             {
                 string url = string.Format(urlPattern, currentPage);
 
@@ -179,8 +179,7 @@ namespace ComicDownloader.Engines
                 htmlDoc.LoadHtml(html);
 
                 var nodes = htmlDoc.DocumentNode.SelectNodes("//table[@id=\"listing\"]//tr/td[position()=1]/a");
-                var endPage = htmlDoc.DocumentNode.SelectNodes("//div[@id=\"nav\"]/ul/li[position()>1]").Count - 1;
-                if (nodes != null && nodes.Count > 0 && currentPage < endPage)
+                if (nodes != null && nodes.Count > 0)
                 {
 
                     foreach (var node in nodes)
@@ -194,11 +193,8 @@ namespace ComicDownloader.Engines
                         results.Add(info);
                     }
                 }
-                else
-                {
-                    isStillHasPage = false;
-                }
-                currentPage = results.Count;
+
+                currentPage++;
             }
             return results;
         }

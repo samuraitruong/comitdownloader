@@ -181,5 +181,41 @@ namespace ComicDownloader.Engines
             }
             return stories;
         }
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string urlPattern = string.Format("http://search.tenmanga.com/list/?wd={0}", keyword.Replace(" ", "+"));
+            urlPattern = urlPattern + "&page={0}.html";
+
+            var results = new List<StoryInfo>();
+            
+            int currentPage = 1;
+            while (currentPage <= Constant.LimitedPageForSearch)
+            {
+                string url = string.Format(urlPattern, currentPage);
+
+                string html = NetworkHelper.GetHtml(url);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@id=\"search_list\"]/ul/li/div[@class=\"intro\"]/h2/a");
+                if (nodes != null && nodes.Count > 0)
+                {
+
+                    foreach (var node in nodes)
+                    {
+
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = node.Attributes["href"].Value,
+                            Name = node.Attributes["title"].Value.Trim()
+                        };
+                        results.Add(info);
+                    }
+                }
+                currentPage++;
+            }
+            return results;
+        }
     }
 }

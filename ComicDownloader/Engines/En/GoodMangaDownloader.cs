@@ -163,14 +163,14 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> OnlineSearch(string keyword)
         {
-            string urlPattern = string.Format("http://www.goodmanga.net/advanced-search?key={0}&wg=&wog=&status=", keyword.Replace(" ", "+"));
+            string urlPattern = string.Format("http://www.goodmanga.net/manga-search?key={0}", keyword.Replace(" ", "+"));
             urlPattern = urlPattern + "&page={0}";
 
             var results = new List<StoryInfo>();
 
             int currentPage = 1;
-            bool isStillHasPage = true;
-            while (isStillHasPage)
+
+            while (currentPage <= Constant.LimitedPageForSearch)
             {
                 string url = string.Format(urlPattern, currentPage);
 
@@ -193,11 +193,8 @@ namespace ComicDownloader.Engines
                         results.Add(info);
                     }
                 }
-                else
-                {
-                    isStillHasPage = false;
-                }
-                currentPage = results.Count;
+
+                currentPage++;
             }
             return results;
         }
