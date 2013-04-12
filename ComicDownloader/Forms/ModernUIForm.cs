@@ -141,6 +141,13 @@ namespace ComicDownloader.Forms
             return tags;
         }
 
+        private void metroTile1_Click(object sender, EventArgs e)
+        {
+            if (mainApp == null) mainApp = new AppMainForm();
+            mainApp.Show();
+            mainApp.WindowState = FormWindowState.Maximized;
+        }
+
 
 
     }
