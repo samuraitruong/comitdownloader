@@ -10,6 +10,7 @@ using MetroFramework.Forms;
 using ComicDownloader.Engines;
 using MetroFramework.Controls;
 using MetroFramework;
+using System.Threading;
 
 namespace ComicDownloader.Forms
 {
@@ -18,11 +19,16 @@ namespace ComicDownloader.Forms
         public ModernUIForm()
         {
             InitializeComponent();
+            InitializeTabAndTitles();
+        }
+
+        private void InitializeTabAndTitles()
+        {
             var tabs = GetRibbonMenuTags();
             foreach (var item in tabs)
             {
                 var tab = new MetroTabPage();
-                
+
                 tab.Enabled = true;
                 tab.HorizontalScrollbar = true;
                 tab.HorizontalScrollbarBarColor = true;
@@ -47,8 +53,8 @@ namespace ComicDownloader.Forms
                 {
                     title.Location = new Point(x, y);
                     tab.Controls.Add(title);
-                    
-                    x += title.Width +2;
+
+                    x += title.Width + 2;
                     if (x >= maxwith)
                     {
                         x = 5;
@@ -57,6 +63,7 @@ namespace ComicDownloader.Forms
                 }
                 metroTabControl1.TabPages.Add(tab);
             }
+            metroTabControl1.SelectedTab = metroTabControl1.TabPages[1];
         }
         private AppMainForm mainApp = new AppMainForm();
 
@@ -90,9 +97,9 @@ namespace ComicDownloader.Forms
 
                         //global::System.Resources.ResourceManager resourceMan = new global::System.Resources.ResourceManager("ComicDownloader.Properties.Resources", typeof(ComicDownloader.Properties.Resources).Assembly);
 
-                        var m = new Random((int)DateTime.Now.Ticks % 100);
+                        var m = new Random((int)DateTime.Now.Ticks);
                         int next = m.Next(0, 13);
-
+                        Thread.Sleep(10);
 
                         var title = new MetroFramework.Controls.MetroTile();
                         title.ActiveControl = null;
@@ -100,7 +107,7 @@ namespace ComicDownloader.Forms
                         title.Location = new System.Drawing.Point(20, 150);
                         //this.metroTile2.Name = "metroTile1";
                         title.Size = new System.Drawing.Size(150, 120);
-                        title.Style = (MetroFramework.MetroColorStyle)(tag.Titles.Count%13);
+                        title.Style = (MetroFramework.MetroColorStyle)(next);
                         title.TabIndex = 2;
                         
                         title.Text = downloader.Name;
