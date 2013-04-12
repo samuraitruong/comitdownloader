@@ -9,7 +9,7 @@ using HtmlAgilityPack;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Vechai.info", MenuGroup = "VN - 2", Language = "Tieng viet", Image32 = "_1364410881_plus_32")]
+    [Downloader("Vechai.info", MenuGroup = "VN - 2" , MetroTab="Vietnamese", Language = "Tieng viet", Image32 = "_1364410881_plus_32")]
     public class VechaiDownloader: Downloader
     {
         public override string ListStoryURL

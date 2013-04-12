@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Threading;
 using System.Net;
+using ComicDownloader.Forms;
 
 namespace ComicDownloader
 {
@@ -22,7 +23,8 @@ namespace ComicDownloader
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new AppMainForm());
+                //Application.Run(new AppMainForm());
+                Application.Run(new ModernUIForm());
             }
             //else
             {

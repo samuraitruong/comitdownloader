@@ -301,6 +301,155 @@
     <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\ConvolutionMatrix.cs" />
     <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\ImageProcessing.cs" />
     <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\IProcessingType.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Demo\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework.Demo\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework.Design\Components\MetroStyleManagerDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroButtonDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroLabelDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroLinkDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroPanelDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroProgressBarDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroProgressSpinnerDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroScrollBarDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroTabControlDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroTabPageCollectionEditor.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroTabPageDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroTextBoxDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroTileDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Fonts\FontResolver.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Animation\AnimationBase.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Animation\ColorBlendAnimation.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Animation\DelayedCall.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Animation\ExpandAnimation.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Animation\MoveAnimation.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Animation\TransitionType.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Components\MetroStyleExtender.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Components\MetroStyleManager.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Components\MetroToolTip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroLink.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroProgressSpinner.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroScrollBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTile.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTilePart.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroToggle.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTrackBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssAnonymousBlockBox.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssAnonymousBox.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssBlock.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssBox.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssBoxWord.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssBoxWordSplitter.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssConstants.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssDefaults.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssDrawingHelper.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssLayoutEngine.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssLength.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssLineBox.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssPropertyAttribute.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssPropertyInheritedAttribute.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssRectangle.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssTable.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssValue.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\HtmlConstants.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\HtmlLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\HtmlPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\HtmlRenderer.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\HtmlTag.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\HtmlToolTip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\InitialContainer.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\Parser.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\MetroBackBuffer.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\MetroPaint.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Forms\MetroForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Forms\MetroMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Forms\MetroTaskWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Interfaces\IMetroComponent.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Interfaces\IMetroControl.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Interfaces\IMetroForm.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Localization\MetroLocalize.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\MetroBrushes.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\MetroColors.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\MetroColorStyle.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\MetroDefaults.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\MetroFonts.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\MetroPens.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\MetroThemeStyle.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Native\DwmApi.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Native\SubClass.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Native\Taskbar.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Native\WinApi.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Native\WinCaret.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Properties\AssemblyRef.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Properties\Resources.Designer.cs" />
     <Compile Include="3rd\ObjectListView\AnimatedDecoration.cs" />
     <Compile Include="3rd\ObjectListView\DataTreeListView.cs">
       <SubType>Component</SubType>
@@ -412,6 +561,12 @@
     </Compile>
     <Compile Include="Forms\ChapterReader.Designer.cs">
       <DependentUpon>ChapterReader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ModernUIForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModernUIForm.Designer.cs">
+      <DependentUpon>ModernUIForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SearchForm.cs">
       <SubType>Form</SubType>
@@ -1118,11 +1273,18 @@
     <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\ShearPanel.resx">
       <DependentUpon>ShearPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="3rd\Metro\MetroFramework.Demo\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\Metro\MetroFramework\Properties\Resources.resx" />
     <EmbeddedResource Include="Forms\AppMainForm.resx">
       <DependentUpon>AppMainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ChapterReader.resx">
       <DependentUpon>ChapterReader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModernUIForm.resx">
+      <DependentUpon>ModernUIForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
@@ -1244,6 +1406,9 @@
     </EmbeddedResource>
     <None Include="3rd\CassiniDev\app.config" />
     <None Include="3rd\ExtendedWebBrowser2\app.config" />
+    <EmbeddedResource Include="3rd\Metro\MetroFramework.Fonts\Resources\Open_Sans.ttf" />
+    <EmbeddedResource Include="3rd\Metro\MetroFramework.Fonts\Resources\Open_Sans_Bold.ttf" />
+    <EmbeddedResource Include="3rd\Metro\MetroFramework.Fonts\Resources\Open_Sans_Light.ttf" />
     <None Include="3rd\ObjectListView\FullClassDiagram.cd" />
     <None Include="3rd\ObjectListView\ObjectListView.FxCop" />
     <None Include="app.config" />
@@ -1312,6 +1477,10 @@
     <None Include="3rd\IView.NET\iView.NET Controls\Resources\unknown_drive_16x161.png" />
     <Content Include="3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x16.png" />
     <None Include="3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x161.png" />
+    <Content Include="3rd\Metro\MetroFramework.Fonts\MetroFramework.Fonts.csproj" />
+    <Content Include="3rd\Metro\MetroFramework.Fonts\Resources\Open Sans License.txt" />
+    <Content Include="3rd\Metro\MetroFramework\Localization\de\MetroToggle.xml" />
+    <Content Include="3rd\Metro\MetroFramework\Localization\en\MetroToggle.xml" />
     <Content Include="3rd\Microsoft.SPOT.Hardware.dll" />
     <Content Include="3rd\Microsoft.SPOT.Native.dll" />
     <Content Include="3rd\Microsoft.SPOT.Net.dll" />

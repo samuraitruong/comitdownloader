@@ -46,7 +46,6 @@
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.loadingCircle1 = new MRG.Controls.UI.LoadingCircle();
             this.label2 = new System.Windows.Forms.Label();
             this.btnOnlineSearch = new System.Windows.Forms.Button();
@@ -181,7 +180,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.loadingCircle1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.btnOnlineSearch);
@@ -193,16 +191,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(692, 48);
             this.panel1.TabIndex = 2;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(509, 13);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(68, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Search On Cache";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // loadingCircle1
             // 
@@ -338,6 +326,5 @@
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private MRG.Controls.UI.LoadingCircle loadingCircle1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
     }
 }
