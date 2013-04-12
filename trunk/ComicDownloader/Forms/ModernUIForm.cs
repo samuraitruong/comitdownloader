@@ -97,9 +97,9 @@ namespace ComicDownloader.Forms
 
                         //global::System.Resources.ResourceManager resourceMan = new global::System.Resources.ResourceManager("ComicDownloader.Properties.Resources", typeof(ComicDownloader.Properties.Resources).Assembly);
 
-                        var m = new Random((int)DateTime.Now.Ticks);
-                        int next = m.Next(0, 13);
-                        Thread.Sleep(10);
+                       Thread.Sleep(new Random().Next(1,10));
+                        var m = new Random(DateTime.Now.Millisecond);
+                        int next = m.Next(0, int.MaxValue);
 
                         var title = new MetroFramework.Controls.MetroTile();
                         title.ActiveControl = null;
@@ -107,9 +107,9 @@ namespace ComicDownloader.Forms
                         title.Location = new System.Drawing.Point(20, 150);
                         //this.metroTile2.Name = "metroTile1";
                         title.Size = new System.Drawing.Size(150, 120);
-                        title.Style = (MetroFramework.MetroColorStyle)(next);
+                        title.Style = (MetroFramework.MetroColorStyle)(next%13);
                         title.TabIndex = 2;
-                        
+                        if (title.Style == MetroColorStyle.White) title.Style = MetroColorStyle.Red;
                         title.Text = downloader.Name;
                         title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                         title.Theme = MetroFramework.MetroThemeStyle.Dark;
