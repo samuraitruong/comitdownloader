@@ -20,7 +20,7 @@ namespace ComicDownloader.Engines
         public virtual string Logo { get {
             return string.Empty;
         } }
-        public abstract List<StoryInfo> GetListStories();
+        //public abstract List<StoryInfo> GetListStories();
         public abstract StoryInfo RequestInfo(string storyUrl);
 
         public abstract List<string> GetPages(string chapUrl);
@@ -56,8 +56,8 @@ namespace ComicDownloader.Engines
 
             if (recache)
             {
-                File.Delete(CachedFile);
-                results = GetListStories();
+                
+                results = GetListStories(true);
             }
             else
             {
@@ -184,22 +184,22 @@ namespace ComicDownloader.Engines
 
 
 
-        public List<StoryInfo> GetListStories(bool force)
-        {
-            if (force)
-            {
-                File.Delete(this.CachedFile);
-                return GetListStories();
-            }
-            else
-            {
-                if (!File.Exists(CachedFile)) return new List<StoryInfo>();
+        public abstract List<StoryInfo> GetListStories(bool forceOnline);
+        //{
+        //    //if (force)
+        //    //{
+        //    //    File.Delete(this.CachedFile);
+        //    //    return GetListStories();
+        //    //}
+        //    //else
+        //    //{
+        //    //    if (!File.Exists(CachedFile)) return new List<StoryInfo>();
 
 
-            }
+        //    //}
 
-            return ReloadChachedData();
+        //    //return ReloadChachedData();
 
-        }
+        //}
     }
 }

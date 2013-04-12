@@ -18,6 +18,7 @@ namespace ComicDownloader.Forms
 {
     public partial class ModernUIForm : MetroForm
     {
+        Thread updateThread;
         public ModernUIForm()
         {
             InitializeComponent();
@@ -259,7 +260,57 @@ namespace ComicDownloader.Forms
             ReCaculatedTitlesSize(e.TabPage as MetroTabPage);
         }
 
+        private void ModernUIForm_Load(object sender, EventArgs e)
+        {
+            //updateThread = new Thread(new ThreadStart(this.BackgroundUpdate));
+            //updateThread.Start();
+            
+            BackgroundUpdate();
+        }
+        private object locker = DateTime.Now;
+        public void BackgroundUpdate()
+        {
+            SmartThreadPool pool = new SmartThreadPool();
+            
+            pool.MaxThreads = 8;
+            var downloaders = Downloader.GetAllDownloaders();
+            updateProgressBar.Minimum = 0;
+            updateProgressBar.Maximum = downloaders.Count;
+            updateProgressBar.Value = 0;
+            lblStatus.Text = "Update database running......";
 
+            foreach (var dl in Downloader.GetAllDownloaders())
+            {
+                pool.QueueWorkItem(delegate(object objectState)
+                {
+                    try
+                    {
+                        Downloader downloader = (Downloader)objectState;
+                        downloader.GetListStories(true);
+                    }
+                    catch (Exception ex)
+                    {
+                        MyLogger.Log(ex);
+                    }
+                    finally
+                    {
+                        this.Invoke(new MethodInvoker(delegate()
+                        {
+                            lock (locker)
+                            {
+                                updateProgressBar.Increment(1);
+                            }
+                        }));
+                    }
+
+                }, dl);
+
+               
+
+            }
+            pool.Start();
+            
+        }
 
     }
 }

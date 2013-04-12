@@ -30,12 +30,12 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
-        public override List<StoryInfo> GetListStories()
+        public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             string urlPattern = this.ListStoryURL + "?ViewType=1&SortBy=1&IsAsc=1&CurrentPage={0}";
            
             List<StoryInfo> results = base.ReloadChachedData();
-            if (results == null || results.Count == 0)
+            if (results == null || results.Count == 0 || forceOnline)
             {
                 results = new List<StoryInfo>();
                 int currentPage = 1;

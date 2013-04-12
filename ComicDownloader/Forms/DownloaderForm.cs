@@ -508,7 +508,7 @@ namespace ComicDownloader
                 ddlList.Enabled = false;
             });
 
-            var stories = Downloader.GetListStories();
+            var stories = Downloader.GetListStories(false);
 
             this.Invoke((MethodInvoker)delegate
             {
