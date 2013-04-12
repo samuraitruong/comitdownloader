@@ -407,6 +407,12 @@ namespace ComicDownloader
             searchForm.WindowState = FormWindowState.Maximized;
         }
 
-      
+
+
+        internal void SetDownloader(Downloader dl)
+        {
+            AddChildForm(dl.Name, dl);
+            this.WindowState = FormWindowState.Maximized;
+        }
     }
 }

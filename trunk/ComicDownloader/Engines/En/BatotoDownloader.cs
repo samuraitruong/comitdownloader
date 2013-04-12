@@ -8,7 +8,7 @@ using System.Collections;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Batoto", MenuGroup = "English", Language = "English", Image32 = "_1364410884_add1_")]
+    [Downloader("Batoto", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
     public class BatotoDownloader :  Downloader
     {
         public override string Name

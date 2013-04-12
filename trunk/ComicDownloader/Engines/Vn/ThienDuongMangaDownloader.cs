@@ -8,7 +8,7 @@ using System.Net;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("ThienDuongManga.com", MenuGroup = "VN - 2", Language = "Tieng viet", Image32 = "_1364410887_Add")]
+    [Downloader("ThienDuongManga.com", MenuGroup = "VN - 2" , MetroTab="Vietnamese", Language = "Tieng viet", Image32 = "_1364410887_Add")]
     public class ThienDuongMangaDownloader
         : Downloader
     {

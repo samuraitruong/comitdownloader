@@ -9,6 +9,7 @@ namespace ComicDownloader.Engines
     [AttributeUsage(AttributeTargets.Class,  AllowMultiple = true)]
     public class DownloaderAttribute : Attribute
     {
+        public string MetroTab { get; set; }
         public string Name { get; set; }
         public string MenuGroup { get; set; }
         public string Language { get; set; }
@@ -19,6 +20,7 @@ namespace ComicDownloader.Engines
         public DownloaderAttribute(string name)
         {
             Name = name;
+            
         }
     }
 }
