@@ -11,6 +11,8 @@ using ComicDownloader.Engines;
 using MetroFramework.Controls;
 using MetroFramework;
 using System.Threading;
+using Amib.Threading;
+using ComicDownloader.Extensions;
 
 namespace ComicDownloader.Forms
 {
@@ -28,16 +30,16 @@ namespace ComicDownloader.Forms
             foreach (var item in tabs)
             {
                 var tab = new MetroTabPage();
-
+                tab.AutoScroll = true;
                 tab.Enabled = true;
                 tab.HorizontalScrollbar = true;
                 tab.HorizontalScrollbarBarColor = true;
                 tab.HorizontalScrollbarHighlightOnWheel = false;
                 tab.HorizontalScrollbarSize = 10;
-                tab.Location = new System.Drawing.Point(4, 35);
+                //tab.Location = new System.Drawing.Point(4, 35);
                 tab.Name = item.Name;
                 tab.Padding = new System.Windows.Forms.Padding(25);
-                tab.Size = new System.Drawing.Size(522, 253);
+                //tab.Size = new System.Drawing.Size(522, 253);
                 tab.TabIndex = 0;
                 tab.Text = item.Name;
                 tab.VerticalScrollbar = true;
@@ -79,6 +81,7 @@ namespace ComicDownloader.Forms
         }
         public List<TabInfo> GetRibbonMenuTags()
         {
+            //SmartThreadPool pool = new SmartThreadPool();
             List<TabInfo> tags = new List<TabInfo>();
             foreach (var downloader in Downloader.GetAllDownloaders())
             {
@@ -124,13 +127,28 @@ namespace ComicDownloader.Forms
                         
                         this.metroToolTip1.SetToolTip(title, downloader.Name);
 
+                        //pool.QueueWorkItem(delegate(object obj) {
 
-                        //title.Click += new EventHandler(delegate(object sender, EventArgs e)
+                        //    TitleLogoUpdate data = (TitleLogoUpdate)obj;
+                        //    if(!string.IsNullOrEmpty(data.Downloader.Logo) ){
+
+                        //        var img = data.Downloader.Logo.DownloadAsImage();
+                        //        img = img.Clip(data.Title.Width, data.Title.Height);
+                        //        data.Title.TileImage = img;
+                        //        data.Title.UseTileImage = true;
+                        //        data.Title.TileImageAlign = ContentAlignment.MiddleCenter;
+                        //        data.Title.TextAlign = ContentAlignment.BottomCenter;
+                            
+                        //    }
+                        
+                        
+                        //}, 
+                        //new TitleLogoUpdate()
                         //{
-                        //    //var dl = ((RibbonButton)sender).Tag as Downloader;
-                        //    //AddChildForm(dl.Name, dl);
-                        //    MessageBox.Show("name");
+                        //    Title = title,
+                        //    Downloader = downloader
                         //});
+                       
 
                         //tag.Titles.Add(metroTile2);
                         tag.Titles.Add(title);
@@ -138,14 +156,107 @@ namespace ComicDownloader.Forms
                 }
 
             }
+           // pool.Start();
             return tags;
         }
-
+        public struct TitleLogoUpdate
+        {
+            public MetroTile Title { get; set; }
+            public Downloader Downloader { get; set; }
+        }
         private void metroTile1_Click(object sender, EventArgs e)
         {
             if (mainApp == null) mainApp = new AppMainForm();
             mainApp.Show();
             mainApp.WindowState = FormWindowState.Maximized;
+        }
+
+        private void ModernUIForm_Resize(object sender, EventArgs e)
+        {
+            foreach (MetroTabPage tab in metroTabControl1.TabPages)
+            {
+                ReCaculatedTitlesSize(tab);
+
+            }
+        }
+
+        private  void ReCaculatedTitlesSize(MetroTabPage tab)
+        {
+            var titles = tab.Controls.Cast<Control>().Where(p => p is MetroTile && p.Tag is Downloader).ToList();
+
+            if (titles.Count == 0) return;
+            int x = 5;
+            int y = 5;
+
+
+
+            int maxwith = metroTabControl1.Width - 100 ;
+            int maxheight = metroTabControl1.Height - 15;
+            double square = maxheight * maxwith / titles.Count;
+
+            int height = (int)Math.Sqrt(square) - 2;
+            int width = (int)square / height - 2;
+            SmartThreadPool pool = new SmartThreadPool();
+
+            foreach (var item in titles)
+            {
+                MetroTile metroTitle = item as MetroTile;
+
+                
+        
+
+                //metroTitle.Style = MetroColorStyle.Red;
+                metroTitle.Size = new System.Drawing.Size(width, height);
+
+
+                metroTitle.Location = new Point(x, y);
+
+
+                x += metroTitle.Width + 2;
+                if (x >= maxwith)
+                {
+                    x = 5;
+                    y = y + metroTitle.Height + 2;
+                }
+
+
+
+                pool.QueueWorkItem(delegate(object obj)
+                                                    {
+
+                                                        TitleLogoUpdate data = (TitleLogoUpdate)obj;
+                                                        if (!string.IsNullOrEmpty(data.Downloader.Logo))
+                                                        {
+
+                                                            var img = data.Downloader.Logo.DownloadAsImage();
+                                                            img = img.Clip(data.Title.Width, data.Title.Height);
+                                                            data.Title.TileImage = img;
+                                                            data.Title.UseTileImage = true;
+                                                            data.Title.TileImageAlign = ContentAlignment.MiddleCenter;
+                                                            data.Title.TextAlign = ContentAlignment.BottomCenter;
+
+                                                        }
+
+
+                                                    },
+                                                    new TitleLogoUpdate()
+                                                    {
+                                                        Title = metroTitle,
+                                                        Downloader = (Downloader)metroTitle.Tag
+                                                    });
+
+            }
+            pool.Start();
+        }
+
+        private void metroTabControl1_TabIndexChanged(object sender, EventArgs e)
+        {
+            ReCaculatedTitlesSize(metroTabControl1.SelectedTab as MetroTabPage);
+        }
+
+        private void metroTabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            ReCaculatedTitlesSize(e.TabPage as MetroTabPage);
         }
 
 
