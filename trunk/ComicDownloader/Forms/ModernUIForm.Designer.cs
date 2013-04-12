@@ -29,10 +29,15 @@ namespace ComicDownloader.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
-            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
+            this.metroTile1 = new MetroFramework.Controls.MetroTile();
             this.metroLink1 = new MetroFramework.Controls.MetroLink();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.metroStyleExtender1 = new MetroFramework.Components.MetroStyleExtender(this.components);
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -47,14 +52,11 @@ namespace ComicDownloader.Forms
             this.metroTabControl1.Size = new System.Drawing.Size(627, 305);
             this.metroTabControl1.TabIndex = 0;
             // 
-            // metroToolTip1
-            // 
-            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroToolTip1.StyleManager = null;
-            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
-            // 
             // metroTabPage1
             // 
+            this.metroTabPage1.Controls.Add(this.metroLabel1);
+            this.metroTabPage1.Controls.Add(this.metroProgressBar1);
+            this.metroTabPage1.Controls.Add(this.metroTile1);
             this.metroTabPage1.Controls.Add(this.metroLink1);
             this.metroTabPage1.HorizontalScrollbarBarColor = true;
             this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
@@ -68,6 +70,33 @@ namespace ComicDownloader.Forms
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
             // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(177, 44);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(118, 19);
+            this.metroLabel1.TabIndex = 5;
+            this.metroLabel1.Text = "Update database...";
+            // 
+            // metroProgressBar1
+            // 
+            this.metroProgressBar1.Location = new System.Drawing.Point(177, 14);
+            this.metroProgressBar1.Name = "metroProgressBar1";
+            this.metroProgressBar1.Size = new System.Drawing.Size(439, 23);
+            this.metroProgressBar1.TabIndex = 4;
+            this.metroProgressBar1.Value = 45;
+            // 
+            // metroTile1
+            // 
+            this.metroTile1.ActiveControl = null;
+            this.metroTile1.Location = new System.Drawing.Point(20, 14);
+            this.metroTile1.Name = "metroTile1";
+            this.metroTile1.Size = new System.Drawing.Size(127, 86);
+            this.metroTile1.TabIndex = 3;
+            this.metroTile1.Text = "Open Downloader";
+            this.metroTile1.Click += new System.EventHandler(this.metroTile1_Click);
+            // 
             // metroLink1
             // 
             this.metroLink1.Location = new System.Drawing.Point(20, 206);
@@ -75,6 +104,12 @@ namespace ComicDownloader.Forms
             this.metroLink1.Size = new System.Drawing.Size(114, 23);
             this.metroLink1.TabIndex = 2;
             this.metroLink1.Text = "Facebook Page";
+            // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // ModernUIForm
             // 
@@ -85,10 +120,10 @@ namespace ComicDownloader.Forms
             this.Name = "ModernUIForm";
             this.Style = MetroFramework.MetroColorStyle.Default;
             this.Text = "Comic Downloader 1.0";
-            this.TopMost = true;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.metroTabControl1.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
+            this.metroTabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -99,6 +134,10 @@ namespace ComicDownloader.Forms
         private MetroFramework.Components.MetroToolTip metroToolTip1;
         private MetroFramework.Controls.MetroTabPage metroTabPage1;
         private MetroFramework.Controls.MetroLink metroLink1;
+        private MetroFramework.Controls.MetroTile metroTile1;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroProgressBar metroProgressBar1;
+        private MetroFramework.Components.MetroStyleExtender metroStyleExtender1;
         
         
         //private MetroFramework.Controls.MetroTile metroTile2;
