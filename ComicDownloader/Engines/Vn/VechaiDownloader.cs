@@ -9,9 +9,16 @@ using HtmlAgilityPack;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Vechai.info", MenuGroup = "VN - 2" , MetroTab="Vietnamese", Language = "Tieng viet", Image32 = "_1364410881_plus_32")]
+    [Downloader("Vechai.info", MenuGroup = "VN - 2" , MetroTab="Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410881_plus_32")]
     public class VechaiDownloader: Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://vechai.info/template/teen9x/images/logo.png";
+            }
+        }
         public override string ListStoryURL
         {
             get { return "http://vechai.info/danh-sach/"; }

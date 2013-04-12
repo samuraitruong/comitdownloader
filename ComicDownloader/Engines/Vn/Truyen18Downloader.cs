@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Truyen 18", Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Vietnamese", Image32 = "1364078951_insert-object")]
+    [Downloader("Truyen 18", Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
     [Downloader("Truyen 18", Language = "Tieng viet", MenuGroup = "VN 18+", Image32 = "1364078951_insert-object")]
 
     public class Truyen18Downloader : Downloader
