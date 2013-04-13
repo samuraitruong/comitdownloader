@@ -10,6 +10,13 @@ namespace ComicDownloader.Engines
     [Downloader("TruyenVnSharing.net", MenuGroup = "VN - 2" , MetroTab="Tiếng Việt", Language = "Tieng viet", Image32 = "1364131990_document_add")]
     public class TruyenVnSharingDownloader : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://truyen.vnsharing.net/Content/images/logo.png";
+            }
+        }
         public override string Name
         {
             get { return "[Truyen VnSharing] - "; }

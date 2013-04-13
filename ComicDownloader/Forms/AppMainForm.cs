@@ -414,5 +414,71 @@ namespace ComicDownloader
             AddChildForm(dl.Name, dl);
             this.WindowState = FormWindowState.Maximized;
         }
+        public void MinimizeToTray()
+        {
+            try
+            {
+                notifyIcon1.BalloonTipTitle = "Comic Downloader V1";
+                notifyIcon1.BalloonTipText = "Form is minimized but all progress still running.";
+                this.Hide();
+                if (FormWindowState.Minimized == this.WindowState)
+                {
+                    notifyIcon1.Visible = true;
+                    notifyIcon1.ShowBalloonTip(500);
+                    
+                }
+                else if (FormWindowState.Normal == this.WindowState || this.WindowState == FormWindowState.Maximized)
+                {
+                    notifyIcon1.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+        private void AppMainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!ApplicationBeiningExited)
+            {
+                e.Cancel = true;
+                MinimizeToTray();
+            }
+        }
+
+        private void notifyIcon1_Click(object sender, EventArgs e)
+        {
+            this.Show();
+        }
+
+        public bool ApplicationBeiningExited { get; set; }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ApplicationBeiningExited = true;
+            Application.Exit();
+        }
+
+        private void restoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Show();
+        }
+
+        private void AppMainForm_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                MinimizeToTray();
+            }
+
+        }
+
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            if(this.WindowState == FormWindowState.Minimized)
+            this.Show();
+            this.WindowState = FormWindowState.Minimized;
+        }
     }
 }

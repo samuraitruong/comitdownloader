@@ -32,12 +32,13 @@ namespace ComicDownloader.Forms
             this.components = new System.ComponentModel.Container();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
-            this.lblStatus = new MetroFramework.Controls.MetroLabel();
+            this.metroLink1 = new MetroFramework.Controls.MetroLink();
             this.updateProgressBar = new MetroFramework.Controls.MetroProgressBar();
             this.metroTile1 = new MetroFramework.Controls.MetroTile();
-            this.metroLink1 = new MetroFramework.Controls.MetroLink();
+            this.lblStatus = new MetroFramework.Controls.MetroLabel();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.metroStyleExtender1 = new MetroFramework.Components.MetroStyleExtender(this.components);
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -56,10 +57,11 @@ namespace ComicDownloader.Forms
             // 
             // metroTabPage1
             // 
-            this.metroTabPage1.Controls.Add(this.lblStatus);
             this.metroTabPage1.Controls.Add(this.metroLink1);
             this.metroTabPage1.Controls.Add(this.updateProgressBar);
+            this.metroTabPage1.Controls.Add(this.metroButton1);
             this.metroTabPage1.Controls.Add(this.metroTile1);
+            this.metroTabPage1.Controls.Add(this.lblStatus);
             this.metroTabPage1.HorizontalScrollbarBarColor = true;
             this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.HorizontalScrollbarSize = 10;
@@ -72,14 +74,13 @@ namespace ComicDownloader.Forms
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
             // 
-            // lblStatus
+            // metroLink1
             // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(177, 44);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(118, 19);
-            this.lblStatus.TabIndex = 5;
-            this.lblStatus.Text = "Update database...";
+            this.metroLink1.Location = new System.Drawing.Point(0, 455);
+            this.metroLink1.Name = "metroLink1";
+            this.metroLink1.Size = new System.Drawing.Size(114, 23);
+            this.metroLink1.TabIndex = 2;
+            this.metroLink1.Text = "Facebook Page";
             // 
             // updateProgressBar
             // 
@@ -87,7 +88,6 @@ namespace ComicDownloader.Forms
             this.updateProgressBar.Name = "updateProgressBar";
             this.updateProgressBar.Size = new System.Drawing.Size(575, 23);
             this.updateProgressBar.TabIndex = 4;
-            this.updateProgressBar.Value = 45;
             // 
             // metroTile1
             // 
@@ -104,19 +104,31 @@ namespace ComicDownloader.Forms
             this.metroTile1.UseTileImage = true;
             this.metroTile1.Click += new System.EventHandler(this.metroTile1_Click);
             // 
-            // metroLink1
+            // lblStatus
             // 
-            this.metroLink1.Location = new System.Drawing.Point(0, 455);
-            this.metroLink1.Name = "metroLink1";
-            this.metroLink1.Size = new System.Drawing.Size(114, 23);
-            this.metroLink1.TabIndex = 2;
-            this.metroLink1.Text = "Facebook Page";
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(177, 40);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(118, 19);
+            this.lblStatus.TabIndex = 5;
+            this.lblStatus.Text = "Update database...";
             // 
             // metroToolTip1
             // 
             this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
+            // metroButton1
+            // 
+            this.metroButton1.Location = new System.Drawing.Point(177, 62);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(130, 38);
+            this.metroButton1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroButton1.TabIndex = 6;
+            this.metroButton1.Text = "Update Database";
+            this.metroButton1.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
             // 
             // ModernUIForm
             // 
@@ -128,6 +140,7 @@ namespace ComicDownloader.Forms
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.DropShadow;
             this.Style = MetroFramework.MetroColorStyle.Default;
             this.Text = "Comic Downloader 1.0";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModernUIForm_FormClosing);
             this.Load += new System.EventHandler(this.ModernUIForm_Load);
             this.Resize += new System.EventHandler(this.ModernUIForm_Resize);
             this.metroTabControl1.ResumeLayout(false);
@@ -147,6 +160,7 @@ namespace ComicDownloader.Forms
         private MetroFramework.Controls.MetroLabel lblStatus;
         private MetroFramework.Controls.MetroProgressBar updateProgressBar;
         private MetroFramework.Components.MetroStyleExtender metroStyleExtender1;
+        private MetroFramework.Controls.MetroButton metroButton1;
         
         
         //private MetroFramework.Controls.MetroTile metroTile2;

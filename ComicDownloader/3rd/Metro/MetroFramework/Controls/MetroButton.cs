@@ -29,10 +29,11 @@ using System.Windows.Forms;
 using MetroFramework.Components;
 using MetroFramework.Drawing;
 using MetroFramework.Interfaces;
+using MetroFramework.Design.Controls;
 
 namespace MetroFramework.Controls
 {
-    [Designer("MetroFramework.Design.Controls.MetroButtonDesigner, " + AssemblyRef.MetroFrameworkDesignSN)]
+    [Designer(typeof(MetroButtonDesigner))]
     [ToolboxBitmap(typeof(Button))]
     [DefaultEvent("Click")]
     public class MetroButton : Button, IMetroControl

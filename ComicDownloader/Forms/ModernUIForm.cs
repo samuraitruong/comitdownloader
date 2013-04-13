@@ -121,8 +121,11 @@ namespace ComicDownloader.Forms
                         {
                             var dl = ((MetroTile)sender).Tag as Downloader;
                             if (mainApp == null) mainApp = new AppMainForm();
-                            mainApp.Show();
-                            mainApp.SetDownloader(dl);
+                            
+                                mainApp.Show();
+                                mainApp.SetDownloader(dl);
+                                mainApp.WindowState = FormWindowState.Maximized;
+                            
                         });
 
                         
@@ -192,11 +195,11 @@ namespace ComicDownloader.Forms
 
 
             int maxwith = metroTabControl1.Width - 100 ;
-            int maxheight = metroTabControl1.Height - 15;
+            int maxheight = metroTabControl1.Height - 120;
             double square = maxheight * maxwith / titles.Count;
 
-            int height = (int)Math.Sqrt(square) - 2;
-            int width = (int)square / height - 2;
+            int height = (int)Math.Sqrt(square) - 1;
+            int width = (int)square / height - 1;
             SmartThreadPool pool = new SmartThreadPool();
 
             foreach (var item in titles)
@@ -259,57 +262,69 @@ namespace ComicDownloader.Forms
         {
             ReCaculatedTitlesSize(e.TabPage as MetroTabPage);
         }
+        private ComicDownloaderSettings Settings = SettingForm.GetSetting();
 
         private void ModernUIForm_Load(object sender, EventArgs e)
         {
             //updateThread = new Thread(new ThreadStart(this.BackgroundUpdate));
             //updateThread.Start();
-            
+             if (Settings != null && Settings.AutoUpdateListOnStart)
+            {
             BackgroundUpdate();
+             }
         }
         private object locker = DateTime.Now;
         public void BackgroundUpdate()
         {
-            SmartThreadPool pool = new SmartThreadPool();
-            
-            pool.MaxThreads = 8;
-            var downloaders = Downloader.GetAllDownloaders();
-            updateProgressBar.Minimum = 0;
-            updateProgressBar.Maximum = downloaders.Count;
-            updateProgressBar.Value = 0;
-            lblStatus.Text = "Update database running......";
+            metroButton1.Enabled = false;
+                SmartThreadPool pool = new SmartThreadPool();
 
-            foreach (var dl in Downloader.GetAllDownloaders())
-            {
-                pool.QueueWorkItem(delegate(object objectState)
+                pool.MaxThreads = 8;
+                var downloaders = Downloader.GetAllDownloaders();
+                updateProgressBar.Minimum = 0;
+                updateProgressBar.Maximum = downloaders.Count;
+                updateProgressBar.Value = 0;
+                lblStatus.Text = "Update database running......";
+
+                foreach (var dl in Downloader.GetAllDownloaders())
                 {
-                    try
+                    pool.QueueWorkItem(delegate(object objectState)
                     {
-                        Downloader downloader = (Downloader)objectState;
-                        downloader.GetListStories(true);
-                    }
-                    catch (Exception ex)
-                    {
-                        MyLogger.Log(ex);
-                    }
-                    finally
-                    {
-                        this.Invoke(new MethodInvoker(delegate()
+                        try
                         {
-                            lock (locker)
+                            Downloader downloader = (Downloader)objectState;
+                            downloader.GetListStories(true);
+                        }
+                        catch (Exception ex)
+                        {
+                            MyLogger.Log(ex);
+                        }
+                        finally
+                        {
+                            this.Invoke(new MethodInvoker(delegate()
                             {
-                                updateProgressBar.Increment(1);
-                            }
-                        }));
-                    }
+                                lock (locker)
+                                {
+                                    updateProgressBar.Increment(1);
+                                }
+                            }));
+                        }
 
-                }, dl);
+                    }, dl);
+                }
+                pool.Start();
 
-               
-
-            }
-            pool.Start();
             
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            BackgroundUpdate();
+        }
+
+        private void ModernUIForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (mainApp != null) mainApp.ApplicationBeiningExited = true;
         }
 
     }
