@@ -421,16 +421,16 @@ namespace ComicDownloader
                 notifyIcon1.BalloonTipTitle = "Comic Downloader V1";
                 notifyIcon1.BalloonTipText = "Form is minimized but all progress still running.";
                 this.Hide();
-                if (FormWindowState.Minimized == this.WindowState)
+                //if (FormWindowState.Minimized == this.WindowState)
                 {
                     notifyIcon1.Visible = true;
-                    notifyIcon1.ShowBalloonTip(500);
+                    notifyIcon1.ShowBalloonTip(1000);
                     
                 }
-                else if (FormWindowState.Normal == this.WindowState || this.WindowState == FormWindowState.Maximized)
-                {
-                    notifyIcon1.Visible = false;
-                }
+                //else if (FormWindowState.Normal == this.WindowState || this.WindowState == FormWindowState.Maximized)
+                //{
+                //    notifyIcon1.Visible = false;
+                //}
             }
             catch (Exception ex)
             {
@@ -474,11 +474,13 @@ namespace ComicDownloader
 
         }
 
+       
+
         private void notifyIcon1_DoubleClick(object sender, EventArgs e)
         {
-            if(this.WindowState == FormWindowState.Minimized)
-            this.Show();
-            this.WindowState = FormWindowState.Minimized;
+            if (this.WindowState == FormWindowState.Minimized)
+                this.Show();
+            this.WindowState = FormWindowState.Maximized;
         }
     }
 }
