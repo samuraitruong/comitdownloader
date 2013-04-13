@@ -474,8 +474,6 @@ namespace ComicDownloader
 
         }
 
-       
-
         private void notifyIcon1_DoubleClick(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
