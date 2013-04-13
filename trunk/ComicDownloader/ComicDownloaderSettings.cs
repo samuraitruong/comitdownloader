@@ -51,14 +51,17 @@ namespace ComicDownloader
         public string RenamePattern { get; set; }
         [CategoryAttribute("Download settings")]
         public string StogareFolder { get; set; }
-
+        [CategoryAttribute("Download settings")]
+        public bool AutoUpdateListOnStart { get; set; }
 
         [CategoryAttribute("Download settings"), DescriptionAttribute("Using multiple thread to download pages in a chapter, this will make increase download speed but need more CPU & Network usage. Use this option on slow netowrk will help you save a ton of time. :)")]
         public bool UseMultiThreadToDownloadChapter { get; set; }
-
+        [CategoryAttribute("Download settings")]
+        public int Threads { get; set; }
         public ComicDownloaderSettings()
         {
             CreatePDF = true;
+            AutoUpdateListOnStart = false;
             IncludePDFIntroPage = true;
             PdfIntroPagePosition = PagePosition.LastPage;
             RenamePattern = "{{PAGENUM}} .{FILENAME}";

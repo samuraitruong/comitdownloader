@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppMainForm));
             this.mdiTabStrip1 = new Cx.Windows.Forms.MdiTabStrip();
             this.ribbon1 = new System.Windows.Forms.Ribbon();
@@ -58,6 +59,8 @@
             this.ribbonPanel13 = new System.Windows.Forms.RibbonPanel();
             this.ribbonPanel3 = new System.Windows.Forms.RibbonPanel();
             this.ribbonComboBox1 = new System.Windows.Forms.RibbonComboBox();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SuspendLayout();
             // 
             // mdiTabStrip1
@@ -145,7 +148,6 @@
             // 
             // bntCasiniServer
             // 
-            this.bntCasiniServer.Image = ((System.Drawing.Image)(resources.GetObject("bntCasiniServer.Image")));
             this.bntCasiniServer.MaximumSize = new System.Drawing.Size(0, 0);
             this.bntCasiniServer.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
             this.bntCasiniServer.MinimumSize = new System.Drawing.Size(0, 0);
@@ -176,10 +178,8 @@
             // 
             // bntMyTest
             // 
-            this.bntMyTest.Image = ((System.Drawing.Image)(resources.GetObject("bntMyTest.Image")));
             this.bntMyTest.MaximumSize = new System.Drawing.Size(0, 0);
             this.bntMyTest.MinimumSize = new System.Drawing.Size(0, 0);
-            this.bntMyTest.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntMyTest.SmallImage")));
             this.bntMyTest.Text = "[[MangaReader]]";
             // 
             // btnLastestUpdate
@@ -187,7 +187,6 @@
             this.btnLastestUpdate.Image = global::ComicDownloader.Properties.Resources._1365103950_interact;
             this.btnLastestUpdate.MaximumSize = new System.Drawing.Size(0, 0);
             this.btnLastestUpdate.MinimumSize = new System.Drawing.Size(0, 0);
-            this.btnLastestUpdate.SmallImage = ((System.Drawing.Image)(resources.GetObject("btnLastestUpdate.SmallImage")));
             this.btnLastestUpdate.Click += new System.EventHandler(this.btnLastestUpdate_Click);
             // 
             // bntSearch
@@ -195,7 +194,6 @@
             this.bntSearch.Image = global::ComicDownloader.Properties.Resources._1365576100_Search;
             this.bntSearch.MaximumSize = new System.Drawing.Size(0, 0);
             this.bntSearch.MinimumSize = new System.Drawing.Size(0, 0);
-            this.bntSearch.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntSearch.SmallImage")));
             this.bntSearch.Click += new System.EventHandler(this.bntSearch_Click);
             // 
             // rbtDownloadQueue
@@ -214,7 +212,6 @@
             this.bntQueueDownload.Image = global::ComicDownloader.Properties.Resources._1364647756_sheduled_task;
             this.bntQueueDownload.MaximumSize = new System.Drawing.Size(0, 0);
             this.bntQueueDownload.MinimumSize = new System.Drawing.Size(0, 0);
-            this.bntQueueDownload.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntQueueDownload.SmallImage")));
             this.bntQueueDownload.Click += new System.EventHandler(this.bntQueueDownload_Click);
             // 
             // bntStartQueue
@@ -223,7 +220,6 @@
             this.bntStartQueue.Image = global::ComicDownloader.Properties.Resources.media_playback_start__1_;
             this.bntStartQueue.MaximumSize = new System.Drawing.Size(0, 0);
             this.bntStartQueue.MinimumSize = new System.Drawing.Size(0, 0);
-            this.bntStartQueue.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntStartQueue.SmallImage")));
             this.bntStartQueue.Click += new System.EventHandler(this.bntStartQueue_Click);
             // 
             // bntStopQueue
@@ -232,7 +228,6 @@
             this.bntStopQueue.Image = global::ComicDownloader.Properties.Resources.media_playback_stop;
             this.bntStopQueue.MaximumSize = new System.Drawing.Size(0, 0);
             this.bntStopQueue.MinimumSize = new System.Drawing.Size(0, 0);
-            this.bntStopQueue.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntStopQueue.SmallImage")));
             this.bntStopQueue.Click += new System.EventHandler(this.bntStopQueue_Click);
             // 
             // bntResumeError
@@ -241,7 +236,6 @@
             this.bntResumeError.Image = global::ComicDownloader.Properties.Resources._1364712905_download;
             this.bntResumeError.MaximumSize = new System.Drawing.Size(0, 0);
             this.bntResumeError.MinimumSize = new System.Drawing.Size(0, 0);
-            this.bntResumeError.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntResumeError.SmallImage")));
             this.bntResumeError.Click += new System.EventHandler(this.bntResumeError_Click);
             // 
             // bntClearQueue
@@ -250,7 +244,6 @@
             this.bntClearQueue.Image = global::ComicDownloader.Properties.Resources._1364710944_clear_left;
             this.bntClearQueue.MaximumSize = new System.Drawing.Size(0, 0);
             this.bntClearQueue.MinimumSize = new System.Drawing.Size(0, 0);
-            this.bntClearQueue.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntClearQueue.SmallImage")));
             this.bntClearQueue.Click += new System.EventHandler(this.bntClearQueue_Click);
             // 
             // ribbonComboBox2
@@ -265,26 +258,20 @@
             // 
             // ribbonButton3
             // 
-            this.ribbonButton3.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton3.Image")));
             this.ribbonButton3.MaximumSize = new System.Drawing.Size(0, 0);
             this.ribbonButton3.MinimumSize = new System.Drawing.Size(0, 0);
-            this.ribbonButton3.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton3.SmallImage")));
             this.ribbonButton3.Text = "Shutdown PC";
             // 
             // ribbonButton4
             // 
-            this.ribbonButton4.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton4.Image")));
             this.ribbonButton4.MaximumSize = new System.Drawing.Size(0, 0);
             this.ribbonButton4.MinimumSize = new System.Drawing.Size(0, 0);
-            this.ribbonButton4.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton4.SmallImage")));
             this.ribbonButton4.Text = "Open Comic Viewer";
             // 
             // ribbonButton5
             // 
-            this.ribbonButton5.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton5.Image")));
             this.ribbonButton5.MaximumSize = new System.Drawing.Size(0, 0);
             this.ribbonButton5.MinimumSize = new System.Drawing.Size(0, 0);
-            this.ribbonButton5.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton5.SmallImage")));
             this.ribbonButton5.Text = "Do Nothing";
             // 
             // ribbonPanel1
@@ -297,7 +284,6 @@
             this.bntSupports.Image = global::ComicDownloader.Properties.Resources._1364755245_network_support;
             this.bntSupports.MaximumSize = new System.Drawing.Size(0, 0);
             this.bntSupports.MinimumSize = new System.Drawing.Size(0, 0);
-            this.bntSupports.SmallImage = ((System.Drawing.Image)(resources.GetObject("bntSupports.SmallImage")));
             this.bntSupports.Click += new System.EventHandler(this.bntSupports_Click);
             // 
             // ribbonPanel13
@@ -314,6 +300,16 @@
             this.ribbonComboBox1.Text = "When queue complete?";
             this.ribbonComboBox1.TextBoxText = "";
             this.ribbonComboBox1.Value = "When queue complete?";
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // AppMainForm
             // 
@@ -365,6 +361,8 @@
         private System.Windows.Forms.RibbonButton btnLastestUpdate;
         private System.Windows.Forms.RibbonButton bntCasiniServer;
         private System.Windows.Forms.RibbonButton bntSearch;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         
     }
 }
