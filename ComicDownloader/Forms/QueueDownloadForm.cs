@@ -92,6 +92,9 @@ namespace ComicDownloader.Forms
                 {
                     DownloadItems = GetHistoryItems();
                 }
+
+                item.Sequence = DownloadItems.Count + 1;
+                item.Priority = 3;
                 DownloadItems.Add(item);
                 //doing merge here :)
                 SaveHistoryItem(DownloadItems);
@@ -388,14 +391,19 @@ namespace ComicDownloader.Forms
         
         private ChapterInfo GetNextChapter()
         {
+            var waitingList = new List<ChapterInfo>();
+            
             foreach (var item in DownloadItems)
             {
-                var chapter = item.SelectedChapters.FirstOrDefault(p => p.Status == DownloadStatus.Waiting);
+                var chapters = item.SelectedChapters.Where(p=>p.Status == DownloadStatus.Waiting);
 
-                if (chapter != null)
-                {
-                    return chapter;
-                }
+                waitingList.AddRange(chapters);
+            }
+            var groups = waitingList.GroupBy(p => p.Priority).Select(p => p);
+            foreach (var group in groups.OrderByDescending(p=>p.Key))
+            {
+                return group.OrderByDescending(p => p.Sequence).FirstOrDefault();
+                break;
             }
             return null;
         }
@@ -571,6 +579,28 @@ namespace ComicDownloader.Forms
             SaveHistoryItem(DownloadItems);
 
             RefreshData();
+        }
+
+        private void mnuPriorityChange(object sender, EventArgs e)
+        {
+            int priority = Convert.ToInt32( ((ToolStripMenuItem)sender).Tag);
+
+            var selectedItems = this.lsvItems.SelectedItems;
+            lock (DownloadItems)
+            {
+                foreach (ListViewItem item in selectedItems)
+                {
+                    var col = item.ListView.Columns.Cast<ColumnHeader>().FirstOrDefault(p => p.Text == "Identify");
+                    var value = item.SubItems[col.Index].Text;
+                    var chap = GetChapterByIdentity(new Guid(value));
+
+                    chap.Priority = priority;
+                    chap.LastModified = DateTime.Now;
+                }
+            }
+            SaveHistoryItem(DownloadItems);
+           
+
         }
     }
 }

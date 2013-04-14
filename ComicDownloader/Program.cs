@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Net;
 using ComicDownloader.Forms;
+using System.Diagnostics;
 
 namespace ComicDownloader
 {
@@ -14,8 +15,17 @@ namespace ComicDownloader
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
-        {
+        static void Main(string[] args){
+        
+
+            if(args.Length>0 && args[0] =="/uninstall") {
+                Process.Start(new ProcessStartInfo()
+                {
+                    Arguments = args[0] + " " + args[1],
+                    FileName = "msiexec.exe"
+                });
+                return;
+                }
             //if (CheckInternetConnection())
             {
                 Application.ThreadException += OnThreadException;

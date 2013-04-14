@@ -558,11 +558,14 @@ namespace ComicDownloader
                     }));
                     currentStoryInfo = Downloader.RequestInfo(txtUrl.Text);
 
+                    this.Invoke(new MethodInvoker(delegate()
+                    {
 
-                    txtTitle.Text = ddlList.Text;
-                    txtTitle.Text = currentStoryInfo.Name.Replace('"', ' ').Replace('.', ' ');
+                        txtTitle.Text = ddlList.Text;
+                        txtTitle.Text = currentStoryInfo.Name.Replace('"', ' ').Replace('.', ' ');
 
-                    this.Text = Downloader.Name + currentStoryInfo.Name;
+                        this.Text = Downloader.Name + currentStoryInfo.Name;
+                    }));
 
                     tblChapters.Rows.Clear();
 
