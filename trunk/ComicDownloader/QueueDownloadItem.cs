@@ -17,6 +17,7 @@ namespace ComicDownloader
         Error
     }
 
+   
    public class QueueDownloadItem
     {
         public long Size { get; set; }
@@ -30,5 +31,7 @@ namespace ComicDownloader
         public DownloadStatus Status { get; set; }
 
         public string ProviderName { get; set; }
+        public int  Priority { get; set; }
+        public int Sequence { get; set; }
     }
 }

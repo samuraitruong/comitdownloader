@@ -29,12 +29,17 @@ namespace ComicDownloader.Engines
 
         public long Size { get; set; }
 
+        public int Priority { get; set; }
+        public int Sequence { get; set; }
+
         public int DownloadedCount { get; set; }
         public ChapterInfo() {
             DownloadedCount = 0;
             Status = DownloadStatus.Waiting;
             UniqueIdentify = new Guid();
         }
+
+        public DateTime LastModified { get; set; }
     }
     public class StoryInfo
     {

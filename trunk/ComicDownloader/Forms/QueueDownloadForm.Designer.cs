@@ -39,12 +39,20 @@
             this.openDestinationFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuRemovAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.allCompletedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRemoveSelection = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuForceDownload = new System.Windows.Forms.ToolStripMenuItem();
             this.moveTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveBottomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuForceDownload = new System.Windows.Forms.ToolStripMenuItem();
+            this.downloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lowestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.normalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.highToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.highestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.superToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lsvItems = new BrightIdeasSoftware.DataListView();
             this.olvProviderName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvStoryName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -61,7 +69,6 @@
             this.barRenderer1 = new BrightIdeasSoftware.BarRenderer();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.allCompletedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lsvItems)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -74,13 +81,14 @@
             this.toolStripSeparator1,
             this.mnuRemovAll,
             this.mnuRemoveSelection,
-            this.mnuForceDownload,
             this.moveTopToolStripMenuItem,
             this.moveBottomToolStripMenuItem,
             this.moveUpToolStripMenuItem,
-            this.moveDownToolStripMenuItem});
+            this.moveDownToolStripMenuItem,
+            this.mnuForceDownload,
+            this.downloadToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(160, 208);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(160, 230);
             this.contextMenuStrip1.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(this.contextMenuStrip1_Closed);
             this.contextMenuStrip1.Opened += new System.EventHandler(this.contextMenuStrip1_Opened);
             // 
@@ -148,20 +156,19 @@
             this.mnuRemovAll.Text = "Remove All";
             this.mnuRemovAll.Click += new System.EventHandler(this.mnuRemovAll_Click);
             // 
+            // allCompletedToolStripMenuItem
+            // 
+            this.allCompletedToolStripMenuItem.Name = "allCompletedToolStripMenuItem";
+            this.allCompletedToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.allCompletedToolStripMenuItem.Text = "All Completed";
+            this.allCompletedToolStripMenuItem.Click += new System.EventHandler(this.allCompletedToolStripMenuItem_Click);
+            // 
             // mnuRemoveSelection
             // 
             this.mnuRemoveSelection.Image = global::ComicDownloader.Properties.Resources._1364717999_delete;
             this.mnuRemoveSelection.Name = "mnuRemoveSelection";
             this.mnuRemoveSelection.Size = new System.Drawing.Size(159, 22);
             this.mnuRemoveSelection.Text = "Remove Selection";
-            // 
-            // mnuForceDownload
-            // 
-            this.mnuForceDownload.Image = global::ComicDownloader.Properties.Resources._1364718151_stopwatch_start;
-            this.mnuForceDownload.Name = "mnuForceDownload";
-            this.mnuForceDownload.Size = new System.Drawing.Size(159, 22);
-            this.mnuForceDownload.Text = "Force Download";
-            this.mnuForceDownload.Click += new System.EventHandler(this.mnuForceDownload_Click);
             // 
             // moveTopToolStripMenuItem
             // 
@@ -190,6 +197,75 @@
             this.moveDownToolStripMenuItem.Name = "moveDownToolStripMenuItem";
             this.moveDownToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.moveDownToolStripMenuItem.Text = "Move Down";
+            // 
+            // mnuForceDownload
+            // 
+            this.mnuForceDownload.Image = global::ComicDownloader.Properties.Resources._1364718151_stopwatch_start;
+            this.mnuForceDownload.Name = "mnuForceDownload";
+            this.mnuForceDownload.Size = new System.Drawing.Size(159, 22);
+            this.mnuForceDownload.Text = "Force Download";
+            this.mnuForceDownload.Click += new System.EventHandler(this.mnuForceDownload_Click);
+            // 
+            // downloadToolStripMenuItem
+            // 
+            this.downloadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lowestToolStripMenuItem,
+            this.lowToolStripMenuItem,
+            this.normalToolStripMenuItem,
+            this.highToolStripMenuItem,
+            this.highestToolStripMenuItem,
+            this.superToolStripMenuItem});
+            this.downloadToolStripMenuItem.Name = "downloadToolStripMenuItem";
+            this.downloadToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.downloadToolStripMenuItem.Text = "Priority";
+            // 
+            // lowestToolStripMenuItem
+            // 
+            this.lowestToolStripMenuItem.Name = "lowestToolStripMenuItem";
+            this.lowestToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lowestToolStripMenuItem.Tag = "1";
+            this.lowestToolStripMenuItem.Text = "Lowest";
+            this.lowestToolStripMenuItem.Click += new System.EventHandler(this.mnuPriorityChange);
+            // 
+            // lowToolStripMenuItem
+            // 
+            this.lowToolStripMenuItem.Name = "lowToolStripMenuItem";
+            this.lowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lowToolStripMenuItem.Tag = "2";
+            this.lowToolStripMenuItem.Text = "Low";
+            this.lowToolStripMenuItem.Click += new System.EventHandler(this.mnuPriorityChange);
+            // 
+            // normalToolStripMenuItem
+            // 
+            this.normalToolStripMenuItem.Name = "normalToolStripMenuItem";
+            this.normalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.normalToolStripMenuItem.Tag = "3";
+            this.normalToolStripMenuItem.Text = "Normal";
+            this.normalToolStripMenuItem.Click += new System.EventHandler(this.mnuPriorityChange);
+            // 
+            // highToolStripMenuItem
+            // 
+            this.highToolStripMenuItem.Name = "highToolStripMenuItem";
+            this.highToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.highToolStripMenuItem.Tag = "4";
+            this.highToolStripMenuItem.Text = "High";
+            this.highToolStripMenuItem.Click += new System.EventHandler(this.mnuPriorityChange);
+            // 
+            // highestToolStripMenuItem
+            // 
+            this.highestToolStripMenuItem.Name = "highestToolStripMenuItem";
+            this.highestToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.highestToolStripMenuItem.Tag = "5";
+            this.highestToolStripMenuItem.Text = "Highest";
+            this.highestToolStripMenuItem.Click += new System.EventHandler(this.mnuPriorityChange);
+            // 
+            // superToolStripMenuItem
+            // 
+            this.superToolStripMenuItem.Name = "superToolStripMenuItem";
+            this.superToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.superToolStripMenuItem.Tag = "6";
+            this.superToolStripMenuItem.Text = "Super ";
+            this.superToolStripMenuItem.Click += new System.EventHandler(this.mnuPriorityChange);
             // 
             // lsvItems
             // 
@@ -297,11 +373,10 @@
             this.olvIdentify.CellPadding = null;
             this.olvIdentify.Groupable = false;
             this.olvIdentify.IsVisible = false;
-            this.olvIdentify.Width = 0;
             this.olvIdentify.Searchable = false;
             this.olvIdentify.Sortable = false;
             this.olvIdentify.Text = "Identify";
-            
+            this.olvIdentify.Width = 0;
             // 
             // olvPages
             // 
@@ -343,13 +418,6 @@
             this.olvColumn2.AspectName = "StoryUrl";
             this.olvColumn2.CellPadding = null;
             this.olvColumn2.DisplayIndex = 1;
-            // 
-            // allCompletedToolStripMenuItem
-            // 
-            this.allCompletedToolStripMenuItem.Name = "allCompletedToolStripMenuItem";
-            this.allCompletedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.allCompletedToolStripMenuItem.Text = "All Completed";
-            this.allCompletedToolStripMenuItem.Click += new System.EventHandler(this.allCompletedToolStripMenuItem_Click);
             // 
             // QueueDownloadForm
             // 
@@ -410,5 +478,12 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem exploreChapterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allCompletedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem downloadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lowestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem normalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem highToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem highestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem superToolStripMenuItem;
     }
 }
