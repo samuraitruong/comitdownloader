@@ -40,6 +40,21 @@ namespace ComicDownloader.Forms
             ci.BringToFront();
             ci.Active = true;
         }
+
+        public SearchForm(string keyword)
+        {
+            InitializeComponent();
+            LoadingCircle ci = new LoadingCircle();
+
+            this.Controls.Add(ci);
+            ci.BringToFront();
+            ci.Active = true;
+            txtKeyword.Text = keyword;
+
+            if(!string.IsNullOrEmpty(keyword)) bntCacheSearch.PerformClick();
+        }
+
+        
         struct SearchThreadParam
         {
             public Downloader Downloader { get; set; }
@@ -56,7 +71,7 @@ namespace ComicDownloader.Forms
         }
 
         private bool contextMenuShowing = false;
-        private void GetSearchItems(object obj)
+        private object GetSearchItems(object obj)
         {
             SearchThreadParam param = (SearchThreadParam)obj;
 
@@ -111,7 +126,7 @@ namespace ComicDownloader.Forms
                 }));
             }
 
-
+            return null;
         }
 
         private void addChapterToQueueToolStripMenuItem_Click(object sender, EventArgs e)
@@ -188,25 +203,33 @@ namespace ComicDownloader.Forms
             progressBar.Step = 1;
             progressBar.Value = 0;
 
-            ManualResetEvent[] doneEvents = new ManualResetEvent[downloaders.Count];
+            
+
+            //ManualResetEvent[] doneEvents = new ManualResetEvent[downloaders.Count];
+
+
             new Thread(delegate()
             {
 
+                SmartThreadPool pool = new SmartThreadPool()
+                {
+                    MaxThreads = SettingForm.GetSetting().SearchThreads
+                };
+                List<IWorkItemResult> workers = new List<IWorkItemResult>();
                 for (int i = 0; i < downloaders.Count; i++)
                 {
-                    doneEvents[i] = new ManualResetEvent(false);
-
-                    ThreadPool.QueueUserWorkItem(this.GetSearchItems, new SearchThreadParam()
+                   
+                    workers.Add(pool.QueueWorkItem(new WorkItemCallback(this.GetSearchItems), new SearchThreadParam()
                     {
                         Downloader = downloaders[i],
-                        ResetEvent = doneEvents[i],
+                        //ResetEvent = doneEvents[i],
                         Keyword = keyword,
                         Online = online, 
                         Recache = recache
-                    });
+                    }));
                 }
-                foreach (var doneEvent in doneEvents) doneEvent.WaitOne();
                 
+                SmartThreadPool.WaitAll(workers.ToArray());
                 this.Invoke(new MethodInvoker(delegate() {
                     loadingCircle1.Visible = false;
                     loadingCircle1.Active = false;
@@ -214,6 +237,8 @@ namespace ComicDownloader.Forms
 
                     DisplaySearchCompleteAnimation();
                 }));
+
+                pool.Shutdown();
                 
 
             }).Start();
@@ -362,5 +387,10 @@ namespace ComicDownloader.Forms
             lvLastestUpdates.EnsureModelVisible(item);
         }
 
+
+        internal void SetKeyword(string p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

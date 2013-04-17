@@ -13,7 +13,7 @@ using ComicDownloader.Properties;
 using System.Reflection;
 using System.Threading;
 using Cx.Windows.Forms;
-using NetduinoLibrary.Toolbox;
+
 using CassiniDev;
 using ComicDownloader.Helpers;
 using System.Diagnostics;
@@ -384,11 +384,11 @@ namespace ComicDownloader
 
         private void ribbonButton2_Click(object sender, EventArgs e)
         {
-            StartServerForm serverForm = new StartServerForm();
-            serverForm.MdiParent= this;
-            serverForm.WindowState = FormWindowState.Minimized;
-            serverForm.Show();
-            serverForm.WindowState = FormWindowState.Maximized;
+            //StartServerForm serverForm = new StartServerForm();
+            //serverForm.MdiParent= this;
+            //serverForm.WindowState = FormWindowState.Minimized;
+            //serverForm.Show();
+            //serverForm.WindowState = FormWindowState.Maximized;
         }
 
         private void bntCasiniServer_Click(object sender, EventArgs e)
@@ -471,7 +471,6 @@ namespace ComicDownloader
             {
                 MinimizeToTray();
             }
-
         }
 
         private void notifyIcon1_DoubleClick(object sender, EventArgs e)
@@ -479,6 +478,14 @@ namespace ComicDownloader
             if (this.WindowState == FormWindowState.Minimized)
                 this.Show();
             this.WindowState = FormWindowState.Maximized;
+        }
+
+        internal void ShowForm(Form form)
+        {
+            form.MdiParent = this;
+            
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
         }
     }
 }

@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            BrightIdeasSoftware.CellStyle cellStyle1 = new BrightIdeasSoftware.CellStyle();
+            BrightIdeasSoftware.CellStyle cellStyle2 = new BrightIdeasSoftware.CellStyle();
+            BrightIdeasSoftware.CellStyle cellStyle3 = new BrightIdeasSoftware.CellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QueueDownloadForm));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +48,6 @@
             this.moveBottomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuForceDownload = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lowestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,10 +67,13 @@
             this.olvIdentify = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPages = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.barRenderer1 = new BrightIdeasSoftware.BarRenderer();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.hyperlinkStyle1 = new BrightIdeasSoftware.HyperlinkStyle();
+            this.mnuForceDownload = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lsvItems)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -85,10 +90,11 @@
             this.moveBottomToolStripMenuItem,
             this.moveUpToolStripMenuItem,
             this.moveDownToolStripMenuItem,
+            this.toolStripSeparator3,
             this.mnuForceDownload,
             this.downloadToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(160, 230);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(160, 236);
             this.contextMenuStrip1.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(this.contextMenuStrip1_Closed);
             this.contextMenuStrip1.Opened += new System.EventHandler(this.contextMenuStrip1_Opened);
             // 
@@ -198,14 +204,6 @@
             this.moveDownToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.moveDownToolStripMenuItem.Text = "Move Down";
             // 
-            // mnuForceDownload
-            // 
-            this.mnuForceDownload.Image = global::ComicDownloader.Properties.Resources._1364718151_stopwatch_start;
-            this.mnuForceDownload.Name = "mnuForceDownload";
-            this.mnuForceDownload.Size = new System.Drawing.Size(159, 22);
-            this.mnuForceDownload.Text = "Force Download";
-            this.mnuForceDownload.Click += new System.EventHandler(this.mnuForceDownload_Click);
-            // 
             // downloadToolStripMenuItem
             // 
             this.downloadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -282,6 +280,7 @@
             this.olvIdentify,
             this.olvPages});
             this.lsvItems.ContextMenuStrip = this.contextMenuStrip1;
+            this.lsvItems.Cursor = System.Windows.Forms.Cursors.Default;
             this.lsvItems.DataSource = null;
             this.lsvItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lsvItems.EmptyListMsg = "There is no item";
@@ -301,6 +300,7 @@
             this.lsvItems.TabIndex = 2;
             this.lsvItems.UseCompatibleStateImageBehavior = false;
             this.lsvItems.UseExplorerTheme = true;
+            this.lsvItems.UseHyperlinks = true;
             this.lsvItems.View = System.Windows.Forms.View.Details;
             // 
             // olvProviderName
@@ -332,6 +332,7 @@
             this.olvChapterUrl.AspectName = "ChapterUrl";
             this.olvChapterUrl.CellPadding = null;
             this.olvChapterUrl.Groupable = false;
+            this.olvChapterUrl.Hyperlink = true;
             this.olvChapterUrl.IsTileViewColumn = true;
             this.olvChapterUrl.Text = "Chapter URL";
             this.olvChapterUrl.Width = 150;
@@ -343,6 +344,7 @@
             this.olvStatus.Groupable = false;
             this.olvStatus.IsTileViewColumn = true;
             this.olvStatus.Text = "Status";
+            this.olvStatus.Width = 100;
             // 
             // olvSize
             // 
@@ -351,6 +353,7 @@
             this.olvSize.Groupable = false;
             this.olvSize.IsTileViewColumn = true;
             this.olvSize.Text = "Size";
+            this.olvSize.Width = 100;
             // 
             // olvProgress
             // 
@@ -390,18 +393,17 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.lblStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 251);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(866, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // lblStatus
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(109, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(0, 17);
             // 
             // barRenderer1
             // 
@@ -418,6 +420,32 @@
             this.olvColumn2.AspectName = "StoryUrl";
             this.olvColumn2.CellPadding = null;
             this.olvColumn2.DisplayIndex = 1;
+            // 
+            // hyperlinkStyle1
+            // 
+            cellStyle1.Font = null;
+            cellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.hyperlinkStyle1.Normal = cellStyle1;
+            cellStyle2.Font = null;
+            cellStyle2.FontStyle = System.Drawing.FontStyle.Underline;
+            this.hyperlinkStyle1.Over = cellStyle2;
+            this.hyperlinkStyle1.OverCursor = System.Windows.Forms.Cursors.Hand;
+            cellStyle3.Font = null;
+            cellStyle3.ForeColor = System.Drawing.Color.Purple;
+            this.hyperlinkStyle1.Visited = cellStyle3;
+            // 
+            // mnuForceDownload
+            // 
+            this.mnuForceDownload.Image = global::ComicDownloader.Properties.Resources._1364718151_stopwatch_start;
+            this.mnuForceDownload.Name = "mnuForceDownload";
+            this.mnuForceDownload.Size = new System.Drawing.Size(159, 22);
+            this.mnuForceDownload.Text = "Force Download";
+            this.mnuForceDownload.Click += new System.EventHandler(this.mnuForceDownload_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(156, 6);
             // 
             // QueueDownloadForm
             // 
@@ -447,7 +475,7 @@
         #endregion
 
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private BrightIdeasSoftware.DataListView lsvItems;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
@@ -463,7 +491,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnuRemovAll;
         private System.Windows.Forms.ToolStripMenuItem mnuRemoveSelection;
-        private System.Windows.Forms.ToolStripMenuItem mnuForceDownload;
         private System.Windows.Forms.ToolStripMenuItem moveUpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem moveDownToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem moveTopToolStripMenuItem;
@@ -485,5 +512,8 @@
         private System.Windows.Forms.ToolStripMenuItem highToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem highestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem superToolStripMenuItem;
+        private BrightIdeasSoftware.HyperlinkStyle hyperlinkStyle1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem mnuForceDownload;
     }
 }

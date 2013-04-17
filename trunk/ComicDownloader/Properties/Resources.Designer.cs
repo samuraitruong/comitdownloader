@@ -599,6 +599,62 @@ namespace ComicDownloader.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _1365926520_Document_scheduled_tasks_icon {
+            get {
+                object obj = ResourceManager.GetObject("1365926520_Document-scheduled-tasks-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365926714_Document_scheduled_tasks_icon {
+            get {
+                object obj = ResourceManager.GetObject("1365926714_Document-scheduled-tasks-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365926784_download {
+            get {
+                object obj = ResourceManager.GetObject("1365926784_download", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365926986_document_search {
+            get {
+                object obj = ResourceManager.GetObject("1365926986_document_search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365927134_cog_icon_2_48x48 {
+            get {
+                object obj = ResourceManager.GetObject("1365927134_cog-icon-2-48x48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365927783_Update {
+            get {
+                object obj = ResourceManager.GetObject("1365927783_Update", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365927859_system_software_update {
+            get {
+                object obj = ResourceManager.GetObject("1365927859_system-software-update", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1365927946_social_balloon_14 {
+            get {
+                object obj = ResourceManager.GetObject("1365927946_social_balloon-14", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap _14747480_bang_comic_book_explosion {
             get {
                 object obj = ResourceManager.GetObject("14747480-bang-comic-book-explosion", resourceCulture);

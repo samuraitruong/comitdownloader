@@ -60,6 +60,8 @@ namespace ComicDownloader
         public int Threads { get; set; }
         public ComicDownloaderSettings()
         {
+            SearchThreads = 10;
+            Threads = 8;
             CreatePDF = true;
             AutoUpdateListOnStart = false;
             IncludePDFIntroPage = true;
@@ -67,5 +69,7 @@ namespace ComicDownloader
             RenamePattern = "{{PAGENUM}} .{FILENAME}";
             StogareFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         }
+
+        public int SearchThreads { get; set; }
     }
 }

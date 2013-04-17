@@ -12,6 +12,23 @@
     <AssemblyName>ComicDownloader</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\Administrator\Desktop\Dropbox_samuraitruong_yahoo\Dropbox\Public\ComicDownloader\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <UpdateUrl>https://dl.dropboxusercontent.com/u/13243930/ComicDownloader/</UpdateUrl>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -36,6 +53,18 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\1364394623_37693.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>FBE3D60583A8570FB2BDCFD2AF9DE4A7E29E010C</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>ComicDownloader_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
@@ -1413,6 +1442,7 @@
     <None Include="3rd\ObjectListView\FullClassDiagram.cd" />
     <None Include="3rd\ObjectListView\ObjectListView.FxCop" />
     <None Include="app.config" />
+    <None Include="ComicDownloader_TemporaryKey.pfx" />
     <None Include="HTML\treetable\.gitignore" />
     <None Include="HTML\treetable\README.md" />
     <None Include="HTML\treetable\treetable.jquery.json" />
@@ -1642,6 +1672,14 @@
     <None Include="Resources\1365685971_Information.png" />
     <None Include="Resources\1365686523_web.png" />
     <None Include="Resources\1365686491_Information.png" />
+    <None Include="Resources\1365926520_Document-scheduled-tasks-icon.png" />
+    <None Include="Resources\1365926714_Document-scheduled-tasks-icon.png" />
+    <None Include="Resources\1365926784_download.png" />
+    <None Include="Resources\1365926986_document_search.png" />
+    <None Include="Resources\1365927134_cog-icon-2-48x48.png" />
+    <None Include="Resources\1365927783_Update.png" />
+    <None Include="Resources\1365927859_system-software-update.png" />
+    <None Include="Resources\1365927946_social_balloon-14.png" />
     <Content Include="Resources\14747480-bang-comic-book-explosion.jpg" />
     <Content Include="3rd\itextsharp.dll" />
     <Content Include="3rd\Cx.Windows.Forms\MdiTabStrip.bmp" />
@@ -1674,6 +1712,7 @@
     <None Include="Resources\media_playback_start %281%29.png" />
     <None Include="Resources\media_playback_stop.png" />
     <None Include="Resources\star.png" />
+    <Content Include="Resources\t9froggy_trans.ico" />
     <Content Include="Resources\the_marvel_universe.jpg" />
     <Content Include="3rd\XPTable\Models\ColumnModel.bmp" />
     <Content Include="3rd\XPTable\Models\Table.bmp" />
@@ -1688,6 +1727,23 @@
     <Folder Include="3rd\ObjectListView\obj\Release\TempPE\" />
     <Folder Include="3rd\XPTable\doc\" />
     <Folder Include="Engines\JP\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

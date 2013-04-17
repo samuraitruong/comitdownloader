@@ -17,6 +17,7 @@ using System.Diagnostics;
 using IView.UI.Forms;
 using ComicDownloader.Helpers;
 using System.Text.RegularExpressions;
+using Amib.Threading;
 
 namespace ComicDownloader.Forms
 {
@@ -127,8 +128,9 @@ namespace ComicDownloader.Forms
                         dsItem.Status = ((float)chap.DownloadedCount / chap.PageCount).ToString("p");
                         if (dsItem.Status == "NaN") dsItem.Status = "Initializing...";
                     }
+                    lsvItems.RefreshObject(dsItem);
             }
-            lsvItems.RefreshObjects(DataSource);
+            
         }
         private void RefreshData()
         {
@@ -204,45 +206,7 @@ namespace ComicDownloader.Forms
                 var chapInfo = GetNextChapter();
                 if (chapInfo != null)
                 {
-                    try
-                    {
-                        chapInfo.Status = DownloadStatus.Downloading;
-                        this.Invoke(new MethodInvoker(delegate() {
-                            RefreshData(chapInfo);
-                        }));
-
-                        
-
-                        Downloader downloader = GetDownloader(chapInfo);
-                        if (downloader != null)
-                        {
-                            chapInfo.Pages = downloader.GetPages(chapInfo.Url);
-                            chapInfo.PageCount = chapInfo.Pages.Count;
-
-
-                            DownloadChapter(chapInfo, downloader);
-
-
-                            GeneratePDF(chapInfo);
-                            chapInfo.Status = DownloadStatus.Completed;
-
-                        }
-                        else
-                        {
-                            chapInfo.Status = DownloadStatus.Error;
-                        }
-                        //update chapter info
-
-                    }
-                    catch
-                    {
-                        chapInfo.Status = DownloadStatus.Error;
-                    }
-                    finally
-                    {
-                        SaveHistoryItem(DownloadItems);
-                        RefreshData(chapInfo);
-                    }
+                    DownloadChapterCallback(chapInfo);
                 }
                 else
                 {
@@ -252,6 +216,55 @@ namespace ComicDownloader.Forms
             if(OnQueueCompleted!= null)
             OnQueueCompleted(DownloadItems);
 
+        }
+
+        private object DownloadChapterCallback(object objState)
+        {
+            var chapInfo = (ChapterInfo)objState;
+            try
+            {
+                chapInfo.Status = DownloadStatus.Downloading;
+                this.Invoke(new MethodInvoker(delegate()
+                {
+                    RefreshData(chapInfo);
+                }));
+
+
+
+                Downloader downloader = GetDownloader(chapInfo);
+                if (downloader != null)
+                {
+                    chapInfo.Pages = downloader.GetPages(chapInfo.Url);
+                    chapInfo.PageCount = chapInfo.Pages.Count;
+
+
+                    DownloadChapter(chapInfo, downloader);
+
+
+                    GeneratePDF(chapInfo);
+                    chapInfo.Status = DownloadStatus.Completed;
+
+                }
+                else
+                {
+                    chapInfo.Status = DownloadStatus.Error;
+                }
+                //update chapter info
+
+            }
+            catch
+            {
+                chapInfo.Status = DownloadStatus.Error;
+            }
+            finally
+            {
+                lock (DownloadItems)
+                {
+                    SaveHistoryItem(DownloadItems);
+                    RefreshData(chapInfo);
+                }
+            }
+            return objState;
         }
 
         private Downloader GetDownloader(ChapterInfo chapInfo)
@@ -319,74 +332,63 @@ namespace ComicDownloader.Forms
         {
             if (chapInfo.Pages == null) return;
 
-            CreateChapterFolder(chapInfo);
+            SmartThreadPool smartThreadPool = new SmartThreadPool()
+            {
+                MaxThreads = Settings.UseMultiThreadToDownloadChapter?Settings.Threads:1
+            };
 
+            List<IWorkItemResult> workerItems = new List<IWorkItemResult>();
+
+           CreateChapterFolder(chapInfo);
+
+           this.Invoke(new MethodInvoker(delegate()
+           {
+               lblStatus.Text = "Downloading : " + chapInfo.Name + "[" + chapInfo.Url + "]";
+           }));
             int count = 0;
             long size = 0;
-            ManualResetEvent resetEvent = new ManualResetEvent(false);
+            
             int toProcess = chapInfo.Pages.Count;
             int index = 1;
-            //if (!Settings.UseMultiThreadToDownloadChapter)
-            //{
-            //   // resetEvent.Set();
-            //}
+           
             foreach (string pageUrl in chapInfo.Pages)
             {
-                var subThread = new Thread(delegate()
-                {
-                    string tempUrl = pageUrl;
-                    if (tempUrl.Contains("?"))
-                    {
-                        tempUrl = tempUrl.Substring(0, tempUrl.IndexOf("?"));
-                    }
-
-                    //string filename = Path.Combine(chapInfo.Folder, (index++).ToString("D2") + ". " + Path.GetFileName(tempUrl));
-
-
-                    try
-                    {
-                        string filename = downloader.DownloadPage(pageUrl, Settings.RenamePattern.Replace("{{PAGENUM}}", (index++).ToString("D2")), chapInfo.Folder, chapInfo.Url);
-
-
-                        var file = File.Open(filename, FileMode.Open);
-
-                        lock (updateUIObj)
+                IWorkItemResult wir1 = smartThreadPool.QueueWorkItem(new
+                        WorkItemCallback(delegate(object state)
                         {
-                            size += file.Length;
-                            //total += file.Length;
-                            file.Close();
-                            count++;
-                            chapInfo.Size = size;
-                            chapInfo.DownloadedCount = count;
-                            RefreshData(chapInfo);
-                        }
 
+                            try
+                            {
+                                string filename = downloader.DownloadPage(state.ToString(), Settings.RenamePattern.Replace("{{PAGENUM}}", (index++).ToString("D2")), chapInfo.Folder, chapInfo.Url);
 
-                    }
-                    catch
-                    {
-                    }
-                    finally
-                    {
+                                var file = File.Open(filename, FileMode.Open);
 
-                        if (Interlocked.Decrement(ref toProcess) == 0)
-                            resetEvent.Set();
-                        RefreshData(chapInfo);
-                    }
-                });
+                                lock (updateUIObj)
+                                {
+                                    size += file.Length;
+                                    //total += file.Length;
+                                    file.Close();
+                                    count++;
+                                    chapInfo.Size = size;
+                                    chapInfo.DownloadedCount = count;
+                                    RefreshData(chapInfo);
+                                }
+                            }
+                            catch{
+                            }
+                            finally
+                            {
+                                RefreshData(chapInfo);
+                            }
+                            return 0;
+                        }), pageUrl);
+                workerItems.Add(wir1);
 
-                //if (!Settings.UseMultiThreadToDownloadChapter)
-                //{
-                //   // resetEvent.WaitOne();
-
-                //}
-                //threads.Add(subThread);
-                subThread.Start();
             }
 
-            //if(Settings.UseMultiThreadToDownloadChapter)
-            resetEvent.WaitOne();
+            bool success = SmartThreadPool.WaitAll(workerItems.ToArray());
 
+            smartThreadPool.Shutdown();
         }
         
         private ChapterInfo GetNextChapter()
@@ -459,19 +461,19 @@ namespace ComicDownloader.Forms
              RefreshData();
 
              StartQueue();
-            
-
-
         }
 
         private void mnuRemovAll_Click(object sender, EventArgs e)
         {
-            DownloadItems.Clear();
-            //Stop Thread
-            RefreshData();
-            SaveHistoryItem(DownloadItems);
+            if (MessageBox.Show("Are you sure you want to remove all chapters?", "Remove al", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            {
+                DownloadItems.Clear();
+                //Stop Thread
+                RefreshData();
+                SaveHistoryItem(DownloadItems);
+            }
         }
-        private bool isContextMenuShowing = false;
+        
         private void contextMenuStrip1_Opened(object sender, EventArgs e)
         {
             var selectedItems = this.lsvItems.SelectedItems[0];
@@ -485,15 +487,13 @@ namespace ComicDownloader.Forms
             {
                 viewPDFToolStripMenuItem.Enabled = false;
             }
-            isContextMenuShowing = true;
+            
 
-            //MessageBox.Show("contextMenuStrip1_Opened");
         }
 
         private void contextMenuStrip1_Closed(object sender, ToolStripDropDownClosedEventArgs e)
         {
-            isContextMenuShowing = false;
-            //MessageBox.Show("contextMenuStrip1_Closed");
+            
         }
 
         private ChapterInfo GetChapterByIdentity(Guid Identity)
@@ -523,10 +523,7 @@ namespace ComicDownloader.Forms
 
         }
 
-        private void mnuForceDownload_Click(object sender, EventArgs e)
-        {
-            
-        }
+        
 
         internal void AbortQueue()
         {
@@ -601,6 +598,31 @@ namespace ComicDownloader.Forms
             SaveHistoryItem(DownloadItems);
            
 
+        }
+
+        private void mnuForceDownload_Click(object sender, EventArgs e)
+        {
+            var selectedItems = this.lsvItems.SelectedItems;
+            SmartThreadPool pool = new SmartThreadPool()
+            {
+                MaxThreads = 3,
+            };
+
+            lock (DownloadItems)
+            {
+                foreach (ListViewItem item in selectedItems)
+                {
+                    var col = item.ListView.Columns.Cast<ColumnHeader>().FirstOrDefault(p => p.Text == "Identify");
+                    var value = item.SubItems[col.Index].Text;
+                    var chap = GetChapterByIdentity(new Guid(value));
+
+                    chap.Priority = 10;
+                    chap.LastModified = DateTime.Now;
+                    chap.Status = DownloadStatus.Waiting;
+                    pool.QueueWorkItem(new WorkItemCallback(DownloadChapterCallback), chap);
+                }
+            }
+            SaveHistoryItem(DownloadItems); //StartQueue();
         }
     }
 }

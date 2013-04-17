@@ -47,6 +47,7 @@ using IView.UI.Forms;
 using ComicDownloader.Engines;
 using System.Collections;
 using System.Threading;
+using Amib.Threading;
 //::///////////////////////////////////////////////////////////////////////////
 //:: Implementation
 //::///////////////////////////////////////////////////////////////////////////
@@ -105,19 +106,22 @@ namespace ComicDownoader.Forms
         {
             InitializeComponent();
             InitializeChildForm();
+            SmartThreadPool pool = new SmartThreadPool() { MaxThreads = 8 };
             if (sFilePath.StartsWith("http"))
             {
                 downloader = Downloader.Resolve(sFilePath);
                  m_sFilePaths = downloader.GetPages(sFilePath);
 
                 //Precache data
-                 new Thread(new ThreadStart(delegate() {
+                 //new Thread(new ThreadStart(delegate() {
                      for (int i = 0; i < m_sFilePaths.Count; i++)
                      {
-                         GetImage(m_sFilePaths[i]);
+                         pool.QueueWorkItem(new WorkItemCallback(this.GetImageCallback), m_sFilePaths[i]);
                      }
+                      //   GetImage(m_sFilePaths[i]);
+                     //}
                  
-                 })).Start();
+                 //})).Start();
                 
             }
             else
@@ -175,6 +179,10 @@ namespace ComicDownoader.Forms
         /// pri
         /// 
         private Hashtable cached = new Hashtable();
+        public object GetImageCallback(object obj) {
+            return GetImage(obj.ToString());
+        
+        }
 
         private Bitmap GetImage(string sPath)
         {
