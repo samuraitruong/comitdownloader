@@ -23,6 +23,7 @@ using IView.UI.Forms;
 using System.Runtime.InteropServices;
 using ComicDownoader.Forms;
 using ComicDownloader.Helpers;
+using Amib.Threading;
 
 
 namespace ComicDownloader
@@ -178,8 +179,12 @@ namespace ComicDownloader
 
         }
 
-        
 
+        public struct DownloadPageParam
+        {
+            public int Index { get; set; }
+            public string PageUrl { get; set; }
+        }
         private void DownloadChapter(ChapterInfo chapInfo)
         {
             if (chapInfo.Pages == null) return;
@@ -190,30 +195,38 @@ namespace ComicDownloader
             long size = 0;
             ManualResetEvent resetEvent = new ManualResetEvent(false);
             int toProcess = chapInfo.Pages.Count;
+
+            SmartThreadPool smartThreadPool = new SmartThreadPool()
+            {
+                MaxThreads = 8
+            };
+
             int index = 1;
+            List<IWorkItemResult> wi = new List<IWorkItemResult>();
+
             //if (!Settings.UseMultiThreadToDownloadChapter)
             //{
             //   // resetEvent.Set();
             //}
+
             foreach (string pageUrl in chapInfo.Pages)
             {
-                var subThread = new Thread(delegate()
+                MyLogger.Log(new Exception("Url__ : " + pageUrl));
+            }
+
+            foreach (string pageUrl in chapInfo.Pages)
+            {
+                IWorkItemResult wir1 = smartThreadPool.QueueWorkItem(new
+                       WorkItemCallback(delegate(object state)
                 {
-                    string tempUrl = pageUrl;
-                    if (tempUrl.Contains("?"))
-                    {
-                        tempUrl = tempUrl.Substring(0, tempUrl.IndexOf("?"));
-                    }
 
-                    //string filename = Path.Combine(chapInfo.Folder, (index++).ToString("D2") + ". " + Path.GetFileName(tempUrl));
-
-
+                    DownloadPageParam param = (DownloadPageParam)state;
                     try
                     {
-                        string filename = Downloader.DownloadPage(pageUrl, Settings.RenamePattern.Replace("{{PAGENUM}}", (index++).ToString("D2")), chapInfo.Folder, chapInfo.Url);
-                        
-                        
+                        string filename = Downloader.DownloadPage(param.PageUrl, Settings.RenamePattern.Replace("{{PAGENUM}}", param.Index.ToString("D2")), chapInfo.Folder, chapInfo.Url);
+
                         var file = File.Open(filename, FileMode.Open);
+
 
                         lock (updateUIObj)
                         {
@@ -238,9 +251,9 @@ namespace ComicDownloader
                             });
                         }
 
-                       
+
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         MyLogger.Log(ex);
                     }
@@ -250,19 +263,16 @@ namespace ComicDownloader
                         if (Interlocked.Decrement(ref toProcess) == 0)
                             resetEvent.Set();
                     }
-                });
 
-                //if (!Settings.UseMultiThreadToDownloadChapter)
-                //{
-                //   // resetEvent.WaitOne();
+                    return 1;
+                }), new DownloadPageParam() { Index = index++, PageUrl = pageUrl});
 
-                //}
-                threads.Add(subThread);
-                subThread.Start();
+
+                wi.Add(wir1);
+
             }
-           
-            //if(Settings.UseMultiThreadToDownloadChapter)
-            resetEvent.WaitOne();
+
+            SmartThreadPool.WaitAll(wi.ToArray());
             
         }
 
@@ -565,24 +575,24 @@ namespace ComicDownloader
                         txtTitle.Text = currentStoryInfo.Name.Replace('"', ' ').Replace('.', ' ');
 
                         this.Text = Downloader.Name + currentStoryInfo.Name;
+                    
+
+                        tblChapters.Rows.Clear();
+
+                        foreach (var item in currentStoryInfo.Chapters)
+                        {
+                            item.UniqueIdentify = Guid.NewGuid();
+
+                            int index = tblChapters.Rows.Add(new Row());
+
+                            tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId.ToString(), true));
+                            tblChapters.Rows[index].Cells.Add(new Cell(item.UniqueIdentify.ToString(), true));
+                            tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId));
+                            tblChapters.Rows[index].Cells.Add(new Cell(item.Name.Replace('"', ' ').Replace('.', ' '), true));
+                            tblChapters.Rows[index].Cells.Add(new Cell(item.Url, new CellStyle() { ForeColor = System.Drawing.Color.Green }));
+
+                        }
                     }));
-
-                    tblChapters.Rows.Clear();
-
-                    foreach (var item in currentStoryInfo.Chapters)
-                    {
-                        item.UniqueIdentify = Guid.NewGuid();
-
-                        int index = tblChapters.Rows.Add(new Row());
-
-                        tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId.ToString(), true));
-                        tblChapters.Rows[index].Cells.Add(new Cell(item.UniqueIdentify.ToString(), true));
-                        tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId));
-                        tblChapters.Rows[index].Cells.Add(new Cell(item.Name.Replace('"', ' ').Replace('.', ' '), true));
-                        tblChapters.Rows[index].Cells.Add(new Cell(item.Url, new CellStyle() { ForeColor = System.Drawing.Color.Green }));
-
-                    }
-
 
                     this.Invoke(new MethodInvoker(delegate()
                     {
