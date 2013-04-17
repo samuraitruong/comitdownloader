@@ -76,7 +76,13 @@ namespace ComicDownloader.Helpers
                 return CustomAttributes<AssemblyTrademarkAttribute>().Trademark;
             }
         }
-
+        public  DateTime ReleaseDate
+        {
+            get
+            {
+                return System.IO.File.GetLastWriteTime(m_Assembly.Location);
+            }
+        }
         public string AssemblyVersion
         {
             get

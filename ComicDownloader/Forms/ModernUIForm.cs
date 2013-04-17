@@ -13,6 +13,7 @@ using MetroFramework;
 using System.Threading;
 using Amib.Threading;
 using ComicDownloader.Extensions;
+using ComicDownloader.Helpers;
 
 namespace ComicDownloader.Forms
 {
@@ -109,7 +110,7 @@ namespace ComicDownloader.Forms
                         title.ActiveControl = null;
                         title.Tag = downloader;
                         title.Location = new System.Drawing.Point(20, 150);
-                        //this.metroTile2.Name = "metroTile1";
+                        title.Cursor = System.Windows.Forms.Cursors.Hand;
                         title.Size = new System.Drawing.Size(150, 120);
                         title.Style = (MetroFramework.MetroColorStyle)(next%13);
                         title.TabIndex = 2;
@@ -272,6 +273,15 @@ namespace ComicDownloader.Forms
             {
             BackgroundUpdate();
              }
+
+             DisplayInfo();
+        }
+
+        private void DisplayInfo()
+        {
+            AssemblyInfoHelper info= new AssemblyInfoHelper(this.GetType());
+
+            lnkAbout.Text = string.Format("{0} v{1}  Release On {2}[{3}]",info.Title, info.AssemblyVersion, info.ReleaseDate, info.Copyright);
         }
         private object locker = DateTime.Now;
         public void BackgroundUpdate()
@@ -326,6 +336,49 @@ namespace ComicDownloader.Forms
         {
             if (mainApp != null) mainApp.ApplicationBeiningExited = true;
         }
+
+        private void metroTile3_Click(object sender, EventArgs e)
+        {
+            DisplayFormOnMainApp((new SearchForm()));
+            
+        }
+
+        private void DisplayFormOnMainApp(Form form)
+        {
+            if (mainApp == null) mainApp = new AppMainForm();
+            mainApp.Show();
+            mainApp.ShowForm(form);
+            mainApp.WindowState = FormWindowState.Maximized;
+        }
+
+        private void tlSetting_Click(object sender, EventArgs e)
+        {
+            DisplayFormOnMainApp(new SettingForm());
+        }
+
+        private void QueueDownload_Click(object sender, EventArgs e)
+        {
+            DisplayFormOnMainApp(new QueueDownloadForm());
+        }
+
+        private void tlLastestUpdate_Click(object sender, EventArgs e)
+        {
+            DisplayFormOnMainApp(new LastestChapterUpdateForm());
+        }
+
+        private void bntSearch_Click(object sender, EventArgs e)
+        {
+            SearchForm frm = new SearchForm(txtKeyword.Text);
+            
+            DisplayFormOnMainApp(frm);
+        }
+
+        private void txtKeyword_TextChanged(object sender, EventArgs e)
+        {
+            bntSearch.Enabled = !string.IsNullOrEmpty(txtKeyword.Text);
+        }
+
+       
 
     }
 }
