@@ -113,7 +113,7 @@ namespace ComicDownloader.Engines
             var arr = match.Groups[1].Value.Split("',".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
             pages.AddRange(arr);
-
+            
             return pages;
         }
 
