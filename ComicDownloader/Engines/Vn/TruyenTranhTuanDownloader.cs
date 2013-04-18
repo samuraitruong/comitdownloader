@@ -12,6 +12,14 @@ namespace ComicDownloader.Engines
     public class TruyenTranhTuanDownloader
         : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://truyentranhtuan.com/banner/banner-onepiece110720181938.jpg";
+            }
+        }
+
         public override string StoryUrlPattern
         {
             get

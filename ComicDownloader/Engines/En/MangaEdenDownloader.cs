@@ -10,6 +10,14 @@ namespace ComicDownloader.Engines
     [Downloader("MangaReader", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410887_Add")]
     public class MangaEdenDownloader :  Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://cdn.mangaeden.com/images/logo2.png";
+            }
+        }
+
         public override string Name
         {
             get { return "[Manga Eden] - "; }

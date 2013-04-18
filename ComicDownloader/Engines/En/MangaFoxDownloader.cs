@@ -10,6 +10,14 @@ namespace ComicDownloader.Engines
     [Downloader("MangaFox", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410906_add")]
     public class MangaFoxDownloader :  Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://l.mfcdn.net/media/fblogo.png";
+            }
+        }
+
         public override string Name
         {
             get { return "[Manga Fox] - "; }

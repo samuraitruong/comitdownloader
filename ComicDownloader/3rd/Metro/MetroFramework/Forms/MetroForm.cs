@@ -215,6 +215,7 @@ namespace MetroFramework.Forms
             }
         }
 
+
         private const int borderWidth = 5;
 
         #endregion

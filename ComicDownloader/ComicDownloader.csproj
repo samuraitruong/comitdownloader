@@ -1465,6 +1465,7 @@
     <Content Include="3rd\CassiniDev\Resources\preferences-web-browser-shortcuts.ico" />
     <Content Include="3rd\Common.Logging.dll" />
     <Content Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_focus_24x24.png" />
+    <None Include="Resources\windows_8_wallpaper_by_joka7959-d5dtl3v.png" />
     <None Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_focus_24x241.png" />
     <Content Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_pressed_24x24.png" />
     <None Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_pressed_24x241.png" />

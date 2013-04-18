@@ -26,8 +26,28 @@ namespace ComicDownloader.Forms
             InitializeTabAndTitles();
         }
 
+        private Color[] colorArray = 
+        {
+            ColorTranslator.FromHtml("#2c89ee"),
+            ColorTranslator.FromHtml("#6cb71e"),
+            ColorTranslator.FromHtml("#bb1d48"),
+            ColorTranslator.FromHtml("#00a21b"),
+            ColorTranslator.FromHtml("#5434ae"),
+            ColorTranslator.FromHtml("#002a6e"),
+            ColorTranslator.FromHtml("#d44a28"),
+            ColorTranslator.FromHtml("#1e7983"),
+            ColorTranslator.FromHtml("#fcdb1c"),
+            ColorTranslator.FromHtml("#94bd79"),
+            ColorTranslator.FromHtml("#7f3978"),
+            ColorTranslator.FromHtml("#ff0000"),
+            ColorTranslator.FromHtml("#ff6600")
+        };
+
         private void InitializeTabAndTitles()
         {
+            metroTabPage1.CustomBackground = true;
+            metroTabPage1.BackColor = ColorTranslator.FromHtml("#001941");
+
             var tabs = GetRibbonMenuTags();
             foreach (var item in tabs)
             {
@@ -49,6 +69,9 @@ namespace ComicDownloader.Forms
                 tab.VerticalScrollbarHighlightOnWheel = false;
                 tab.VerticalScrollbarSize = 10;
                 tab.Visible = true;
+
+                tab.CustomBackground = true;
+                tab.BackColor = ColorTranslator.FromHtml("#001941");
 
                 int maxwith = metroTabControl1.Width;
                 int x = 5;
@@ -112,9 +135,20 @@ namespace ComicDownloader.Forms
                         title.Location = new System.Drawing.Point(20, 150);
                         title.Cursor = System.Windows.Forms.Cursors.Hand;
                         title.Size = new System.Drawing.Size(150, 120);
-                        title.Style = (MetroFramework.MetroColorStyle)(next%13);
+
+                        title.CustomBackground = true;
+                        var index = next%colorArray.Length;
+                        title.BackColor = colorArray[index];
+
+                        title.CustomForeColor = true;
+                        title.ForeColor = ColorTranslator.FromHtml("#ffffff");
+                        
+                        title.TileTextFontSize = MetroTileTextSize.Medium;
+                        title.TileTextFontWeight = MetroTileTextWeight.Bold;
+
+                        //title.Style = (MetroFramework.MetroColorStyle)(next%13);
                         title.TabIndex = 2;
-                        if (title.Style == MetroColorStyle.White) title.Style = MetroColorStyle.Red;
+                        //if (title.Style == MetroColorStyle.White) title.Style = MetroColorStyle.Red;
                         title.Text = downloader.Name;
                         title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                         title.Theme = MetroFramework.MetroThemeStyle.Dark;

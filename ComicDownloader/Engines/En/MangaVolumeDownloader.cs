@@ -10,6 +10,14 @@ namespace ComicDownloader.Engines
     [Downloader("MangaVolume", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
     public class MangaVolumeDownloader : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://www.mangavolume.com/templates/mangavolume/images/logo.jpg";
+            }
+        }
+
         public override string Name
         {
             get { return "[MangaVolume] - "; }

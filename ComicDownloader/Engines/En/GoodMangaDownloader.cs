@@ -10,6 +10,14 @@ namespace ComicDownloader.Engines
     [Downloader("GoodManga", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
     public class GoodMangaDownloader : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://w2.goodmanga.net/images/site/front/logo.png";
+            }
+        }
+
         public override string Name
         {
             get { return "[GoodManga] - "; }

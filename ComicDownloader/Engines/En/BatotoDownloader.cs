@@ -11,6 +11,14 @@ namespace ComicDownloader.Engines
     [Downloader("Batoto", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
     public class BatotoDownloader :  Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://www.batoto.net/forums/public/style_images/Deluxe_Images/logo.png";
+            }
+        }
+
         public override string Name
         {
             get { return "[Batoto.NET] - "; }

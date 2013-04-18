@@ -10,6 +10,15 @@ namespace ComicDownloader.Engines
     [Downloader("KissManga", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410887_Add")]
     public class KissMangaDownloader : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://kissmanga.com/Content/images/favicon.ico";
+            }
+        }
+
+
         public override string Name
         {
             get { return "[Kiss Manga] - "; }

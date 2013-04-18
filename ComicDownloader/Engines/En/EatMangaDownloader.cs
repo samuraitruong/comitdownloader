@@ -10,6 +10,14 @@ namespace ComicDownloader.Engines
     [Downloader("EatManga", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
     public class EatMangaDownloader :  Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://s8.eatmanga.com/media/logo.png";
+            }
+        }
+
         public override string Name
         {
             get { return "[Eatmanga.com] - "; }

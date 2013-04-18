@@ -10,6 +10,14 @@ namespace ComicDownloader.Engines
     [Downloader("MangaWall", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
     public class MangaWallDownloader :  Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://san.mangawall.com/avatar/200x200/0.png";
+            }
+        }
+
         public override string Name
         {
             get { return "[Manga Wall] - "; }

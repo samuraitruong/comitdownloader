@@ -12,6 +12,14 @@ namespace ComicDownloader.Engines
     public class ThienDuongMangaDownloader
         : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://thienduongmanga.com/views/css/thien-duong-manga.jpg";
+            }
+        }
+
         public override string StoryUrlPattern
         {
             get

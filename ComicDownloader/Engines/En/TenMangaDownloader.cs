@@ -10,6 +10,14 @@ namespace ComicDownloader.Engines
     [Downloader("TenManga", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "1364078951_insert-object")]
     public class TenMangaDownloader : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://www.tenmanga.com/files/img/logo.gif";
+            }
+        }
+
         public override string Name
         {
             get { return "[Ten Manga] - "; }

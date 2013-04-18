@@ -12,6 +12,37 @@ namespace ComicDownloader.Engines
     public class MangaKungDownloader
         : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://www.mangakung.com/files/banner.png";
+            }
+        }
+
+        public override string StoryUrlPattern
+        {
+            get
+            {
+                return HostUrl + "/{0}/";
+            }
+
+        }
+        public override string HostUrl
+        {
+            get
+            {
+                return "http://www.mangakung.com/";
+            }
+        }
+        public override string ListStoryURL
+        {
+            get
+            {
+                return "http://www.mangakung.com/directory/";
+            }
+
+        }
 
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
@@ -111,29 +142,6 @@ namespace ComicDownloader.Engines
             
 
             return pages;
-        }
-        public override string StoryUrlPattern
-        {
-            get
-            {
-                return HostUrl + "/{0}/";
-            }
-            
-        }
-        public override string HostUrl
-        {
-            get
-            {
-                return "http://www.mangakung.com/";
-            }
-        }
-        public override string ListStoryURL
-        {
-            get
-            {
-                return "http://www.mangakung.com/directory/";
-            }
-            
         }
 
         public override List<StoryInfo> OnlineSearch(string keyword)

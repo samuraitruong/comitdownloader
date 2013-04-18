@@ -10,6 +10,14 @@ namespace ComicDownloader.Engines
     [Downloader("JPManga", MenuGroup = "Japan", Language = "English", Image32 = "_1364410887_Add")]
     public class JPMangaDownloader : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://js.eu.cdndm.com/endefault/img/logo.gif";
+            }
+        }
+
         public override string Name
         {
             get { return "[JP Manga] - "; }

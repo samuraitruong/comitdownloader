@@ -65,6 +65,7 @@ namespace ComicDownloader.Forms
             // 
             // metroTabPage1
             // 
+            this.metroTabPage1.BackColor = System.Drawing.Color.White;
             this.metroTabPage1.Controls.Add(this.bntSearch);
             this.metroTabPage1.Controls.Add(this.txtKeyword);
             this.metroTabPage1.Controls.Add(this.tlLastestUpdate);
@@ -76,12 +77,13 @@ namespace ComicDownloader.Forms
             this.metroTabPage1.Controls.Add(this.tlSettings);
             this.metroTabPage1.Controls.Add(this.metroTile3);
             this.metroTabPage1.Controls.Add(this.tlQueueDownload);
+            this.metroTabPage1.CustomBackground = true;
             this.metroTabPage1.HorizontalScrollbarBarColor = true;
             this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.HorizontalScrollbarSize = 10;
-            this.metroTabPage1.Location = new System.Drawing.Point(4, 35);
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 32);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(752, 458);
+            this.metroTabPage1.Size = new System.Drawing.Size(752, 461);
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "Home";
             this.metroTabPage1.VerticalScrollbarBarColor = true;

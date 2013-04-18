@@ -10,6 +10,14 @@ namespace ComicDownloader.Engines
     [Downloader("Comic.Vuilen.com", Language="Tieng viet", MenuGroup = "VN - 2" , MetroTab="Tiếng Việt", Image32 = "_1364410884_add1_")]
     public class ComicVuiLenDownloader : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://www.vuilen.com/images/vuilen.gif";
+            }
+        }
+
         public override string Name
         {
             get { return "[Comic Vui Len] - "; }
