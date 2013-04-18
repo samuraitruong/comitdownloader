@@ -321,6 +321,10 @@ namespace ComicDownloader.Forms
         {
             try
             {
+                if (Directory.Exists(chapInfo.Folder))
+                {
+                    Directory.Delete(chapInfo.Folder, true);
+                }
                 Directory.CreateDirectory(chapInfo.Folder);
             }
             finally

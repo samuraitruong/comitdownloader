@@ -24,6 +24,7 @@ using System.Runtime.InteropServices;
 using ComicDownoader.Forms;
 using ComicDownloader.Helpers;
 using Amib.Threading;
+using ComicDownloader.Extensions;
 
 
 namespace ComicDownloader
@@ -204,16 +205,6 @@ namespace ComicDownloader
             int index = 1;
             List<IWorkItemResult> wi = new List<IWorkItemResult>();
 
-            //if (!Settings.UseMultiThreadToDownloadChapter)
-            //{
-            //   // resetEvent.Set();
-            //}
-
-            foreach (string pageUrl in chapInfo.Pages)
-            {
-                MyLogger.Log(new Exception("Url__ : " + pageUrl));
-            }
-
             foreach (string pageUrl in chapInfo.Pages)
             {
                 IWorkItemResult wir1 = smartThreadPool.QueueWorkItem(new
@@ -377,7 +368,7 @@ namespace ComicDownloader
                     {
                         Guid id = new Guid((item.Cells[1].Text));
                         var chap = this.currentStoryInfo.Chapters.FirstOrDefault(p => p.UniqueIdentify == id);
-                        chap.FolderName = txtTitle.Text + " " + chap.ChapId.ToString();
+                        chap.FolderName = chap.Name.ConvertToValidFileName();
                         chap.Folder = Path.Combine(rootPath, chap.FolderName);
                         chap.PdfFileName = chap.FolderName + ".pdf";
                         chap.PdfPath = Path.Combine(rootPath, "PDF\\" + chap.PdfFileName);
@@ -393,6 +384,10 @@ namespace ComicDownloader
         {
             try
             {
+                if (Directory.Exists(chapInfo.Folder))
+                {
+                    Directory.Delete(chapInfo.Folder, true);
+                }
                 Directory.CreateDirectory(chapInfo.Folder);
             }
             finally

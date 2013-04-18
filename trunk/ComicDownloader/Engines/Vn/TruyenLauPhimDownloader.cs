@@ -188,5 +188,52 @@ namespace ComicDownloader.Engines
             }
             return stories;
         }
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string urlPattern = string.Format("http://truyen.lauphim.com/manga-list/search/{0}/name-az/{1}/", keyword.Replace(" ", "+"), "{0}");
+
+            var results = new List<StoryInfo>();
+
+            int currentPage = 1;
+            bool end = false;
+
+            while (currentPage <= Constant.LimitedPageForSearch)
+            {
+                if (end)
+                {
+                    break;
+                }
+
+                string url = string.Format(urlPattern, currentPage);
+
+                string html = NetworkHelper.GetHtml(url);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"wpm_pag mng_lst tbn\"]/div[contains(@class,'nde')]/div/a");
+                if (nodes != null && nodes.Count > 0)
+                {
+                    foreach (var node in nodes)
+                    {
+                        if (results.Any(p => p.Url == node.Attributes["href"].Value))
+                        {
+                            end = true;
+                            break;
+                        }
+
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = node.Attributes["href"].Value,
+                            Name = node.Attributes["title"].Value.Trim()
+                        };
+                        results.Add(info);
+                    }
+                }
+
+                currentPage++;
+            }
+            return results;
+        }
     }
 }
