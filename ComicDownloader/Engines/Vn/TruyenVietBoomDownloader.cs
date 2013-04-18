@@ -160,5 +160,41 @@ namespace ComicDownloader.Engines
         //    }
         //    return stories;
         //}
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string urlPattern = string.Format("http://truyen.vietboom.com/tim-kiem?ViewType=1&SearchText={0}&SearchBy=1&CurrentPage={1}", keyword.Replace(" ", "+"), "{0}");
+
+            var results = new List<StoryInfo>();
+
+            int currentPage = 1;
+
+            while (currentPage <= Constant.LimitedPageForSearch)
+            {
+                string url = string.Format(urlPattern, currentPage);
+
+                string html = NetworkHelper.GetHtml(url);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"cListStory\"]/div[contains(@class, 'item')]/h4/a");
+                if (nodes != null && nodes.Count > 0)
+                {
+                    foreach (var node in nodes)
+                    {
+
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = HostUrl + node.Attributes["href"].Value,
+                            Name = node.InnerText.Trim()
+                        };
+                        results.Add(info);
+                    }
+                }
+
+                currentPage++;
+            }
+            return results;
+        }
     }
 }

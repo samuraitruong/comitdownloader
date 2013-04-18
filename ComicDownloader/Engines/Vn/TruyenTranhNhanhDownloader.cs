@@ -169,5 +169,42 @@ namespace ComicDownloader.Engines
             }
             return stories;
         }
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string urlPattern = string.Format("http://truyentranhnhanh.com/comics/timkiem/{1}/{0}", keyword.Replace(" ", "+"), "{0}");
+
+            var results = new List<StoryInfo>();
+
+            int currentPage = 1;
+
+            while (currentPage <= Constant.LimitedPageForSearch)
+            {
+                string url = string.Format(urlPattern, currentPage);
+
+                string html = NetworkHelper.GetHtml(url);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"list_search\"]/ul/li/div[@class=\"manga_text\"]/div[@class=\"title\"]/h3/a");
+                if (nodes != null && nodes.Count > 0)
+                {
+
+                    foreach (var node in nodes)
+                    {
+
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = node.Attributes["href"].Value,
+                            Name = node.InnerText.Trim()
+                        };
+                        results.Add(info);
+                    }
+                }
+
+                currentPage++;
+            }
+            return results;
+        }
     }
 }

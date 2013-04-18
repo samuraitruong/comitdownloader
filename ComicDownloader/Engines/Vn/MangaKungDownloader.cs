@@ -135,9 +135,42 @@ namespace ComicDownloader.Engines
             }
             
         }
-        public MangaKungDownloader()
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
         {
-            
+            string urlPattern = string.Format("http://www.mangakung.com/page/{1}/?s={0}", keyword.Replace(" ", "+"), "{0}");
+
+            var results = new List<StoryInfo>();
+
+            int currentPage = 1;
+
+            while (currentPage <= Constant.LimitedPageForSearch)
+            {
+                string url = string.Format(urlPattern, currentPage);
+
+                string html = NetworkHelper.GetHtml(url);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@id=\"maincontent\"]/div[@class=\"galleryitem\"]/h3/a");
+                if (nodes != null && nodes.Count > 0)
+                {
+
+                    foreach (var node in nodes)
+                    {
+
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = node.Attributes["href"].Value,
+                            Name = node.InnerText.Trim()
+                        };
+                        results.Add(info);
+                    }
+                }
+
+                currentPage++;
+            }
+            return results;
         }
     }
 }

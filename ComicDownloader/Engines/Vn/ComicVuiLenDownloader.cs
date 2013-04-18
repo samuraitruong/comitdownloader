@@ -129,5 +129,7 @@ namespace ComicDownloader.Engines
             
             return pages;
         }
+
+        //Don't provide search
     }
 }
