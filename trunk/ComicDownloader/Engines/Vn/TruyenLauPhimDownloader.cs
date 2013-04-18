@@ -10,6 +10,14 @@ namespace ComicDownloader.Engines
     [Downloader("Truyen.Lauphim.com", Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "_1364410898_file_add")]
     public class TruyenLauPhimDownloader : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://truyen.lauphim.com/wp-content/themes/glossy-bright/logo.png";
+            }
+        }
+
         public override string Name
         {
             get { return "[Truyen Lau Phim] - "; }

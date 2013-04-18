@@ -10,6 +10,14 @@ namespace ComicDownloader.Engines
     [Downloader("MangaAnimea", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
     public class MangaAnimeaDownloader : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://cdn.animea.net/gfx/mgfx/logo.png";
+            }
+        }
+
         public override string Name
         {
             get { return "[Manga.Animea.NET] - "; }

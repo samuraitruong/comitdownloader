@@ -10,6 +10,14 @@ namespace ComicDownloader.Engines
     [Downloader("nTruyen", Language = "Tieng viet", MenuGroup = "VN - 2" , MetroTab="Tiếng Việt", Image32 = "_1364410878_Add")]
     public class MangaFcDownloader : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://mangafc.com/img/logo.png";
+            }
+        }
+
         public override string Name
         {
             get { return "[Manga Fc] - "; }

@@ -10,6 +10,14 @@ namespace ComicDownloader.Engines
     [Downloader("Manga Inn", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
     public class MangaInnDownloader : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://www.mangainn.com/images/logoM.png?1366264019";
+            }
+        }
+
         public override string Name
         {
             get { return "[Manga Inn] - "; }

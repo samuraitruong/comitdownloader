@@ -10,6 +10,14 @@ namespace ComicDownloader.Engines
     [Downloader("Webtruyen.com", MenuGroup = "VN" , MetroTab="Tiếng Việt", Language = "Tieng viet", Image32 = "1364131990_document_add")]
     public class WebTruyenDownloader : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://webtruyen.net/skin/default/img/emanga-logo-mini.png";
+            }
+        }
+
         public override string Name
         {
             get { return "[Web Truyen] - "; }

@@ -7,12 +7,20 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("MangaReader", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
+    [Downloader("Starkana", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
     public class MangaAccessDownloader :  Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "https://starkana.me/img/sk_logo.png";
+            }
+        }
+
         public override string Name
         {
-            get { return "[Manga Access] - "; }
+            get { return "[Starkana] - "; }
         }
 
         public override string ListStoryURL

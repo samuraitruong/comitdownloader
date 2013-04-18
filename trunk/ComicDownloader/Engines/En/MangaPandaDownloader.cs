@@ -10,6 +10,14 @@ namespace ComicDownloader.Engines
     [Downloader("MangaPanda", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
     public class MangaPandaDownloader__ : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://s4.mangapanda.com/favicon.ico";
+            }
+        }
+
         public override string Name
         {
             get { return "[MangaPanda] - "; }

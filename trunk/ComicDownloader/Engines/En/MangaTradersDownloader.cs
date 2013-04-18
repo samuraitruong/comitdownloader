@@ -10,6 +10,8 @@ namespace ComicDownloader.Engines
     [Downloader("MangaTraders", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
     public class MangaTradersDownloader : Downloader
     {
+        
+
         public override string Name
         {
             get { return "[MangaTraders] - "; }

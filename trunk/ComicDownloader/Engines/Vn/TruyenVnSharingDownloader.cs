@@ -53,7 +53,8 @@ namespace ComicDownloader.Engines
                     string url = string.Format(urlPattern, currentPage);
 
                     string html = NetworkHelper.GetHtml(url);
-                    var pattern = "<a class=\"bigChar\" href=\"(.*)\">(.*)</a>";
+                    var pattern = "<a class=\"bigChar\" href=\"(.*)\">(.*)</a>";
+
                     //HtmlDocument htmlDoc = new HtmlDocument();
                     //htmlDoc.LoadHtml(html);
 

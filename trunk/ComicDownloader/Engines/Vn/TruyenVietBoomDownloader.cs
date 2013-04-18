@@ -10,6 +10,7 @@ namespace ComicDownloader.Engines
     [Downloader("Vietboom", MenuGroup = "VN" , MetroTab="Tiếng Việt", Language = "Tieng viet", Image32 = "1364150669_folder_add")]
     public class TruyenVietBoomDownloader :  Downloader
     {
+
         public override string Name
         {
             get { return "[Viet Boom] - "; }

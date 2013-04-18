@@ -10,6 +10,14 @@ namespace ComicDownloader.Engines
     [Downloader("TruyenTranh8.com", Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
     public class TruyenTranh8Downloader: Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://newupload.truyentranh8.com/templates/main/images/logo.png";
+            }
+        }
+
         public override string Name
         {
             get { return "[Truyen Tranh 8] - "; }

@@ -12,6 +12,14 @@ namespace ComicDownloader.Engines
     public class XomTruyenDownloader
         : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://xomtruyen.com/skin/default/img/xomtruyen.png";
+            }
+        }
+
         public override string StoryUrlPattern
         {
             get
