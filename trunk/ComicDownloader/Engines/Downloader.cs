@@ -16,6 +16,13 @@ namespace ComicDownloader.Engines
         public abstract string Name { get; }
         public abstract  string ListStoryURL { get;  }
         public abstract string HostUrl { get; }
+        public virtual string ServiceUrl
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
         public abstract string StoryUrlPattern { get; }
         public virtual string Logo { get {
             return string.Empty;

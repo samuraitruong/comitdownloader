@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
 
 namespace ComicDownloader.Engines
 {
@@ -24,6 +25,14 @@ namespace ComicDownloader.Engines
         public override string HostUrl
         {
             get { return "http://truyen.vietboom.com"; }
+        }
+
+        public override string ServiceUrl
+        {
+            get
+            {
+                return "http://truyen.vietboom.com/MainHandler.ashx";
+            }
         }
 
         public override string StoryUrlPattern
@@ -196,6 +205,51 @@ namespace ComicDownloader.Engines
                 currentPage++;
             }
             return results;
+        }
+
+        public override List<StoryInfo> GetLastestUpdates()
+        {
+            var jsonStr = "{{\"id\": {0},\"method\":\"getListStoryNewUpdateChapter\",\"params\":[\"{1}\"]}}";
+            var jsonArray = new string[]{
+                string.Format(jsonStr, "2", DateTime.Now.ToString("O")),
+                string.Format(jsonStr, "2", DateTime.Now.AddDays(-1).ToString("O")),
+                string.Format(jsonStr, "2", DateTime.Now.AddDays(-2).ToString("O"))
+            };
+
+            var stories = new List<StoryInfo>();
+
+            foreach (string json in jsonArray)
+            {
+                var resultStr = NetworkHelper.PostHtml(ServiceUrl, HostUrl, json);
+
+                if (!string.IsNullOrEmpty(resultStr))
+                {
+                    JObject obj = JObject.Parse(resultStr);
+                    var resultJson = (JObject)obj["result"];
+                    var data = (JArray)resultJson["data"];
+
+                    foreach (JObject item in data)
+                    {
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = HostUrl + "/truyen/" + item["userDefineURL"],
+                            Name = item["name"].ToString(),
+                            Chapters = new List<ChapterInfo>()
+                            {
+                                new ChapterInfo()
+                                {
+                                    Url = HostUrl + "/truyen/" + item["userDefineURL"] + "/" + item["lastChapterID"] + "/" + item["lastChapterNameUserDefineURL"],
+                                    Name = item["lastChapterName"].ToString()
+                                }
+                            }
+                        };
+
+                        stories.Add(info);
+                    }
+                }
+            }
+
+            return stories;
         }
     }
 }
