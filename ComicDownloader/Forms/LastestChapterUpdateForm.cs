@@ -110,7 +110,10 @@ namespace ComicDownloader.Forms
                     {
                         DataSource.AddRange(tempLst);
                         //lvLastestUpdates.SetObjects(DataSource);
-                        lvLastestUpdates.AddObjects(DataSource);
+                        this.Invoke(new MethodInvoker(delegate()
+                        {
+                            lvLastestUpdates.AddObjects(DataSource);
+                        }));
                     }
                 }
 

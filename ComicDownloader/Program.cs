@@ -6,6 +6,7 @@ using System.Threading;
 using System.Net;
 using ComicDownloader.Forms;
 using System.Diagnostics;
+using ComicDownloader.Engines;
 
 namespace ComicDownloader
 {
