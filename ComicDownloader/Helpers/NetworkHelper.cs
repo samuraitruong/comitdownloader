@@ -50,7 +50,16 @@ namespace ComicDownloader.Engines
             return "HTTP ERROR";
         }
 
-        public static string PostHtml(string serviceUrl, string refererUrl, string json)
+        public static string PostHtml(string serviceUrl, string refererUrl, string json, 
+                                      string origin = null,
+                                      string contentType = null,
+                                      string accept = null,
+                                      string charset = null,
+                                      string encoding = null,
+                                      string language = null,
+                                      string cacheControl = null,
+                                      bool connection = false,
+                                      string userAgent = null)
         {
             HttpWebRequest request = (HttpWebRequest)
             WebRequest.Create(serviceUrl);
@@ -60,6 +69,51 @@ namespace ComicDownloader.Engines
 
             request.Referer = refererUrl;
             request.Method = "POST";
+
+            if (!string.IsNullOrEmpty(origin))
+            {
+                request.Headers.Add("Origin", origin);
+            }
+
+            if (!string.IsNullOrEmpty(contentType))
+            {
+                request.ContentType = contentType;
+            }
+
+            if (!string.IsNullOrEmpty(accept))
+            {
+                request.Accept = accept;
+            }
+
+            if (!string.IsNullOrEmpty(charset))
+            {
+                request.Headers.Add("Accept-Charset", accept);
+            }
+
+            if (!string.IsNullOrEmpty(encoding))
+            {
+                request.Headers.Add("Accept-Encoding", encoding);
+            }
+
+            if (!string.IsNullOrEmpty(language))
+            {
+                request.Headers.Add("Accept-Language", language);
+            }
+
+            if (!string.IsNullOrEmpty(cacheControl))
+            {
+                request.Headers.Add("Cache-Control", cacheControl);
+            }
+
+            if (connection)
+            {
+                request.KeepAlive = connection;
+            }
+
+            if (!string.IsNullOrEmpty(userAgent))
+            {
+                request.UserAgent = userAgent;
+            }
 
             StreamWriter writer = new StreamWriter(request.GetRequestStream());
             writer.Write(json);
