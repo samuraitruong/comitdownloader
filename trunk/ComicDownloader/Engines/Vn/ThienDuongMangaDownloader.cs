@@ -55,16 +55,18 @@ namespace ComicDownloader.Engines
                 HtmlDocument htmlDoc = new HtmlDocument();
                 htmlDoc.LoadHtml(html);
                 var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"divRow\"]/div[1]/a");
-                
 
-                foreach (HtmlNode node in nodes)
+                if (nodes != null)
                 {
-                    results.Add(new StoryInfo()
+                    foreach (HtmlNode node in nodes)
                     {
-                        
-                        Name = node.InnerText.Trim(),
-                        Url = HostUrl + node.Attributes["href"].Value
-                    });
+                        results.Add(new StoryInfo()
+                        {
+
+                            Name = node.InnerText.Trim(),
+                            Url = HostUrl + node.Attributes["href"].Value
+                        });
+                    }
                 }
             }
             SaveCache(results);

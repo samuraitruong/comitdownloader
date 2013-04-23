@@ -33,7 +33,7 @@
             BrightIdeasSoftware.CellStyle cellStyle2 = new BrightIdeasSoftware.CellStyle();
             BrightIdeasSoftware.CellStyle cellStyle3 = new BrightIdeasSoftware.CellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HostProviderSupportForm));
-            this.dataListView1 = new BrightIdeasSoftware.DataListView();
+            this.dataListView1 = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -62,7 +62,7 @@
             this.olvColumn4,
             this.olvColumn5});
             this.dataListView1.ContextMenuStrip = this.contextMenuStrip1;
-            this.dataListView1.DataSource = null;
+            
             this.dataListView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataListView1.FullRowSelect = true;
             this.dataListView1.GridLines = true;
@@ -207,7 +207,7 @@
 
         #endregion
 
-        private BrightIdeasSoftware.DataListView dataListView1;
+        private BrightIdeasSoftware.ObjectListView dataListView1;
         private BrightIdeasSoftware.OLVColumn olvColumn3;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;

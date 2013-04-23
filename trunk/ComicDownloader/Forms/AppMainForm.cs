@@ -18,6 +18,7 @@ using CassiniDev;
 using ComicDownloader.Helpers;
 using System.Diagnostics;
 
+
 namespace ComicDownloader
 {
     public partial class AppMainForm : Form
@@ -486,6 +487,11 @@ namespace ComicDownloader
             
             form.WindowState = FormWindowState.Maximized;
             form.Show();
+        }
+
+        private void ribbonOrbMenuItem2_Click(object sender, EventArgs e)
+        {
+           // AutoUpdater.AutoUpdater.Start("http://10.195.131.124:8080/ComicDownloader/updates.xml");
         }
     }
 }

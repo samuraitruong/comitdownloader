@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{599D307F-532C-4C3A-8F9E-0C74B6F0C5E8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Griffin.Networking</RootNamespace>
+    <AssemblyName>Griffin.Networking</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Source\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Griffin.Networking.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Buffers\BufferSlice.cs" />
+    <Compile Include="Buffers\StringBufferSliceReader.cs" />
+    <Compile Include="Buffers\BufferSliceStack.cs" />
+    <Compile Include="Buffers\BufferWriter.cs" />
+    <Compile Include="Buffers\CircularStream.cs" />
+    <Compile Include="Buffers\IBufferReader.cs" />
+    <Compile Include="Buffers\IBufferSlice.cs" />
+    <Compile Include="Buffers\IStringBufferReader.cs" />
+    <Compile Include="Buffers\IBufferSliceStack.cs" />
+    <Compile Include="Buffers\IBufferStream.cs" />
+    <Compile Include="Buffers\IBufferWrapper.cs" />
+    <Compile Include="Buffers\IBufferWriter.cs" />
+    <Compile Include="Buffers\IPeekable.cs" />
+    <Compile Include="Buffers\NamespaceDoc.cs" />
+    <Compile Include="Buffers\PeekableMemoryStream.cs" />
+    <Compile Include="Buffers\PooledBufferSlice.cs" />
+    <Compile Include="Buffers\SliceStream.cs" />
+    <Compile Include="Clients\BinaryClient.cs" />
+    <Compile Include="Clients\ClientBase.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="ISocketWriterJob.cs" />
+    <Compile Include="Messaging\MessagingClient.cs" />
+    <Compile Include="Clients\NamespaceDoc.cs" />
+    <Compile Include="Clients\ReceivedBufferEventArgs.cs" />
+    <Compile Include="Messaging\MessagingService.cs" />
+    <Compile Include="Messaging\ReceivedMessageEventArgs.cs" />
+    <Compile Include="DisconnectEventArgs.cs" />
+    <Compile Include="Messaging\MessagingServer.cs" />
+    <Compile Include="NamespaceDoc.cs" />
+    <Compile Include="Pipelines\IDownstreamHandler.cs" />
+    <Compile Include="Pipelines\IPipeline.cs" />
+    <Compile Include="Pipelines\IPipelineFactory.cs" />
+    <Compile Include="Pipelines\IPipelineHandler.cs" />
+    <Compile Include="Pipelines\IPipelineHandlerContext.cs" />
+    <Compile Include="Pipelines\IPipelineMessage.cs" />
+    <Compile Include="IServiceLocator.cs" />
+    <Compile Include="Pipelines\IUpstreamHandler.cs" />
+    <Compile Include="Logging\BaseLogger.cs" />
+    <Compile Include="Logging\ConsoleLogger.cs" />
+    <Compile Include="Logging\FilteredLogger.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="Logging\LogManager.cs" />
+    <Compile Include="Logging\NamespaceDoc.cs" />
+    <Compile Include="Logging\NullLogger.cs" />
+    <Compile Include="Logging\SimpleFilteredLogManager.cs" />
+    <Compile Include="Logging\SimpleLogManager.cs" />
+    <Compile Include="Logging\SystemDebugLogger.cs" />
+    <Compile Include="Messaging\IMessageBuilder.cs" />
+    <Compile Include="Messaging\IMessageFormatterFactory.cs" />
+    <Compile Include="Messaging\IMessageSerializer.cs" />
+    <Compile Include="Messaging\NamespaceDoc.cs" />
+    <Compile Include="Pipelines\Messages\ClientConnected.cs" />
+    <Compile Include="Pipelines\Messages\BindSocket.cs" />
+    <Compile Include="Pipelines\Messages\Close.cs" />
+    <Compile Include="Pipelines\Messages\Closed.cs" />
+    <Compile Include="Pipelines\Messages\Connect.cs" />
+    <Compile Include="Pipelines\Messages\Connected.cs" />
+    <Compile Include="Pipelines\Messages\Disconnect.cs" />
+    <Compile Include="Pipelines\Messages\Disconnected.cs" />
+    <Compile Include="Pipelines\Messages\PipelineFailure.cs" />
+    <Compile Include="Pipelines\Messages\Received.cs" />
+    <Compile Include="Pipelines\Messages\ReceivedInStream.cs" />
+    <Compile Include="Pipelines\Messages\SendBuffer.cs" />
+    <Compile Include="Pipelines\Messages\SendSlice.cs" />
+    <Compile Include="Pipelines\Messages\SendStream.cs" />
+    <Compile Include="Pipelines\Messages\Sent.cs" />
+    <Compile Include="ObjectExtensions.cs" />
+    <Compile Include="Pipelines\DelegatePipelineFactory.cs" />
+    <Compile Include="Pipelines\Pipeline.cs" />
+    <Compile Include="Pipelines\PipelineDownstreamContext.cs" />
+    <Compile Include="Pipelines\PipelineServer.cs" />
+    <Compile Include="Pipelines\PipelineServerService.cs" />
+    <Compile Include="Pipelines\PipelineUpstreamContext.cs" />
+    <Compile Include="Pipelines\ServiceLocatorPipelineFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servers\ClientExceptionEventArgs.cs" />
+    <Compile Include="Servers\NamespaceDoc.cs" />
+    <Compile Include="Servers\ServerBase.cs" />
+    <Compile Include="Servers\ServerClientContext.cs" />
+    <Compile Include="Servers\IServiceFactory.cs" />
+    <Compile Include="Servers\IServerService.cs" />
+    <Compile Include="Servers\IServerClientContext.cs" />
+    <Compile Include="Messaging\MessagingClientContext.cs" />
+    <Compile Include="Messaging\MessagingServerConfiguration.cs" />
+    <Compile Include="Servers\Server.cs" />
+    <Compile Include="Servers\ServerConfiguration.cs" />
+    <Compile Include="Servers\ServiceExceptionContext.cs" />
+    <Compile Include="SliceSocketWriterJob.cs" />
+    <Compile Include="SocketWriter.cs" />
+    <Compile Include="StreamSocketWriterJob.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
