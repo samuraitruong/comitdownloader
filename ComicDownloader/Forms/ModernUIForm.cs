@@ -14,6 +14,8 @@ using System.Threading;
 using Amib.Threading;
 using ComicDownloader.Extensions;
 using ComicDownloader.Helpers;
+using System.Diagnostics;
+
 
 namespace ComicDownloader.Forms
 {
@@ -410,6 +412,23 @@ namespace ComicDownloader.Forms
         private void txtKeyword_TextChanged(object sender, EventArgs e)
         {
             bntSearch.Enabled = !string.IsNullOrEmpty(txtKeyword.Text);
+        }
+
+        private void metroTile1_Click_1(object sender, EventArgs e)
+        {
+            /* AutoUpdater.Start function takes following Arguments
+             * 1. url of the appcast xml file that specifies download url, changelog url, application Version and title
+             * 2. If you want user to select remind later interval then set lateUserSelectRemindLater as true. If you select true third and fourth arguments will be ignored.
+             * 3. reminderLaterTime is a remind later timespan value if user choose Remind Later.
+             * 4. reminderLaterTimeFormat is a time format enum that specifies if you want to take remind later time span value as minutes, hours or days.
+             * AutoUpdater.Start(string appcastURL, bool lateUserSelectRemindLater, int reminderLaterTime, int reminderLaterTimeFormat)
+            */
+            //AutoUpdater.AutoUpdater.Start("http://10.195.131.124:8080/ComicDownloader/updates.xml");
+        }
+
+        private void metroTile2_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=QP7B8JQTQY2ZU&lc=VN&item_name=Comic%20Downloader&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
         }
 
        

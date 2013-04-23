@@ -150,7 +150,13 @@ namespace ComicDownloader.Engines
 
         public int ExtractID(string name)
         {
-            return ExtractID(name, @".*\s(\d*)$");
+            int id= ExtractID(name, @".*\s(\d*)$");
+            if (id > 0) return id;
+
+            id=  ExtractID(name, @".*\s(\d*)\s.*");
+            if (id > 0) return id;
+
+            return ExtractID(name,@"\d\d*");
             
         }
 

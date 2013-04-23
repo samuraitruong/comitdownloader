@@ -1,0 +1,98 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E88AF6FD-147D-429B-8EAF-718170D4342D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DDay.Update</RootNamespace>
+    <AssemblyName>DDay.Update</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>DDay.Update.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\AssemblyIdentity.cs" />
+    <Compile Include="Components\CommandLine.cs" />
+    <Compile Include="Components\Deployment.cs" />
+    <Compile Include="Components\DeploymentManifest.cs" />
+    <Compile Include="Components\Dependency.cs" />
+    <Compile Include="Components\DependentAssembly.cs" />
+    <Compile Include="Components\DeploymentProvider.cs" />
+    <Compile Include="Components\Description.cs" />
+    <Compile Include="Configuration\DDayUpdateConfigurationSection.cs" />
+    <Compile Include="Configuration\KeyValuePairConfigurationElementCollection.cs" />
+    <Compile Include="Configuration\KeyValuePairConfigurationSection.cs" />
+    <Compile Include="Exceptions\ApplicationStartException.cs" />
+    <Compile Include="Exceptions\ApplicationTerminationException.cs" />
+    <Compile Include="Exceptions\ManifestException.cs" />
+    <Compile Include="Exceptions\DeploymentManifestException.cs" />
+    <Compile Include="Exceptions\RequiresDeploymentManifestException.cs" />
+    <Compile Include="Exceptions\UpdateDownloadException.cs" />
+    <Compile Include="Interfaces\ILog.cs" />
+    <Compile Include="Interfaces\IVersionManager.cs" />
+    <Compile Include="Configuration\KeyValuePairConfigurationElement.cs" />
+    <Compile Include="Updater.cs" />
+    <Compile Include="ApplicationLauncher.cs" />
+    <Compile Include="Utilities\DownloadedBytesStringConverter.cs" />
+    <Compile Include="Components\EntryPoint.cs" />
+    <Compile Include="Components\UpdateFile.cs" />
+    <Compile Include="FileDownloader.cs" />
+    <Compile Include="Interfaces\IDownloadableFile.cs" />
+    <Compile Include="Interfaces\IUpdateNotifier.cs" />
+    <Compile Include="Interfaces\IManifestDependency.cs" />
+    <Compile Include="Components\Manifest.cs" />
+    <Compile Include="UpdateManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Components\ApplicationManifest.cs" />
+    <Compile Include="Utilities\HashUtility.cs" />
+    <Compile Include="Utilities\Log4NetLogger.cs" />
+    <Compile Include="VersionManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="DDay.Update.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="License.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

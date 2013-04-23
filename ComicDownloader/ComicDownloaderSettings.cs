@@ -35,6 +35,7 @@ namespace ComicDownloader
         public bool AutoLoadChapter { get; set; }
 
          [CategoryAttribute("Download settings")]
+
         public bool EnableResizeImage { get; set; }
         [CategoryAttribute("Download settings")]
         public bool KeepRatio { get; set; }
@@ -54,6 +55,8 @@ namespace ComicDownloader
         [CategoryAttribute("Download settings")]
         public bool AutoUpdateListOnStart { get; set; }
 
+        [CategoryAttribute("Download settings")]
+        public int ConcurrentPageDownloadThreads { get; set; }
         [CategoryAttribute("Download settings"), DescriptionAttribute("Using multiple thread to download pages in a chapter, this will make increase download speed but need more CPU & Network usage. Use this option on slow netowrk will help you save a ton of time. :)")]
         public bool UseMultiThreadToDownloadChapter { get; set; }
         [CategoryAttribute("Download settings")]
@@ -62,7 +65,9 @@ namespace ComicDownloader
         {
             SearchThreads = 10;
             Threads = 8;
+            ConcurrentPageDownloadThreads = 12;
             CreatePDF = true;
+            UseMultiThreadToDownloadChapter = true;
             AutoUpdateListOnStart = false;
             IncludePDFIntroPage = true;
             PdfIntroPagePosition = PagePosition.LastPage;

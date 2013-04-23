@@ -53,25 +53,27 @@ namespace ComicDownloader.Engines
                     string url = string.Format(urlPattern, currentPage);
 
                     string html = NetworkHelper.GetHtml(url);
-                    var pattern = "<a class=\"bigChar\" href=\"(.*)\">(.*)</a>";
+                    //var pattern = "<a class=\"bigChar\" href=\"(.*)\">(.*)</a>";
 
-                    //HtmlDocument htmlDoc = new HtmlDocument();
-                    //htmlDoc.LoadHtml(html);
-
+                    HtmlDocument htmlDoc = new HtmlDocument();
+                    htmlDoc.LoadHtml(html);
+                    var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"listing\"]/tr/td[1]/a");
                     //var nodes = htmlDoc.DocumentNode.Descendants("a")
                     //                    .Where(p => p.Attributes.Contains("class") &&
                     //                              p.Attributes["class"].Value == "bigChar")
                     //                    .ToList();
-                    var matches = Regex.Matches(html, pattern);
-                    if (matches != null && matches.Count > 0)
+                    //var matches = Regex.Matches(html, pattern);
+                    if (nodes != null && nodes.Count > 0)
                     {
                         currentPage++;
-                        foreach (Match match in matches)
+                        //cheat page 25 return no result
+                        if (currentPage == 25) currentPage++;
+                        foreach (HtmlNode node in  nodes)
                         {
                             StoryInfo info = new StoryInfo()
                             {
-                                Url = HostUrl  + match.Groups[1].Value,
-                                Name = match.Groups[2].Value,
+                                Url = HostUrl  +node.Attributes["href"].Value,
+                                Name = node.InnerText.Trim(),
                             };
                             results.Add(info);
                         }
@@ -115,7 +117,7 @@ namespace ComicDownloader.Engines
                 {
                     Name = node.InnerText.Trim(),
                     Url = HostUrl+node.Attributes["href"].Value.Trim(),
-                    ChapId = ExtractID(node.InnerText.Trim(),@"Chap (\d*)")   
+                    ChapId = ExtractID(node.InnerText.Trim())   
                 };
                 
                 info.Chapters.Add(chapInfo);

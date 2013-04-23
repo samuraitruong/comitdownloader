@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="DDay.Update.UpdateManager">
+    <Position X="2.75" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>UpdateManager.cs</FileName>
+      <HashCode>AAZAACQBCAAABAEAACIACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Members>
+      <Field Name="_DeploymentManifest" Hidden="true" />
+      <Field Name="_LocalDeploymentManifest" Hidden="true" />
+      <Method Name="GetLocalDeploymentManifest" Hidden="true" />
+      <Field Name="LocalApplicationManifestFilename" Hidden="true" />
+      <Field Name="LocalDeploymentManifestFilename" Hidden="true" />
+      <Field Name="log" Hidden="true" />
+      <Method Name="SaveLocalManifests" Hidden="true" />
+    </Members>
+  </Class>
+  <Class Name="DDay.Update.Manifest" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Components\Manifest.cs</FileName>
+      <HashCode>SCQAAYAAAAAAAEGEAQoQQAAAAAAAAABCCAAIQAASIAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDay.Update.Dependency" Collapsed="true">
+    <Position X="5.5" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Components\Dependency.cs</FileName>
+      <HashCode>QAAAAAAAAAAAAACAAAAAQAAAAAAAAAAAAAAIAAAQAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDay.Update.DependentAssembly" Collapsed="true">
+    <Position X="5.5" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Components\DependentAssembly.cs</FileName>
+      <HashCode>AIQAgAAAAAABwAAABAAQIEIAAIBQAAAIBAAAAAGAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.225" />
+  </Class>
+  <Class Name="DDay.Update.Deployment" Collapsed="true">
+    <Position X="0.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Components\Deployment.cs</FileName>
+      <HashCode>AAGAAAAAAAQAACAEAAAgQgAAAAAAAIAAAIIAAAAQAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDay.Update.DeploymentManifest" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Components\DeploymentManifest.cs</FileName>
+      <HashCode>AAQAAQIAAAAgAAAAAAAAAAAAAAQEAAAEAAAAAAEAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDay.Update.ApplicationManifest" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Components\ApplicationManifest.cs</FileName>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAACCAAEAAAAAABAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDay.Update.AssemblyIdentity" Collapsed="true">
+    <Position X="0.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Components\AssemblyIdentity.cs</FileName>
+      <HashCode>IAAAAAABCAAAAAAAAAAAYASAAAAAAAAAAQAAAAAwAEA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDay.Update.CommandLine" Collapsed="true">
+    <Position X="0.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Components\CommandLine.cs</FileName>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAAEEAAAAIAAAAAAAAI=</HashCode>
+    </TypeIdentifier>
+    <Members>
+      <Field Name="_File" Hidden="true" />
+      <Field Name="_Parameters" Hidden="true" />
+    </Members>
+  </Class>
+  <Class Name="DDay.Update.Description" Collapsed="true">
+    <Position X="0.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Components\Description.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAAACQAAAABAAgAAAAAAAAAAAAAAAQA=</HashCode>
+    </TypeIdentifier>
+    <Members>
+      <Field Name="_Product" Hidden="true" />
+      <Field Name="_Publisher" Hidden="true" />
+      <Field Name="_SupportUrl" Hidden="true" />
+    </Members>
+  </Class>
+  <Class Name="DDay.Update.EntryPoint" Collapsed="true">
+    <Position X="0.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Components\EntryPoint.cs</FileName>
+      <HashCode>AAwQAAAAAAAAAAAAAAAQIAQIAAAAACAAAAAAAAAAAAI=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDay.Update.UpdateFile" Collapsed="true">
+    <Position X="7.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Components\UpdateFile.cs</FileName>
+      <HashCode>AAABAEAAAAAAwAABBAAAYEYAAAAAAAAAAAAAAQAUAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.252" />
+  </Class>
+  <Class Name="DDay.Update.FileDownloader" Collapsed="true">
+    <Position X="0.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>FileDownloader.cs</FileName>
+      <HashCode>AgCAAIAAAAAI0EgAAQYAiEIEBSgiAAgCAAEFIgAAACg=</HashCode>
+    </TypeIdentifier>
+  </Class>
+</ClassDiagram>

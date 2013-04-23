@@ -42,13 +42,25 @@ namespace ComicDownloader
 
                     foreach (var att in attrs)
                     {
-                        ds.Add(new ProviderItem()
+                        try
                         {
-                            Language = att.Language,
-                            HostUrl = item.HostUrl,
-                            Name = item.Name.TrimEnd(" -".ToCharArray()),
-                            Stories = item.GetListStories(false).Count
-                        });
+                            var dsitem = new ProviderItem()
+                            {
+                                Language = att.Language,
+                                HostUrl = item.HostUrl,
+                                Name = item.Name.TrimEnd(" -".ToCharArray()),
+                                Stories = item.GetListStories(false).Count
+                            };
+                            dataListView1.AddObject(dsitem);
+                            ds.Add(dsitem);
+                        }
+                        catch (Exception ex)
+                        {
+                            
+                           
+                        }
+                       
+
                     }
 
 

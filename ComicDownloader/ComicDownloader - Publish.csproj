@@ -1,0 +1,2361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{178F8B09-DEFA-4728-A6EE-174A27DF7B73}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ComicDownloader</RootNamespace>
+    <AssemblyName>ComicDownloader</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>C:\HOST\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>false</MapFileExtensions>
+    <InstallUrl>http://comicdownloader.vv.si/updates/</InstallUrl>
+    <UpdateUrl>http://comicdownloader.vv.si/updates/</UpdateUrl>
+    <SupportUrl>http://www.facebook.com/pages/Comic-Downloader/137897009722629</SupportUrl>
+    <ProductName>Comic Downloader</ProductName>
+    <PublisherName>samuraitruong%40hotmail.com</PublisherName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>index.html</WebPage>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.2</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\1364394623_37693.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>FBE3D60583A8570FB2BDCFD2AF9DE4A7E29E010C</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>ComicDownloader_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>3rd\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>3rd\HtmlAgilityPack.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.4.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>3rd\itextsharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>3rd\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="3rd\CassiniDev\BrowserTestResultItem.cs" />
+    <Compile Include="3rd\CassiniDev\BrowserTestResults.cs" />
+    <Compile Include="3rd\CassiniDev\CassiniDevBrowserTest.cs" />
+    <Compile Include="3rd\CassiniDev\CassiniDevServerOP.cs" />
+    <Compile Include="3rd\CassiniDev\CassiniServer.cs" />
+    <Compile Include="3rd\CassiniDev\Configuration\CassiniDevConfigurationSection.cs" />
+    <Compile Include="3rd\CassiniDev\Configuration\CassiniDevProfileElement.cs" />
+    <Compile Include="3rd\CassiniDev\Configuration\CassiniDevProfileElementCollection.cs" />
+    <Compile Include="3rd\CassiniDev\Configuration\PluginElement.cs" />
+    <Compile Include="3rd\CassiniDev\Configuration\PluginElementCollection.cs" />
+    <Compile Include="3rd\CassiniDev\ContentLocator.cs" />
+    <Compile Include="3rd\CassiniDev\Core\Connection.cs" />
+    <Compile Include="3rd\CassiniDev\Core\Host.cs" />
+    <Compile Include="3rd\CassiniDev\Core\Messages.cs" />
+    <Compile Include="3rd\CassiniDev\Core\NtlmAuth.cs" />
+    <Compile Include="3rd\CassiniDev\Core\Request.cs" />
+    <Compile Include="3rd\CassiniDev\Core\RequestEventArgs.cs" />
+    <Compile Include="3rd\CassiniDev\Core\Server.cs" />
+    <Compile Include="3rd\CassiniDev\IContentLocator.cs" />
+    <Compile Include="3rd\CassiniDev\LocalContentLocator.cs" />
+    <Compile Include="3rd\CassiniDev\Logging\LogInfo.cs" />
+    <Compile Include="3rd\CassiniDev\Misc\CommandLine.cs" />
+    <Compile Include="3rd\CassiniDev\Misc\CommandLineArguments.cs" />
+    <Compile Include="3rd\CassiniDev\Misc\CommandLineParser.cs" />
+    <Compile Include="3rd\CassiniDev\Misc\Common.cs" />
+    <Compile Include="3rd\CassiniDev\Misc\HostsFile.cs" />
+    <Compile Include="3rd\CassiniDev\Misc\Interop.cs" />
+    <Compile Include="3rd\CassiniDev\Misc\NetworkUtils.cs" />
+    <Compile Include="3rd\CassiniDev\Misc\ServiceInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\CassiniDev\QUnitExBrowserTestResultItem.cs" />
+    <Compile Include="3rd\CassiniDev\Resources\CassiniDev.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CassiniDev.resx</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\CassiniDev\Resources\SR.cs" />
+    <Compile Include="3rd\CassiniDev\Views\BodyView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\CassiniDev\Views\BodyView.Designer.cs">
+      <DependentUpon>BodyView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\CassiniDev\Views\WebServerFormView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\CassiniDev\Views\WebServerFormView.Designer.cs">
+      <DependentUpon>WebServerFormView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\CassiniDev\Views\LogView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\CassiniDev\Views\LogView.Designer.cs">
+      <DependentUpon>LogView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\CassiniDev\WebBrowser.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\BrowserCommands.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\BrowserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\BrowserControl.Designer.cs">
+      <DependentUpon>BrowserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\BrowserExtendedNavigatingEventArgs.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\CommandStateEventArgs.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\ExtendedWebBrowser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\BrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\BrowserForm.Designer.cs">
+      <DependentUpon>BrowserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\NativeMethods.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\NotifyCollection.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\OpenUrlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\OpenUrlForm.Designer.cs">
+      <DependentUpon>OpenUrlForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\OptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\OptionsForm.Designer.cs">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\PopupBlockerFilterLevel.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\ScriptError.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\ScriptErrorManager.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\ScriptErrorWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\ScriptErrorWindow.Designer.cs">
+      <DependentUpon>ScriptErrorWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\ExtendedWebBrowser2\SettingsHelper.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\TextChangedEventArgs.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\UnsafeNativeMethods.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\UrlContext.cs" />
+    <Compile Include="3rd\ExtendedWebBrowser2\WindowManager.cs" />
+    <Compile Include="3rd\IView.NET\Data\ApplicationData.cs" />
+    <Compile Include="3rd\IView.NET\Data\Enumerations.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Data\Enumerations.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\AquaButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\BufferedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ColourPicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ColourPicker.Designer.cs">
+      <DependentUpon>ColourPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\CropPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\CropPanel.Designer.cs">
+      <DependentUpon>CropPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\DropDownPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ExplorerListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ExplorerTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\Histogram.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\Histogram.Designer.cs">
+      <DependentUpon>Histogram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ImageBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ImageBox.Designer.cs">
+      <DependentUpon>ImageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ImageBoxEventArgs.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ImageBoxMouseEventArgs.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\PropertiesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\PropertiesPanel.Designer.cs">
+      <DependentUpon>PropertiesPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\RedEyePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\RedEyePanel.Designer.cs">
+      <DependentUpon>RedEyePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ResizePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ResizePanel.Designer.cs">
+      <DependentUpon>ResizePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ScrollLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ShearPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ShearPanel.Designer.cs">
+      <DependentUpon>ShearPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\SplitButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ToolStripAddRemoveButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Controls\Library\ToolStripDirectoryButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\IView.NET\iView.NET Engine\ColourTables\ArcticSilverColourTable.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\ColourTables\SkyBlueColourTable.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\CommandLine.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\DockChangedEventArgs.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\DockingWindow.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\DrawingTools.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ExifImageProperties.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ExifReader.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ExtensionMethods.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\Favourite.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\FavouritesCollection.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\FileFormatException.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\FileTools.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\IDockable.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ImageBrowser.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ImageBrowserEventArgs.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ImageBrowserItem.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ImageBrowserItemEventArgs.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ImageBrowserRenameEventArgs.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ImageEditManagement.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ImageProperties.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ImageSaver.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\NativeMethods.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\RecentPlace.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\RecentPlacesCollection.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\Resolution.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ResolutionTypeConverter.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\ScaleHitTestTools.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\SlideShowDocument.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\SSFDescriptor.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\Tools.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\UpdateChecker.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Core\UpdateCheckFinishedEventArgs.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Data\Enumerations.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\ConvolutionMatrix.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\ImageProcessing.cs" />
+    <Compile Include="3rd\IView.NET\iView.NET Engine\Processing\IProcessingType.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Demo\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework.Demo\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework.Design\Components\MetroStyleManagerDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroButtonDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroLabelDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroLinkDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroPanelDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroProgressBarDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroProgressSpinnerDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroScrollBarDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroTabControlDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroTabPageCollectionEditor.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroTabPageDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroTextBoxDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Design\Controls\MetroTileDesigner.cs" />
+    <Compile Include="3rd\Metro\MetroFramework.Fonts\FontResolver.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Animation\AnimationBase.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Animation\ColorBlendAnimation.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Animation\DelayedCall.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Animation\ExpandAnimation.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Animation\MoveAnimation.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Animation\TransitionType.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Components\MetroStyleExtender.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Components\MetroStyleManager.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Components\MetroToolTip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroLink.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroProgressSpinner.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroScrollBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTile.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTilePart.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroToggle.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTrackBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssAnonymousBlockBox.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssAnonymousBox.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssBlock.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssBox.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssBoxWord.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssBoxWordSplitter.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssConstants.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssDefaults.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssDrawingHelper.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssLayoutEngine.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssLength.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssLineBox.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssPropertyAttribute.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssPropertyInheritedAttribute.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssRectangle.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssTable.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\CssValue.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\HtmlConstants.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\HtmlLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\HtmlPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\HtmlRenderer.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\HtmlTag.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\HtmlToolTip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\InitialContainer.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\Html\Parser.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\MetroBackBuffer.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Drawing\MetroPaint.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Forms\MetroForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Forms\MetroMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Forms\MetroTaskWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Interfaces\IMetroComponent.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Interfaces\IMetroControl.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Interfaces\IMetroForm.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Localization\MetroLocalize.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\MetroBrushes.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\MetroColors.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\MetroColorStyle.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\MetroDefaults.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\MetroFonts.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\MetroPens.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\MetroThemeStyle.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Native\DwmApi.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Native\SubClass.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Native\Taskbar.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Native\WinApi.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Native\WinCaret.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Properties\AssemblyRef.cs" />
+    <Compile Include="3rd\Metro\MetroFramework\Properties\Resources.Designer.cs" />
+    <Compile Include="3rd\ObjectListView\AnimatedDecoration.cs" />
+    <Compile Include="3rd\ObjectListView\DataTreeListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\Filtering\FlagClusteringStrategy.cs" />
+    <Compile Include="3rd\ObjectListView\Implementation\TreeDataSourceAdapter.cs" />
+    <Compile Include="3rd\ObjectListView\Utilities\OLVExporter.cs" />
+    <Compile Include="3rd\PagedList\BasePagedList.cs" />
+    <Compile Include="3rd\PagedList\IPagedList.cs" />
+    <Compile Include="3rd\PagedList\PagedList.cs" />
+    <Compile Include="3rd\PagedList\PagedListExtensions.cs" />
+    <Compile Include="3rd\PagedList\PagedListMetaData.cs" />
+    <Compile Include="3rd\PagedList\StaticPagedList.cs" />
+    <Compile Include="3rd\SmartThreadPool\CallerThreadContext.cs" />
+    <Compile Include="3rd\SmartThreadPool\CanceledWorkItemsGroup.cs" />
+    <Compile Include="3rd\SmartThreadPool\EventWaitHandle.cs" />
+    <Compile Include="3rd\SmartThreadPool\EventWaitHandleFactory.cs" />
+    <Compile Include="3rd\SmartThreadPool\Exceptions.cs" />
+    <Compile Include="3rd\SmartThreadPool\Interfaces.cs" />
+    <Compile Include="3rd\SmartThreadPool\InternalInterfaces.cs" />
+    <Compile Include="3rd\SmartThreadPool\PriorityQueue.cs" />
+    <Compile Include="3rd\SmartThreadPool\SLExt.cs" />
+    <Compile Include="3rd\SmartThreadPool\SmartThreadPool.cs" />
+    <Compile Include="3rd\SmartThreadPool\SmartThreadPool.ThreadEntry.cs" />
+    <Compile Include="3rd\SmartThreadPool\STPEventWaitHandle.cs" />
+    <Compile Include="3rd\SmartThreadPool\STPPerformanceCounter.cs" />
+    <Compile Include="3rd\SmartThreadPool\STPStartInfo.cs" />
+    <Compile Include="3rd\SmartThreadPool\SynchronizedDictionary.cs" />
+    <Compile Include="3rd\SmartThreadPool\WIGStartInfo.cs" />
+    <Compile Include="3rd\SmartThreadPool\WorkItem.cs" />
+    <Compile Include="3rd\SmartThreadPool\WorkItem.WorkItemResult.cs" />
+    <Compile Include="3rd\SmartThreadPool\WorkItemFactory.cs" />
+    <Compile Include="3rd\SmartThreadPool\WorkItemInfo.cs" />
+    <Compile Include="3rd\SmartThreadPool\WorkItemResultTWrapper.cs" />
+    <Compile Include="3rd\SmartThreadPool\WorkItemsGroup.cs" />
+    <Compile Include="3rd\SmartThreadPool\WorkItemsGroupBase.cs" />
+    <Compile Include="3rd\SmartThreadPool\WorkItemsQueue.cs" />
+    <Compile Include="3rd\SparkleLibrary\Adapters\AnimationAdapter.cs" />
+    <Compile Include="3rd\SparkleLibrary\Animation\Animateable.cs" />
+    <Compile Include="3rd\SparkleLibrary\Animation\Animation.cs" />
+    <Compile Include="3rd\SparkleLibrary\Animation\Events.cs" />
+    <Compile Include="3rd\SparkleLibrary\Effects\Effect.cs" />
+    <Compile Include="3rd\SparkleLibrary\Effects\Effects.cs" />
+    <Compile Include="3rd\SparkleLibrary\Locators\Locators.cs" />
+    <Compile Include="3rd\SparkleLibrary\Locators\PointLocator.cs" />
+    <Compile Include="3rd\SparkleLibrary\Locators\RectangleLocator.cs" />
+    <Compile Include="3rd\SparkleLibrary\Sprites\Audio.cs" />
+    <Compile Include="3rd\SparkleLibrary\Sprites\ImageSprite.cs" />
+    <Compile Include="3rd\SparkleLibrary\Sprites\ISprite.cs" />
+    <Compile Include="3rd\SparkleLibrary\Sprites\ShapeSprite.cs" />
+    <Compile Include="3rd\SparkleLibrary\Sprites\Sprite.cs" />
+    <Compile Include="3rd\SparkleLibrary\Sprites\TextSprite.cs" />
+    <Compile Include="ComicDownloaderSettings.cs" />
+    <Compile Include="Constant.cs" />
+    <Compile Include="Engines\18+\HakihomeDownloader.cs" />
+    <Compile Include="Engines\18+\Manga16Downloader.cs" />
+    <Compile Include="Engines\DownloaderAttribute.cs" />
+    <Compile Include="Engines\En\BatotoDownloader.cs" />
+    <Compile Include="Engines\En\MangaPandaDownloader.cs" />
+    <Compile Include="Engines\En\GoodMangaDownloader.cs" />
+    <Compile Include="Engines\En\MangaInnDownloader.cs" />
+    <Compile Include="Engines\En\MangaTradersDownloader.cs" />
+    <Compile Include="Engines\En\MangaVolumeDownloader.cs" />
+    <Compile Include="Engines\En\MangaWallDownloader.cs" />
+    <Compile Include="Engines\En\Manga4Downloader.cs" />
+    <Compile Include="Engines\En\MangaAccessDownloader.cs" />
+    <Compile Include="Engines\En\MangaAnimeaDownloader.cs" />
+    <Compile Include="Engines\En\EatMangaDownloader.cs" />
+    <Compile Include="Engines\En\MangagoDownloader.cs" />
+    <Compile Include="Engines\En\JPMangaDownloader.cs" />
+    <Compile Include="Engines\En\MangaChromeDownloader.cs" />
+    <Compile Include="Engines\En\KissMangaDownloader.cs" />
+    <Compile Include="Engines\En\TenMangaDownloader.cs" />
+    <Compile Include="Engines\En\MangaParkDownloader.cs" />
+    <Compile Include="Engines\En\MangaHereDownloader.cs" />
+    <Compile Include="Engines\Proxies\BlogTruyenDownloaderProxy.cs" />
+    <Compile Include="Engines\Vn\ThienDuongMangaDownloader.cs" />
+    <Compile Include="Engines\Vn\WebTruyenDownloader.cs" />
+    <Compile Include="Extensions\ImageExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Forms\AppMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AppMainForm.designer.cs">
+      <DependentUpon>AppMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\AsyncDialog\AsyncBaseDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\AsyncDialog\LoadingCircle.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\AsyncDialog\LoadingCircle.Designer.cs">
+      <DependentUpon>LoadingCircle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Engines\En\MangaEdenDownloader.cs" />
+    <Compile Include="Engines\En\MangaFoxDownloader.cs" />
+    <Compile Include="Engines\En\MangaReaderDownloader.cs" />
+    <Compile Include="Engines\Vn\ComicVuiLenDownloader.cs" />
+    <Compile Include="Engines\Vn\NTruyenDownloader.cs" />
+    <Compile Include="Engines\Vn\TruyenLauPhimDownloader.cs" />
+    <Compile Include="Engines\Vn\Truyen18Downloader.cs" />
+    <Compile Include="Engines\Vn\MangaFcDownloader.cs" />
+    <Compile Include="Engines\Vn\XomTruyenDownloader.cs" />
+    <Compile Include="Engines\Vn\MangaKungDownloader.cs" />
+    <Compile Include="Extension.cs" />
+    <Compile Include="Forms\ChapterReader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ChapterReader.Designer.cs">
+      <DependentUpon>ChapterReader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ModernUIForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModernUIForm.Designer.cs">
+      <DependentUpon>ModernUIForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SearchForm.Designer.cs">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DownloaderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DownloaderForm.designer.cs">
+      <DependentUpon>DownloaderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\Cx.Windows.Forms\MdiChildForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\Cx.Windows.Forms\MdiChildForm.Designer.cs">
+      <DependentUpon>MdiChildForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\Cx.Windows.Forms\MdiTabStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Cx.Windows.Forms\MdiTabStrip.Designer.cs">
+      <DependentUpon>MdiTabStrip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\Cx.Windows.Forms\MdiTabStripButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\Cx.Windows.Forms\MdiTabStripButton.Designer.cs">
+      <DependentUpon>MdiTabStripButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\Cx.Windows.Forms\NoResizeChildForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\Cx.Windows.Forms\NoResizeChildForm.Designer.cs">
+      <DependentUpon>NoResizeChildForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Engines\Vn\BlogTruyenDownloader.cs" />
+    <Compile Include="Engines\Vn\TruyenTranhNhanhDownloader.cs" />
+    <Compile Include="Engines\Downloader.cs" />
+    <Compile Include="Forms\IView\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\AdjustTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\AdjustTime.Designer.cs">
+      <DependentUpon>AdjustTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\BatchEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\BatchEditor.Designer.cs">
+      <DependentUpon>BatchEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\BmpSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\BmpSettings.Designer.cs">
+      <DependentUpon>BmpSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\CreateContactSheet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\CreateContactSheet.Designer.cs">
+      <DependentUpon>CreateContactSheet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\CreateSlideShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\CreateSlideShow.Designer.cs">
+      <DependentUpon>CreateSlideShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\EyeDropper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\EyeDropper.Designer.cs">
+      <DependentUpon>EyeDropper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\FavouriteDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\FavouriteDialog.Designer.cs">
+      <DependentUpon>FavouriteDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\JpegSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\JpegSettings.Designer.cs">
+      <DependentUpon>JpegSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\License.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\License.Designer.cs">
+      <DependentUpon>License.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\MainWindowSubs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\NewWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\NewWindow.Designer.cs">
+      <DependentUpon>NewWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\Options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\Options.Designer.cs">
+      <DependentUpon>Options.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\ProcessingDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\ProcessingDialog.Designer.cs">
+      <DependentUpon>ProcessingDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\RenameFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\RenameFile.Designer.cs">
+      <DependentUpon>RenameFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\ScreenShot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\ScreenShot.Designer.cs">
+      <DependentUpon>ScreenShot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\SlideShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\SlideShow.Designer.cs">
+      <DependentUpon>SlideShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\SlideShowWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\SlideShowWindow.Designer.cs">
+      <DependentUpon>SlideShowWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\TiffSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\TiffSettings.Designer.cs">
+      <DependentUpon>TiffSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IView\UpdateLocations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IView\UpdateLocations.Designer.cs">
+      <DependentUpon>UpdateLocations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LastestChapterUpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LastestChapterUpdateForm.Designer.cs">
+      <DependentUpon>LastestChapterUpdateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\QueueCompleteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\QueueCompleteForm.Designer.cs">
+      <DependentUpon>QueueCompleteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\QueueDownloadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\QueueDownloadForm.Designer.cs">
+      <DependentUpon>QueueDownloadForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ReadOnlineForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ReadOnlineForm.Designer.cs">
+      <DependentUpon>ReadOnlineForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\AssemblyInfoHelper.cs" />
+    <Compile Include="Helpers\NetworkHelper.cs" />
+    <Compile Include="Engines\StoryInfo.cs" />
+    <Compile Include="Engines\Vn\TruyenTranh8Downloader.cs" />
+    <Compile Include="Engines\Vn\TruyenTranhTuanDownloader.cs" />
+    <Compile Include="Engines\Vn\TruyenVietBoomDownloader.cs" />
+    <Compile Include="Engines\Vn\TruyenVnSharingDownloader.cs" />
+    <Compile Include="Engines\Vn\VechaiDownloader.cs" />
+    <Compile Include="EXComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EXListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Intro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Intro.Designer.cs">
+      <DependentUpon>Intro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HostProviderSupportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HostProviderSupportForm.Designer.cs">
+      <DependentUpon>HostProviderSupportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\PDFHelper.cs" />
+    <Compile Include="MyLogger.cs" />
+    <Compile Include="Properties\IViewSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>IViewSettings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="LongOperation.cs" />
+    <Compile Include="3rd\ObjectListView\CellEditing\CellEditKeyEngine.cs" />
+    <Compile Include="3rd\ObjectListView\CellEditing\CellEditors.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\CellEditing\EditorRegistry.cs" />
+    <Compile Include="3rd\ObjectListView\DataListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\DragDrop\DragSource.cs" />
+    <Compile Include="3rd\ObjectListView\DragDrop\DropSink.cs" />
+    <Compile Include="3rd\ObjectListView\DragDrop\OLVDataObject.cs" />
+    <Compile Include="3rd\ObjectListView\FastDataListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\FastObjectListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\Filtering\Cluster.cs" />
+    <Compile Include="3rd\ObjectListView\Filtering\ClusteringStrategy.cs" />
+    <Compile Include="3rd\ObjectListView\Filtering\ClustersFromGroupsStrategy.cs" />
+    <Compile Include="3rd\ObjectListView\Filtering\DateTimeClusteringStrategy.cs" />
+    <Compile Include="3rd\ObjectListView\Filtering\FilterMenuBuilder.cs" />
+    <Compile Include="3rd\ObjectListView\Filtering\Filters.cs" />
+    <Compile Include="3rd\ObjectListView\Filtering\ICluster.cs" />
+    <Compile Include="3rd\ObjectListView\Filtering\IClusteringStrategy.cs" />
+    <Compile Include="3rd\ObjectListView\Filtering\TextMatchFilter.cs" />
+    <Compile Include="3rd\ObjectListView\Implementation\Attributes.cs" />
+    <Compile Include="3rd\ObjectListView\Implementation\Comparers.cs" />
+    <Compile Include="3rd\ObjectListView\Implementation\DataSourceAdapter.cs" />
+    <Compile Include="3rd\ObjectListView\Implementation\Delegates.cs" />
+    <Compile Include="3rd\ObjectListView\Implementation\Enums.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\Implementation\Events.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\Implementation\GroupingParameters.cs" />
+    <Compile Include="3rd\ObjectListView\Implementation\Groups.cs" />
+    <Compile Include="3rd\ObjectListView\Implementation\Munger.cs" />
+    <Compile Include="3rd\ObjectListView\Implementation\NativeMethods.cs" />
+    <Compile Include="3rd\ObjectListView\Implementation\NullableDictionary.cs" />
+    <Compile Include="3rd\ObjectListView\Implementation\OLVListItem.cs" />
+    <Compile Include="3rd\ObjectListView\Implementation\OLVListSubItem.cs" />
+    <Compile Include="3rd\ObjectListView\Implementation\OlvListViewHitTestInfo.cs" />
+    <Compile Include="3rd\ObjectListView\Implementation\VirtualGroups.cs" />
+    <Compile Include="3rd\ObjectListView\Implementation\VirtualListDataSource.cs" />
+    <Compile Include="3rd\ObjectListView\ObjectListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\ObjectListView.DesignTime.cs" />
+    <Compile Include="3rd\ObjectListView\OLVColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\Rendering\Adornments.cs" />
+    <Compile Include="3rd\ObjectListView\Rendering\Decorations.cs" />
+    <Compile Include="3rd\ObjectListView\Rendering\Overlays.cs" />
+    <Compile Include="3rd\ObjectListView\Rendering\Renderers.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\Rendering\Styles.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\Rendering\TreeRenderer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\SubControls\GlassPanelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\SubControls\HeaderControl.cs" />
+    <Compile Include="3rd\ObjectListView\SubControls\ToolStripCheckedListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\SubControls\ToolTipControl.cs" />
+    <Compile Include="3rd\ObjectListView\TreeListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\Utilities\ColumnSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\Utilities\ColumnSelectionForm.Designer.cs">
+      <DependentUpon>ColumnSelectionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3rd\ObjectListView\Utilities\Generator.cs" />
+    <Compile Include="3rd\ObjectListView\Utilities\TypedObjectListView.cs" />
+    <Compile Include="3rd\ObjectListView\VirtualObjectListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Helpers\SecureHelper.cs" />
+    <Compile Include="Helpers\SerializationHelper.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\GlobalHook.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\IContainsRibbonComponents.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\IContainsSelectableRibbonItems.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\IDropDownRibbonItem.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\IRibbonElement.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\IRibbonForm.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\IRibbonToolTip.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\IScrollableRibbonItem.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\Ribbon.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonArrowDirection.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonButtonCollection.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonButtonDesigner.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonButtonList.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonButtonListDesigner.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonButtonStyle.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonCanvasEventArgs.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonCaptionButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonColorChooser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonColorPart.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonComboBoxDesigner.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonContext.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonContextCollection.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonDescriptionMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonDesigner.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonElementMeasureSizeEventArgs.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonElementPaintEventArgs.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonElementPopUpEventArgs.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonElementWithItemCollectionDesigner.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonFormHelper.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonHost.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonHostSizeModeHandledEventArgs.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonItemBoundsEventArgs.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonItemCollection.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonItemCollectionEditor.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonItemEventArgs.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonItemGroup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonItemGroupDesigner.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonItemGroupItemCollection.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonItemRenderEventArgs.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonMouseSensor.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonNonClientMode.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonOrbAdornerGlyph.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonOrbDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonOrbDropDownEventArgs.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonOrbMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonOrbMenuItemDesigner.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonOrbOptionButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonOrbRecentItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonOrbStyle.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonPanelCollection.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonPanelDesigner.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonPanelFlowDirection.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonPanelGlyph.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonPanelPopup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonPanelRenderEventArgs.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonPanelSizeMode.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonPopup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonPopupManager.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonProfesionalRendererColorTable.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonProfesionalRendererColorTableBlack.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonProfessionalRenderer.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonQuickAccessToolbar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonQuickAccessToolbarGlyph.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonQuickAccessToolbarItemCollection.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonRenderer.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonRenderEventArgs.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonSeparator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonTab.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonTabCollection.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonTabDesigner.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonTabGlyph.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonTabRenderEventArgs.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonTextEventArgs.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonToolTip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonToolTipRenderEventArgs.cs" />
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\RibbonWrappedDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\System.Windows.Forms.Ribbon35\WinApi.cs" />
+    <Compile Include="3rd\XPTable\Editors\CellEditor.cs" />
+    <Compile Include="3rd\XPTable\Editors\ColorCellEditor.cs" />
+    <Compile Include="3rd\XPTable\Editors\ComboBoxCellEditor.cs" />
+    <Compile Include="3rd\XPTable\Editors\DateTimeCellEditor.cs" />
+    <Compile Include="3rd\XPTable\Editors\DropDownCellEditor.cs" />
+    <Compile Include="3rd\XPTable\Editors\DropDownContainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3rd\XPTable\Editors\DropDownStyle.cs" />
+    <Compile Include="3rd\XPTable\Editors\EditStartAction.cs" />
+    <Compile Include="3rd\XPTable\Editors\ICellEditor.cs" />
+    <Compile Include="3rd\XPTable\Editors\IEditorUsesRendererButtons.cs" />
+    <Compile Include="3rd\XPTable\Editors\IKeyMessageFilterClient.cs" />
+    <Compile Include="3rd\XPTable\Editors\IMouseMessageFilterClient.cs" />
+    <Compile Include="3rd\XPTable\Editors\KeyMessageFilter.cs" />
+    <Compile Include="3rd\XPTable\Editors\MouseMessageFilter.cs" />
+    <Compile Include="3rd\XPTable\Editors\NumberCellEditor.cs" />
+    <Compile Include="3rd\XPTable\Editors\TextCellEditor.cs" />
+    <Compile Include="3rd\XPTable\Events\CellButtonEventArgs.cs" />
+    <Compile Include="3rd\XPTable\Events\CellCheckBoxEventArgs.cs" />
+    <Compile Include="3rd\XPTable\Events\CellEditEventArgs.cs" />
+    <Compile Include="3rd\XPTable\Events\CellEventArgs.cs" />
+    <Compile Include="3rd\XPTable\Events\CellEventArgsBase.cs" />
+    <Compile Include="3rd\XPTable\Events\CellEventType.cs" />
+    <Compile Include="3rd\XPTable\Events\CellFocusEventArgs.cs" />
+    <Compile Include="3rd\XPTable\Events\CellKeyEventArgs.cs" />
+    <Compile Include="3rd\XPTable\Events\CellMouseEventArgs.cs" />
+    <Compile Include="3rd\XPTable\Events\ColumnEventArgs.cs" />
+    <Compile Include="3rd\XPTable\Events\ColumnEventType.cs" />
+    <Compile Include="3rd\XPTable\Events\ColumnModelEventArgs.cs" />
+    <Compile Include="3rd\XPTable\Events\HeaderMouseEventArgs.cs" />
+    <Compile Include="3rd\XPTable\Events\PaintCellEventArgs.cs" />
+    <Compile Include="3rd\XPTable\Events\PaintHeaderEventArgs.cs" />
+    <Compile Include="3rd\XPTable\Events\RowEventArgs.cs" />
+    <Compile Include="3rd\XPTable\Events\RowEventType.cs" />
+    <Compile Include="3rd\XPTable\Events\SelectionEventArgs.cs" />
+    <Compile Include="3rd\XPTable\Events\TableModelEventArgs.cs" />
+    <Compile Include="3rd\XPTable\Models\ButtonColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\XPTable\Models\Cell.cs" />
+    <Compile Include="3rd\XPTable\Models\CellCheckStyle.cs" />
+    <Compile Include="3rd\XPTable\Models\CellCollection.cs" />
+    <Compile Include="3rd\XPTable\Models\CellImageStyle.cs" />
+    <Compile Include="3rd\XPTable\Models\CellPadding.cs" />
+    <Compile Include="3rd\XPTable\Models\CellPos.cs" />
+    <Compile Include="3rd\XPTable\Models\CellStyle.cs" />
+    <Compile Include="3rd\XPTable\Models\CheckBoxColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\XPTable\Models\CheckBoxColumnStyle.cs" />
+    <Compile Include="3rd\XPTable\Models\ColorColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\XPTable\Models\Column.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\XPTable\Models\ColumnAlignment.cs" />
+    <Compile Include="3rd\XPTable\Models\ColumnCollection.cs" />
+    <Compile Include="3rd\XPTable\Models\ColumnModel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\XPTable\Models\ColumnState.cs" />
+    <Compile Include="3rd\XPTable\Models\ComboBoxColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\XPTable\Models\DateTimeColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\XPTable\Models\Design\CellCollectionEditor.cs" />
+    <Compile Include="3rd\XPTable\Models\Design\CellConverter.cs" />
+    <Compile Include="3rd\XPTable\Models\Design\ColumnCollectionEditor.cs" />
+    <Compile Include="3rd\XPTable\Models\Design\HelpfulCollectionEditor.cs" />
+    <Compile Include="3rd\XPTable\Models\Design\RowCollectionEditor.cs" />
+    <Compile Include="3rd\XPTable\Models\Design\RowComparer.cs" />
+    <Compile Include="3rd\XPTable\Models\Design\RowConverter.cs" />
+    <Compile Include="3rd\XPTable\Models\DropDownColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\XPTable\Models\GridLines.cs" />
+    <Compile Include="3rd\XPTable\Models\GridLineStyle.cs" />
+    <Compile Include="3rd\XPTable\Models\HeaderContextMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\XPTable\Models\ImageColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\XPTable\Models\ImageSizeMode.cs" />
+    <Compile Include="3rd\XPTable\Models\NumberColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\XPTable\Models\ProgressBarColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\XPTable\Models\Row.cs" />
+    <Compile Include="3rd\XPTable\Models\RowAlignment.cs" />
+    <Compile Include="3rd\XPTable\Models\RowCollection.cs" />
+    <Compile Include="3rd\XPTable\Models\RowStyle.cs" />
+    <Compile Include="3rd\XPTable\Models\SelectionStyle.cs" />
+    <Compile Include="3rd\XPTable\Models\Table.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\XPTable\Models\TableModel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\XPTable\Models\TableRegion.cs" />
+    <Compile Include="3rd\XPTable\Models\TableState.cs" />
+    <Compile Include="3rd\XPTable\Models\TextColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="3rd\XPTable\Renderers\ButtonCellRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\ButtonRendererData.cs" />
+    <Compile Include="3rd\XPTable\Renderers\CellRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\CheckBoxCellRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\CheckBoxRendererData.cs" />
+    <Compile Include="3rd\XPTable\Renderers\ColorCellRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\ComboBoxCellRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\DateTimeCellRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\DropDownCellRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\DropDownRendererData.cs" />
+    <Compile Include="3rd\XPTable\Renderers\FlatHeaderRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\GradientHeaderRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\HeaderRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\ICellRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\IHeaderRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\ImageCellRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\IRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\NumberCellRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\NumberRendererData.cs" />
+    <Compile Include="3rd\XPTable\Renderers\ProgressBarCellRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\Renderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\TextCellRenderer.cs" />
+    <Compile Include="3rd\XPTable\Renderers\XPHeaderRenderer.cs" />
+    <Compile Include="3rd\XPTable\Sorting\CheckBoxComparer.cs" />
+    <Compile Include="3rd\XPTable\Sorting\ColorComparer.cs" />
+    <Compile Include="3rd\XPTable\Sorting\ComparerBase.cs" />
+    <Compile Include="3rd\XPTable\Sorting\DateTimeComparer.cs" />
+    <Compile Include="3rd\XPTable\Sorting\HeapSorter.cs" />
+    <Compile Include="3rd\XPTable\Sorting\IComparerCollection.cs" />
+    <Compile Include="3rd\XPTable\Sorting\ImageComparer.cs" />
+    <Compile Include="3rd\XPTable\Sorting\InsertionSorter.cs" />
+    <Compile Include="3rd\XPTable\Sorting\MergeSorter.cs" />
+    <Compile Include="3rd\XPTable\Sorting\NumberComparer.cs" />
+    <Compile Include="3rd\XPTable\Sorting\ShellSorter.cs" />
+    <Compile Include="3rd\XPTable\Sorting\SortColumn.cs" />
+    <Compile Include="3rd\XPTable\Sorting\SortColumnCollection.cs" />
+    <Compile Include="3rd\XPTable\Sorting\SorterBase.cs" />
+    <Compile Include="3rd\XPTable\Sorting\TextComparer.cs" />
+    <Compile Include="3rd\XPTable\Themes\ButtonParts.cs" />
+    <Compile Include="3rd\XPTable\Themes\CheckBoxStates.cs" />
+    <Compile Include="3rd\XPTable\Themes\ColumnHeaderParts.cs" />
+    <Compile Include="3rd\XPTable\Themes\ColumnHeaderStates.cs" />
+    <Compile Include="3rd\XPTable\Themes\ComboBoxParts.cs" />
+    <Compile Include="3rd\XPTable\Themes\ComboBoxStates.cs" />
+    <Compile Include="3rd\XPTable\Themes\ListViewParts.cs" />
+    <Compile Include="3rd\XPTable\Themes\ListViewStates.cs" />
+    <Compile Include="3rd\XPTable\Themes\ProgressBarParts.cs" />
+    <Compile Include="3rd\XPTable\Themes\PushButtonStates.cs" />
+    <Compile Include="3rd\XPTable\Themes\RadioButtonStates.cs" />
+    <Compile Include="3rd\XPTable\Themes\ScrollBarParts.cs" />
+    <Compile Include="3rd\XPTable\Themes\ScrollBarStates.cs" />
+    <Compile Include="3rd\XPTable\Themes\TabParts.cs" />
+    <Compile Include="3rd\XPTable\Themes\TextBoxParts.cs" />
+    <Compile Include="3rd\XPTable\Themes\TextBoxStates.cs" />
+    <Compile Include="3rd\XPTable\Themes\ThemeClasses.cs" />
+    <Compile Include="3rd\XPTable\Themes\ThemeManager.cs" />
+    <Compile Include="3rd\XPTable\Themes\UpDownParts.cs" />
+    <Compile Include="3rd\XPTable\Themes\UpDownStates.cs" />
+    <Compile Include="3rd\XPTable\Win32\AsciiChars.cs" />
+    <Compile Include="3rd\XPTable\Win32\DLLVERSIONINFO.cs" />
+    <Compile Include="3rd\XPTable\Win32\KeyEventFFlags.cs" />
+    <Compile Include="3rd\XPTable\Win32\MSG.cs" />
+    <Compile Include="3rd\XPTable\Win32\NativeMethods.cs" />
+    <Compile Include="3rd\XPTable\Win32\NativeWindow.cs" />
+    <Compile Include="3rd\XPTable\Win32\POINT.cs" />
+    <Compile Include="3rd\XPTable\Win32\RECT.cs" />
+    <Compile Include="3rd\XPTable\Win32\SIZE.cs" />
+    <Compile Include="3rd\XPTable\Win32\TRACKMOUSEEVENT.cs" />
+    <Compile Include="3rd\XPTable\Win32\WindowExtendedStyles.cs" />
+    <Compile Include="3rd\XPTable\Win32\WindowMessages.cs" />
+    <Compile Include="3rd\XPTable\Win32\WindowStyles.cs" />
+    <Compile Include="Forms\SettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SettingForm.Designer.cs">
+      <DependentUpon>SettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QueueDownloadItem.cs" />
+    <EmbeddedResource Include="3rd\CassiniDev\Resources\CassiniDev.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CassiniDev.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\CassiniDev\Views\BodyView.resx">
+      <DependentUpon>BodyView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\CassiniDev\Views\WebServerFormView.resx">
+      <DependentUpon>WebServerFormView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\CassiniDev\Views\LogView.resx">
+      <DependentUpon>LogView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\ExtendedWebBrowser2\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\ExtendedWebBrowser2\BrowserControl.resx">
+      <DependentUpon>BrowserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\ExtendedWebBrowser2\BrowserForm.resx">
+      <DependentUpon>BrowserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\ExtendedWebBrowser2\OpenUrlForm.resx">
+      <DependentUpon>OpenUrlForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\ExtendedWebBrowser2\OptionsForm.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\ExtendedWebBrowser2\ScriptErrorWindow.resx">
+      <DependentUpon>ScriptErrorWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\ColourPicker.resx">
+      <DependentUpon>ColourPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\CropPanel.resx">
+      <DependentUpon>CropPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\Histogram.resx">
+      <DependentUpon>Histogram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\ImageBox.resx">
+      <DependentUpon>ImageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\PropertiesPanel.resx">
+      <DependentUpon>PropertiesPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\RedEyePanel.resx">
+      <DependentUpon>RedEyePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\ResizePanel.resx">
+      <DependentUpon>ResizePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\IView.NET\iView.NET Controls\Library\ShearPanel.resx">
+      <DependentUpon>ShearPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\Metro\MetroFramework.Demo\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\Metro\MetroFramework\Properties\Resources.resx" />
+    <EmbeddedResource Include="Forms\AppMainForm.resx">
+      <DependentUpon>AppMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ChapterReader.resx">
+      <DependentUpon>ChapterReader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModernUIForm.resx">
+      <DependentUpon>ModernUIForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SearchForm.resx">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DownloaderForm.resx">
+      <DependentUpon>DownloaderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\Cx.Windows.Forms\MdiChildForm.resx">
+      <DependentUpon>MdiChildForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\Cx.Windows.Forms\NoResizeChildForm.resx">
+      <DependentUpon>NoResizeChildForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Intro.resx">
+      <DependentUpon>Intro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\ObjectListView\Utilities\ColumnSelectionForm.resx">
+      <DependentUpon>ColumnSelectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\AdjustTime.resx">
+      <DependentUpon>AdjustTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\BatchEditor.resx">
+      <DependentUpon>BatchEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\BmpSettings.resx">
+      <DependentUpon>BmpSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\CreateContactSheet.resx">
+      <DependentUpon>CreateContactSheet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\CreateSlideShow.resx">
+      <DependentUpon>CreateSlideShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\EyeDropper.resx">
+      <DependentUpon>EyeDropper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\FavouriteDialog.resx">
+      <DependentUpon>FavouriteDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\JpegSettings.resx">
+      <DependentUpon>JpegSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\License.resx">
+      <DependentUpon>License.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\NewWindow.resx">
+      <DependentUpon>NewWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\Options.resx">
+      <DependentUpon>Options.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\ProcessingDialog.resx">
+      <DependentUpon>ProcessingDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\RenameFile.resx">
+      <DependentUpon>RenameFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\ScreenShot.resx">
+      <DependentUpon>ScreenShot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\SlideShow.resx">
+      <DependentUpon>SlideShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\SlideShowWindow.resx">
+      <DependentUpon>SlideShowWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\TiffSettings.resx">
+      <DependentUpon>TiffSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IView\UpdateLocations.resx">
+      <DependentUpon>UpdateLocations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LastestChapterUpdateForm.resx">
+      <DependentUpon>LastestChapterUpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\QueueCompleteForm.resx">
+      <DependentUpon>QueueCompleteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\QueueDownloadForm.resx">
+      <DependentUpon>QueueDownloadForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HostProviderSupportForm.resx">
+      <DependentUpon>HostProviderSupportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ReadOnlineForm.resx">
+      <DependentUpon>ReadOnlineForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="3rd\XPTable\Editors\DropDownContainer.resx">
+      <DependentUpon>DropDownContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\XPTable\Models\Table.resx">
+      <DependentUpon>Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3rd\XPTable\Models\TableModel.resx">
+      <DependentUpon>TableModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SettingForm.resx">
+      <DependentUpon>SettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="3rd\CassiniDev\app.config" />
+    <None Include="3rd\ExtendedWebBrowser2\app.config" />
+    <EmbeddedResource Include="3rd\Metro\MetroFramework.Fonts\Resources\Open_Sans.ttf" />
+    <EmbeddedResource Include="3rd\Metro\MetroFramework.Fonts\Resources\Open_Sans_Bold.ttf" />
+    <EmbeddedResource Include="3rd\Metro\MetroFramework.Fonts\Resources\Open_Sans_Light.ttf" />
+    <None Include="3rd\ObjectListView\FullClassDiagram.cd" />
+    <None Include="3rd\ObjectListView\ObjectListView.FxCop" />
+    <None Include="app.config" />
+    <None Include="ComicDownloader_TemporaryKey.pfx" />
+    <None Include="Properties\IViewSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>IViewSettings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="3rd\CassiniDev\Resources\preferences-web-browser-shortcuts.ico" />
+    <Content Include="3rd\Common.Logging.dll" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_focus_24x24.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_focus_24x241.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_pressed_24x24.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_pressed_24x241.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\arrow_down_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\arrow_down_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\cd_rom_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\cd_rom_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\computer_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\computer_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\desktop_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\desktop_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\documents_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\documents_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\favourites_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\favourites_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\folder_closed_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\folder_closed_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\folder_hidden_closed_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\folder_hidden_closed_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\folder_hidden_opened_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\folder_hidden_opened_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\folder_opened_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\folder_opened_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\folder_up_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\folder_up_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\hard_drive_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\hard_drive_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\HistogramCross.cur" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\histogramcross1.cur" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\locked_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\locked_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\network_drive_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\network_drive_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\pictures_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\pictures_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\ram_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\ram_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\removable_disk_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\removable_disk_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\unknown_drive_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\unknown_drive_16x161.png" />
+    <Content Include="3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x16.png" />
+    <None Include="3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x161.png" />
+    <Content Include="3rd\Metro\MetroFramework.Fonts\MetroFramework.Fonts.csproj" />
+    <Content Include="3rd\Metro\MetroFramework.Fonts\Resources\Open Sans License.txt" />
+    <Content Include="3rd\Metro\MetroFramework\Localization\de\MetroToggle.xml" />
+    <Content Include="3rd\Metro\MetroFramework\Localization\en\MetroToggle.xml" />
+    <Content Include="3rd\NLog.dll" />
+    <Content Include="3rd\NLog.Extended.dll" />
+    <Content Include="3rd\PagedList\PagedList.csproj" />
+    <Content Include="Resources\1363852385_info.png" />
+    <Content Include="Resources\1363939449_netvibes.png" />
+    <Content Include="Resources\1363942937_ark2.png" />
+    <Content Include="Resources\1363960953_adept_update.png" />
+    <Content Include="Resources\1364078951_insert-object.png" />
+    <Content Include="Resources\1364131990_document_add.png" />
+    <Content Include="Resources\1364150669_folder_add.png" />
+    <Content Include="Resources\1364155386_gtk-refresh.png" />
+    <Content Include="Resources\1364326694_stock_save-pdf_24.png" />
+    <None Include="Resources\1364392872_slideshow.png" />
+    <Content Include="Resources\1364394623_37693.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\1364410919_Add Green Button.png" />
+    <None Include="Resources\1364410878_Add.png" />
+    <None Include="Resources\1364410881_plus_32.png" />
+    <None Include="Resources\1364410884_add1-.png" />
+    <None Include="Resources\1364410887_Add.png" />
+    <None Include="Resources\1364410892_document-new.png" />
+    <None Include="Resources\1364410895_001_01.gif" />
+    <None Include="Resources\1364410898_file_add.png" />
+    <None Include="Resources\1364410901_add.png" />
+    <None Include="Resources\1364410906_add.png" />
+    <None Include="Resources\1364410910_edit_add.png" />
+    <None Include="Resources\1364410914_plus.png" />
+    <None Include="Resources\1364413350_window_new.png" />
+    <None Include="Resources\1364561047_wheel.png" />
+    <None Include="Resources\1364561037_wheel.png" />
+    <None Include="Resources\1364561270_exit.png" />
+    <None Include="Resources\1364647743_sheduled_task.png" />
+    <None Include="Resources\1364647743_sheduled_task1.png" />
+    <None Include="Resources\1364647756_sheduled_task.png" />
+    <None Include="Resources\1364671000_10.png" />
+    <None Include="Resources\1364710944_clear_left.png" />
+    <None Include="Resources\1364711392_media-play-pause-resume.png" />
+    <None Include="Resources\1364712905_download.png" />
+    <Content Include="Resources\1364714377_46796.ico" />
+    <None Include="Resources\1364717902_list-remove.png" />
+    <None Include="Resources\1364717999_delete.png" />
+    <None Include="Resources\1364718151_stopwatch_start.png" />
+    <None Include="Resources\1364718266_up.png" />
+    <None Include="Resources\1364718270_go-top.png" />
+    <None Include="Resources\1364718322_emblem-downloads.png" />
+    <None Include="Resources\1364718320_go-bottom.png" />
+    <None Include="Resources\1364718418_checked_checkbox.png" />
+    <None Include="Resources\1364718448_checkbox_unchecked.png" />
+    <None Include="Resources\1364718484_radio-unchecked.png" />
+    <None Include="Resources\1364718512_to_do_list_cheked_all.png" />
+    <None Include="Resources\1364718586_netvibes.png" />
+    <None Include="Resources\1364718804_start-here-ubuntustudio.png" />
+    <None Include="Resources\1364729000_old-edit-find.png" />
+    <None Include="Resources\1364728988_file_extension_pdf.png" />
+    <None Include="Resources\1364729045_Gnome-Mail-Mark-Read-32.png" />
+    <None Include="Resources\1364729079_folderopen1.png" />
+    <None Include="Resources\1364738251_folder_explore.png" />
+    <None Include="Resources\1364755245_network-support.png" />
+    <None Include="Resources\1365100868_interact.png" />
+    <None Include="Resources\1365100861_interact.png" />
+    <None Include="Resources\1365103950_interact.png" />
+    <None Include="Resources\1365316352_mark_as_read_32.png" />
+    <None Include="Resources\1365319718_Globe1.png" />
+    <None Include="Resources\1365339292_play.png" />
+    <None Include="Resources\1365339653_Previous.png" />
+    <None Include="Resources\1365339706_go-last-page.png" />
+    <None Include="Resources\1365339736_go-last-page.png" />
+    <None Include="Resources\1365339812_Previous.png" />
+    <None Include="Resources\1365339806_Next.png" />
+    <None Include="Resources\1365339875_Close.png" />
+    <None Include="Resources\1365340186_Pause.png" />
+    <None Include="Resources\1365430905_internet-radio-new.png" />
+    <None Include="Resources\1365493287_web.png" />
+    <None Include="Resources\1365535542_reload.png" />
+    <None Include="Resources\1365535653_Process-Accept.png" />
+    <None Include="Resources\1365535741_select_by_adding_to_selection.png" />
+    <None Include="Resources\1365576001_search.png" />
+    <None Include="Resources\1365576100_Search.png" />
+    <None Include="Resources\1365685971_Information.png" />
+    <None Include="Resources\1365686523_web.png" />
+    <None Include="Resources\1365686491_Information.png" />
+    <None Include="Resources\1365926520_Document-scheduled-tasks-icon.png" />
+    <None Include="Resources\1365926714_Document-scheduled-tasks-icon.png" />
+    <None Include="Resources\1365926784_download.png" />
+    <None Include="Resources\1365926986_document_search.png" />
+    <None Include="Resources\1365927134_cog-icon-2-48x48.png" />
+    <None Include="Resources\1365927783_Update.png" />
+    <None Include="Resources\1365927859_system-software-update.png" />
+    <None Include="Resources\1365927946_social_balloon-14.png" />
+    <Content Include="Resources\14747480-bang-comic-book-explosion.jpg" />
+    <Content Include="3rd\itextsharp.dll" />
+    <Content Include="3rd\Cx.Windows.Forms\MdiTabStrip.bmp" />
+    <None Include="Resources\blankcursor.cur" />
+    <None Include="Resources\eyedroppercursor.cur" />
+    <None Include="Resources\GPL v2.0.txt" />
+    <Content Include="Resources\gtk-about.png" />
+    <Content Include="3rd\HtmlAgilityPack.dll" />
+    <Content Include="3rd\ObjectListView\CustomDictionary.xml" />
+    <Content Include="3rd\ObjectListView\Resources\clear-filter.png" />
+    <Content Include="3rd\ObjectListView\Resources\coffee.jpg" />
+    <Content Include="3rd\ObjectListView\Resources\filter-icons3.png" />
+    <Content Include="3rd\ObjectListView\Resources\filter.png" />
+    <Content Include="3rd\ObjectListView\Resources\sort-ascending.png" />
+    <Content Include="3rd\ObjectListView\Resources\sort-descending.png" />
+    <Content Include="Readme.txt" />
+    <None Include="Resources\clear-filter.png" />
+    <None Include="Resources\filter-icons3.png" />
+    <None Include="Resources\filter.png" />
+    <None Include="Resources\Intro.pdf" />
+    <None Include="Resources\sort-ascending.png" />
+    <None Include="Resources\sort-descending.png" />
+    <Content Include="3rd\System.Windows.Forms.Ribbon35\Updates.txt" />
+    <Content Include="Resources\1364325544_stock_save-pdf-16.png" />
+    <None Include="Resources\open file filter.txt" />
+    <None Include="Resources\redeyecursor.cur" />
+    <None Include="Resources\Save File Filter.txt" />
+    <None Include="Resources\pause_16x16.png" />
+    <None Include="Resources\play_16x16.png" />
+    <None Include="Resources\media_playback_start %281%29.png" />
+    <None Include="Resources\media_playback_stop.png" />
+    <None Include="Resources\star.png" />
+    <Content Include="Resources\t9froggy_trans.ico" />
+    <Content Include="Resources\the_marvel_universe.jpg" />
+    <Content Include="3rd\XPTable\Models\ColumnModel.bmp" />
+    <Content Include="3rd\XPTable\Models\Table.bmp" />
+    <Content Include="3rd\XPTable\Models\TableModel.bmp" />
+    <Content Include="3rd\XPTable\XPTable.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="3rd\ObjectListView\bin\debug\" />
+    <Folder Include="3rd\ObjectListView\bin\Release\" />
+    <Folder Include="3rd\ObjectListView\obj\Debug\Refactor\" />
+    <Folder Include="3rd\ObjectListView\obj\Debug\TempPE\" />
+    <Folder Include="3rd\ObjectListView\obj\Release\TempPE\" />
+    <Folder Include="3rd\XPTable\doc\" />
+    <Folder Include="Engines\JP\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="3rd\CassiniDev\Resources\preferences-web-browser-shortcuts.ico">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\Common.Logging.dll">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\Cx.Windows.Forms\MdiTabStrip.bmp">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\HtmlAgilityPack.dll">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\itextsharp.dll">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_focus_24x24.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_pressed_24x24.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\arrow_down_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\cd_rom_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\computer_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\desktop_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\documents_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\favourites_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\folder_closed_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\folder_hidden_closed_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\folder_hidden_opened_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\folder_opened_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\folder_up_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\hard_drive_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\HistogramCross.cur">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\locked_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\network_drive_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\pictures_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\ram_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\removable_disk_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\unknown_drive_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\Metro\MetroFramework.Fonts\MetroFramework.Fonts.csproj">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\Metro\MetroFramework.Fonts\Resources\Open Sans License.txt">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\Metro\MetroFramework\Localization\de\MetroToggle.xml">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\Metro\MetroFramework\Localization\en\MetroToggle.xml">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\NLog.dll">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\NLog.Extended.dll">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\ObjectListView\CustomDictionary.xml">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\ObjectListView\Resources\clear-filter.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\ObjectListView\Resources\coffee.jpg">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\ObjectListView\Resources\filter-icons3.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\ObjectListView\Resources\filter.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\ObjectListView\Resources\sort-ascending.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\ObjectListView\Resources\sort-descending.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\PagedList\PagedList.csproj">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\System.Windows.Forms.Ribbon35\Updates.txt">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\XPTable\Models\ColumnModel.bmp">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\XPTable\Models\Table.bmp">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\XPTable\Models\TableModel.bmp">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="3rd\XPTable\XPTable.xml">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="ComicDownloader.exe">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>ManifestEntryPoint</FileType>
+    </PublishFile>
+    <PublishFile Include="HtmlAgilityPack">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="itextsharp">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Readme.txt">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\1363852385_info.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\1363939449_netvibes.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\1363942937_ark2.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\1363960953_adept_update.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\1364078951_insert-object.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\1364131990_document_add.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\1364150669_folder_add.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\1364155386_gtk-refresh.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\1364325544_stock_save-pdf-16.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\1364326694_stock_save-pdf_24.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\1364394623_37693.ico">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\1364714377_46796.ico">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\14747480-bang-comic-book-explosion.jpg">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\gtk-about.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\t9froggy_trans.ico">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\the_marvel_universe.jpg">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <!--<UsingTask TaskName="SmartAssembly.MSBuild.Tasks.Build" AssemblyName="SmartAssembly.MSBuild.Tasks, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7f465a1c156d4d57" />
+  <Target Name="BeforeBuild" Condition=" '$(Configuration)' == 'Release' ">
+    <CreateProperty Value="true">
+      <Output TaskParameter="Value" PropertyName="RunSmartAssembly" />
+    </CreateProperty>
+  </Target>
+  <Target Name="AfterCompile" Condition=" '$(RunSmartAssembly)' != '' ">
+    <SmartAssembly.MSBuild.Tasks.Build ProjectFile="ComicDownloader.saproj" OverwriteAssembly="True" />
+  </Target>-->
+  <!--___BEGIN_CRYPTO_OBFUSCATOR___-->
+  <!--<PropertyGroup>
+    <CO_FirstProject>True</CO_FirstProject>
+    <CO_LastProject>True</CO_LastProject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <CO_Config>Release|x86</CO_Config>
+    <CO_ProjectFilePath>..\ComicDownloader_Release_x86.obproj</CO_ProjectFilePath>
+  </PropertyGroup>
+  <Import Project="C:\Program Files (x86)\LogicNP Software\Crypto Obfuscator For .Net 2012 R2\CryptoObfuscator.targets" />
+  -->
+  <!--___END_CRYPTO_OBFUSCATOR___-->
+</Project>

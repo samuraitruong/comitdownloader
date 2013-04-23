@@ -63,6 +63,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.restoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ribbonOrbMenuItem2 = new System.Windows.Forms.RibbonOrbMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,8 +92,9 @@
             this.ribbon1.OrbDropDown.Location = new System.Drawing.Point(0, 0);
             this.ribbon1.OrbDropDown.MenuItems.Add(this.mnuOptions);
             this.ribbon1.OrbDropDown.MenuItems.Add(this.ribbonOrbMenuItem1);
+            this.ribbon1.OrbDropDown.MenuItems.Add(this.ribbonOrbMenuItem2);
             this.ribbon1.OrbDropDown.Name = "";
-            this.ribbon1.OrbDropDown.Size = new System.Drawing.Size(527, 160);
+            this.ribbon1.OrbDropDown.Size = new System.Drawing.Size(527, 204);
             this.ribbon1.OrbDropDown.TabIndex = 0;
             this.ribbon1.OrbImage = null;
             // 
@@ -350,6 +352,16 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // ribbonOrbMenuItem2
+            // 
+            this.ribbonOrbMenuItem2.DropDownArrowDirection = System.Windows.Forms.RibbonArrowDirection.Left;
+            this.ribbonOrbMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("ribbonOrbMenuItem2.Image")));
+            this.ribbonOrbMenuItem2.MaximumSize = new System.Drawing.Size(0, 0);
+            this.ribbonOrbMenuItem2.MinimumSize = new System.Drawing.Size(0, 0);
+            this.ribbonOrbMenuItem2.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonOrbMenuItem2.SmallImage")));
+            this.ribbonOrbMenuItem2.Text = "ribbonOrbMenuItem2";
+            this.ribbonOrbMenuItem2.Click += new System.EventHandler(this.ribbonOrbMenuItem2_Click);
+            // 
             // AppMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -407,6 +419,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem restoreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.RibbonOrbMenuItem ribbonOrbMenuItem2;
         
     }
 }

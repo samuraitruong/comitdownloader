@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Administrator\Desktop\Dropbox_samuraitruong_yahoo\Dropbox\Public\ComicDownloader\</PublishUrl>
+    <PublishUrl>C:\HOST\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <UpdateUrl>https://dl.dropboxusercontent.com/u/13243930/ComicDownloader/</UpdateUrl>
+    <UpdateUrl>\\localhost\host\</UpdateUrl>
     <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
@@ -55,10 +55,10 @@
     <ApplicationIcon>Resources\1364394623_37693.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>FBE3D60583A8570FB2BDCFD2AF9DE4A7E29E010C</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>86CC654276B9ABB306D1C22D30B3F12F2811B72B</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>ComicDownloader_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>ComicDownloader_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -1445,6 +1445,7 @@
     <None Include="3rd\ObjectListView\FullClassDiagram.cd" />
     <None Include="3rd\ObjectListView\ObjectListView.FxCop" />
     <None Include="app.config" />
+    <None Include="ComicDownloader_1_TemporaryKey.pfx" />
     <None Include="ComicDownloader_TemporaryKey.pfx" />
     <None Include="HTML\treetable\.gitignore" />
     <None Include="HTML\treetable\README.md" />
@@ -1466,6 +1467,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="3rd\AutoUpdater.NET.dll" />
     <Content Include="3rd\CassiniDev\Resources\preferences-web-browser-shortcuts.ico" />
     <Content Include="3rd\Common.Logging.dll" />
     <Content Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_focus_24x24.png" />
@@ -1523,6 +1525,7 @@
     <Content Include="3rd\NLog.dll" />
     <Content Include="3rd\NLog.Extended.dll" />
     <Content Include="3rd\PagedList\PagedList.csproj" />
+    <Content Include="3rd\SKGL.dll" />
     <Content Include="HTML\INDEX.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1610,7 +1613,9 @@
     <Content Include="Resources\1364155386_gtk-refresh.png" />
     <Content Include="Resources\1364326694_stock_save-pdf_24.png" />
     <None Include="Resources\1364392872_slideshow.png" />
-    <Content Include="Resources\1364394623_37693.ico" />
+    <Content Include="Resources\1364394623_37693.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\1364410919_Add Green Button.png" />
     <None Include="Resources\1364410878_Add.png" />
     <None Include="Resources\1364410881_plus_32.png" />
@@ -1685,12 +1690,16 @@
     <None Include="Resources\1365927783_Update.png" />
     <None Include="Resources\1365927859_system-software-update.png" />
     <None Include="Resources\1365927946_social_balloon-14.png" />
+    <None Include="Resources\1366530408_paypal-curved.png" />
+    <None Include="Resources\1366530557_donate.png" />
+    <None Include="Resources\1366530835_paypal-curved.png" />
     <Content Include="Resources\14747480-bang-comic-book-explosion.jpg" />
     <Content Include="3rd\itextsharp.dll" />
     <Content Include="3rd\Cx.Windows.Forms\MdiTabStrip.bmp" />
     <None Include="Resources\blankcursor.cur" />
     <None Include="Resources\eyedroppercursor.cur" />
     <None Include="Resources\GPL v2.0.txt" />
+    <None Include="Resources\donate-512.png" />
     <Content Include="Resources\gtk-about.png" />
     <Content Include="3rd\HtmlAgilityPack.dll" />
     <Content Include="3rd\ObjectListView\CustomDictionary.xml" />
@@ -1755,6 +1764,11 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties BuildVersion_StartDate="2013/3/19" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_ConfigurationName="Release" BuildVersion_IncrementBeforeBuild="True" />
+    </VisualStudio>
+  </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

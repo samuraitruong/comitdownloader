@@ -35,10 +35,12 @@ namespace ComicDownloader.Forms
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
             this.bntSearch = new MetroFramework.Controls.MetroButton();
             this.txtKeyword = new MetroFramework.Controls.MetroTextBox();
+            this.metroTile2 = new MetroFramework.Controls.MetroTile();
             this.tlLastestUpdate = new MetroFramework.Controls.MetroTile();
             this.tlNewDownload = new MetroFramework.Controls.MetroTile();
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.metroTile6 = new MetroFramework.Controls.MetroTile();
+            this.metroTile1 = new MetroFramework.Controls.MetroTile();
             this.updateProgressBar = new MetroFramework.Controls.MetroProgressBar();
             this.lblStatus = new MetroFramework.Controls.MetroLabel();
             this.tlSettings = new MetroFramework.Controls.MetroTile();
@@ -68,10 +70,12 @@ namespace ComicDownloader.Forms
             this.metroTabPage1.BackColor = System.Drawing.Color.White;
             this.metroTabPage1.Controls.Add(this.bntSearch);
             this.metroTabPage1.Controls.Add(this.txtKeyword);
+            this.metroTabPage1.Controls.Add(this.metroTile2);
             this.metroTabPage1.Controls.Add(this.tlLastestUpdate);
             this.metroTabPage1.Controls.Add(this.tlNewDownload);
             this.metroTabPage1.Controls.Add(this.metroButton1);
             this.metroTabPage1.Controls.Add(this.metroTile6);
+            this.metroTabPage1.Controls.Add(this.metroTile1);
             this.metroTabPage1.Controls.Add(this.updateProgressBar);
             this.metroTabPage1.Controls.Add(this.lblStatus);
             this.metroTabPage1.Controls.Add(this.tlSettings);
@@ -81,9 +85,9 @@ namespace ComicDownloader.Forms
             this.metroTabPage1.HorizontalScrollbarBarColor = true;
             this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.HorizontalScrollbarSize = 10;
-            this.metroTabPage1.Location = new System.Drawing.Point(4, 32);
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 35);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(752, 461);
+            this.metroTabPage1.Size = new System.Drawing.Size(752, 458);
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "Home";
             this.metroTabPage1.VerticalScrollbarBarColor = true;
@@ -112,7 +116,23 @@ namespace ComicDownloader.Forms
             this.txtKeyword.SelectedText = "";
             this.txtKeyword.Size = new System.Drawing.Size(578, 23);
             this.txtKeyword.TabIndex = 12;
+            this.txtKeyword.Text = "Dragon Ball";
             this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
+            // 
+            // metroTile2
+            // 
+            this.metroTile2.ActiveControl = null;
+            this.metroTile2.Location = new System.Drawing.Point(411, 187);
+            this.metroTile2.Name = "metroTile2";
+            this.metroTile2.Size = new System.Drawing.Size(211, 150);
+            this.metroTile2.TabIndex = 15;
+            this.metroTile2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.metroTile2.TileImage = global::ComicDownloader.Properties.Resources._1366530835_paypal_curved;
+            this.metroTile2.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.metroTile2.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.metroTile2.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.metroTile2.UseTileImage = true;
+            this.metroTile2.Click += new System.EventHandler(this.metroTile2_Click);
             // 
             // tlLastestUpdate
             // 
@@ -181,6 +201,20 @@ namespace ComicDownloader.Forms
             this.metroTile6.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
             this.metroTile6.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
             this.metroTile6.UseTileImage = true;
+            // 
+            // metroTile1
+            // 
+            this.metroTile1.ActiveControl = null;
+            this.metroTile1.Location = new System.Drawing.Point(640, 187);
+            this.metroTile1.Name = "metroTile1";
+            this.metroTile1.Size = new System.Drawing.Size(150, 84);
+            this.metroTile1.TabIndex = 14;
+            this.metroTile1.Text = "Check of Update";
+            this.metroTile1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.metroTile1.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.metroTile1.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Regular;
+            this.metroTile1.Visible = false;
+            this.metroTile1.Click += new System.EventHandler(this.metroTile1_Click_1);
             // 
             // updateProgressBar
             // 
@@ -281,7 +315,7 @@ namespace ComicDownloader.Forms
             this.Name = "ModernUIForm";
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.DropShadow;
             this.Style = MetroFramework.MetroColorStyle.Default;
-            this.Text = "Comic Downloader 1.0";
+            this.Text = "Comic Downloader 1.0 Build 1256";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModernUIForm_FormClosing);
             this.Load += new System.EventHandler(this.ModernUIForm_Load);
             this.Resize += new System.EventHandler(this.ModernUIForm_Resize);
@@ -310,6 +344,8 @@ namespace ComicDownloader.Forms
         private MetroFramework.Controls.MetroTile metroTile6;
         private MetroFramework.Controls.MetroButton bntSearch;
         private MetroFramework.Controls.MetroTextBox txtKeyword;
+        private MetroFramework.Controls.MetroTile metroTile1;
+        private MetroFramework.Controls.MetroTile metroTile2;
         
         
         //private MetroFramework.Controls.MetroTile metroTile2;

@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_46BA16CB889A45ED8D1070882831613B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_66D76F6B340B05503D975482DA0C6560"
         "OwnerKey" = "8:_FF99F23C4CEE4A7091216EA20EA8AAF5"
         "MsmSig" = "8:_UNDEFINED"
@@ -22,12 +28,6 @@
         "Entry"
         {
         "MsmKey" = "8:_6D46D430B3D7499CA6C3F878753B3680"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_756F8476F3EB448BA0E9BE7D7292BA3C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -41,6 +41,12 @@
         {
         "MsmKey" = "8:_AFC5D0EF187E4401A2EC3BD14F5BC205"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F168D79AEB95FEF2FC5BB78188970650"
+        "OwnerKey" = "8:_FF99F23C4CEE4A7091216EA20EA8AAF5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -64,7 +70,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F168D79AEB95FEF2FC5BB78188970650"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_9BBACD69C47A4629847F816541B39ED4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_46BA16CB889A45ED8D1070882831613B"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -149,6 +167,34 @@
     {
         "CustomAction"
         {
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_14AC1EAD354B42F3A03596D6DDBA4724"
+            {
+            "Name" = "8:Primary output from ComicDownloader.Installer (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_46BA16CB889A45ED8D1070882831613B"
+            "FileType" = "3:1"
+            "InstallAction" = "3:1"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_5AD1729D_D9F5_4872_A6CA_3D959746BE33"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_47B9CA1D689B440CAF14BD54EBC7544F"
+            {
+            "Name" = "8:Primary output from ComicDownloader.Installer (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_46BA16CB889A45ED8D1070882831613B"
+            "FileType" = "3:1"
+            "InstallAction" = "3:2"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_43E98BE5_53A7_4596_A115_FE642386CB6E"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
         }
         "DefaultFeature"
         {
@@ -223,26 +269,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_756F8476F3EB448BA0E9BE7D7292BA3C"
-            {
-            "SourcePath" = "8:..\\Release\\log.txt"
-            "TargetName" = "8:log.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9BBACD69C47A4629847F816541B39ED4"
             {
             "AssemblyRegister" = "3:1"
@@ -294,11 +320,42 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F168D79AEB95FEF2FC5BB78188970650"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_F168D79AEB95FEF2FC5BB78188970650"
+                    {
+                    "Name" = "8:Common.Logging.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Common.Logging.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FF99F23C4CEE4A7091216EA20EA8AAF5"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ComicDownloader, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1caba167bd85aed6, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:ComicDownloader, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_FF99F23C4CEE4A7091216EA20EA8AAF5"
@@ -343,6 +400,39 @@
                 {
                 }
             }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_8100D5398A804407A581A79EB4308033"
+            {
+            "Name" = "8:#1922"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:TemplateFolder"
+                "Folders"
+                {
+                }
+            }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_98FC631F93424C23ABCE2B1F101693AE"
+            {
+            "Name" = "8:#1915"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:AppDataFolder"
+                "Folders"
+                {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_3642FAE3069A42168FCDB626A84B12D6"
+                    {
+                    "Name" = "8:Comic Downloader V1"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_1D62243E963C4B678CB6659D68527121"
+                        "Folders"
+                        {
+                        }
+                    }
+                }
+            }
             "{1525181F-901A-416C-8A58-119130FE478E}:_D75FE0982D73401A9273025F2CB681D7"
             {
             "Name" = "8:#1916"
@@ -382,7 +472,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Comic Downloader V1"
         "ProductCode" = "8:{B272C882-A26C-4FDA-AE48-64933A2077A9}"
-        "PackageCode" = "8:{AE667B61-8F59-4485-AE98-338D9C041331}"
+        "PackageCode" = "8:{DA21D34C-DCEA-4831-84D0-5E3B9ACA1C21}"
         "UpgradeCode" = "8:{7F4E4438-E618-4DAC-8DD3-DEC09F6F24D4}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -432,6 +522,20 @@
                             "Transitive" = "11:FALSE"
                                 "Keys"
                                 {
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_5E5ED27B042F4AE790EFE667A2A00075"
+                                    {
+                                    "Name" = "8:ComicDownloaderV1"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
                                 }
                                 "Values"
                                 {
@@ -457,6 +561,20 @@
                     "Transitive" = "11:FALSE"
                         "Keys"
                         {
+                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_AAC7351F21B74B77820FBDD6A08C2E9D"
+                            {
+                            "Name" = "8:Comic"
+                            "Condition" = "8:"
+                            "AlwaysCreate" = "11:FALSE"
+                            "DeleteAtUninstall" = "11:FALSE"
+                            "Transitive" = "11:FALSE"
+                                "Keys"
+                                {
+                                }
+                                "Values"
+                                {
+                                }
+                            }
                             "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_C46A0785FACC49B6A9BE0B5E08707237"
                             {
                             "Name" = "8:[Manufacturer]"
@@ -514,6 +632,20 @@
             "Folder" = "8:_D75FE0982D73401A9273025F2CB681D7"
             "WorkingFolder" = "8:_16495D796CE84539AEC87DD81F268A2D"
             "Icon" = "8:_AFC5D0EF187E4401A2EC3BD14F5BC205"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4B58E34BB9E741F6BDA9E617283BE7C5"
+            {
+            "Name" = "8:Uninstall"
+            "Arguments" = "8:/uninstall {B272C882-A26C-4FDA-AE48-64933A2077A9}"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_FF99F23C4CEE4A7091216EA20EA8AAF5"
+            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "WorkingFolder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Icon" = "8:"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_DD3B8F777DD548D09BF50B9EB0F4DEAA"
@@ -929,6 +1061,34 @@
         }
         "ProjectOutput"
         {
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_46BA16CB889A45ED8D1070882831613B"
+            {
+            "SourcePath" = "8:..\\ComicDownloader.Installer\\obj\\Release\\ComicDownloader.Installer.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{4AE212E0-5C7E-4950-AED2-2476E7665146}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
         }
     }
 }
