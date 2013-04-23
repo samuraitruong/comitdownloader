@@ -185,5 +185,28 @@ namespace ComicDownloader.Engines
 
             return stories;
         }
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            var stories = new List<StoryInfo>();
+
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                var urlPartern = string.Format("http://truyentranh8.com/{0}/", keyword.Replace(" ", "_"));
+
+                string html = NetworkHelper.GetHtml(urlPartern);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var node = htmlDoc.DocumentNode.SelectSingleNode("//div[@class=\"info1\"]/table//tr[position()=1]/td/a");
+
+                if (node != null && node.Attributes["href"].Value != "/#doctruyen")
+                {
+                    stories.Add(new StoryInfo() { Url = urlPartern, Name = keyword });
+                }
+            }
+
+            return stories;
+        }
     }
 }

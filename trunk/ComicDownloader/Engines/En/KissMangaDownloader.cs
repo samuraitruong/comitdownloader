@@ -34,6 +34,14 @@ namespace ComicDownloader.Engines
             get { return "http://kissmanga.com"; }
         }
 
+        public override string ServiceUrl
+        {
+            get
+            {
+                return "http://kissmanga.com/Search/Manga";
+            }
+        }
+
         public override string StoryUrlPattern
         {
             get { throw new NotImplementedException(); }
@@ -171,6 +179,39 @@ namespace ComicDownloader.Engines
                     }
                 stories.Add(info);
             }
+            return stories;
+        }
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            var json = "keyword={0}";
+            json = string.Format(json, keyword);
+
+            var html = NetworkHelper.PostHtml(ServiceUrl, ServiceUrl, json, 
+                HostUrl,
+                "application/x-www-form-urlencoded",
+                "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "ISO-8859-1,utf-8;q=0.7,*;q=0.3",
+                "gzip,deflate,sdch",
+                "en-US,en;q=0.8",
+                "max-age=0",
+                true,
+                "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31");
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//table[@class=\"listing\"]//tr[@class=\"odd\"]/td[position()=1]/a");
+
+            var stories = new List<StoryInfo>();
+
+            if (nodes != null)
+            {
+                foreach (HtmlNode node in nodes)
+                {
+                    stories.Add(new StoryInfo() { Url = HostUrl + node.Attributes["href"].Value, Name = node.InnerText.Trim() }); 
+                }
+            }
+
             return stories;
         }
 
