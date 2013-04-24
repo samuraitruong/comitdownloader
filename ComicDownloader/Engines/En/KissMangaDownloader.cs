@@ -185,7 +185,7 @@ namespace ComicDownloader.Engines
         public override List<StoryInfo> OnlineSearch(string keyword)
         {
             var json = "keyword={0}";
-            json = string.Format(json, keyword);
+            json = string.Format(json, keyword.Replace(" ","+"));
 
             var html = NetworkHelper.PostHtml(ServiceUrl, ServiceUrl, json, 
                 HostUrl,
@@ -200,7 +200,7 @@ namespace ComicDownloader.Engines
 
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
-            var nodes = htmlDoc.DocumentNode.SelectNodes("//table[@class=\"listing\"]//tr[@class=\"odd\"]/td[position()=1]/a");
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//table[@class=\"listing\"]//tr[position()>2]/td[position()=1]/a");
 
             var stories = new List<StoryInfo>();
 

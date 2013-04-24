@@ -157,6 +157,8 @@ namespace ComicDownloader.Engines
             return pages;
         }
 
+        //Lastest Update chi show story, thong co link chapter moi nhat
+
         //Use google search
     }
 }
