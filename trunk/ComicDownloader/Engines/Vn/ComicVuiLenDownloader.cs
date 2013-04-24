@@ -138,6 +138,8 @@ namespace ComicDownloader.Engines
             return pages;
         }
 
+        //Ko thu hien get lastest upate
+
         //Don't provide search
     }
 }

@@ -27,6 +27,14 @@ namespace ComicDownloader.Engines
             get { return "http://mangachrome.com"; }
         }
 
+        public override string ServiceUrl
+        {
+            get
+            {
+                return "http://mangachrome.com/manga-list/search/";
+            }
+        }
+
         public override string StoryUrlPattern
         {
             get { throw new NotImplementedException(); }
@@ -177,6 +185,46 @@ namespace ComicDownloader.Engines
                 stories.Add(info);
             }
             return stories;
+        }
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string urlPattern = string.Format("http://mangachrome.com/manga-list/search/{0}/name-az/{1}/", keyword.Replace(" ", "+"), "{0}");
+
+            var results = new List<StoryInfo>();
+
+            int currentPage = 1;
+
+            while (currentPage <= Constant.LimitedPageForSearch)
+            {
+                string url = string.Format(urlPattern, currentPage);
+
+                string html = NetworkHelper.GetHtml(url);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//table[@id=\"wpm_mng_lst\"]//tr/td/a[position()=2]");
+                if (nodes != null && nodes.Count > 0)
+                {
+                    foreach (var node in nodes)
+                    {
+                        if (results.Any(p => p.Url == node.Attributes["href"].Value))
+                        {
+                            currentPage = Constant.LimitedPageForSearch;
+                            break;
+                        }
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = node.Attributes["href"].Value,
+                            Name = node.Attributes["title"].Value.Trim()
+                        };
+                        results.Add(info);
+                    }
+                }
+
+                currentPage++;
+            }
+            return results;
         }
     }
 }
