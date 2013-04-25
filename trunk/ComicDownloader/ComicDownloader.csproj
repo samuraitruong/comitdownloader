@@ -541,6 +541,7 @@
     <Compile Include="Engines\18+\Manga16Downloader.cs" />
     <Compile Include="Engines\DownloaderAttribute.cs" />
     <Compile Include="Engines\En\BatotoDownloader.cs" />
+    <Compile Include="Engines\En\MangableDownloader.cs" />
     <Compile Include="Engines\En\MangaPandaDownloader.cs" />
     <Compile Include="Engines\En\GoodMangaDownloader.cs" />
     <Compile Include="Engines\En\MangaInnDownloader.cs" />
@@ -555,6 +556,7 @@
     <Compile Include="Engines\En\JPMangaDownloader.cs" />
     <Compile Include="Engines\En\MangaChromeDownloader.cs" />
     <Compile Include="Engines\En\KissMangaDownloader.cs" />
+    <Compile Include="Engines\En\OneMangeDownloader.cs" />
     <Compile Include="Engines\En\TenMangaDownloader.cs" />
     <Compile Include="Engines\En\MangaParkDownloader.cs" />
     <Compile Include="Engines\En\MangaHereDownloader.cs" />
@@ -1766,7 +1768,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2013/3/19" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_ConfigurationName="Release" BuildVersion_IncrementBeforeBuild="True" />
+      <UserProperties BuildVersion_IncrementBeforeBuild="True" BuildVersion_ConfigurationName="Release" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_StartDate="2013/3/19" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
