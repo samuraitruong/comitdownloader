@@ -562,7 +562,6 @@
     <Compile Include="Engines\En\MangaHereDownloader.cs" />
     <Compile Include="Engines\En\UnixMangaDownloader.cs" />
     <Compile Include="Engines\Proxies\BlogTruyenDownloaderProxy.cs" />
-    <Compile Include="Engines\Vn\CongTruyenDownloader.cs" />
     <Compile Include="Engines\Vn\ThienDuongMangaDownloader.cs" />
     <Compile Include="Engines\Vn\WebTruyenDownloader.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
@@ -1770,7 +1769,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_IncrementBeforeBuild="True" BuildVersion_ConfigurationName="Release" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_StartDate="2013/3/19" />
+      <UserProperties BuildVersion_StartDate="2013/3/19" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_ConfigurationName="Release" BuildVersion_IncrementBeforeBuild="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
