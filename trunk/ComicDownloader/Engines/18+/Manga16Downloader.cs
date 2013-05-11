@@ -12,6 +12,14 @@ namespace ComicDownloader.Engines
 
     public class Manga16Downloader : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://www.manga16.com/statics/templates/default/images/logo.png";
+            }
+        }
+
         public override string Name
         {
             get { return "[Manga 16] - "; }

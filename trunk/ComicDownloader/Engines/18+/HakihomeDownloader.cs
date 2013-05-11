@@ -12,6 +12,14 @@ namespace ComicDownloader.Engines
 
     public class HakihomeDownloader : Downloader
     {
+        public override string Logo
+        {
+            get
+            {
+                return "http://hakihome.com/images/logo.png";
+            }
+        }
+
         public override string Name
         {
             get { return "[Hakihome] - "; }
