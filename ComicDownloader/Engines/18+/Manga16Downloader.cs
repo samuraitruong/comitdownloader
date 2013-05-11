@@ -109,7 +109,6 @@ namespace ComicDownloader.Engines
             return info;
         }
         
-
         public override List<string> GetPages(string chapUrl)
         {
             var html = NetworkHelper.GetHtml(chapUrl);
@@ -123,6 +122,45 @@ namespace ComicDownloader.Engines
             {
                 results.Add(match.Value.Replace("\\/","/")+"?imgmax=1600");
                 
+            }
+            return results;
+        }
+
+        //last update chi show story ko co chapter
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string urlPattern = string.Format("http://www.manga16.com/comic/search/{0}?page={1}", keyword.Replace(" ", "+"), "{0}");
+
+            var results = new List<StoryInfo>();
+
+            int currentPage = 1;
+
+            while (currentPage <= Constant.LimitedPageForSearch)
+            {
+                string url = string.Format(urlPattern, currentPage);
+
+                string html = NetworkHelper.GetHtml(url);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//span[@id=\"eid_album_category_0\"]/a");
+                if (nodes != null && nodes.Count > 0)
+                {
+
+                    foreach (var node in nodes)
+                    {
+
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = node.Attributes["href"].Value,
+                            Name = node.InnerText.Trim()
+                        };
+                        results.Add(info);
+                    }
+                }
+
+                currentPage++;
             }
             return results;
         }

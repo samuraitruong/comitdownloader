@@ -112,7 +112,6 @@ namespace ComicDownloader.Engines
             return info;
         }
         
-
         public override List<string> GetPages(string chapUrl)
         {
             var html = NetworkHelper.GetHtml(chapUrl+"/more.html");
@@ -128,6 +127,73 @@ namespace ComicDownloader.Engines
                 results.Add(p.Attributes["src"].Value.Trim());
                 
             }
+            return results;
+        }
+
+        public override List<StoryInfo> GetLastestUpdates()
+        {
+            string lastestUpdateUrl = HostUrl;
+            List<StoryInfo> stories = new List<StoryInfo>();
+            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
+
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"nchap newchap\"]//tr/td/a[position()=1]");
+
+            foreach (HtmlNode node in nodes)
+            {
+                StoryInfo info = new StoryInfo()
+                {
+                    Url = node.Attributes["href"].Value,
+                    Name = node.InnerText.Trim(),
+                    Chapters = new List<ChapterInfo>(),
+                };
+                var chapters = node.ParentNode.SelectNodes("a[position()=2]");
+                if (chapters != null)
+                {
+                    foreach (HtmlNode chap in chapters)
+                    {
+                        var chapUrl = chap.Attributes["href"].Value;
+                        chapUrl = chapUrl.Substring(chapUrl.IndexOf("url")+4);
+
+                        info.Chapters.Add(new ChapterInfo()
+                        {
+                            Name = chap.InnerText.Trim(),
+                            Url = chapUrl
+                        });
+                    }
+                }
+                stories.Add(info);
+            }
+            return stories;
+        }
+
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string urlPattern = string.Format("http://www.hakihome.com/sea/tit={0}", keyword);
+
+            var results = new List<StoryInfo>();
+
+            string html = NetworkHelper.GetHtml(urlPattern);
+            HtmlDocument htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"rightb\"]/h2/div[@class=\"tuade\"]/a");
+            if (nodes != null && nodes.Count > 0)
+            {
+
+                foreach (var node in nodes)
+                {
+
+                    StoryInfo info = new StoryInfo()
+                    {
+                        Url = node.Attributes["href"].Value,
+                        Name = node.InnerText.Trim()
+                    };
+                    results.Add(info);
+                }
+            }
+
             return results;
         }
     }
