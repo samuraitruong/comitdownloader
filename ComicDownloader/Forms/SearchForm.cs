@@ -305,7 +305,7 @@ namespace ComicDownloader.Forms
             foreach (SearchItem item in lvLastestUpdates.SelectedObjects)
             {
                 
-                pool.QueueWorkItem(this.AddToQueue, item);
+                //pool.QueueWorkItem(this.AddToQueue, item);
             }
 
             pool.Start();

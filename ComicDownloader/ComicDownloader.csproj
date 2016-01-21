@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -10,9 +10,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ComicDownloader</RootNamespace>
     <AssemblyName>ComicDownloader</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>C:\HOST\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -40,6 +41,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -50,15 +52,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\1364394623_37693.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>86CC654276B9ABB306D1C22D30B3F12F2811B72B</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>1023FF4FAD8FB42F71D7D2BDD9D500CF700C0102</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>ComicDownloader_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>ComicDownloader_2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -398,18 +401,14 @@
     <Compile Include="3rd\Metro\MetroFramework\Controls\MetroScrollBar.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTabControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTabControl.cs" />
     <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTile.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTile.cs" />
     <Compile Include="3rd\Metro\MetroFramework\Controls\MetroTilePart.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -831,9 +830,7 @@
     </Compile>
     <Compile Include="LongOperation.cs" />
     <Compile Include="3rd\ObjectListView\CellEditing\CellEditKeyEngine.cs" />
-    <Compile Include="3rd\ObjectListView\CellEditing\CellEditors.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="3rd\ObjectListView\CellEditing\CellEditors.cs" />
     <Compile Include="3rd\ObjectListView\CellEditing\EditorRegistry.cs" />
     <Compile Include="3rd\ObjectListView\DataListView.cs">
       <SubType>Component</SubType>
@@ -1449,6 +1446,7 @@
     <None Include="3rd\ObjectListView\ObjectListView.FxCop" />
     <None Include="app.config" />
     <None Include="ComicDownloader_1_TemporaryKey.pfx" />
+    <None Include="ComicDownloader_2_TemporaryKey.pfx" />
     <None Include="ComicDownloader_TemporaryKey.pfx" />
     <None Include="HTML\treetable\.gitignore" />
     <None Include="HTML\treetable\README.md" />
