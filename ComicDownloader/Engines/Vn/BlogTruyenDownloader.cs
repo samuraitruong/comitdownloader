@@ -27,12 +27,12 @@ namespace ComicDownloader.Engines
 
         public override string ListStoryURL
         {
-            get { return "http://danhmuc.blogtruyen.com/2009/11/danh-sach-tong-hop.html"; }
+            get { return "http://blogtruyen.com/ListStory/GetCategory?CategoryID=0&OrderBy=1&PageIndex={0}"; }
         }
 
         public override string HostUrl
         {
-            get { return "http://home.blogtruyen.com"; }
+            get { return "http://blogtruyen.com"; }
         }
 
         public override string StoryUrlPattern
@@ -43,42 +43,77 @@ namespace ComicDownloader.Engines
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             List<StoryInfo> results = base.ReloadChachedData();
+            string urlPattern = "http://blogtruyen.com/ListStory/GetCategory?CategoryID=0&OrderBy=1&PageIndex={0}";
 
             if (results == null || results.Count == 0 || forceOnline)
             {
+
                 results = new List<StoryInfo>();
-
-                string[] urls = {"http://blogtruyen.com/list/list-0abc-3.js",
-                              "http://blogtruyen.com/list/list-defgh-3.js",
-                              "http://blogtruyen.com/list/list-ijkl-3.js",
-                              "http://blogtruyen.com/list/list-mnop-3.js",
-                              "http://blogtruyen.com/list/list-qrst-3.js",
-                              "http://blogtruyen.com/list/list-uvwxyz-3.js"
-                             };
-                foreach (var url in urls)
+                int currentPage = 1;
+                bool isStillHasPage = true;
+                while (isStillHasPage)
                 {
-
+                    string url = string.Format(urlPattern, currentPage);
                     string html = NetworkHelper.GetHtml(url);
-
-                    HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
+                    HtmlDocument htmlDoc = new HtmlDocument();
                     htmlDoc.LoadHtml(html);
-                    var links = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"listing\"]//a");
 
-                    //htmlDoc.LoadHtml(table.InnerHtml);
-                    //var links = htmlDoc.DocumentNode.SelectNodes("//a");
-                    foreach (HtmlNode item in links)
+                    var nodes = htmlDoc.DocumentNode.SelectNodes("//span[contains(@class ,'tiptip')]//a");
+                    if (nodes != null && nodes.Count > 0)
                     {
-                        StoryInfo info = new StoryInfo()
+                        currentPage++;
+                        foreach (var node in nodes)
                         {
-                            Name = item.InnerText,
-                            Url = item.Attributes["href"].Value
-                        };
-                        results.Add(info);
+                            //var a = node.SelectSingleNode("//a");
+
+                            StoryInfo info = new StoryInfo()
+                            {
+                                Url = HostUrl + node.Attributes["href"].Value,
+                                Name = node.ChildNodes[0].InnerText.Trim()
+                            };
+                            results.Add(info);
+                        }
                     }
-#if DEBUG
-                   // break;
-#endif
+                    else
+                    {
+                        isStillHasPage = false;
+                    }
+
                 }
+
+                //                results = new List<StoryInfo>();
+
+                //                string[] urls = {"http://blogtruyen.com/list/list-0abc-3.js",
+                //                              "http://blogtruyen.com/list/list-defgh-3.js",
+                //                              "http://blogtruyen.com/list/list-ijkl-3.js",
+                //                              "http://blogtruyen.com/list/list-mnop-3.js",
+                //                              "http://blogtruyen.com/list/list-qrst-3.js",
+                //                              "http://blogtruyen.com/list/list-uvwxyz-3.js"
+                //                             };
+                //                foreach (var url in urls)
+                //                {
+
+                //                    string html = NetworkHelper.GetHtml(url);
+
+                //                    HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
+                //                    htmlDoc.LoadHtml(html);
+                //                    var links = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"listing\"]//a");
+
+                //                    //htmlDoc.LoadHtml(table.InnerHtml);
+                //                    //var links = htmlDoc.DocumentNode.SelectNodes("//a");
+                //                    foreach (HtmlNode item in links)
+                //                    {
+                //                        StoryInfo info = new StoryInfo()
+                //                        {
+                //                            Name = item.InnerText,
+                //                            Url = item.Attributes["href"].Value
+                //                        };
+                //                        results.Add(info);
+                //                    }
+                //#if DEBUG
+                //                   // break;
+                //#endif
+                //                }
             }
             base.SaveCache(results);
             return results;
@@ -95,24 +130,24 @@ namespace ComicDownloader.Engines
             var htmlDoc = new HtmlAgilityPack.HtmlDocument();
             htmlDoc.LoadHtml(html);
             
-            var node = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"post\"]/div[1]/h1/a");
+            var node = htmlDoc.DocumentNode.SelectSingleNode("//h1[@class='entry-title']/a");
             info.Name = node.InnerText.Replace("&nbsp;", string.Empty);
 
             //var chapters = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"post\"]//a[contains(@href,'x2.blogtruyen.com')]");
-            var chapters = htmlDoc.DocumentNode
-                .Descendants("a")
-                .Where(x => x.Attributes.Contains("href") &&
-                          ( x.Attributes["href"].Value.Contains("x1.blogtruyen.com") ||
-                            x.Attributes["href"].Value.Contains("x2.blogtruyen.com") ||
-                            x.Attributes["href"].Value.Contains("x3.blogtruyen.com")))
-                .ToList();
+            var chapters = htmlDoc.DocumentNode.SelectNodes("//*[@id='list-chapters']/p/span[@class='title']/a");
+                //.Descendants("a")
+                //.Where(x => x.Attributes.Contains("href") &&
+                //          ( x.Attributes["href"].Value.Contains("x1.blogtruyen.com") ||
+                //            x.Attributes["href"].Value.Contains("x2.blogtruyen.com") ||
+                //            x.Attributes["href"].Value.Contains("x3.blogtruyen.com")))
+                //.ToList();
 
             foreach (HtmlNode item in chapters)
             {
 
                 var chapInfo = new ChapterInfo()
                 {
-                    Url = item.Attributes["href"].Value,
+                    Url = this.HostUrl+item.Attributes["href"].Value,
                     Name = item.FirstChild.InnerText,
                     ChapId = ExtractID(item.FirstChild.InnerText)
                 };
@@ -296,27 +331,34 @@ namespace ComicDownloader.Engines
             //html = ReplaceText(html);
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);
-            var textare = doc.DocumentNode.SelectSingleNode("//*[@id=\"blogtruyencopy\"]");
-
+            var nodes = doc.DocumentNode.SelectNodes("//*[@id='content']/img");
+            List<string> result = new List<string>();
+            if (nodes!= null)
+            {
+                foreach (HtmlNode node in nodes)
+                {
+                    result.Add(node.Attributes["src"].Value);
+                }
+            }
             //var images = doc.DocumentNode.Descendants("img")
             //                .Where(p => p.Attributes.Contains("src") &&
             //                        p.Attributes["src"].Value.StartsWith("http://img.photo.zing.vn"))
             //                .Select(p=>p.Attributes["src"].Value.Replace("http://img.photo.zing.vn","http://d.f2.photo.zdn.vn"))
 
             //                .ToList();
-            List<string> result = new List<string>();
+            //List<string> result = new List<string>();
 
-            var matches = Regex.Matches(textare.InnerHtml, "https?://[\\*&=?%0-9a-zA-Z._/-]*(.jpg|.JPG|.png|.PNG)");
-            if (matches != null)
-            {
-                foreach (Match  match in matches)
-                {
-                    //if(match.Value.Contains("die-report")) break;
-                    string url = ReplaceText(match.Value);
-                    //if (!IsDump(url)) 
-                        result.Add(url);
-                }
-            }
+            //var matches = Regex.Matches(textare.InnerHtml, "https?://[\\*&=?%0-9a-zA-Z._/-]*(.jpg|.JPG|.png|.PNG)");
+            //if (matches != null)
+            //{
+            //    foreach (Match  match in matches)
+            //    {
+            //        //if(match.Value.Contains("die-report")) break;
+            //        string url = ReplaceText(match.Value);
+            //        //if (!IsDump(url)) 
+            //            result.Add(url);
+            //    }
+            //}
             //
 
             //foreach (HtmlNode  node in  images)
