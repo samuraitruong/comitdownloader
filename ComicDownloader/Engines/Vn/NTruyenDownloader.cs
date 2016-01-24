@@ -7,14 +7,14 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("nTruyen", Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "1364131990_document_add")]
+    [Downloader("nTruyen", Offline = false, Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "1364131990_document_add")]
     public class NTruyenDownloader :  Downloader
     {
         public override string Logo
         {
             get
             {
-                return "http://ntruyen.net/Themes/Default/Images/Logo.png";
+                return "http://ntruyen.info/Themes/Default/Images/Logo.png";
             }
         }
         public override string Name
@@ -24,12 +24,12 @@ namespace ComicDownloader.Engines
 
         public override string ListStoryURL
         {
-            get { return "http://ntruyen.net/danh-sach-truyen"; }
+            get { return "http://ntruyen.info/danh-sach-truyen"; }
         }
 
         public override string HostUrl
         {
-            get { return "http://ntruyen.net"; }
+            get { return "http://ntruyen.info"; }
         }
 
         public override string StoryUrlPattern
@@ -116,15 +116,21 @@ namespace ComicDownloader.Engines
         public override List<string> GetPages(string chapUrl)
         {
             var html = NetworkHelper.GetHtml(chapUrl);
-
-            var matches = Regex.Matches(html, "\"imageUrl\":\"([^,]*)\"");
-
             List<string> results = new List<string>();
-            foreach (Match match in matches)
+
+            //var matches = Regex.Matches(html, "\"imageUrl\":\"([^,]*)\"");
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@id='containerListPage']//img");
+            foreach (HtmlNode item in nodes)
             {
-                results.Add(match.Groups[1].Value);
-                
+                results.Add(item.Attributes["src"].Value);
             }
+            //foreach (Match match in matches)
+            //{
+            //    results.Add(match.Groups[1].Value);
+                
+            //}
             return results;
         }
 

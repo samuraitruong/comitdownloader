@@ -7,8 +7,8 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Truyen 18", Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
-    [Downloader("Truyen 18", Language = "Tieng viet", MenuGroup = "VN 18+", MetroTab = "18+", Image32 = "1364078951_insert-object")]
+    [Downloader("Truyen 18", Offline = false, Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
+    [Downloader("Truyen 18", Offline = false, Language = "Tieng viet", MenuGroup = "VN 18+", MetroTab = "18+", Image32 = "1364078951_insert-object")]
 
     public class Truyen18Downloader : Downloader
     {
@@ -50,16 +50,17 @@ namespace ComicDownloader.Engines
                     HtmlDocument htmlDoc = new HtmlDocument();
                     htmlDoc.LoadHtml(html);
 
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"listing\"]//td[1]/a");
+                    var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='show-content-cat']/ul/li/a/img");
                     if (nodes != null && nodes.Count > 0)
                     {
                         currentPage++;
                         foreach (var node in nodes)
                         {
+                            var anode = node.ParentNode.NextSibling.NextSibling;
                             StoryInfo info = new StoryInfo()
                             {
-                                Url = HostUrl+node.Attributes["href"].Value,
-                                Name = node.InnerText
+                                Url = HostUrl+ anode.Attributes["href"].Value,
+                                Name = anode.Attributes["title"].Value
                             };
                             results.Add(info);
                         }
@@ -123,15 +124,29 @@ namespace ComicDownloader.Engines
         public override List<string> GetPages(string chapUrl)
         {
             var html = NetworkHelper.GetHtml(chapUrl);
-
-            var matches = Regex.Matches(html, @"\[IMG\](.*)?\[/IMG\]");
-
+            var doc = new HtmlDocument();
+            //doc.LoadHtml(html);
+            //var html1 = doc.DocumentNode.SelectSingleNode("//textarea").InnerText;
+            //doc.LoadHtml(html1);
+            //var nodes = doc.DocumentNode.SelectNodes("//img");
+            var patterns = new string[] { "\\*&url=([^\"]*)" , @"\[IMG\]([^\[]*)\[\/IMG\]" };
             List<string> results = new List<string>();
-            foreach (Match match in matches)
+
+            foreach (var pattern in patterns)
             {
-                results.Add(match.Groups[1].Value+"?imgmax=1600");
-                
+                var matches = Regex.Matches(html, pattern, RegexOptions.IgnoreCase);
+
+                foreach (Match match in matches)
+                {
+                    var url = match.Groups[1].Value;
+                    url = System.Web.HttpUtility.UrlDecode(url);
+                    url = BlogTruyenDownloader.ConvertURL(url);
+                    results.Add(url);
+
+                }
             }
+
+
             return results;
         }
 

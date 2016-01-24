@@ -8,7 +8,7 @@ using System.Net;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("TruyenTranhTuan", Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "_1364410919_Add_Green_Button")]
+    [Downloader("TruyenTranhTuan", Offline = false, Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "_1364410919_Add_Green_Button")]
     public class TruyenTranhTuanDownloader
         : Downloader
     {
@@ -50,18 +50,17 @@ namespace ComicDownloader.Engines
             if (results == null || results.Count == 0 || forceOnline)
             {
                 results = new List<StoryInfo>();
-                var html = NetworkHelper.GetHtml(this.ListStoryURL);
+                var doc = base.GetParser(this.ListStoryURL);
+                var nodes = doc.DocumentNode.SelectNodes("//span[@class='manga']/a");
+               
 
-                string pattern = "<a class=\"ch-subject\" href=\"/(.+)/\" title=\"\">(.+)</a>";
-                var matches = Regex.Matches(html, pattern);
-
-                foreach (Match match in matches)
+                foreach (HtmlNode match in nodes)
                 {
                     results.Add(new StoryInfo()
                     {
-                        UrlSegment = match.Groups[1].Value,
-                        Name = match.Groups[2].Value,
-                        Url = HostUrl + "/" + match.Groups[1].Value
+                        //UrlSegment = match.Groups[1].Value,
+                        Url = match.Attributes["href"].Value,
+                        Name = match.InnerText.Trim()
                     });
                 }
             }
@@ -81,20 +80,20 @@ namespace ComicDownloader.Engines
             HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
             htmlDoc.LoadHtml(html);
 
-            var node = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"fontsize-chitiet\"]/span[1]");
+            var node = htmlDoc.DocumentNode.SelectSingleNode("//h1[@itemprop='name']");
             info.Name = node.InnerText;
-            var node2 = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"fontsize-chitiet\"]/span[2]");
-            info.AltName = node2.InnerText;
-            var node3 = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"fontsize-chitiet\"]/span[2]");
-            info.Categories = node3.InnerText;
+            //var node2 = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"fontsize-chitiet\"]/span[2]");
+            //info.AltName = node2.InnerText;
+            //var node3 = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"fontsize-chitiet\"]/span[2]");
+            //info.Categories = node3.InnerText;
             info.Url = url;
 
-            var ccontentmain = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"content-main\"]");
+            //var ccontentmain = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"content-main\"]");
             
 
-            htmlDoc.LoadHtml(ccontentmain.InnerHtml);
+            //htmlDoc.LoadHtml(ccontentmain.InnerHtml);
 
-            var chapterLinks = htmlDoc.DocumentNode.SelectNodes("//a[@href!='']");
+            var chapterLinks = htmlDoc.DocumentNode.SelectNodes("//span[@class='chapter-name']/a");
 
             info.ChapterCount = chapterLinks.Count;
             foreach (HtmlNode item in chapterLinks)
@@ -102,9 +101,8 @@ namespace ComicDownloader.Engines
 
                 ChapterInfo chapter = new ChapterInfo()
                 {
-                    Url = string.Format("{0}{1}doc-truyen/", HostUrl, item.Attributes["href"].Value),
-                    Name = item.InnerText
-                    ,
+                    Url = item.Attributes["href"].Value,
+                    Name = item.InnerText,
                     ChapId = ExtractID(item.InnerText)
 
                 };
@@ -125,14 +123,12 @@ namespace ComicDownloader.Engines
         {
             List<string> pages = new List<string>();
 
-            using (WebClient client = new WebClient())
+            //using (WebClient client = new WebClient())
             {
-                string html = client.DownloadString(chapUrl);
-                var matches = Regex.Matches(html, @"/manga/[0-9a-zA-Z//s-]*(?:.png|.jpg|.PNG|.JPG)");
-                pages = matches.Cast<Match>()
-                    .OrderBy(p => p.Value)
-                    .Select(p => this.HostUrl+p.Value)
-                    .ToList();
+                string html = NetworkHelper.GetHtml(chapUrl);
+                var match = Regex.Match(html, "var slides_page_url_path = \\[([^\\]]*)\\]");
+                var arr = match.Groups[1].Value.Split(new char[] { '"', ',' }, StringSplitOptions.RemoveEmptyEntries);
+                pages.AddRange(arr);
             }
 
             return pages;

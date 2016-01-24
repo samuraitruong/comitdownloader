@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms.VisualStyles;
+﻿using System.Reflection;
+using System.Windows.Forms.VisualStyles;
 namespace ComicDownloader.Forms
 {
     partial class ModernUIForm

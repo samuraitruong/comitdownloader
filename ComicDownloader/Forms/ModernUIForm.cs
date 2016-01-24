@@ -92,7 +92,7 @@ namespace ComicDownloader.Forms
                 }
                 metroTabControl1.TabPages.Add(tab);
             }
-            metroTabControl1.SelectedTab = metroTabControl1.TabPages[1];
+            metroTabControl1.SelectedTab = metroTabControl1.TabPages[0];
         }
         private AppMainForm mainApp = new AppMainForm();
 

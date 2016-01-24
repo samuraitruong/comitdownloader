@@ -189,7 +189,7 @@ namespace ComicDownloader
             // 
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(45, 17);
-            this.lblStatus.Text = "Pedding";
+            this.lblStatus.Text = "Pending";
             this.lblStatus.Click += new System.EventHandler(this.lblStatus_Click);
             // 
             // toolStripStatusLabel1

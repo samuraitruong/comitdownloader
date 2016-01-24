@@ -420,12 +420,12 @@ namespace ComicDownloader
             try
             {
                 notifyIcon1.BalloonTipTitle = "Comic Downloader V1";
-                notifyIcon1.BalloonTipText = "Form is minimized but all progress still running.";
+                notifyIcon1.BalloonTipText = "Comic Downloader is minimized but download progress still running...";
                 this.Hide();
                 //if (FormWindowState.Minimized == this.WindowState)
                 {
                     notifyIcon1.Visible = true;
-                    notifyIcon1.ShowBalloonTip(1000);
+                    notifyIcon1.ShowBalloonTip(2000);
                     
                 }
                 //else if (FormWindowState.Normal == this.WindowState || this.WindowState == FormWindowState.Maximized)

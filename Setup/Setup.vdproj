@@ -15,26 +15,44 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_0297EF7D41F6C675AFCB7ED8D20C7C8A"
+        "OwnerKey" = "8:_BABBC22EE1DC453CA88F1E7E218E827B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_0297EF7D41F6C675AFCB7ED8D20C7C8A"
+        "OwnerKey" = "8:_0D837D34B081EBF80E262D81F0BB82D7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_0D837D34B081EBF80E262D81F0BB82D7"
+        "OwnerKey" = "8:_BABBC22EE1DC453CA88F1E7E218E827B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_46BA16CB889A45ED8D1070882831613B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_66D76F6B340B05503D975482DA0C6560"
-        "OwnerKey" = "8:_FF99F23C4CEE4A7091216EA20EA8AAF5"
+        "MsmKey" = "8:_4BAEC4668B4E7A934A55F9C9EBF66C2C"
+        "OwnerKey" = "8:_BABBC22EE1DC453CA88F1E7E218E827B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6D46D430B3D7499CA6C3F878753B3680"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_875476B1B218850FA27E4B190A3EEE9A"
+        "OwnerKey" = "8:_BABBC22EE1DC453CA88F1E7E218E827B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_9BBACD69C47A4629847F816541B39ED4"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_A0F07FB7031896D513A1C649CEF09FDD"
+        "OwnerKey" = "8:_BABBC22EE1DC453CA88F1E7E218E827B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -45,44 +63,98 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F168D79AEB95FEF2FC5BB78188970650"
-        "OwnerKey" = "8:_FF99F23C4CEE4A7091216EA20EA8AAF5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FF99F23C4CEE4A7091216EA20EA8AAF5"
+        "MsmKey" = "8:_BABBC22EE1DC453CA88F1E7E218E827B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FF99F23C4CEE4A7091216EA20EA8AAF5"
+        "MsmKey" = "8:_BE2FBF61CF0623CAA7A32F67BD85906B"
+        "OwnerKey" = "8:_BABBC22EE1DC453CA88F1E7E218E827B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_66D76F6B340B05503D975482DA0C6560"
+        "MsmKey" = "8:_EB424D509A1600DB23E441EAC6471185"
+        "OwnerKey" = "8:_0297EF7D41F6C675AFCB7ED8D20C7C8A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F168D79AEB95FEF2FC5BB78188970650"
+        "MsmKey" = "8:_EB424D509A1600DB23E441EAC6471185"
+        "OwnerKey" = "8:_0D837D34B081EBF80E262D81F0BB82D7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9BBACD69C47A4629847F816541B39ED4"
+        "MsmKey" = "8:_EB424D509A1600DB23E441EAC6471185"
+        "OwnerKey" = "8:_BABBC22EE1DC453CA88F1E7E218E827B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F5752995FF7AE1B2F6324220AEECA905"
+        "OwnerKey" = "8:_BABBC22EE1DC453CA88F1E7E218E827B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_46BA16CB889A45ED8D1070882831613B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_BABBC22EE1DC453CA88F1E7E218E827B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_4BAEC4668B4E7A934A55F9C9EBF66C2C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_875476B1B218850FA27E4B190A3EEE9A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0D837D34B081EBF80E262D81F0BB82D7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0297EF7D41F6C675AFCB7ED8D20C7C8A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_EB424D509A1600DB23E441EAC6471185"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A0F07FB7031896D513A1C649CEF09FDD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_BE2FBF61CF0623CAA7A32F67BD85906B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F5752995FF7AE1B2F6324220AEECA905"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -149,15 +221,20 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5.2"
+                    }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5.SP1"
                     {
                     "Name" = "8:.NET Framework 3.5 SP1"
                     "ProductCode" = "8:Microsoft.Net.Framework.3.5.SP1"
                     }
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.4.5"
                     {
-                    "Name" = "8:Windows Installer 3.1"
-                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    "Name" = "8:Windows Installer 4.5"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.4.5"
                     }
                 }
             }
@@ -210,7 +287,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v3.5"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.5.2"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=131000"
                 }
@@ -218,20 +295,20 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_66D76F6B340B05503D975482DA0C6560"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0297EF7D41F6C675AFCB7ED8D20C7C8A"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Microsoft.SPOT.Hardware, Version=3.0.7186.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_66D76F6B340B05503D975482DA0C6560"
+                    "_0297EF7D41F6C675AFCB7ED8D20C7C8A"
                     {
-                    "Name" = "8:NLog.DLL"
+                    "Name" = "8:Microsoft.SPOT.Hardware.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:NLog.DLL"
+            "SourcePath" = "8:Microsoft.SPOT.Hardware.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
@@ -249,40 +326,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D46D430B3D7499CA6C3F878753B3680"
-            {
-            "SourcePath" = "8:..\\Release\\ComicDownloader.exe.config"
-            "TargetName" = "8:ComicDownloader.exe.config"
-            "Tag" = "8:"
-            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9BBACD69C47A4629847F816541B39ED4"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0D837D34B081EBF80E262D81F0BB82D7"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Microsoft.SPOT.Net, Version=3.0.7186.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_9BBACD69C47A4629847F816541B39ED4"
+                    "_0D837D34B081EBF80E262D81F0BB82D7"
                     {
-                    "Name" = "8:NLog.dll"
+                    "Name" = "8:Microsoft.SPOT.Net.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Release\\NLog.dll"
+            "SourcePath" = "8:Microsoft.SPOT.Net.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
@@ -297,7 +354,100 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4BAEC4668B4E7A934A55F9C9EBF66C2C"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_4BAEC4668B4E7A934A55F9C9EBF66C2C"
+                    {
+                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Newtonsoft.Json.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_875476B1B218850FA27E4B190A3EEE9A"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_875476B1B218850FA27E4B190A3EEE9A"
+                    {
+                    "Name" = "8:NLog.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:NLog.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A0F07FB7031896D513A1C649CEF09FDD"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:itextsharp, Version=5.4.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_A0F07FB7031896D513A1C649CEF09FDD"
+                    {
+                    "Name" = "8:itextsharp.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:itextsharp.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AFC5D0EF187E4401A2EC3BD14F5BC205"
@@ -320,20 +470,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F168D79AEB95FEF2FC5BB78188970650"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BE2FBF61CF0623CAA7A32F67BD85906B"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_F168D79AEB95FEF2FC5BB78188970650"
+                    "_BE2FBF61CF0623CAA7A32F67BD85906B"
                     {
-                    "Name" = "8:Common.Logging.DLL"
+                    "Name" = "8:HtmlAgilityPack.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Common.Logging.DLL"
+            "SourcePath" = "8:HtmlAgilityPack.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
@@ -351,20 +501,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FF99F23C4CEE4A7091216EA20EA8AAF5"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EB424D509A1600DB23E441EAC6471185"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ComicDownloader, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Microsoft.SPOT.Native, Version=3.0.7186.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_FF99F23C4CEE4A7091216EA20EA8AAF5"
+                    "_EB424D509A1600DB23E441EAC6471185"
                     {
-                    "Name" = "8:ComicDownloader.exe"
+                    "Name" = "8:Microsoft.SPOT.Native.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Release\\ComicDownloader.exe"
+            "SourcePath" = "8:Microsoft.SPOT.Native.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
@@ -379,7 +529,38 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F5752995FF7AE1B2F6324220AEECA905"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_F5752995FF7AE1B2F6324220AEECA905"
+                    {
+                    "Name" = "8:Common.Logging.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Common.Logging.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
         }
@@ -436,7 +617,7 @@
             "{1525181F-901A-416C-8A58-119130FE478E}:_D75FE0982D73401A9273025F2CB681D7"
             {
             "Name" = "8:#1916"
-            "AlwaysCreate" = "11:FALSE"
+            "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:DesktopFolder"
@@ -472,15 +653,15 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Comic Downloader V1"
         "ProductCode" = "8:{B272C882-A26C-4FDA-AE48-64933A2077A9}"
-        "PackageCode" = "8:{DA21D34C-DCEA-4831-84D0-5E3B9ACA1C21}"
+        "PackageCode" = "8:{0498786E-27A3-4285-9E43-E8DCB41D17D5}"
         "UpgradeCode" = "8:{7F4E4438-E618-4DAC-8DD3-DEC09F6F24D4}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:Comic"
+        "Manufacturer" = "8:khoaimap"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:Comic Downloader Setup"
@@ -620,44 +801,30 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_371521B724434B3F907C831929A61074"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_AB6BF1ACBF094550BEDAF2DB7AB4A1B8"
             {
             "Name" = "8:Comic Downloader"
             "Arguments" = "8:"
             "Description" = "8:"
-            "ShowCmd" = "3:1"
+            "ShowCmd" = "3:3"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_FF99F23C4CEE4A7091216EA20EA8AAF5"
-            "Folder" = "8:_D75FE0982D73401A9273025F2CB681D7"
-            "WorkingFolder" = "8:_16495D796CE84539AEC87DD81F268A2D"
-            "Icon" = "8:_AFC5D0EF187E4401A2EC3BD14F5BC205"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4B58E34BB9E741F6BDA9E617283BE7C5"
-            {
-            "Name" = "8:Uninstall"
-            "Arguments" = "8:/uninstall {B272C882-A26C-4FDA-AE48-64933A2077A9}"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_FF99F23C4CEE4A7091216EA20EA8AAF5"
-            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Target" = "8:_BABBC22EE1DC453CA88F1E7E218E827B"
+            "Folder" = "8:_FCAA4A6AD1384F77B4372E0BDE76DC9C"
             "WorkingFolder" = "8:_16495D796CE84539AEC87DD81F268A2D"
             "Icon" = "8:"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_DD3B8F777DD548D09BF50B9EB0F4DEAA"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_BD9C1BECBF7E43E9B78D01A010C030AC"
             {
             "Name" = "8:Comic Downloader"
             "Arguments" = "8:"
             "Description" = "8:"
-            "ShowCmd" = "3:1"
+            "ShowCmd" = "3:3"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_FF99F23C4CEE4A7091216EA20EA8AAF5"
-            "Folder" = "8:_FCAA4A6AD1384F77B4372E0BDE76DC9C"
+            "Target" = "8:_BABBC22EE1DC453CA88F1E7E218E827B"
+            "Folder" = "8:_D75FE0982D73401A9273025F2CB681D7"
             "WorkingFolder" = "8:_16495D796CE84539AEC87DD81F268A2D"
             "Icon" = "8:_AFC5D0EF187E4401A2EC3BD14F5BC205"
             "Feature" = "8:"
@@ -1084,6 +1251,34 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{4AE212E0-5C7E-4950-AED2-2476E7665146}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_BABBC22EE1DC453CA88F1E7E218E827B"
+            {
+            "SourcePath" = "8:..\\ComicDownloader\\obj\\x86\\Release\\ComicDownloader.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{E3BB4F32-9C5C-4F11-BF27-F79EED48AE21}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {

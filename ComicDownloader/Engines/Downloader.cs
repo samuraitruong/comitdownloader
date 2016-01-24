@@ -7,6 +7,7 @@ using System.Reflection;
 using System.IO;
 using System.Net;
 using ComicDownloader.Properties;
+using HtmlAgilityPack;
 
 namespace ComicDownloader.Engines
 {
@@ -16,6 +17,16 @@ namespace ComicDownloader.Engines
         public abstract string Name { get; }
         public abstract  string ListStoryURL { get;  }
         public abstract string HostUrl { get; }
+        public HtmlDocument GetParser(string url)
+        {
+            if (url.StartsWith("http"))
+            {
+                url = NetworkHelper.GetHtml(url);
+            }
+            var doc = new HtmlDocument();
+            doc.LoadHtml(url);
+            return doc;
+        }
         public virtual string ServiceUrl
         {
             get
@@ -187,9 +198,15 @@ namespace ComicDownloader.Engines
             {
                 if (item.BaseType == typeof(Downloader))
                 {
-                    
                     Downloader instance = (Downloader)Activator.CreateInstance(item);
-                    _downloaders.Add(instance);
+
+                    var attributes = instance.GetType().GetCustomAttributes(typeof(DownloaderAttribute), true);
+                    if (attributes.Length>0  && !((DownloaderAttribute)attributes[0]).Offline)
+                    {
+                       
+
+                        _downloaders.Add(instance);
+                    }
                 }
             }
             return _downloaders;

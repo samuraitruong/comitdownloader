@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("TruyenTranh8.com", Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
+    [Downloader("TruyenTranh8.com", Offline = false, Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
     public class TruyenTranh8Downloader: Downloader
     {
         public override string Logo
@@ -65,7 +65,7 @@ namespace ComicDownloader.Engines
                         {
                             StoryInfo info = new StoryInfo()
                             {
-                                Url = HostUrl+"/" + node.Attributes["href"].Value,
+                                Url = node.Attributes["href"].Value,
                                 Name = node.InnerText
                             };
                             results.Add(info);
@@ -109,9 +109,9 @@ namespace ComicDownloader.Engines
               {
                   ChapterInfo chapInfo = new ChapterInfo()
                   {
-                      Name = node.Descendants("strong").FirstOrDefault().InnerText,
-                      Url = node.Descendants("a").FirstOrDefault().Attributes["href"].Value.Trim(),
-                      ChapId = ExtractID(node.Descendants("strong").FirstOrDefault().InnerText)
+                      Name = node.SelectSingleNode("//strong").InnerText,
+                      Url = node.Attributes["href"].Value.Trim(),
+                      ChapId = ExtractID(node.SelectSingleNode("//strong").InnerText)
                   };
                   info.Chapters.Add(chapInfo);
               }

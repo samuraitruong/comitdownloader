@@ -561,8 +561,11 @@
     <Compile Include="Engines\En\MangaHereDownloader.cs" />
     <Compile Include="Engines\En\UnixMangaDownloader.cs" />
     <Compile Include="Engines\Proxies\BlogTruyenDownloaderProxy.cs" />
-    <Compile Include="Engines\Vn\ThienDuongMangaDownloader.cs" />
-    <Compile Include="Engines\Vn\WebTruyenDownloader.cs" />
+    <Compile Include="Engines\Vn\ChapTruyenDownloader.cs" />
+    <Compile Include="Engines\Vn\VuaTruyenTranhDownloader.cs" />
+    <Compile Include="Engines\Vn\Manga24hDownloader.cs" />
+    <Compile Include="Engines\Offline\VN\WebTruyenDownloader.cs" />
+    <Compile Include="Engines\Vn\ComicVnDownloader.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Forms\AppMainForm.cs">
@@ -583,13 +586,13 @@
     <Compile Include="Engines\En\MangaEdenDownloader.cs" />
     <Compile Include="Engines\En\MangaFoxDownloader.cs" />
     <Compile Include="Engines\En\MangaReaderDownloader.cs" />
-    <Compile Include="Engines\Vn\ComicVuiLenDownloader.cs" />
+    <Compile Include="Engines\Offline\VN\ComicVuiLenDownloader.cs" />
     <Compile Include="Engines\Vn\NTruyenDownloader.cs" />
-    <Compile Include="Engines\Vn\TruyenLauPhimDownloader.cs" />
+    <Compile Include="Engines\Offline\VN\TruyenLauPhimDownloader.cs" />
     <Compile Include="Engines\Vn\Truyen18Downloader.cs" />
-    <Compile Include="Engines\Vn\MangaFcDownloader.cs" />
-    <Compile Include="Engines\Vn\XomTruyenDownloader.cs" />
-    <Compile Include="Engines\Vn\MangaKungDownloader.cs" />
+    <Compile Include="Engines\Offline\VN\MangaFcDownloader.cs" />
+    <Compile Include="Engines\Offline\VN\XomTruyenDownloader.cs" />
+    <Compile Include="Engines\Vn\Manga89Downloader.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="Forms\ChapterReader.cs">
       <SubType>Form</SubType>
@@ -640,7 +643,7 @@
       <DependentUpon>NoResizeChildForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Engines\Vn\BlogTruyenDownloader.cs" />
-    <Compile Include="Engines\Vn\TruyenTranhNhanhDownloader.cs" />
+    <Compile Include="Engines\Offline\VN\TruyenTranhNhanhDownloader.cs" />
     <Compile Include="Engines\Downloader.cs" />
     <Compile Include="Forms\IView\AboutBox.cs">
       <SubType>Form</SubType>
@@ -800,9 +803,9 @@
     <Compile Include="Engines\StoryInfo.cs" />
     <Compile Include="Engines\Vn\TruyenTranh8Downloader.cs" />
     <Compile Include="Engines\Vn\TruyenTranhTuanDownloader.cs" />
-    <Compile Include="Engines\Vn\TruyenVietBoomDownloader.cs" />
-    <Compile Include="Engines\Vn\TruyenVnSharingDownloader.cs" />
-    <Compile Include="Engines\Vn\VechaiDownloader.cs" />
+    <Compile Include="Engines\Offline\VN\TruyenVietBoomDownloader.cs" />
+    <Compile Include="Engines\Offline\VN\TruyenVnSharingDownloader.cs" />
+    <Compile Include="Engines\Offline\VN\VechaiDownloader.cs" />
     <Compile Include="EXComboBox.cs">
       <SubType>Component</SubType>
     </Compile>

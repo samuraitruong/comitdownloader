@@ -16,6 +16,7 @@ namespace ComicDownloader.Engines
         public string Image32 { get; set; }
         public string Image24 { get; set; }
         public string Image16 { get; set; }
+        public bool Offline { get; set; }
 
         public bool Enable { get; set; }
         public DownloaderAttribute(string name)

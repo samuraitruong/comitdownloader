@@ -160,7 +160,14 @@ namespace ComicDownloader.Engines
             info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
             return info;
         }
+        public static string ConvertURL(string url)
+        {
+            return ReplaceText(url);
 
+            //var convertedUrl = url.Replace("http://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&resize_h=0&rewriteMime=image/*&url=", string.Empty);
+            //convertedUrl = convertedUrl.Replace("http://lh1", "http://4");
+            //return convertedUrl;
+        }
         public static string ReplaceText(string s)
         {
 
@@ -191,7 +198,7 @@ namespace ComicDownloader.Engines
             s = s.Replace("<tbody>", "");
             //s = s.Replace("manhua.comicvn.net","go.blogtruyen.com/reup" rel="/");
             s = s.Replace("manhua.comicvn.net", "go.blogtruyen.com/reup");
-
+            s = s.Replace("http://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&resize_h=0&rewriteMime=image/*&url=", string.Empty);
             s = s.Replace("http://images0-focus-opensocial.googleusercontent", "");
             s = s.Replace("https://images0-focus-opensocial.googleusercontent", "");
             s = s.Replace("http://images-focus-opensocial.googleusercontent", "");
@@ -322,6 +329,10 @@ namespace ComicDownloader.Engines
             s = s.Replace("?imgmax=1600?imgmax=2000", "?imgmax=2000");
             s = s.Replace("?imgmax=2000?imgmax=1600", "?imgmax=2000");
             s = s.Replace("?imgmax=1600?imgmax=1600", "?imgmax=2000");
+            if(s.Contains("bp.blogspot") && !s.Contains("?imgmax"))
+            {
+                s = s + "?imgmax=0";
+            }
             return s;
         }
   
@@ -337,7 +348,7 @@ namespace ComicDownloader.Engines
             {
                 foreach (HtmlNode node in nodes)
                 {
-                    result.Add(node.Attributes["src"].Value);
+                    result.Add(ConvertURL(node.Attributes["src"].Value));
                 }
             }
             //var images = doc.DocumentNode.Descendants("img")
