@@ -8,7 +8,7 @@ using System.Net;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Xomtruyen.info", Offline = true, MenuGroup = "VN - 2" , MetroTab="Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410887_Add")]
+    [Downloader("Xomtruyentranh.con", Offline = false, MenuGroup = "VN - 2" , MetroTab="Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410887_Add")]
     public class XomTruyenDownloader
         : Downloader
     {
@@ -16,7 +16,7 @@ namespace ComicDownloader.Engines
         {
             get
             {
-                return "http://xomtruyen.com/skin/default/img/xomtruyen.png";
+                return "http://xomtruyentranh.com/skin/default/img/xomtruyen.png";
             }
         }
 
@@ -32,7 +32,7 @@ namespace ComicDownloader.Engines
         {
             get
             {
-                return "http://xomtruyen.com/";
+                return "http://xomtruyentranh.com/";
             }
         }
         public override string ListStoryURL
@@ -54,7 +54,7 @@ namespace ComicDownloader.Engines
 
                 HtmlDocument htmlDoc = new HtmlDocument();
                 htmlDoc.LoadHtml(html);
-                var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"maincol\"]/div[2]//span[1]/a[contains(@href,\"http\")]");
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@id='maincol']/div[2]//span[1]/a[contains(@href,'http')]");
                 
 
                 foreach (HtmlNode node in nodes)
@@ -128,15 +128,19 @@ namespace ComicDownloader.Engines
         {
             List<string> pages = new List<string>();
 
-            
-                string html = NetworkHelper.GetHtml(chapUrl);
-                var p = "var images = \\[(.*)\\]";
-                var match = Regex.Match(html, p);
-                var arr = match.Groups[1].Value.Split("',".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            var doc = base.GetParser(chapUrl);
+            return doc.DocumentNode.SelectNodes("//div[@class='breadcumb'][2]//img")
+                .Select(p => p.Attributes["Src"].Value)
+                .ToList();
+                //string html = NetworkHelper.GetHtml(chapUrl);
+                
+                //var p = "var images = \\[(.*)\\]";
+                //var match = Regex.Match(html, p);
+                //var arr = match.Groups[1].Value.Split("',".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                pages.AddRange(arr);
+                //pages.AddRange(arr);
 
-            return pages;
+            //return pages;
         }
 
         public override List<StoryInfo> GetLastestUpdates()

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("http://www.facebook.com/pages/Comic-Downloader/137897009722629")]
 [assembly: AssemblyProduct("Comic Downloader")]
-[assembly: AssemblyCopyright("Copyright © Samuraitruong 2013")]
+[assembly: AssemblyCopyright("Copyright © Samuraitruong 2016")]
 [assembly: AssemblyTrademark("samuraitruong@hotmail.com")]
 [assembly: AssemblyCulture("")]
 

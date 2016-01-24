@@ -42,12 +42,131 @@ namespace ComicDownloader.Engines
         public abstract StoryInfo RequestInfo(string storyUrl);
 
         public abstract List<string> GetPages(string chapUrl);
+
+        public StoryInfo RequestInfoSimple(string storyUrl, string namePattern, string chapterPattern, string appendHostUrl="", Func<HtmlNode, string> nameExtract = null, Func<HtmlNode, ChapterInfo> chapterExtract = null)
+        {
+            var html = NetworkHelper.GetHtml(storyUrl);
+
+            HtmlDocument htmlDoc = new HtmlDocument();
+
+            htmlDoc.LoadHtml(html);
+
+            var nameNode = htmlDoc.DocumentNode.SelectSingleNode(namePattern);
+            string chapterName = (nameExtract != null )? nameExtract(nameNode) : nameNode.InnerText.Trim();
+
+            StoryInfo info = new StoryInfo()
+            {
+                Url = storyUrl,
+                Name = chapterName
+            };
+
+            var chapNodes = htmlDoc.DocumentNode.SelectNodes(chapterPattern);
+
+            foreach (HtmlNode node in chapNodes)
+            {
+                var chapInfo = chapterExtract != null? chapterExtract(node): new ChapterInfo()
+                {
+                    Name = node.InnerText,
+                    Url = appendHostUrl+ node.Attributes["href"].Value.Trim(),
+                    ChapId = ExtractID(node.InnerText)
+                };
+
+                info.Chapters.Add(chapInfo);
+            }
+
+            info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
+            return info;
+        }
+
+        public List<StoryInfo> GetListStoriesSimple(string urlPattern,string matchPattern, bool forceOnline, Func<HtmlNode, StoryInfo> convertFunc = null)
+        {
+            
+            List<StoryInfo> results = this.ReloadChachedData();
+
+            if (results == null || results.Count == 0 || forceOnline)
+            {
+                results = new List<StoryInfo>();
+                int currentPage = 1;
+                bool isStillHasPage = true;
+                while (isStillHasPage)
+                {
+
+                    string url = string.Format(urlPattern, currentPage);
+
+                    string html = NetworkHelper.GetHtml(url);
+                    HtmlDocument htmlDoc = new HtmlDocument();
+                    htmlDoc.LoadHtml(html);
+
+                    var nodes = htmlDoc.DocumentNode.SelectNodes(matchPattern);
+                    if (nodes != null && nodes.Count > 0)
+                    {
+                        currentPage++;
+                        foreach (var node in nodes)
+                        {
+                            if (convertFunc != null)
+                            {
+                                results.Add(convertFunc(node));
+                            }
+                            else
+                            {
+                                StoryInfo info = new StoryInfo()
+                                {
+                                    Url = node.Attributes["href"].Value,
+                                    Name = node.Attributes["title"].Value
+                                };
+                                results.Add(info);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        isStillHasPage = false;
+                    }
+
+                }
+
+            }
+            this.SaveCache(results);
+            return results;
+        }
+
+        public List<string> GetPagesSimple(string chapUrl, string pattern, Func<string, List<string>> customExtractor=null, string hostExpanded="", Func<HtmlNode, string> imgExtract= null)
+        {
+            List<string> pages = new List<string>();
+            var html = NetworkHelper.GetHtml(chapUrl);
+            var htmlDoc = new HtmlAgilityPack.HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var nodes = htmlDoc.DocumentNode.SelectNodes(pattern);
+            if (nodes != null)
+            {
+                foreach (HtmlNode item in nodes)
+                {
+                    if (imgExtract != null)
+                    {
+                        pages.Add(imgExtract(item));
+                    }
+                    else {
+                        pages.Add(hostExpanded + item.Attributes["src"].Value);
+                    }
+                }
+            }
+            else
+            {
+                if(customExtractor != null)
+                {
+                    return customExtractor(html);
+                }
+            }
+            return pages;
+        }
+        
         public string CachedFile { get {
             
             return Environment.GetFolderPath(
     Environment.SpecialFolder.ApplicationData)+"\\ComicDownloader\\"+ this.GetType().Name + ".CACHED";
         
         } }
+
 
         public virtual List<StoryInfo> GetLastestUpdates()
         {
@@ -93,6 +212,7 @@ namespace ComicDownloader.Engines
 
         public virtual string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
         {
+            pageUrl = Helpers.UrlHelper.TryFixUrl(pageUrl);
             string filename = Path.GetFileName(pageUrl);
             if(filename.Contains("?"))
             {
@@ -110,7 +230,7 @@ namespace ComicDownloader.Engines
                     filename = Path.Combine(folder, replaceFileName);
                     client.DownloadFile(pageUrl, filename);
                 }
-                catch
+                catch 
                 {
                 }
             }
@@ -212,7 +332,7 @@ namespace ComicDownloader.Engines
             return _downloaders;
         }
 
-
+        
 
         public abstract List<StoryInfo> GetListStories(bool forceOnline);
         //{
