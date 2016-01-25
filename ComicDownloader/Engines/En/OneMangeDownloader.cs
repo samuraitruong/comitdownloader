@@ -73,7 +73,7 @@ namespace ComicDownloader.Engines.En
                                 StoryInfo info = new StoryInfo()
                                 {
                                     Url = node.Attributes["href"].Value,
-                                    Name = node.InnerText.Trim()
+                                    Name = node.InnerText.Trim().Trim()
                                 };
                                 results.Add(info);
                             }
@@ -96,7 +96,7 @@ namespace ComicDownloader.Engines.En
 
             htmlDoc.LoadHtml(html);
 
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@class=\"wpm_pag mng_det\"]/h1[position()=1]").InnerText.Trim();
+            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@class=\"wpm_pag mng_det\"]/h1[position()=1]").InnerText.Trim().Trim();
 
             StoryInfo info = new StoryInfo()
             {
@@ -219,7 +219,7 @@ namespace ComicDownloader.Engines.En
                         StoryInfo info = new StoryInfo()
                         {
                             Url = node.Attributes["href"].Value,
-                            Name = node.InnerText.Trim()
+                            Name = node.InnerText.Trim().Trim()
                         };
                         results.Add(info);
                     }

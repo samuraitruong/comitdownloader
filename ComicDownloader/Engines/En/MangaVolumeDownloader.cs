@@ -64,7 +64,7 @@ namespace ComicDownloader.Engines
                             StoryInfo info = new StoryInfo()
                             {
                                 Url = HostUrl + node.Attributes["href"].Value,
-                                Name = node.ChildNodes[2].InnerText.Trim()
+                                Name = node.ChildNodes[2].InnerText.Trim().Trim()
                             };
                             results.Add(info);
                         }
@@ -94,7 +94,7 @@ namespace ComicDownloader.Engines
             StoryInfo info = new StoryInfo()
             {
                 Url = storyUrl,
-                Name = nameNode.InnerText.Trim(),
+                Name = nameNode.InnerText.Trim().Trim(),
             };
 
             var chapterNodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"MainList\"]//td[1]/a");
@@ -103,9 +103,9 @@ namespace ComicDownloader.Engines
             {
                 ChapterInfo chap = new ChapterInfo()
                 {
-                    Name = chapter.InnerText.Trim(),
+                    Name = chapter.InnerText.Trim().Trim(),
                     Url =  HostUrl + chapter.Attributes["href"].Value,
-                    ChapId = ExtractID(chapter.InnerText)
+                    ChapId = ExtractID(chapter.InnerText.Trim())
                 };
                 info.Chapters.Add(chap);
             }
@@ -154,7 +154,7 @@ namespace ComicDownloader.Engines
             {
                 string chapterUrl = HostUrl + node.Attributes["href"].Value;
                 string pageUrl = HostUrl + "/serie-archive/mangas-" + node.Attributes["href"].Value.Substring(1, node.Attributes["href"].Value.LastIndexOf("/"));
-                var chapterTitle = node.ChildNodes[2].InnerText.Trim();
+                var chapterTitle = node.ChildNodes[2].InnerText.Trim().Trim();
                 StoryInfo info;
 
                 if (stories.Any(p => p.Url == pageUrl))
@@ -215,7 +215,7 @@ namespace ComicDownloader.Engines
                         StoryInfo info = new StoryInfo()
                         {
                             Url = HostUrl + node.Attributes["href"].Value,
-                            Name = node.ChildNodes[2].InnerText.Trim()
+                            Name = node.ChildNodes[2].InnerText.Trim().Trim()
                         };
                         results.Add(info);
                     }

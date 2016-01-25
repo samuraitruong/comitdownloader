@@ -62,7 +62,7 @@ namespace ComicDownloader.Engines
                     results.Add(new StoryInfo()
                     {
                         
-                        Name = node.InnerText.Trim(),
+                        Name = node.InnerText.Trim().Trim(),
                         Url = node.Attributes["href"].Value
                     });
                 }
@@ -83,7 +83,7 @@ namespace ComicDownloader.Engines
             StoryInfo info = new StoryInfo()
             {
                 Url = url,
-                Name = nameNode.InnerText.Trim()
+                Name = nameNode.InnerText.Trim().Trim()
             };
 
             var chapterLinks = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"postcontent\"]//a[contains(@href,'http://img')]");
@@ -95,9 +95,9 @@ namespace ComicDownloader.Engines
                 ChapterInfo chapter = new ChapterInfo()
                 {
                     Url = item.Attributes["href"].Value,
-                    Name = item.InnerText
+                    Name = item.InnerText.Trim()
                     ,
-                    ChapId = ExtractID(item.InnerText,@"Chapter (\d*)")
+                    ChapId = ExtractID(item.InnerText.Trim(),@"Chapter (\d*)")
 
                 };
                
@@ -135,7 +135,7 @@ namespace ComicDownloader.Engines
                 htmlDoc.LoadHtml(html);
                 var options = htmlDoc.DocumentNode.SelectNodes("//select[@name=\"page\"]//option");
                 //var paged = htmlDoc.DocumentNode.SelectSingleNode("//select[@name='chapter']/option[@selected='selected']");
-                //if(paged.InnerText == "End")
+                //if(paged.InnerText.Trim() == "End")
                 //{
                     
                 //}
@@ -174,7 +174,7 @@ namespace ComicDownloader.Engines
                         StoryInfo info = new StoryInfo()
                         {
                             Url = node.Attributes["href"].Value,
-                            Name = node.InnerText.Trim()
+                            Name = node.InnerText.Trim().Trim()
                         };
                         results.Add(info);
                     }

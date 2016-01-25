@@ -58,7 +58,7 @@ namespace ComicDownloader.Engines
                         StoryInfo info = new StoryInfo()
                         {
                             Url = node.Attributes["href"].Value,
-                            Name = node.InnerText.Trim()
+                            Name = node.InnerText.Trim().Trim()
                         };
                         results.Add(info);
                     }
@@ -83,7 +83,7 @@ namespace ComicDownloader.Engines
             StoryInfo info = new StoryInfo()
             {
                 Url = url,
-                Name = nameNode.InnerText.Trim()
+                Name = nameNode.InnerText.Trim().Trim()
             };
 
             var chapterLinks = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"manga_chapters\"]//span[1]/a");
@@ -95,9 +95,9 @@ namespace ComicDownloader.Engines
                 ChapterInfo chapter = new ChapterInfo()
                 {
                     Url = item.Attributes["href"].Value,
-                    Name = item.InnerText
+                    Name = item.InnerText.Trim()
                     ,
-                    ChapId = ExtractID(item.InnerText, @"Chapter (\d*)")
+                    ChapId = ExtractID(item.InnerText.Trim(), @"Chapter (\d*)")
 
                 };
 
@@ -139,7 +139,7 @@ namespace ComicDownloader.Engines
             {
                 var chapterUrl = node.Attributes["href"].Value;
                 var storyUrl = chapterUrl.Substring(0, chapterUrl.LastIndexOf("/chap"));
-                var chapterTitle = node.InnerText.Trim();
+                var chapterTitle = node.InnerText.Trim().Trim();
                 var storyTitle = chapterTitle.Substring(0, chapterTitle.LastIndexOf("chap")).Trim();
 
                 StoryInfo info = new StoryInfo()

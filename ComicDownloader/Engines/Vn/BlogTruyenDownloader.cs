@@ -69,7 +69,7 @@ namespace ComicDownloader.Engines
                             StoryInfo info = new StoryInfo()
                             {
                                 Url = HostUrl + node.Attributes["href"].Value,
-                                Name = node.ChildNodes[0].InnerText.Trim()
+                                Name = node.ChildNodes[0].InnerText.Trim().Trim()
                             };
                             results.Add(info);
                         }
@@ -105,7 +105,7 @@ namespace ComicDownloader.Engines
                 //                    {
                 //                        StoryInfo info = new StoryInfo()
                 //                        {
-                //                            Name = item.InnerText,
+                //                            Name = item.InnerText.Trim(),
                 //                            Url = item.Attributes["href"].Value
                 //                        };
                 //                        results.Add(info);
@@ -131,7 +131,7 @@ namespace ComicDownloader.Engines
             htmlDoc.LoadHtml(html);
             
             var node = htmlDoc.DocumentNode.SelectSingleNode("//h1[@class='entry-title']/a");
-            info.Name = node.InnerText.Replace("&nbsp;", string.Empty);
+            info.Name = node.InnerText.Trim().Replace("&nbsp;", string.Empty);
 
             //var chapters = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"post\"]//a[contains(@href,'x2.blogtruyen.com')]");
             var chapters = htmlDoc.DocumentNode.SelectNodes("//*[@id='list-chapters']/p/span[@class='title']/a");
@@ -148,8 +148,8 @@ namespace ComicDownloader.Engines
                 var chapInfo = new ChapterInfo()
                 {
                     Url = this.HostUrl+item.Attributes["href"].Value,
-                    Name = item.FirstChild.InnerText,
-                    ChapId = ExtractID(item.FirstChild.InnerText)
+                    Name = item.FirstChild.InnerText.Trim(),
+                    ChapId = ExtractID(item.FirstChild.InnerText.Trim())
                 };
 
 

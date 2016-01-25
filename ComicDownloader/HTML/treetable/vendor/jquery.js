@@ -4842,7 +4842,7 @@ Expr = Sizzle.selectors = {
 
 		"contains": markFunction(function( text ) {
 			return function( elem ) {
-				return ( elem.textContent || elem.innerText || getText( elem ) ).indexOf( text ) > -1;
+				return ( elem.textContent || elem.InnerText.Trim() || getText( elem ) ).indexOf( text ) > -1;
 			};
 		}),
 

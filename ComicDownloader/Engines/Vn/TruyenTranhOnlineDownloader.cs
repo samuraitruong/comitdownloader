@@ -7,30 +7,30 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Thich Truyen Tranh", Offline = false, Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
-    public class ThichTruyenTranhDownloader: Downloader
+    [Downloader("Truyen Tranh Online", Offline = false, Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
+    public class TruyenTranhOnlineDownloader : Downloader
     {
         public override string Logo
         {
             get
             {
-                return "http://thichtruyentranh.com/images/logo.png";
+                return "http://truyentranhonline.vn/wp-content/themes/truyentranhonline/images/logo.png";
             }
         }
 
         public override string Name
         {
-            get { return "[Thich Truyen Tranh] - "; }
+            get { return "[Truyen Tranh Online] - "; }
         }
 
         public override string ListStoryURL
         {
-            get { return "http://thichtruyentranh.com/truyen-moi-nhat/trang.1.html"; }
+            get { return "http://truyentranhonline.vn/truyen-moi/page/1/"; }
         }
 
         public override string HostUrl
         {
-            get { return "http://thichtruyentranh.com"; }
+            get { return "http://truyentranhonline.vn/"; }
         }
 
         public override string StoryUrlPattern
@@ -41,64 +41,47 @@ namespace ComicDownloader.Engines
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             //GOOD Example for cleanup code.
-            return base.GetListStoriesSimple("http://thichtruyentranh.com/truyen-moi-nhat/trang.{0}.html",
-                "//ul[@class='ulListruyen']//a[@class='tile']",
+            return base.GetListStoriesSimple("http://truyentranhonline.vn/truyen-moi/page/{0}/",
+                "//div[@class='ls1']//ul/h3/a",
                 forceOnline,
-               this.HostUrl);
+                "", null,
+                this.CustomListParser);
+        }
+
+        private  List<StoryInfo> CustomListParser(string html, HtmlDocument doc)
+        {
+                List<StoryInfo> list = new List<StoryInfo>();
+                var divNode = doc.DocumentNode.Descendants("div").Where(p => p.HasAttributes && p.Attributes["class"] != null && p.Attributes["class"].Value == "ls1").FirstOrDefault();
+            if (divNode == null) return list;
+                doc.LoadHtml(divNode.InnerHtml);
+                var nodes = doc.DocumentNode.SelectNodes("//h3/a");
+                if (nodes != null)
+                {
+                    foreach (HtmlNode node in nodes)
+                    {
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = node.Attributes["href"].Value,
+                            Name = node.Attributes["title"] != null && string.IsNullOrEmpty(node.Attributes["title"].Value) ? node.Attributes["title"].Value : node.InnerText.Trim().Trim()
+                        };
+                        list.Add(info);
+                    }
+                }
+
+                return list;
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
         {
-            var doc = base.GetParser(storyUrl);
-            var paging = doc.DocumentNode.SelectSingleNode("(//div[@class='paging'])[1]//li[last()]/a");
-            var listPages = new List<string>() { storyUrl };
+            return base.RequestInfoSimple(storyUrl,
+                "//h1/a",
+                "//ul[@class='chapter']/li//a");
 
-            if(paging!= null)
-            {
-                var pagingUrl = this.HostUrl + paging.Attributes["href"].Value;
-                var pageCount = Regex.Match(pagingUrl, @"trang\.(\d+).html").Groups[1].Value;
-                pagingUrl = Regex.Replace(pagingUrl, @"trang\.(\d+).html", "trang.{0}.html");
-                foreach (var item in Enumerable.Range(2, int.Parse(pageCount)-1))
-                {
-                    listPages.Add(string.Format(pagingUrl, item));
-                }
-
-            }
-            List<ChapterInfo> chapters = new List<ChapterInfo>();
-            StoryInfo info = new StoryInfo();
-            foreach (var url in listPages)
-            {
-                info = base.RequestInfoSimple(storyUrl,
-                "//ul[@class='ulpro_line']//h1",
-                "//ul[@class='ul_listchap']//a",
-                this.HostUrl);
-                chapters.AddRange(info.Chapters);
-            }
-            info.Chapters = chapters;
-            info.ChapterCount = chapters.Count;
-            return info;
-        }
-        private List<string> CustomExtractPages(string html)
-        {
-            List<string> list = new List<string>();
-
-            var match = Regex.Match(html, @"var imgArray = \[([^\]]*)]");
-            if (match != null)
-            {
-                html = match.Groups[1].Value;
-                var nodes = base.GetParser(html).DocumentNode.SelectNodes("//img");
-                foreach (HtmlNode node in nodes)
-                {
-                    list.Add(node.Attributes["src"].Value);
-                }
-            }
-            return list;
         }
         public override List<string> GetPages(string chapUrl)
         {
-            return base.GetPagesSimple(chapUrl,
-                "//div[@id='content_read']/img",
-                customExtractor: this.CustomExtractPages);
+            return base.GetPagesSimple(chapUrl+ "&load=0",
+                "//section[@id='viewer']//img");
         }
 
         public override List<StoryInfo> GetLastestUpdates()

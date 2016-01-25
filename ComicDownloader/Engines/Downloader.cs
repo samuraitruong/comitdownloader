@@ -43,7 +43,7 @@ namespace ComicDownloader.Engines
 
         public abstract List<string> GetPages(string chapUrl);
 
-        public StoryInfo RequestInfoSimple(string storyUrl, string namePattern, string chapterPattern, string appendHostUrl="", Func<HtmlNode, string> nameExtract = null, Func<HtmlNode, ChapterInfo> chapterExtract = null)
+        public StoryInfo RequestInfoSimple(string storyUrl, string namePattern, string chapterPattern, string appendHostUrl="", Func<HtmlNode, string> nameExtract = null, Func<HtmlNode, ChapterInfo> chapterExtract = null, Func<string, HtmlDocument, List<ChapterInfo>> customChapterExtract= null)
         {
             var html = NetworkHelper.GetHtml(storyUrl);
 
@@ -52,7 +52,7 @@ namespace ComicDownloader.Engines
             htmlDoc.LoadHtml(html);
 
             var nameNode = htmlDoc.DocumentNode.SelectSingleNode(namePattern);
-            string chapterName = (nameExtract != null )? nameExtract(nameNode) : nameNode.InnerText.Trim();
+            string chapterName = (nameExtract != null )? nameExtract(nameNode) : nameNode.InnerText.Trim().Trim();
 
             StoryInfo info = new StoryInfo()
             {
@@ -61,24 +61,34 @@ namespace ComicDownloader.Engines
             };
 
             var chapNodes = htmlDoc.DocumentNode.SelectNodes(chapterPattern);
-
-            foreach (HtmlNode node in chapNodes)
-            {
-                var chapInfo = chapterExtract != null? chapterExtract(node): new ChapterInfo()
+            if (chapNodes != null) {
+                foreach (HtmlNode node in chapNodes)
                 {
-                    Name = node.InnerText,
-                    Url = appendHostUrl+ node.Attributes["href"].Value.Trim(),
-                    ChapId = ExtractID(node.InnerText)
-                };
+                    var chapInfo = chapterExtract != null ? chapterExtract(node) : new ChapterInfo()
+                    {
+                        Name = (node.Attributes["title"] != null && !string.IsNullOrEmpty(node.Attributes["title"].Value)) ? node.Attributes["title"].Value : node.InnerText.Trim().Trim(),
+                        Url = appendHostUrl + node.Attributes["href"].Value.Trim(),
+                    };
+                    chapInfo.ChapId = ExtractID(chapInfo.Name);
+                    info.Chapters.Add(chapInfo);
+                }
 
-                info.Chapters.Add(chapInfo);
+                info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
+                return info;
+
             }
-
-            info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
+            else
+            {
+                if(customChapterExtract != null)
+                {
+                    var list = customChapterExtract(html, htmlDoc);
+                    info.Chapters.AddRange(list);
+                }
+            }
             return info;
         }
 
-        public List<StoryInfo> GetListStoriesSimple(string urlPattern,string matchPattern, bool forceOnline, Func<HtmlNode, StoryInfo> convertFunc = null)
+        public List<StoryInfo> GetListStoriesSimple(string urlPattern,string matchPattern, bool forceOnline, string appendHost="", Func<HtmlNode, StoryInfo> convertFunc = null,   Func<string, HtmlDocument, List<StoryInfo>> customParser= null, bool singleListPage= false)
         {
             
             List<StoryInfo> results = this.ReloadChachedData();
@@ -90,7 +100,7 @@ namespace ComicDownloader.Engines
                 bool isStillHasPage = true;
                 while (isStillHasPage)
                 {
-
+                    
                     string url = string.Format(urlPattern, currentPage);
 
                     string html = NetworkHelper.GetHtml(url);
@@ -111,11 +121,25 @@ namespace ComicDownloader.Engines
                             {
                                 StoryInfo info = new StoryInfo()
                                 {
-                                    Url = node.Attributes["href"].Value,
-                                    Name = node.Attributes["title"].Value
+                                    Url = appendHost + node.Attributes["href"].Value,
+                                    Name = node.Attributes["title"]!=null && !string.IsNullOrEmpty(node.Attributes["title"].Value)? node.Attributes["title"].Value.Trim() : node.InnerText.Trim().Trim()
                                 };
                                 results.Add(info);
                             }
+                        }
+                    }
+                    else
+                    if(customParser != null)
+                    {
+                        currentPage++;
+                        var listparsed = customParser(html, htmlDoc);
+                        if(listparsed != null && listparsed.Count >0)
+                        {
+                            results.AddRange(listparsed);
+                        }
+                        else
+                        {
+                            isStillHasPage = false;
                         }
                     }
                     else
@@ -123,6 +147,11 @@ namespace ComicDownloader.Engines
                         isStillHasPage = false;
                     }
 
+                    //only process 1 page
+                    if (singleListPage)
+                    {
+                        isStillHasPage = false;
+                    }
                 }
 
             }

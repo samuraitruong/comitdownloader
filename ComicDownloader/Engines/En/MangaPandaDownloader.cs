@@ -60,7 +60,7 @@ namespace ComicDownloader.Engines
                         StoryInfo info = new StoryInfo()
                         {
                             Url = HostUrl + node.Attributes["href"].Value,
-                            Name = node.InnerText.Trim()
+                            Name = node.InnerText.Trim().Trim()
                         };
                         results.Add(info);
                     }
@@ -87,7 +87,7 @@ namespace ComicDownloader.Engines
             StoryInfo info = new StoryInfo()
             {
                 Url = storyUrl,
-                Name = nameNode.InnerText.Trim(),
+                Name = nameNode.InnerText.Trim().Trim(),
             };
 
             //var match = Regex.Match(html,"<table id=\"listing\"");
@@ -102,9 +102,9 @@ namespace ComicDownloader.Engines
                 {
                     ChapterInfo chap = new ChapterInfo()
                     {
-                        Name = chapter.InnerText.Trim(),
+                        Name = chapter.InnerText.Trim().Trim(),
                         Url = HostUrl + chapter.Attributes["href"].Value,
-                        ChapId = ExtractID(chapter.InnerText)
+                        ChapId = ExtractID(chapter.InnerText.Trim())
                     };
                     info.Chapters.Add(chap);
                 }
@@ -155,7 +155,7 @@ namespace ComicDownloader.Engines
                 StoryInfo info = new StoryInfo()
                 {
                     Url = HostUrl + node.Attributes["href"].Value,
-                    Name = node.FirstChild.InnerText.Trim(),
+                    Name = node.FirstChild.InnerText.Trim().Trim(),
                     Chapters = new List<ChapterInfo>(),
                 };
                 var chapters = node.ParentNode.SelectNodes("a[position()>1]");
@@ -165,7 +165,7 @@ namespace ComicDownloader.Engines
                     {
                         info.Chapters.Add(new ChapterInfo()
                         {
-                            Name = chap.InnerText.Trim(),
+                            Name = chap.InnerText.Trim().Trim(),
                             Url = HostUrl + chap.Attributes["href"].Value,
                         });
                     }
@@ -205,7 +205,7 @@ namespace ComicDownloader.Engines
                         StoryInfo info = new StoryInfo()
                         {
                             Url = HostUrl + node.Attributes["href"].Value,
-                            Name = node.InnerText.Trim()
+                            Name = node.InnerText.Trim().Trim()
                         };
                         results.Add(info);
                     }

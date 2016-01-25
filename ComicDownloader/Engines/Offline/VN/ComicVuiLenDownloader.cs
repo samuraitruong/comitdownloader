@@ -96,14 +96,14 @@ namespace ComicDownloader.Engines
             StoryInfo info = new StoryInfo()
             {
                 Url = storyUrl,
-                Name = nameNode.InnerText.Substring(0,nameNode.InnerText.IndexOf("-"))
+                Name = nameNode.InnerText.Trim().Substring(0,nameNode.InnerText.Trim().IndexOf("-"))
             };
 
             var pageNav = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='pagenav']");
             if (pageNav != null)
             {
                 var countText = pageNav.SelectSingleNode("//td[@class='vbmenu_control']");
-                var count = countText.InnerText.Replace("Page 1 of", string.Empty);
+                var count = countText.InnerText.Trim().Replace("Page 1 of", string.Empty);
                 var pagingUrl = storyUrl + "&order=desc&sort=timeupdate&page={0}";
 
                 for (var i=1; i< int.Parse(count); i++ )
@@ -118,15 +118,15 @@ namespace ComicDownloader.Engines
                     {
                         ChapterInfo chapInfo = new ChapterInfo()
                         {
-                            //Name = node.InnerText.Trim(),
+                            //Name = node.InnerText.Trim().Trim(),
                             Url = HostUrl + node.Attributes["href"].Value.Trim(),
-                            //ChapId = ExtractID(node.InnerText.Trim())
+                            //ChapId = ExtractID(node.InnerText.Trim().Trim())
                         };
                         var bnodes = node.ParentNode.ParentNode.ParentNode.ParentNode.SelectNodes("b");
                         var name = "";
                         foreach (HtmlNode b in bnodes)
                         {
-                            name += b.InnerText + " - ";
+                            name += b.InnerText.Trim() + " - ";
                         }
                         chapInfo.Name = name;
                         chapInfo.ChapId = ExtractID(name, @"tap([\d]*)");
@@ -142,13 +142,13 @@ namespace ComicDownloader.Engines
                 {
                     ChapterInfo chapInfo = new ChapterInfo()
                     {
-                        //Name = node.InnerText.Trim(),
+                        //Name = node.InnerText.Trim().Trim(),
                         Url = HostUrl + node.Attributes["href"].Value.Trim(),
-                        //ChapId = ExtractID(node.InnerText.Trim())
+                        //ChapId = ExtractID(node.InnerText.Trim().Trim())
                     };
                     var t = node.ParentNode.ParentNode.ParentNode.NextSibling.NextSibling.NextSibling.NextSibling;
-                    chapInfo.Name = t.InnerText.Trim();
-                    chapInfo.ChapId = ExtractID(t.InnerText.Trim(), @"tap([\d]*)");
+                    chapInfo.Name = t.InnerText.Trim().Trim();
+                    chapInfo.ChapId = ExtractID(t.InnerText.Trim().Trim(), @"tap([\d]*)");
                     info.Chapters.Add(chapInfo);
                 }
 

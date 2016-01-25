@@ -160,11 +160,11 @@ namespace IView.Engine.Core
                 // Select the version node and validate it.
                 XmlNode oNode = oXmlDocument.SelectSingleNode(VERSION_NODE);
 
-                if ((oNode != null) && (IsVersionStringValid(oNode.InnerText)))
+                if ((oNode != null) && (IsVersionStringValid(oNode.InnerText.Trim())))
                 {
                     // Initialize the locations array, and store the version read from the file.
                     m_sLocations = new string[MAX_LOCATIONS];
-                    m_oVersion = new Version(oNode.InnerText);
+                    m_oVersion = new Version(oNode.InnerText.Trim());
 
                     // Select the locations node and enumerate through it's child nodes, storing
                     // the locations in an array with the name and the url separated by the pipe delimiter.
@@ -180,7 +180,7 @@ namespace IView.Engine.Core
                                 break;
                             
                             oNode = (XmlNode)oNodes.Current;
-                            m_sLocations[nCount] = oNode.Name + "|" + oNode.InnerText;
+                            m_sLocations[nCount] = oNode.Name + "|" + oNode.InnerText.Trim();
                             ++nCount;
                         }
                     }

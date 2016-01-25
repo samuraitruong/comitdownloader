@@ -54,7 +54,7 @@ namespace ComicDownloader.Engines
                 {
                     var nodes = htmlDoc.DocumentNode.SelectSingleNode("//ul[@class='pagination']/li/span");
 
-                    var innertText = nodes.InnerText;
+                    var innertText = nodes.InnerText.Trim();
                     var count = Convert.ToInt32(Regex.Match(innertText, @"\d+").Value);
 
                     foreach (var item in Enumerable.Range(1, count))
@@ -87,7 +87,7 @@ namespace ComicDownloader.Engines
                             var story = new StoryInfo()
                             {
                                 Url = HostUrl + "/" + htmlDoc.DocumentNode.FirstChild.Attributes["href"].Value,
-                                Name = htmlDoc.DocumentNode.FirstChild.InnerText.Trim()
+                                Name = htmlDoc.DocumentNode.FirstChild.InnerText.Trim().Trim()
                             };
                             results.Add(story);
                         }
@@ -127,8 +127,8 @@ namespace ComicDownloader.Engines
                     ChapterInfo chap = new ChapterInfo()
                     {
                         Url = this.HostUrl+"/" +node.Attributes["href"].Value,
-                        Name = node.InnerText.Trim(),
-                        ChapId = ExtractID(node.InnerText.Trim())
+                        Name = node.InnerText.Trim().Trim(),
+                        ChapId = ExtractID(node.InnerText.Trim().Trim())
                     };
 
                     story.Chapters.Add(chap);

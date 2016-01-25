@@ -98,7 +98,7 @@ namespace ComicDownloader.Engines
             //{
             //    story.Name = match.Groups[1].Value;
             //}
-            story.Name = nodeHtml.InnerText;
+            story.Name = nodeHtml.InnerText.Trim();
             var nodes = htmlDoc.DocumentNode.SelectNodes("//ul[@id='acc1']//li/a");
             if (nodes != null)
                 foreach (HtmlNode node in nodes)

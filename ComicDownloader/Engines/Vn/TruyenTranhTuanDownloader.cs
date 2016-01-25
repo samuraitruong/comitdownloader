@@ -60,7 +60,7 @@ namespace ComicDownloader.Engines
                     {
                         //UrlSegment = match.Groups[1].Value,
                         Url = match.Attributes["href"].Value,
-                        Name = match.InnerText.Trim()
+                        Name = match.InnerText.Trim().Trim()
                     });
                 }
             }
@@ -81,11 +81,11 @@ namespace ComicDownloader.Engines
             htmlDoc.LoadHtml(html);
 
             var node = htmlDoc.DocumentNode.SelectSingleNode("//h1[@itemprop='name']");
-            info.Name = node.InnerText;
+            info.Name = node.InnerText.Trim();
             //var node2 = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"fontsize-chitiet\"]/span[2]");
-            //info.AltName = node2.InnerText;
+            //info.AltName = node2.InnerText.Trim();
             //var node3 = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"fontsize-chitiet\"]/span[2]");
-            //info.Categories = node3.InnerText;
+            //info.Categories = node3.InnerText.Trim();
             info.Url = url;
 
             //var ccontentmain = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"content-main\"]");
@@ -102,8 +102,8 @@ namespace ComicDownloader.Engines
                 ChapterInfo chapter = new ChapterInfo()
                 {
                     Url = item.Attributes["href"].Value,
-                    Name = item.InnerText,
-                    ChapId = ExtractID(item.InnerText)
+                    Name = item.InnerText.Trim(),
+                    ChapId = ExtractID(item.InnerText.Trim())
 
                 };
                
@@ -150,7 +150,7 @@ namespace ComicDownloader.Engines
                 var storyUrl = chapUrl.Substring(0, chapUrl.LastIndexOf("/"));
                 storyUrl = storyUrl.Substring(0, storyUrl.LastIndexOf("/"));
 
-                var chapTitle = node.InnerText.Trim();
+                var chapTitle = node.InnerText.Trim().Trim();
                 chapTitle = chapTitle.Substring(chapTitle.LastIndexOf("]") + 1);
                 var storyTitle = chapTitle.Substring(0, chapTitle.LastIndexOf(" "));
 

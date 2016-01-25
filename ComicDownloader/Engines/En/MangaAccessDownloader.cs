@@ -58,7 +58,7 @@ namespace ComicDownloader.Engines
                     StoryInfo info = new StoryInfo()
                     {
                         Url = HostUrl + node.Attributes["href"].Value,
-                        Name = node.InnerText.Trim()
+                        Name = node.InnerText.Trim().Trim()
                     };
                     results.Add(info);
                 }
@@ -82,7 +82,7 @@ namespace ComicDownloader.Engines
             StoryInfo info = new StoryInfo()
             {
                 Url = storyUrl,
-                Name = nameNode.InnerText.Trim(),
+                Name = nameNode.InnerText.Trim().Trim(),
             };
 
             var chapterNodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"download-link\"]");
@@ -91,7 +91,7 @@ namespace ComicDownloader.Engines
             {
                 ChapterInfo chap = new ChapterInfo()
                 {
-                    Name = chapter.InnerText ,//+ " " + chapter.ChildNodes[0].InnerText + " " + chapter.ChildNodes[1].InnerText,
+                    Name = chapter.InnerText.Trim() ,//+ " " + chapter.ChildNodes[0].InnerText.Trim() + " " + chapter.ChildNodes[1].InnerText.Trim(),
                     Url = HostUrl + chapter.Attributes["href"].Value,
                     
                 };
@@ -164,7 +164,7 @@ namespace ComicDownloader.Engines
                     info = new StoryInfo()
                     {
                         Url = pageUrl,
-                        Name = node.ChildNodes[0].InnerText.Trim(),
+                        Name = node.ChildNodes[0].InnerText.Trim().Trim(),
                         Chapters = new List<ChapterInfo>()
                     };
 
@@ -174,7 +174,7 @@ namespace ComicDownloader.Engines
                 var chapter = new ChapterInfo()
                 {
                     Url = chapterUrl,
-                    Name = node.ChildNodes[0].InnerText.Trim() + ' ' + node.ChildNodes[1].InnerText.Trim() + ' ' + node.ChildNodes[2].NextSibling.InnerText.Trim()
+                    Name = node.ChildNodes[0].InnerText.Trim().Trim() + ' ' + node.ChildNodes[1].InnerText.Trim().Trim() + ' ' + node.ChildNodes[2].NextSibling.InnerText.Trim().Trim()
                 };
 
                 info.Chapters.Add(chapter);

@@ -93,7 +93,7 @@ namespace ComicDownloader.Engines
             StoryInfo story = new StoryInfo()
             {
                 Url = url,
-                Name = nodeHtml.InnerText.Trim()
+                Name = nodeHtml.InnerText.Trim().Trim()
             };
             //var match = Regex.Match(nodeHtml.InnerHtml, "<strong>(.*?)</strong>");
             //if (match != null)
@@ -110,8 +110,8 @@ namespace ComicDownloader.Engines
                     ChapterInfo chap = new ChapterInfo()
                     {
                         Url = node.Attributes["href"].Value,
-                        Name = node.InnerText.Trim(),
-                        ChapId = ExtractID(node.InnerText.Trim())
+                        Name = node.InnerText.Trim().Trim(),
+                        ChapId = ExtractID(node.InnerText.Trim().Trim())
                     };
 
                     story.Chapters.Add(chap);

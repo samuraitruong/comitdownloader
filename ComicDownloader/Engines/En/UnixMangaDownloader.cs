@@ -51,7 +51,7 @@ namespace ComicDownloader.Engines.En
                         StoryInfo info = new StoryInfo()
                         {
                             Url = node.Attributes["href"].Value,
-                            Name = node.InnerText.Trim()
+                            Name = node.InnerText.Trim().Trim()
                         };
                         results.Add(info);
                     }
@@ -86,9 +86,9 @@ namespace ComicDownloader.Engines.En
                 {
                     ChapterInfo chap = new ChapterInfo()
                     {
-                        Name = item.InnerText.Trim(),
+                        Name = item.InnerText.Trim().Trim(),
                         Url = item.Attributes["href"].Value,
-                        ChapId = ExtractID(item.InnerText.Trim())
+                        ChapId = ExtractID(item.InnerText.Trim().Trim())
                     };
                     info.Chapters.Add(chap);
                 }
@@ -102,7 +102,7 @@ namespace ComicDownloader.Engines.En
             var html = NetworkHelper.GetHtml(pageUrl);
             HtmlDocument htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
-            var imgUrl = htmlDoc.DocumentNode.SelectSingleNode("//div[@id=\"contentRH\"]/div[@align=\"center\"]/script").InnerText;
+            var imgUrl = htmlDoc.DocumentNode.SelectSingleNode("//div[@id=\"contentRH\"]/div[@align=\"center\"]/script").InnerText.Trim();
             imgUrl = imgUrl.Substring(imgUrl.IndexOf("SRC") + 5);
             imgUrl = imgUrl.Substring(0, imgUrl.IndexOf('"'));
 
@@ -197,7 +197,7 @@ namespace ComicDownloader.Engines.En
             htmlDoc.LoadHtml(html);
 
             var node = htmlDoc.DocumentNode.SelectSingleNode("//table[@class=\"snif\"]//tr[position()=2]/td[position()=2]/a");
-            if (node.InnerText.Trim() == "[ Goto Main ]")
+            if (node.InnerText.Trim().Trim() == "[ Goto Main ]")
             {
                 var nameNode = urlPattern.Substring(urlPattern.LastIndexOf("/") + 1);
                 nameNode = nameNode.Substring(0, nameNode.LastIndexOf(".htm")).Replace("_", " ");

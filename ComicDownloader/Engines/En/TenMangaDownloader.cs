@@ -75,7 +75,7 @@ namespace ComicDownloader.Engines
                                  StoryInfo info = new StoryInfo()
                                  {
                                      Url =node.Attributes["href"].Value,
-                                     Name = node.InnerText.Trim()
+                                     Name = node.InnerText.Trim().Trim()
                                  };
                                  results.Add(info);
                              }
@@ -106,7 +106,7 @@ namespace ComicDownloader.Engines
             StoryInfo info = new StoryInfo()
             {
                 Url = storyUrl,
-                Name = nameNode.InnerText.Trim().Replace("Manga",""),
+                Name = nameNode.InnerText.Trim().Trim().Replace("Manga",""),
             };
 
 
@@ -115,9 +115,9 @@ namespace ComicDownloader.Engines
             {
                 ChapterInfo chap = new ChapterInfo()
                 {
-                    Name = chapter.InnerText.Trim(),
+                    Name = chapter.InnerText.Trim().Trim(),
                     Url = HostUrl+ chapter.Attributes["href"].Value,
-                    //ChapId = ExtractID(chapter.InnerText)
+                    //ChapId = ExtractID(chapter.InnerText.Trim())
                 };
                 chap.ChapId = ExtractID(chap.Name);
                 info.Chapters.Add(chap);
@@ -170,7 +170,7 @@ namespace ComicDownloader.Engines
                 StoryInfo info = new StoryInfo()
                 {
                     Url = node.Attributes["href"].Value,
-                    Name = node.InnerText.Trim(),
+                    Name = node.InnerText.Trim().Trim(),
                     Chapters = new List<ChapterInfo>(),
                 };
                 var chapters = node.ParentNode.ParentNode.SelectNodes("span/a[position()=1]");
@@ -180,7 +180,7 @@ namespace ComicDownloader.Engines
                     {
                         info.Chapters.Add(new ChapterInfo()
                         {
-                            Name = chap.FirstChild.InnerText.Trim(),
+                            Name = chap.FirstChild.InnerText.Trim().Trim(),
                             Url = chap.Attributes["href"].Value,
                         });
                     }
