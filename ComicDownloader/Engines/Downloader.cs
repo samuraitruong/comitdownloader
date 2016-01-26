@@ -11,6 +11,8 @@ using HtmlAgilityPack;
 
 namespace ComicDownloader.Engines
 {
+    public delegate string ResolveImageOnPage(string pageUrl);
+
     public abstract class Downloader
     {
         public List<StoryInfo> AllStories { get; set; }
@@ -38,6 +40,7 @@ namespace ComicDownloader.Engines
         public virtual string Logo { get {
             return string.Empty;
         } }
+
         //public abstract List<StoryInfo> GetListStories();
         public abstract StoryInfo RequestInfo(string storyUrl);
 
@@ -88,6 +91,85 @@ namespace ComicDownloader.Engines
             return info;
         }
 
+        public List<StoryInfo> GetListStoriesUnknowPages(string startUrl, string matchPattern, bool forceOnline, string pagingPattern, Func<HtmlNode, string> pagingExtract= null, string appendHost = "", Func<HtmlNode, StoryInfo> convertFunc = null, Func<string, HtmlDocument, List<StoryInfo>> customParser = null, bool singleListPage = false)
+        {
+            Queue<string> queue = new Queue<string>();
+            queue.Enqueue(startUrl);
+            List<string> alllinks = new List<string>() { startUrl };
+
+            List<StoryInfo> results = this.ReloadChachedData();
+
+            if (results == null || results.Count == 0 || forceOnline)
+            {
+                results = new List<StoryInfo>();
+                int currentPage = 1;
+                while (queue.Count>0)
+                {
+                    string url = queue.Dequeue();
+                    string html = NetworkHelper.GetHtml(url);
+                    HtmlDocument htmlDoc = new HtmlDocument();
+                    htmlDoc.LoadHtml(html);
+                    var isStillHasPage = true;
+                    var nodes = htmlDoc.DocumentNode.SelectNodes(matchPattern);
+                    var paging = htmlDoc.DocumentNode.SelectNodes(pagingPattern);
+                    if(paging!= null)
+                    {
+                        foreach (var p in paging)
+                        {
+                            var pageUrl = p.Attributes["href"].Value;
+                        }
+                    }
+                    if (nodes != null && nodes.Count > 0)
+                    {
+                        currentPage++;
+                        foreach (var node in nodes)
+                        {
+                            if (convertFunc != null)
+                            {
+                                results.Add(convertFunc(node));
+                            }
+                            else
+                            {
+                                StoryInfo info = new StoryInfo()
+                                {
+                                    Url = appendHost + node.Attributes["href"].Value,
+                                    Name = node.Attributes["title"] != null && !string.IsNullOrEmpty(node.Attributes["title"].Value) ? node.Attributes["title"].Value.Trim() : node.InnerText.Trim().Trim()
+                                };
+                                results.Add(info);
+                            }
+                        }
+                    }
+                    else
+                    if (customParser != null)
+                    {
+                        currentPage++;
+                        var listparsed = customParser(html, htmlDoc);
+                        if (listparsed != null && listparsed.Count > 0)
+                        {
+                            results.AddRange(listparsed);
+                        }
+                        else
+                        {
+                            isStillHasPage = false;
+                        }
+                    }
+                    else
+                    {
+                        isStillHasPage = false;
+                    }
+
+                    //only process 1 page
+                    if (singleListPage)
+                    {
+                        isStillHasPage = false;
+                    }
+                }
+
+            }
+            this.SaveCache(results);
+            return results;
+        }
+
         public List<StoryInfo> GetListStoriesSimple(string urlPattern,string matchPattern, bool forceOnline, string appendHost="", Func<HtmlNode, StoryInfo> convertFunc = null,   Func<string, HtmlDocument, List<StoryInfo>> customParser= null, bool singleListPage= false)
         {
             
@@ -99,10 +181,8 @@ namespace ComicDownloader.Engines
                 int currentPage = 1;
                 bool isStillHasPage = true;
                 while (isStillHasPage)
-                {
-                    
+                {   
                     string url = string.Format(urlPattern, currentPage);
-
                     string html = NetworkHelper.GetHtml(url);
                     HtmlDocument htmlDoc = new HtmlDocument();
                     htmlDoc.LoadHtml(html);
@@ -159,7 +239,7 @@ namespace ComicDownloader.Engines
             return results;
         }
 
-        public List<string> GetPagesSimple(string chapUrl, string pattern, Func<string, List<string>> customExtractor=null, string hostExpanded="", Func<HtmlNode, string> imgExtract= null)
+        public List<string> GetPagesSimple(string chapUrl, string pattern, Func<string, List<string>> customExtractor=null, string hostExpanded="", Func<HtmlNode, string> imgExtract= null,string imgAttrName="src")
         {
             List<string> pages = new List<string>();
             var html = NetworkHelper.GetHtml(chapUrl);
@@ -175,7 +255,7 @@ namespace ComicDownloader.Engines
                         pages.Add(imgExtract(item));
                     }
                     else {
-                        pages.Add(hostExpanded + item.Attributes["src"].Value);
+                        pages.Add(hostExpanded + item.Attributes[imgAttrName].Value);
                     }
                 }
             }
@@ -238,9 +318,14 @@ namespace ComicDownloader.Engines
             
             return results;
         }
+        public ResolveImageOnPage ResolveImageInHtmlPage { get; set; }
 
         public virtual string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
         {
+            if(this.ResolveImageInHtmlPage != null)
+            {
+                pageUrl = this.ResolveImageInHtmlPage(pageUrl);
+            }
             pageUrl = Helpers.UrlHelper.TryFixUrl(pageUrl);
             string filename = Path.GetFileName(pageUrl);
             if(filename.Contains("?"))

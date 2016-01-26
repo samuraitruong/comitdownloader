@@ -561,6 +561,14 @@
     <Compile Include="Engines\En\MangaHereDownloader.cs" />
     <Compile Include="Engines\En\UnixMangaDownloader.cs" />
     <Compile Include="Engines\Proxies\BlogTruyenDownloaderProxy.cs" />
+    <Compile Include="Engines\Vn\BlogTruyenHayDownloader.cs" />
+    <Compile Include="Engines\Vn\UpTruyenDownloader.cs" />
+    <Compile Include="Engines\Vn\TruyenTranhProDownloader.cs" />
+    <Compile Include="Engines\Vn\TuoiTreNangDongDownloader.cs" />
+    <Compile Include="Engines\Vn\MangaMuiMuiDownloader.cs" />
+    <Compile Include="Engines\Vn\VagabondMangaDownloader.cs" />
+    <Compile Include="Engines\Vn\BigTruyenDownloader.cs" />
+    <Compile Include="Engines\Vn\TruyenTranh24Downloader.cs" />
     <Compile Include="Engines\Vn\Truyen1Downloader.cs" />
     <Compile Include="Engines\Vn\TruyenV1Downloader.cs" />
     <Compile Include="Engines\Vn\ChapTruyenDownloader.cs" />

@@ -307,12 +307,18 @@ namespace ComicDownloader.Forms
             //updateThread.Start();
              if (Settings != null && Settings.AutoUpdateListOnStart)
             {
-            BackgroundUpdate();
+                BackgroundUpdate();
              }
 
              DisplayInfo();
+             DisplayListSupport();
         }
 
+        public void DisplayListSupport()
+        {
+            //objectListView1.SetObjects(Downloader.GetAllDownloaders());
+            
+        }
         private void DisplayInfo()
         {
             AssemblyInfoHelper info= new AssemblyInfoHelper(this.GetType());
