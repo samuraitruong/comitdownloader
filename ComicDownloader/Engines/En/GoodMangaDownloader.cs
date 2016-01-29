@@ -7,20 +7,20 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("GoodManga", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
+    [Downloader("Good Manga", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
     public class GoodMangaDownloader : Downloader
     {
         public override string Logo
         {
             get
             {
-                return "http://w2.goodmanga.net/images/site/front/logo.png";
+                return "http://www.goodmanga.net/images/site/front/logo.png";
             }
         }
 
         public override string Name
         {
-            get { return "[GoodManga] - "; }
+            get { return "[Good Manga] - "; }
         }
 
         public override string ListStoryURL
@@ -40,70 +40,18 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            string urlPattern = this.ListStoryURL;
-
-            List<StoryInfo> results = base.ReloadChachedData();
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-               
-                    
-                string html = NetworkHelper.GetHtml(this.ListStoryURL);
-                HtmlDocument htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(html);
-
-                var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"series_index\"]//a");
-                if (nodes != null && nodes.Count > 0)
-                {
-                    foreach (var node in nodes)
-                    {
-                        StoryInfo info = new StoryInfo()
-                        {
-                            Url = node.Attributes["href"].Value,
-                            Name = node.InnerText.Trim().Trim()
-                        };
-                        results.Add(info);
-                    }
-
-                       
-                }
-                
-
-            }
-            this.SaveCache(results);
-            return results;
+            return base.GetListStoriesSimple(this.ListStoryURL,
+                "//table[@class='series_index']//a",
+                forceOnline
+                );
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
         {
-            var html = NetworkHelper.GetHtml(storyUrl);
+            return base.RequestInfoSimple(storyUrl,
+                "//div[@class='right_col']/h1",
+                "//div[@id='chapters']/ul/li/a");
 
-            HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlDocument();
-
-            htmlDoc.LoadHtml(html);
-
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class=\"right_col\"]/h1");
-
-            StoryInfo info = new StoryInfo()
-            {
-                Url = storyUrl,
-                Name = nameNode.InnerText.Trim().Trim(),
-            };
-
-            var chapterNodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"chapters\"]//a");
-
-            foreach (HtmlNode chapter in chapterNodes)
-            {
-                ChapterInfo chap = new ChapterInfo()
-                {
-                    Name = chapter.InnerText.Trim().Trim(),
-                    Url =  chapter.Attributes["href"].Value,
-                    ChapId = ExtractID(chapter.InnerText.Trim())
-                };
-                info.Chapters.Add(chap);
-            }
-            info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
-            return info;
         }
 
         public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
@@ -118,19 +66,12 @@ namespace ComicDownloader.Engines
         }
         public override List<string> GetPages(string chapUrl)
         {
-            var html = NetworkHelper.GetHtml(chapUrl);
-
-            HtmlDocument htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-
-            var pages = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"page_select\"]//option[@value]");
-
-            List<string> results = new List<string>();
-            foreach (HtmlNode page in pages)
-            {
-                results.Add(page.Attributes["value"].Value);
-            }
-            return results;
+            return base.GetPagesSimple(chapUrl,
+                "//*[@class='page_select']//option[@value]",
+                null,
+                null,
+                null,
+                "value");
         }
 
         public override List<StoryInfo> GetLastestUpdates()

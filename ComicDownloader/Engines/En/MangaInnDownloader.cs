@@ -14,7 +14,7 @@ namespace ComicDownloader.Engines
         {
             get
             {
-                return "http://www.mangainn.com/images/logoM.png?1366264019";
+                return "http://www.mangainn.me/images/logoM.png";
             }
         }
 
@@ -25,12 +25,12 @@ namespace ComicDownloader.Engines
 
         public override string ListStoryURL
         {
-            get { return "http://www.mangainn.com/MangaList"; }
+            get { return "http://www.mangainn.me/MangaList"; }
         }
 
         public override string HostUrl
         {
-            get { return "http://www.mangainn.com/"; }
+            get { return "http://www.mangainn.ne/"; }
         }
 
         public override string ServiceUrl
@@ -48,94 +48,33 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-
-
-            List<StoryInfo> results = base.ReloadChachedData();
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-
-                string html = NetworkHelper.GetHtml(this.ListStoryURL);
-                HtmlDocument htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(html);
-
-                var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"mangalistItems\"]//a");
-
-                foreach (var node in nodes)
-                {
-                    StoryInfo info = new StoryInfo()
-                    {
-                        Url = node.Attributes["href"].Value,
-                        Name = node.InnerText.Trim().Trim()
-                    };
-                    results.Add(info);
-                }
-
-
-            }
-            this.SaveCache(results);
-            return results;
+            return base.GetListStoriesSimple(this.ListStoryURL,
+               "//li[@class='mangalistItems']/a",
+               forceOnline,
+               string.Empty);
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
         {
-            var html = NetworkHelper.GetHtml(storyUrl);
+            return base.RequestInfoSimple(storyUrl,
+                "//table[@class='headLBL'][1]//td[@itemprop='name']",
+                "//div[@class='divThickBorder'][3]//span/a"
+                );
 
-            HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlDocument();
-
-            htmlDoc.LoadHtml(html);
-
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class=\"headLBL\"]//tr[1]//td[2]");
-
-            StoryInfo info = new StoryInfo()
-            {
-                Url = storyUrl,
-                Name = nameNode.InnerText.Trim().Trim(),
-            };
-
-           var chapterNodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"divThickBorder\"]//table//tr/td[1]//a");
-
-            foreach (HtmlNode chapter in chapterNodes)
-            {
-                ChapterInfo chap = new ChapterInfo()
-                {
-                    Name = chapter.ChildNodes[0].InnerText.Trim() +" " + chapter.ChildNodes[0].InnerText.Trim() ,
-                    Url =  chapter.Attributes["href"].Value,
-                    
-                };
-                chap.ChapId = ExtractID(chap.Name);
-                info.Chapters.Add(chap);
-            }
-            info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
-            return info;
         }
 
         public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
         {
-            var html = NetworkHelper.GetHtml(pageUrl);
-            HtmlDocument htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-            var img = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"imgholder\"]//img");
-            pageUrl = img.Attributes["src"].Value;
-
-            
-            return base.DownloadPage(pageUrl, renamePattern, folder, httpReferer);
+            var imgUrl = base.ExtractImage(pageUrl, "//div[@id='divimgPage']/img");
+            return base.DownloadPage(imgUrl, renamePattern, folder, httpReferer);
         }
         public override List<string> GetPages(string chapUrl)
         {
-            var html = NetworkHelper.GetHtml(chapUrl);
-
-            HtmlDocument htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-
-            var pages = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"pageMenu\"]//option");
-
-            List<string> results = new List<string>();
-            foreach (HtmlNode page in pages)
-            {
-                results.Add(HostUrl+ page.Attributes["value"].Value);
-            }
-            return results;
+            return base.GetPagesSimple(chapUrl,
+                "//select[@id='cmbpages']/option",imgExtract: delegate(HtmlNode node)
+                {
+                    return chapUrl + "/page_" + node.Attributes["value"].Value;
+                });
         }
 
         public override List<StoryInfo> GetLastestUpdates()

@@ -437,7 +437,10 @@ namespace ComicDownloader.Forms
             Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=QP7B8JQTQY2ZU&lc=VN&item_name=Comic%20Downloader&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
         }
 
-       
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form1 f = new Form1();
+            f.ShowDialog();
+        }
     }
 }

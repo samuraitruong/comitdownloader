@@ -14,7 +14,7 @@ namespace ComicDownloader.Engines
         {
             get
             {
-                return "http://s8.eatmanga.com/media/logo.png";
+                return "http://cdn.eatmanga.com/media/logo.png";
             }
         }
 
@@ -40,70 +40,17 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            string urlPattern = this.ListStoryURL + "?p={0}";
-
-            List<StoryInfo> results = base.ReloadChachedData();
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-
-
-                string html = NetworkHelper.GetHtml(ListStoryURL);
-                HtmlDocument htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(html);
-
-                var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"updates\"]//th[1]/a");
-                if (nodes != null && nodes.Count > 0)
-                {
-
-                    foreach (var node in nodes)
-                    {
-                        StoryInfo info = new StoryInfo()
-                        {
-                            Url = HostUrl+node.Attributes["href"].Value,
-                            Name = node.InnerText.Trim().Trim()
-                        };
-                        results.Add(info);
-                    }
-                }
-
-            }
-
-
-            this.SaveCache(results);
-            return results;
+            return base.GetListStoriesSimple(this.ListStoryURL,
+                "//table[@id='updates']//th/a",
+                forceOnline,
+                this.HostUrl,
+                singleListPage: true
+            );
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
         {
-            var html = NetworkHelper.GetHtml(storyUrl);
-
-            HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlDocument();
-
-            htmlDoc.LoadHtml(html);
-
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"main_content\"]//h1");
-
-            StoryInfo info = new StoryInfo()
-            {
-                Url = storyUrl,
-                Name = nameNode.InnerText.Trim().Trim(),
-            };
-
-            var chapterNodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"updates\"]//th/a");
-
-            foreach (HtmlNode chapter in chapterNodes)
-            {
-                ChapterInfo chap = new ChapterInfo()
-                {
-                    Name = chapter.InnerText.Trim().Trim(),
-                    Url =  HostUrl+ chapter.Attributes["href"].Value,
-                    ChapId = ExtractID(chapter.InnerText.Trim())
-                };
-                info.Chapters.Add(chap);
-            }
-            info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
-            return info;
+            return base.RequestInfoSimple(storyUrl, "//h1", "//*[@id=\"updates\"]//th/a", this.HostUrl);
         }
 
         public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
@@ -121,19 +68,13 @@ namespace ComicDownloader.Engines
         }
         public override List<string> GetPages(string chapUrl)
         {
-            var html = NetworkHelper.GetHtml(chapUrl);
-
-            HtmlDocument htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-
-            var pages = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"pages\"]").SelectNodes("option");
-
-            List<string> results = new List<string>();
-            foreach (HtmlNode page in pages)
-            {
-                results.Add(HostUrl+page.Attributes["value"].Value);
-            }
-            return results;
+            return base.GetPagesSimple(chapUrl,
+                "//select[@id='pages']/option",
+                null,
+                this.HostUrl,
+                null,
+                "value"
+                );
         }
 
         public override List<StoryInfo> GetLastestUpdates()

@@ -7,14 +7,14 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("MangaReader", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "1364150669_folder_add")]
+    [Downloader("Manga Park", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "1364150669_folder_add")]
     public class MangaParkDownloader :  Downloader
     {
         public override string Logo
         {
             get
             {
-                return "http://s.mpcdn.net/img/logo.png";
+                return "http://h.s.mangapark.me/img/logo.png";
             }
         }
 
@@ -25,12 +25,12 @@ namespace ComicDownloader.Engines
 
         public override string ListStoryURL
         {
-            get { return "http://www.mangapark.com/manga"; }
+            get { return "http://mangapark.me/genre"; }
         }
 
         public override string HostUrl
         {
-            get { return "http://www.mangapark.com"; }
+            get { return "http://mangapark.me"; }
         }
 
         public override string StoryUrlPattern
@@ -40,68 +40,24 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            List<StoryInfo> results = base.ReloadChachedData();
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-
-                string html = NetworkHelper.GetHtml(this.ListStoryURL);
-                HtmlDocument htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(html);
-
-                var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"section\"]//li/a");
-
-                foreach (var node in nodes)
-                {
-                    StoryInfo info = new StoryInfo()
-                    {
-                        Url = HostUrl+node.Attributes["href"].Value,
-                        Name = node.InnerText.Trim().Trim()
-                    };
-                    results.Add(info);
-                }
-
-
-            }
-            this.SaveCache(results);
-            return results;
+            return base.GetListStoriesSimple("http://mangapark.me/genre/{0}",
+                "//ul/h3/a",
+                forceOnline,
+                this.HostUrl);
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
         {
-            var html = NetworkHelper.GetHtml(storyUrl);
-
-            HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlDocument();
-
-            htmlDoc.LoadHtml(html);
-
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//section[@class=\"manga\"]//h1");
-
-            StoryInfo info = new StoryInfo()
-            {
-                Url = storyUrl,
-                Name = nameNode.InnerText.Trim().Trim().Replace("Manga",""),
-            };
-
-            
-            var chapters = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"list\"]//li/span/a");
-            var links = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"list\"]//em/a[last()]");
-
-            for (int i = 0; i < chapters.Count; i++)
-            {
-            
-                ChapterInfo chap = new ChapterInfo()
-                {
-                    Name = chapters[i].ChildNodes[0].InnerText.Trim() + chapters[i].ChildNodes[1].InnerText.Trim(),
-                    Url = HostUrl + links[i].Attributes["href"].Value.Trim()
-                    //ChapId = ExtractID(chapter.InnerText.Trim())
-                };
-                chap.ChapId = ExtractID(chap.Name, "Ch.(\\d*)");
-                info.Chapters.Add(chap);
-            }
-            
-            info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
-            return info;
+            return base.RequestInfoSimple(storyUrl,
+                "//h1",
+                "//ul[@class='chapter']/li",
+                chapterExtract:delegate(HtmlNode node) {
+                    return new ChapterInfo()
+                    {
+                        Name = node.Descendants("A").First().InnerText + node.Descendants("A").First().NextSibling.InnerText,
+                        Url = this.HostUrl+node.Descendants("A").Last().Attributes["href"].Value
+                    };
+                });
         }
 
         public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
@@ -115,22 +71,7 @@ namespace ComicDownloader.Engines
         }
         public override List<string> GetPages(string chapUrl)
         {
-            var html = NetworkHelper.GetHtml(chapUrl);
-
-           // string patternUrl = chapUrl.Replace("/1/","{0}.html");
-            HtmlDocument htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-
-            var pages = htmlDoc.DocumentNode.SelectNodes("//a[@class=\"img-link\"]//img");
-
-            List<string> results = new List<string>();
-            foreach (HtmlNode page in pages)
-            {
-
-
-                results.Add(page.Attributes["src"].Value);
-            }
-            return results;
+            return base.GetPagesSimple(chapUrl, "//a[@class='img-link']/img");
         }
 
         public override List<StoryInfo> GetLastestUpdates()

@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("TenManga", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "1364078951_insert-object")]
+    [Downloader("Ten Manga", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "1364078951_insert-object")]
     public class TenMangaDownloader : Downloader
     {
         public override string Logo
@@ -40,119 +40,33 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-             List<StoryInfo> results = base.ReloadChachedData();
-             if (results == null || results.Count == 0 || forceOnline)
-             {
-                 results = new List<StoryInfo>();
-
-                 var html = NetworkHelper.GetHtml(this.ListStoryURL);
-
-                 HtmlDocument htmlDoc = new HtmlDocument();
-                 htmlDoc.LoadHtml(html);
-
-                 var catPages = htmlDoc.DocumentNode.SelectNodes("/html/body/div[2]//a[@href]");
-                 foreach (var item in catPages)
-                 {
-                     string urlPattern = item.Attributes["href"].Value.Replace(".html", "_{0}.html");
-
-
-                     int currentPage = 1;
-                     bool isStillHasPage = true;
-                     while (isStillHasPage)
-                     {
-                         string url = string.Format(urlPattern, currentPage);
-
-                         var phtml = NetworkHelper.GetHtml(url);
-                         HtmlDocument phtmlDoc = new HtmlDocument();
-                         phtmlDoc.LoadHtml(phtml);
-
-                         var nodes = phtmlDoc.DocumentNode.SelectNodes("//*[@class='intro']//h2/a");
-                         if (nodes != null && nodes.Count > 0)
-                         {
-                             currentPage++;
-                             foreach (var node in nodes)
-                             {
-                                 StoryInfo info = new StoryInfo()
-                                 {
-                                     Url =node.Attributes["href"].Value,
-                                     Name = node.InnerText.Trim().Trim()
-                                 };
-                                 results.Add(info);
-                             }
-                         }
-                         else
-                         {
-                             isStillHasPage = false;
-                         }
-
-                     }
-
-                 }
-             }
-            this.SaveCache(results);
-            return results;
+            return base.GetListStoriesSimple("http://www.tenmanga.com/ajax/lastest/page-{0}",
+                "//dd/a[position()=1]",
+                forceOnline
+                );
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
         {
-            var html = NetworkHelper.GetHtml(storyUrl);
-
-            HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlDocument();
-
-            htmlDoc.LoadHtml(html);
-            
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class=\"cmtList\"]//h1");
-
-            StoryInfo info = new StoryInfo()
-            {
-                Url = storyUrl,
-                Name = nameNode.InnerText.Trim().Trim().Replace("Manga",""),
-            };
-
-
-            var chapterNodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"chapter_list\"]//td[1]/a");
-            foreach (HtmlNode chapter in chapterNodes)
-            {
-                ChapterInfo chap = new ChapterInfo()
-                {
-                    Name = chapter.InnerText.Trim().Trim(),
-                    Url = HostUrl+ chapter.Attributes["href"].Value,
-                    //ChapId = ExtractID(chapter.InnerText.Trim())
-                };
-                chap.ChapId = ExtractID(chap.Name);
-                info.Chapters.Add(chap);
-            }
-            
-            info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
-            return info;
+            return base.RequestInfoSimple(storyUrl,
+                "//div[@class='book-info']//h1[1]/b",
+                "//ul[@class='chapter-box']/li/div[1]/a");
         }
 
         public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
         {
-            var html = NetworkHelper.GetHtml(pageUrl);
-            HtmlDocument htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-            var img = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"comicpic\"]");
-            pageUrl = img.Attributes["src"].Value;
-            return base.DownloadPage(pageUrl, renamePattern, folder, httpReferer);
+            var imgUrl = base.ExtractImage(pageUrl, "//div[@class='pic_box']//img");
+            return base.DownloadPage(imgUrl, renamePattern, folder, httpReferer);
         }
         public override List<string> GetPages(string chapUrl)
         {
-            var html = NetworkHelper.GetHtml(chapUrl);
-
-           // string patternUrl = chapUrl.Replace("/1/","{0}.html");
-            HtmlDocument htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-
-            var pages = htmlDoc.DocumentNode.SelectNodes("//*[@id='page']//option");
-
-            List<string> results = new List<string>();
-            foreach (HtmlNode page in pages)
-            {
-                string url = page.Attributes["value"].Value;
-                results.Add(url);
-            }
-            return results;
+            return base.GetPagesSimple(chapUrl,
+                "(//div[@class='read-head' and position()])[1]//select[@class='sl-page']/option",
+                null, 
+                null, 
+                null,
+                "value"
+                );
         }
 
         public override List<StoryInfo> GetLastestUpdates()

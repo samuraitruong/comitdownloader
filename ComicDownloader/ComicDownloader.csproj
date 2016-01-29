@@ -544,22 +544,26 @@
     <Compile Include="Engines\En\MangaPandaDownloader.cs" />
     <Compile Include="Engines\En\GoodMangaDownloader.cs" />
     <Compile Include="Engines\En\MangaInnDownloader.cs" />
-    <Compile Include="Engines\En\MangaTradersDownloader.cs" />
+    <Compile Include="Engines\En\MyMangaReaderDownloader.cs" />
+    <Compile Include="Engines\En\MyMangaOnlineDownloader.cs" />
+    <Compile Include="Engines\En\MangaSaurusDownloader.cs" />
+    <Compile Include="Engines\En\MangaKoiDownloader.cs" />
+    <Compile Include="Engines\En\TaaddDownloader.cs" />
+    <Compile Include="Engines\Offline\En\MangaTradersDownloader.cs" />
     <Compile Include="Engines\En\MangaVolumeDownloader.cs" />
-    <Compile Include="Engines\En\MangaWallDownloader.cs" />
-    <Compile Include="Engines\En\Manga4Downloader.cs" />
-    <Compile Include="Engines\En\MangaAccessDownloader.cs" />
-    <Compile Include="Engines\En\MangaAnimeaDownloader.cs" />
+    <Compile Include="Engines\Offline\En\MangaWallDownloader.cs" />
+    <Compile Include="Engines\Offline\En\Manga4Downloader.cs" />
+    <Compile Include="Engines\Offline\En\MangaAccessDownloader.cs" />
     <Compile Include="Engines\En\EatMangaDownloader.cs" />
     <Compile Include="Engines\En\MangagoDownloader.cs" />
-    <Compile Include="Engines\En\JPMangaDownloader.cs" />
-    <Compile Include="Engines\En\MangaChromeDownloader.cs" />
-    <Compile Include="Engines\En\KissMangaDownloader.cs" />
-    <Compile Include="Engines\En\OneMangeDownloader.cs" />
+    <Compile Include="Engines\JP\JPMangaDownloader.cs" />
+    <Compile Include="Engines\En\MyMangaDownloader.cs" />
+    <Compile Include="Engines\Offline\En\KissMangaDownloader.cs" />
     <Compile Include="Engines\En\TenMangaDownloader.cs" />
     <Compile Include="Engines\En\MangaParkDownloader.cs" />
     <Compile Include="Engines\En\MangaHereDownloader.cs" />
     <Compile Include="Engines\En\UnixMangaDownloader.cs" />
+    <Compile Include="Engines\Offline\En\OneMangeDownloader.cs" />
     <Compile Include="Engines\Proxies\BlogTruyenDownloaderProxy.cs" />
     <Compile Include="Engines\Vn\BlogTruyenHayDownloader.cs" />
     <Compile Include="Engines\Vn\UpTruyenDownloader.cs" />
@@ -620,6 +624,12 @@
     </Compile>
     <Compile Include="Forms\ChapterReader.Designer.cs">
       <DependentUpon>ChapterReader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ModernUIForm.cs">
       <SubType>Form</SubType>
@@ -1341,6 +1351,9 @@
     <EmbeddedResource Include="Forms\ChapterReader.resx">
       <DependentUpon>ChapterReader.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ModernUIForm.resx">
       <DependentUpon>ModernUIForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1766,7 +1779,6 @@
     <Folder Include="3rd\ObjectListView\obj\Debug\TempPE\" />
     <Folder Include="3rd\ObjectListView\obj\Release\TempPE\" />
     <Folder Include="3rd\XPTable\doc\" />
-    <Folder Include="Engines\JP\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

@@ -8,10 +8,13 @@ using System.IO;
 using System.Net;
 using ComicDownloader.Properties;
 using HtmlAgilityPack;
+using System.Runtime.InteropServices;
 
 namespace ComicDownloader.Engines
 {
     public delegate string ResolveImageOnPage(string pageUrl);
+    public delegate void AfterCookieSet();
+
 
     public abstract class Downloader
     {
@@ -19,6 +22,79 @@ namespace ComicDownloader.Engines
         public abstract string Name { get; }
         public abstract  string ListStoryURL { get;  }
         public abstract string HostUrl { get; }
+        public virtual bool InitCookie()
+        {
+            return false;
+        }
+        private CookieContainer Cookies = null;
+
+        public event AfterCookieSet AfterCookieSet;
+
+        [DllImport("wininet.dll", SetLastError = true)]
+        public static extern bool InternetGetCookieEx(
+        string url,
+        string cookieName,
+        StringBuilder cookieData,
+        ref int size,
+        Int32 dwFlags,
+        IntPtr lpReserved);
+
+        private const Int32 InternetCookieHttponly = 0x2000;
+
+        [DllImport("wininet.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        static extern bool InternetGetCookieEx(string pchURL, string pchCookieName, StringBuilder pchCookieData, ref uint pcchCookieData, int dwFlags, IntPtr lpReserved);
+       
+        /// <summary>
+        /// Gets the URI cookie container.
+        /// </summary>
+        /// <param name="uri">The URI.</param>
+        /// <returns></returns>
+        public static CookieContainer GetUriCookieContainer(Uri uri)
+        {
+            CookieContainer cookies = null;
+            // Determine the size of the cookie
+            int datasize = 8192 * 16;
+            StringBuilder cookieData = new StringBuilder(datasize);
+            if (!InternetGetCookieEx(uri.ToString(), null, cookieData, ref datasize, InternetCookieHttponly, IntPtr.Zero))
+            {
+                if (datasize < 0)
+                    return null;
+                // Allocate stringbuilder large enough to hold the cookie
+                cookieData = new StringBuilder(datasize);
+                if (!InternetGetCookieEx(
+                    uri.ToString(),
+                    null, cookieData,
+                    ref datasize,
+                    InternetCookieHttponly,
+                    IntPtr.Zero))
+                    return null;
+            }
+            if (cookieData.Length > 0)
+            {
+                cookies = new CookieContainer();
+                cookies.SetCookies(uri, cookieData.ToString().Replace(';', ','));
+            }
+            return cookies;
+        }
+
+        //this function to create a web browser/load cookies from browser
+        public virtual void EnsureCookies()
+        {
+            //var webBrowser1 = new System.Windows.Forms.WebBrowser();
+            //webBrowser1.Navigated += WebBrowser1_Navigated;
+            //webBrowser1.Navigate(this.HostUrl);
+
+        }
+
+        //private void WebBrowser1_Navigated(object sender, System.Windows.Forms.WebBrowserNavigatedEventArgs e)
+        //{
+        //    //this.Cookies = GetUriCookieContainer(new Uri(this.HostUrl));
+        //    if(AfterCookieSet != null)
+        //    {
+        //        AfterCookieSet();
+        //    }
+        //}
+
         public HtmlDocument GetParser(string url)
         {
             if (url.StartsWith("http"))
@@ -91,7 +167,28 @@ namespace ComicDownloader.Engines
             return info;
         }
 
-        public List<StoryInfo> GetListStoriesUnknowPages(string startUrl, string matchPattern, bool forceOnline, string pagingPattern, Func<HtmlNode, string> pagingExtract= null, string appendHost = "", Func<HtmlNode, StoryInfo> convertFunc = null, Func<string, HtmlDocument, List<StoryInfo>> customParser = null, bool singleListPage = false)
+        internal List<string> GetPagesRegex(string chapUrl, string pattern, string hostExpanded="", Func<Match, string> customMatch=null)
+        {
+            var html = NetworkHelper.GetHtml(chapUrl);
+            var matches = Regex.Matches(html, pattern);
+            List<string> pages = new List<string>();
+
+            foreach (Match match in matches)
+            {
+                if (customMatch != null)
+                {
+                    pages.Add(customMatch(match));
+                }
+                else
+                {
+                    pages.Add(match.Groups[1].Value);
+                }
+            }
+
+            return pages;
+        }
+
+        public List<StoryInfo> GetListStoriesUnknowPages(string startUrl, string matchPattern, bool forceOnline, string pagingPattern, Func<HtmlNode, string> pagingExtract= null, string appendHost = "", Func<HtmlNode, StoryInfo> convertFunc = null, Func<string, HtmlDocument, List<StoryInfo>> customParser = null, bool singleListPage = false, Func<string,HtmlDocument, List<String>> allLinksExtract=null)
         {
             Queue<string> queue = new Queue<string>();
             queue.Enqueue(startUrl);
@@ -111,14 +208,35 @@ namespace ComicDownloader.Engines
                     htmlDoc.LoadHtml(html);
                     var isStillHasPage = true;
                     var nodes = htmlDoc.DocumentNode.SelectNodes(matchPattern);
-                    var paging = htmlDoc.DocumentNode.SelectNodes(pagingPattern);
-                    if(paging!= null)
+                    var links = new List<String>();
+                    #region grab links/paging
+                    if (allLinksExtract != null)
                     {
-                        foreach (var p in paging)
+                        links = allLinksExtract(html, htmlDoc);
+                    }
+                    else
+                    {
+                        var paging =  htmlDoc.DocumentNode.SelectNodes(pagingPattern);
+                        if (paging != null)
                         {
-                            var pageUrl = p.Attributes["href"].Value;
+                            foreach (var p in paging)
+                            {
+                                var pageUrl = appendHost + p.Attributes["href"].Value;
+                                links.Add(pageUrl);
+                            }
                         }
                     }
+
+                    foreach (var item in links)
+                    { 
+                        if (!alllinks.Contains(item))
+                        {
+                            alllinks.Add(item);
+                            queue.Enqueue(item);
+                        }
+                    }
+                    #endregion
+
                     if (nodes != null && nodes.Count > 0)
                     {
                         currentPage++;
@@ -170,9 +288,19 @@ namespace ComicDownloader.Engines
             return results;
         }
 
-        public List<StoryInfo> GetListStoriesSimple(string urlPattern,string matchPattern, bool forceOnline, string appendHost="", Func<HtmlNode, StoryInfo> convertFunc = null,   Func<string, HtmlDocument, List<StoryInfo>> customParser= null, bool singleListPage= false)
+        internal string ExtractImage(string pageUrl, string pattern)
         {
-            
+            var html = NetworkHelper.GetHtml(pageUrl);
+            HtmlDocument htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var img = htmlDoc.DocumentNode.SelectSingleNode(pattern);
+            var imgUrl = img.Attributes["src"].Value;
+            return imgUrl;
+
+        }
+
+        public List<StoryInfo> GetListStoriesSimple(string urlPattern,string matchPattern, bool forceOnline, string appendHost="", Func<HtmlNode, StoryInfo> convertFunc = null,   Func<string, HtmlDocument, List<StoryInfo>> customParser= null, bool singleListPage= false)
+        {            
             List<StoryInfo> results = this.ReloadChachedData();
 
             if (results == null || results.Count == 0 || forceOnline)
@@ -183,7 +311,7 @@ namespace ComicDownloader.Engines
                 while (isStillHasPage)
                 {   
                     string url = string.Format(urlPattern, currentPage);
-                    string html = NetworkHelper.GetHtml(url);
+                    string html = NetworkHelper.GetHtml(url, this.Cookies);
                     HtmlDocument htmlDoc = new HtmlDocument();
                     htmlDoc.LoadHtml(html);
 
@@ -465,5 +593,11 @@ namespace ComicDownloader.Engines
         //    //return ReloadChachedData();
 
         //}
+
+        public Downloader()
+        {
+            //this.InitCookie();
+            this.Cookies = GetUriCookieContainer(new Uri(this.HostUrl));
+        }
     }
 }

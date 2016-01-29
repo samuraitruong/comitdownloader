@@ -5,12 +5,31 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Threading;
+using System.Runtime.InteropServices;
 
 namespace ComicDownloader.Engines
 {
     public class NetworkHelper
     {
-        public static string GetHtml(string url)
+        [DllImport("wininet.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        static extern bool InternetGetCookieEx(string pchURL, string pchCookieName, StringBuilder pchCookieData, ref uint pcchCookieData, int dwFlags, IntPtr lpReserved);
+        const int INTERNET_COOKIE_HTTPONLY = 0x00002000;
+        public static string GetGlobalCookies(string uri)
+        {
+            uint datasize = 1024;
+            StringBuilder cookieData = new StringBuilder((int)datasize);
+            if (InternetGetCookieEx(uri, null, cookieData, ref datasize, INTERNET_COOKIE_HTTPONLY, IntPtr.Zero)
+            && cookieData.Length > 0)
+            {
+                return cookieData.ToString();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static string GetHtml(string url, CookieContainer cookies = null)
         {
             try
             {
@@ -22,7 +41,17 @@ namespace ComicDownloader.Engines
                     myHttpWebRequest.Method = "GET";
                     myHttpWebRequest.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
                     myHttpWebRequest.AutomaticDecompression = DecompressionMethods.GZip;//Or DecompressionMethods.Deflate
-
+                    if(cookies != null)
+                    {
+                        myHttpWebRequest.CookieContainer = cookies;
+                    }
+                    else
+                    {
+                        var uri = new Uri(url);
+                        myHttpWebRequest.CookieContainer = new CookieContainer();
+                        string cookiesss = GetGlobalCookies(uri.AbsoluteUri);
+                        myHttpWebRequest.CookieContainer.SetCookies(new Uri(uri.AbsoluteUri), GetGlobalCookies(uri.AbsoluteUri));
+                    }
                     // Set the user agent as if we were a web browser
                     myHttpWebRequest.UserAgent = @"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.4) Gecko/20060508 Firefox/1.5.0.4";
 

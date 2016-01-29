@@ -8,30 +8,31 @@ using System.Collections;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Batoto", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
+    //Offline - require authenticated to get chappter list
+    [Downloader("Batoto", Offline =true, MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
     public class BatotoDownloader :  Downloader
     {
         public override string Logo
         {
             get
             {
-                return "http://www.batoto.net/forums/public/style_images/Deluxe_Images/logo.png";
+                return "https://bato.to/forums/public/style_images/11_4_logo.png";
             }
         }
 
         public override string Name
         {
-            get { return "[Batoto.NET] - "; }
+            get { return "[Bato.to] - "; }
         }
 
         public override string ListStoryURL
         {
-            get { return "http://www.batoto.net/search"; }
+            get { return "http://bato.to/search"; }
         }
 
         public override string HostUrl
         {
-            get { return "http://www.batoto.net"; }
+            get { return "http://www.bato.to"; }
         }
 
         public override string StoryUrlPattern
@@ -41,78 +42,17 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            string urlPattern = this.ListStoryURL + "?p={0}";
-
-            List<StoryInfo> results = base.ReloadChachedData();
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-                int currentPage = 1;
-                bool isStillHasPage = true;
-                while (isStillHasPage)
-                {
-                    string url = string.Format(urlPattern, currentPage);
-
-                    string html = NetworkHelper.GetHtml(url);
-                    HtmlDocument htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(html);
-
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"comic_search_results\"]//td[1]/strong/a");
-                    if (nodes != null && nodes.Count > 0)
-                    {
-                        currentPage++;
-                        foreach (var node in nodes)
-                        {
-                            StoryInfo info = new StoryInfo()
-                            {
-                                Url = node.Attributes["href"].Value,
-                                Name = node.ChildNodes[1].InnerText.Trim().Trim()
-                            };
-                            results.Add(info);
-                        }
-                    }
-                    else
-                    {
-                        isStillHasPage = false;
-                    }
-
-                }
-
-            }
-            this.SaveCache(results);
-            return results;
+            return base.GetListStoriesSimple("http://bato.to/search_ajax?&p={0}",
+                "//table//tr/td[1]/strong/a",
+                forceOnline);
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
         {
-            var html = NetworkHelper.GetHtml(storyUrl);
-
-            HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlDocument();
-
-            htmlDoc.LoadHtml(html);
-
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class=\"ipsBox_withphoto\"]//h1");
-
-            StoryInfo info = new StoryInfo()
-            {
-                Url = storyUrl,
-                Name = nameNode.InnerText.Trim().Trim(),
-            };
-
-            var chapterNodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"ipb_table chapters_list\"]//td[1]/a");
-
-            foreach (HtmlNode chapter in chapterNodes)
-            {
-                ChapterInfo chap = new ChapterInfo()
-                {
-                    Name = chapter.ChildNodes[1].InnerText.Trim().Trim(),
-                    Url =  chapter.Attributes["href"].Value,
-                    ChapId = ExtractID(chapter.InnerText.Trim())
-                };
-                info.Chapters.Add(chap);
-            }
-            info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
-            return info;
+            return base.RequestInfoSimple(storyUrl,
+                "//h1",
+                ""
+                );
         }
 
         public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)

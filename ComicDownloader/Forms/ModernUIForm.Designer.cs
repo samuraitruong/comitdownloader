@@ -37,22 +37,23 @@ namespace ComicDownloader.Forms
             this.textColumn3 = new XPTable.Models.TextColumn();
             this.lnkAbout = new MetroFramework.Controls.MetroLink();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.tlQueueDownload = new MetroFramework.Controls.MetroTile();
+            this.tlSettings = new MetroFramework.Controls.MetroTile();
+            this.tlLastestUpdate = new MetroFramework.Controls.MetroTile();
             this.metroStyleExtender1 = new MetroFramework.Components.MetroStyleExtender(this.components);
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
-            this.tlQueueDownload = new MetroFramework.Controls.MetroTile();
-            this.metroTile3 = new MetroFramework.Controls.MetroTile();
-            this.tlSettings = new MetroFramework.Controls.MetroTile();
-            this.lblStatus = new MetroFramework.Controls.MetroLabel();
-            this.updateProgressBar = new MetroFramework.Controls.MetroProgressBar();
-            this.metroTile1 = new MetroFramework.Controls.MetroTile();
-            this.metroTile6 = new MetroFramework.Controls.MetroTile();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
-            this.tlNewDownload = new MetroFramework.Controls.MetroTile();
-            this.tlLastestUpdate = new MetroFramework.Controls.MetroTile();
-            this.metroTile2 = new MetroFramework.Controls.MetroTile();
-            this.txtKeyword = new MetroFramework.Controls.MetroTextBox();
             this.bntSearch = new MetroFramework.Controls.MetroButton();
+            this.txtKeyword = new MetroFramework.Controls.MetroTextBox();
+            this.metroTile2 = new MetroFramework.Controls.MetroTile();
+            this.tlNewDownload = new MetroFramework.Controls.MetroTile();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.metroTile6 = new MetroFramework.Controls.MetroTile();
+            this.metroTile1 = new MetroFramework.Controls.MetroTile();
+            this.updateProgressBar = new MetroFramework.Controls.MetroProgressBar();
+            this.lblStatus = new MetroFramework.Controls.MetroLabel();
+            this.metroTile3 = new MetroFramework.Controls.MetroTile();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
+            this.button1 = new System.Windows.Forms.Button();
             this.metroTabPage1.SuspendLayout();
             this.metroTabControl1.SuspendLayout();
             this.SuspendLayout();
@@ -73,9 +74,68 @@ namespace ComicDownloader.Forms
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
+            // tlQueueDownload
+            // 
+            this.tlQueueDownload.ActiveControl = null;
+            this.tlQueueDownload.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tlQueueDownload.Location = new System.Drawing.Point(599, 14);
+            this.tlQueueDownload.Name = "tlQueueDownload";
+            this.tlQueueDownload.Size = new System.Drawing.Size(150, 150);
+            this.tlQueueDownload.Style = MetroFramework.MetroColorStyle.Green;
+            this.tlQueueDownload.TabIndex = 7;
+            this.tlQueueDownload.Text = "Task Scheduler";
+            this.tlQueueDownload.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.tlQueueDownload.TileImage = global::ComicDownloader.Properties.Resources._1365926714_Document_scheduled_tasks_icon;
+            this.tlQueueDownload.TileImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.tlQueueDownload.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.tlQueueDownload.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.metroToolTip1.SetToolTip(this.tlQueueDownload, "View Download schedule");
+            this.tlQueueDownload.UseTileImage = true;
+            this.tlQueueDownload.Click += new System.EventHandler(this.QueueDownload_Click);
+            // 
+            // tlSettings
+            // 
+            this.tlSettings.ActiveControl = null;
+            this.tlSettings.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tlSettings.Location = new System.Drawing.Point(411, 14);
+            this.tlSettings.Name = "tlSettings";
+            this.tlSettings.Size = new System.Drawing.Size(150, 150);
+            this.tlSettings.Style = MetroFramework.MetroColorStyle.Lime;
+            this.tlSettings.TabIndex = 9;
+            this.tlSettings.Text = "Option";
+            this.tlSettings.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.tlSettings.TileImage = global::ComicDownloader.Properties.Resources._1365927134_cog_icon_2_48x48;
+            this.tlSettings.TileImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.tlSettings.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.tlSettings.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.metroToolTip1.SetToolTip(this.tlSettings, "Change Download settings");
+            this.tlSettings.UseTileImage = true;
+            this.tlSettings.Click += new System.EventHandler(this.tlSetting_Click);
+            // 
+            // tlLastestUpdate
+            // 
+            this.tlLastestUpdate.ActiveControl = null;
+            this.tlLastestUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tlLastestUpdate.Location = new System.Drawing.Point(20, 187);
+            this.tlLastestUpdate.Name = "tlLastestUpdate";
+            this.tlLastestUpdate.Size = new System.Drawing.Size(150, 150);
+            this.tlLastestUpdate.Style = MetroFramework.MetroColorStyle.Magenta;
+            this.tlLastestUpdate.TabIndex = 10;
+            this.tlLastestUpdate.Text = "Update";
+            this.tlLastestUpdate.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.tlLastestUpdate.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tlLastestUpdate.TileImage = global::ComicDownloader.Properties.Resources._1365927859_system_software_update;
+            this.tlLastestUpdate.TileImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.tlLastestUpdate.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.tlLastestUpdate.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.metroToolTip1.SetToolTip(this.tlLastestUpdate, "View lastest update from providers");
+            this.tlLastestUpdate.UseTileImage = true;
+            this.tlLastestUpdate.Click += new System.EventHandler(this.tlLastestUpdate_Click);
+            // 
             // metroTabPage1
             // 
             this.metroTabPage1.BackColor = System.Drawing.Color.White;
+            this.metroTabPage1.Controls.Add(this.button1);
             this.metroTabPage1.Controls.Add(this.bntSearch);
             this.metroTabPage1.Controls.Add(this.txtKeyword);
             this.metroTabPage1.Controls.Add(this.metroTile2);
@@ -102,119 +162,45 @@ namespace ComicDownloader.Forms
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
             // 
-            // tlQueueDownload
+            // bntSearch
             // 
-            this.tlQueueDownload.ActiveControl = null;
-            this.tlQueueDownload.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tlQueueDownload.Location = new System.Drawing.Point(599, 14);
-            this.tlQueueDownload.Name = "tlQueueDownload";
-            this.tlQueueDownload.Size = new System.Drawing.Size(150, 150);
-            this.tlQueueDownload.Style = MetroFramework.MetroColorStyle.Green;
-            this.tlQueueDownload.TabIndex = 7;
-            this.tlQueueDownload.Text = "Task Scheduler";
-            this.tlQueueDownload.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.tlQueueDownload.TileImage = global::ComicDownloader.Properties.Resources._1365926714_Document_scheduled_tasks_icon;
-            this.tlQueueDownload.TileImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.tlQueueDownload.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
-            this.tlQueueDownload.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
-            this.metroToolTip1.SetToolTip(this.tlQueueDownload, "View Download schedule");
-            this.tlQueueDownload.UseTileImage = true;
-            this.tlQueueDownload.Click += new System.EventHandler(this.QueueDownload_Click);
+            this.bntSearch.Location = new System.Drawing.Point(619, 406);
+            this.bntSearch.Name = "bntSearch";
+            this.bntSearch.Size = new System.Drawing.Size(130, 38);
+            this.bntSearch.Style = MetroFramework.MetroColorStyle.Purple;
+            this.bntSearch.TabIndex = 13;
+            this.bntSearch.Text = "Search";
+            this.bntSearch.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.bntSearch.Click += new System.EventHandler(this.bntSearch_Click);
             // 
-            // metroTile3
+            // txtKeyword
             // 
-            this.metroTile3.ActiveControl = null;
-            this.metroTile3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.metroTile3.Location = new System.Drawing.Point(211, 14);
-            this.metroTile3.Name = "metroTile3";
-            this.metroTile3.Size = new System.Drawing.Size(150, 150);
-            this.metroTile3.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroTile3.TabIndex = 8;
-            this.metroTile3.Text = "Search";
-            this.metroTile3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.metroTile3.TileImage = global::ComicDownloader.Properties.Resources._1365926986_document_search;
-            this.metroTile3.TileImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.metroTile3.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
-            this.metroTile3.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
-            this.metroTile3.UseTileImage = true;
-            this.metroTile3.Click += new System.EventHandler(this.metroTile3_Click);
+            this.txtKeyword.Location = new System.Drawing.Point(20, 421);
+            this.txtKeyword.MaxLength = 32767;
+            this.txtKeyword.Name = "txtKeyword";
+            this.txtKeyword.PasswordChar = '\0';
+            this.txtKeyword.PromptText = "Enter manga title";
+            this.txtKeyword.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtKeyword.SelectedText = "";
+            this.txtKeyword.Size = new System.Drawing.Size(578, 23);
+            this.txtKeyword.TabIndex = 12;
+            this.txtKeyword.Text = "Dragon Ball";
+            this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
             // 
-            // tlSettings
+            // metroTile2
             // 
-            this.tlSettings.ActiveControl = null;
-            this.tlSettings.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tlSettings.Location = new System.Drawing.Point(411, 14);
-            this.tlSettings.Name = "tlSettings";
-            this.tlSettings.Size = new System.Drawing.Size(150, 150);
-            this.tlSettings.Style = MetroFramework.MetroColorStyle.Lime;
-            this.tlSettings.TabIndex = 9;
-            this.tlSettings.Text = "Option";
-            this.tlSettings.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.tlSettings.TileImage = global::ComicDownloader.Properties.Resources._1365927134_cog_icon_2_48x48;
-            this.tlSettings.TileImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.tlSettings.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
-            this.tlSettings.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
-            this.metroToolTip1.SetToolTip(this.tlSettings, "Change Download settings");
-            this.tlSettings.UseTileImage = true;
-            this.tlSettings.Click += new System.EventHandler(this.tlSetting_Click);
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(20, 398);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(118, 19);
-            this.lblStatus.TabIndex = 5;
-            this.lblStatus.Text = "Update database...";
-            // 
-            // updateProgressBar
-            // 
-            this.updateProgressBar.Location = new System.Drawing.Point(20, 357);
-            this.updateProgressBar.Name = "updateProgressBar";
-            this.updateProgressBar.Size = new System.Drawing.Size(578, 38);
-            this.updateProgressBar.TabIndex = 4;
-            // 
-            // metroTile1
-            // 
-            this.metroTile1.ActiveControl = null;
-            this.metroTile1.Location = new System.Drawing.Point(640, 187);
-            this.metroTile1.Name = "metroTile1";
-            this.metroTile1.Size = new System.Drawing.Size(150, 84);
-            this.metroTile1.TabIndex = 14;
-            this.metroTile1.Text = "Check of Update";
-            this.metroTile1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.metroTile1.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
-            this.metroTile1.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Regular;
-            this.metroTile1.Visible = false;
-            this.metroTile1.Click += new System.EventHandler(this.metroTile1_Click_1);
-            // 
-            // metroTile6
-            // 
-            this.metroTile6.ActiveControl = null;
-            this.metroTile6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.metroTile6.Location = new System.Drawing.Point(211, 187);
-            this.metroTile6.Name = "metroTile6";
-            this.metroTile6.Size = new System.Drawing.Size(150, 150);
-            this.metroTile6.Style = MetroFramework.MetroColorStyle.Red;
-            this.metroTile6.TabIndex = 11;
-            this.metroTile6.Text = "Product Page";
-            this.metroTile6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.metroTile6.TileImage = global::ComicDownloader.Properties.Resources._1365927946_social_balloon_14;
-            this.metroTile6.TileImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.metroTile6.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
-            this.metroTile6.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
-            this.metroTile6.UseTileImage = true;
-            // 
-            // metroButton1
-            // 
-            this.metroButton1.Location = new System.Drawing.Point(619, 357);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(130, 38);
-            this.metroButton1.Style = MetroFramework.MetroColorStyle.Magenta;
-            this.metroButton1.TabIndex = 6;
-            this.metroButton1.Text = "Update Database";
-            this.metroButton1.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
+            this.metroTile2.ActiveControl = null;
+            this.metroTile2.Location = new System.Drawing.Point(411, 187);
+            this.metroTile2.Name = "metroTile2";
+            this.metroTile2.Size = new System.Drawing.Size(211, 150);
+            this.metroTile2.TabIndex = 15;
+            this.metroTile2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.metroTile2.TileImage = global::ComicDownloader.Properties.Resources._1366530835_paypal_curved;
+            this.metroTile2.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.metroTile2.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.metroTile2.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.metroTile2.UseTileImage = true;
+            this.metroTile2.Click += new System.EventHandler(this.metroTile2_Click);
             // 
             // tlNewDownload
             // 
@@ -236,65 +222,81 @@ namespace ComicDownloader.Forms
             this.tlNewDownload.UseTileImage = true;
             this.tlNewDownload.Click += new System.EventHandler(this.metroTile1_Click);
             // 
-            // tlLastestUpdate
+            // metroButton1
             // 
-            this.tlLastestUpdate.ActiveControl = null;
-            this.tlLastestUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tlLastestUpdate.Location = new System.Drawing.Point(20, 187);
-            this.tlLastestUpdate.Name = "tlLastestUpdate";
-            this.tlLastestUpdate.Size = new System.Drawing.Size(150, 150);
-            this.tlLastestUpdate.Style = MetroFramework.MetroColorStyle.Magenta;
-            this.tlLastestUpdate.TabIndex = 10;
-            this.tlLastestUpdate.Text = "Update";
-            this.tlLastestUpdate.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.tlLastestUpdate.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.tlLastestUpdate.TileImage = global::ComicDownloader.Properties.Resources._1365927859_system_software_update;
-            this.tlLastestUpdate.TileImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.tlLastestUpdate.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
-            this.tlLastestUpdate.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
-            this.metroToolTip1.SetToolTip(this.tlLastestUpdate, "View lastest update from providers");
-            this.tlLastestUpdate.UseTileImage = true;
-            this.tlLastestUpdate.Click += new System.EventHandler(this.tlLastestUpdate_Click);
+            this.metroButton1.Location = new System.Drawing.Point(619, 357);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(130, 38);
+            this.metroButton1.Style = MetroFramework.MetroColorStyle.Magenta;
+            this.metroButton1.TabIndex = 6;
+            this.metroButton1.Text = "Update Database";
+            this.metroButton1.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
             // 
-            // metroTile2
+            // metroTile6
             // 
-            this.metroTile2.ActiveControl = null;
-            this.metroTile2.Location = new System.Drawing.Point(411, 187);
-            this.metroTile2.Name = "metroTile2";
-            this.metroTile2.Size = new System.Drawing.Size(211, 150);
-            this.metroTile2.TabIndex = 15;
-            this.metroTile2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.metroTile2.TileImage = global::ComicDownloader.Properties.Resources._1366530835_paypal_curved;
-            this.metroTile2.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.metroTile2.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
-            this.metroTile2.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
-            this.metroTile2.UseTileImage = true;
-            this.metroTile2.Click += new System.EventHandler(this.metroTile2_Click);
+            this.metroTile6.ActiveControl = null;
+            this.metroTile6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroTile6.Location = new System.Drawing.Point(211, 187);
+            this.metroTile6.Name = "metroTile6";
+            this.metroTile6.Size = new System.Drawing.Size(150, 150);
+            this.metroTile6.Style = MetroFramework.MetroColorStyle.Red;
+            this.metroTile6.TabIndex = 11;
+            this.metroTile6.Text = "Product Page";
+            this.metroTile6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.metroTile6.TileImage = global::ComicDownloader.Properties.Resources._1365927946_social_balloon_14;
+            this.metroTile6.TileImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.metroTile6.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.metroTile6.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.metroTile6.UseTileImage = true;
             // 
-            // txtKeyword
+            // metroTile1
             // 
-            this.txtKeyword.Location = new System.Drawing.Point(20, 421);
-            this.txtKeyword.MaxLength = 32767;
-            this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.PasswordChar = '\0';
-            this.txtKeyword.PromptText = "Enter manga title";
-            this.txtKeyword.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtKeyword.SelectedText = "";
-            this.txtKeyword.Size = new System.Drawing.Size(578, 23);
-            this.txtKeyword.TabIndex = 12;
-            this.txtKeyword.Text = "Dragon Ball";
-            this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
+            this.metroTile1.ActiveControl = null;
+            this.metroTile1.Location = new System.Drawing.Point(640, 187);
+            this.metroTile1.Name = "metroTile1";
+            this.metroTile1.Size = new System.Drawing.Size(150, 84);
+            this.metroTile1.TabIndex = 14;
+            this.metroTile1.Text = "Check of Update";
+            this.metroTile1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.metroTile1.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.metroTile1.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Regular;
+            this.metroTile1.Visible = false;
+            this.metroTile1.Click += new System.EventHandler(this.metroTile1_Click_1);
             // 
-            // bntSearch
+            // updateProgressBar
             // 
-            this.bntSearch.Location = new System.Drawing.Point(619, 406);
-            this.bntSearch.Name = "bntSearch";
-            this.bntSearch.Size = new System.Drawing.Size(130, 38);
-            this.bntSearch.Style = MetroFramework.MetroColorStyle.Purple;
-            this.bntSearch.TabIndex = 13;
-            this.bntSearch.Text = "Search";
-            this.bntSearch.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.bntSearch.Click += new System.EventHandler(this.bntSearch_Click);
+            this.updateProgressBar.Location = new System.Drawing.Point(20, 357);
+            this.updateProgressBar.Name = "updateProgressBar";
+            this.updateProgressBar.Size = new System.Drawing.Size(578, 38);
+            this.updateProgressBar.TabIndex = 4;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(20, 398);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(118, 19);
+            this.lblStatus.TabIndex = 5;
+            this.lblStatus.Text = "Update database...";
+            // 
+            // metroTile3
+            // 
+            this.metroTile3.ActiveControl = null;
+            this.metroTile3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroTile3.Location = new System.Drawing.Point(211, 14);
+            this.metroTile3.Name = "metroTile3";
+            this.metroTile3.Size = new System.Drawing.Size(150, 150);
+            this.metroTile3.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTile3.TabIndex = 8;
+            this.metroTile3.Text = "Search";
+            this.metroTile3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.metroTile3.TileImage = global::ComicDownloader.Properties.Resources._1365926986_document_search;
+            this.metroTile3.TileImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.metroTile3.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.metroTile3.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.metroTile3.UseTileImage = true;
+            this.metroTile3.Click += new System.EventHandler(this.metroTile3_Click);
             // 
             // metroTabControl1
             // 
@@ -307,6 +309,16 @@ namespace ComicDownloader.Forms
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.metroTabControl1_Selected);
             this.metroTabControl1.TabIndexChanged += new System.EventHandler(this.metroTabControl1_TabIndexChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(669, 287);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ModernUIForm
             // 
@@ -352,6 +364,7 @@ namespace ComicDownloader.Forms
         private MetroFramework.Controls.MetroTile metroTile3;
         private MetroFramework.Controls.MetroTile tlQueueDownload;
         private MetroFramework.Controls.MetroTabControl metroTabControl1;
+        private System.Windows.Forms.Button button1;
 
 
         //private MetroFramework.Controls.MetroTile metroTile2;
