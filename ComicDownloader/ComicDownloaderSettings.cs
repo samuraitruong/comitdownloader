@@ -61,9 +61,14 @@ namespace ComicDownloader
         public bool UseMultiThreadToDownloadChapter { get; set; }
         [CategoryAttribute("Download settings")]
         public int Threads { get; set; }
+
+        [CategoryAttribute("Download settings")]
+        public int MaxThreadCrawlList { get; set; }
+
         public ComicDownloaderSettings()
         {
             SearchThreads = 10;
+            MaxThreadCrawlList = 20;
             Threads = 8;
             ConcurrentPageDownloadThreads = 12;
             CreatePDF = true;

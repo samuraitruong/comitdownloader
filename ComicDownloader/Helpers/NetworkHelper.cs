@@ -48,9 +48,12 @@ namespace ComicDownloader.Engines
                     else
                     {
                         var uri = new Uri(url);
-                        myHttpWebRequest.CookieContainer = new CookieContainer();
                         string cookiesss = GetGlobalCookies(uri.AbsoluteUri);
-                        myHttpWebRequest.CookieContainer.SetCookies(new Uri(uri.AbsoluteUri), GetGlobalCookies(uri.AbsoluteUri));
+                        if(cookiesss!= null) {
+                            myHttpWebRequest.CookieContainer = new CookieContainer();
+                            myHttpWebRequest.CookieContainer.SetCookies(new Uri(uri.AbsoluteUri), GetGlobalCookies(uri.AbsoluteUri));
+
+                        }
                     }
                     // Set the user agent as if we were a web browser
                     myHttpWebRequest.UserAgent = @"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.4) Gecko/20060508 Firefox/1.5.0.4";
