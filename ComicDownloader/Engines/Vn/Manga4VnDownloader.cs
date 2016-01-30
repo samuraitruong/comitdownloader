@@ -38,7 +38,7 @@ namespace ComicDownloader.Engines
         {
             string urlPattern = "http://manga4vn.com/truyen-moi-dang/page/{0}";
 
-            List<StoryInfo> results = base.ReloadChachedData();
+            List<StoryInfo> results = base.ReloadChachedData().Stories;
 
             if (results == null || results.Count == 0 || forceOnline)
             {

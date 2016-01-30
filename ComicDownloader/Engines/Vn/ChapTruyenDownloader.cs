@@ -46,7 +46,7 @@ namespace ComicDownloader.Engines
          
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            List<StoryInfo> results = ReloadChachedData();
+            List<StoryInfo> results = ReloadChachedData().Stories;
             if (results == null || results.Count == 0 || forceOnline)
             {
                 results = new List<StoryInfo>();

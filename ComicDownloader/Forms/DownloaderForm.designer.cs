@@ -74,11 +74,13 @@ namespace ComicDownloader
             this.btnExitThread = new System.Windows.Forms.Button();
             this.bntPauseThread = new System.Windows.Forms.Button();
             this.groupInfo = new System.Windows.Forms.GroupBox();
+            this.ddlFilter = new System.Windows.Forms.ComboBox();
             this.loading = new MRG.Controls.UI.LoadingCircle();
             this.bntRefresh = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.bntInfo = new System.Windows.Forms.Button();
-            this.ddlList = new System.Windows.Forms.ComboBox();
+            this.ddlList = new GroupedComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.listHistory = new ComicDownloader.EXListView();
             this.index = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -90,7 +92,6 @@ namespace ComicDownloader
             this.colPDF = ((ComicDownloader.EXColumnHeader)(new ComicDownloader.EXColumnHeader()));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.errInvalidFileName = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label5 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.gpbChapters.SuspendLayout();
@@ -104,9 +105,9 @@ namespace ComicDownloader
             // 
             // txtUrl
             // 
-            this.txtUrl.Location = new System.Drawing.Point(17, 80);
+            this.txtUrl.Location = new System.Drawing.Point(6, 80);
             this.txtUrl.Name = "txtUrl";
-            this.txtUrl.Size = new System.Drawing.Size(219, 20);
+            this.txtUrl.Size = new System.Drawing.Size(230, 20);
             this.txtUrl.TabIndex = 0;
             this.txtUrl.Text = "[URL to story copy and paste or select from list]";
             this.txtUrl.TextChanged += new System.EventHandler(this.txtUrl_TextChanged);
@@ -114,7 +115,7 @@ namespace ComicDownloader
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 109);
+            this.label3.Location = new System.Drawing.Point(6, 109);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 5;
@@ -122,9 +123,9 @@ namespace ComicDownloader
             // 
             // txtTitle
             // 
-            this.txtTitle.Location = new System.Drawing.Point(19, 125);
+            this.txtTitle.Location = new System.Drawing.Point(6, 125);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(219, 20);
+            this.txtTitle.Size = new System.Drawing.Size(232, 20);
             this.txtTitle.TabIndex = 4;
             this.txtTitle.Text = "[Story Title - unset]";
             this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
@@ -468,6 +469,7 @@ namespace ComicDownloader
             // 
             // groupInfo
             // 
+            this.groupInfo.Controls.Add(this.ddlFilter);
             this.groupInfo.Controls.Add(this.loading);
             this.groupInfo.Controls.Add(this.bntRefresh);
             this.groupInfo.Controls.Add(this.label5);
@@ -484,6 +486,16 @@ namespace ComicDownloader
             this.groupInfo.TabIndex = 20;
             this.groupInfo.TabStop = false;
             this.groupInfo.Text = "Manga Selector";
+            // 
+            // ddlFilter
+            // 
+            this.ddlFilter.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ddlFilter.FormattingEnabled = true;
+            this.ddlFilter.Location = new System.Drawing.Point(6, 32);
+            this.ddlFilter.Name = "ddlFilter";
+            this.ddlFilter.Size = new System.Drawing.Size(44, 23);
+            this.ddlFilter.TabIndex = 21;
+            this.ddlFilter.SelectedIndexChanged += new System.EventHandler(this.ddlFilter_SelectedIndexChanged);
             // 
             // loading
             // 
@@ -513,10 +525,19 @@ namespace ComicDownloader
             this.bntRefresh.UseVisualStyleBackColor = true;
             this.bntRefresh.Click += new System.EventHandler(this.bntRefresh_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(171, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "select a story from  list to download";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 64);
+            this.label1.Location = new System.Drawing.Point(3, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 1;
@@ -534,13 +555,21 @@ namespace ComicDownloader
             // 
             // ddlList
             // 
+            this.ddlList.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.ddlList.DataSource = null;
+            this.ddlList.DisplayMember = "Name";
+            this.ddlList.DropDownHeight = 500;
             this.ddlList.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddlList.FormattingEnabled = true;
+            this.ddlList.GroupMember = "Group";
+            this.ddlList.IntegralHeight = false;
             this.ddlList.ItemHeight = 17;
-            this.ddlList.Location = new System.Drawing.Point(19, 32);
+            this.ddlList.Location = new System.Drawing.Point(54, 32);
+            this.ddlList.MaxDropDownItems = 20;
             this.ddlList.Name = "ddlList";
-            this.ddlList.Size = new System.Drawing.Size(209, 25);
+            this.ddlList.Size = new System.Drawing.Size(174, 23);
             this.ddlList.TabIndex = 15;
+            this.ddlList.ValueMember = "Url";
             this.ddlList.SelectedIndexChanged += new System.EventHandler(this.ddlList_SelectedIndexChanged);
             // 
             // panel2
@@ -621,15 +650,6 @@ namespace ComicDownloader
             // 
             this.errInvalidFileName.ContainerControl = this;
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(171, 13);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "select a story from  list to download";
-            // 
             // DownloaderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -688,7 +708,6 @@ namespace ComicDownloader
         private System.Windows.Forms.ToolStripStatusLabel lblTotalDownloadCount;
         private System.Windows.Forms.ColumnHeader index;
         private System.Windows.Forms.Button bntPauseThread;
-        private System.Windows.Forms.ComboBox ddlList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button bntInfo;
         private System.Windows.Forms.Button btnExitThread;
@@ -722,6 +741,8 @@ namespace ComicDownloader
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem mnuReadOnline;
         private System.Windows.Forms.Label label5;
+        private GroupedComboBox ddlList;
+        private System.Windows.Forms.ComboBox ddlFilter;
     }
 }
 

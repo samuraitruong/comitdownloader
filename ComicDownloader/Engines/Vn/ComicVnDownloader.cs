@@ -43,7 +43,7 @@ namespace ComicDownloader.Engines
             string urlPattern = "http://comicvn.net/truyen-tranh?parent_slug=truyen-tranh&name_slug=&id_category=1&orderBy=&type=0&&page={0}";
             string  cheUrl = "http://comicvn.net/truyen-che";
 
-            List<StoryInfo> results = base.ReloadChachedData();
+            List<StoryInfo> results = base.ReloadChachedData().Stories;
 
             if (results == null || results.Count == 0 || forceOnline)
             {

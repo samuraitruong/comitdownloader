@@ -3,24 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Net;
 using System.Text.RegularExpressions;
 using System.IO;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 using System.Threading;
-using System.Linq.Expressions;
-using System.Reflection;
 using System.Diagnostics;
 using Cx.Windows.Forms;
 using ComicDownloader.Engines;
 using XPTable.Models;
-using ComicDownloader.Properties;
 using ComicDownloader.Forms;
 using IView.UI.Forms;
-using System.Runtime.InteropServices;
 using ComicDownoader.Forms;
 using ComicDownloader.Helpers;
 using Amib.Threading;
@@ -29,10 +21,10 @@ using System.Threading.Tasks;
 
 namespace ComicDownloader
 {
-   
+
     public partial class DownloaderForm : MdiChildForm
     {
-       
+
         public ComicDownloaderSettings Settings { get; set; }
 
         List<Thread> threads = new List<Thread>();
@@ -68,7 +60,10 @@ namespace ComicDownloader
 
         private void Downloader_OnListPageCrawled(List<StoryInfo> listStories)
         {
-            this.UnlockLayoutAfterLoadStories(listStories);
+            Task.Run(() =>
+           {
+               this.UnlockLayoutAfterLoadStories(listStories);
+           });
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -115,7 +110,7 @@ namespace ComicDownloader
             downloadThread.Start();
             threads.Clear();
             threads.Add(downloadThread);
-            
+
 
         }
 
@@ -129,7 +124,7 @@ namespace ComicDownloader
                 try
                 {
                     chapterCount++;
-                    
+
                     this.Invoke((MethodInvoker)delegate
                     {
                         lblStatus.Text = chapInfo.Name;
@@ -223,7 +218,7 @@ namespace ComicDownloader
             foreach (string pageUrl in chapInfo.Pages)
             {
                 IWorkItemResult wir1 = smartThreadPool.QueueWorkItem(new
-                       WorkItemCallback(delegate(object state)
+                       WorkItemCallback(delegate (object state)
                 {
 
                     DownloadPageParam param = (DownloadPageParam)state;
@@ -271,7 +266,7 @@ namespace ComicDownloader
                     }
 
                     return 1;
-                }), new DownloadPageParam() { Index = index++, PageUrl = pageUrl});
+                }), new DownloadPageParam() { Index = index++, PageUrl = pageUrl });
 
 
                 wi.Add(wir1);
@@ -279,7 +274,7 @@ namespace ComicDownloader
             }
 
             SmartThreadPool.WaitAll(wi.ToArray());
-            
+
         }
 
         private void DisplayChap(ChapterInfo chapInfo, int chapCount)
@@ -290,7 +285,7 @@ namespace ComicDownloader
                 this.progess.Value = 1;
                 this.progess.Maximum = chapInfo.PageCount;
                 var listItem = new EXListViewItem(chapCount.ToString());
-                listItem.SubItems.Add(chapInfo.Name.Replace('"',' ').Replace('.',' '));
+                listItem.SubItems.Add(chapInfo.Name.Replace('"', ' ').Replace('.', ' '));
                 listItem.SubItems.Add(chapInfo.PageCount.ToString());
                 listItem.SubItems.Add("0");
                 EXControlListViewSubItem cs = new EXControlListViewSubItem();
@@ -323,8 +318,8 @@ namespace ComicDownloader
 
                 bntOpenFolder.Click += new EventHandler(delegate
                 {
-                     MainWindow window = new MainWindow(new string[] { chapInfo.Folder+"/dum.trick","0"});
-                     window.WindowState = FormWindowState.Maximized;
+                    MainWindow window = new MainWindow(new string[] { chapInfo.Folder + "/dum.trick", "0" });
+                    window.WindowState = FormWindowState.Maximized;
                     window.ShowDialog();
                     //window.SubStartSlideShow();
                 });
@@ -350,11 +345,11 @@ namespace ComicDownloader
                     Tag = pdfLinkCol,
                     //Text = chapInfo.PdfPath,
                     Enabled = false,
-                    
+
                 };
 
                 bntOpenPDF.Click += new EventHandler(bntOpenPDF_Click);
-               
+
                 listItem.SubItems.Add(pdfLinkCol);
                 listHistory.AddControlToSubItem(bntOpenPDF, pdfLinkCol);
 
@@ -422,12 +417,12 @@ namespace ComicDownloader
 
         }
 
-       
-        
+
+
         private void bntPauseThread_Click(object sender, EventArgs e)
         {
             threads.RemoveAll(p => p.ThreadState == System.Threading.ThreadState.Stopped);
-            
+
             foreach (var thread in threads)
             {
 
@@ -444,15 +439,15 @@ namespace ComicDownloader
                     catch (Exception ex)
                     {
                         MyLogger.Log(ex);
-                        
+
                     }
-                    
+
                 }
                 else
                 {
-                    if (thread != null && thread.ThreadState == System.Threading.ThreadState.Suspended || 
+                    if (thread != null && thread.ThreadState == System.Threading.ThreadState.Suspended ||
                                           thread.ThreadState == System.Threading.ThreadState.WaitSleepJoin ||
-                                          thread.ThreadState == System.Threading.ThreadState.SuspendRequested 
+                                          thread.ThreadState == System.Threading.ThreadState.SuspendRequested
                         )
                     {
                         try
@@ -482,14 +477,14 @@ namespace ComicDownloader
                                 MyLogger.Log(ex);
                             }
                         }
-                        
-                        
+
+
                     }
                 }
-               
-                
+
+
             }
-            
+
 
             bntPauseThread.Text = bntPauseThread.Text == "Pause" ? "Resume" : "Pause";
         }
@@ -502,25 +497,29 @@ namespace ComicDownloader
         private void Form1_Load(object sender, EventArgs e)
         {
             txtDir.Text = Settings.StogareFolder;
-            this.LoadStoryList();
+            Task.Run(() =>
+            {
+                this.LoadStoryList();
+            });
 
             if (downloadNow)
             {
                 bntInfo.PerformClick();
             }
         }
-
-
         List<StoryInfo> stories = new List<StoryInfo>();
-
-      
 
         private void LoadStoryList()
         {
 
             this.Invoke((MethodInvoker)delegate
             {
-                ddlList.Items.Clear();
+                if (ddlList.DataSource == null)
+                {
+                    ddlList.DataSource = this.stories;
+                }
+
+                //ddlList.Items.Clear();
                 loading.Visible = true;
                 loading.Location = bntRefresh.Location;
                 loading.Size = bntRefresh.Size;
@@ -528,23 +527,27 @@ namespace ComicDownloader
                 ddlList.Text = "Wait a moment....";
                 bntRefresh.Enabled = false;
                 ddlList.Enabled = false;
-                
+
             });
             var task = Task<List<StoryInfo>>.Run(() => Downloader.GetListStories(false))
-                .ContinueWith((t) => {
-                        this.stories = t.Result;
-                        this.UnlockLayoutAfterLoadStories(t.Result, true);
-                    });
+                .ContinueWith((t) =>
+                {
+                    this.stories = t.Result;
+                    this.UnlockLayoutAfterLoadStories(t.Result, true);
+                });
         }
 
         private void ddlList_SelectedIndexChanged(object sender, EventArgs e)
         {
             var info = (ddlList.SelectedItem as StoryInfo);
-            string url = info.Url;
-            txtUrl.Text = url;
-            bntInfo.Enabled = true;
-            tblChapters.Rows.Clear();
-            loading.Visible = false;
+            if (info != null)
+            {
+                string url = info.Url;
+                txtUrl.Text = url;
+                bntInfo.Enabled = true;
+                tblChapters.Rows.Clear();
+                loading.Visible = false;
+            }
         }
 
         StoryInfo currentStoryInfo = null;
@@ -553,16 +556,16 @@ namespace ComicDownloader
         {
             var form = this.MdiParent as AppMainForm;
             form.UpdateActiveTabTitle(title);
-            
+
         }
 
         private void bntInfo_Click(object sender, EventArgs e)
         {
-            new Thread(new ThreadStart(delegate()
+            new Thread(new ThreadStart(delegate ()
             {
                 using (new LongOperation())
                 {
-                    this.Invoke(new MethodInvoker(delegate()
+                    this.Invoke(new MethodInvoker(delegate ()
                     {
 
                         this.Text = "Loading...";
@@ -574,14 +577,14 @@ namespace ComicDownloader
                     }));
                     currentStoryInfo = Downloader.RequestInfo(txtUrl.Text);
 
-                    this.Invoke(new MethodInvoker(delegate()
+                    this.Invoke(new MethodInvoker(delegate ()
                     {
 
                         txtTitle.Text = ddlList.Text;
                         txtTitle.Text = currentStoryInfo.Name.Replace('"', ' ').Replace('.', ' ');
 
                         this.Text = Downloader.Name + currentStoryInfo.Name;
-                    
+                        txtDir.Text = Settings.StogareFolder + "\\" + currentStoryInfo.Name.MakeSafeFilename();
 
                         tblChapters.Rows.Clear();
 
@@ -600,7 +603,7 @@ namespace ComicDownloader
                         }
                     }));
 
-                    this.Invoke(new MethodInvoker(delegate()
+                    this.Invoke(new MethodInvoker(delegate ()
                     {
                         loading.Visible = false;
 
@@ -625,7 +628,7 @@ namespace ComicDownloader
             ddlList.Enabled = p;
             txtTitle.Enabled = p;
             txtUrl.Enabled = p;
-            
+
 
             bntDownload.Enabled = p;
 
@@ -639,13 +642,13 @@ namespace ComicDownloader
         private void btnExitThread_Click(object sender, EventArgs e)
         {
             foreach (var item in threads)
-	        {
-		         if (item != null && item.IsAlive)
             {
-                item.Abort();
+                if (item != null && item.IsAlive)
+                {
+                    item.Abort();
+                }
             }
-	        }
-           
+
             bntDownload.Enabled = true;
             bntPauseThread.Text = "Pause";
             bntPauseThread.Enabled = false;
@@ -698,10 +701,12 @@ namespace ComicDownloader
         {
             mnuSelectSelected.Enabled = true;
         }
+        DateTime lastupdate = DateTime.Now.AddMinutes(-10);
 
-       private void UnlockLayoutAfterLoadStories(List<StoryInfo> pageStories, bool reset=false)
+        private void UnlockLayoutAfterLoadStories(List<StoryInfo> pageStories, bool reset = false)
         {
-            lock (updateUIObj) {
+            lock (updateUIObj)
+            {
                 this.Invoke((MethodInvoker)delegate
                 {
                     if (this.stories == null || reset)
@@ -712,11 +717,23 @@ namespace ComicDownloader
 
                     if (reset)
                     {
-                        ddlList.Items.Clear();
+                        //ddlList.Items.Clear();
                         bntRefresh.Enabled = true;
 
                     }
-                    ddlList.Items.AddRange(pageStories.ToArray());
+                    var ts = DateTime.Now - lastupdate;
+                    if (ts.TotalSeconds > 5)
+                    {
+                        ddlList.DataSource = this.stories; //rerender dropdown list is heavy. just render if data change after 5 secs.
+                        lastupdate = DateTime.Now;
+
+                        ddlFilter.Items.Clear();
+                        var filters = new List<string> { "All" };
+                        filters.AddRange(this.stories.Select(p => p.Group).Distinct());
+                        ddlFilter.Items.AddRange(filters.ToArray());
+
+                    }
+                    //ddlList.Items.AddRange(pageStories.ToArray());
                     lblStoriesCount.Text = "Stories : " + this.stories.Count.ToString();
                     if (!reset)
                     {
@@ -725,25 +742,44 @@ namespace ComicDownloader
                     else
                     {
                         ddlList.Text = string.Format("There are {0} stories in list", this.stories.Count);
+                        ddlFilter.Items.Clear();
+                        var filters = new List<string> { "All" };
+                        filters.AddRange(this.stories.Select(p => p.Group).Distinct());
+                        ddlFilter.Items.AddRange(filters.ToArray());
                     }
                     ddlList.Enabled = true;
                     loading.Visible = !reset;
                 });
             }
         }
-        
+
         private void bntRefresh_Click(object sender, EventArgs e)
         {
-            Downloader.DeleteCached();
-            this.stories = null;
-            this.LoadStoryList();
-            
+            var cached = Downloader.ReloadChachedData();
+            if (cached == null || cached.Stories.Count == 0)
+            {
+                Downloader.DeleteCached();
+                this.stories = null;
+                this.LoadStoryList();
+            }
+            else
+            {
+                DownloaderInfoForm form = new DownloaderInfoForm();
+                form.ShowInfo(cached, this.Downloader);
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    Downloader.DeleteCached();
+                    this.stories = null;
+                    this.LoadStoryList();
+                }
+            }
+
         }
 
         private void lstChapters_CellCheckChanged(object sender, XPTable.Events.CellCheckBoxEventArgs e)
         {
             ToggleDownloadButtonBySelected();
-            
+
         }
 
         private void ToggleDownloadButtonBySelected()
@@ -764,7 +800,7 @@ namespace ComicDownloader
 
         private void lstChapters_ContextMenuStripChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void txtUrl_TextChanged(object sender, EventArgs e)
@@ -788,7 +824,7 @@ namespace ComicDownloader
             ToggleDownloadButtonBySelected();
         }
 
-      
+
 
         private void tblChapters_RowAdded(object sender, XPTable.Events.TableModelEventArgs e)
         {
@@ -810,7 +846,7 @@ namespace ComicDownloader
 
         private void button2_Click_2(object sender, EventArgs e)
         {
-            
+
         }
 
         private void DownloaderForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -859,7 +895,7 @@ namespace ComicDownloader
         private void mnuAddandStartQueue_Click(object sender, EventArgs e)
         {
             AddToQueue(true);
-            
+
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -875,15 +911,23 @@ namespace ComicDownloader
             }
         }
 
-        
-
-
-
-
-
-
-
-
-
+        private void ddlFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var select = ddlFilter.Text.ToString();
+            var filterSource = this.stories;
+            if(select != "All")
+            {
+                filterSource = filterSource.Where(p => p.Group == select).ToList();
+                ddlList.Text = string.Format("Filtered , there are {0}//{1} stories display in the list", filterSource.Count, this.stories.Count);
+                //need update status bar???
+            }
+            else
+            {
+                ddlList.Text = string.Format("There are {0} stories in list", this.stories.Count);
+                //need update status bar???
+            }
+            ddlList.DataSource = filterSource;
+            
+        }
     }
 }

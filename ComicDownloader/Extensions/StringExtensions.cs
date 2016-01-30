@@ -4,12 +4,50 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Collections;
 using System.Xml.Linq;
+using System.Linq;
 
-namespace ComicDownloader.Extensions
+namespace System
 {
     public static class StringExtensions
     {
-      
+
+        private enum TimeSpanElement
+        {
+            Millisecond,
+            Second,
+            Minute,
+            Hour,
+            Day
+        }
+
+        public static string ToFriendlyDisplay(this TimeSpan timeSpan, int maxNrOfElements)
+        {
+            maxNrOfElements = Math.Max(Math.Min(maxNrOfElements, 5), 1);
+            var parts = new[]
+                            {
+                            Tuple.Create(TimeSpanElement.Day, timeSpan.Days),
+                            Tuple.Create(TimeSpanElement.Hour, timeSpan.Hours),
+                            Tuple.Create(TimeSpanElement.Minute, timeSpan.Minutes),
+                            Tuple.Create(TimeSpanElement.Second, timeSpan.Seconds),
+                            Tuple.Create(TimeSpanElement.Millisecond, timeSpan.Milliseconds)
+                        }
+                                        .SkipWhile(i => i.Item2 <= 0)
+                                        .Take(maxNrOfElements);
+
+            return string.Join(", ", parts.Select(p => string.Format("{0} {1}{2}", p.Item2, p.Item1, p.Item2 > 1 ? "s" : string.Empty)));
+        }
+
+
+        public static string MakeSafeFilename(this string filename, char replaceChar = '-')
+        {
+            foreach (char c in System.IO.Path.GetInvalidFileNameChars())
+            {
+                filename = filename.Replace(c, replaceChar);
+            }
+            filename = Regex.Replace(filename, @"&\w+;", replaceChar.ToString());
+            return filename;
+        }
+
         //public static string ToMD5(this string name)
         //{
         //    return SecurityHelper.HashPassword(name);
@@ -32,7 +70,7 @@ namespace ComicDownloader.Extensions
         //    return Encoding.UTF8.GetString(Convert.FromBase64String(sInput));
         //}
 
-       
+
 
         public static bool IsValidEmailAddress(this string s)
         {
@@ -55,7 +93,7 @@ namespace ComicDownloader.Extensions
                     if (!str.IsValidEmailAddress()) return false;
                 }
             }
-            else { 
+            else {
                 return regex.IsMatch(s);
             }
 
@@ -71,11 +109,11 @@ namespace ComicDownloader.Extensions
         {
             char[] invalidFilenameCharacters = new[] { '\\', '/', ':', '*', '?', '"', '<', '>', '|', '#', '{', '}', '%', '~', '&' };
             string[] invalidFileNameStrings = new[] { ".files", "_files",
-	                "-Dateien", "_fichiers", "_bestanden","_file",
-	                "_archivos", "-filer", "_tiedostot", "_pliki",
-	                "_soubory","_elemei", "_ficheiros", "_arquivos",
-	                "_dosyalar", "_datoteke","_fitxers", "_failid",
-	                "_fails", "_bylos", "_fajlovi", "_fitxategiak"};
+                    "-Dateien", "_fichiers", "_bestanden","_file",
+                    "_archivos", "-filer", "_tiedostot", "_pliki",
+                    "_soubory","_elemei", "_ficheiros", "_arquivos",
+                    "_dosyalar", "_datoteke","_fitxers", "_failid",
+                    "_fails", "_bylos", "_fajlovi", "_fitxategiak"};
 
             string validSharePointFileName = fileName;
 
@@ -127,7 +165,7 @@ namespace ComicDownloader.Extensions
             string ext = Path.GetExtension(validSharePointFileName);
             name = name.TrimBy(123);
 
-            return name+ext;
+            return name + ext;
         }
 
         //public static string ToPlainText(this string source)
@@ -145,8 +183,8 @@ namespace ComicDownloader.Extensions
 
         }
 
-      
-        
+
+
         public static string DoStripDiacritics(this string accented)
         {
             Regex regex = new Regex(@"\p{IsCombiningDiacriticalMarks}+");

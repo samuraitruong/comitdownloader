@@ -41,7 +41,7 @@ namespace ComicDownloader.Engines
             List<string> visitedLinks = new List<string>();
             visitedLinks.Add(this.ListStoryURL);
 
-            List<StoryInfo> results = base.ReloadChachedData();
+            List<StoryInfo> results = base.ReloadChachedData().Stories;
 
             if (results == null || results.Count == 0 || forceOnline)
             {

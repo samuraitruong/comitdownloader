@@ -36,7 +36,7 @@ namespace ComicDownloader.Engines
         {
             string urlPattern = "http://www.truyen18.org/moi-cap-nhat/danhsach/page/{0}.html";
            
-            List<StoryInfo> results = base.ReloadChachedData();
+            List<StoryInfo> results = base.ReloadChachedData().Stories;
             if (results == null || results.Count == 0 || forceOnline)
             {
                 results = new List<StoryInfo>();

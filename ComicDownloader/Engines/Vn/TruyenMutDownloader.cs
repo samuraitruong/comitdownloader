@@ -42,7 +42,7 @@ namespace ComicDownloader.Engines
         {
             string urlPattern = "http://truyenmut.com/danh-sach/truyen-moi-update/page-{0}.html";
             
-            List<StoryInfo> results = base.ReloadChachedData();
+            List<StoryInfo> results = base.ReloadChachedData().Stories;
 
             if (results == null || results.Count == 0 || forceOnline)
             {

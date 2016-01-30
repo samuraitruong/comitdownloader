@@ -11,6 +11,7 @@ namespace ComicDownloader.Engines
         public string Name { get; set; }
         public string Url { get; set; }
         public string Page { get; set; }
+        
         public Guid UniqueIdentify { get; set; }
 
         public int ChapId { get; set; }
@@ -43,6 +44,20 @@ namespace ComicDownloader.Engines
     }
     public class StoryInfo
     {
+        public string Group
+        {
+            get
+            {
+                //return "A";
+                var firstChar = Name.Trim().FirstOrDefault();
+                if (char.IsLetterOrDigit(firstChar))
+                {
+                    return firstChar.ToString().ToUpper();
+                }
+
+                return "#";
+            }
+        }
         public string Name { get; set; }
         public string AltName { get; set; }
         public string Author { get; set; }
@@ -63,5 +78,24 @@ namespace ComicDownloader.Engines
         {
             return Name;
         }
+    }
+
+    public enum CrawlTypes
+    {
+        Manual,
+        Clould
+    }
+    public class StoryInfoCacheFile
+    {
+        public List<StoryInfo> Stories { get; set; }
+        public DateTime Updated { get; set; }
+        public long TotalTime { get; set; }
+        public CrawlTypes Type { get; set; }
+        public StoryInfoCacheFile()
+        {
+            Stories = new List<StoryInfo>();
+            Updated = DateTime.Now;
+        }
+
     }
 }
