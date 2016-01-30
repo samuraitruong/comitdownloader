@@ -43,46 +43,13 @@ namespace ComicDownloader.Engines
             string urlPattern = "http://comicvn.net/truyen-tranh?parent_slug=truyen-tranh&name_slug=&id_category=1&orderBy=&type=0&&page={0}";
             string  cheUrl = "http://comicvn.net/truyen-che";
 
-            List<StoryInfo> results = base.ReloadChachedData().Stories;
+            return base.GetListStoriesSimple(urlPattern,
+                "//ul[@class='list']/li/div/h2/a",
+                forceOnline,
+                this.HostUrl);
+            //request  truyen che
 
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-                int currentPage = 0;
-                bool isStillHasPage = true;
-                while (isStillHasPage)
-                {
-
-                    string url = string.Format(urlPattern, currentPage);
-
-                    string html = NetworkHelper.GetHtml(currentPage==0? cheUrl: url);
-                    HtmlDocument htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(html);
-
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//ul[@class='list']/li/div/h2/a");
-                    if (nodes != null && nodes.Count > 0)
-                    {
-                        currentPage++;
-                        foreach (var node in nodes)
-                        {
-                            StoryInfo info = new StoryInfo()
-                            {
-                                Url = this.HostUrl + node.Attributes["href"].Value,
-                                Name = node.InnerText.Trim()
-                            };
-                            results.Add(info);
-                        }
-                    }
-                    else
-                    {
-                        isStillHasPage = false;
-                    }
-
-                }
-
-            }
-            this.SaveCache(results);
-            return results;
+            
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
@@ -200,6 +167,19 @@ namespace ComicDownloader.Engines
             }
 
             return stories;
+        }
+
+        public override int MaxThreadCrawlList
+        {
+            get
+            {
+                return 8; // seem this site block if we call to it so fast.
+            }
+
+            set
+            {
+                base.MaxThreadCrawlList = value;
+            }
         }
     }
 }

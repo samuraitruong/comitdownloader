@@ -37,47 +37,9 @@ namespace ComicDownloader.Engines
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             string urlPattern = "http://mangak.net/moi-cap-nhat/page/{0}/";
-
-            List<StoryInfo> results = base.ReloadChachedData().Stories;
-
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-                int currentPage = 0;
-                bool isStillHasPage = true;
-                while (isStillHasPage)
-                {
-
-                    string url = string.Format(urlPattern, currentPage);
-
-                    string html = NetworkHelper.GetHtml(url);
-                    HtmlDocument htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(html);
-
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='update_image']/a[1]");
-                    if (nodes != null && nodes.Count > 0)
-                    {
-                        currentPage++;
-                        foreach (var node in nodes)
-                        {
-                            StoryInfo info = new StoryInfo()
-                            {
-                                Url = node.Attributes["href"].Value,
-                                Name = node.Attributes["title"].Value
-                            };
-                            results.Add(info);
-                        }
-                    }
-                    else
-                    {
-                        isStillHasPage = false;
-                    }
-
-                }
-
-            }
-            this.SaveCache(results);
-            return results;
+            return GetListStoriesSimple(urlPattern,
+                "//div[@class='update_image']/a[1]",
+                forceOnline);
         }
 
         public override StoryInfo RequestInfo(string url)

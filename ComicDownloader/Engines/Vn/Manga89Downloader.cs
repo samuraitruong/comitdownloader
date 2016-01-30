@@ -46,29 +46,7 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            List<StoryInfo> results = ReloadChachedData().Stories;
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-                var html = NetworkHelper.GetHtml(this.ListStoryURL);
-
-                HtmlDocument htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(html);
-                var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"ddsg-wrapper\"]/ul/li[1]/ul/li/a");
-                
-
-                foreach (HtmlNode node in nodes)
-                {
-                    results.Add(new StoryInfo()
-                    {
-                        
-                        Name = node.InnerText.Trim().Trim(),
-                        Url = node.Attributes["href"].Value
-                    });
-                }
-            }
-            SaveCache(results);
-            return results;
+            return GetListStoriesSimple(this.ListStoryURL, "//*[@class=\"ddsg-wrapper\"]/ul/li[1]/ul/li/a", forceOnline, singleListPage: true);
         }
 
         public override StoryInfo RequestInfo(string url)

@@ -10,8 +10,8 @@ using ComicDownloader.Properties;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("BlogTruyen", MenuGroup = "VN" , MetroTab="Tiếng Việt" , Language="Tieng viet", Image32 = "_1364410895_001_01")]
-    public class BlogTruyenDownloader: Downloader
+    [Downloader("BlogTruyen", MenuGroup = "VN", MetroTab = "Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410895_001_01")]
+    public class BlogTruyenDownloader : Downloader
     {
         public override string Logo
         {
@@ -45,80 +45,19 @@ namespace ComicDownloader.Engines
             List<StoryInfo> results = base.ReloadChachedData().Stories;
             string urlPattern = "http://blogtruyen.com/ListStory/GetCategory?CategoryID=0&OrderBy=1&PageIndex={0}";
 
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-
-                results = new List<StoryInfo>();
-                int currentPage = 1;
-                bool isStillHasPage = true;
-                while (isStillHasPage)
+            return base.GetListStoriesSimple(urlPattern,
+                "//span[contains(@class ,'tiptip')]//a",
+                forceOnline,
+                this.HostUrl, (HtmlNode node) =>
                 {
-                    string url = string.Format(urlPattern, currentPage);
-                    string html = NetworkHelper.GetHtml(url);
-                    HtmlDocument htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(html);
-
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//span[contains(@class ,'tiptip')]//a");
-                    if (nodes != null && nodes.Count > 0)
+                    return new StoryInfo()
                     {
-                        currentPage++;
-                        foreach (var node in nodes)
-                        {
-                            //var a = node.SelectSingleNode("//a");
-
-                            StoryInfo info = new StoryInfo()
-                            {
-                                Url = HostUrl + node.Attributes["href"].Value,
-                                Name = node.ChildNodes[0].InnerText.Trim().Trim()
-                            };
-                            results.Add(info);
-                        }
-                    }
-                    else
-                    {
-                        isStillHasPage = false;
-                    }
-
-                }
-
-                //                results = new List<StoryInfo>();
-
-                //                string[] urls = {"http://blogtruyen.com/list/list-0abc-3.js",
-                //                              "http://blogtruyen.com/list/list-defgh-3.js",
-                //                              "http://blogtruyen.com/list/list-ijkl-3.js",
-                //                              "http://blogtruyen.com/list/list-mnop-3.js",
-                //                              "http://blogtruyen.com/list/list-qrst-3.js",
-                //                              "http://blogtruyen.com/list/list-uvwxyz-3.js"
-                //                             };
-                //                foreach (var url in urls)
-                //                {
-
-                //                    string html = NetworkHelper.GetHtml(url);
-
-                //                    HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
-                //                    htmlDoc.LoadHtml(html);
-                //                    var links = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"listing\"]//a");
-
-                //                    //htmlDoc.LoadHtml(table.InnerHtml);
-                //                    //var links = htmlDoc.DocumentNode.SelectNodes("//a");
-                //                    foreach (HtmlNode item in links)
-                //                    {
-                //                        StoryInfo info = new StoryInfo()
-                //                        {
-                //                            Name = item.InnerText.Trim(),
-                //                            Url = item.Attributes["href"].Value
-                //                        };
-                //                        results.Add(info);
-                //                    }
-                //#if DEBUG
-                //                   // break;
-                //#endif
-                //                }
-            }
-            base.SaveCache(results);
-            return results;
+                        Url = HostUrl + node.Attributes["href"].Value,
+                        Name = node.ChildNodes[0].InnerText.Trim().Trim()
+                    };
+                });
         }
-        
+
         public override StoryInfo RequestInfo(string storyUrl)
         {
             StoryInfo info = new StoryInfo
@@ -129,25 +68,25 @@ namespace ComicDownloader.Engines
             var html = NetworkHelper.GetHtml(storyUrl);
             var htmlDoc = new HtmlAgilityPack.HtmlDocument();
             htmlDoc.LoadHtml(html);
-            
+
             var node = htmlDoc.DocumentNode.SelectSingleNode("//h1[@class='entry-title']/a");
             info.Name = node.InnerText.Trim().Replace("&nbsp;", string.Empty);
 
             //var chapters = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"post\"]//a[contains(@href,'x2.blogtruyen.com')]");
             var chapters = htmlDoc.DocumentNode.SelectNodes("//*[@id='list-chapters']/p/span[@class='title']/a");
-                //.Descendants("a")
-                //.Where(x => x.Attributes.Contains("href") &&
-                //          ( x.Attributes["href"].Value.Contains("x1.blogtruyen.com") ||
-                //            x.Attributes["href"].Value.Contains("x2.blogtruyen.com") ||
-                //            x.Attributes["href"].Value.Contains("x3.blogtruyen.com")))
-                //.ToList();
+            //.Descendants("a")
+            //.Where(x => x.Attributes.Contains("href") &&
+            //          ( x.Attributes["href"].Value.Contains("x1.blogtruyen.com") ||
+            //            x.Attributes["href"].Value.Contains("x2.blogtruyen.com") ||
+            //            x.Attributes["href"].Value.Contains("x3.blogtruyen.com")))
+            //.ToList();
 
             foreach (HtmlNode item in chapters)
             {
 
                 var chapInfo = new ChapterInfo()
                 {
-                    Url = this.HostUrl+item.Attributes["href"].Value,
+                    Url = this.HostUrl + item.Attributes["href"].Value,
                     Name = item.FirstChild.InnerText.Trim(),
                     ChapId = ExtractID(item.FirstChild.InnerText.Trim())
                 };
@@ -329,13 +268,13 @@ namespace ComicDownloader.Engines
             s = s.Replace("?imgmax=1600?imgmax=2000", "?imgmax=2000");
             s = s.Replace("?imgmax=2000?imgmax=1600", "?imgmax=2000");
             s = s.Replace("?imgmax=1600?imgmax=1600", "?imgmax=2000");
-            if(s.Contains("bp.blogspot") && !s.Contains("?imgmax"))
+            if (s.Contains("bp.blogspot") && !s.Contains("?imgmax"))
             {
                 s = s + "?imgmax=0";
             }
             return s;
         }
-  
+
         public override List<string> GetPages(string chapUrl)
         {
             var html = NetworkHelper.GetHtml(chapUrl);
@@ -344,7 +283,7 @@ namespace ComicDownloader.Engines
             doc.LoadHtml(html);
             var nodes = doc.DocumentNode.SelectNodes("//*[@id='content']/img");
             List<string> result = new List<string>();
-            if (nodes!= null)
+            if (nodes != null)
             {
                 foreach (HtmlNode node in nodes)
                 {
@@ -383,13 +322,13 @@ namespace ComicDownloader.Engines
         {
             return url.Contains("button") ||
                     url.Contains("black50") ||
-                    url.Contains("die-report")||
+                    url.Contains("die-report") ||
                     url.Contains("newGB1-zip");
 
         }
 
         //Lastest Update chi show story, thong co link chapter moi nhat
 
-       //Use google search
+        //Use google search
     }
 }

@@ -40,10 +40,12 @@
             this.label8 = new System.Windows.Forms.Label();
             this.lblEllapsedTime = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnAbort = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -139,6 +141,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.lblEllapsedTime);
             this.groupBox1.Controls.Add(this.label1);
@@ -152,11 +155,21 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(377, 143);
+            this.groupBox1.Size = new System.Drawing.Size(484, 143);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Info";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pictureBox1.Location = new System.Drawing.Point(296, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(176, 120);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
             // 
             // label10
             // 
@@ -165,14 +178,14 @@
             this.label10.ForeColor = System.Drawing.Color.Red;
             this.label10.Location = new System.Drawing.Point(12, 146);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(353, 79);
+            this.label10.Size = new System.Drawing.Size(460, 86);
             this.label10.TabIndex = 11;
             this.label10.Text = resources.GetString("label10.Text");
             this.label10.UseCompatibleTextRendering = true;
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(12, 228);
+            this.btnOK.Location = new System.Drawing.Point(113, 235);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(117, 23);
             this.btnOK.TabIndex = 12;
@@ -182,7 +195,7 @@
             // 
             // btnAbort
             // 
-            this.btnAbort.Location = new System.Drawing.Point(209, 228);
+            this.btnAbort.Location = new System.Drawing.Point(248, 235);
             this.btnAbort.Name = "btnAbort";
             this.btnAbort.Size = new System.Drawing.Size(119, 23);
             this.btnAbort.TabIndex = 13;
@@ -194,11 +207,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(377, 267);
+            this.ClientSize = new System.Drawing.Size(484, 270);
             this.Controls.Add(this.btnAbort);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DownloaderInfoForm";
@@ -208,6 +222,7 @@
             this.TopMost = true;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -228,5 +243,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnAbort;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

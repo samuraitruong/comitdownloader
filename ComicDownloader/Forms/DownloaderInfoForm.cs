@@ -24,6 +24,16 @@ namespace ComicDownloader.Forms
             lblTotal.Text = info.Stories.Count.ToString();
             lblUpdated.Text = info.Updated.ToString();
             lblEllapsedTime.Text = TimeSpan.FromMilliseconds(info.TotalTime).ToFriendlyDisplay(5);
+            try
+            {
+                pictureBox1.ImageLocation = dl.Logo;
+                pictureBox1.Load();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
         }
         private void button2_Click(object sender, EventArgs e)
         {

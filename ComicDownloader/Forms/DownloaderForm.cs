@@ -42,7 +42,8 @@ namespace ComicDownloader
             InitializeComponent();
             Settings = SettingForm.GetSetting();
             this.Downloader = dl;
-            this.Name = dl.Name;
+            this.Text= dl.Name;
+
             this.Downloader.OnListPageCrawled += Downloader_OnListPageCrawled;
 
         }

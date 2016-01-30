@@ -46,42 +46,10 @@ namespace ComicDownloader.Engines
          
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            List<StoryInfo> results = ReloadChachedData().Stories;
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-                var html = NetworkHelper.GetHtml(this.ListStoryURL);
-
-                HtmlDocument htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(html);
-                var nav = htmlDoc.DocumentNode.SelectSingleNode("(//ul[@class='pgg']/li/a)[last()]");
-                var url = nav.Attributes["href"].Value;
-                var count = Regex.Match(url,"\\d+").Value;
-                foreach (var item in Enumerable.Range(1, int.Parse(count)))
-                {
-                    url = "http://chaptruyen.com/truyen/all/any/name-az/" + item + "/";
-
-                    html = NetworkHelper.GetHtml(url);
-                    htmlDoc.LoadHtml(html);
-
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//a[@class='mng_det_pop']");
-
-                    if (nodes != null)
-                    {
-                        foreach (HtmlNode node in nodes)
-                        {
-                            results.Add(new StoryInfo()
-                            {
-
-                                Name = node.Attributes["title"].Value.Trim(),
-                                Url =  node.Attributes["href"].Value
-                            });
-                        }
-                    }
-                }
-            }
-            SaveCache(results);
-            return results;
+            return base.GetListStoriesUnknowPages(this.ListStoryURL,
+                "//a[@class='mng_det_pop']",
+                forceOnline,
+                "(//ul[@class='pgg'])[1]/li/a");
         }
 
         public override StoryInfo RequestInfo(string url)

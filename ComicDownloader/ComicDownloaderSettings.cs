@@ -63,17 +63,21 @@ namespace ComicDownloader
         public int Threads { get; set; }
 
         [CategoryAttribute("Download settings")]
+        public int NumberRetryWhenFailed { get; set; }
+
+        [CategoryAttribute("Download settings")]
         public int MaxThreadCrawlList { get; set; }
 
         public ComicDownloaderSettings()
         {
             SearchThreads = 10;
-            MaxThreadCrawlList = 20;
+            MaxThreadCrawlList = 10;
             Threads = 8;
             ConcurrentPageDownloadThreads = 12;
             CreatePDF = true;
             UseMultiThreadToDownloadChapter = true;
             AutoUpdateListOnStart = false;
+            this.NumberRetryWhenFailed = 5;
             IncludePDFIntroPage = true;
             PdfIntroPagePosition = PagePosition.LastPage;
             RenamePattern = "{{PAGENUM}} .{FILENAME}";

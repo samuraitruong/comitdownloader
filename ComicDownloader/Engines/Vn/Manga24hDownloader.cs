@@ -36,66 +36,10 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            List<StoryInfo> results = ReloadChachedData().Stories;
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-
-                string html = NetworkHelper.GetHtml(this.ListStoryURL);
-                HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
-
-                // There are various options, set as needed
-                htmlDoc.OptionFixNestedTags = true;
-
-                StringReader reader = new StringReader(html);
-                // filePath is a path to a file containing the html
-                htmlDoc.Load(reader);
-                if (htmlDoc.DocumentNode != null)
-                {
-                    var nodes = htmlDoc.DocumentNode.SelectSingleNode("//ul[@class='pagination']/li/span");
-
-                    var innertText = nodes.InnerText.Trim();
-                    var count = Convert.ToInt32(Regex.Match(innertText, @"\d+").Value);
-
-                    foreach (var item in Enumerable.Range(1, count))
-                    {
-                        string requestListPage = this.ListStoryURL + (item == 1 ? "" : "/" + item.ToString());
-
-                        var pageHtml = NetworkHelper.GetHtml(requestListPage);
-
-                        //HtmlAgilityPack.HtmlDocument htmlDoc1 = new HtmlAgilityPack.HtmlDocument();
-
-                        // There are various options, set as needed
-                       // htmlDoc.OptionFixNestedTags = true;
-
-                        //StringReader reader1 = new StringReader(html);
-                        //html = Regex.Replace(html, @"<head[^>]*>[\s\S]*?<\/head>", string.Empty);
-                        // filePath is a path to a file containing the html
-                        //htmlDoc1.Load(reader);
-                        //var list = htmlDoc1.DocumentNode.SelectNodes("//a[@class='manga_name_update']");
-
-                        //var links = htmlDoc1.DocumentNode
-                        //.Descendants("a")
-                        //.Where(tr => tr.GetAttributeValue("class", "").Contains("manga_name_update"))
-                        //.SelectMany(tr => tr.Descendants("a"))
-                        //.ToList();
-                        var matches = Regex.Matches(pageHtml, "<a class=\"manga_name_update\"[^>]*>[\\s\\S]*?<\\/a>");
-
-                        foreach (Match match in matches)
-                        {
-                            htmlDoc.LoadHtml(match.Value);
-                            var story = new StoryInfo()
-                            {
-                                Url = HostUrl + "/" + htmlDoc.DocumentNode.FirstChild.Attributes["href"].Value,
-                                Name = htmlDoc.DocumentNode.FirstChild.InnerText.Trim().Trim()
-                            };
-                            results.Add(story);
-                        }
-                    }
-                }
-            }
-            SaveCache(results);
-            return results;
+            return base.GetListStoriesUnknowPages(this.ListStoryURL,
+                "//a[@class='manga_name_update']",
+                forceOnline,
+                "//ul[@class='pagination']/li/a",null, this.HostUrl);
         }
 
         public override StoryInfo RequestInfo(string url)

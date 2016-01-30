@@ -41,47 +41,11 @@ namespace ComicDownloader.Engines
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             string urlPattern = "http://hamtruyen.vn/danhsach/P{0}/index.html?sort=1";
-          
-            List<StoryInfo> results = base.ReloadChachedData().Stories;
 
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-                int currentPage = 0;
-                bool isStillHasPage = true;
-                while (isStillHasPage)
-                {
-
-                    string url = string.Format(urlPattern, currentPage);
-
-                    string html = NetworkHelper.GetHtml(url);
-                    HtmlDocument htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(html);
-
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='item_truyennendoc']/a");
-                    if (nodes != null && nodes.Count > 0)
-                    {
-                        currentPage++;
-                        foreach (var node in nodes)
-                        {
-                            StoryInfo info = new StoryInfo()
-                            {
-                                Url = this.HostUrl + node.Attributes["href"].Value,
-                                Name = node.InnerText.Trim()
-                            };
-                            results.Add(info);
-                        }
-                    }
-                    else
-                    {
-                        isStillHasPage = false;
-                    }
-
-                }
-
-            }
-            this.SaveCache(results);
-            return results;
+            return base.GetListStoriesSimple(urlPattern,
+               "//div[@class='item_truyennendoc']/a",
+               forceOnline,
+               this.HostUrl);
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
@@ -190,6 +154,18 @@ namespace ComicDownloader.Engines
             }
 
             return stories;
+        }
+        public override int MaxThreadCrawlList
+        {
+            get
+            {
+                return 6; //dont do it so fast, server will return 403 :) this will override global setting
+            }
+
+            set
+            {
+                base.MaxThreadCrawlList = value;
+            }
         }
     }
 }
