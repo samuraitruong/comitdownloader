@@ -28,33 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.groupedCombo = new GroupedComboBox();
             this.SuspendLayout();
             // 
-            // webBrowser1
+            // groupedCombo
             // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(641, 243);
-            this.webBrowser1.TabIndex = 0;
-            this.webBrowser1.Url = new System.Uri("http://kissmanga.com", System.UriKind.Absolute);
+            this.groupedCombo.DataSource = null;
+            this.groupedCombo.FormattingEnabled = true;
+            this.groupedCombo.Location = new System.Drawing.Point(106, 43);
+            this.groupedCombo.Name = "groupedCombo";
+            this.groupedCombo.Size = new System.Drawing.Size(121, 21);
+            this.groupedCombo.TabIndex = 1;
+            this.groupedCombo.SelectedIndexChanged += new System.EventHandler(this.groupedCombo_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(641, 243);
-            this.Controls.Add(this.webBrowser1);
+            this.Controls.Add(this.groupedCombo);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        private GroupedComboBox groupedCombo;
     }
 }

@@ -42,7 +42,7 @@ namespace ComicDownloader.Engines
         {
             string urlPattern = "http://hamtruyen.vn/danhsach/P{0}/index.html?sort=1";
           
-            List<StoryInfo> results = base.ReloadChachedData();
+            List<StoryInfo> results = base.ReloadChachedData().Stories;
 
             if (results == null || results.Count == 0 || forceOnline)
             {

@@ -43,7 +43,7 @@ namespace ComicDownloader.Engines
 
             string urlPattern = "http://www.jpmanga.com/manga-directory-p{0}/"; 
 
-            List<StoryInfo> results = base.ReloadChachedData();
+            List<StoryInfo> results = base.ReloadChachedData().Stories;
             if (results == null || results.Count == 0 || forceOnline)
             {
                 results = new List<StoryInfo>();

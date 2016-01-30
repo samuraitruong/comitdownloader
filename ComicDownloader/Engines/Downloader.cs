@@ -10,6 +10,7 @@ using ComicDownloader.Properties;
 using HtmlAgilityPack;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace ComicDownloader.Engines
 {
@@ -206,7 +207,8 @@ namespace ComicDownloader.Engines
             queue.Enqueue(startUrl);
             List<string> alllinks = new List<string>() { startUrl };
 
-            List<StoryInfo> results = this.ReloadChachedData();
+            var catchItem = this.ReloadChachedData();
+            List<StoryInfo> results = catchItem.Stories;
 
             if (results == null || results.Count == 0 || forceOnline)
             {
@@ -294,9 +296,9 @@ namespace ComicDownloader.Engines
                         isStillHasPage = false;
                     }
                 }
-
+                //update cache
+                this.SaveCache(results);
             }
-            this.SaveCache(results);
             return results;
         }
 
@@ -353,12 +355,14 @@ namespace ComicDownloader.Engines
             }
             return results1;
         }
-        public List<StoryInfo> GetListStoriesSimple(string urlPattern,string matchPattern, bool forceOnline, string appendHost="", Func<HtmlNode, StoryInfo> convertFunc = null,   Func<string, HtmlDocument, List<StoryInfo>> customParser= null, bool singleListPage= false)
-        {            
-            List<StoryInfo> results = this.ReloadChachedData();
-
+        public List<StoryInfo> GetListStoriesSimple(string urlPattern, string matchPattern, bool forceOnline, string appendHost = "", Func<HtmlNode, StoryInfo> convertFunc = null, Func<string, HtmlDocument, List<StoryInfo>> customParser = null, bool singleListPage = false)
+        {
+            var catchItem = this.ReloadChachedData();
+            List<StoryInfo> results = catchItem.Stories;
+            //Stopwatch clock = new Stopwatch();
             if (results == null || results.Count == 0 || forceOnline)
             {
+                //clock.Start();
                 results = new List<StoryInfo>();
                 int currentPage = 1;
                 bool isStillHasPage = true;
@@ -366,18 +370,19 @@ namespace ComicDownloader.Engines
                 {
                     var tasks = new List<Task<List<StoryInfo>>>();
 
-                    foreach (var item in Enumerable.Range(1, singleListPage?1: MaxThreadCrawlList))
+                    foreach (var item in Enumerable.Range(1, singleListPage ? 1 : MaxThreadCrawlList))
                     {
                         string url = string.Format(urlPattern, currentPage++);
                         var oneTask = new Task<List<StoryInfo>>(() => this.CrawlOnePage(url, matchPattern, appendHost, convertFunc, customParser));
                         tasks.Add(oneTask);
                         oneTask.Start();
                     }
-                    Task.WaitAll(tasks.ToArray(),100);
+                    Task.WaitAll(tasks.ToArray(), 100);
 
                     foreach (var item in tasks)
                     {
-                        if (item.Result.Count > 0) {
+                        if (item.Result.Count > 0)
+                        {
                             results.AddRange(item.Result);
                         }
                         else
@@ -392,10 +397,11 @@ namespace ComicDownloader.Engines
                 }
 
                 //sort result 
-                results = results.OrderBy(p => p.Name).ToList();
 
+                results = results.OrderBy(p => p.Name).ToList();
+                //clock.Stop();
+                this.SaveCache(results, 0);
             }
-            this.SaveCache(results);
             return results;
         }
 
@@ -467,7 +473,7 @@ namespace ComicDownloader.Engines
             }
             else
             {
-                results = ReloadChachedData();
+                results = ReloadChachedData().Stories;
             }
 
 
@@ -510,10 +516,18 @@ namespace ComicDownloader.Engines
             }
             return filename;
         }
-        public void SaveCache(List<StoryInfo> stories)
+        public void SaveCache(List<StoryInfo> stories, long crawlTime = 0, CrawlTypes type = CrawlTypes.Manual)
         {
+            var info = new StoryInfoCacheFile()
+            {
+                Stories = stories,
+                Type = type,
+                TotalTime = crawlTime,
+                Updated = DateTime.Now
+            };
+
             var temp = Path.GetTempPath() + Path.GetRandomFileName();
-            var xml = SerializationHelper.SerializeToXml<List<StoryInfo>>(stories);
+            var xml = SerializationHelper.SerializeToXml<StoryInfoCacheFile>(info);
             using (var file = new StreamWriter(File.Open(temp, FileMode.OpenOrCreate)))
             {
                 file.Write(xml);
@@ -523,21 +537,34 @@ namespace ComicDownloader.Engines
             SecureHelper.EncryptFile(temp, CachedFile, Resources.SecureKey);
         }
 
-        public List<StoryInfo> ReloadChachedData()
+        public StoryInfoCacheFile ReloadChachedData()
         {
-
-            if (File.Exists(this.CachedFile))
+            StoryInfoCacheFile info = new StoryInfoCacheFile() {
+            };
+            try
             {
-                var temp = Path.GetTempPath()+ Path.GetRandomFileName();
-
-                SecureHelper.DecryptFile(CachedFile, temp, Resources.SecureKey);
-
-                using (var file = File.OpenText(temp))
+                if (File.Exists(this.CachedFile))
                 {
-                    return SerializationHelper.DeserializeFromXml<List<StoryInfo>>(file.ReadToEnd());
+                    var temp = Path.GetTempPath() + Path.GetRandomFileName();
+
+                    SecureHelper.DecryptFile(CachedFile, temp, Resources.SecureKey);
+
+                    using (var file = File.OpenText(temp))
+                    {
+                        info= SerializationHelper.DeserializeFromXml<StoryInfoCacheFile>(file.ReadToEnd());
+                    }
                 }
             }
-            return null;
+            catch(Exception ex)
+            {
+
+            }
+            finally
+            {
+               
+            }
+            
+            return info;
         }
 
         public int ExtractID(string name, string pattern)

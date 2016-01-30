@@ -44,7 +44,7 @@ namespace ComicDownloader.Engines
         {
             string urlPattern = "http://www.manga16.com/comic/news?page={0}";
            
-            List<StoryInfo> results = base.ReloadChachedData();
+            List<StoryInfo> results = base.ReloadChachedData().Stories;
             if (results == null || results.Count == 0 || forceOnline)
             {
                 results = new List<StoryInfo>();

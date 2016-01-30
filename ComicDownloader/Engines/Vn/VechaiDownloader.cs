@@ -38,7 +38,7 @@ namespace ComicDownloader.Engines
         {
             string urlPattern = "http://vechai.info/danh-sach.tmoinhat.p{0}.json";
 
-            List<StoryInfo> results = base.ReloadChachedData();
+            List<StoryInfo> results = base.ReloadChachedData().Stories;
 
             if (results == null || results.Count == 0 || forceOnline)
             {

@@ -42,7 +42,7 @@ namespace ComicDownloader.Engines
         {
             string urlPattern = this.ListStoryURL + "trang-{0}.html";
            
-            List<StoryInfo> results = base.ReloadChachedData();
+            List<StoryInfo> results = base.ReloadChachedData().Stories;
             if (results == null || results.Count == 0 || forceOnline)
             {
                 results = new List<StoryInfo>();

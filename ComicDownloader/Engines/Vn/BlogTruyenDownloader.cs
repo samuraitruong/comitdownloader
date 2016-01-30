@@ -42,7 +42,7 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            List<StoryInfo> results = base.ReloadChachedData();
+            List<StoryInfo> results = base.ReloadChachedData().Stories;
             string urlPattern = "http://blogtruyen.com/ListStory/GetCategory?CategoryID=0&OrderBy=1&PageIndex={0}";
 
             if (results == null || results.Count == 0 || forceOnline)

@@ -38,7 +38,7 @@ namespace ComicDownloader.Engines
         {
             string urlPattern = "http://mangak.net/moi-cap-nhat/page/{0}/";
 
-            List<StoryInfo> results = base.ReloadChachedData();
+            List<StoryInfo> results = base.ReloadChachedData().Stories;
 
             if (results == null || results.Count == 0 || forceOnline)
             {

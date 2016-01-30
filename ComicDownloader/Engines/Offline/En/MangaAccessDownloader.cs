@@ -42,7 +42,7 @@ namespace ComicDownloader.Engines
         {
 
 
-            List<StoryInfo> results = base.ReloadChachedData();
+            List<StoryInfo> results = base.ReloadChachedData().Stories;
             if (results == null || results.Count == 0 || forceOnline)
             {
                 results = new List<StoryInfo>();

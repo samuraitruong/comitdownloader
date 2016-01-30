@@ -42,7 +42,7 @@ namespace ComicDownloader.Engines
         {
             string urlPattern = "http://truyen.lauphim.com/manga-list/all/any/name-az/{0}/";
             //*[@id="sct_content"]/div/div/div[1]/ul
-            List<StoryInfo> results = base.ReloadChachedData();
+            List<StoryInfo> results = base.ReloadChachedData().Stories;
             if (results == null || results.Count == 0 || forceOnline)
             {
                 results = new List<StoryInfo>();
