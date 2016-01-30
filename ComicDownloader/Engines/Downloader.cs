@@ -15,7 +15,16 @@ namespace ComicDownloader.Engines
 {
     public delegate string ResolveImageOnPage(string pageUrl);
     public delegate void AfterCookieSet();
+    public delegate void ListPageCrawled(List<StoryInfo> listStories);
 
+
+    public class StoryComparer : IComparer<StoryInfo>
+    {
+        public int Compare(StoryInfo x, StoryInfo y)
+        {
+            return string.CompareOrdinal(x.Name, y.Name);
+        }
+    }
 
     public abstract class Downloader
     {
@@ -31,6 +40,7 @@ namespace ComicDownloader.Engines
         private CookieContainer Cookies = null;
 
         public event AfterCookieSet AfterCookieSet;
+        public event ListPageCrawled OnListPageCrawled;
 
         [DllImport("wininet.dll", SetLastError = true)]
         public static extern bool InternetGetCookieEx(
@@ -300,7 +310,49 @@ namespace ComicDownloader.Engines
             return imgUrl;
 
         }
+        private List<StoryInfo> CrawlOnePage(string url, string matchPattern, string appendHost = "", Func<HtmlNode, StoryInfo> convertFunc = null, Func<string, HtmlDocument, List<StoryInfo>> customParser = null)
+        {
+            var results1 = new List<StoryInfo>();
+            string html = NetworkHelper.GetHtml(url, this.Cookies);
+            HtmlDocument htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
 
+            var nodes = htmlDoc.DocumentNode.SelectNodes(matchPattern);
+            if (nodes != null && nodes.Count > 0)
+            {
+                foreach (var node in nodes)
+                {
+                    if (convertFunc != null)
+                    {
+                        results1.Add(convertFunc(node));
+                    }
+                    else
+                    {
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = appendHost + node.Attributes["href"].Value,
+                            Name = node.Attributes["title"] != null && !string.IsNullOrEmpty(node.Attributes["title"].Value) ? node.Attributes["title"].Value.Trim() : node.InnerText.Trim().Trim()
+                        };
+                        results1.Add(info);
+                    }
+                }
+            }
+            else
+            if (customParser != null)
+            {
+                var listparsed = customParser(html, htmlDoc);
+                if (listparsed != null && listparsed.Count > 0)
+                {
+                    results1.AddRange(listparsed);
+                }
+            }
+
+            if(this.OnListPageCrawled != null)
+            {
+                this.OnListPageCrawled(results1);
+            }
+            return results1;
+        }
         public List<StoryInfo> GetListStoriesSimple(string urlPattern,string matchPattern, bool forceOnline, string appendHost="", Func<HtmlNode, StoryInfo> convertFunc = null,   Func<string, HtmlDocument, List<StoryInfo>> customParser= null, bool singleListPage= false)
         {            
             List<StoryInfo> results = this.ReloadChachedData();
@@ -316,59 +368,8 @@ namespace ComicDownloader.Engines
 
                     foreach (var item in Enumerable.Range(1, singleListPage?1: MaxThreadCrawlList))
                     {
-                        var oneTask = new Task<List<StoryInfo>>(() =>
-                        {
-                            var results1 = new List<StoryInfo>();
-                            string url = string.Format(urlPattern, currentPage++);
-                            string html = NetworkHelper.GetHtml(url, this.Cookies);
-                            HtmlDocument htmlDoc = new HtmlDocument();
-                            htmlDoc.LoadHtml(html);
-
-                            var nodes = htmlDoc.DocumentNode.SelectNodes(matchPattern);
-                            if (nodes != null && nodes.Count > 0)
-                            {
-                                foreach (var node in nodes)
-                                {
-                                    if (convertFunc != null)
-                                    {
-                                        results1.Add(convertFunc(node));
-                                    }
-                                    else
-                                    {
-                                        StoryInfo info = new StoryInfo()
-                                        {
-                                            Url = appendHost + node.Attributes["href"].Value,
-                                            Name = node.Attributes["title"] != null && !string.IsNullOrEmpty(node.Attributes["title"].Value) ? node.Attributes["title"].Value.Trim() : node.InnerText.Trim().Trim()
-                                        };
-                                        results1.Add(info);
-                                    }
-                                }
-                            }
-                            else
-                            if (customParser != null)
-                            {
-                                var listparsed = customParser(html, htmlDoc);
-                                if (listparsed != null && listparsed.Count > 0)
-                                {
-                                    results1.AddRange(listparsed);
-                                }
-                                else
-                                {
-                                    isStillHasPage = false;
-                                }
-                            }
-                            else
-                            {
-                                isStillHasPage = false;
-                            }
-
-                        //only process 1 page
-                        if (singleListPage)
-                            {
-                                isStillHasPage = false;
-                            }
-                            return results1;
-                        });
+                        string url = string.Format(urlPattern, currentPage++);
+                        var oneTask = new Task<List<StoryInfo>>(() => this.CrawlOnePage(url, matchPattern, appendHost, convertFunc, customParser));
                         tasks.Add(oneTask);
                         oneTask.Start();
                     }
@@ -384,7 +385,14 @@ namespace ComicDownloader.Engines
                             isStillHasPage = false;
                         }
                     }
+                    if (singleListPage)
+                    {
+                        isStillHasPage = false;
+                    }
                 }
+
+                //sort result 
+                results = results.OrderBy(p => p.Name).ToList();
 
             }
             this.SaveCache(results);

@@ -221,10 +221,8 @@ namespace ComicDownloader
 
         private void AddChildForm(string title, Downloader dl)
         {
-            DownloaderForm childForm = new DownloaderForm();
+            DownloaderForm childForm = new DownloaderForm(dl);
             childForm.MdiParent = this;
-            childForm.Downloader = dl;
-            childForm.Text = title;
             childForm.WindowState = FormWindowState.Minimized;
             childForm.Show();
             childForm.WindowState = FormWindowState.Maximized;
