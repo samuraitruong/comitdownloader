@@ -349,20 +349,20 @@ namespace ComicDownloader.Engines
                 }
             }
 
-            if(this.OnListPageCrawled != null)
-            {
-                this.OnListPageCrawled(results1);
-            }
+            //if(this.OnListPageCrawled != null)
+            //{
+            //    this.OnListPageCrawled(results1);
+            //}
             return results1;
         }
         public List<StoryInfo> GetListStoriesSimple(string urlPattern, string matchPattern, bool forceOnline, string appendHost = "", Func<HtmlNode, StoryInfo> convertFunc = null, Func<string, HtmlDocument, List<StoryInfo>> customParser = null, bool singleListPage = false)
         {
             var catchItem = this.ReloadChachedData();
             List<StoryInfo> results = catchItem.Stories;
-            //Stopwatch clock = new Stopwatch();
+            Stopwatch clock = new Stopwatch();
             if (results == null || results.Count == 0 || forceOnline)
             {
-                //clock.Start();
+                clock.Start();
                 results = new List<StoryInfo>();
                 int currentPage = 1;
                 bool isStillHasPage = true;
@@ -374,6 +374,13 @@ namespace ComicDownloader.Engines
                     {
                         string url = string.Format(urlPattern, currentPage++);
                         var oneTask = new Task<List<StoryInfo>>(() => this.CrawlOnePage(url, matchPattern, appendHost, convertFunc, customParser));
+                        oneTask.ContinueWith((t) =>
+                        {
+                            if (this.OnListPageCrawled != null)
+                            {
+                                this.OnListPageCrawled(t.Result);
+                            }
+                        });
                         tasks.Add(oneTask);
                         oneTask.Start();
                     }
@@ -399,8 +406,8 @@ namespace ComicDownloader.Engines
                 //sort result 
 
                 results = results.OrderBy(p => p.Name).ToList();
-                //clock.Stop();
-                this.SaveCache(results, 0);
+                clock.Stop();
+                this.SaveCache(results, clock.ElapsedMilliseconds );
             }
             return results;
         }

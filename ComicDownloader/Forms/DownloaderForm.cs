@@ -497,18 +497,17 @@ namespace ComicDownloader
         private void Form1_Load(object sender, EventArgs e)
         {
             txtDir.Text = Settings.StogareFolder;
-            this.LoadStoryList();
+            Task.Run(() =>
+            {
+                this.LoadStoryList();
+            });
 
             if (downloadNow)
             {
                 bntInfo.PerformClick();
             }
         }
-
-
         List<StoryInfo> stories = new List<StoryInfo>();
-
-
 
         private void LoadStoryList()
         {
@@ -702,10 +701,11 @@ namespace ComicDownloader
         {
             mnuSelectSelected.Enabled = true;
         }
+        DateTime lastupdate = DateTime.Now.AddMinutes(-10);
 
         private void UnlockLayoutAfterLoadStories(List<StoryInfo> pageStories, bool reset = false)
         {
-            //lock (updateUIObj)
+            lock (updateUIObj)
             {
                 this.Invoke((MethodInvoker)delegate
                 {
@@ -721,8 +721,18 @@ namespace ComicDownloader
                         bntRefresh.Enabled = true;
 
                     }
+                    var ts = DateTime.Now - lastupdate;
+                    if (ts.TotalSeconds > 5)
+                    {
+                        ddlList.DataSource = this.stories; //rerender dropdown list is heavy. just render if data change after 5 secs.
+                        lastupdate = DateTime.Now;
 
-                    ddlList.DataSource = this.stories;
+                        ddlFilter.Items.Clear();
+                        var filters = new List<string> { "All" };
+                        filters.AddRange(this.stories.Select(p => p.Group).Distinct());
+                        ddlFilter.Items.AddRange(filters.ToArray());
+
+                    }
                     //ddlList.Items.AddRange(pageStories.ToArray());
                     lblStoriesCount.Text = "Stories : " + this.stories.Count.ToString();
                     if (!reset)
@@ -755,7 +765,7 @@ namespace ComicDownloader
             else
             {
                 DownloaderInfoForm form = new DownloaderInfoForm();
-                form.ShowInfo(cached);
+                form.ShowInfo(cached, this.Downloader);
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     Downloader.DeleteCached();

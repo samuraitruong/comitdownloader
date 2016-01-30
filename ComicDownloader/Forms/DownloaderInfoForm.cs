@@ -17,9 +17,13 @@ namespace ComicDownloader.Forms
         {
             InitializeComponent();
         }
-        public void ShowInfo(StoryInfoCacheFile info)
+        public void ShowInfo(StoryInfoCacheFile info, Downloader dl)
         {
-
+            lblUrl.Text = dl.HostUrl;
+            lblName.Text = dl.Name;
+            lblTotal.Text = info.Stories.Count.ToString();
+            lblUpdated.Text = info.Updated.ToString();
+            lblEllapsedTime.Text = TimeSpan.FromMilliseconds(info.TotalTime).ToFriendlyDisplay(5);
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -31,6 +35,11 @@ namespace ComicDownloader.Forms
         {
             DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -48,6 +48,7 @@ namespace ComicDownloader.Engines
         {
             get
             {
+                //return "A";
                 var firstChar = Name.Trim().FirstOrDefault();
                 if (char.IsLetterOrDigit(firstChar))
                 {
