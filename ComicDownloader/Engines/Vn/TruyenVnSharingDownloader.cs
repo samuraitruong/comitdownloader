@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("TruyenVnSharing.net", MenuGroup = "VN - 2" , Offline = false, MetroTab ="Tiếng Việt", Language = "Tieng viet", Image32 = "1364131990_document_add")]
+    [Downloader("TruyenVnSharing.net", MenuGroup = "O->T", Offline = false, MetroTab ="Tiếng Việt", Language = "Tieng viet", Image32 = "1364131990_document_add")]
     public class TruyenVnSharingDownloader : Downloader
     {
         public override string Logo
@@ -48,54 +48,7 @@ namespace ComicDownloader.Engines
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             string urlPattern = this.ListStoryURL + "/{0}";
-
-            List<StoryInfo> results = base.ReloadChachedData().Stories;
-
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-                int currentPage = 1;
-                bool isStillHasPage = true;
-                while (isStillHasPage)
-                {
-                    string url = string.Format(urlPattern, currentPage);
-
-                    string html = NetworkHelper.GetHtml(url);
-                    //var pattern = "<a class=\"bigChar\" href=\"(.*)\">(.*)</a>";
-
-                    HtmlDocument htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(html);
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//li[@class='browse_result_item']/a[@class='title']");
-                    //var nodes = htmlDoc.DocumentNode.Descendants("a")
-                    //                    .Where(p => p.Attributes.Contains("class") &&
-                    //                              p.Attributes["class"].Value == "bigChar")
-                    //                    .ToList();
-                    //var matches = Regex.Matches(html, pattern);
-                    if (nodes != null && nodes.Count > 0)
-                    {
-                        currentPage++;
-                        //cheat page 25 return no result
-                        //if (currentPage == 25) currentPage++;
-                        foreach (HtmlNode node in  nodes)
-                        {
-                            StoryInfo info = new StoryInfo()
-                            {
-                                Url = node.Attributes["href"].Value,
-                                Name = node.InnerText.Trim().Trim(),
-                            };
-                            results.Add(info);
-                        }
-                    }
-                    else
-                    {
-                        isStillHasPage = false;
-                    }
-
-                }
-
-            }
-            this.SaveCache(results);
-            return results;
+            return base.GetListStoriesSimple(urlPattern, "//li[@class='browse_result_item']/a[@class='title']", forceOnline);
         }
 
         public override StoryInfo RequestInfo(string storyUrl)

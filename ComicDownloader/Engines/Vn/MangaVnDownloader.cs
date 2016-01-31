@@ -9,7 +9,7 @@ using HtmlAgilityPack;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("MangaVn.com", MenuGroup = "VN - 2", MetroTab = "Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410881_plus_32")]
+    [Downloader("MangaVn.com", MenuGroup = "I->N", MetroTab = "Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410881_plus_32")]
     public class MangaVnDownloader : Downloader
     {
         public override string Logo
@@ -36,56 +36,11 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            var queue = new Queue<string>();
-            queue.Enqueue(this.ListStoryURL);
-            List<string> visitedLinks = new List<string>();
-            visitedLinks.Add(this.ListStoryURL);
-
-            List<StoryInfo> results = base.ReloadChachedData().Stories;
-
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-                int currentPage = 1;
-                while (queue.Count>0)
-                {
-                    var url = queue.Dequeue();
-
-                    string html = NetworkHelper.GetHtml(url);
-                    HtmlDocument htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(html);
-
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@id='blog_message']/span/a");
-                    if (nodes != null && nodes.Count > 0)
-                    {
-                        currentPage++;
-                        foreach (var node in nodes)
-                        {
-                            StoryInfo info = new StoryInfo()
-                            {
-                                Url = node.Attributes["href"].Value,
-                                Name = node.InnerText.Trim().Trim()
-                            };
-                            results.Add(info);
-                        }
-                    }
-
-                    //get navigation page
-                    var paging = htmlDoc.DocumentNode.SelectNodes("//p[@class='paging']//a[contains(@href,'f3p')]");
-                    foreach (HtmlNode p in paging)
-                    {
-                        var nextUrl = this.HostUrl + p.Attributes["href"].Value;
-                        if(!visitedLinks.Contains(nextUrl))
-                        {
-                            queue.Enqueue(nextUrl);
-                            visitedLinks.Add(nextUrl);
-                        }
-                    }
-                }
-
-            }
-            this.SaveCache(results);
-            return results;
+            return base.GetListStoriesUnknowPages(this.ListStoryURL,
+                "//div[@id='blog_message']/span/a",
+                forceOnline,
+                "//p[@class='paging']//a[contains(@href,'f3p')]",
+                null, this.HostUrl);
         }
 
 

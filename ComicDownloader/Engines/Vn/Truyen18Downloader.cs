@@ -7,8 +7,8 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Truyen 18", Offline = false, Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
-    [Downloader("Truyen 18", Offline = false, Language = "Tieng viet", MenuGroup = "VN 18+", MetroTab = "18+", Image32 = "1364078951_insert-object")]
+    [Downloader("Truyen 18", Offline = false, Language = "Tieng viet", MenuGroup = "O->T", MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
+    [Downloader("Truyen 18", Offline = false, Language = "Tieng viet", MenuGroup = "18+", MetroTab = "18+", Image32 = "1364078951_insert-object")]
 
     public class Truyen18Downloader : Downloader
     {
@@ -35,47 +35,8 @@ namespace ComicDownloader.Engines
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             string urlPattern = "http://www.truyen18.org/moi-cap-nhat/danhsach/page/{0}.html";
-           
-            List<StoryInfo> results = base.ReloadChachedData().Stories;
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-                int currentPage = 1;
-                bool isStillHasPage = true;
-                while (isStillHasPage)
-                {
-                    string url = string.Format(urlPattern, currentPage);
 
-                    string html = NetworkHelper.GetHtml(url);
-                    HtmlDocument htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(html);
-
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='show-content-cat']/ul/li/a/img");
-                    if (nodes != null && nodes.Count > 0)
-                    {
-                        currentPage++;
-                        foreach (var node in nodes)
-                        {
-                            var anode = node.ParentNode.NextSibling.NextSibling;
-                            StoryInfo info = new StoryInfo()
-                            {
-                                Url = HostUrl+ anode.Attributes["href"].Value,
-                                Name = anode.Attributes["title"].Value
-                            };
-                            results.Add(info);
-                        }
-                    }
-                    else
-                    {
-                        isStillHasPage = false;
-                    }
-                                        
-                }
-
-            }
-            results = results.OrderBy(p => p.Name).ToList();
-            this.SaveCache(results);
-            return results;
+            return base.GetListStoriesSimple(urlPattern, "//div[@class='show-content-cat']/ul/li/a[2]", forceOnline);
         }
 
         public override StoryInfo RequestInfo(string storyUrl)

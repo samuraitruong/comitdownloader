@@ -1483,6 +1483,16 @@ namespace ComicDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap load_download {
+            get {
+                object obj = ResourceManager.GetObject("load_download", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap locked_16x16 {
             get {
                 object obj = ResourceManager.GetObject("locked_16x16", resourceCulture);

@@ -42,6 +42,7 @@ namespace ComicDownloader.Forms
             this.tlLastestUpdate = new MetroFramework.Controls.MetroTile();
             this.metroStyleExtender1 = new MetroFramework.Components.MetroStyleExtender(this.components);
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.bntSearch = new MetroFramework.Controls.MetroButton();
             this.txtKeyword = new MetroFramework.Controls.MetroTextBox();
             this.metroTile2 = new MetroFramework.Controls.MetroTile();
@@ -53,7 +54,6 @@ namespace ComicDownloader.Forms
             this.lblStatus = new MetroFramework.Controls.MetroLabel();
             this.metroTile3 = new MetroFramework.Controls.MetroTile();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
-            this.button1 = new System.Windows.Forms.Button();
             this.metroTabPage1.SuspendLayout();
             this.metroTabControl1.SuspendLayout();
             this.SuspendLayout();
@@ -161,6 +161,16 @@ namespace ComicDownloader.Forms
             this.metroTabPage1.VerticalScrollbarBarColor = true;
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(669, 287);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // bntSearch
             // 
@@ -309,16 +319,6 @@ namespace ComicDownloader.Forms
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.metroTabControl1_Selected);
             this.metroTabControl1.TabIndexChanged += new System.EventHandler(this.metroTabControl1_TabIndexChanged);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(669, 287);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ModernUIForm
             // 

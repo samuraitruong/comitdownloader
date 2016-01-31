@@ -10,7 +10,7 @@ using ComicDownloader.Properties;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("BlogTruyen", MenuGroup = "VN", MetroTab = "Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410895_001_01")]
+    [Downloader("BlogTruyen", MenuGroup = "A->F", MetroTab = "Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410895_001_01")]
     public class BlogTruyenDownloader : Downloader
     {
         public override string Logo

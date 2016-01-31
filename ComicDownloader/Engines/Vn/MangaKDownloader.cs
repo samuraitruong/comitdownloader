@@ -9,7 +9,7 @@ using HtmlAgilityPack;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("MangaK.net", MenuGroup = "VN - 2" , Offline = false, MetroTab ="Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410881_plus_32")]
+    [Downloader("MangaK.net", MenuGroup = "I->N", Offline = false, MetroTab ="Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410881_plus_32")]
     public class MangaKDownloader : Downloader
     {
         public override string Logo

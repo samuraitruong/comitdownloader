@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("TruyenTranh8.com", Offline = false, Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
+    [Downloader("TruyenTranh8.com", Offline = false, Language = "Tieng viet", MenuGroup = "O->T", MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
     public class TruyenTranh8Downloader: Downloader
     {
         public override string Logo
@@ -25,12 +25,12 @@ namespace ComicDownloader.Engines
 
         public override string ListStoryURL
         {
-            get { return "http://truyentranh8.com/danh_sach_truyen/"; }
+            get { return "http://truyentranh8.net/danh_sach_truyen/"; }
         }
 
         public override string HostUrl
         {
-            get { return "http://truyentranh8.com"; }
+            get { return "http://truyentranh8.net"; }
         }
 
         public override string StoryUrlPattern
@@ -40,84 +40,35 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            string urlPattern = this.ListStoryURL + "page={0}";
+            string urlPattern = "http://truyentranh8.net/search.php?act=search&sort=ten&page={0}&view=list";
 
-            List<StoryInfo> results = base.ReloadChachedData().Stories;
-
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-                int currentPage = 1;
-                bool isStillHasPage = true;
-                while (isStillHasPage)
-                {
-                    string url = string.Format(urlPattern, currentPage);
-
-                    string html = NetworkHelper.GetHtml(url);
-                    HtmlDocument htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(html);
-
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"tblChap\"]//a[@class=\"tipsy\"]");
-                    if (nodes != null && nodes.Count > 0)
+            return base.GetListStoriesSimple(urlPattern,
+                "//td[@class='tit']/a[1]",
+                forceOnline,
+                convertFunc:(node)=> {
+                    return new StoryInfo()
                     {
-                        currentPage++;
-                        foreach (var node in nodes)
-                        {
-                            StoryInfo info = new StoryInfo()
-                            {
-                                Url = node.Attributes["href"].Value,
-                                Name = node.InnerText.Trim()
-                            };
-                            results.Add(info);
-                        }
-                    }
-                    else
-                    {
-                        isStillHasPage = false;
-                    }
-
-                }
-
-            }
-            this.SaveCache(results);
-            return results;
+                        Name = node.InnerText,
+                        Url = base.EnsureHostName(this.HostUrl, node.Attributes["href"].Value)
+                    };
+                });
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
         {
-            
 
-            var html = NetworkHelper.GetHtml(storyUrl);
-
-            HtmlDocument htmlDoc = new HtmlDocument();
-
-            htmlDoc.LoadHtml(html);
-
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//h1[@itemprop=\"name\"]");
-
-            
-             
-            StoryInfo info = new StoryInfo()
-            {
-                Url = storyUrl,
-                Name = nameNode.InnerText.Trim()
-            };
-
-              var chapNodes = htmlDoc.DocumentNode.SelectNodes("//*[@itemprop=\"itemListElement\"]");
-
-              foreach (HtmlNode node in chapNodes)
-              {
-                  ChapterInfo chapInfo = new ChapterInfo()
-                  {
-                      Name = node.SelectSingleNode("//strong").InnerText.Trim(),
-                      Url = node.Attributes["href"].Value.Trim(),
-                      ChapId = ExtractID(node.SelectSingleNode("//strong").InnerText.Trim())
-                  };
-                  info.Chapters.Add(chapInfo);
-              }
-
-              info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
-            return info;
+            return base.RequestInfoSimple(storyUrl,
+                "//h1[@itemprop=\"name\"]",
+                "//*[@itemprop=\"itemListElement\"]", 
+                chapterExtract : (node)=> {
+                    ChapterInfo chapInfo = new ChapterInfo()
+                    {
+                        Name = node.SelectSingleNode("//span[@clss='hm']").InnerText.Trim() + node.SelectSingleNode("//strong").InnerText.Trim(),
+                        Url = node.Attributes["href"].Value.Trim(),
+                        ChapId = ExtractID(node.SelectSingleNode("//strong").InnerText.Trim())
+                    };
+                    return chapInfo;
+                });
         }
 
         public override List<string> GetPages(string chapUrl)
@@ -137,14 +88,6 @@ namespace ComicDownloader.Engines
             {
                 pages.Add(match.Groups[1].Value);
             }
-            //HtmlDocument htmlDoc = new HtmlDocument();
-            //htmlDoc.LoadHtml(html);
-
-            //var pageNodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"wrapper\"]//img");
-            //foreach (HtmlNode node in pageNodes)
-            //{
-            //    pages.Add(node.Attributes["src"].Value);
-            //}
             return pages;
         }
 

@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using System.Windows.Forms;
+
 namespace ComicDownloader
 {
     partial class DownloaderForm
@@ -556,18 +558,17 @@ namespace ComicDownloader
             // ddlList
             // 
             this.ddlList.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.ddlList.DataSource = null;
+            this.ddlList.GroupMember = "Group";
             this.ddlList.DisplayMember = "Name";
             this.ddlList.DropDownHeight = 500;
             this.ddlList.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddlList.FormattingEnabled = true;
-            this.ddlList.GroupMember = "Group";
             this.ddlList.IntegralHeight = false;
             this.ddlList.ItemHeight = 17;
             this.ddlList.Location = new System.Drawing.Point(54, 32);
             this.ddlList.MaxDropDownItems = 20;
             this.ddlList.Name = "ddlList";
-            this.ddlList.Size = new System.Drawing.Size(174, 23);
+            this.ddlList.Size = new System.Drawing.Size(174, 25);
             this.ddlList.TabIndex = 15;
             this.ddlList.ValueMember = "Url";
             this.ddlList.SelectedIndexChanged += new System.EventHandler(this.ddlList_SelectedIndexChanged);

@@ -60,10 +60,7 @@ namespace ComicDownloader
                     {
                        Text = (button.Tag as Downloader).Name,
                     };
-
-                   
-
-
+                    
                     pnl.Items.Add(button);
                     tab.Panels.Add(pnl);
 
@@ -93,9 +90,12 @@ namespace ComicDownloader
                             tags.Add(tag);
                         }
                         tag.TagName = att.MenuGroup;
+                        if(string.IsNullOrEmpty(att.Image32))
+                        {
+                            att.Image32 = "load_download";
+                        }
 
                         global::System.Resources.ResourceManager resourceMan = new global::System.Resources.ResourceManager("ComicDownloader.Properties.Resources", typeof(Resources).Assembly);
-
                         RibbonButton button = new RibbonButton()
                         {
                             Image =  resourceMan.GetObject(att.Image32) as Image,
@@ -164,22 +164,9 @@ namespace ComicDownloader
             {
                 cobDownloaders.DropDownItems.Add(item);
 
-
-
             }
         }
-
-       
-
-        private void btnAddNewTTT_Click(object sender, EventArgs e)
-        {
-            DownloaderForm childForm = new DownloaderForm();
-            childForm.MdiParent = this;
-            childForm.Downloader = new TruyenTranhTuanDownloader();
-            childForm.Text = "Truyen Tranh Tuan";
-            childForm.Show();
-        }
-
+        
         public void UpdateActiveTabTitle(string title)
         {
             mdiTabStrip1.SelectedTab.Text = title;
@@ -188,9 +175,6 @@ namespace ComicDownloader
         {
             
         }
-
-       
-
         private void ribbonOrbMenuItem1_Click(object sender, EventArgs e)
         {
             Application.Exit();

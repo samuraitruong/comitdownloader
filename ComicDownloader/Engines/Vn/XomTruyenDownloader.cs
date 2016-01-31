@@ -8,7 +8,7 @@ using System.Net;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Xomtruyentranh.con", Offline = false, MenuGroup = "VN - 2" , MetroTab="Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410887_Add")]
+    [Downloader("Xomtruyentranh.con", Offline = false, MenuGroup = "U-Z", MetroTab="Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410887_Add")]
     public class XomTruyenDownloader
         : Downloader
     {
@@ -46,68 +46,12 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            List<StoryInfo> results = base.ReloadChachedData().Stories;
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-                var html = NetworkHelper.GetHtml(this.ListStoryURL);
-
-                HtmlDocument htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(html);
-                var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@id='maincol']/div[2]//span[1]/a[contains(@href,'http')]");
-                
-
-                foreach (HtmlNode node in nodes)
-                {
-                    results.Add(new StoryInfo()
-                    {
-                        
-                        Name = node.InnerText.Trim().Trim(),
-                        Url = node.Attributes["href"].Value
-                    });
-                }
-            }
-            SaveCache(results);
-            return results;
+            return base.GetListStoriesSimple(this.ListStoryURL, "//*[@id='maincol']/div[2]//span[1]/a[contains(@href,'http')]", forceOnline, singleListPage: true);
         }
 
         public override StoryInfo RequestInfo(string url)
         {
-         
-            var html = NetworkHelper.GetHtml(url);
-
-            HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
-            htmlDoc.LoadHtml(html);
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"mangainfo\"]//h3");
-
-            StoryInfo info = new StoryInfo()
-            {
-                Url = url,
-                Name = nameNode.InnerText.Trim().Trim()
-            };
-
-            var chapterLinks = htmlDoc.DocumentNode.SelectNodes("//*[@class=\"scroll-pane\"]//span[1]/a");
-
-            info.ChapterCount = chapterLinks.Count;
-            foreach (HtmlNode item in chapterLinks)
-            {
-
-                ChapterInfo chapter = new ChapterInfo()
-                {
-                    Url = item.Attributes["href"].Value,
-                    Name = item.InnerText.Trim()
-                    ,
-                    ChapId = ExtractID(item.InnerText.Trim(),@"Chapter (\d*)")
-
-                };
-               
-
-                info.Chapters.Add(chapter);
-            }
-
-            info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
-
-            return info;
+            return base.RequestInfoSimple(url, "//*[@id=\"mangainfo\"]//h3", "//*[@class=\"scroll-pane\"]//span[1]/a");       
         }
         public override string Name
         {
@@ -126,21 +70,7 @@ namespace ComicDownloader.Engines
         //}
         public override List<string> GetPages(string chapUrl)
         {
-            List<string> pages = new List<string>();
-
-            var doc = base.GetParser(chapUrl);
-            return doc.DocumentNode.SelectNodes("//div[@class='breadcumb'][2]//img")
-                .Select(p => p.Attributes["Src"].Value)
-                .ToList();
-                //string html = NetworkHelper.GetHtml(chapUrl);
-                
-                //var p = "var images = \\[(.*)\\]";
-                //var match = Regex.Match(html, p);
-                //var arr = match.Groups[1].Value.Split("',".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-
-                //pages.AddRange(arr);
-
-            //return pages;
+            return base.GetPagesSimple(chapUrl, "//div[@class='breadcumb'][2]//img");
         }
 
         public override List<StoryInfo> GetLastestUpdates()

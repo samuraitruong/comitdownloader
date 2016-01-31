@@ -22,7 +22,7 @@ namespace ComicDownloader.Engines
         public DownloaderAttribute(string name)
         {
             Name = name;
-            
+            Image32 = "load_download";
         }
     }
 }

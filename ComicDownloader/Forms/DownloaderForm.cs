@@ -512,30 +512,32 @@ namespace ComicDownloader
 
         private void LoadStoryList()
         {
+            Task.Run(()=> LockUIForStoryListLoading());
 
-            this.Invoke((MethodInvoker)delegate
-            {
-                if (ddlList.DataSource == null)
-                {
-                    ddlList.DataSource = this.stories;
-                }
-
-                //ddlList.Items.Clear();
-                loading.Visible = true;
-                loading.Location = bntRefresh.Location;
-                loading.Size = bntRefresh.Size;
-
-                ddlList.Text = "Wait a moment....";
-                bntRefresh.Enabled = false;
-                ddlList.Enabled = false;
-
-            });
             var task = Task<List<StoryInfo>>.Run(() => Downloader.GetListStories(false))
                 .ContinueWith((t) =>
                 {
                     this.stories = t.Result;
                     this.UnlockLayoutAfterLoadStories(t.Result, true);
                 });
+        }
+
+        private void LockUIForStoryListLoading()
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                ddlList.DataSource = null;
+                ddlList.Items.Clear();
+                ddlList.FormattingEnabled = false;
+                loading.Visible = true;
+                loading.Location = bntRefresh.Location;
+                loading.Size = bntRefresh.Size;
+                ddlFilter.Enabled = false;
+                ddlList.Text = "Wait a moment....";
+                bntRefresh.Enabled = false;
+                ddlList.Enabled = false;
+
+            });
         }
 
         private void ddlList_SelectedIndexChanged(object sender, EventArgs e)
@@ -723,18 +725,13 @@ namespace ComicDownloader
 
                     }
                     var ts = DateTime.Now - lastupdate;
-                    if (ts.TotalSeconds > 5)
+                    if (ts.TotalSeconds > this.stories.Count/500)
                     {
-                        ddlList.DataSource = this.stories; //rerender dropdown list is heavy. just render if data change after 5 secs.
+                        //ddlList.DataSource = this.stories; //rerender dropdown list is heavy. just render if data change after 5 secs.
                         lastupdate = DateTime.Now;
-
-                        ddlFilter.Items.Clear();
-                        var filters = new List<string> { "All" };
-                        filters.AddRange(this.stories.Select(p => p.Group).Distinct());
-                        ddlFilter.Items.AddRange(filters.ToArray());
-
                     }
-                    //ddlList.Items.AddRange(pageStories.ToArray());
+                    ddlFilter.Items.Clear();
+                    ddlList.Items.AddRange(pageStories.ToArray());
                     lblStoriesCount.Text = "Stories : " + this.stories.Count.ToString();
                     if (!reset)
                     {
@@ -747,6 +744,11 @@ namespace ComicDownloader
                         var filters = new List<string> { "All" };
                         filters.AddRange(this.stories.Select(p => p.Group).Distinct());
                         ddlFilter.Items.AddRange(filters.ToArray());
+                        ddlFilter.Enabled = true;
+                        ddlList.Items.Clear();
+                        ddlList.FormattingEnabled = true;
+                        ddlList.DataSource = this.stories;
+
                     }
                     ddlList.Enabled = true;
                     loading.Visible = !reset;
@@ -756,6 +758,7 @@ namespace ComicDownloader
 
         private void bntRefresh_Click(object sender, EventArgs e)
         {
+
             var cached = Downloader.ReloadChachedData();
             if (cached == null || cached.Stories.Count == 0)
             {

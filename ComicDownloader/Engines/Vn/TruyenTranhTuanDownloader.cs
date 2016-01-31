@@ -8,7 +8,7 @@ using System.Net;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("TruyenTranhTuan", Offline = false, Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "_1364410919_Add_Green_Button")]
+    [Downloader("TruyenTranhTuan", Offline = false, Language = "Tieng viet", MenuGroup = "O->T", MetroTab="Tiếng Việt", Image32 = "_1364410919_Add_Green_Button")]
     public class TruyenTranhTuanDownloader
         : Downloader
     {
@@ -46,74 +46,14 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            List<StoryInfo> results = base.ReloadChachedData().Stories;
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-                var doc = base.GetParser(this.ListStoryURL);
-                var nodes = doc.DocumentNode.SelectNodes("//span[@class='manga']/a");
-               
-
-                foreach (HtmlNode match in nodes)
-                {
-                    results.Add(new StoryInfo()
-                    {
-                        //UrlSegment = match.Groups[1].Value,
-                        Url = match.Attributes["href"].Value,
-                        Name = match.InnerText.Trim().Trim()
-                    });
-                }
-            }
-            SaveCache(results);
-            return results;
+            return base.GetListStoriesSimple(this.ListStoryURL,
+                "//span[@class='manga']/a",
+                forceOnline, singleListPage: true);
         }
 
         public override StoryInfo RequestInfo(string url)
         {
-            StoryInfo info = new StoryInfo();
-
-            // LockControl(false);
-            //string url = string.Format(StoryUrlPattern, urlSegment);
-
-            var html = NetworkHelper.GetHtml(url);
-
-            HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
-            htmlDoc.LoadHtml(html);
-
-            var node = htmlDoc.DocumentNode.SelectSingleNode("//h1[@itemprop='name']");
-            info.Name = node.InnerText.Trim();
-            //var node2 = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"fontsize-chitiet\"]/span[2]");
-            //info.AltName = node2.InnerText.Trim();
-            //var node3 = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"fontsize-chitiet\"]/span[2]");
-            //info.Categories = node3.InnerText.Trim();
-            info.Url = url;
-
-            //var ccontentmain = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"content-main\"]");
-            
-
-            //htmlDoc.LoadHtml(ccontentmain.InnerHtml);
-
-            var chapterLinks = htmlDoc.DocumentNode.SelectNodes("//span[@class='chapter-name']/a");
-
-            info.ChapterCount = chapterLinks.Count;
-            foreach (HtmlNode item in chapterLinks)
-            {
-
-                ChapterInfo chapter = new ChapterInfo()
-                {
-                    Url = item.Attributes["href"].Value,
-                    Name = item.InnerText.Trim(),
-                    ChapId = ExtractID(item.InnerText.Trim())
-
-                };
-               
-
-                info.Chapters.Add(chapter);
-            }
-
-            info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
-
-            return info;
+            return base.RequestInfoSimple(url, "//h1[@itemprop='name']", "//span[@class='chapter-name']/a");
         }
         public override string Name
         {

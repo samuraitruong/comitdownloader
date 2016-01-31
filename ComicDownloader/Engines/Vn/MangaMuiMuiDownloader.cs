@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Manga Miu Miu", Offline = false, Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
+    [Downloader("Manga Miu Miu", Offline = false, Language = "Tieng viet", MenuGroup = "I->N", MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
     public class MangaMiuMiuDownloader : Downloader
     {
         public override string Logo

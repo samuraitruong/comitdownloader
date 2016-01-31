@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Truyen Mut", Offline = false, Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
+    [Downloader("Truyen Mut", Offline = false, Language = "Tieng viet", MenuGroup = "O->T", MetroTab="Tiếng Việt", Image32 = "load_download")]
     public class TruyenMutDownloader: Downloader
     {
         public override string Logo
@@ -41,98 +41,33 @@ namespace ComicDownloader.Engines
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             string urlPattern = "http://truyenmut.com/danh-sach/truyen-moi-update/page-{0}.html";
-            
-            List<StoryInfo> results = base.ReloadChachedData().Stories;
 
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-                int currentPage = 1;
-                bool isStillHasPage = true;
-                while (isStillHasPage)
+            return base.GetListStoriesSimple(urlPattern,
+                "(//div[@class='list list-thumbnail col-xs-12'])[1]//div[2]//div/a",
+                forceOnline,
+               // "//ul[@class='pagination pagination-sm']/li/a",
+                convertFunc: (node) =>
                 {
-                    string url = string.Format(urlPattern, currentPage);
-
-                    string html = NetworkHelper.GetHtml(url);
-                    HtmlDocument htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(html);
-
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//a[@class='TitleAlbum']");
-                    if (nodes != null && nodes.Count > 0)
+                    return new StoryInfo()
                     {
-                        currentPage++;
-                        foreach (var node in nodes)
-                        {
-                            StoryInfo info = new StoryInfo()
-                            {
-                                Url = this.HostUrl + "/"+ node.Attributes["href"].Value,
-                                Name = node.InnerText.Trim().Trim()
-                            };
-                            results.Add(info);
-                        }
-                    }
-                    else
-                    {
-                        isStillHasPage = false;
-                    }
+                        Name = node.InnerText.Trim(),
+                        Url = base.EnsureHostName(this.HostUrl, node.Attributes["href"].Value)
+                    };
                 }
-
-            }
-            this.SaveCache(results);
-            return results;
+                );
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
         {
             var html = NetworkHelper.GetHtml(storyUrl);
-
-            HtmlDocument htmlDoc = new HtmlDocument();
-
-            htmlDoc.LoadHtml(html);
-
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//h1");
- 
-            StoryInfo info = new StoryInfo()
-            { 
-                Url = storyUrl,
-                Name = nameNode.InnerText.Trim().Replace("Đọc Truyện ", string.Empty)
-            };
-
-              var chapNodes = htmlDoc.DocumentNode.SelectNodes("(//div[@class='info']/table//tr/td)[1]//a");
-
-              foreach (HtmlNode node in chapNodes)
-              {
-                string url = node.Attributes["href"].Value.Trim();
-                if(!url.StartsWith("http"))
-                {
-                    url = this.HostUrl + "/" + url;
-                }
-                  ChapterInfo chapInfo = new ChapterInfo()
-                  {
-                      Name =  node.InnerText.Trim().Trim(),
-                      Url = url,
-                      ChapId = ExtractID(node.InnerText.Trim().Trim())
-                  };
-                  info.Chapters.Add(chapInfo);
-              }
-
-              info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
-            return info;
+            return base.RequestInfoSimple(storyUrl,
+                "//div[@class='title-list']/h2",
+                "//*[@id='list-chapter']/div[2]/div[1]//a");
         }
 
         public override List<string> GetPages(string chapUrl)
         {
-            List<string> pages = new List<string>();
-
-            var doc = base.GetParser(chapUrl);
-            
-            var nodes = doc.DocumentNode.SelectNodes("//div[@id='content']/table//tr/td/p/img");
-            foreach (HtmlNode node in nodes)
-            {
-                pages.Add(node.Attributes["src"].Value);
-            }
-
-            return pages;
+            return base.GetPagesSimple(chapUrl, "//div[@class='chapter-content']//img");
         }
 
         public override List<StoryInfo> GetLastestUpdates()

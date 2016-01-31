@@ -117,87 +117,104 @@ namespace ComicDownloader.Forms
                 {
                     foreach (DownloaderAttribute att in attributes)
                     {
-                        var tag = tags.Find(p => p.Name == att.MetroTab);
-                        if (tag == null)
+                        var listNames = new List<String>() { att.MetroTab, att.Name.Substring(0, 1).ToUpper() };
+                        listNames.ForEach((name) =>
                         {
-                            tag = new TabInfo();
-                            tags.Add(tag);
-                        }
-                        tag.Name = att.MetroTab;
+                            var tag = tags.Find(p => p.Name == name);
 
-                        //global::System.Resources.ResourceManager resourceMan = new global::System.Resources.ResourceManager("ComicDownloader.Properties.Resources", typeof(ComicDownloader.Properties.Resources).Assembly);
+                            if (tag == null)
+                            {
+                                tag = new TabInfo();
+                                tags.Add(tag);
+                            }
+                            tag.Name = name;
 
-                       Thread.Sleep(new Random().Next(1,10));
-                        var m = new Random(DateTime.Now.Millisecond);
-                        int next = m.Next(0, int.MaxValue);
+                            //global::System.Resources.ResourceManager resourceMan = new global::System.Resources.ResourceManager("ComicDownloader.Properties.Resources", typeof(ComicDownloader.Properties.Resources).Assembly);
 
-                        var title = new MetroFramework.Controls.MetroTile();
-                        title.ActiveControl = null;
-                        title.Tag = downloader;
-                        title.Location = new System.Drawing.Point(20, 150);
-                        title.Cursor = System.Windows.Forms.Cursors.Hand;
-                        title.Size = new System.Drawing.Size(150, 120);
+                            Thread.Sleep(new Random().Next(1, 10));
+                            var m = new Random(DateTime.Now.Millisecond);
+                            int next = m.Next(0, int.MaxValue);
 
-                        title.CustomBackground = true;
-                        var index = next%colorArray.Length;
-                        title.BackColor = colorArray[index];
+                            var title = new MetroFramework.Controls.MetroTile();
+                            title.ActiveControl = null;
+                            title.Tag = downloader;
+                            title.Location = new System.Drawing.Point(20, 150);
+                            title.Cursor = System.Windows.Forms.Cursors.Hand;
+                            title.Size = new System.Drawing.Size(150, 120);
 
-                        title.CustomForeColor = true;
-                        title.ForeColor = ColorTranslator.FromHtml("#ffffff");
-                        
-                        title.TileTextFontSize = MetroTileTextSize.Medium;
-                        title.TileTextFontWeight = MetroTileTextWeight.Bold;
+                            title.CustomBackground = true;
+                            var index = next % colorArray.Length;
+                            title.BackColor = colorArray[index];
 
-                        //title.Style = (MetroFramework.MetroColorStyle)(next%13);
-                        title.TabIndex = 2;
-                        //if (title.Style == MetroColorStyle.White) title.Style = MetroColorStyle.Red;
-                        title.Text = downloader.Name;
-                        title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-                        title.Theme = MetroFramework.MetroThemeStyle.Dark;
-                        title.Click += new System.EventHandler(delegate(object sender, System.EventArgs e)
-                        {
-                            var dl = ((MetroTile)sender).Tag as Downloader;
-                            if (mainApp == null) mainApp = new AppMainForm();
-                            
+                            title.CustomForeColor = true;
+                            title.ForeColor = ColorTranslator.FromHtml("#ffffff");
+
+                            title.TileTextFontSize = MetroTileTextSize.Medium;
+                            title.TileTextFontWeight = MetroTileTextWeight.Bold;
+
+                            //title.Style = (MetroFramework.MetroColorStyle)(next%13);
+                            title.TabIndex = 2;
+                            //if (title.Style == MetroColorStyle.White) title.Style = MetroColorStyle.Red;
+                            title.Text = downloader.Name;
+                            title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                            title.Theme = MetroFramework.MetroThemeStyle.Dark;
+                            title.Click += new System.EventHandler(delegate (object sender, System.EventArgs e)
+                            {
+                                var dl = ((MetroTile)sender).Tag as Downloader;
+                                if (mainApp == null) mainApp = new AppMainForm();
+
                                 mainApp.Show();
                                 mainApp.SetDownloader(dl);
                                 mainApp.WindowState = FormWindowState.Maximized;
-                            
+
+                            });
+
+
+                            this.metroToolTip1.SetToolTip(title, downloader.Name);
+
+                            //pool.QueueWorkItem(delegate(object obj) {
+
+                            //    TitleLogoUpdate data = (TitleLogoUpdate)obj;
+                            //    if(!string.IsNullOrEmpty(data.Downloader.Logo) ){
+
+                            //        var img = data.Downloader.Logo.DownloadAsImage();
+                            //        img = img.Clip(data.Title.Width, data.Title.Height);
+                            //        data.Title.TileImage = img;
+                            //        data.Title.UseTileImage = true;
+                            //        data.Title.TileImageAlign = ContentAlignment.MiddleCenter;
+                            //        data.Title.TextAlign = ContentAlignment.BottomCenter;
+
+                            //    }
+
+
+                            //}, 
+                            //new TitleLogoUpdate()
+                            //{
+                            //    Title = title,
+                            //    Downloader = downloader
+                            //});
+
+
+                            //tag.Titles.Add(metroTile2);
+                            tag.Titles.Add(title);
                         });
-
-                        
-                        this.metroToolTip1.SetToolTip(title, downloader.Name);
-
-                        //pool.QueueWorkItem(delegate(object obj) {
-
-                        //    TitleLogoUpdate data = (TitleLogoUpdate)obj;
-                        //    if(!string.IsNullOrEmpty(data.Downloader.Logo) ){
-
-                        //        var img = data.Downloader.Logo.DownloadAsImage();
-                        //        img = img.Clip(data.Title.Width, data.Title.Height);
-                        //        data.Title.TileImage = img;
-                        //        data.Title.UseTileImage = true;
-                        //        data.Title.TileImageAlign = ContentAlignment.MiddleCenter;
-                        //        data.Title.TextAlign = ContentAlignment.BottomCenter;
-                            
-                        //    }
-                        
-                        
-                        //}, 
-                        //new TitleLogoUpdate()
-                        //{
-                        //    Title = title,
-                        //    Downloader = downloader
-                        //});
-                       
-
-                        //tag.Titles.Add(metroTile2);
-                        tag.Titles.Add(title);
                     }
                 }
 
             }
-           // pool.Start();
+            // pool.Start();
+            tags.Sort((x, y) => {
+                if(x.Name.Length == 1  && x.Name.Length == 1)
+                {
+                    return string.CompareOrdinal(x.Name, y.Name);
+                }
+
+                if(x.Name.Length>1)
+                {
+                    return -1;
+                }
+                return x.Name.Length - y.Name.Length;
+            });
             return tags;
         }
         public struct TitleLogoUpdate

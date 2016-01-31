@@ -202,7 +202,7 @@ namespace ComicDownloader.Engines
             return pages;
         }
 
-        private string EnsureHostName( string hostUrl, string url)
+        public string EnsureHostName( string hostUrl, string url)
         {
             if (url.StartsWith("http")) return url;
             if (string.IsNullOrEmpty(hostUrl))

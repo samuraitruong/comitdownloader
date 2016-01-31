@@ -8,7 +8,7 @@ using System.Net;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Chaptruyen.com", Offline = false, MenuGroup = "VN - 2" , MetroTab="Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410887_Add")]
+    [Downloader("Chaptruyen.com", Offline = false, MenuGroup = "A->F", MetroTab="Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410887_Add")]
     public class ChapTruyenDownloader
         : Downloader
     {

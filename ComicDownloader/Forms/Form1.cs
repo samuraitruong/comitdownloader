@@ -35,10 +35,13 @@ namespace ComicDownloader.Forms
                 new { Value=105, Display="Chillies", Group="Vegetables" },
                 new { Value=106, Display="Strawberries", Group="Fruit" }
             });
-            groupedCombo.DataSource = ar;
-            ar.Add(new { Value = 106, Display = "Strawberries1", Group = "AAAA" });
-            groupedCombo.DataSource = ar;
-            this.Invalidate();
+            //groupedCombo.DataSource = ar;
+            //ar.Add(new { Value = 106, Display = "Strawberries1", Group = "AAAA" });
+            //groupedCombo.DataSource = ar;
+            //this.Invalidate();
+
+            groupedCombo.Items.Add(new { Value = 106, Display = "Strawberries1", Group = "AAAA" });
+            groupedCombo.Items.Add(new { Value = 106, Display = "Strawberries1", Group = "BB" });
         }
 
         private void groupedCombo_SelectedIndexChanged(object sender, EventArgs e)

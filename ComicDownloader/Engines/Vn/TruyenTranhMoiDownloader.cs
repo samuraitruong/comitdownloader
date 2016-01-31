@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Truyen Tranh Moi", Offline = false, Language = "Tieng viet", MenuGroup = "VN" , MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
+    [Downloader("Truyen Tranh Moi", Offline = false, Language = "Tieng viet", MenuGroup = "O->T", MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
     public class TruyenTranhMoiDownloader: Downloader
     {
         public override string Logo
@@ -41,47 +41,9 @@ namespace ComicDownloader.Engines
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             string urlPattern = "http://truyentranhmoi.com/danh-sach/page/{0}/";
-            
-            List<StoryInfo> results = base.ReloadChachedData().Stories;
-
-            if (results == null || results.Count == 0 || forceOnline)
-            {
-                results = new List<StoryInfo>();
-                int currentPage = 1;
-                bool isStillHasPage = true;
-                while (isStillHasPage)
-                {
-
-                    string url = string.Format(urlPattern, currentPage);
-
-                    string html = NetworkHelper.GetHtml(url);
-                    HtmlDocument htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(html);
-
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class,'truyen-list')]/ul/li/a[2]");
-                    if (nodes != null && nodes.Count > 0)
-                    {
-                        currentPage++;
-                        foreach (var node in nodes)
-                        {
-                            StoryInfo info = new StoryInfo()
-                            {
-                                Url =  node.Attributes["href"].Value,
-                                Name = node.Attributes["title"].Value
-                            };
-                            results.Add(info);
-                        }
-                    }
-                    else
-                    {
-                        isStillHasPage = false;
-                    }
-
-                }
-
-            }
-            this.SaveCache(results);
-            return results;
+            return base.GetListStoriesSimple(urlPattern,
+                "//div[contains(@class,'truyen-list')]/ul/li/a[2]",
+                forceOnline);
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
