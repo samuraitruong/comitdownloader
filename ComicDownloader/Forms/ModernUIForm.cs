@@ -15,19 +15,53 @@ using Amib.Threading;
 using ComicDownloader.Extensions;
 using ComicDownloader.Helpers;
 using System.Diagnostics;
-
+using System.Threading.Tasks;
 
 namespace ComicDownloader.Forms
 {
     public partial class ModernUIForm : MetroForm
     {
         Thread updateThread;
+        public static event EventHandler ClipboardUpdate;
+        ClipboardAlertForm clipboardForm = null;
+
         public ModernUIForm()
         {
+            clipboardForm = new ClipboardAlertForm();
             InitializeComponent();
             InitializeTabAndTitles();
+            ClipboardUpdate = this.onClipboarChanged;
         }
 
+        private void onClipboarChanged(object sender, EventArgs args)
+        {
+            var text = Clipboard.GetText();
+            if (text.StartsWith("http"))
+            {
+                Task.Run(() =>
+                {
+                    var dl = Downloader.Resolve(text, true);
+                    if (dl != null)
+                    {
+                        if (dl.CurrentStory != null)
+                        {
+                            this.Invoke((MethodInvoker)delegate
+                            {
+                                if (mainApp == null) mainApp = new AppMainForm();
+
+                                clipboardForm.SetData(dl, mainApp);
+                                //clipboardForm.WindowState = FormWindowState.Minimized;
+                                //clipboardForm.Show();
+                                Win32NativeMethods.SetForegroundWindow(clipboardForm.Handle);
+                                //clipboardForm.WindowState = FormWindowState.Normal;
+                            });
+
+                            
+                        }
+                    }
+                });
+            }
+        }
         private Color[] colorArray = 
         {
             ColorTranslator.FromHtml("#2c89ee"),
@@ -329,7 +363,55 @@ namespace ComicDownloader.Forms
 
              DisplayInfo();
              DisplayListSupport();
+            RegisterClipboardMonitoring();
         }
+        private IntPtr _clipboardViewerNext;
+        private void RegisterClipboardMonitoring()
+        {
+            //Win32NativeMethods.SetParent(Handle, Win32NativeMethods.HWND_MESSAGE);
+            // Win32NativeMethods.AddClipboardFormatListener(Handle);
+
+            _clipboardViewerNext = Win32NativeMethods.SetClipboardViewer(this.Handle);
+        }
+        private static void OnClipboardUpdate(EventArgs e)
+        {
+            var handler = ClipboardUpdate;
+            if (handler != null)
+            {
+                handler(null, e);
+            }
+        }
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);    // Process the message 
+
+            if (m.Msg == Win32NativeMethods.WM_DRAWCLIPBOARD)
+            {
+                OnClipboardUpdate(null);
+
+                //IDataObject iData = Clipboard.GetDataObject();      // Clipboard's data
+
+                //if (iData.GetDataPresent(DataFormats.Text))
+                //{
+                //    string text = (string)iData.GetData(DataFormats.Text);      // Clipboard text
+                //                                                                // do something with it
+                //}
+                //else if (iData.GetDataPresent(DataFormats.Bitmap))
+                //{
+                //    Bitmap image = (Bitmap)iData.GetData(DataFormats.Bitmap);   // Clipboard image
+                //                                                                // do something with it
+                //}
+            }
+        }
+
+        //protected override void WndProc(ref Message m)
+        //{
+        //    //if (m.Msg == Win32NativeMethods.WM_CLIPBOARDUPDATE)
+        //    //{
+        //    //    OnClipboardUpdate(null);
+        //    //}
+        //    base.WndProc(ref m);
+        //}
 
         public void DisplayListSupport()
         {
@@ -393,6 +475,7 @@ namespace ComicDownloader.Forms
 
         private void ModernUIForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Win32NativeMethods.ChangeClipboardChain(this.Handle, _clipboardViewerNext);
             if (mainApp != null) mainApp.ApplicationBeiningExited = true;
         }
 

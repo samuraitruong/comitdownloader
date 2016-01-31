@@ -69,6 +69,7 @@ namespace ComicDownloader.Engines
 
         
         public string UrlSegment { get; set; }
+        public string Summary { get; set; }
 
         public StoryInfo()
         {

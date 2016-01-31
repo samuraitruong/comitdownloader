@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Comic Downloader")]
-[assembly: AssemblyDescription("This tool allow download comic from varied source")]
+[assembly: AssemblyDescription("A robust tool to download and read manga offline. This support all major website to read comic/manga online free in Vietnamese and English.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("http://www.facebook.com/pages/Comic-Downloader/137897009722629")]
 [assembly: AssemblyProduct("Comic Downloader")]

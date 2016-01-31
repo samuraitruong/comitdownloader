@@ -43,10 +43,19 @@ namespace ComicDownloader
             Settings = SettingForm.GetSetting();
             this.Downloader = dl;
             this.Text= dl.Name;
-
             this.Downloader.OnListPageCrawled += Downloader_OnListPageCrawled;
-
         }
+        public DownloaderForm(Downloader dl, string startUrl , bool autoStart)
+        {
+            InitializeComponent();
+            Settings = SettingForm.GetSetting();
+            this.Downloader = dl;
+            this.Text = dl.Name;
+            this.Downloader.OnListPageCrawled += Downloader_OnListPageCrawled;
+            this.currentUrl = startUrl;
+            this.downloadNow = autoStart;
+        }
+
 
         private bool downloadNow;
         public DownloaderForm(string storyUrl)
@@ -56,6 +65,7 @@ namespace ComicDownloader
             txtUrl.Text = storyUrl;
             this.Downloader = Downloader.Resolve(txtUrl.Text);
             this.Downloader.OnListPageCrawled += Downloader_OnListPageCrawled;
+            this.currentUrl = storyUrl;
             downloadNow = true;
         }
 
@@ -495,18 +505,19 @@ namespace ComicDownloader
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void DownloadForm_Load(object sender, EventArgs e)
         {
             txtDir.Text = Settings.StogareFolder;
+            
+            if (downloadNow)
+            {
+                txtUrl.Text = this.currentUrl;
+                bntInfo.PerformClick();
+            }
             Task.Run(() =>
             {
                 this.LoadStoryList();
             });
-
-            if (downloadNow)
-            {
-                bntInfo.PerformClick();
-            }
         }
         List<StoryInfo> stories = new List<StoryInfo>();
 
@@ -564,58 +575,63 @@ namespace ComicDownloader
 
         private void bntInfo_Click(object sender, EventArgs e)
         {
-            new Thread(new ThreadStart(delegate ()
+            Task.Run(() =>
             {
-                using (new LongOperation())
+                this.Invoke(new MethodInvoker(delegate ()
                 {
-                    this.Invoke(new MethodInvoker(delegate ()
+
+                    this.Text = "Loading...";
+
+                    loading.Location = bntInfo.Location;
+                    loading.Size = bntInfo.Size;
+                    loading.Visible = true;
+
+                }));
+                currentStoryInfo = Downloader.RequestInfo(txtUrl.Text);
+
+                this.Invoke(new MethodInvoker(delegate ()
+                {
+
+                    txtTitle.Text = ddlList.Text;
+                    txtTitle.Text = currentStoryInfo.Name.Replace('"', ' ').Replace('.', ' ');
+
+                    this.Text = Downloader.Name + currentStoryInfo.Name;
+                    txtDir.Text = Settings.StogareFolder + "\\" + currentStoryInfo.Name.MakeSafeFilename();
+
+                    tblChapters.Rows.Clear();
+
+                    foreach (var item in currentStoryInfo.Chapters)
                     {
+                        item.UniqueIdentify = Guid.NewGuid();
 
-                        this.Text = "Loading...";
+                        int index = tblChapters.Rows.Add(new Row());
 
-                        loading.Location = bntInfo.Location;
-                        loading.Size = bntInfo.Size;
-                        loading.Visible = true;
+                        tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId.ToString(), true));
+                        tblChapters.Rows[index].Cells.Add(new Cell(item.UniqueIdentify.ToString(), true));
+                        tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId));
+                        tblChapters.Rows[index].Cells.Add(new Cell(item.Name.Replace('"', ' ').Replace('.', ' '), true));
+                        tblChapters.Rows[index].Cells.Add(new Cell(item.Url, new CellStyle() { ForeColor = System.Drawing.Color.Green }));
 
-                    }));
-                    currentStoryInfo = Downloader.RequestInfo(txtUrl.Text);
+                    }
+                }));
 
-                    this.Invoke(new MethodInvoker(delegate ()
+                this.Invoke(new MethodInvoker(delegate ()
+                {
+                    loading.Visible = false;
+
+                }));
+
+                ToggleControl(true);
+            }).ContinueWith((task) => {
+                if (downloadNow)
+                {
+                    downloadNow = false;
+                    if(currentStoryInfo!= null && currentStoryInfo.Chapters.Count>0)
                     {
-
-                        txtTitle.Text = ddlList.Text;
-                        txtTitle.Text = currentStoryInfo.Name.Replace('"', ' ').Replace('.', ' ');
-
-                        this.Text = Downloader.Name + currentStoryInfo.Name;
-                        txtDir.Text = Settings.StogareFolder + "\\" + currentStoryInfo.Name.MakeSafeFilename();
-
-                        tblChapters.Rows.Clear();
-
-                        foreach (var item in currentStoryInfo.Chapters)
-                        {
-                            item.UniqueIdentify = Guid.NewGuid();
-
-                            int index = tblChapters.Rows.Add(new Row());
-
-                            tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId.ToString(), true));
-                            tblChapters.Rows[index].Cells.Add(new Cell(item.UniqueIdentify.ToString(), true));
-                            tblChapters.Rows[index].Cells.Add(new Cell(item.ChapId));
-                            tblChapters.Rows[index].Cells.Add(new Cell(item.Name.Replace('"', ' ').Replace('.', ' '), true));
-                            tblChapters.Rows[index].Cells.Add(new Cell(item.Url, new CellStyle() { ForeColor = System.Drawing.Color.Green }));
-
-                        }
-                    }));
-
-                    this.Invoke(new MethodInvoker(delegate ()
-                    {
-                        loading.Visible = false;
-
-                    }));
-
-                    ToggleControl(true);
+                        bntDownload.PerformClick();
+                    }
                 }
-            })).Start();
-
+            }); ;
         }
 
         private void ToggleControl(bool state)
@@ -631,8 +647,6 @@ namespace ComicDownloader
             ddlList.Enabled = p;
             txtTitle.Enabled = p;
             txtUrl.Enabled = p;
-
-
             bntDownload.Enabled = p;
 
         }
@@ -705,6 +719,8 @@ namespace ComicDownloader
             mnuSelectSelected.Enabled = true;
         }
         DateTime lastupdate = DateTime.Now.AddMinutes(-10);
+        private string currentUrl;
+        private bool autoStart;
 
         private void UnlockLayoutAfterLoadStories(List<StoryInfo> pageStories, bool reset = false)
         {

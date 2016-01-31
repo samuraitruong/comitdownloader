@@ -42,7 +42,6 @@ namespace ComicDownloader.Forms
             this.tlLastestUpdate = new MetroFramework.Controls.MetroTile();
             this.metroStyleExtender1 = new MetroFramework.Components.MetroStyleExtender(this.components);
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this.bntSearch = new MetroFramework.Controls.MetroButton();
             this.txtKeyword = new MetroFramework.Controls.MetroTextBox();
             this.metroTile2 = new MetroFramework.Controls.MetroTile();
@@ -135,7 +134,6 @@ namespace ComicDownloader.Forms
             // metroTabPage1
             // 
             this.metroTabPage1.BackColor = System.Drawing.Color.White;
-            this.metroTabPage1.Controls.Add(this.button1);
             this.metroTabPage1.Controls.Add(this.bntSearch);
             this.metroTabPage1.Controls.Add(this.txtKeyword);
             this.metroTabPage1.Controls.Add(this.metroTile2);
@@ -161,16 +159,6 @@ namespace ComicDownloader.Forms
             this.metroTabPage1.VerticalScrollbarBarColor = true;
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(669, 287);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // bntSearch
             // 
@@ -331,7 +319,7 @@ namespace ComicDownloader.Forms
             this.Name = "ModernUIForm";
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.DropShadow;
             this.Style = MetroFramework.MetroColorStyle.Default;
-            this.Text = "Comic Downloader 1.0 Build 1256";
+            this.Text = "Comic Downloader 1.1 Build 300116 ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModernUIForm_FormClosing);
             this.Load += new System.EventHandler(this.ModernUIForm_Load);
             this.Resize += new System.EventHandler(this.ModernUIForm_Resize);
@@ -364,7 +352,6 @@ namespace ComicDownloader.Forms
         private MetroFramework.Controls.MetroTile metroTile3;
         private MetroFramework.Controls.MetroTile tlQueueDownload;
         private MetroFramework.Controls.MetroTabControl metroTabControl1;
-        private System.Windows.Forms.Button button1;
 
 
         //private MetroFramework.Controls.MetroTile metroTile2;

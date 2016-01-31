@@ -490,6 +490,7 @@ namespace ComicDownloader.Engines
             return results;
         }
         public ResolveImageOnPage ResolveImageInHtmlPage { get; set; }
+        public StoryInfo CurrentStory { get; private set; }
 
         public virtual string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
         {
@@ -610,10 +611,34 @@ namespace ComicDownloader.Engines
         }
         private static List<Downloader> _downloaders;
 
-        public static Downloader Resolve(string url)
+        public static Downloader Resolve(string url, bool fetchDat = false)
         {
-            return GetAllDownloaders().FirstOrDefault(p => url.Contains(p.HostUrl));
+            var dl =  GetAllDownloaders().FirstOrDefault(p => url.Contains(p.HostUrl));
+            if(dl != null)
+            {
+                if (fetchDat) {
+                    dl = (Downloader)Activator.CreateInstance(dl.GetType());
+                    List<string> pages = new List<string>();
+                    dl.CurrentStory = dl.RequestInfo(url);
+                    if (dl.CurrentStory == null)
+                    {
+                        var resolvedUrl = dl.TryGetStoryUrl(url);
+                        if (!string.IsNullOrEmpty(resolvedUrl)) {
+                            dl.CurrentStory = dl.RequestInfo(url);
+                        };
+                    //try to parse link from chapter o 
+                    //dl.CurrentChapter =dl.GetPages(url);
+                }
+                }
+            }
+            return dl;
         }
+
+        private string TryGetStoryUrl(string url)
+        {
+            return url;
+        }
+
         public static List<Downloader> GetAllDownloaders()
         {
            

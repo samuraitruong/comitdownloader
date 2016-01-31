@@ -203,9 +203,9 @@ namespace ComicDownloader
 
        
 
-        private void AddChildForm(string title, Downloader dl)
+        private void AddChildForm(string title, Downloader dl, string storyUrl="", bool autoStart=false)
         {
-            DownloaderForm childForm = new DownloaderForm(dl);
+            DownloaderForm childForm = new DownloaderForm(dl, storyUrl, autoStart);
             childForm.MdiParent = this;
             childForm.WindowState = FormWindowState.Minimized;
             childForm.Show();
@@ -392,9 +392,9 @@ namespace ComicDownloader
 
 
 
-        internal void SetDownloader(Downloader dl)
+        internal void SetDownloader(Downloader dl, string currentUrl="", bool autoStart = false)
         {
-            AddChildForm(dl.Name, dl);
+            AddChildForm(dl.Name, dl, currentUrl, autoStart);
             this.WindowState = FormWindowState.Maximized;
         }
         public void MinimizeToTray()

@@ -63,7 +63,7 @@ namespace ComicDownloader.Engines
                 chapterExtract : (node)=> {
                     ChapterInfo chapInfo = new ChapterInfo()
                     {
-                        Name = node.SelectSingleNode("//span[@clss='hm']").InnerText.Trim() + node.SelectSingleNode("//strong").InnerText.Trim(),
+                        Name = node.SelectSingleNode("//span[@class='hm']").InnerText.Trim() + node.SelectSingleNode("//strong").InnerText.Trim(),
                         Url = node.Attributes["href"].Value.Trim(),
                         ChapId = ExtractID(node.SelectSingleNode("//strong").InnerText.Trim())
                     };

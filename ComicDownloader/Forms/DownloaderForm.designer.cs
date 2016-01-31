@@ -518,8 +518,9 @@ namespace ComicDownloader
             // 
             // bntRefresh
             // 
+            this.bntRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.bntRefresh.Enabled = false;
-            this.bntRefresh.Image = global::ComicDownloader.Properties.Resources._1364155386_gtk_refresh;
+            this.bntRefresh.Image = global::ComicDownloader.Properties.Resources._1454256850_view_refresh;
             this.bntRefresh.Location = new System.Drawing.Point(242, 32);
             this.bntRefresh.Name = "bntRefresh";
             this.bntRefresh.Size = new System.Drawing.Size(33, 25);
@@ -547,7 +548,8 @@ namespace ComicDownloader
             // 
             // bntInfo
             // 
-            this.bntInfo.Image = global::ComicDownloader.Properties.Resources.gtk_about;
+            this.bntInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bntInfo.Image = global::ComicDownloader.Properties.Resources._1454256989_sign_info;
             this.bntInfo.Location = new System.Drawing.Point(242, 80);
             this.bntInfo.Name = "bntInfo";
             this.bntInfo.Size = new System.Drawing.Size(30, 23);
@@ -558,17 +560,18 @@ namespace ComicDownloader
             // ddlList
             // 
             this.ddlList.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.ddlList.GroupMember = "Group";
+            this.ddlList.DataSource = null;
             this.ddlList.DisplayMember = "Name";
             this.ddlList.DropDownHeight = 500;
             this.ddlList.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddlList.FormattingEnabled = true;
+            this.ddlList.GroupMember = "Group";
             this.ddlList.IntegralHeight = false;
             this.ddlList.ItemHeight = 17;
             this.ddlList.Location = new System.Drawing.Point(54, 32);
             this.ddlList.MaxDropDownItems = 20;
             this.ddlList.Name = "ddlList";
-            this.ddlList.Size = new System.Drawing.Size(174, 25);
+            this.ddlList.Size = new System.Drawing.Size(174, 23);
             this.ddlList.TabIndex = 15;
             this.ddlList.ValueMember = "Url";
             this.ddlList.SelectedIndexChanged += new System.EventHandler(this.ddlList_SelectedIndexChanged);
@@ -662,7 +665,7 @@ namespace ComicDownloader
             this.Name = "DownloaderForm";
             this.Text = "Comic Downloader Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DownloaderForm_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.DownloadForm_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);

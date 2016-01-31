@@ -637,6 +637,12 @@
     <Compile Include="Forms\ChapterReader.Designer.cs">
       <DependentUpon>ChapterReader.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ClipboardAlertForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ClipboardAlertForm.Designer.cs">
+      <DependentUpon>ClipboardAlertForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1304,6 +1310,7 @@
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="QueueDownloadItem.cs" />
+    <Compile Include="Win32Native.cs" />
     <EmbeddedResource Include="3rd\CassiniDev\Resources\CassiniDev.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CassiniDev.Designer.cs</LastGenOutput>
@@ -1368,6 +1375,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ChapterReader.resx">
       <DependentUpon>ChapterReader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ClipboardAlertForm.resx">
+      <DependentUpon>ClipboardAlertForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -1757,6 +1767,8 @@
     <None Include="Resources\1366530408_paypal-curved.png" />
     <None Include="Resources\1366530557_donate.png" />
     <None Include="Resources\1366530835_paypal-curved.png" />
+    <None Include="Resources\1454256850_view-refresh.png" />
+    <None Include="Resources\1454256989_sign-info.png" />
     <Content Include="Resources\14747480-bang-comic-book-explosion.jpg" />
     <Content Include="3rd\itextsharp.dll" />
     <Content Include="3rd\Cx.Windows.Forms\MdiTabStrip.bmp" />
