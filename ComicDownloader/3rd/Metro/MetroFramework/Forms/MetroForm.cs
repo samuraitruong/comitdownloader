@@ -834,10 +834,22 @@ namespace MetroFramework.Forms
             if (shadowForm == null || shadowForm.IsDisposed) return;
 
             shadowForm.Visible = false;
-            Owner = shadowForm.Owner;
-            shadowForm.Owner = null;
-            shadowForm.Dispose();
-            shadowForm = null;
+            try
+            {
+                Owner = shadowForm.Owner;
+                shadowForm.Owner = null;
+                
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                shadowForm.Dispose();
+                shadowForm = null;
+            }
+            
         }
 
         #region MetroShadowBase

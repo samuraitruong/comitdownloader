@@ -103,6 +103,16 @@ namespace ComicDownloader
 
         }
 
+        internal void SetDownloadStory(StoryInfo info, bool download= false)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                txtUrl.Text = info.Url;
+                downloadNow = download;
+                bntInfo.PerformClick();
+            });
+            
+        }
 
         private List<ChapterInfo> toBeDownloadedChapters = new List<ChapterInfo>();
 
@@ -516,6 +526,7 @@ namespace ComicDownloader
             }
             Task.Run(() =>
             {
+                Thread.Sleep(1000);
                 this.LoadStoryList();
             });
         }
@@ -785,7 +796,7 @@ namespace ComicDownloader
             else
             {
                 DownloaderInfoForm form = new DownloaderInfoForm();
-                form.ShowInfo(cached, this.Downloader);
+                form.ShowInfo(cached, this.Downloader, this);
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     Downloader.DeleteCached();
@@ -948,6 +959,12 @@ namespace ComicDownloader
             }
             ddlList.DataSource = filterSource;
             
+        }
+
+        private void btnSetting_Click(object sender, EventArgs e)
+        {
+            DownloaderSettingForm form = new DownloaderSettingForm(this.Downloader);
+            form.ShowDialog();
         }
     }
 }

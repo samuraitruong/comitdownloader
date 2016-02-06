@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
@@ -78,6 +79,14 @@ namespace ComicDownloader.Engines
         public override string ToString()
         {
             return Name;
+        }
+
+        public void Beautifier()
+        {
+            Name = Regex.Replace(Name, @"&\w{4};?", string.Empty);
+            Url = Url.Trim();
+            Url = Url.TrimStart("{}[(".ToCharArray());
+            Url = Url.TrimEnd("]){}".ToCharArray());
         }
     }
 

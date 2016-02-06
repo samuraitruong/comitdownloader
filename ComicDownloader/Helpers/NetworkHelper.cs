@@ -82,16 +82,19 @@ namespace ComicDownloader.Engines
             return "HTTP ERROR";
         }
 
-        public static string PostHtml(string serviceUrl, string refererUrl, string json, 
+        public static string PostHtml(string serviceUrl, 
+                                      string refererUrl, 
+                                      string json, 
                                       string origin = null,
-                                      string contentType = null,
-                                      string accept = null,
-                                      string charset = null,
-                                      string encoding = null,
-                                      string language = null,
-                                      string cacheControl = null,
+                                      string contentType = "application/x-www-form-urlencoded",
+                                      string accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                      string charset = "ISO-8859-1,utf-8;q=0.7,*;q=0.3",
+                                      string encoding = "text/html",
+                                      string language = "en-US,en;q=0.8",
+                                      string cacheControl = "max-age=0",
                                       bool connection = false,
-                                      string userAgent = null)
+                                      string userAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36",
+                                      Action<CookieContainer> postProcess= null)
         {
             HttpWebRequest request = (HttpWebRequest)
             WebRequest.Create(serviceUrl);
@@ -150,8 +153,18 @@ namespace ComicDownloader.Engines
             StreamWriter writer = new StreamWriter(request.GetRequestStream());
             writer.Write(json);
             writer.Close();
+            var response = (HttpWebResponse)request.GetResponse();
+            if (postProcess != null)
+            {
+                CookieContainer container = new CookieContainer();
 
-            StreamReader reader = new StreamReader(request.GetResponse().GetResponseStream());
+                foreach(Cookie item in response.Cookies)
+                {
+                    container.Add(item);
+                }
+                postProcess(container);
+            }
+            StreamReader reader = new StreamReader(response.GetResponseStream());
             return reader.ReadToEnd();
         }
 

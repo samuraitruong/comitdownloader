@@ -82,6 +82,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>3rd\itextsharp.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.SPOT.Net, Version=3.0.7186.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>3rd\Microsoft.SPOT.Net.dll</HintPath>
@@ -551,6 +552,7 @@
     <Compile Include="Engines\18+\HakihomeDownloader.cs" />
     <Compile Include="Engines\18+\Manga16Downloader.cs" />
     <Compile Include="Engines\DownloaderAttribute.cs" />
+    <Compile Include="Engines\DownloaderSetting.cs" />
     <Compile Include="Engines\En\BatotoDownloader.cs" />
     <Compile Include="Engines\En\MangableDownloader.cs" />
     <Compile Include="Engines\En\MangaPandaDownloader.cs" />
@@ -561,7 +563,7 @@
     <Compile Include="Engines\En\MangaSaurusDownloader.cs" />
     <Compile Include="Engines\En\MangaKoiDownloader.cs" />
     <Compile Include="Engines\En\TaaddDownloader.cs" />
-    <Compile Include="Engines\Offline\En\MangaTradersDownloader.cs" />
+    <Compile Include="Engines\En\MangaTradersDownloader.cs" />
     <Compile Include="Engines\En\MangaVolumeDownloader.cs" />
     <Compile Include="Engines\Offline\En\MangaWallDownloader.cs" />
     <Compile Include="Engines\Offline\En\Manga4Downloader.cs" />
@@ -604,6 +606,7 @@
     <Compile Include="Engines\Offline\VN\WebTruyenDownloader.cs" />
     <Compile Include="Engines\Vn\ComicVnDownloader.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Forms\AppMainForm.cs">
       <SubType>Form</SubType>
@@ -642,6 +645,12 @@
     </Compile>
     <Compile Include="Forms\ClipboardAlertForm.Designer.cs">
       <DependentUpon>ClipboardAlertForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DownloaderSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DownloaderSettingForm.Designer.cs">
+      <DependentUpon>DownloaderSettingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
@@ -1379,6 +1388,9 @@
     <EmbeddedResource Include="Forms\ClipboardAlertForm.resx">
       <DependentUpon>ClipboardAlertForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DownloaderSettingForm.resx">
+      <DependentUpon>DownloaderSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -1769,6 +1781,11 @@
     <None Include="Resources\1366530835_paypal-curved.png" />
     <None Include="Resources\1454256850_view-refresh.png" />
     <None Include="Resources\1454256989_sign-info.png" />
+    <None Include="Resources\1454336807_Streamline-76.png" />
+    <None Include="Resources\1454337177_Magnifier2.png" />
+    <None Include="Resources\1454337637_gear-tools-settings.png" />
+    <None Include="Resources\1454337668_gear-user.png" />
+    <None Include="Resources\1454338876_18.png" />
     <Content Include="Resources\14747480-bang-comic-book-explosion.jpg" />
     <Content Include="3rd\itextsharp.dll" />
     <Content Include="3rd\Cx.Windows.Forms\MdiTabStrip.bmp" />
@@ -1842,7 +1859,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2013/3/19" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_ConfigurationName="Release" BuildVersion_IncrementBeforeBuild="True" />
+      <UserProperties BuildVersion_IncrementBeforeBuild="True" BuildVersion_ConfigurationName="Release" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_StartDate="2013/3/19" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

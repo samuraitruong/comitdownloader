@@ -76,6 +76,7 @@ namespace ComicDownloader
             this.btnExitThread = new System.Windows.Forms.Button();
             this.bntPauseThread = new System.Windows.Forms.Button();
             this.groupInfo = new System.Windows.Forms.GroupBox();
+            this.btnSetting = new System.Windows.Forms.Button();
             this.ddlFilter = new System.Windows.Forms.ComboBox();
             this.loading = new MRG.Controls.UI.LoadingCircle();
             this.bntRefresh = new System.Windows.Forms.Button();
@@ -471,6 +472,7 @@ namespace ComicDownloader
             // 
             // groupInfo
             // 
+            this.groupInfo.Controls.Add(this.btnSetting);
             this.groupInfo.Controls.Add(this.ddlFilter);
             this.groupInfo.Controls.Add(this.loading);
             this.groupInfo.Controls.Add(this.bntRefresh);
@@ -489,6 +491,17 @@ namespace ComicDownloader
             this.groupInfo.TabStop = false;
             this.groupInfo.Text = "Manga Selector";
             // 
+            // btnSetting
+            // 
+            this.btnSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSetting.Image = global::ComicDownloader.Properties.Resources._1454337668_gear_user;
+            this.btnSetting.Location = new System.Drawing.Point(248, 2);
+            this.btnSetting.Name = "btnSetting";
+            this.btnSetting.Size = new System.Drawing.Size(26, 26);
+            this.btnSetting.TabIndex = 22;
+            this.btnSetting.UseVisualStyleBackColor = true;
+            this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
+            // 
             // ddlFilter
             // 
             this.ddlFilter.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -504,7 +517,7 @@ namespace ComicDownloader
             this.loading.Active = true;
             this.loading.Color = System.Drawing.Color.DarkGray;
             this.loading.InnerCircleRadius = 5;
-            this.loading.Location = new System.Drawing.Point(225, 3);
+            this.loading.Location = new System.Drawing.Point(144, 96);
             this.loading.Name = "loading";
             this.loading.NumberSpoke = 12;
             this.loading.OuterCircleRadius = 11;
@@ -747,6 +760,7 @@ namespace ComicDownloader
         private System.Windows.Forms.Label label5;
         private GroupedComboBox ddlList;
         private System.Windows.Forms.ComboBox ddlFilter;
+        private Button btnSetting;
     }
 }
 
