@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 namespace ComicDownloader.Engines
 {
     [Downloader("Manga Panda", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
-    public class MangaPandaDownloader__ : Downloader
+    public class MangaPandaDownloader : Downloader
     {
         public override string Logo
         {
@@ -38,7 +38,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
-        public override List<StoryInfo> GetListStories(bool forceOnline)
+        public override List<StoryInfo> HotestStories(){throw new NotImplementedException();}    public override List<StoryInfo> GetListStories(bool forceOnline)      
         {
             return base.GetListStoriesSimple(this.ListStoryURL,
                 "//ul[@class='series_alpha']/li/a",

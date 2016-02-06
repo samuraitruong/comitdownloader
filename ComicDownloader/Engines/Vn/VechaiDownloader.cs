@@ -34,7 +34,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
-        public override List<StoryInfo> GetListStories(bool forceOnline)
+        public override List<StoryInfo> HotestStories(){throw new NotImplementedException();}    public override List<StoryInfo> GetListStories(bool forceOnline)      
         {
             string urlPattern = "http://vechai.info/danh-sach.tmoinhat.p{0}.json";
             return base.GetListStoriesSimple(urlPattern, "//ul[@id='comic-list']/li/a[1]", forceOnline);

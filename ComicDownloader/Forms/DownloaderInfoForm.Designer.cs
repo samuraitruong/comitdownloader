@@ -51,11 +51,12 @@ namespace ComicDownloader.Forms
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.tabGeneral = new MetroFramework.Controls.MetroTabPage();
-            this.tabSearch = new MetroFramework.Controls.MetroTabPage();
-            this.searchLoading = new MRG.Controls.UI.LoadingCircle();
-            this.listSearchResult = new BrightIdeasSoftware.ObjectListView();
-            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.hotestLoading = new MRG.Controls.UI.LoadingCircle();
+            this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
+            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +64,11 @@ namespace ComicDownloader.Forms
             this.addToQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabSearch = new MetroFramework.Controls.MetroTabPage();
+            this.searchLoading = new MRG.Controls.UI.LoadingCircle();
+            this.listSearchResult = new BrightIdeasSoftware.ObjectListView();
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.btnSearch = new MetroFramework.Controls.MetroButton();
             this.txtKeyword = new System.Windows.Forms.TextBox();
             this.onlineCheck = new MetroFramework.Controls.MetroCheckBox();
@@ -78,9 +84,12 @@ namespace ComicDownloader.Forms
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.metroTabControl1.SuspendLayout();
             this.tabGeneral.SuspendLayout();
+            this.metroTabPage1.SuspendLayout();
+            this.metroPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.tabSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listSearchResult)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             this.tabUpdate.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listLastestUpdate)).BeginInit();
@@ -252,8 +261,9 @@ namespace ComicDownloader.Forms
             // metroTabControl1
             // 
             this.metroTabControl1.Controls.Add(this.tabGeneral);
-            this.metroTabControl1.Controls.Add(this.tabSearch);
             this.metroTabControl1.Controls.Add(this.tabUpdate);
+            this.metroTabControl1.Controls.Add(this.metroTabPage1);
+            this.metroTabControl1.Controls.Add(this.tabSearch);
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
@@ -275,6 +285,143 @@ namespace ComicDownloader.Forms
             this.tabGeneral.VerticalScrollbarBarColor = true;
             this.tabGeneral.VerticalScrollbarHighlightOnWheel = false;
             this.tabGeneral.VerticalScrollbarSize = 10;
+            // 
+            // metroTabPage1
+            // 
+            this.metroTabPage1.Controls.Add(this.metroPanel1);
+            this.metroTabPage1.HorizontalScrollbarBarColor = true;
+            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.HorizontalScrollbarSize = 10;
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 35);
+            this.metroTabPage1.Name = "metroTabPage1";
+            this.metroTabPage1.Size = new System.Drawing.Size(557, 369);
+            this.metroTabPage1.TabIndex = 3;
+            this.metroTabPage1.Text = "Hot Manga";
+            this.metroTabPage1.VerticalScrollbarBarColor = true;
+            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.VerticalScrollbarSize = 10;
+            // 
+            // metroPanel1
+            // 
+            this.metroPanel1.Controls.Add(this.hotestLoading);
+            this.metroPanel1.Controls.Add(this.objectListView1);
+            this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(0, 0);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(557, 369);
+            this.metroPanel1.TabIndex = 2;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // hotestLoading
+            // 
+            this.hotestLoading.Active = true;
+            this.hotestLoading.BackColor = System.Drawing.Color.Transparent;
+            this.hotestLoading.Color = System.Drawing.Color.DarkGray;
+            this.hotestLoading.InnerCircleRadius = 6;
+            this.hotestLoading.Location = new System.Drawing.Point(242, 168);
+            this.hotestLoading.Name = "hotestLoading";
+            this.hotestLoading.NumberSpoke = 9;
+            this.hotestLoading.OuterCircleRadius = 7;
+            this.hotestLoading.RotationSpeed = 40;
+            this.hotestLoading.Size = new System.Drawing.Size(42, 29);
+            this.hotestLoading.SpokeThickness = 4;
+            this.hotestLoading.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.Firefox;
+            this.hotestLoading.TabIndex = 22;
+            this.hotestLoading.Text = "loadingCircle1";
+            // 
+            // objectListView1
+            // 
+            this.objectListView1.AllColumns.Add(this.olvColumn5);
+            this.objectListView1.AllColumns.Add(this.olvColumn6);
+            this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn5,
+            this.olvColumn6});
+            this.objectListView1.ContextMenuStrip = this.contextMenuStrip1;
+            this.objectListView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.objectListView1.FullRowSelect = true;
+            this.objectListView1.Location = new System.Drawing.Point(0, 0);
+            this.objectListView1.Name = "objectListView1";
+            this.objectListView1.OverlayText.Text = "Lastest";
+            this.objectListView1.OverlayText.TextColor = System.Drawing.Color.Lavender;
+            this.objectListView1.Size = new System.Drawing.Size(557, 369);
+            this.objectListView1.TabIndex = 3;
+            this.objectListView1.UseCompatibleStateImageBehavior = false;
+            this.objectListView1.View = System.Windows.Forms.View.Details;
+            this.objectListView1.SelectionChanged += new System.EventHandler(this.listLastestUpdate_SelectionChanged);
+            this.objectListView1.DoubleClick += new System.EventHandler(this.listLastestUpdate_DoubleClick);
+            // 
+            // olvColumn5
+            // 
+            this.olvColumn5.AspectName = "Name";
+            this.olvColumn5.CellPadding = null;
+            this.olvColumn5.Text = "Name";
+            this.olvColumn5.UseInitialLetterForGroup = true;
+            this.olvColumn5.Width = 200;
+            // 
+            // olvColumn6
+            // 
+            this.olvColumn6.AspectName = "Url";
+            this.olvColumn6.CellPadding = null;
+            this.olvColumn6.Groupable = false;
+            this.olvColumn6.Hyperlink = true;
+            this.olvColumn6.Text = "URL";
+            this.olvColumn6.Width = 150;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewToolStripMenuItem,
+            this.refreshToolStripMenuItem,
+            this.downloadToolStripMenuItem,
+            this.addToQueueToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.closeToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(147, 120);
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.viewToolStripMenuItem.Text = "View";
+            this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
+            // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.refreshToolStripMenuItem.Text = "Refresh";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
+            // 
+            // downloadToolStripMenuItem
+            // 
+            this.downloadToolStripMenuItem.Name = "downloadToolStripMenuItem";
+            this.downloadToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.downloadToolStripMenuItem.Text = "Download";
+            this.downloadToolStripMenuItem.Click += new System.EventHandler(this.downloadToolStripMenuItem_Click);
+            // 
+            // addToQueueToolStripMenuItem
+            // 
+            this.addToQueueToolStripMenuItem.Name = "addToQueueToolStripMenuItem";
+            this.addToQueueToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.addToQueueToolStripMenuItem.Text = "Add to queue";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            // 
+            // closeToolStripMenuItem
+            // 
+            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.closeToolStripMenuItem.Text = "Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // tabSearch
             // 
@@ -350,57 +497,6 @@ namespace ComicDownloader.Forms
             this.olvColumn4.Text = "URL";
             this.olvColumn4.UseFiltering = false;
             this.olvColumn4.Width = 275;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewToolStripMenuItem,
-            this.refreshToolStripMenuItem,
-            this.downloadToolStripMenuItem,
-            this.addToQueueToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.closeToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(147, 120);
-            // 
-            // viewToolStripMenuItem
-            // 
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.viewToolStripMenuItem.Text = "View";
-            this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
-            // 
-            // refreshToolStripMenuItem
-            // 
-            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.refreshToolStripMenuItem.Text = "Refresh";
-            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
-            // 
-            // downloadToolStripMenuItem
-            // 
-            this.downloadToolStripMenuItem.Name = "downloadToolStripMenuItem";
-            this.downloadToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.downloadToolStripMenuItem.Text = "Download";
-            this.downloadToolStripMenuItem.Click += new System.EventHandler(this.downloadToolStripMenuItem_Click);
-            // 
-            // addToQueueToolStripMenuItem
-            // 
-            this.addToQueueToolStripMenuItem.Name = "addToQueueToolStripMenuItem";
-            this.addToQueueToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.addToQueueToolStripMenuItem.Text = "Add to queue";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
-            // 
-            // closeToolStripMenuItem
-            // 
-            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.closeToolStripMenuItem.Text = "Close";
-            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // btnSearch
             // 
@@ -551,10 +647,13 @@ namespace ComicDownloader.Forms
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.metroTabControl1.ResumeLayout(false);
             this.tabGeneral.ResumeLayout(false);
+            this.metroTabPage1.ResumeLayout(false);
+            this.metroPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.tabSearch.ResumeLayout(false);
             this.tabSearch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listSearchResult)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.tabUpdate.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.listLastestUpdate)).EndInit();
@@ -604,5 +703,11 @@ namespace ComicDownloader.Forms
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn4;
         private MRG.Controls.UI.LoadingCircle searchLoading;
+        private MetroTabPage metroTabPage1;
+        private MetroPanel metroPanel1;
+        private BrightIdeasSoftware.ObjectListView objectListView1;
+        private BrightIdeasSoftware.OLVColumn olvColumn5;
+        private BrightIdeasSoftware.OLVColumn olvColumn6;
+        private MRG.Controls.UI.LoadingCircle hotestLoading;
     }
 }

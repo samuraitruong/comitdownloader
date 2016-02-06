@@ -8,7 +8,7 @@ using System.Net;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("TruyenTranhTuan", Offline = false, Language = "Tieng viet", MenuGroup = "O->T", MetroTab="Tiếng Việt", Image32 = "_1364410919_Add_Green_Button")]
+    [Downloader("TruyenTranhTuan", Offline = false, Language = "Tieng viet", MenuGroup = "O->T", MetroTab = "Tiếng Việt", Image32 = "_1364410919_Add_Green_Button")]
     public class TruyenTranhTuanDownloader
         : Downloader
     {
@@ -44,6 +44,7 @@ namespace ComicDownloader.Engines
 
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             return base.GetListStoriesSimple(this.ListStoryURL,
@@ -96,7 +97,7 @@ namespace ComicDownloader.Engines
 
                 StoryInfo info = new StoryInfo()
                 {
-                    Url = storyUrl ,
+                    Url = storyUrl,
                     Name = storyTitle,
                     Chapters = new List<ChapterInfo>(),
                 };

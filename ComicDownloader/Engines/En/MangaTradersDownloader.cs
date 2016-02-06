@@ -8,10 +8,10 @@ using System.Text.RegularExpressions;
 namespace ComicDownloader.Engines
 {
     //TODO : Offline , require loging
-    [Downloader("Manga Traders", Offline =true, MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
+    [Downloader("Manga Traders", Offline = true, MenuGroup = "English", MetroTab = "English", Language = "English", Image32 = "_1364410884_add1_")]
     public class MangaTradersDownloader : Downloader
     {
-        
+
 
         public override string Name
         {
@@ -33,6 +33,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             return base.GetListStoriesSimple(this.ListStoryURL,

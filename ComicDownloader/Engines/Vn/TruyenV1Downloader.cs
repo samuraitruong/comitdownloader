@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Truyen V1", Offline = false, Language = "Tieng viet", MenuGroup = "O->T", MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
+    [Downloader("Truyen V1", Offline = false, Language = "Tieng viet", MenuGroup = "O->T", MetroTab = "Tiếng Việt", Image32 = "1364078951_insert-object")]
     public class TruyenV1Downloader : Downloader
     {
         public override string Logo
@@ -38,6 +38,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             //GOOD Example for cleanup code.
@@ -47,7 +48,7 @@ namespace ComicDownloader.Engines
                 singleListPage: true
                 );
         }
-        
+
         public override StoryInfo RequestInfo(string storyUrl)
         {
             return base.RequestInfoSimple(storyUrl,

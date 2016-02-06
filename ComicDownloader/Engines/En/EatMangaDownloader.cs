@@ -7,8 +7,8 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("EatManga", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
-    public class EatMangaDownloader :  Downloader
+    [Downloader("EatManga", MenuGroup = "English", MetroTab = "English", Language = "English", Image32 = "_1364410884_add1_")]
+    public class EatMangaDownloader : Downloader
     {
         public override string Logo
         {
@@ -38,6 +38,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             return base.GetListStoriesSimple(this.ListStoryURL,
@@ -59,11 +60,11 @@ namespace ComicDownloader.Engines
             HtmlDocument htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
             var img = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"eatmanga_image_big\"]");
-            if(img == null)
+            if (img == null)
                 img = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"eatmanga_image\"]");
             pageUrl = img.Attributes["src"].Value;
 
-            
+
             return base.DownloadPage(pageUrl, renamePattern, folder, httpReferer);
         }
         public override List<string> GetPages(string chapUrl)
@@ -102,7 +103,7 @@ namespace ComicDownloader.Engines
                     info = new StoryInfo()
                     {
                         Url = pageUrl,
-                        Name = pageUrl.Substring(pageUrl.LastIndexOf("/") + 1).Replace("-"," "),
+                        Name = pageUrl.Substring(pageUrl.LastIndexOf("/") + 1).Replace("-", " "),
                         Chapters = new List<ChapterInfo>()
                     };
 

@@ -32,7 +32,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
-        public override List<StoryInfo> GetListStories(bool forceOnline)
+        public override List<StoryInfo> HotestStories(){throw new NotImplementedException();}    public override List<StoryInfo> GetListStories(bool forceOnline)      
         {
             string urlPattern = "http://www.truyen18.org/moi-cap-nhat/danhsach/page/{0}.html";
 

@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Good Manga", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
+    [Downloader("Good Manga", MenuGroup = "English", MetroTab = "English", Language = "English", Image32 = "_1364410884_add1_")]
     public class GoodMangaDownloader : Downloader
     {
         public override string Logo
@@ -38,6 +38,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             return base.GetListStoriesSimple(this.ListStoryURL,
@@ -147,5 +148,6 @@ namespace ComicDownloader.Engines
             }
             return results;
         }
+
     }
 }

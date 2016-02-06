@@ -54,6 +54,7 @@ namespace ComicDownloader.Forms
             });
 
             RefreshLastestItem();
+            RefreshHostestItem();
         }
 
         private void Dl_OnSearchPageFinished(List<StoryInfo> listStories)
@@ -71,6 +72,17 @@ namespace ComicDownloader.Forms
             .ContinueWith((result) =>
             {
                 this.displayLastestUpdateList(result.Result);
+            });
+        }
+        private void RefreshHostestItem()
+        {
+            Task.Run(() =>
+            {
+                return downloader.HotestStories();
+            })
+            .ContinueWith((result) =>
+            {
+                this.displayHostestList(result.Result);
             });
         }
 
@@ -95,7 +107,14 @@ namespace ComicDownloader.Forms
         {
 
         }
-
+        private void displayHostestList(List<StoryInfo> data)
+        {
+            this.InvokeOnMainThread(() =>
+            {
+                this.objectListView1.SetObjects(data);
+                hotestLoading.Visible = false;
+            });
+        }
         private void displayLastestUpdateList(List<StoryInfo> lastest)
         {
             //if (this.InvokeRequired)
@@ -150,6 +169,10 @@ namespace ComicDownloader.Forms
             if (metroTabControl1.SelectedTab == tabSearch)
             {
                 OnRowClick(this.listSearchResult, false);
+            }
+            if (metroTabControl1.SelectedTab == metroTabPage1)
+            {
+                OnRowClick(this.objectListView1, false);
             }
         }
 

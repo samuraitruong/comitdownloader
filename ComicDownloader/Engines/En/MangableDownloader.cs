@@ -36,6 +36,7 @@ namespace ComicDownloader.Engines.En
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             return base.GetListStoriesUnknowPages("http://mangable.com/manga-list/all/name/asc/1.html",
@@ -51,8 +52,9 @@ namespace ComicDownloader.Engines.En
             return base.RequestInfoSimple(storyUrl,
                 "//h2[@id='series_title']",
                 "//div[@id='newlist']/ul/li/a",
-                string.Empty, 
-                chapterExtract: delegate(HtmlNode node) {
+                string.Empty,
+                chapterExtract: delegate (HtmlNode node)
+                {
                     return new ChapterInfo()
                     {
                         Name = node.Descendants("b").First().InnerText.Trim(),
@@ -65,7 +67,7 @@ namespace ComicDownloader.Engines.En
         public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
         {
             var imgUrl = base.ExtractImage(pageUrl, "//img[@id=\"image\"]");
-            
+
             return base.DownloadPage(imgUrl, renamePattern, folder, httpReferer);
         }
         public override List<string> GetPages(string chapUrl)
@@ -78,7 +80,7 @@ namespace ComicDownloader.Engines.En
                 {
                     return chapUrl + node.Attributes["value"].Value;
                 });
-            
+
         }
 
         public override List<StoryInfo> GetLastestUpdates()

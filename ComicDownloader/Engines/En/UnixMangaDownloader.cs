@@ -29,6 +29,7 @@ namespace ComicDownloader.Engines.En
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             string urlPattern = this.ListStoryURL;

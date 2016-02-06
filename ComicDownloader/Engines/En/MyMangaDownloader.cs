@@ -46,7 +46,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
-        public override List<StoryInfo> GetListStories(bool forceOnline)
+        public override List<StoryInfo> HotestStories(){throw new NotImplementedException();}    public override List<StoryInfo> GetListStories(bool forceOnline)      
         {
             return base.GetListStoriesSimple("http://www.mymanga.me/manga-directory/all/az/{0}",
                 "//div[@class='manga-hover-wrapper']/a",

@@ -41,9 +41,20 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
-        public override List<StoryInfo> GetListStories(bool forceOnline)
+        public override List<StoryInfo> HotestStories(){
+            return base.HotestStoriesSimple(this.HostUrl,
+                "//ul[contains(@class,'most-views')]/li/a",
+                nodeConvert: (node) =>
+                {
+                    return new StoryInfo()
+                    {
+                        Url = node.Attributes["href"].Value,
+                        Name = node.SelectSingleNode("p").InnerText.Trim()
+                    };
+                });
+        }
+        public override List<StoryInfo> GetListStories(bool forceOnline)      
         {
-            //GOOD Example for cleanup code.
             return base.GetListStoriesSimple("http://www.a3manga.com/danh-sach-truyen/",
                 "//table//tr/td[2]/a",
                 forceOnline,

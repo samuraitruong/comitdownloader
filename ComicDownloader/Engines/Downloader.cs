@@ -11,6 +11,7 @@ using HtmlAgilityPack;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using MoreLinq;
 
 namespace ComicDownloader.Engines
 {
@@ -93,8 +94,8 @@ namespace ComicDownloader.Engines
         public event AfterCookieSet AfterCookieSet;
         public event ListPageCrawled OnListPageCrawled;
         public event ListPageCrawled OnSearchPageFinished;
-
-        [DllImport("wininet.dll", SetLastError = true)]
+        public event ListPageCrawled OnHostestPageCrawled; 
+    [DllImport("wininet.dll", SetLastError = true)]
         public static extern bool InternetGetCookieEx(
         string url,
         string cookieName,
@@ -511,11 +512,55 @@ namespace ComicDownloader.Engines
     Environment.SpecialFolder.ApplicationData)+"\\ComicDownloader\\"+ this.GetType().Name + ".CACHED";
         
         } }
-
-
         public virtual List<StoryInfo> GetLastestUpdates()
         {
             return new List<StoryInfo>();
+        }
+        public abstract List<StoryInfo> HotestStories();
+        public List<StoryInfo> HotestStoriesSimple(string urlpattern, string nodePattern, int totalPages = 1, Func<HtmlNode, StoryInfo> nodeConvert = null, Func<string, HtmlDocument, List<StoryInfo>> customParser = null)
+        {
+            var results = new List<StoryInfo>();
+
+            bool isStillHasPage = true;
+            var currentPage = 1;
+            while (isStillHasPage)
+            {
+                var tasks = new List<Task<List<StoryInfo>>>();
+
+                foreach (var item in Enumerable.Range(1, Math.Min(totalPages, MaxThreadCrawlList)))
+                {
+                    string url = string.Format(urlpattern, currentPage++);
+                    var oneTask = new Task<List<StoryInfo>>(() => this.CrawlOnePage(url, nodePattern, 0, "", nodeConvert, customParser));
+                    oneTask.ContinueWith((t) =>
+                    {
+                        if (this.OnHostestPageCrawled != null)
+                        {
+                            this.OnHostestPageCrawled(t.Result);
+                        }
+                    });
+                    tasks.Add(oneTask);
+                    oneTask.Start();
+                }
+                Task.WaitAll(tasks.ToArray(), 100);
+
+                foreach (var item in tasks)
+                {
+                    if (item.Result.Count > 0)
+                    {
+                        results.AddRange(item.Result);
+                    }
+                    else
+                    {
+                        isStillHasPage = false;
+                    }
+                }
+                if (totalPages > 0 && currentPage >= totalPages)
+                {
+                    isStillHasPage = false;
+                }
+            }
+            return results.DistinctBy(p=>p.Url).ToList();
+
         }
         public List<StoryInfo> OnlineSearchGet(string urlSearch, string matchPattern, int totalSearchPage = 0, Func<HtmlNode, StoryInfo> nodeConvert = null, Func<String, HtmlDocument, List<StoryInfo>> customParser = null)
         {

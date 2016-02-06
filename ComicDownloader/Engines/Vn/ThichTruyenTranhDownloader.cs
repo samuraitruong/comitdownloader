@@ -7,8 +7,8 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Thich Truyen Tranh", Offline = false, Language = "Tieng viet", MenuGroup = "O->T" , MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
-    public class ThichTruyenTranhDownloader: Downloader
+    [Downloader("Thich Truyen Tranh", Offline = false, Language = "Tieng viet", MenuGroup = "O->T", MetroTab = "Tiếng Việt", Image32 = "1364078951_insert-object")]
+    public class ThichTruyenTranhDownloader : Downloader
     {
         public override string Logo
         {
@@ -38,6 +38,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             //GOOD Example for cleanup code.
@@ -53,12 +54,12 @@ namespace ComicDownloader.Engines
             var paging = doc.DocumentNode.SelectSingleNode("(//div[@class='paging'])[1]//li[last()]/a");
             var listPages = new List<string>() { storyUrl };
 
-            if(paging!= null)
+            if (paging != null)
             {
                 var pagingUrl = this.HostUrl + paging.Attributes["href"].Value;
                 var pageCount = Regex.Match(pagingUrl, @"trang\.(\d+).html").Groups[1].Value;
                 pagingUrl = Regex.Replace(pagingUrl, @"trang\.(\d+).html", "trang.{0}.html");
-                foreach (var item in Enumerable.Range(2, int.Parse(pageCount)-1))
+                foreach (var item in Enumerable.Range(2, int.Parse(pageCount) - 1))
                 {
                     listPages.Add(string.Format(pagingUrl, item));
                 }

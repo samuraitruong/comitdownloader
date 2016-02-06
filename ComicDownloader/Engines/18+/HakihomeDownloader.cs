@@ -40,7 +40,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
-        public override List<StoryInfo> GetListStories(bool forceOnline)
+        public override List<StoryInfo> HotestStories(){throw new NotImplementedException();}    public override List<StoryInfo> GetListStories(bool forceOnline)      
         {
             string urlPattern = "http://www.hakihome.com/ListMangaHentai.html/pagel/{0}/";
            

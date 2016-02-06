@@ -44,7 +44,7 @@ namespace ComicDownloader.Engines
 
         }
          
-        public override List<StoryInfo> GetListStories(bool forceOnline)
+        public override List<StoryInfo> HotestStories(){throw new NotImplementedException();}    public override List<StoryInfo> GetListStories(bool forceOnline)      
         {
             return base.GetListStoriesUnknowPages(this.ListStoryURL,
                 "//a[@class='mng_det_pop']",

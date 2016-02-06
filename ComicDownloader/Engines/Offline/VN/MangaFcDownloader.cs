@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("nTruyen", Offline = true, Language = "Tieng viet", MenuGroup = "VN - 2" , MetroTab="Tiếng Việt", Image32 = "_1364410878_Add")]
+    [Downloader("nTruyen", Offline = true, Language = "Tieng viet", MenuGroup = "VN - 2", MetroTab = "Tiếng Việt", Image32 = "_1364410878_Add")]
     public class MangaFcDownloader : Downloader
     {
         public override string Logo
@@ -38,10 +38,11 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             string urlPattern = this.ListStoryURL + "trang-{0}.html";
-           
+
             List<StoryInfo> results = base.ReloadChachedData().Stories;
             if (results == null || results.Count == 0 || forceOnline)
             {
@@ -57,18 +58,18 @@ namespace ComicDownloader.Engines
                 int totalPage = Convert.ToInt32(totalPageNode.InnerText.Trim());
                 for (int i = 1; i <= totalPage; i++)
                 {
-                    
-              
+
+
                     string url = string.Format(urlPattern, i);
 
-                     html = NetworkHelper.GetHtml(url);
+                    html = NetworkHelper.GetHtml(url);
                     HtmlDocument parser = new HtmlDocument();
                     parser.LoadHtml(html);
 
                     var nodes = parser.DocumentNode.SelectNodes("//*[@id=\"table_example\"]//td[1]/a");
                     if (nodes != null && nodes.Count > 0)
                     {
-                        
+
                         foreach (var node in nodes)
                         {
                             StoryInfo info = new StoryInfo()
@@ -79,8 +80,8 @@ namespace ComicDownloader.Engines
                             results.Add(info);
                         }
                     }
-                  
-                                        
+
+
                 }
 
             }
@@ -119,11 +120,11 @@ namespace ComicDownloader.Engines
             info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
             return info;
         }
-        
+
 
         public override List<string> GetPages(string chapUrl)
         {
-            var html = NetworkHelper.GetHtml(chapUrl+"nhieutrang.html");
+            var html = NetworkHelper.GetHtml(chapUrl + "nhieutrang.html");
 
             HtmlDocument htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
@@ -132,7 +133,7 @@ namespace ComicDownloader.Engines
             foreach (HtmlNode match in pages)
             {
                 results.Add(BlogTruyenDownloader.ReplaceText(match.Attributes["data-src"].Value));
-                
+
             }
             return results;
         }

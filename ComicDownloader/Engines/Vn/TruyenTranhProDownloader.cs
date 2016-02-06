@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Truyen Tranh Pro", Offline = false, Language = "Tieng viet", MenuGroup = "O->T", MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
+    [Downloader("Truyen Tranh Pro", Offline = false, Language = "Tieng viet", MenuGroup = "O->T", MetroTab = "Tiếng Việt", Image32 = "1364078951_insert-object")]
     public class TruyenTranhProDownloader : Downloader
     {
         public override string Logo
@@ -38,6 +38,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             //GOOD Example for cleanup code.
@@ -45,17 +46,17 @@ namespace ComicDownloader.Engines
                 "//a[@class='thumbnail']",
                 forceOnline,
                 this.HostUrl,
-                singleListPage:true
-                
+                singleListPage: true
+
 
                 );
         }
-        
+
         public override StoryInfo RequestInfo(string storyUrl)
         {
             return base.RequestInfoSimple(storyUrl,
                 "//h2[@class='page-subtitle']/*",
-                "//div[@class='items-more']//li/a", 
+                "//div[@class='items-more']//li/a",
                 chapterExtract: delegate (HtmlNode node)
                  {
                      ChapterInfo info = new ChapterInfo()
@@ -63,7 +64,7 @@ namespace ComicDownloader.Engines
                          Url = this.HostUrl + node.Attributes["href"].Value,
                          Name = node.FirstChild.InnerText.Trim()
                      };
-                    return info;
+                     return info;
                  }
                 );
         }

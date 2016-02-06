@@ -7,8 +7,8 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Starkana", Offline =true, MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410884_add1_")]
-    public class MangaAccessDownloader :  Downloader
+    [Downloader("Starkana", Offline = true, MenuGroup = "English", MetroTab = "English", Language = "English", Image32 = "_1364410884_add1_")]
+    public class MangaAccessDownloader : Downloader
     {
         public override string Logo
         {
@@ -38,6 +38,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
 
@@ -52,16 +53,16 @@ namespace ComicDownloader.Engines
                 htmlDoc.LoadHtml(html);
 
                 var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"inner_page\"]//div[contains(@class,\"c_h\")]/a");
-                if(nodes!=null)
-                foreach (var node in nodes)
-                {
-                    StoryInfo info = new StoryInfo()
+                if (nodes != null)
+                    foreach (var node in nodes)
                     {
-                        Url = HostUrl + node.Attributes["href"].Value,
-                        Name = node.InnerText.Trim().Trim()
-                    };
-                    results.Add(info);
-                }
+                        StoryInfo info = new StoryInfo()
+                        {
+                            Url = HostUrl + node.Attributes["href"].Value,
+                            Name = node.InnerText.Trim().Trim()
+                        };
+                        results.Add(info);
+                    }
 
 
             }
@@ -91,9 +92,9 @@ namespace ComicDownloader.Engines
             {
                 ChapterInfo chap = new ChapterInfo()
                 {
-                    Name = chapter.InnerText.Trim() ,//+ " " + chapter.ChildNodes[0].InnerText.Trim() + " " + chapter.ChildNodes[1].InnerText.Trim(),
+                    Name = chapter.InnerText.Trim(),//+ " " + chapter.ChildNodes[0].InnerText.Trim() + " " + chapter.ChildNodes[1].InnerText.Trim(),
                     Url = HostUrl + chapter.Attributes["href"].Value,
-                    
+
                 };
                 chap.ChapId = ExtractID(chap.Name);
                 info.Chapters.Add(chap);
@@ -110,7 +111,7 @@ namespace ComicDownloader.Engines
             var img = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"inner_page\"]//img");
             pageUrl = img.Attributes["src"].Value;
 
-            
+
             return base.DownloadPage(pageUrl, renamePattern, folder, httpReferer);
         }
         public override List<string> GetPages(string chapUrl)
@@ -125,7 +126,7 @@ namespace ComicDownloader.Engines
             List<string> results = new List<string>();
             foreach (HtmlNode page in pages)
             {
-                results.Add(HostUrl+ page.Attributes["value"].Value);
+                results.Add(HostUrl + page.Attributes["value"].Value);
             }
             return results;
         }
@@ -180,7 +181,7 @@ namespace ComicDownloader.Engines
                 info.Chapters.Add(chapter);
             }
 
-            
+
             return stories;
         }
 

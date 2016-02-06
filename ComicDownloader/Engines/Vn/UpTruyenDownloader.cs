@@ -8,7 +8,7 @@ using System.Net;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Up Truyen", Offline = false, Language = "Tieng viet", MenuGroup = "U->Z", MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
+    [Downloader("Up Truyen", Offline = false, Language = "Tieng viet", MenuGroup = "U->Z", MetroTab = "Tiếng Việt", Image32 = "1364078951_insert-object")]
     public class UpTruyenDownloader : Downloader
     {
         public override string Logo
@@ -33,11 +33,11 @@ namespace ComicDownloader.Engines
         public override bool Login()
         {
             var data = string.Format("username={0}&password={1}", this.Settings.UserName, this.Settings.Password);
-            CookieContainer cookies = null; 
-            var html = NetworkHelper.PostHtml(this.LoginUrl, this.HostUrl, data, postProcess:(c)=>
-            {
-                cookies = c;
-            });
+            CookieContainer cookies = null;
+            var html = NetworkHelper.PostHtml(this.LoginUrl, this.HostUrl, data, postProcess: (c) =>
+             {
+                 cookies = c;
+             });
             html = NetworkHelper.GetHtml(this.HostUrl, cookies);
             return true;
         }
@@ -57,6 +57,12 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() {
+            return base.HotestStoriesSimple("http://uptruyen.com/manga",
+                "//div[@id='toplist_panel']//h4/a");
+
+        }
+
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             //GOOD Example for cleanup code.
@@ -66,7 +72,7 @@ namespace ComicDownloader.Engines
                 this.HostUrl
                 );
         }
-        
+
         public override StoryInfo RequestInfo(string storyUrl)
         {
             return base.RequestInfoSimple(storyUrl,

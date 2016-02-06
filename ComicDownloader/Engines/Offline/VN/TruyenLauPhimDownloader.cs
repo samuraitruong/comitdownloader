@@ -38,7 +38,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
-        public override List<StoryInfo> GetListStories(bool forceOnline)
+        public override List<StoryInfo> HotestStories(){throw new NotImplementedException();}    public override List<StoryInfo> GetListStories(bool forceOnline)      
         {
             string urlPattern = "http://truyen.lauphim.com/manga-list/all/any/name-az/{0}/";
             //*[@id="sct_content"]/div/div/div[1]/ul

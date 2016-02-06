@@ -40,7 +40,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
-        public override List<StoryInfo> GetListStories(bool forceOnline)
+        public override List<StoryInfo> HotestStories(){throw new NotImplementedException();}    public override List<StoryInfo> GetListStories(bool forceOnline)      
         {
             List<StoryInfo> results = base.ReloadChachedData().Stories;
             string urlPattern = "http://blogtruyen.com/ListStory/GetCategory?CategoryID=0&OrderBy=1&PageIndex={0}";

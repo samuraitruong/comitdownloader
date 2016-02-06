@@ -40,7 +40,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
-        public override List<StoryInfo> GetListStories(bool forceOnline)
+        public override List<StoryInfo> HotestStories(){throw new NotImplementedException();}    public override List<StoryInfo> GetListStories(bool forceOnline)      
         {
             return base.GetListStoriesSimple("http://bato.to/search_ajax?&p={0}",
                 "//table//tr/td[1]/strong/a",

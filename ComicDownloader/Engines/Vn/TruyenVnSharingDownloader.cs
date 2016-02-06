@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("TruyenVnSharing.net", MenuGroup = "O->T", Offline = false, MetroTab ="Tiếng Việt", Language = "Tieng viet", Image32 = "1364131990_document_add")]
+    [Downloader("TruyenVnSharing.net", MenuGroup = "O->T", Offline = false, MetroTab = "Tiếng Việt", Language = "Tieng viet", Image32 = "1364131990_document_add")]
     public class TruyenVnSharingDownloader : Downloader
     {
         public override string Logo
@@ -45,6 +45,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             string urlPattern = this.ListStoryURL + "/{0}";
@@ -78,9 +79,9 @@ namespace ComicDownloader.Engines
                 {
                     Name = node.InnerText.Trim().Trim(),
                     Url = node.Attributes["href"].Value.Trim(),
-                    ChapId = ExtractID(node.InnerText.Trim().Trim())   
+                    ChapId = ExtractID(node.InnerText.Trim().Trim())
                 };
-                
+
                 info.Chapters.Add(chapInfo);
             }
 
@@ -110,7 +111,7 @@ namespace ComicDownloader.Engines
             {
                 pages.Add(node.Attributes["src"].Value);
             }
-            
+
             return pages;
         }
 

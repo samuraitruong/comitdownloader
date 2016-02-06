@@ -8,7 +8,7 @@ using System.Net;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Manga89", Offline = false, Language = "Tieng viet", MenuGroup = "I->N", MetroTab="Tiếng Việt", Image32 = "_1364410884_add1_")]
+    [Downloader("Manga89", Offline = false, Language = "Tieng viet", MenuGroup = "I->N", MetroTab = "Tiếng Việt", Image32 = "_1364410884_add1_")]
     public class Manga89Downloader
         : Downloader
     {
@@ -44,6 +44,7 @@ namespace ComicDownloader.Engines
 
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             return GetListStoriesSimple(this.ListStoryURL, "//*[@class=\"ddsg-wrapper\"]/ul/li[1]/ul/li/a", forceOnline, singleListPage: true);
@@ -51,7 +52,7 @@ namespace ComicDownloader.Engines
 
         public override StoryInfo RequestInfo(string url)
         {
-         
+
             var html = NetworkHelper.GetHtml(url);
 
             HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
@@ -75,10 +76,10 @@ namespace ComicDownloader.Engines
                     Url = item.Attributes["href"].Value,
                     Name = item.InnerText.Trim()
                     ,
-                    ChapId = ExtractID(item.InnerText.Trim(),@"Chapter (\d*)")
+                    ChapId = ExtractID(item.InnerText.Trim(), @"Chapter (\d*)")
 
                 };
-               
+
 
                 info.Chapters.Add(chapter);
             }
@@ -99,7 +100,7 @@ namespace ComicDownloader.Engines
             htmlDoc.LoadHtml(html);
             var imgNode = htmlDoc.DocumentNode.SelectSingleNode("//img[@class=\"1picture\"]");
 
-            var url = "http://img.manga89.com/read/"+ imgNode.Attributes["src"].Value;
+            var url = "http://img.manga89.com/read/" + imgNode.Attributes["src"].Value;
 
             return base.DownloadPage(url, renamePattern, folder, httpReferer);
         }
@@ -107,21 +108,21 @@ namespace ComicDownloader.Engines
         {
             List<string> pages = new List<string>();
 
-            
-                string html = NetworkHelper.GetHtml(chapUrl);
-                HtmlDocument htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(html);
-                var options = htmlDoc.DocumentNode.SelectNodes("//select[@name=\"page\"]//option");
-                //var paged = htmlDoc.DocumentNode.SelectSingleNode("//select[@name='chapter']/option[@selected='selected']");
-                //if(paged.InnerText.Trim() == "End")
-                //{
-                    
-                //}
-                foreach (var item in options)
-	            {
-                    pages.Add(chapUrl + item.Attributes["value"].Value);
-	            }
-            
+
+            string html = NetworkHelper.GetHtml(chapUrl);
+            HtmlDocument htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var options = htmlDoc.DocumentNode.SelectNodes("//select[@name=\"page\"]//option");
+            //var paged = htmlDoc.DocumentNode.SelectSingleNode("//select[@name='chapter']/option[@selected='selected']");
+            //if(paged.InnerText.Trim() == "End")
+            //{
+
+            //}
+            foreach (var item in options)
+            {
+                pages.Add(chapUrl + item.Attributes["value"].Value);
+            }
+
 
             return pages;
         }

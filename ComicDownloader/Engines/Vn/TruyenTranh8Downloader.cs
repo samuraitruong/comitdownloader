@@ -7,8 +7,8 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("TruyenTranh8.com", Offline = false, Language = "Tieng viet", MenuGroup = "O->T", MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
-    public class TruyenTranh8Downloader: Downloader
+    [Downloader("TruyenTranh8.com", Offline = false, Language = "Tieng viet", MenuGroup = "O->T", MetroTab = "Tiếng Việt", Image32 = "1364078951_insert-object")]
+    public class TruyenTranh8Downloader : Downloader
     {
         public override string Logo
         {
@@ -38,6 +38,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             string urlPattern = "http://truyentranh8.net/search.php?act=search&sort=ten&page={0}&view=list";
@@ -45,7 +46,8 @@ namespace ComicDownloader.Engines
             return base.GetListStoriesSimple(urlPattern,
                 "//td[@class='tit']/a[1]",
                 forceOnline,
-                convertFunc:(node)=> {
+                convertFunc: (node) =>
+                {
                     return new StoryInfo()
                     {
                         Name = node.InnerText,
@@ -59,8 +61,9 @@ namespace ComicDownloader.Engines
 
             return base.RequestInfoSimple(storyUrl,
                 "//h1[@itemprop=\"name\"]",
-                "//*[@itemprop=\"itemListElement\"]", 
-                chapterExtract : (node)=> {
+                "//*[@itemprop=\"itemListElement\"]",
+                chapterExtract: (node) =>
+                {
                     ChapterInfo chapInfo = new ChapterInfo()
                     {
                         Name = node.SelectSingleNode("//span[@class='hm']").InnerText.Trim() + node.SelectSingleNode("//strong").InnerText.Trim(),
@@ -81,8 +84,8 @@ namespace ComicDownloader.Engines
             string p = "lstImages.push\\(\"(.*)\"\\)";
 
             var matches = Regex.Matches(html, pvip);
-            if(matches== null || matches.Count ==0)
-             matches = Regex.Matches(html,p );
+            if (matches == null || matches.Count == 0)
+                matches = Regex.Matches(html, p);
 
             foreach (Match match in matches)
             {

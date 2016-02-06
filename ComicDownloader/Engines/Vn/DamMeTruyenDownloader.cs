@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Dam Me Truyen", Offline = false, Language = "Tieng viet", MenuGroup = "A->F", MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
+    [Downloader("Dam Me Truyen", Offline = false, Language = "Tieng viet", MenuGroup = "A->F", MetroTab = "Tiếng Việt", Image32 = "1364078951_insert-object")]
     public class DamMeTruyenDownloader : Downloader
     {
         public override string Logo
@@ -38,6 +38,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             //GOOD Example for cleanup code.
@@ -46,27 +47,27 @@ namespace ComicDownloader.Engines
                 forceOnline);
         }
 
-        private  List<StoryInfo> CustomListParser(string html, HtmlDocument doc)
+        private List<StoryInfo> CustomListParser(string html, HtmlDocument doc)
         {
-                List<StoryInfo> list = new List<StoryInfo>();
-                var divNode = doc.DocumentNode.Descendants("div").Where(p => p.HasAttributes && p.Attributes["class"] != null && p.Attributes["class"].Value == "ls1").FirstOrDefault();
+            List<StoryInfo> list = new List<StoryInfo>();
+            var divNode = doc.DocumentNode.Descendants("div").Where(p => p.HasAttributes && p.Attributes["class"] != null && p.Attributes["class"].Value == "ls1").FirstOrDefault();
             if (divNode == null) return list;
-                doc.LoadHtml(divNode.InnerHtml);
-                var nodes = doc.DocumentNode.SelectNodes("//h3/a");
-                if (nodes != null)
+            doc.LoadHtml(divNode.InnerHtml);
+            var nodes = doc.DocumentNode.SelectNodes("//h3/a");
+            if (nodes != null)
+            {
+                foreach (HtmlNode node in nodes)
                 {
-                    foreach (HtmlNode node in nodes)
+                    StoryInfo info = new StoryInfo()
                     {
-                        StoryInfo info = new StoryInfo()
-                        {
-                            Url = node.Attributes["href"].Value,
-                            Name = node.Attributes["title"] != null && string.IsNullOrEmpty(node.Attributes["title"].Value) ? node.Attributes["title"].Value : node.InnerText.Trim().Trim()
-                        };
-                        list.Add(info);
-                    }
+                        Url = node.Attributes["href"].Value,
+                        Name = node.Attributes["title"] != null && string.IsNullOrEmpty(node.Attributes["title"].Value) ? node.Attributes["title"].Value : node.InnerText.Trim().Trim()
+                    };
+                    list.Add(info);
                 }
+            }
 
-                return list;
+            return list;
         }
         private List<ChapterInfo> CustomExtractChapters(string html, HtmlDocument doc)
         {
@@ -76,7 +77,7 @@ namespace ComicDownloader.Engines
             var nodes = doc.DocumentNode.SelectNodes("//ul/li/span/a");
             foreach (HtmlNode node in nodes)
             {
-                var chapInfo =  new ChapterInfo()
+                var chapInfo = new ChapterInfo()
                 {
                     Name = node.InnerText.Trim(),
                     Url = node.Attributes["href"].Value.Trim(),
@@ -92,7 +93,7 @@ namespace ComicDownloader.Engines
             return base.RequestInfoSimple(storyUrl,
                 "//h1[@class='ttl']",
                 "//ul[@class='lst']/li/span/a",
-                null, 
+                null,
                 null,
                 null,
                 this.CustomExtractChapters
@@ -103,13 +104,13 @@ namespace ComicDownloader.Engines
         {
             var html = NetworkHelper.GetHtml(chapUrl);
             var match = Regex.Match(html, @"loadingBookChapters\('(\d+)', '(\d+)'\)");
-            if(match != null && match.Groups.Count >= 2)
+            if (match != null && match.Groups.Count >= 2)
             {
                 var url = "http://dammetruyen.com/truyen/gen_html_chapter/" + match.Groups[1].Value + '/' + match.Groups[2].Value;
                 var doc = GetParser(url);
                 var nodes = doc.DocumentNode.SelectNodes("//img");
-                if(nodes != null && nodes.Count >0)
-                return nodes.Select(p => p.Attributes["src"].Value).ToList();    
+                if (nodes != null && nodes.Count > 0)
+                    return nodes.Select(p => p.Attributes["src"].Value).ToList();
             }
             return new List<string>();
         }

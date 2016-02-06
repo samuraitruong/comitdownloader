@@ -7,8 +7,8 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("nTruyen", Offline = false, Language = "Tieng viet", MenuGroup = "I->N", MetroTab="Tiếng Việt", Image32 = "1364131990_document_add")]
-    public class NTruyenDownloader :  Downloader
+    [Downloader("nTruyen", Offline = false, Language = "Tieng viet", MenuGroup = "I->N", MetroTab = "Tiếng Việt", Image32 = "1364131990_document_add")]
+    public class NTruyenDownloader : Downloader
     {
         public override string Logo
         {
@@ -37,6 +37,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             string urlPattern = this.ListStoryURL + "?ViewType=1&SortBy=1&IsAsc=1&CurrentPage={0}";
@@ -69,14 +70,14 @@ namespace ComicDownloader.Engines
                 {
                     Name = chapter.InnerText.Trim(),
                     Url = HostUrl + chapter.Attributes["href"].Value,
-                    ChapId = ExtractID(chapter.InnerText.Trim(),"Chapter (\\d*)")
+                    ChapId = ExtractID(chapter.InnerText.Trim(), "Chapter (\\d*)")
                 };
                 info.Chapters.Add(chap);
             }
             info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
             return info;
         }
-        
+
         public override List<string> GetPages(string chapUrl)
         {
             var html = NetworkHelper.GetHtml(chapUrl);
@@ -93,7 +94,7 @@ namespace ComicDownloader.Engines
             //foreach (Match match in matches)
             //{
             //    results.Add(match.Groups[1].Value);
-                
+
             //}
             return results;
         }

@@ -34,6 +34,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             string urlPattern = "http://manga4vn.com/truyen-moi-dang/page/{0}";
@@ -46,7 +47,7 @@ namespace ComicDownloader.Engines
 
         public override StoryInfo RequestInfo(string url)
         {
-            
+
             var html = NetworkHelper.GetHtml(url);
 
             var htmlDoc = new HtmlAgilityPack.HtmlDocument();

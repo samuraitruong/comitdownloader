@@ -8,7 +8,7 @@ using System.Net;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Xomtruyentranh.con", Offline = false, MenuGroup = "U-Z", MetroTab="Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410887_Add")]
+    [Downloader("Xomtruyentranh.con", Offline = false, MenuGroup = "U-Z", MetroTab = "Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410887_Add")]
     public class XomTruyenDownloader
         : Downloader
     {
@@ -44,6 +44,7 @@ namespace ComicDownloader.Engines
 
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             return base.GetListStoriesSimple(this.ListStoryURL, "//*[@id='maincol']/div[2]//span[1]/a[contains(@href,'http')]", forceOnline, singleListPage: true);
@@ -51,7 +52,7 @@ namespace ComicDownloader.Engines
 
         public override StoryInfo RequestInfo(string url)
         {
-            return base.RequestInfoSimple(url, "//*[@id=\"mangainfo\"]//h3", "//*[@class=\"scroll-pane\"]//span[1]/a");       
+            return base.RequestInfoSimple(url, "//*[@id=\"mangainfo\"]//h3", "//*[@class=\"scroll-pane\"]//span[1]/a");
         }
         public override string Name
         {

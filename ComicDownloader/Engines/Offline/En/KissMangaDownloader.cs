@@ -57,7 +57,7 @@ namespace ComicDownloader.Engines
             return base.InitCookie();
         }
 
-        public override List<StoryInfo> GetListStories(bool forceOnline)
+        public override List<StoryInfo> HotestStories(){throw new NotImplementedException();}    public override List<StoryInfo> GetListStories(bool forceOnline)      
         {
             return base.GetListStoriesSimple(
                 this.ListStoryURL + "?page={0}",

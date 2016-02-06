@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("My Manga Online", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "1364078951_insert-object")]
+    [Downloader("My Manga Online", MenuGroup = "English", MetroTab = "English", Language = "English", Image32 = "1364078951_insert-object")]
     public class MyMangaOnlineDownloader : Downloader
     {
         public override string Logo
@@ -38,6 +38,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             return base.GetListStoriesUnknowPages(this.ListStoryURL,
@@ -45,7 +46,7 @@ namespace ComicDownloader.Engines
                 forceOnline,
                 "", null,
                 this.HostUrl,
-                allLinksExtract: delegate(string html, HtmlDocument document)
+                allLinksExtract: delegate (string html, HtmlDocument document)
                 {
                     List<String> results = new List<string>();
                     var nodes = document.DocumentNode.SelectNodes("//div[@id='top-box-alpha']//ul/li[position()>4]/a");
@@ -121,7 +122,7 @@ namespace ComicDownloader.Engines
             urlPattern = urlPattern + "&page={0}.html";
 
             var results = new List<StoryInfo>();
-            
+
             int currentPage = 1;
             while (currentPage <= Constant.LimitedPageForSearch)
             {

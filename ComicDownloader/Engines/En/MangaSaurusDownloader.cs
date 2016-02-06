@@ -38,7 +38,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
-        public override List<StoryInfo> GetListStories(bool forceOnline)
+        public override List<StoryInfo> HotestStories(){throw new NotImplementedException();}    public override List<StoryInfo> GetListStories(bool forceOnline)      
         {
             return base.GetListStoriesSimple("http://mangasaurus.com/browse/newest/{0}",
                 "//span[@class='comicInfo__comicTitle']/a[@class='comicRow__url']",

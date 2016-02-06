@@ -7,10 +7,11 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("MangaFox", MenuGroup = "English" , MetroTab="English", Language = "English", Image32 = "_1364410906_add")]
-    public class MangaFoxDownloader :  Downloader
+    [Downloader("MangaFox", MenuGroup = "English", MetroTab = "English", Language = "English", Image32 = "_1364410906_add")]
+    public class MangaFoxDownloader : Downloader
     {
         public override string Logo
+
         {
             get
             {
@@ -38,6 +39,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             return base.GetListStoriesSimple("http://mangafox.me/directory/{0}.htm",
@@ -65,7 +67,7 @@ namespace ComicDownloader.Engines
         {
             var html = NetworkHelper.GetHtml(chapUrl);
 
-            string patternUrl = chapUrl.Replace("1.html","{0}.html");
+            string patternUrl = chapUrl.Replace("1.html", "{0}.html");
 
             return base.GetPagesSimple(chapUrl,
                 "//div[@class='l']//option[position()<last()]",

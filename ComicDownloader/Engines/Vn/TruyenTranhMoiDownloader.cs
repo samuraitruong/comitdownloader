@@ -7,8 +7,8 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Truyen Tranh Moi", Offline = false, Language = "Tieng viet", MenuGroup = "O->T", MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
-    public class TruyenTranhMoiDownloader: Downloader
+    [Downloader("Truyen Tranh Moi", Offline = false, Language = "Tieng viet", MenuGroup = "O->T", MetroTab = "Tiếng Việt", Image32 = "1364078951_insert-object")]
+    public class TruyenTranhMoiDownloader : Downloader
     {
         public override string Logo
         {
@@ -38,6 +38,7 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
+        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             string urlPattern = "http://truyentranhmoi.com/danh-sach/page/{0}/";
@@ -55,27 +56,27 @@ namespace ComicDownloader.Engines
             htmlDoc.LoadHtml(html);
 
             var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//h1");
- 
+
             StoryInfo info = new StoryInfo()
             {
                 Url = storyUrl,
                 Name = nameNode.InnerText.Trim().Trim()
             };
 
-              var chapNodes = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class,'chap-list')]/ul/li/a");
+            var chapNodes = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class,'chap-list')]/ul/li/a");
 
-              foreach (HtmlNode node in chapNodes)
-              {
-                  ChapterInfo chapInfo = new ChapterInfo()
-                  {
-                      Name =  node.InnerText.Trim(),
-                      Url = node.Attributes["href"].Value.Trim(),
-                      ChapId = ExtractID(node.InnerText.Trim())
-                  };
-                  info.Chapters.Add(chapInfo);
-              }
+            foreach (HtmlNode node in chapNodes)
+            {
+                ChapterInfo chapInfo = new ChapterInfo()
+                {
+                    Name = node.InnerText.Trim(),
+                    Url = node.Attributes["href"].Value.Trim(),
+                    ChapId = ExtractID(node.InnerText.Trim())
+                };
+                info.Chapters.Add(chapInfo);
+            }
 
-              info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
+            info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
             return info;
         }
 
@@ -84,7 +85,7 @@ namespace ComicDownloader.Engines
             List<string> pages = new List<string>();
 
             var doc = base.GetParser(chapUrl);
-            
+
             var nodes = doc.DocumentNode.SelectNodes("//div[contains(@class,'image-chap')]/img");
             foreach (HtmlNode node in nodes)
             {
