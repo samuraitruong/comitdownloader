@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System; using System.Net;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,6 +13,7 @@ namespace System
 {
     public static class ObjectExtensions
     {
+         
         public static void InvokeOnMainThread(this System.Windows.Forms.Control control, Action act)
         {
             control.Invoke(new MethodInvoker(act), null);

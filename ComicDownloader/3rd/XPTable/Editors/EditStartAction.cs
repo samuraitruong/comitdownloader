@@ -25,7 +25,7 @@
  */
 
 
-using System;
+using System; using System.Net;
 
 
 namespace XPTable.Editors

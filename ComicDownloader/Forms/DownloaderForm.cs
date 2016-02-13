@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System; using System.Net;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -165,9 +165,9 @@ namespace ComicDownloader
                 {
 
                 }
-
-
             }
+            GenerateStoryPDF(this.currentStoryInfo, toBeDownloadedChapters);
+
 
             this.Invoke((MethodInvoker)delegate
             {
@@ -176,6 +176,27 @@ namespace ComicDownloader
                 //MessageBox.Show("Download completed!");
             });
 
+        }
+
+        private void GenerateStoryPDF(StoryInfo currentStoryInfo, List<ChapterInfo> toBeDownloadedChapters)
+        {
+            var dir = toBeDownloadedChapters[0].Folder;
+            var rootDir = (new DirectoryInfo(dir)).Parent.FullName;
+            var htmlFiles = Directory.GetFiles(rootDir, "*.html", SearchOption.AllDirectories);
+            if(htmlFiles.Length == 0)
+            {
+                return;
+            }
+            string pdfPath = rootDir + "\\PDF\\" + currentStoryInfo.Name.ConvertToValidFileName() + ".pdf";
+            PDFHelper.CreatePDFFromHtmls(htmlFiles, pdfPath, currentStoryInfo.Name, this.Settings);
+            this.InvokeOnMainThread(() =>
+            {
+                lblStoryPDF.Text = pdfPath;
+                if(MessageBox.Show(string.Format( "Story {0} has been downloaded, Do you want to open pdf file?", currentStoryInfo.Name), "Download finish", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                {
+                    Process.Start(pdfPath);
+                }
+            });
         }
 
         private void GeneratePDF(ChapterInfo chapInfo)
@@ -245,7 +266,12 @@ namespace ComicDownloader
                     DownloadPageParam param = (DownloadPageParam)state;
                     try
                     {
-                        string filename = Downloader.DownloadPage(param.PageUrl, Settings.RenamePattern.Replace("{{PAGENUM}}", param.Index.ToString("D2")), chapInfo.Folder, chapInfo.Url);
+                        string filename = Downloader.DownloadPage(param.PageUrl, 
+                            Settings.RenamePattern.Replace("{{PAGENUM}}", 
+                            param.Index.ToString("D2")), 
+                            chapInfo.Folder, 
+                            chapInfo.Url,
+                            chapter:chapInfo);
 
                         var file = File.Open(filename, FileMode.Open);
 
@@ -404,10 +430,14 @@ namespace ComicDownloader
                         chap.PdfFileName = chap.FolderName + ".pdf";
                         chap.PdfPath = Path.Combine(rootPath, "PDF\\" + chap.PdfFileName);
                         chap.Status = DownloadStatus.Waiting;
+                        chap.Story = this.currentStoryInfo;
                         toBeDownloadedChapters.Add(chap);
                     }
                 }
             }
+
+
+            //toBeDownloadedChapters =  this.Downloader.NormalizedChapters(toBeDownloadedChapters,);
             return toBeDownloadedChapters;
         }
 
@@ -796,9 +826,13 @@ namespace ComicDownloader
             else
             {
                 DownloaderInfoForm form = new DownloaderInfoForm();
+#if DEBUG
+                form.TopMost = false;
+#endif
                 form.ShowInfo(cached, this.Downloader, this);
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
+
                     Downloader.DeleteCached();
                     this.stories = null;
                     this.LoadStoryList();
@@ -965,6 +999,21 @@ namespace ComicDownloader
         {
             DownloaderSettingForm form = new DownloaderSettingForm(this.Downloader);
             form.ShowDialog();
+        }
+
+        private void contextMenuStrip2_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void openDestinationFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\Explorer.exe \"" + txtDir.Text + "\"");
+        }
+
+        private void openFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\Explorer.exe", "\"" + txtDir.Text + "\"");
         }
     }
 }

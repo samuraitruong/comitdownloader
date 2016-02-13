@@ -1541,6 +1541,23 @@ namespace ComicDownloader.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string HtmlTemplate {
+            get {
+                return ResourceManager.GetString("HtmlTemplate", resourceCulture);
+            }
+        }
+
+        internal static string DefaultCss
+        {
+            get
+            {
+                return ResourceManager.GetString("DefaultCss", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] Intro {

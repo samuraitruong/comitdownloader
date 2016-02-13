@@ -1,7 +1,7 @@
 using System.Threading;
 
 #if (_WINDOWS_CE)
-using System;
+using System; using System.Net;
 using System.Runtime.InteropServices;
 #endif
 

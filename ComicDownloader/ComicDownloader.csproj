@@ -78,9 +78,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>3rd\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="itextsharp, Version=5.4.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>3rd\itextsharp.dll</HintPath>
+    <Reference Include="itextsharp">
+      <HintPath>..\packages\iTextSharp.5.5.8\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.8.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.8\lib\itextsharp.xmlworker.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.SPOT.Net, Version=3.0.7186.0, Culture=neutral, processorArchitecture=MSIL">
@@ -566,6 +569,7 @@
     <Compile Include="Engines\En\MyMangaOnlineDownloader.cs" />
     <Compile Include="Engines\En\MangaSaurusDownloader.cs" />
     <Compile Include="Engines\En\MangaKoiDownloader.cs" />
+    <Compile Include="Engines\En\FreeMangaMeDownloader.cs" />
     <Compile Include="Engines\En\TaaddDownloader.cs" />
     <Compile Include="Engines\En\MangaTradersDownloader.cs" />
     <Compile Include="Engines\En\MangaVolumeDownloader.cs" />
@@ -583,7 +587,8 @@
     <Compile Include="Engines\En\UnixMangaDownloader.cs" />
     <Compile Include="Engines\Offline\En\OneMangeDownloader.cs" />
     <Compile Include="Engines\Proxies\BlogTruyenDownloaderProxy.cs" />
-    <Compile Include="Engines\Vn\BlogTruyenHayDownloader.cs" />
+    <Compile Include="Engines\Text\SSTruyenDownloader.cs" />
+    <Compile Include="Engines\Vn\GocThuGianDownloader.cs" />
     <Compile Include="Engines\Vn\UpTruyenDownloader.cs" />
     <Compile Include="Engines\Vn\TruyenTranhProDownloader.cs" />
     <Compile Include="Engines\Vn\TuoiTreNangDongDownloader.cs" />
@@ -867,7 +872,9 @@
       <DependentUpon>DownloaderInfoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AssemblyInfoHelper.cs" />
-    <Compile Include="Helpers\NetworkHelper.cs" />
+    <Compile Include="Helpers\NetworkHelper.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Engines\StoryInfo.cs" />
     <Compile Include="Engines\Vn\TruyenTranh8Downloader.cs" />
     <Compile Include="Engines\Vn\TruyenTranhTuanDownloader.cs" />
@@ -1502,8 +1509,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1797,6 +1804,9 @@
     <None Include="Resources\eyedroppercursor.cur" />
     <None Include="Resources\GPL v2.0.txt" />
     <None Include="Resources\donate-512.png" />
+    <None Include="Resources\DefaultCss.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\gtk-about.png" />
     <Content Include="3rd\HtmlAgilityPack.dll" />
     <Content Include="3rd\ObjectListView\CustomDictionary.xml" />
@@ -1825,6 +1835,7 @@
     <None Include="Resources\star.png" />
     <None Include="Resources\load_download.png" />
     <Content Include="Resources\t9froggy_trans.ico" />
+    <None Include="Resources\HtmlTemplate.html" />
     <Content Include="Resources\the_marvel_universe.jpg" />
     <Content Include="3rd\XPTable\Models\ColumnModel.bmp" />
     <Content Include="3rd\XPTable\Models\Table.bmp" />
@@ -1863,7 +1874,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2013/3/19" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_ConfigurationName="Release" BuildVersion_IncrementBeforeBuild="True" />
+      <UserProperties BuildVersion_IncrementBeforeBuild="True" BuildVersion_ConfigurationName="Release" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_StartDate="2013/3/19" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

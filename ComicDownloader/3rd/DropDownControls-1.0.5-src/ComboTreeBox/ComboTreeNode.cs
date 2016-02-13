@@ -1,7 +1,7 @@
 ﻿// A ComboBox with a TreeView Drop-Down
 // Bradley Smith - 2010/11/04 (updated 2015/04/14)
 
-using System;
+using System; using System.Net;
 using System.Text;
 using System.ComponentModel;
 using System.Drawing;

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using System; using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using HtmlAgilityPack;
+using System.Net;
 
 namespace ComicDownloader.Engines.En
 {
@@ -64,7 +65,7 @@ namespace ComicDownloader.Engines.En
 
         }
 
-        public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
+        public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer, CookieContainer cc = null, string originalUrl = null, ChapterInfo chappter = null)
         {
             var imgUrl = base.ExtractImage(pageUrl, "//img[@id=\"image\"]");
 

@@ -1,6 +1,6 @@
 ﻿using ComicDownloader.Engines;
 using MetroFramework.Forms;
-using System;
+using System; using System.Net;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;

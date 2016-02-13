@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System; using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,7 +54,7 @@ namespace ComicDownloader.Engines
             return base.RequestInfoSimple(storyUrl, "//h1", "//*[@id=\"updates\"]//th/a", this.HostUrl);
         }
 
-        public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
+        public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer, CookieContainer cc = null, string originalUrl = null, ChapterInfo chappter = null)
         {
             var html = NetworkHelper.GetHtml(pageUrl);
             HtmlDocument htmlDoc = new HtmlDocument();

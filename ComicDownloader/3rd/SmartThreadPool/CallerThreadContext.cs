@@ -1,7 +1,7 @@
 
 #if !(_WINDOWS_CE) && !(_SILVERLIGHT) && !(WINDOWS_PHONE)
 
-using System;
+using System; using System.Net;
 using System.Diagnostics;
 using System.Threading;
 using System.Reflection;

@@ -1,7 +1,7 @@
 ﻿// DataGridView Column Types for Drop-Down Controls
 // Bradley Smith - 2015/4/14
 
-using System;
+using System; using System.Net;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;

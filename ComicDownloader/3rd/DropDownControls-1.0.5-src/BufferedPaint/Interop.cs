@@ -1,7 +1,7 @@
 ﻿// Painting Controls With Fade Animations Using the Buffered Paint API
 // Bradley Smith - 2011/10/23 (updated 2014/03/12)
 
-using System;
+using System; using System.Net;
 using System.Drawing;
 using System.Runtime.InteropServices;
 

@@ -22,7 +22,7 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using System;
+using System; using System.Net;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;

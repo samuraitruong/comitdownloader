@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace MetroFramework.Properties {
-    using System;
+    using System; using System.Net;
     
     
     /// <summary>

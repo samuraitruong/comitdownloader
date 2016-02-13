@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System; using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -67,8 +67,8 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetLastestUpdates()
         {
-            return base.GetLastestUpdateSimple(this.HostUrl,
-                "//a[@class='title-h3-link']",
+            return base.GetLastestUpdateSimple("http://blogtruyen.com/trangchu",
+                "//*[@id='top-newest-story']//a",
                 "");
         }
 

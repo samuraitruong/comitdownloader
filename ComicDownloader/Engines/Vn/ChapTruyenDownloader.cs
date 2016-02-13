@@ -1,14 +1,15 @@
-﻿using System;
+﻿using System; using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using System.Net;
+using Newtonsoft.Json.Linq;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Chaptruyen.com", Offline = false, MenuGroup = "A->F", MetroTab="Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410887_Add")]
+    [Downloader("Chaptruyen.com", Offline = false, MenuGroup = "A->F", MetroTab = "Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410887_Add")]
     public class ChapTruyenDownloader
         : Downloader
     {
@@ -43,8 +44,12 @@ namespace ComicDownloader.Engines
             }
 
         }
-         
-        public override List<StoryInfo> HotestStories(){throw new NotImplementedException();}    public override List<StoryInfo> GetListStories(bool forceOnline)      
+
+        public override List<StoryInfo> HotestStories() {
+            return base.HotestStoriesSimple(this.HostUrl,
+                "//div[@class='wpm_wgt mng_ppl']//div[@class='ttb']/a");
+        }
+        public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             return base.GetListStoriesUnknowPages(this.ListStoryURL,
                 "//a[@class='mng_det_pop']",
@@ -54,36 +59,10 @@ namespace ComicDownloader.Engines
 
         public override StoryInfo RequestInfo(string url)
         {
-         
-            var html = NetworkHelper.GetHtml(url);
-
-            HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
-            htmlDoc.LoadHtml(html);
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//h1/a");
-
-            StoryInfo info = new StoryInfo()
-            {
-                Url = url,
-                Name = nameNode.FirstChild.InnerText.Trim().Trim()
-            };
-
-            var chapterLinks = htmlDoc.DocumentNode.SelectNodes("//ul[@class='lst']//a[@class='lst']");
-
-            info.ChapterCount = chapterLinks.Count;
-            foreach (HtmlNode item in chapterLinks)
-            {
-                ChapterInfo chapter = new ChapterInfo()
-                {
-                    Url = item.Attributes["href"].Value,
-                    Name = item.Attributes["title"].Value,
-                    ChapId = ExtractID(item.Attributes["title"].Value)
-                };
-                info.Chapters.Add(chapter);
-            }
-
-            info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
-
-            return info;
+            return base.RequestInfoSimple(url,
+                "//h1/a",
+                "//ul[@class='lst']//a[@class='lst']"
+                );
         }
         public override string Name
         {
@@ -104,76 +83,41 @@ namespace ComicDownloader.Engines
         {
             List<string> pages = new List<string>();
 
-            
-                string html = NetworkHelper.GetHtml(chapUrl);
-                var p = "lstImages\\.push\\(\"([^\"]*)\"";
-                var matches = Regex.Matches(html, p);
-                foreach (Match item in matches)
-                {
-                    pages.Add(item.Groups[1].Value);
-                }
+
+            string html = NetworkHelper.GetHtml(chapUrl);
+            var p = "lstImages\\.push\\(\"([^\"]*)\"";
+            var matches = Regex.Matches(html, p);
+            foreach (Match item in matches)
+            {
+                pages.Add(item.Groups[1].Value);
+            }
             return pages;
         }
 
         public override List<StoryInfo> GetLastestUpdates()
         {
-            string lastestUpdateUrl = HostUrl;
-            List<StoryInfo> stories = new List<StoryInfo>();
-            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
-
-            var htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-
-            var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"slide4hinh\"]//div[@class=\"tentruyen\"]/a");
-
-            foreach (HtmlNode node in nodes)
-            {
-                StoryInfo info = new StoryInfo()
-                {
-                    Url = node.Attributes["href"].Value,
-                    Name = node.InnerText.Trim().Trim(),
-                    Chapters = new List<ChapterInfo>(),
-                };
-                var chapters = node.ParentNode.ParentNode.SelectNodes("div[@class=\"sochap\"]/a");
-                if (chapters != null)
-                {
-                    foreach (HtmlNode chap in chapters)
-                    {
-                        info.Chapters.Add(new ChapterInfo()
-                        {
-                            Name = chap.InnerText.Trim().Trim(),
-                            Url = chap.Attributes["href"].Value,
-                        });
-                    }
-                }
-
-                stories.Add(info);
-            }
-
-            return stories;
+            return base.GetLastestUpdateSimple("http://chaptruyen.com/truyen/all/any/last-updated/",
+                "//a[@class='mng_det_pop']",
+                "");
         }
 
         public override List<StoryInfo> OnlineSearch(string keyword)
         {
-            var stories = new List<StoryInfo>();
+            string url = "http://chaptruyen.com/wpm-ajx/mng-sch-lst/?q="+ keyword+"&limit=1000";
 
-            if (!string.IsNullOrEmpty(keyword))
-            {
-                var urlPartern = string.Format("http://ChapTruyen.com/truyen/{0}", keyword.Replace(" ", "_"));
-
-                string html = NetworkHelper.GetHtml(urlPartern);
-                HtmlDocument htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(html);
-
-                var node = htmlDoc.DocumentNode.SelectSingleNode("//div[@class=\"divTable\"]");
-
-                if (node != null)
-                {
-                    stories.Add(new StoryInfo() { Url = urlPartern, Name = keyword });
-                }
-            }
-
-            return stories;
+            return OnlineSearchGet(url,
+                "//dummy", 1, customParser: (html, doc)=> {
+                    List<StoryInfo> list = new List<StoryInfo>();
+                    var json = html.Replace("}", "},");
+                    json = json.TrimEnd(new char[] { ',' });
+                    var obj = JArray.Parse("[" + json + "]");
+                    list = obj.Select(x => new StoryInfo()
+                    {
+                        Name = x["nme"].ToString(),
+                        Url = x["url"].ToString()
+                    }).ToList();
+                    return list;
+                });
         }
     }
 }

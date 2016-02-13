@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System; using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +6,39 @@ using System.Net;
 using System.IO;
 using System.Threading;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
+    public class CookieAwareWebClient : WebClient
+    {
+        private readonly CookieContainer m_container = new CookieContainer();
+        public CookieAwareWebClient(CookieContainer cc): base()
+        {
+            m_container = cc;
+        }
+        protected override WebRequest GetWebRequest(Uri address)
+        {
+            WebRequest request = base.GetWebRequest(address);
+            HttpWebRequest webRequest = request as HttpWebRequest;
+            if (webRequest != null && this.m_container != null)
+            {
+                webRequest.CookieContainer = m_container;
+            }
+            if(webRequest != null)
+            {
+                webRequest.Accept =  "application/xml,application/xhtml+xml,text/html;q=0.9,text/plain; q = 0.8,image/png,*/*;q=0.5";
+                webRequest.UserAgent =  "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36";
+                //webRequest.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate, sdch");
+                webRequest.Headers.Add(HttpRequestHeader.AcceptLanguage, "en-US,en;q=0.8");
+                webRequest.Headers.Add("X-Requested-With:XMLHttpRequest");
+                webRequest.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
+            }
+            return request;
+        }
+    }
+
     public class NetworkHelper
     {
         [DllImport("wininet.dll", CharSet = CharSet.Auto, SetLastError = true)]
@@ -28,7 +58,45 @@ namespace ComicDownloader.Engines
                 return null;
             }
         }
+        public static CookieContainer GetCookie(string url, string referer)
+        {
+            var cookies = new CookieContainer();
+            try
+            {
+                Uri myUri = new Uri(url);
+                // Create a 'HttpWebRequest' object for the specified url. 
+                HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(myUri);
+                myHttpWebRequest.Method = "GET";
+                myHttpWebRequest.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
+                myHttpWebRequest.AutomaticDecompression = DecompressionMethods.GZip;//Or DecompressionMethods.Deflate
+                myHttpWebRequest.UserAgent = @"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.4) Gecko/20060508 Firefox/1.5.0.4";
 
+                HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttpWebRequest.GetResponse();
+                foreach (Cookie item in myHttpWebResponse.Cookies)
+                {
+                    cookies.Add(item);
+                }
+                for (int i = 0; i < myHttpWebResponse.Headers.Count; i++)
+                {
+                    string name = myHttpWebResponse.Headers.GetKey(i);
+                    string value = myHttpWebResponse.Headers.Get(i);
+                    if (name == "Set-Cookie")
+                    {
+                        Match match = Regex.Match(value, "(.+?)=(.+?);");
+                        if (match.Captures.Count > 0)
+                        {
+                            cookies.Add(new Cookie(match.Groups[1].Value, match.Groups[2].Value, "/", "example.com"));
+                        }
+                    }
+                }
+
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return cookies;
+        }
         public static string GetHtml(string url, CookieContainer cookies = null)
         {
             try
@@ -63,6 +131,14 @@ namespace ComicDownloader.Engines
                     var stream = myHttpWebResponse.GetResponseStream();
                     var reader = new StreamReader(stream);
                     var html = reader.ReadToEnd();
+                    if(cookies == null)
+                    {
+                        cookies = new CookieContainer();
+                        foreach (Cookie item in myHttpWebResponse.Cookies)
+                        {
+                            cookies.Add(item);
+                        }
+                    }
                     // Release resources of response object.
                     myHttpWebResponse.Close();
 
@@ -175,6 +251,15 @@ namespace ComicDownloader.Engines
                 return client.DownloadData(p);
             }
             return null;
+        }
+        public string GetContentType(string url)
+        {
+            HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            myHttpWebRequest.Method = "HEAD";
+            var response = (HttpWebResponse)myHttpWebRequest.GetResponse();
+            string ct= response.ContentType;
+            response.Close();
+            return ct;
         }
     }
 }

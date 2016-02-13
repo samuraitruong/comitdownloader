@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml.Serialization;
 
 namespace ComicDownloader.Engines
 {
@@ -42,6 +44,8 @@ namespace ComicDownloader.Engines
         }
 
         public DateTime LastModified { get; set; }
+        [XmlIgnore]
+        public StoryInfo Story { get; internal set; }
     }
     public class StoryInfo
     {

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using System; using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
+using System.Net;
 
 namespace ComicDownloader.Engines
 {
@@ -54,7 +55,7 @@ namespace ComicDownloader.Engines
                 "//ul[@class='chlist']//a[@class='tips']");
         }
 
-        public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
+        public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer, CookieContainer cc = null, string originalUrl = null, ChapterInfo chappter = null)
         {
             var html = NetworkHelper.GetHtml(pageUrl);
             HtmlDocument htmlDoc = new HtmlDocument();

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System; using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,7 +54,7 @@ namespace ComicDownloader.Engines
                 "//div[@class='detail_list']//ul/li/span/a");
         }
 
-        public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
+        public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer, CookieContainer cc = null, string originalUrl = null, ChapterInfo chappter = null)
         {
             var img = base.ExtractImage(pageUrl,"//*[@id=\"viewer\"]//img[2]");
             return base.DownloadPage(img, renamePattern, folder, httpReferer);

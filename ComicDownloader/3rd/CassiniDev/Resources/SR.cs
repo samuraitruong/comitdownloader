@@ -14,7 +14,7 @@
 
 #region
 
-using System;
+using System; using System.Net;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;

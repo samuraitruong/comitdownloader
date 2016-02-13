@@ -2,7 +2,7 @@
 using ComicDownloader.Engines;
 using ComicDownloader.Properties;
 using MetroFramework.Forms;
-using System;
+using System; using System.Net;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -142,6 +142,11 @@ namespace ComicDownloader.Forms
             {
                 OnRowClick(this.listSearchResult, true);
             }
+            if (metroTabControl1.SelectedTab == metroTabPage1)
+            {
+                OnRowClick(this.objectListView1, true);
+            }
+
         }
 
         private void SetDownloadStory(StoryInfo info)
@@ -201,7 +206,15 @@ namespace ComicDownloader.Forms
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.loading.Visible = true;
-            RefreshLastestItem();
+            if (metroTabControl1.SelectedTab == tabUpdate)
+            {
+                RefreshLastestItem();
+            }
+            if (metroTabControl1.SelectedTab == metroTabPage1)
+            {
+                RefreshHostestItem();
+            }
+
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)

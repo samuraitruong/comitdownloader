@@ -1,11 +1,12 @@
 ﻿#define DEBUG
-using System;
+using System; using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
+using Newtonsoft.Json.Linq;
 
 namespace ComicDownloader.Engines
 {
@@ -34,51 +35,46 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
-        public override List<StoryInfo> HotestStories(){throw new NotImplementedException();}    public override List<StoryInfo> GetListStories(bool forceOnline)      
+        public override List<StoryInfo> GetLastestUpdates()
+        {
+            return base.GetLastestUpdateSimple("http://manga24h.com/capnhat/{0}",
+                "//h4/a", 
+                "");
+
+        }
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            string url = "http://manga24h.com/index.php?module=ajax&act=manga&opt=search&manga_search_home&q=" + keyword;
+            return base.OnlineSearchGet(url, "", 1, customParser: (html, doc) => {
+                var obj = JObject.Parse(html);
+                var list = from p in obj["items"]
+                           select new StoryInfo()
+                           {
+                             Name = p["text"].ToString(),
+                             Url  = base.EnsureHostName(this.HostUrl, p["id"].ToString())
+                           };
+                return list.ToList();
+            });
+        }
+        public override List<StoryInfo> HotestStories() {
+            return base.HotestStoriesSimple("http://manga24h.com/status/hot.html/{0}",
+                "//h4/a",
+                5);
+        }
+        public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             return base.GetListStoriesUnknowPages(this.ListStoryURL,
                 "//a[@class='manga_name_update']",
                 forceOnline,
-                "//ul[@class='pagination']/li/a",null, this.HostUrl);
+                "//ul[@class='pagination']/li/a", null, this.HostUrl);
         }
 
         public override StoryInfo RequestInfo(string url)
         {
-            
-            var html = NetworkHelper.GetHtml(url);
 
-            var htmlDoc = new HtmlAgilityPack.HtmlDocument();
-            htmlDoc.LoadHtml(html);
-
-            var nodeHtml = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='manga-detail-info']/h1");
-            StoryInfo story = new StoryInfo()
-            {
-                Url = url,
-                Name = nodeHtml.InnerHtml
-            };
-            //var match = Regex.Match(nodeHtml.InnerHtml, "<strong>(.*?)</strong>");
-            //if (match != null)
-            //{
-            //    story.Name = match.Groups[1].Value;
-            //}
-
-            //htmlDoc.LoadHtml(nodeHtml.InnerHtml);
-            //var matches = Regex.Matches("<table class="table chapt - table"[^>]*>[\s\S]*?<\/table>")
-            var nodes = htmlDoc.DocumentNode.SelectNodes("//table[@class='table chapt-table']//tr/td/a");
-            if (nodes != null)
-                foreach (HtmlNode node in nodes)
-                {
-                    ChapterInfo chap = new ChapterInfo()
-                    {
-                        Url = this.HostUrl+"/" +node.Attributes["href"].Value,
-                        Name = node.InnerText.Trim().Trim(),
-                        ChapId = ExtractID(node.InnerText.Trim().Trim())
-                    };
-
-                    story.Chapters.Add(chap);
-                }
-            story.Chapters = story.Chapters.OrderBy(p => p.ChapId).ToList();
-            return story;
+            return base.RequestInfoSimple(url,
+                "//div[@id='manga-detail-info']/h1",
+                "//table[@class='table chapt-table']//tr/td/a");
         }
 
         public override string Name

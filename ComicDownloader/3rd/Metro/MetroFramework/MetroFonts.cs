@@ -27,7 +27,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Drawing.Text;
-using System;
+using System; using System.Net;
 
 namespace MetroFramework
 {

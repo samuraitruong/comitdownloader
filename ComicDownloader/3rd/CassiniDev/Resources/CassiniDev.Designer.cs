@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace ComicDownloader._3rd.CassiniDev.Resources {
-    using System;
+    using System; using System.Net;
     
     
     /// <summary>

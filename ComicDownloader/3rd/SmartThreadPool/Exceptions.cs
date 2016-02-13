@@ -1,4 +1,4 @@
-using System;
+using System; using System.Net;
 #if !(_WINDOWS_CE)
 using System.Runtime.Serialization;
 #endif

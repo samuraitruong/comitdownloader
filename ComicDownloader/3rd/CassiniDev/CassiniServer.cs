@@ -9,7 +9,7 @@
 //  * You must not remove this notice, or any other, from this software.
 //  *
 //  * **********************************************************************************/
-using System;
+using System; using System.Net;
 using System.IO;
 using System.Net;
 

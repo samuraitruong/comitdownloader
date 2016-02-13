@@ -14,7 +14,7 @@
 
 #region
 
-using System;
+using System; using System.Net;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -129,7 +129,7 @@ namespace CassiniDev
     ///
     ///    So for the wc.exe program we want this:
     ///
-    ///    using System;
+    ///    using System; using System.Net;
     ///    using Utilities;
     ///
     ///    class WCArguments

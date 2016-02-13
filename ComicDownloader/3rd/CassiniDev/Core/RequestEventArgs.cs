@@ -13,7 +13,7 @@
 
 #region
 
-using System;
+using System; using System.Net;
 using CassiniDev.ServerLog;
 
 #endregion

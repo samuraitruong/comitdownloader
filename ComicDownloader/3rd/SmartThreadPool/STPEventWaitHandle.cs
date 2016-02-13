@@ -1,6 +1,6 @@
 ﻿#if !(_WINDOWS_CE)
 
-using System;
+using System; using System.Net;
 using System.Threading;
 
 namespace Amib.Threading.Internal

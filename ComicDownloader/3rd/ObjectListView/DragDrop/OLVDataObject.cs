@@ -29,7 +29,7 @@
  * If you wish to use this code in a closed source application, please contact phillip_piper@bigfoot.com.
  */
 
-using System;
+using System; using System.Net;
 using System.Collections;
 using System.Windows.Forms;
 

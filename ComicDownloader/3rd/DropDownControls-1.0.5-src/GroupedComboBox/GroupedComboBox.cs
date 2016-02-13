@@ -1,7 +1,7 @@
 ﻿// A ComboBox Control With Grouping
 // Bradley Smith - 2010/06/24 (updated 2015/04/14)
 
-using System;
+using System; using System.Net;
 using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;

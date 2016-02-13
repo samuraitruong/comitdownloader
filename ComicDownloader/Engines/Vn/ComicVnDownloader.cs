@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System; using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +7,8 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("ComicVN.NET", Offline = false, Language = "Tieng viet", MenuGroup = "A->F", MetroTab="Tiếng Việt", Image32 = "1364078951_insert-object")]
-    public class ComicVnDownloader: Downloader
+    [Downloader("ComicVN.NET", Offline = false, Language = "Tieng viet", MenuGroup = "A->F", MetroTab = "Tiếng Việt", Image32 = "1364078951_insert-object")]
+    public class ComicVnDownloader : Downloader
     {
         public override string Logo
         {
@@ -38,10 +38,15 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
-        public override List<StoryInfo> HotestStories(){throw new NotImplementedException();}    public override List<StoryInfo> GetListStories(bool forceOnline)      
+        public override List<StoryInfo> HotestStories() {
+            return base.HotestStoriesSimple(this.HostUrl,
+                "//div[@id='home-top-ten']//ul[@class='list-items']//h2/a");
+
+        }
+        public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             string urlPattern = "http://comicvn.net/truyen-tranh?parent_slug=truyen-tranh&name_slug=&id_category=1&orderBy=&type=0&&page={0}";
-            string  cheUrl = "http://comicvn.net/truyen-che";
+            string cheUrl = "http://comicvn.net/truyen-che";
 
             return base.GetListStoriesSimple(urlPattern,
                 "//ul[@class='list']/li/div/h2/a",
@@ -49,40 +54,14 @@ namespace ComicDownloader.Engines
                 this.HostUrl);
             //request  truyen che
 
-            
+
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
         {
-            var html = NetworkHelper.GetHtml(storyUrl);
-
-            HtmlDocument htmlDoc = new HtmlDocument();
-
-            htmlDoc.LoadHtml(html);
-
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//h1[@class='title-detail']");
- 
-            StoryInfo info = new StoryInfo()
-            {
-                Url = storyUrl,
-                Name = nameNode.InnerText.Trim()
-            };
-
-              var chapNodes = htmlDoc.DocumentNode.SelectNodes("//table[@class='list-chapter']//a");
-
-              foreach (HtmlNode node in chapNodes)
-              {
-                  ChapterInfo chapInfo = new ChapterInfo()
-                  {
-                      Name =  node.InnerText.Trim(),
-                      Url = this.HostUrl + node.Attributes["href"].Value.Trim(),
-                      ChapId = ExtractID(node.InnerText.Trim())
-                  };
-                  info.Chapters.Add(chapInfo);
-              }
-
-              info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
-            return info;
+            return base.RequestInfoSimple(storyUrl,
+                "//h1[@class='title-detail']",
+                "//table[@class='list-chapter']//a");
         }
 
         public override List<string> GetPages(string chapUrl)
@@ -97,76 +76,20 @@ namespace ComicDownloader.Engines
             {
                 pages.Add(node.Attributes["src"].Value);
             }
-            //HtmlDocument htmlDoc = new HtmlDocument();
-            //htmlDoc.LoadHtml(html);
-
-            //var pageNodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"wrapper\"]//img");
-            //foreach (HtmlNode node in pageNodes)
-            //{
-            //    pages.Add(node.Attributes["src"].Value);
-            //}
             return pages;
         }
 
         public override List<StoryInfo> GetLastestUpdates()
         {
-            string lastestUpdateUrl = HostUrl;
-            List<StoryInfo> stories = new List<StoryInfo>();
-            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
-
-            var htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-
-            var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"product\"]/div[@class=\"list-chap\"]/ul/li[position()=1]/a");
-
-            foreach (HtmlNode node in nodes)
-            {
-                StoryInfo info = new StoryInfo()
-                {
-                    Url = HostUrl + "/" + node.Attributes["href"].Value,
-                    Name = node.FirstChild.InnerText.Trim().Trim(),
-                    Chapters = new List<ChapterInfo>(),
-                };
-                var chapters = node.ParentNode.ParentNode.SelectNodes("li[position()=3]/ul/h3/a");
-                if (chapters != null)
-                {
-                    foreach (HtmlNode chap in chapters)
-                    {
-                        info.Chapters.Add(new ChapterInfo()
-                        {
-                            Name = chap.InnerText.Trim().Trim(),
-                            Url = HostUrl + "/" + chap.Attributes["href"].Value,
-                        });
-                    }
-                }
-
-                stories.Add(info);
-            }
-
-            return stories;
+            return base.GetLastestUpdateSimple(this.HostUrl,
+                "//div[@class='content-new']//h2/a", "");
         }
 
         public override List<StoryInfo> OnlineSearch(string keyword)
         {
-            var stories = new List<StoryInfo>();
+            string url = "http://comicvn.net/truyentranh/manga/search/?parent_slug=&name_slug=&id_category=&page=1&orderBy=&type=0&key=" + keyword + "&type_search=truyen";
+            return base.OnlineSearchGet(url, "//div[@class='content']//h2/a", 1);
 
-            if (!string.IsNullOrEmpty(keyword))
-            {
-                var urlPartern = string.Format("http://truyentranh8.com/{0}/", keyword.Replace(" ", "_"));
-
-                string html = NetworkHelper.GetHtml(urlPartern);
-                HtmlDocument htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(html);
-
-                var node = htmlDoc.DocumentNode.SelectSingleNode("//div[@class=\"info1\"]/table//tr[position()=1]/td/a");
-
-                if (node != null && node.Attributes["href"].Value != "/#doctruyen")
-                {
-                    stories.Add(new StoryInfo() { Url = urlPartern, Name = keyword });
-                }
-            }
-
-            return stories;
         }
 
         public override int MaxThreadCrawlList

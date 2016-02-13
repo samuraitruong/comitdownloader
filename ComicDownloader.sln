@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicDownloader", "ComicDownloader\ComicDownloader.csproj", "{E3BB4F32-9C5C-4F11-BF27-F79EED48AE21}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{C737CEAA-E092-4DF8-8858-31EECFA33D7B}"
@@ -36,6 +38,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicDownloader.Licensing", "ComicDownloader.Licensing\ComicDownloader.Licensing.csproj", "{9944F4D3-26C5-431C-AC8E-EBECEA916545}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicDownloader.LicenseGenerator", "ComicDownloader.LicenseGenerator\ComicDownloader.LicenseGenerator.csproj", "{2FC5B0B7-C2BA-4FFD-909E-DD7E00305606}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{59F004AE-DCA1-47B5-8F92-356410C41086}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -187,6 +191,18 @@ Global
 		{2FC5B0B7-C2BA-4FFD-909E-DD7E00305606}.Release|Mixed Platforms.Build.0 = Release|x86
 		{2FC5B0B7-C2BA-4FFD-909E-DD7E00305606}.Release|x86.ActiveCfg = Release|x86
 		{2FC5B0B7-C2BA-4FFD-909E-DD7E00305606}.Release|x86.Build.0 = Release|x86
+		{59F004AE-DCA1-47B5-8F92-356410C41086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59F004AE-DCA1-47B5-8F92-356410C41086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59F004AE-DCA1-47B5-8F92-356410C41086}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{59F004AE-DCA1-47B5-8F92-356410C41086}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{59F004AE-DCA1-47B5-8F92-356410C41086}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{59F004AE-DCA1-47B5-8F92-356410C41086}.Debug|x86.Build.0 = Debug|Any CPU
+		{59F004AE-DCA1-47B5-8F92-356410C41086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59F004AE-DCA1-47B5-8F92-356410C41086}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59F004AE-DCA1-47B5-8F92-356410C41086}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{59F004AE-DCA1-47B5-8F92-356410C41086}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{59F004AE-DCA1-47B5-8F92-356410C41086}.Release|x86.ActiveCfg = Release|Any CPU
+		{59F004AE-DCA1-47B5-8F92-356410C41086}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

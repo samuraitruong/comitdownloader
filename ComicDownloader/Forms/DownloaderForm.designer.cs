@@ -95,6 +95,9 @@ namespace ComicDownloader
             this.colPDF = ((ComicDownloader.EXColumnHeader)(new ComicDownloader.EXColumnHeader()));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.errInvalidFileName = new System.Windows.Forms.ErrorProvider(this.components);
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblStoryPDF = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.gpbChapters.SuspendLayout();
@@ -104,6 +107,7 @@ namespace ComicDownloader
             this.groupInfo.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errInvalidFileName)).BeginInit();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtUrl
@@ -176,7 +180,8 @@ namespace ComicDownloader
             this.toolStripStatusLabel2,
             this.lblTotalDownloadCount,
             this.toolStripStatusLabel3,
-            this.lblSelected});
+            this.lblSelected,
+            this.lblStoryPDF});
             this.statusStrip1.Location = new System.Drawing.Point(0, 358);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(949, 22);
@@ -300,11 +305,11 @@ namespace ComicDownloader
             // columnModel1
             // 
             this.columnModel1.Columns.AddRange(new XPTable.Models.Column[] {
-            this.chkSelect,
-            this.txtChapIdentify,
-            this.colChapId,
-            this.txtChapName,
-            this.txtChapLink});
+            ((XPTable.Models.Column)(this.chkSelect)),
+            ((XPTable.Models.Column)(this.txtChapIdentify)),
+            ((XPTable.Models.Column)(this.colChapId)),
+            ((XPTable.Models.Column)(this.txtChapName)),
+            ((XPTable.Models.Column)(this.txtChapLink))});
             // 
             // chkSelect
             // 
@@ -608,6 +613,7 @@ namespace ComicDownloader
             this.columnHeaderProgress,
             this.columnHeader4,
             this.colPDF});
+            this.listHistory.ContextMenuStrip = this.contextMenuStrip2;
             this.listHistory.ControlPadding = 4;
             this.listHistory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listHistory.FullRowSelect = true;
@@ -667,6 +673,25 @@ namespace ComicDownloader
             // 
             this.errInvalidFileName.ContainerControl = this;
             // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openFolderToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(140, 26);
+            // 
+            // openFolderToolStripMenuItem
+            // 
+            this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
+            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.openFolderToolStripMenuItem.Text = "Open Folder";
+            this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
+            // 
+            // lblStoryPDF
+            // 
+            this.lblStoryPDF.Name = "lblStoryPDF";
+            this.lblStoryPDF.Size = new System.Drawing.Size(0, 17);
+            // 
             // DownloaderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -691,6 +716,7 @@ namespace ComicDownloader
             this.groupInfo.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errInvalidFileName)).EndInit();
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -761,6 +787,9 @@ namespace ComicDownloader
         private GroupedComboBox ddlList;
         private System.Windows.Forms.ComboBox ddlFilter;
         private Button btnSetting;
+        private ToolStripMenuItem openFolderToolStripMenuItem;
+        private ContextMenuStrip contextMenuStrip2;
+        private ToolStripStatusLabel lblStoryPDF;
     }
 }
 

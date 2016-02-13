@@ -1,6 +1,6 @@
 ﻿#define DEBUG
 
-using System;
+using System; using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +10,7 @@ using ComicDownloader.Properties;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("BlogTruyen", MenuGroup = "A->F", MetroTab = "Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410895_001_01")]
+    [Downloader("Blog Truyen", Offline = false, MenuGroup = "A->F", MetroTab = "Tiếng Việt", Language = "Tieng viet", Image32 = "_1364410895_001_01")]
     public class BlogTruyenDownloader : Downloader
     {
         public override string Logo
@@ -22,7 +22,7 @@ namespace ComicDownloader.Engines
         }
         public override string Name
         {
-            get { return "[BlogTruyen] - "; }
+            get { return "[Blog Truyen] - "; }
         }
 
         public override string ListStoryURL
@@ -40,7 +40,11 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
-        public override List<StoryInfo> HotestStories(){throw new NotImplementedException();}    public override List<StoryInfo> GetListStories(bool forceOnline)      
+        public override List<StoryInfo> HotestStories() {
+            return base.HotestStoriesSimple("http://blogtruyen.com/trangchu",
+                "//div[@id='tabs-top-hot']//a");
+        }
+        public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             List<StoryInfo> results = base.ReloadChachedData().Stories;
             string urlPattern = "http://blogtruyen.com/ListStory/GetCategory?CategoryID=0&OrderBy=1&PageIndex={0}";
@@ -275,6 +279,19 @@ namespace ComicDownloader.Engines
             return s;
         }
 
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            return base.OnlineSearchGet("http://blogtruyen.com/Partial/QuickSearch?keyword=" + keyword,
+                "//a",
+                1);
+        }
+        public override List<StoryInfo> GetLastestUpdates()
+        {
+            return base.GetLastestUpdateSimple("http://blogtruyen.com/trangchu",
+                "//*[@id='top-newest-story']/a",
+                "");
+        }
+
         public override List<string> GetPages(string chapUrl)
         {
             var html = NetworkHelper.GetHtml(chapUrl);
@@ -290,31 +307,6 @@ namespace ComicDownloader.Engines
                     result.Add(ConvertURL(node.Attributes["src"].Value));
                 }
             }
-            //var images = doc.DocumentNode.Descendants("img")
-            //                .Where(p => p.Attributes.Contains("src") &&
-            //                        p.Attributes["src"].Value.StartsWith("http://img.photo.zing.vn"))
-            //                .Select(p=>p.Attributes["src"].Value.Replace("http://img.photo.zing.vn","http://d.f2.photo.zdn.vn"))
-
-            //                .ToList();
-            //List<string> result = new List<string>();
-
-            //var matches = Regex.Matches(textare.InnerHtml, "https?://[\\*&=?%0-9a-zA-Z._/-]*(.jpg|.JPG|.png|.PNG)");
-            //if (matches != null)
-            //{
-            //    foreach (Match  match in matches)
-            //    {
-            //        //if(match.Value.Contains("die-report")) break;
-            //        string url = ReplaceText(match.Value);
-            //        //if (!IsDump(url)) 
-            //            result.Add(url);
-            //    }
-            //}
-            //
-
-            //foreach (HtmlNode  node in  images)
-            //{
-            //    result.Add(node.Attributes["src"].Value);
-            //}
             return result.Distinct().ToList();
         }
 

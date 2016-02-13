@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System; using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -86,10 +86,15 @@ namespace ComicDownloader.Engines
         {
             var html = NetworkHelper.GetHtml(chapUrl);
             var doc = new HtmlDocument();
-            //doc.LoadHtml(html);
-            //var html1 = doc.DocumentNode.SelectSingleNode("//textarea").InnerText.Trim();
-            //doc.LoadHtml(html1);
-            //var nodes = doc.DocumentNode.SelectNodes("//img");
+            doc.LoadHtml(html);
+            var html1 = doc.DocumentNode.SelectSingleNode("//textarea").InnerText.Trim();
+            doc.LoadHtml(html1);
+            var nodes = doc.DocumentNode.SelectNodes("//img");
+            if(nodes!= null)
+            {
+                return nodes.Select(p => p.Attributes["src"].Value).ToList();
+            }
+
             var patterns = new string[] { "\\*&url=([^\"]*)" , @"\[IMG\]([^\[]*)\[\/IMG\]" };
             List<string> results = new List<string>();
 

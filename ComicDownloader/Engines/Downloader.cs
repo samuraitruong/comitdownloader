@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,16 +29,16 @@ namespace ComicDownloader.Engines
         }
     }
 
-   
+
     public abstract class Downloader
     {
         public DownloaderSetting Settings { get; set; }
-        
+
         public virtual int MaxThreadCrawlList { get; set; }
         public virtual int NumberRetryWhenFailed { get; set; }
         public List<StoryInfo> AllStories { get; set; }
         public abstract string Name { get; }
-        public abstract  string ListStoryURL { get;  }
+        public abstract string ListStoryURL { get; }
         public abstract string HostUrl { get; }
         public virtual bool InitCookie()
         {
@@ -55,12 +56,13 @@ namespace ComicDownloader.Engines
                 {
                     var htmlDoc = GetParser(url);
                     var nodes = htmlDoc.DocumentNode.SelectNodes(storyNodePattern);
-                    if(nodes != null)
+                    if (nodes != null)
                     {
                         foreach (HtmlNode node in nodes)
                         {
                             StoryInfo info = null;
-                            if (storyExtractor != null)  {
+                            if (storyExtractor != null)
+                            {
                                 info = storyExtractor(node);
                             }
                             else
@@ -79,8 +81,8 @@ namespace ComicDownloader.Engines
                             }
                         }
                     }
-    
-            });
+
+                });
                 listTask.Add(task);
 
             }
@@ -94,21 +96,21 @@ namespace ComicDownloader.Engines
         public event AfterCookieSet AfterCookieSet;
         public event ListPageCrawled OnListPageCrawled;
         public event ListPageCrawled OnSearchPageFinished;
-        public event ListPageCrawled OnHostestPageCrawled; 
-    [DllImport("wininet.dll", SetLastError = true)]
+        public event ListPageCrawled OnHostestPageCrawled;
+        [DllImport("wininet.dll", SetLastError = true)]
         public static extern bool InternetGetCookieEx(
-        string url,
-        string cookieName,
-        StringBuilder cookieData,
-        ref int size,
-        Int32 dwFlags,
-        IntPtr lpReserved);
+            string url,
+            string cookieName,
+            StringBuilder cookieData,
+            ref int size,
+            Int32 dwFlags,
+            IntPtr lpReserved);
 
         private const Int32 InternetCookieHttponly = 0x2000;
 
         [DllImport("wininet.dll", CharSet = CharSet.Auto, SetLastError = true)]
         static extern bool InternetGetCookieEx(string pchURL, string pchCookieName, StringBuilder pchCookieData, ref uint pcchCookieData, int dwFlags, IntPtr lpReserved);
-       
+
         /// <summary>
         /// Gets the URI cookie container.
         /// </summary>
@@ -183,9 +185,13 @@ namespace ComicDownloader.Engines
         }
 
         public abstract string StoryUrlPattern { get; }
-        public virtual string Logo { get {
-            return string.Empty;
-        } }
+        public virtual string Logo
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
 
         //public abstract List<StoryInfo> GetListStories();
         public abstract StoryInfo RequestInfo(string storyUrl);
@@ -196,52 +202,93 @@ namespace ComicDownloader.Engines
         }
         public abstract List<string> GetPages(string chapUrl);
 
-        public StoryInfo RequestInfoSimple(string storyUrl, string namePattern, string chapterPattern, string appendHostUrl="", Func<HtmlNode, string> nameExtract = null, Func<HtmlNode, ChapterInfo> chapterExtract = null, Func<string, HtmlDocument, List<ChapterInfo>> customChapterExtract= null)
+        public StoryInfo RequestInfoSimple(string storyUrl, string namePattern, string chapterPattern, string appendHostUrl = "", Func<HtmlNode, string> nameExtract = null, Func<HtmlNode, ChapterInfo> chapterExtract = null, Func<string, HtmlDocument, List<ChapterInfo>> customChapterExtract = null, string chapPagingPattern = "", Func<string, HtmlDocument, List<string>> customChapPagingExtract = null)
         {
-            var html = NetworkHelper.GetHtml(storyUrl);
+            Queue<string> queue = new Queue<string>();
+            queue.Enqueue(storyUrl);
+            List<string> alllinks = new List<string>() { storyUrl };
+            StoryInfo info = null;
 
-            HtmlDocument htmlDoc = new HtmlDocument();
-
-            htmlDoc.LoadHtml(html);
-
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode(namePattern);
-            string chapterName = (nameExtract != null )? nameExtract(nameNode) : nameNode.InnerText.Trim().Trim();
-
-            StoryInfo info = new StoryInfo()
+            while (queue.Count > 0)
             {
-                Url = storyUrl,
-                Name = chapterName
-            };
+                var threadCount = Math.Min(queue.Count, this.MaxThreadCrawlList);
+                var patch = Enumerable.Range(1, threadCount).Select(p => queue.Dequeue());
 
-            var chapNodes = htmlDoc.DocumentNode.SelectNodes(chapterPattern);
-            if (chapNodes != null) {
-                foreach (HtmlNode node in chapNodes)
+                var parallelResult = Parallel.ForEach(patch, (currentPageUrl) =>
                 {
-                    var chapInfo = chapterExtract != null ? chapterExtract(node) : new ChapterInfo()
+                    var html = NetworkHelper.GetHtml(currentPageUrl);
+
+                    HtmlDocument htmlDoc = new HtmlDocument();
+
+                    htmlDoc.LoadHtml(html);
+
+                    var nameNode = htmlDoc.DocumentNode.SelectSingleNode(namePattern);
+                    string chapterName = (nameExtract != null) ? nameExtract(nameNode) : nameNode.InnerText.Trim().Trim();
+                    if (info == null)
                     {
-                        Name = (node.Attributes["title"] != null && !string.IsNullOrEmpty(node.Attributes["title"].Value)) ? node.Attributes["title"].Value : node.InnerText.Trim().Trim(),
-                        Url = EnsureHostName(appendHostUrl , node.Attributes["href"].Value.Trim()),
-                    };
-                    chapInfo.ChapId = ExtractID(chapInfo.Name);
-                    info.Chapters.Add(chapInfo);
-                }
+                        info = new StoryInfo()
+                        {
+                            Url = storyUrl,
+                            Name = chapterName
+                        };
+                    }
 
-                info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
-                return info;
+                    var chapNodes = htmlDoc.DocumentNode.SelectNodes(chapterPattern);
+                    if (chapNodes != null)
+                    {
+                        foreach (HtmlNode node in chapNodes)
+                        {
+                            var chapInfo = chapterExtract != null ? chapterExtract(node) : new ChapterInfo()
+                            {
+                                Name = (node.Attributes["title"] != null && !string.IsNullOrEmpty(node.Attributes["title"].Value)) ? node.Attributes["title"].Value : node.InnerText.Trim().Trim(),
+                                Url = EnsureHostName(appendHostUrl, node.Attributes["href"].Value.Trim()),
+                            };
+                            chapInfo.ChapId = ExtractID(chapInfo.Name);
+                            info.Chapters.Add(chapInfo);
+                        }
 
-            }
-            else
-            {
-                if(customChapterExtract != null)
-                {
-                    var list = customChapterExtract(html, htmlDoc);
-                    info.Chapters.AddRange(list);
-                }
+                        info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
+                    }
+                    else
+                    {
+                        if (customChapterExtract != null)
+                        {
+                            var list = customChapterExtract(html, htmlDoc);
+                            info.Chapters.AddRange(list);
+                        }
+                    }
+                    List<string> pagingLinks = new List<string>();
+                    if (customChapPagingExtract != null)
+                    {
+                        pagingLinks = customChapPagingExtract(html, htmlDoc);
+
+                    }
+                    else
+                    if (!string.IsNullOrEmpty(chapPagingPattern))
+                    {
+                        var pagingNodes = htmlDoc.DocumentNode.SelectNodes(chapPagingPattern);
+                        if (pagingNodes != null)
+                        {
+                            pagingLinks = pagingNodes.Select(p => EnsureHostName(this.HostUrl, p.Attributes["href"].Value)).ToList();
+                        }
+                    }
+                    lock (alllinks)
+                    {
+                        foreach (var item in pagingLinks)
+                        {
+                            if (alllinks.Contains(item))
+                            {
+                                alllinks.Add(item);
+                                queue.Enqueue(item);
+                            }
+                        }
+                    }
+                });
             }
             return info;
         }
 
-        internal List<string> GetPagesRegex(string chapUrl, string pattern, string hostExpanded="", Func<Match, string> customMatch=null)
+        internal List<string> GetPagesRegex(string chapUrl, string pattern, string hostExpanded = "", Func<Match, string> customMatch = null)
         {
             var html = NetworkHelper.GetHtml(chapUrl);
             var matches = Regex.Matches(html, pattern);
@@ -262,7 +309,7 @@ namespace ComicDownloader.Engines
             return pages;
         }
 
-        public string EnsureHostName( string hostUrl, string url)
+        public string EnsureHostName(string hostUrl, string url)
         {
             if (url.StartsWith("http")) return url;
             if (string.IsNullOrEmpty(hostUrl))
@@ -270,13 +317,13 @@ namespace ComicDownloader.Engines
                 hostUrl = this.HostUrl;
             }
 
-            string newUrl = hostUrl +"/"+ url;
+            string newUrl = hostUrl + "/" + url;
             var left = newUrl.Substring(0, 8);
-            var right = newUrl.Substring(8).Replace("//","/");
+            var right = newUrl.Substring(8).Replace("//", "/");
 
             return left + right;
         }
-        public List<StoryInfo> GetListStoriesUnknowPages(string startUrl, string matchPattern, bool forceOnline, string pagingPattern, Func<HtmlNode, string> pagingExtract= null, string appendHost = "", Func<HtmlNode, StoryInfo> convertFunc = null, Func<string, HtmlDocument, List<StoryInfo>> customParser = null, bool singleListPage = false, Func<string,HtmlDocument, List<String>> allLinksExtract=null)
+        public List<StoryInfo> GetListStoriesUnknowPages(string startUrl, string matchPattern, bool forceOnline, string pagingPattern, Func<HtmlNode, string> pagingExtract = null, string appendHost = "", Func<HtmlNode, StoryInfo> convertFunc = null, Func<string, HtmlDocument, List<StoryInfo>> customParser = null, bool singleListPage = false, Func<string, HtmlDocument, List<String>> allLinksExtract = null)
         {
             Queue<string> queue = new Queue<string>();
             queue.Enqueue(startUrl);
@@ -298,7 +345,7 @@ namespace ComicDownloader.Engines
                     var parallelResult = Parallel.ForEach(patch, (currentPageUrl) =>
                     {
 
-                        var listStories = this.CrawlOnePage(currentPageUrl, matchPattern, 0,appendHost, convertFunc, customParser,
+                        var listStories = this.CrawlOnePage(currentPageUrl, matchPattern, 0, appendHost, convertFunc, customParser,
                         pagingCrawler: (HtmlDocument doc, string rawhtml) =>
                         {
 
@@ -315,7 +362,7 @@ namespace ComicDownloader.Engines
                                 {
                                     foreach (var p in paging)
                                     {
-                                        var pageUrl = EnsureHostName(appendHost , p.Attributes["href"].Value);
+                                        var pageUrl = EnsureHostName(appendHost, p.Attributes["href"].Value);
                                         links.Add(pageUrl);
                                     }
                                 }
@@ -354,6 +401,28 @@ namespace ComicDownloader.Engines
             return results;
         }
 
+        public List<ChapterInfo> NormalizedChaptersSimple(List<ChapterInfo> chapters)
+        {
+            var story = chapters[0].Story;
+            var list = new List<ChapterInfo>();
+            var nomalized = new ChapterInfo()
+            {
+                Name =  story.Name,
+                Pages = new List<string>()
+            };
+            foreach (var item in chapters)
+            {
+                nomalized.Pages.Add(item.Url);
+            }
+            return list;
+
+        }
+        internal List<ChapterInfo> NormalizedChapters(List<ChapterInfo> toBeDownloadedChapters)
+        {
+            //override on text downloader to merge all chapter to become 1 chapter with multiple pages
+            return toBeDownloadedChapters;
+        }
+
         internal string ExtractImage(string pageUrl, string pattern)
         {
             var html = NetworkHelper.GetHtml(pageUrl);
@@ -364,18 +433,18 @@ namespace ComicDownloader.Engines
             return imgUrl;
 
         }
-        private List<StoryInfo> CrawlOnePage(string url, string matchPattern, int retry=0, string appendHost = "", Func<HtmlNode, StoryInfo> convertFunc = null, Func<string, HtmlDocument, List<StoryInfo>> customParser = null, Action<HtmlDocument ,string> pagingCrawler=null)
+        private List<StoryInfo> CrawlOnePage(string url, string matchPattern, int retry = 0, string appendHost = "", Func<HtmlNode, StoryInfo> convertFunc = null, Func<string, HtmlDocument, List<StoryInfo>> customParser = null, Action<HtmlDocument, string> pagingCrawler = null)
         {
             var results1 = new List<StoryInfo>();
             string html = NetworkHelper.GetHtml(url, this.Cookies);
-            if(html == "HTTP ERROR" && retry <=this.NumberRetryWhenFailed)
+            if (html == "HTTP ERROR" && retry <= this.NumberRetryWhenFailed)
             {
-                return CrawlOnePage(url, matchPattern, retry++,appendHost, convertFunc ,customParser, pagingCrawler );
+                return CrawlOnePage(url, matchPattern, retry++, appendHost, convertFunc, customParser, pagingCrawler);
             }
             HtmlDocument htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
-            if(pagingCrawler != null)
+            if (pagingCrawler != null)
             {
                 pagingCrawler(htmlDoc, html);
             }
@@ -407,7 +476,7 @@ namespace ComicDownloader.Engines
                     }
                 }
             }
-            if (customParser != null && results1.Count ==0)
+            if (customParser != null && results1.Count == 0)
             {
                 var listparsed = customParser(html, htmlDoc);
                 if (listparsed != null && listparsed.Count > 0)
@@ -437,7 +506,7 @@ namespace ComicDownloader.Engines
                     foreach (var item in Enumerable.Range(1, singleListPage ? 1 : MaxThreadCrawlList))
                     {
                         string url = string.Format(urlPattern, currentPage++);
-                        var oneTask = new Task<List<StoryInfo>>(() => this.CrawlOnePage(url, matchPattern,0, appendHost, convertFunc, customParser));
+                        var oneTask = new Task<List<StoryInfo>>(() => this.CrawlOnePage(url, matchPattern, 0, appendHost, convertFunc, customParser));
                         oneTask.ContinueWith((t) =>
                         {
                             if (this.OnListPageCrawled != null)
@@ -471,12 +540,12 @@ namespace ComicDownloader.Engines
 
                 results = results.OrderBy(p => p.Name).ToList();
                 clock.Stop();
-                this.SaveCache(results, clock.ElapsedMilliseconds );
+                this.SaveCache(results, clock.ElapsedMilliseconds);
             }
             return results;
         }
 
-        public List<string> GetPagesSimple(string chapUrl, string pattern, Func<string, List<string>> customExtractor=null, string hostExpanded="", Func<HtmlNode, string> imgExtract= null,string imgAttrName="src")
+        public List<string> GetPagesSimple(string chapUrl, string pattern, Func<string, List<string>> customExtractor = null, string hostExpanded = "", Func<HtmlNode, string> imgExtract = null, string imgAttrName = "src")
         {
             List<string> pages = new List<string>();
             var html = NetworkHelper.GetHtml(chapUrl);
@@ -498,22 +567,27 @@ namespace ComicDownloader.Engines
             }
             else
             {
-                if(customExtractor != null)
+                if (customExtractor != null)
                 {
                     return customExtractor(html);
                 }
             }
             return pages;
         }
-        
-        public string CachedFile { get {
-            
-            return Environment.GetFolderPath(
-    Environment.SpecialFolder.ApplicationData)+"\\ComicDownloader\\"+ this.GetType().Name + ".CACHED";
-        
-        } }
+
+        public string CachedFile
+        {
+            get
+            {
+
+                return Environment.GetFolderPath(
+        Environment.SpecialFolder.ApplicationData) + "\\ComicDownloader\\" + this.GetType().Name + ".CACHED";
+
+            }
+        }
         public virtual List<StoryInfo> GetLastestUpdates()
         {
+            throw new Exception("must implement this function");
             return new List<StoryInfo>();
         }
         public abstract List<StoryInfo> HotestStories();
@@ -559,7 +633,7 @@ namespace ComicDownloader.Engines
                     isStillHasPage = false;
                 }
             }
-            return results.DistinctBy(p=>p.Url).ToList();
+            return results.DistinctBy(p => p.Url).ToList();
 
         }
         public List<StoryInfo> OnlineSearchGet(string urlSearch, string matchPattern, int totalSearchPage = 0, Func<HtmlNode, StoryInfo> nodeConvert = null, Func<String, HtmlDocument, List<StoryInfo>> customParser = null)
@@ -575,7 +649,7 @@ namespace ComicDownloader.Engines
                 foreach (var item in Enumerable.Range(1, totalSearchPage == 0 ? MaxThreadCrawlList : Math.Min(totalSearchPage, MaxThreadCrawlList)))
                 {
                     string url = string.Format(urlSearch, currentPage++);
-                    var oneTask = new Task<List<StoryInfo>>(() => this.CrawlOnePage(url, matchPattern, 0,"", nodeConvert, customParser));
+                    var oneTask = new Task<List<StoryInfo>>(() => this.CrawlOnePage(url, matchPattern, 0, "", nodeConvert, customParser));
                     oneTask.ContinueWith((t) =>
                     {
                         if (this.OnSearchPageFinished != null)
@@ -627,7 +701,7 @@ namespace ComicDownloader.Engines
 
             if (recache)
             {
-                
+
                 results = GetListStories(true);
             }
             else
@@ -637,43 +711,74 @@ namespace ComicDownloader.Engines
 
 
             if (results != null)
-                {
-                    results = results.Where(p => p.Name.ToLower().Contains(keyword.ToLower())).ToList();
-                }
-            
+            {
+                results = results.Where(p => p.Name.ToLower().Contains(keyword.ToLower())).ToList();
+            }
+
             return results;
+        }
+        public virtual bool IsTextEngines { get; }
+        //this is 
+        public virtual void AfterPageDownloadedSimple(string filename, string chapterName, string contentPattern = "", string titlePattern = "")
+        {
+            try
+            {
+                using (var stream = new FileStream(filename, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+                {
+                    var fileContents = (new StreamReader(stream)).ReadToEnd();
+                    string template = Resources.HtmlTemplate;
+                    var newContent = template.Replace("[[content]]", fileContents);
+                    newContent = newContent.Replace("[[title]]", chapterName);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    var writer = new StreamWriter(stream);
+                    writer.Write(newContent);
+                    writer.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        public virtual void AfterPageDownloaded(string filename, ChapterInfo chapter)
+        {
+            AfterPageDownloadedSimple(filename, chapter.Name);
         }
         public ResolveImageOnPage ResolveImageInHtmlPage { get; set; }
         public StoryInfo CurrentStory { get; private set; }
-
-        public virtual string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer)
+        public virtual string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer, CookieContainer cc = null, string originalUrl = null, ChapterInfo chapter = null)
         {
-            if(this.ResolveImageInHtmlPage != null)
+            if (this.ResolveImageInHtmlPage != null)
             {
                 pageUrl = this.ResolveImageInHtmlPage(pageUrl);
             }
             pageUrl = Helpers.UrlHelper.TryFixUrl(pageUrl);
-            string filename = Path.GetFileName(pageUrl);
-            if(filename.Contains("?"))
+            if (originalUrl == null)
+            {
+                originalUrl = pageUrl;
+            }
+
+            string filename = Path.GetFileName(originalUrl);
+
+            if (filename.Contains("?"))
             {
                 filename = filename.Substring(0, filename.IndexOf("?"));
             }
-
-            using (WebClient client = new WebClient())
+            using (WebClient client = new CookieAwareWebClient(cc))
             {
                 client.Headers.Add("Referer", httpReferer);
                 try
                 {
-
                     string replaceFileName = renamePattern.Replace("{FILENAME}", filename);
-
-                    filename = Path.Combine(folder, replaceFileName);
-                    client.DownloadFile(pageUrl, filename);
+                    {
+                        filename = Path.Combine(folder, replaceFileName);
+                        client.DownloadFile(pageUrl, filename);
+                    }
                 }
-                catch 
+                catch
                 {
                 }
             }
+            this.AfterPageDownloaded(filename, chapter);
             return filename;
         }
         public void SaveCache(List<StoryInfo> stories, long crawlTime = 0, CrawlTypes type = CrawlTypes.Manual)
@@ -692,14 +797,15 @@ namespace ComicDownloader.Engines
             {
                 file.Write(xml);
             }
-            
+
             Directory.CreateDirectory(Path.GetDirectoryName(CachedFile));
             SecureHelper.EncryptFile(temp, CachedFile, Resources.SecureKey);
         }
 
         public StoryInfoCacheFile ReloadChachedData()
         {
-            StoryInfoCacheFile info = new StoryInfoCacheFile() {
+            StoryInfoCacheFile info = new StoryInfoCacheFile()
+            {
             };
             try
             {
@@ -711,19 +817,19 @@ namespace ComicDownloader.Engines
 
                     using (var file = File.OpenText(temp))
                     {
-                        info= SerializationHelper.DeserializeFromXml<StoryInfoCacheFile>(file.ReadToEnd());
+                        info = SerializationHelper.DeserializeFromXml<StoryInfoCacheFile>(file.ReadToEnd());
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
             finally
             {
-               
+
             }
-            
+
             return info;
         }
 
@@ -742,17 +848,17 @@ namespace ComicDownloader.Engines
 
         public int ExtractID(string name)
         {
-            int id= ExtractID(name, @".*\s(\d*)$");
+            int id = ExtractID(name, @".*\s(\d*)$");
             if (id > 0) return id;
 
-            id=  ExtractID(name, @".*\s(\d*)\s.*");
+            id = ExtractID(name, @".*\s(\d*)\s.*");
             if (id > 0) return id;
 
-            return ExtractID(name,@"\d\d*");
-            
+            return ExtractID(name, @"\d\d*");
+
         }
 
-        internal  void DeleteCached()
+        internal void DeleteCached()
         {
             try
             {
@@ -767,22 +873,24 @@ namespace ComicDownloader.Engines
 
         public static Downloader Resolve(string url, bool fetchDat = false)
         {
-            var dl =  GetAllDownloaders().FirstOrDefault(p => url.Contains(p.HostUrl));
-            if(dl != null)
+            var dl = GetAllDownloaders().FirstOrDefault(p => url.Contains(p.HostUrl));
+            if (dl != null)
             {
-                if (fetchDat) {
+                if (fetchDat)
+                {
                     dl = (Downloader)Activator.CreateInstance(dl.GetType());
                     List<string> pages = new List<string>();
                     dl.CurrentStory = dl.RequestInfo(url);
                     if (dl.CurrentStory == null)
                     {
                         var resolvedUrl = dl.TryGetStoryUrl(url);
-                        if (!string.IsNullOrEmpty(resolvedUrl)) {
+                        if (!string.IsNullOrEmpty(resolvedUrl))
+                        {
                             dl.CurrentStory = dl.RequestInfo(url);
                         };
-                    //try to parse link from chapter o 
-                    //dl.CurrentChapter =dl.GetPages(url);
-                }
+                        //try to parse link from chapter o 
+                        //dl.CurrentChapter =dl.GetPages(url);
+                    }
                 }
             }
             return dl;
@@ -795,7 +903,7 @@ namespace ComicDownloader.Engines
 
         public static List<Downloader> GetAllDownloaders()
         {
-           
+
             if (_downloaders != null) return _downloaders;
             _downloaders = new List<Downloader>();
             var types = Assembly.GetExecutingAssembly().GetTypes();
@@ -806,9 +914,9 @@ namespace ComicDownloader.Engines
                     Downloader instance = (Downloader)Activator.CreateInstance(item);
 
                     var attributes = instance.GetType().GetCustomAttributes(typeof(DownloaderAttribute), true);
-                    if (attributes.Length>0  && !((DownloaderAttribute)attributes[0]).Offline)
+                    if (attributes.Length > 0 && !((DownloaderAttribute)attributes[0]).Offline)
                     {
-                       
+
 
                         _downloaders.Add(instance);
                     }
@@ -817,7 +925,7 @@ namespace ComicDownloader.Engines
             return _downloaders;
         }
 
-        
+
 
         public abstract List<StoryInfo> GetListStories(bool forceOnline);
         //{
@@ -847,7 +955,7 @@ namespace ComicDownloader.Engines
             //load setting.
             this.Settings = new DownloaderSetting();
             this.Settings = this.Settings.FromFile<DownloaderSetting>(this.SettingFile, Resources.SecureKey);
-            if(this.Settings == null)
+            if (this.Settings == null)
             {
                 this.Settings = new DownloaderSetting()
                 {
@@ -859,11 +967,11 @@ namespace ComicDownloader.Engines
         {
             get
             {
-                 return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + 
-                    "\\ComicDownloader\\settings\\" + this.GetType().Name + ".cfg";
+                return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+                   "\\ComicDownloader\\settings\\" + this.GetType().Name + ".cfg";
             }
         }
-      
+
         public void SaveSetting(DownloaderSetting setting)
         {
             this.Settings = setting;

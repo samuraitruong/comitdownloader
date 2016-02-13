@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System; using System.Net;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -126,7 +126,7 @@ namespace ComicDownloader.Forms
                 }
                 metroTabControl1.TabPages.Add(tab);
             }
-            metroTabControl1.SelectedTab = metroTabControl1.TabPages[0];
+            metroTabControl1.SelectedTab = metroTabControl1.TabPages[2];
         }
         private AppMainForm mainApp = new AppMainForm();
 
@@ -138,6 +138,7 @@ namespace ComicDownloader.Forms
             {
                 Titles = new List<MetroTile>();
             }
+
 
         }
         public List<TabInfo> GetRibbonMenuTags()
@@ -161,7 +162,7 @@ namespace ComicDownloader.Forms
                                 tag = new TabInfo();
                                 tags.Add(tag);
                             }
-                            tag.Name = name;
+                            tag.Name = name.Trim();
 
                             //global::System.Resources.ResourceManager resourceMan = new global::System.Resources.ResourceManager("ComicDownloader.Properties.Resources", typeof(ComicDownloader.Properties.Resources).Assembly);
 
@@ -238,16 +239,10 @@ namespace ComicDownloader.Forms
             }
             // pool.Start();
             tags.Sort((x, y) => {
-                if(x.Name.Length == 1  && x.Name.Length == 1)
-                {
+                if ((x.Name.Length == 1 && y.Name.Length == 1)) {
                     return string.CompareOrdinal(x.Name, y.Name);
                 }
-
-                if(x.Name.Length>1)
-                {
-                    return -1;
-                }
-                return x.Name.Length - y.Name.Length;
+                return y.Name.Length - x.Name.Length;
             });
             return tags;
         }
@@ -286,8 +281,8 @@ namespace ComicDownloader.Forms
             int maxheight = metroTabControl1.Height - 120;
             double square = maxheight * maxwith / titles.Count;
 
-            int height = (int)Math.Sqrt(square) - 1;
-            int width = (int)square / height - 1;
+            int height =Math.Min(200,(int)Math.Sqrt(square) - 1);
+            int width = Math.Min(200, (int)square / height - 1);
             SmartThreadPool pool = new SmartThreadPool();
 
             foreach (var item in titles)
