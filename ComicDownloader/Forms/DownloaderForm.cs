@@ -192,7 +192,7 @@ namespace ComicDownloader
             this.InvokeOnMainThread(() =>
             {
                 lblStoryPDF.Text = pdfPath;
-                if(MessageBox.Show(string.Format( "Story {0} has been downloaded, Do you want to open pdf file?", currentStoryInfo.Name), "Download finish", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                if(MessageBox.Show(string.Format( "Story {0} has been downloaded, Do you want to open pdf file?", currentStoryInfo.Name) + Environment.NewLine + "Filename: " + pdfPath, "Download finish", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
                 {
                     Process.Start(pdfPath);
                 }

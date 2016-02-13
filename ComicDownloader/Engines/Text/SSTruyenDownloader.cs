@@ -102,6 +102,7 @@ namespace ComicDownloader.Engines
 
             var fileContent = File.ReadAllText(filename);
             fileContent = fileContent.Replace("<p></p>", "<br/><br/>");
+            fileContent = fileContent.Replace("</div></div>", "</div>");
             File.WriteAllText(filename, fileContent);
         }
         //Use google search 

@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Net;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
 using ComicDownloader.Properties;
-using System.Reflection;
 using iTextSharp.tool.xml;
-using iTextSharp.text.html.simpleparser;
 using System.Windows.Forms;
-using iTextSharp.tool.xml.css;
-using iTextSharp.tool.xml.pipeline.html;
-using iTextSharp.tool.xml.pipeline.css;
-using iTextSharp.tool.xml.pipeline.end;
+using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Helpers
 {
@@ -140,15 +132,15 @@ namespace ComicDownloader.Helpers
         }
 
         private static void EmbedeIntroPage(Document pdfDoc, PdfWriter writer)
-       {
-           pdfDoc.NewPage();
-           PdfReader reader = new PdfReader(Resources.Intro);
-           PdfContentByte cb = writer.DirectContent;
-           PdfImportedPage page = writer.GetImportedPage(reader, 1); ;
+        {
+            pdfDoc.NewPage();
+            PdfReader reader = new PdfReader(Resources.Intro);
+            PdfContentByte cb = writer.DirectContent;
+            PdfImportedPage page = writer.GetImportedPage(reader, 1); ;
 
-           //cb.AddTemplate(page, 0, -1f, 1f, 0, 0, reader.GetPageSizeWithRotation(1).Height);
-           cb.AddTemplate(page, 0, 0);
-       }
+            //cb.AddTemplate(page, 0, -1f, 1f, 0, 0, reader.GetPageSizeWithRotation(1).Height);
+            cb.AddTemplate(page, 0, 0);
+        }
 
         public static bool IsImageFile(string file)
         {
@@ -184,7 +176,32 @@ namespace ComicDownloader.Helpers
             ret.Position = 0;
             return ret;
         }
+        public static Chapter CreateChapterContent(string html)
+        {
+            // Declare a font to used for the bookmarks
+            iTextSharp.text.Font bookmarkFont = iTextSharp.text.FontFactory.GetFont
+            (iTextSharp.text.FontFactory.HELVETICA, 16, iTextSharp.text.Font.NORMAL, new BaseColor(255, 153, 0));
 
+            // Split H2 Html Tag
+            string pattern = @"<\s*h1[^>]*>(.*?)<\s*/h1\s*>";
+            var match = Regex.Match(html, pattern);
+            Chapter chapter = new Chapter(new Paragraph(match.Groups[1].Value), 0);
+            chapter.NumberDepth = 0;
+
+            chapter.AddSection(20f, new Paragraph(match.Groups[1].Value, bookmarkFont), 0);
+
+            foreach (IElement element in XMLWorkerHelper.ParseToElementList(html, Resources.DefaultCss))
+            {
+                if (element.Type == 666) continue;
+                try{
+                    chapter.Add(element);
+                }
+                catch(Exception ex) { }
+                
+            }
+            chapter.BookmarkTitle = match.Groups[1].Value;
+            return chapter;
+        }
         internal static void CreatePDFFromHtmls(string[] htmlFiles, string pdfPath, string name, ComicDownloaderSettings settings)
         {
             try
@@ -210,28 +227,38 @@ namespace ComicDownloader.Helpers
                     EmbedeIntroPage(pdfDoc, writer);
                     pdfDoc.NewPage();
                 }
-                    
+
 
                 var instance = XMLWorkerHelper.GetInstance();
                 var cssPath = Application.StartupPath + "\\Resources\\defaultcss.css";
 
                 foreach (var item in htmlFiles)
                 {
+                    //var chap = CreateChapterContent(File.ReadAllText(item, Encoding.UTF8));
+                    //pdfDoc.Add(chap);
                     //add header
-                    instance.ParseXHtml(writer,
-                        pdfDoc,
-                        File.OpenRead(item),
-                        File.OpenRead(cssPath),
-                        Encoding.UTF8,
-                        new UnicodeFontFactory());
-                    pdfDoc.NewPage();
+                    //Chapter chapter = new Chapter(new Paragraph("aaa"), 0);
+                    //pdfDoc.Add(chapter);
+                    try {
+                        instance.ParseXHtml(writer,
+                            pdfDoc,
+                            File.OpenRead(item),
+                            File.OpenRead(cssPath),
+                            Encoding.UTF8,
+                            new UnicodeFontFactory());
+                        pdfDoc.NewPage();
+                    }
+                    catch(Exception ex)
+                    {
+
+                    }
                 }
 
                 if (settings.IncludePDFIntroPage && settings.PdfIntroPagePosition == PagePosition.LastPage)
                     EmbedeIntroPage(pdfDoc, writer);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -241,25 +268,26 @@ namespace ComicDownloader.Helpers
             }
         }
 
-        public static void CreatePDF(string directoryPath , string pdfFile, string name, ComicDownloaderSettings settings){
+        public static void CreatePDF(string directoryPath, string pdfFile, string name, ComicDownloaderSettings settings)
+        {
 
-           try
-           {
-               Directory.CreateDirectory(Path.GetDirectoryName(pdfFile));
-           }
-           finally{}
+            try
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(pdfFile));
+            }
+            finally { }
 
-           Document pdfDoc = new Document(PageSize.A4);
-           AssemblyInfoHelper info = new AssemblyInfoHelper(typeof(PDFHelper));
+            Document pdfDoc = new Document(PageSize.A4);
+            AssemblyInfoHelper info = new AssemblyInfoHelper(typeof(PDFHelper));
 
-           pdfDoc.AddAuthor(info.Company);
-           pdfDoc.AddCreationDate();
-           pdfDoc.AddTitle(name);
-           
+            pdfDoc.AddAuthor(info.Company);
+            pdfDoc.AddCreationDate();
+            pdfDoc.AddTitle(name);
+
 
             float docw = pdfDoc.PageSize.Width;
             float doch = pdfDoc.PageSize.Width;
-            
+
             PdfDate st = new PdfDate(DateTime.Today);
             Chapter chapter = new Chapter(new Paragraph(name), 1);
 
@@ -342,7 +370,7 @@ namespace ComicDownloader.Helpers
                 pdfDoc.Close();
             }
 
-       
-       }
+
+        }
     }
 }
