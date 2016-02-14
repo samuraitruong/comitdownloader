@@ -1,10 +1,12 @@
-﻿using System; using System.Net;
+﻿using System;
+using System.Net;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Collections;
 using System.Xml.Linq;
 using System.Linq;
+using System.Globalization;
 
 namespace System
 {
@@ -19,7 +21,22 @@ namespace System
             Hour,
             Day
         }
+        public static string RemoveDiacritics(this string text)
+        {
+            var normalizedString = text.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder();
 
+            foreach (var c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+        }
         public static string ToFriendlyDisplay(this TimeSpan timeSpan, int maxNrOfElements)
         {
             maxNrOfElements = Math.Max(Math.Min(maxNrOfElements, 5), 1);
@@ -277,6 +294,12 @@ namespace System
                 ele.SetAttributeValue(name, value);
             }
             return ele.ToString();
+        }
+        public static string TryFixHtml(this string html)
+        {
+           var newHtml = html;
+            newHtml = newHtml.Replace("<br>", "<br/>");
+            return newHtml;
         }
 
     }

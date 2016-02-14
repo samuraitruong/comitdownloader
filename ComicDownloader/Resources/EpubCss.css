@@ -1,0 +1,16 @@
+﻿@charset "utf-8";
+@font-face { font-family : Calibri; src : url(fonts/Calibri.otf); }
+
+html
+{
+    -epub-writing-mode: vertical-rl;
+    font-family: Calibri;
+    font-size: 14pt;
+    margin: auto 1em;
+    padding: 1em 0;
+    max-height: 28em;
+}
+
+body{
+    font-family:Calibri;
+}

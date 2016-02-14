@@ -1,0 +1,17 @@
+﻿@charset "utf-8";
+
+
+html
+{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 14pt;
+    margin: auto 1em;
+    padding: 1em 0;
+    max-height: 28em;
+    background-color: #fff4e7;
+    color:red;
+}
+
+body{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}

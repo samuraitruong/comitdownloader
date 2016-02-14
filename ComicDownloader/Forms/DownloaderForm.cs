@@ -166,7 +166,7 @@ namespace ComicDownloader
 
                 }
             }
-            GenerateStoryPDF(this.currentStoryInfo, toBeDownloadedChapters);
+            GenerateStoryEbooks(this.currentStoryInfo, toBeDownloadedChapters);
 
 
             this.Invoke((MethodInvoker)delegate
@@ -178,7 +178,7 @@ namespace ComicDownloader
 
         }
 
-        private void GenerateStoryPDF(StoryInfo currentStoryInfo, List<ChapterInfo> toBeDownloadedChapters)
+        private void GenerateStoryEbooks(StoryInfo currentStoryInfo, List<ChapterInfo> toBeDownloadedChapters)
         {
             var dir = toBeDownloadedChapters[0].Folder;
             var rootDir = (new DirectoryInfo(dir)).Parent.FullName;
@@ -188,7 +188,10 @@ namespace ComicDownloader
                 return;
             }
             string pdfPath = rootDir + "\\PDF\\" + currentStoryInfo.Name.ConvertToValidFileName() + ".pdf";
+            string epubFile = pdfPath.Replace(".pdf", ".epub");
+
             PDFHelper.CreatePDFFromHtmls(htmlFiles, pdfPath, currentStoryInfo.Name, this.Settings);
+            EPUBHelper.GenereateEpubFromHtml(htmlFiles, epubFile, currentStoryInfo.Name);
             this.InvokeOnMainThread(() =>
             {
                 lblStoryPDF.Text = pdfPath;

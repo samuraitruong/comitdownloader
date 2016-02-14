@@ -40,6 +40,14 @@ namespace ComicDownloader.Engines
         public abstract string Name { get; }
         public abstract string ListStoryURL { get; }
         public abstract string HostUrl { get; }
+
+        public virtual int MaxRequestInfoChapterThread
+        {
+            get
+            {
+                return Math.Max(this.MaxThreadCrawlList, 8);
+            }
+        }
         public virtual bool InitCookie()
         {
             return false;
@@ -202,7 +210,7 @@ namespace ComicDownloader.Engines
         }
         public abstract List<string> GetPages(string chapUrl);
 
-        public StoryInfo RequestInfoSimple(string storyUrl, string namePattern, string chapterPattern, string appendHostUrl = "", Func<HtmlNode, string> nameExtract = null, Func<HtmlNode, ChapterInfo> chapterExtract = null, Func<string, HtmlDocument, List<ChapterInfo>> customChapterExtract = null, string chapPagingPattern = "", Func<string, HtmlDocument, List<string>> customChapPagingExtract = null)
+        public StoryInfo RequestInfoSimple(string storyUrl, string namePattern, string chapterPattern, string appendHostUrl = "", Func<HtmlNode, string> nameExtract = null, Func<HtmlNode, ChapterInfo> chapterExtract = null, Func<string, HtmlDocument, List<ChapterInfo>> customChapterExtract = null, string chapPagingPattern = "", Func<string, HtmlDocument, List<string>> customChapPagingExtract = null, Func<HtmlNode, string> chapPagingNodeExtract=null)
         {
             Queue<string> queue = new Queue<string>();
             queue.Enqueue(storyUrl);
@@ -211,7 +219,7 @@ namespace ComicDownloader.Engines
 
             while (queue.Count > 0)
             {
-                var threadCount = Math.Min(queue.Count, this.MaxThreadCrawlList);
+                var threadCount = Math.Min(this.MaxRequestInfoChapterThread,Math.Min(queue.Count, this.MaxThreadCrawlList));
                 var patch = Enumerable.Range(1, threadCount).Select(p => queue.Dequeue());
 
                 var parallelResult = Parallel.ForEach(patch, (currentPageUrl) =>
@@ -269,14 +277,24 @@ namespace ComicDownloader.Engines
                         var pagingNodes = htmlDoc.DocumentNode.SelectNodes(chapPagingPattern);
                         if (pagingNodes != null)
                         {
-                            pagingLinks = pagingNodes.Select(p => EnsureHostName(this.HostUrl, p.Attributes["href"].Value)).ToList();
+                            foreach (HtmlNode item in pagingNodes)
+                            {
+                                if(item.Attributes["href"]== null || 
+                                item.Attributes["href"].Value.StartsWith("javascript"))
+                                {
+                                    continue;
+                                };
+
+                                string link = chapPagingNodeExtract != null ? chapPagingNodeExtract(item) : EnsureHostName(this.HostUrl, item.Attributes["href"].Value);
+                                pagingLinks.Add(link);
+                            }
                         }
                     }
                     lock (alllinks)
                     {
                         foreach (var item in pagingLinks)
                         {
-                            if (alllinks.Contains(item))
+                            if (!alllinks.Contains(item))
                             {
                                 alllinks.Add(item);
                                 queue.Enqueue(item);
@@ -285,6 +303,7 @@ namespace ComicDownloader.Engines
                     }
                 });
             }
+            info.Chapters = info.Chapters.DistinctBy(p => p.Url).ToList();
             return info;
         }
 
@@ -362,7 +381,12 @@ namespace ComicDownloader.Engines
                                 {
                                     foreach (var p in paging)
                                     {
-                                        var pageUrl = EnsureHostName(appendHost, p.Attributes["href"].Value);
+                                        if (p.Attributes["href"] == null || p.Attributes["href"].Value.StartsWith("javascript"))
+                                            continue;
+
+                                        var href = p.Attributes["href"].Value;
+                                        
+                                        var pageUrl = pagingExtract!= null? pagingExtract(p): EnsureHostName(appendHost, p.Attributes["href"].Value);
                                         links.Add(pageUrl);
                                     }
                                 }
@@ -723,10 +747,30 @@ namespace ComicDownloader.Engines
         {
             try
             {
-                using (var stream = new FileStream(filename, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+                var fileContents = File.ReadAllText(filename);
+                File.Delete(filename);
+                using (var stream = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
                 {
-                    var fileContents = (new StreamReader(stream)).ReadToEnd();
                     string template = Resources.HtmlTemplate;
+                    var doc = GetParser(fileContents);
+                    if (!string.IsNullOrEmpty(contentPattern))
+                    {
+                        var node = doc.DocumentNode.SelectSingleNode(contentPattern);
+                        if(node!= null)
+                        {
+                            fileContents = node.InnerHtml;
+                        }
+                    }
+                    
+                     if (!string.IsNullOrEmpty(titlePattern))
+                    {
+                        var node = doc.DocumentNode.SelectSingleNode(titlePattern);
+                        if (node != null)
+                        {
+                            chapterName = node.InnerText.Trim();
+                        }
+                    }
+                    fileContents = fileContents.TryFixHtml();
                     var newContent = template.Replace("[[content]]", fileContents);
                     newContent = newContent.Replace("[[title]]", chapterName);
                     stream.Seek(0, SeekOrigin.Begin);
@@ -769,6 +813,11 @@ namespace ComicDownloader.Engines
                 try
                 {
                     string replaceFileName = renamePattern.Replace("{FILENAME}", filename);
+                    if(Path.GetExtension(replaceFileName) =="")
+                    {
+                        replaceFileName += ".html";
+                        replaceFileName = replaceFileName.Replace("..", ".");
+                    }
                     {
                         filename = Path.Combine(folder, replaceFileName);
                         client.DownloadFile(pageUrl, filename);

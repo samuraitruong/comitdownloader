@@ -676,4 +676,25 @@
   <data name="HtmlTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\HtmlTemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="LiberationSerif_Bold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LiberationSerif-Bold.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LiberationSerif_BoldItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LiberationSerif-BoldItalic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LiberationSerif_Italic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LiberationSerif-Italic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LiberationSerif_Regular" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LiberationSerif-Regular.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Calibri" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Calibri.otf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="EpubCss" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EpubCss.css;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EpubTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EpubTemplate.xhtml;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

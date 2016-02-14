@@ -587,6 +587,9 @@
     <Compile Include="Engines\En\UnixMangaDownloader.cs" />
     <Compile Include="Engines\Offline\En\OneMangeDownloader.cs" />
     <Compile Include="Engines\Proxies\BlogTruyenDownloaderProxy.cs" />
+    <Compile Include="Engines\Text\TruyenYYDownloader.cs" />
+    <Compile Include="Engines\Text\ThichDocTruyenDownloader.cs" />
+    <Compile Include="Engines\Text\WebTruyenDownloader.cs" />
     <Compile Include="Engines\Text\SSTruyenDownloader.cs" />
     <Compile Include="Engines\Vn\GocThuGianDownloader.cs" />
     <Compile Include="Engines\Vn\UpTruyenDownloader.cs" />
@@ -612,7 +615,6 @@
     <Compile Include="Engines\Vn\VuaTruyenTranhDownloader.cs" />
     <Compile Include="Engines\Vn\ThichTruyenTranhDownloader.cs" />
     <Compile Include="Engines\Vn\Manga24hDownloader.cs" />
-    <Compile Include="Engines\Offline\VN\WebTruyenDownloader.cs" />
     <Compile Include="Engines\Vn\ComicVnDownloader.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Extensions\ObjectExtension.cs" />
@@ -872,6 +874,7 @@
       <DependentUpon>DownloaderInfoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AssemblyInfoHelper.cs" />
+    <Compile Include="Helpers\EPUBHelper.cs" />
     <Compile Include="Helpers\NetworkHelper.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1568,6 +1571,13 @@
     <Content Include="3rd\DropDownControls-1.0.5-src\DropDownControls.sln" />
     <Content Include="3rd\DropDownControls-1.0.5-src\LICENSE.TXT" />
     <Content Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_focus_24x24.png" />
+    <None Include="Resources\Calibri.otf" />
+    <None Include="Resources\Calibri.ttf" />
+    <None Include="Resources\EpubTemplate.xhtml" />
+    <None Include="Resources\LiberationSerif-Bold.ttf" />
+    <None Include="Resources\LiberationSerif-BoldItalic.ttf" />
+    <None Include="Resources\LiberationSerif-Italic.ttf" />
+    <None Include="Resources\LiberationSerif-Regular.ttf" />
     <None Include="Resources\windows_8_wallpaper_by_joka7959-d5dtl3v.png" />
     <None Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_focus_24x241.png" />
     <Content Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_pressed_24x24.png" />
@@ -1807,6 +1817,7 @@
     <None Include="Resources\DefaultCss.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\EpubCss.css" />
     <Content Include="Resources\gtk-about.png" />
     <Content Include="3rd\HtmlAgilityPack.dll" />
     <Content Include="3rd\ObjectListView\CustomDictionary.xml" />
@@ -1867,6 +1878,12 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetEpub-master\dotNetEpub\dotNetEpub.csproj">
+      <Project>{382299de-6c02-4587-864f-2218bd3a1935}</Project>
+      <Name>dotNetEpub</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
@@ -1874,7 +1891,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_IncrementBeforeBuild="True" BuildVersion_ConfigurationName="Release" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_StartDate="2013/3/19" />
+      <UserProperties BuildVersion_StartDate="2013/3/19" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_ConfigurationName="Release" BuildVersion_IncrementBeforeBuild="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

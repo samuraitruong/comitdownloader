@@ -31,13 +31,21 @@ namespace ComicDownloader.Engines
             get { throw new NotImplementedException(); }
         }
 
-        public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
+        public override List<StoryInfo> HotestStories()
+        {
+            return HotestStoriesSimple("http://sstruyen.com/doc-truyen/index.php?search=&cate=&order=2&page={0}"
+                , "//*[@class='listTitle']/a", 1);
+        }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             string urlPattern = "http://sstruyen.com/doc-truyen/truyen-moi-nhat/page-{0}.html";
 
             return base.GetListStoriesSimple(urlPattern,
                 "//*[@class='listTitle']/a", forceOnline);
+        }
+        public override List<StoryInfo> OnlineSearch(string keyword)
+        {
+            return base.OnlineSearchGet("http://sstruyen.com/doc-truyen/index.php?page={0}&search=" + keyword, "//*[@class='listTitle']/a", 3);
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
@@ -46,55 +54,27 @@ namespace ComicDownloader.Engines
                 "//h1[@class='title']",
                 "//div[@class='chuongmoi']//a",
                 chapPagingPattern: "//div[@class='page-split']/a");
+
         }
 
         public override List<string> GetPages(string chapUrl)
         {
             return new List<string>() { chapUrl };
         }
-        public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer, CookieContainer cc = null, string originalUrl = null, ChapterInfo chappter = null)
-        {
-            cc = NetworkHelper.GetCookie(pageUrl, httpReferer);
-            var html = NetworkHelper.GetHtml(pageUrl, cc);
-            var match = Regex.Match(html, "load\\(\\\"([^\\\"]*)\\\"\\)");
-            var ajaxUrl = this.HostUrl + match.Groups[1].Value;
-            return base.DownloadPage(ajaxUrl, renamePattern, folder, httpReferer, cc, pageUrl, chapter:chappter);
-        }
+        //public override string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer, CookieContainer cc = null, string originalUrl = null, ChapterInfo chappter = null)
+        //{
+        //    cc = NetworkHelper.GetCookie(pageUrl, httpReferer);
+        //    var html = NetworkHelper.GetHtml(pageUrl, cc);
+        //    var match = Regex.Match(html, "load\\(\\\"([^\\\"]*)\\\"\\)");
+        //    var ajaxUrl = this.HostUrl + match.Groups[1].Value;
+        //    return base.DownloadPage(ajaxUrl, renamePattern, folder, httpReferer, cc, pageUrl, chapter:chappter);
+        //}
         public override List<StoryInfo> GetLastestUpdates()
         {
-            string lastestUpdateUrl = "http://www.truyen18.org/moi-cap-nhat/danhsach.html";
-            List<StoryInfo> stories = new List<StoryInfo>();
-            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
-
-            var htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-            var nodes = htmlDoc.DocumentNode.SelectNodes("//table[@class=\"listing\"]//tr[@class=\"odd\"]/td[position()=1]/a");
-
-            foreach (HtmlNode node in nodes)
-            {
-                StoryInfo info = new StoryInfo()
-                {
-                    Url = HostUrl.Substring(0, HostUrl.LastIndexOf("/")) + node.Attributes["href"].Value,
-                    Name = node.InnerText.Trim().Trim(),
-                    Chapters = new List<ChapterInfo>(),
-                };
-                var chapters = node.ParentNode.ParentNode.SelectNodes("td[position()=3]/a");
-                if (chapters != null)
-                {
-                    foreach (HtmlNode chap in chapters)
-                    {
-                        info.Chapters.Add(new ChapterInfo()
-                        {
-                            Name = chap.InnerText.Trim().Trim(),
-                            Url = chap.Attributes["href"].Value,
-                        });
-                    }
-                }
-
-                stories.Add(info);
-            }
-            return stories;
+            string lastestUpdateUrl = "http://sstruyen.com/doc-truyen/index.php?search=&cate=&order=8&page={0}";
+            return base.GetLastestUpdateSimple(lastestUpdateUrl, "//*[@class='listTitle']/a", "", null, 3);
         }
+
         public override void AfterPageDownloaded(string filename, ChapterInfo chap)
         {
             //replace content 
