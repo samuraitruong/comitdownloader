@@ -772,7 +772,7 @@ namespace ComicDownloader.Engines
                     }
                     fileContents = fileContents.TryFixHtml();
                     var newContent = template.Replace("[[content]]", fileContents);
-                    newContent = newContent.Replace("[[title]]", chapterName);
+                    newContent = newContent.Replace("[[title]]", chapterName.ToUpper());
                     stream.Seek(0, SeekOrigin.Begin);
                     var writer = new StreamWriter(stream);
                     writer.Write(newContent);

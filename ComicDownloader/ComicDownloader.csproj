@@ -587,6 +587,9 @@
     <Compile Include="Engines\En\UnixMangaDownloader.cs" />
     <Compile Include="Engines\Offline\En\OneMangeDownloader.cs" />
     <Compile Include="Engines\Proxies\BlogTruyenDownloaderProxy.cs" />
+    <Compile Include="Engines\Text\GocTruyenDownloader.cs" />
+    <Compile Include="Engines\Text\LMVNDownloader.cs" />
+    <Compile Include="Engines\Text\TruyenFullDownloader.cs" />
     <Compile Include="Engines\Text\TruyenYYDownloader.cs" />
     <Compile Include="Engines\Text\ThichDocTruyenDownloader.cs" />
     <Compile Include="Engines\Text\WebTruyenDownloader.cs" />
