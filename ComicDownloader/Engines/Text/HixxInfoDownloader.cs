@@ -7,23 +7,23 @@ using System.IO;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("goctruyen.com", Offline = false, Language = "Truyen chu tieng viet", MenuGroup = "O-S", MetroTab = "Text Tiếng Việt", Image32 = "1364078951_insert-object")]
+    [Downloader("hixx.info", Offline = false, Language = "Truyen chu tieng viet", MenuGroup = "O-S", MetroTab = "Text Tiếng Việt", Image32 = "1364078951_insert-object")]
 
-    public class GocTruyenDownloader : Downloader
+    public class HixxInfoDownloader : Downloader
     {
         public override string Name
         {
-            get { return "[goctruyen.com] - "; }
+            get { return "[hixx.info] - "; }
         }
 
         public override string ListStoryURL
         {
-            get { return "http://goctruyen.com/all"; }
+            get { return "http://truyen.hixx.info/truyen.html"; }
         }
 
         public override string HostUrl
         {
-            get { return "http://goctruyen.com/"; }
+            get { return "http://truyen.hixx.info/"; }
         }
 
         public override string StoryUrlPattern
@@ -34,36 +34,39 @@ namespace ComicDownloader.Engines
         {
             get
             {
-                return "http://goctruyen.com/public/frontend/img/logo.png";
+                return "http://truyen.hixx.info/assets/truyen/images/no_image_found_120x180.jpg";
             }
         }
         public override List<StoryInfo> HotestStories() {
             return HotestStoriesSimple("http://truyenfull.vn/danh-sach/truyen-hot/trang-{0}/"
-                , "//h3[@class='truyen-title']/a", 3);
+                , "//span[@class='title_story']//a");
         }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            return base.GetListStoriesSimple("http://goctruyen.com/all/{0}/",
-                "//ul[@class='homeListstory']//h3/a", forceOnline);
+            return base.GetListStoriesUnknowPages("http://truyen2.hixx.info/truyen",
+                "//ul[@class='content']/li/a[2]", forceOnline,
+                "//div[@class='bt_pagination']//a");
         }
         public override List<StoryInfo> OnlineSearch(string keyword)
         {
-            return base.OnlineSearchGet("http://goctruyen.com/search/"+keyword+"/{0}/", "//ul[@class='homeListstory']//h3/a", 3);
+            return base.OnlineSearchGet("http://truyen2.hixx.info/truyen/search/index/q/"+ keyword, "//ul[@class='homeListstory']//h3/a", 1);
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
         {
             return base.RequestInfoSimple(storyUrl,
                 "//h1",
-                "//table[@class='table table-striped']//a[@class='title_chapter']",
+                "//div[@class='danh_sach']/a",
                 chapterExtract: (HtmlNode node)=> {
-                    return new ChapterInfo()
+                    var aaa= new ChapterInfo()
                     {
                         Url = node.Attributes["href"].Value,
-                        Name = node.ParentNode.PreviousSibling.InnerText.Trim() +" - " + node.InnerText
+                        Name = node.InnerText.Replace("Đọc truyện Online - ","").Trim()
                     };
+                    aaa.Name = Regex.Replace(aaa.Name,"<!.*-->", "").Trim();
+                    return aaa;
                 },
-                chapPagingPattern: "//ul[@class='page']//a");
+                chapPagingPattern: "//div[@class='bt_pagination']//a");
         }
 
         public override List<string> GetPages(string chapUrl)
@@ -87,7 +90,7 @@ namespace ComicDownloader.Engines
         public override void AfterPageDownloaded(string filename, ChapterInfo chap)
         {
             
-            AfterPageDownloadedSimple(filename, chap.Name, "//*[@id='detailcontent']", "//h3");
+            AfterPageDownloadedSimple(filename, chap.Name, "//*[@id='ar-content-html']", "//h3");
 
             
         }

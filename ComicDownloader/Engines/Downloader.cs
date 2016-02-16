@@ -40,7 +40,11 @@ namespace ComicDownloader.Engines
         public abstract string Name { get; }
         public abstract string ListStoryURL { get; }
         public abstract string HostUrl { get; }
-
+        private List<string> chapterIdPatterns = new List<string> {
+            @"Chương (\d+)",
+            @"(\d+)$",
+            @"(\d+)"
+        };
         public virtual int MaxRequestInfoChapterThread
         {
             get
@@ -230,7 +234,7 @@ namespace ComicDownloader.Engines
 
                     htmlDoc.LoadHtml(html);
 
-                    var nameNode = htmlDoc.DocumentNode.SelectSingleNode(namePattern);
+                    var nameNode = htmlDoc.DocumentNode.GetSingleNode(namePattern);
                     string chapterName = (nameExtract != null) ? nameExtract(nameNode) : nameNode.InnerText.Trim().Trim();
                     if (info == null)
                     {
@@ -342,11 +346,33 @@ namespace ComicDownloader.Engines
 
             return left + right;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="startUrl">multiple support , separate by comma</param>
+        /// <param name="matchPattern">multiple support , separate by comma</param>
+        /// <param name="forceOnline"></param>
+        /// <param name="pagingPattern"></param>
+        /// <param name="pagingExtract">Custom function to extract href link for paring element.</param>
+        /// <param name="appendHost"></param>
+        /// <param name="convertFunc">custom function to parse a html node to a story</param>
+        /// <param name="customParser">custom function to grab all story on current page</param>
+        /// <param name="singleListPage"></param>
+        /// <param name="allLinksExtract">custom function to get all links</param>
+        /// <returns></returns>
         public List<StoryInfo> GetListStoriesUnknowPages(string startUrl, string matchPattern, bool forceOnline, string pagingPattern, Func<HtmlNode, string> pagingExtract = null, string appendHost = "", Func<HtmlNode, StoryInfo> convertFunc = null, Func<string, HtmlDocument, List<StoryInfo>> customParser = null, bool singleListPage = false, Func<string, HtmlDocument, List<String>> allLinksExtract = null)
         {
+            var startUrls = startUrl.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+
             Queue<string> queue = new Queue<string>();
-            queue.Enqueue(startUrl);
-            List<string> alllinks = new List<string>() { startUrl };
+            List<string> alllinks = new List<string>();
+
+            startUrls.ForEach((s) =>
+            {
+                queue.Enqueue(s);
+                alllinks.Add(s);
+            });
+
 
             var catchItem = this.ReloadChachedData();
             List<StoryInfo> results = catchItem.Stories;
@@ -475,7 +501,17 @@ namespace ComicDownloader.Engines
 
             if (!string.IsNullOrEmpty(matchPattern))
             {
-                var nodes = htmlDoc.DocumentNode.SelectNodes(matchPattern);
+                var patterns = matchPattern.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                List<HtmlNode> nodes = new List<HtmlNode>();
+                patterns.ForEach((s) =>
+                {
+                    var n = htmlDoc.DocumentNode.SelectNodes(s);
+                    if(n!= null)
+                    {
+                        nodes.AddRange(n.Cast<HtmlNode>().ToList());
+                    }
+                });
+               //var nodes = htmlDoc.DocumentNode.SelectNodes(matchPattern);
 
 
                 if (nodes != null && nodes.Count > 0)
@@ -561,7 +597,7 @@ namespace ComicDownloader.Engines
                 }
 
                 //sort result 
-
+                results = results.DistinctBy(p => p.Url).ToList();
                 results = results.OrderBy(p => p.Name).ToList();
                 clock.Stop();
                 this.SaveCache(results, clock.ElapsedMilliseconds);
@@ -884,6 +920,7 @@ namespace ComicDownloader.Engines
 
         public int ExtractID(string name, string pattern)
         {
+
             var match = Regex.Match(name, pattern, RegexOptions.IgnoreCase);
             if (match != null)
             {
@@ -891,19 +928,28 @@ namespace ComicDownloader.Engines
                 int.TryParse(match.Groups[1].Value, out id);
                 return id;
             }
+
             return 0;
 
         }
-
         public int ExtractID(string name)
         {
-            int id = ExtractID(name, @".*\s(\d*)$");
-            if (id > 0) return id;
+            //int id = ExtractID(name, @".*\s(\d*)$");
+            //if (id > 0) return id;
 
-            id = ExtractID(name, @".*\s(\d*)\s.*");
-            if (id > 0) return id;
+            //id = ExtractID(name, @".*\s(\d*)\s.*");
+            //if (id > 0) return id;
 
-            return ExtractID(name, @"\d\d*");
+            //return ExtractID(name, @"\d\d*");
+            foreach (var item in this.chapterIdPatterns)
+            {
+                var id = ExtractID(name, item);
+                if(id>0)
+                {
+                    return id;
+                }
+            }
+            return 0;
 
         }
 

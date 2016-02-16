@@ -7,23 +7,23 @@ using System.IO;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("goctruyen.com", Offline = false, Language = "Truyen chu tieng viet", MenuGroup = "O-S", MetroTab = "Text Tiếng Việt", Image32 = "1364078951_insert-object")]
+    [Downloader("truyenchu.net", Offline = false, Language = "Truyen chu tieng viet", MenuGroup = "O-S", MetroTab = "Text Tiếng Việt", Image32 = "1364078951_insert-object")]
 
-    public class GocTruyenDownloader : Downloader
+    public class TruyenChuDownloader : Downloader
     {
         public override string Name
         {
-            get { return "[goctruyen.com] - "; }
+            get { return "[truyenchu.net] - "; }
         }
 
         public override string ListStoryURL
         {
-            get { return "http://goctruyen.com/all"; }
+            get { return "http://truyenchu.net/danh-sach-truyen/tat-ca"; }
         }
 
         public override string HostUrl
         {
-            get { return "http://goctruyen.com/"; }
+            get { return "http://truyenchu.net"; }
         }
 
         public override string StoryUrlPattern
@@ -43,8 +43,8 @@ namespace ComicDownloader.Engines
         }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            return base.GetListStoriesSimple("http://goctruyen.com/all/{0}/",
-                "//ul[@class='homeListstory']//h3/a", forceOnline);
+            return base.GetListStoriesSimple("http://truyenchu.net/danh-sach-truyen/tat-ca?page={0}",
+                "//a[@class='text-bold']", forceOnline);
         }
         public override List<StoryInfo> OnlineSearch(string keyword)
         {
@@ -55,15 +55,14 @@ namespace ComicDownloader.Engines
         {
             return base.RequestInfoSimple(storyUrl,
                 "//h1",
-                "//table[@class='table table-striped']//a[@class='title_chapter']",
+                "//div[contains(@class,'lst-chapter')]//a",
                 chapterExtract: (HtmlNode node)=> {
                     return new ChapterInfo()
                     {
                         Url = node.Attributes["href"].Value,
-                        Name = node.ParentNode.PreviousSibling.InnerText.Trim() +" - " + node.InnerText
+                        Name = node.PreviousSibling.InnerText.Trim() +" - " + node.InnerText.Trim()
                     };
-                },
-                chapPagingPattern: "//ul[@class='page']//a");
+                });
         }
 
         public override List<string> GetPages(string chapUrl)
@@ -87,7 +86,7 @@ namespace ComicDownloader.Engines
         public override void AfterPageDownloaded(string filename, ChapterInfo chap)
         {
             
-            AfterPageDownloadedSimple(filename, chap.Name, "//*[@id='detailcontent']", "//h3");
+            AfterPageDownloadedSimple(filename, chap.Name, "//div[contains(@class,'set-textresize')]", "//h1");
 
             
         }

@@ -587,6 +587,9 @@
     <Compile Include="Engines\En\UnixMangaDownloader.cs" />
     <Compile Include="Engines\Offline\En\OneMangeDownloader.cs" />
     <Compile Include="Engines\Proxies\BlogTruyenDownloaderProxy.cs" />
+    <Compile Include="Engines\Text\DocTruyen360Downloader.cs" />
+    <Compile Include="Engines\Text\TruyenChuDownloader.cs" />
+    <Compile Include="Engines\Text\HixxInfoDownloader.cs" />
     <Compile Include="Engines\Text\GocTruyenDownloader.cs" />
     <Compile Include="Engines\Text\LMVNDownloader.cs" />
     <Compile Include="Engines\Text\TruyenFullDownloader.cs" />
@@ -620,6 +623,7 @@
     <Compile Include="Engines\Vn\Manga24hDownloader.cs" />
     <Compile Include="Engines\Vn\ComicVnDownloader.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
+    <Compile Include="Extensions\HtmlDocumentExtension.cs" />
     <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Forms\AppMainForm.cs">
@@ -1894,7 +1898,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2013/3/19" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_ConfigurationName="Release" BuildVersion_IncrementBeforeBuild="True" />
+      <UserProperties BuildVersion_IncrementBeforeBuild="True" BuildVersion_ConfigurationName="Release" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_StartDate="2013/3/19" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
