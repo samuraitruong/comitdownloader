@@ -59,6 +59,14 @@ namespace ComicDownloader.Helpers
             finally
             {
                 epub.Generate(epubFile);
+                try
+                {
+                    MobiHelper.ConvertEpubToMobi(epubFile);
+                }
+                catch(Exception ex)
+                {
+
+                }
             }
         }
     }

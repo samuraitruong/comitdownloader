@@ -58,7 +58,7 @@ namespace ComicDownloader.Engines
                 return null;
             }
         }
-        public static CookieContainer GetCookie(string url, string referer)
+        public static CookieContainer GetCookie(string url, string referer, string cookieheaders="")
         {
             var cookies = new CookieContainer();
             try
@@ -70,6 +70,10 @@ namespace ComicDownloader.Engines
                 myHttpWebRequest.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
                 myHttpWebRequest.AutomaticDecompression = DecompressionMethods.GZip;//Or DecompressionMethods.Deflate
                 myHttpWebRequest.UserAgent = @"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.4) Gecko/20060508 Firefox/1.5.0.4";
+                if (!string.IsNullOrEmpty(cookieheaders)) { 
+                    myHttpWebRequest.CookieContainer = new CookieContainer();
+                    myHttpWebRequest.CookieContainer.SetCookies(new Uri(url), cookieheaders);
+                }         ;
 
                 HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttpWebRequest.GetResponse();
                 foreach (Cookie item in myHttpWebResponse.Cookies)
@@ -170,11 +174,16 @@ namespace ComicDownloader.Engines
                                       string cacheControl = "max-age=0",
                                       bool connection = false,
                                       string userAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36",
-                                      Action<CookieContainer> postProcess= null)
+                                      Action<CookieContainer> postProcess= null,
+                                      CookieContainer cookies= null)
         {
             HttpWebRequest request = (HttpWebRequest)
             WebRequest.Create(serviceUrl);
-
+            
+            if(cookies != null)
+            {
+                request.CookieContainer = cookies;
+            }
             request.ServicePoint.Expect100Continue = false;
             request.Timeout = 20000;
 
@@ -198,7 +207,7 @@ namespace ComicDownloader.Engines
 
             if (!string.IsNullOrEmpty(charset))
             {
-                request.Headers.Add("Accept-Charset", accept);
+                request.Headers.Add("Accept-Charset", charset);
             }
 
             if (!string.IsNullOrEmpty(encoding))

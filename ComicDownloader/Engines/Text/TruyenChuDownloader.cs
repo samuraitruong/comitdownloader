@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Web;
 
 namespace ComicDownloader.Engines
 {
@@ -34,21 +35,27 @@ namespace ComicDownloader.Engines
         {
             get
             {
-                return "http://goctruyen.com/public/frontend/img/logo.png";
+                return "";
             }
         }
         public override List<StoryInfo> HotestStories() {
-            return HotestStoriesSimple("http://truyenfull.vn/danh-sach/truyen-hot/trang-{0}/"
-                , "//h3[@class='truyen-title']/a", 3);
+            return HotestStoriesSimple(this.HostUrl
+                , "//ul[contains(@class,'sidebar-top-list')]//a", 1);
         }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             return base.GetListStoriesSimple("http://truyenchu.net/danh-sach-truyen/tat-ca?page={0}",
-                "//a[@class='text-bold']", forceOnline);
+                "//li/div[2]//a[contains(@class,'text-bold')]", forceOnline, convertFunc: (HtmlNode node) => {
+                    return new StoryInfo()
+                    {
+                        Url = base.EnsureHostName("", node.Attributes["href"].Value),
+                        Name = HttpUtility.HtmlDecode(node.InnerText.Trim())
+                    };
+                });
         }
         public override List<StoryInfo> OnlineSearch(string keyword)
         {
-            return base.OnlineSearchGet("http://goctruyen.com/search/"+keyword+"/{0}/", "//ul[@class='homeListstory']//h3/a", 3);
+            return base.OnlineSearchGet("http://truyenchu.net/tim-kiem-nang-cao?name=" + keyword+ "&status=1", "//div[@class='content-text']//a[@class='text-bold']", 1);
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
@@ -59,8 +66,8 @@ namespace ComicDownloader.Engines
                 chapterExtract: (HtmlNode node)=> {
                     return new ChapterInfo()
                     {
-                        Url = node.Attributes["href"].Value,
-                        Name = node.PreviousSibling.InnerText.Trim() +" - " + node.InnerText.Trim()
+                        Url = base.EnsureHostName("",node.Attributes["href"].Value),
+                        Name = HttpUtility.HtmlDecode(node.PreviousSibling.InnerText.Trim() +" - " + node.InnerText.Trim())
                     };
                 });
         }

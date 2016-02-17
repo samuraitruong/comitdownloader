@@ -187,11 +187,12 @@ namespace ComicDownloader
             {
                 return;
             }
+            var orderedFiles = htmlFiles.OrderBy(p => Path.GetFileName(p)).ToArray();
             string pdfPath = rootDir + "\\PDF\\" + currentStoryInfo.Name.ConvertToValidFileName() + ".pdf";
             string epubFile = pdfPath.Replace(".pdf", ".epub");
 
-            PDFHelper.CreatePDFFromHtmls(htmlFiles, pdfPath, currentStoryInfo.Name, this.Settings);
-            EPUBHelper.GenereateEpubFromHtml(htmlFiles, epubFile, currentStoryInfo.Name);
+            PDFHelper.CreatePDFFromHtmls(orderedFiles, pdfPath, currentStoryInfo.Name, this.Settings);
+            EPUBHelper.GenereateEpubFromHtml(orderedFiles, epubFile, currentStoryInfo.Name);
             this.InvokeOnMainThread(() =>
             {
                 lblStoryPDF.Text = pdfPath;
@@ -269,9 +270,11 @@ namespace ComicDownloader
                     DownloadPageParam param = (DownloadPageParam)state;
                     try
                     {
-                        string filename = Downloader.DownloadPage(param.PageUrl, 
-                            Settings.RenamePattern.Replace("{{PAGENUM}}", 
-                            param.Index.ToString("D2")), 
+                        string outputName = Settings.RenamePattern.Replace("{{PAGENUM}}", param.Index.ToString("D3"))
+                                                  .Replace("{{CHAPTER}}", chapInfo != null ? chapInfo.Name : "");
+
+                        string filename = Downloader.DownloadPage(param.PageUrl,
+                            outputName,
                             chapInfo.Folder, 
                             chapInfo.Url,
                             chapter:chapInfo);

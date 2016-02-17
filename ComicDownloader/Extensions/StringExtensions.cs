@@ -21,6 +21,14 @@ namespace System
             Hour,
             Day
         }
+        public static string ToValidFileName(this string fileName)
+        {
+       
+            string sss= Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(), string.Empty));
+            sss = sss.Replace("\"", "");
+            return sss;
+        
+    }
         public static string RemoveDiacritics(this string text)
         {
             var normalizedString = text.Normalize(NormalizationForm.FormD);

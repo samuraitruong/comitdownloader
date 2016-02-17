@@ -17,7 +17,18 @@ namespace System
 {
     public static class HtmlDocumentExtensions
     {
-         
+        public static string Href(this HtmlNode node)
+        {
+            return node.Attr("href");
+        }
+        public static string Attr(this HtmlNode node, string attr)
+        {
+            if(node.Attributes[attr]!= null)
+            {
+                return node.Attributes[attr].Value.Trim();
+            }
+            return "";
+        }
 
         public static HtmlNode GetSingleNode(this HtmlNode node, string patterns)
         {
@@ -39,6 +50,27 @@ namespace System
             return defaultValue;
         }
 
+        /// <summary>
+        /// Get all node match with multiple patterns.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="patterns">separate by comma</param>
+        /// <returns></returns>
+        public static List<HtmlNode> GellAllNodes(this HtmlNode  node, string patterns)
+        {
+            var results = new List<HtmlNode>();
+
+            string[] arr = patterns.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var item in arr)
+            {
+                var test = node.SelectNodes(item);
+                if (test != null)
+                {
+                    results.AddRange(test.Cast<HtmlNode>().ToList());
+                }
+            }
+            return results;
+        }
 
 
 

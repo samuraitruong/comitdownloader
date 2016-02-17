@@ -32,6 +32,7 @@ namespace ComicDownloader.Engines
 
     public abstract class Downloader
     {
+
         public DownloaderSetting Settings { get; set; }
 
         public virtual int MaxThreadCrawlList { get; set; }
@@ -54,6 +55,28 @@ namespace ComicDownloader.Engines
         }
         public virtual bool InitCookie()
         {
+            return true;
+        }
+        public bool InitCookieFromUrl(string url="", string initcookies="")
+        {
+            if(string.IsNullOrEmpty(url))
+            {
+                url = this.HostUrl;
+            }
+            var cc = NetworkHelper.GetCookie(url, url, initcookies);
+            if (this.Cookies == null)
+            {
+                this.Cookies = new CookieContainer();
+            }
+            if (cc != null)
+            {
+                foreach (Cookie item in cc.GetCookies(new Uri(url)))
+                {
+                    this.Cookies.Add(item);
+                }
+
+            }
+
             return false;
         }
 
@@ -103,7 +126,7 @@ namespace ComicDownloader.Engines
             return result;
         }
 
-        private CookieContainer Cookies = null;
+        protected CookieContainer Cookies = null;
 
         public event AfterCookieSet AfterCookieSet;
         public event ListPageCrawled OnListPageCrawled;
@@ -228,7 +251,7 @@ namespace ComicDownloader.Engines
 
                 var parallelResult = Parallel.ForEach(patch, (currentPageUrl) =>
                 {
-                    var html = NetworkHelper.GetHtml(currentPageUrl);
+                    var html = NetworkHelper.GetHtml(currentPageUrl, this.Cookies);
 
                     HtmlDocument htmlDoc = new HtmlDocument();
 
@@ -402,7 +425,7 @@ namespace ComicDownloader.Engines
                             }
                             else
                             {
-                                var paging = doc.DocumentNode.SelectNodes(pagingPattern);
+                                var paging = doc.DocumentNode.GellAllNodes(pagingPattern);
                                 if (paging != null)
                                 {
                                     foreach (var p in paging)
@@ -779,7 +802,7 @@ namespace ComicDownloader.Engines
         }
         public virtual bool IsTextEngines { get; }
         //this is 
-        public virtual void AfterPageDownloadedSimple(string filename, string chapterName, string contentPattern = "", string titlePattern = "")
+        public virtual void AfterPageDownloadedSimple(string filename, string chapterName, string contentPattern = "", string titlePattern = "", Func<string, HtmlDocument, string> extractContent=null)
         {
             try
             {
@@ -791,10 +814,14 @@ namespace ComicDownloader.Engines
                     var doc = GetParser(fileContents);
                     if (!string.IsNullOrEmpty(contentPattern))
                     {
-                        var node = doc.DocumentNode.SelectSingleNode(contentPattern);
+                        var node = doc.DocumentNode.GetSingleNode(contentPattern);
                         if(node!= null)
                         {
                             fileContents = node.InnerHtml;
+                        }
+                        if(extractContent!= null)
+                        {
+                            fileContents = extractContent(fileContents, doc);
                         }
                     }
                     
@@ -821,7 +848,7 @@ namespace ComicDownloader.Engines
         }
         public virtual void AfterPageDownloaded(string filename, ChapterInfo chapter)
         {
-            AfterPageDownloadedSimple(filename, chapter.Name);
+            //AfterPageDownloadedSimple(filename, chapter.Name);
         }
         public ResolveImageOnPage ResolveImageInHtmlPage { get; set; }
         public StoryInfo CurrentStory { get; private set; }
@@ -854,12 +881,17 @@ namespace ComicDownloader.Engines
                         replaceFileName += ".html";
                         replaceFileName = replaceFileName.Replace("..", ".");
                     }
+                    if(chapter.Pages.Count == 1)
                     {
-                        filename = Path.Combine(folder, replaceFileName);
+                        replaceFileName = string.Format("{0} - {1}.html", chapter.ChapId.ToString("D3"), chapter.Name);
+                    };
+
+                    {
+                        filename = Path.Combine(folder, replaceFileName.ToValidFileName());
                         client.DownloadFile(pageUrl, filename);
                     }
                 }
-                catch
+                catch    (Exception ex)
                 {
                 }
             }
@@ -1042,8 +1074,8 @@ namespace ComicDownloader.Engines
 
         public Downloader()
         {
-            //this.InitCookie();
             this.Cookies = GetUriCookieContainer(new Uri(this.HostUrl));
+
             this.MaxThreadCrawlList = SettingForm.GetSetting().MaxThreadCrawlList;
             this.NumberRetryWhenFailed = SettingForm.GetSetting().NumberRetryWhenFailed;
 
@@ -1057,7 +1089,9 @@ namespace ComicDownloader.Engines
                     LastKeyword = "Dragon Ball"
                 };
             }
+            this.InitCookie();
         }
+        
         public string SettingFile
         {
             get

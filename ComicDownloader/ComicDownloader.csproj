@@ -587,7 +587,14 @@
     <Compile Include="Engines\En\UnixMangaDownloader.cs" />
     <Compile Include="Engines\Offline\En\OneMangeDownloader.cs" />
     <Compile Include="Engines\Proxies\BlogTruyenDownloaderProxy.cs" />
+    <Compile Include="Engines\Text\EThuVienOnlineDownloader.cs" />
+    <Compile Include="Engines\Text\SanTruyenDownloader.cs" />
+    <Compile Include="Engines\Text\VNThuQuanDownloader.cs" />
+    <Compile Include="Engines\Text\TieuThuyetHayDownloader.cs" />
+    <Compile Include="Engines\Text\ThichTruyenVNDownloader.cs" />
+    <Compile Include="Engines\Text\Truyen8MobiDownloader.cs" />
     <Compile Include="Engines\Text\DocTruyen360Downloader.cs" />
+    <Compile Include="Engines\Text\Truyen368Downloader.cs" />
     <Compile Include="Engines\Text\TruyenChuDownloader.cs" />
     <Compile Include="Engines\Text\HixxInfoDownloader.cs" />
     <Compile Include="Engines\Text\GocTruyenDownloader.cs" />
@@ -622,6 +629,7 @@
     <Compile Include="Engines\Vn\ThichTruyenTranhDownloader.cs" />
     <Compile Include="Engines\Vn\Manga24hDownloader.cs" />
     <Compile Include="Engines\Vn\ComicVnDownloader.cs" />
+    <Compile Include="Engines\Vn\TruyenQiQuiVNDownloader.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Extensions\HtmlDocumentExtension.cs" />
     <Compile Include="Extensions\ObjectExtension.cs" />
@@ -882,6 +890,7 @@
     </Compile>
     <Compile Include="Helpers\AssemblyInfoHelper.cs" />
     <Compile Include="Helpers\EPUBHelper.cs" />
+    <Compile Include="Helpers\MobiHelper.cs" />
     <Compile Include="Helpers\NetworkHelper.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1629,6 +1638,9 @@
     <None Include="3rd\IView.NET\iView.NET Controls\Resources\unknown_drive_16x161.png" />
     <Content Include="3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x16.png" />
     <None Include="3rd\IView.NET\iView.NET Controls\Resources\unlocked_16x161.png" />
+    <Content Include="3rd\kindlegen.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="3rd\Metro\MetroFramework.Fonts\MetroFramework.Fonts.csproj" />
     <Content Include="3rd\Metro\MetroFramework.Fonts\Resources\Open Sans License.txt" />
     <Content Include="3rd\Metro\MetroFramework\Localization\de\MetroToggle.xml" />

@@ -246,7 +246,9 @@ namespace ComicDownloader.Helpers
                             File.OpenRead(cssPath),
                             Encoding.UTF8,
                             new UnicodeFontFactory());
-                        pdfDoc.NewPage();
+                        writer.NewPage();
+                        //pdfDoc.NewPage();
+
                     }
                     catch(Exception ex)
                     {
