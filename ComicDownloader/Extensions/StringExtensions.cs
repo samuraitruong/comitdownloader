@@ -307,6 +307,7 @@ namespace System
         {
            var newHtml = html;
             newHtml = newHtml.Replace("<br>", "<br/>");
+            newHtml = newHtml.Replace("<p></p>", "<br/><br/>");
             return newHtml;
         }
 

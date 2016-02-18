@@ -588,7 +588,12 @@
     <Compile Include="Engines\Offline\En\OneMangeDownloader.cs" />
     <Compile Include="Engines\Proxies\BlogTruyenDownloaderProxy.cs" />
     <Compile Include="Engines\Text\EThuVienOnlineDownloader.cs" />
+    <Compile Include="Engines\Text\KhoTruyenHayDownloader.cs" />
     <Compile Include="Engines\Text\SanTruyenDownloader.cs" />
+    <Compile Include="Engines\Text\TungHoanhDownloader.cs" />
+    <Compile Include="Engines\Text\TruyenDichDownloader.cs" />
+    <Compile Include="Engines\Text\TruyenNgonTinhAZDownloader.cs" />
+    <Compile Include="Engines\Text\TruyenKiemHiepAZDownloader.cs" />
     <Compile Include="Engines\Text\VNThuQuanDownloader.cs" />
     <Compile Include="Engines\Text\TieuThuyetHayDownloader.cs" />
     <Compile Include="Engines\Text\ThichTruyenVNDownloader.cs" />
@@ -1648,6 +1653,7 @@
     <Content Include="3rd\Microsoft.SPOT.Hardware.dll" />
     <Content Include="3rd\Microsoft.SPOT.Native.dll" />
     <Content Include="3rd\Microsoft.SPOT.Net.dll" />
+    <Content Include="3rd\mongoose-free-6.1.exe" />
     <Content Include="3rd\NLog.dll" />
     <Content Include="3rd\NLog.Extended.dll" />
     <Content Include="3rd\PagedList\PagedList.csproj" />
@@ -1910,7 +1916,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_IncrementBeforeBuild="True" BuildVersion_ConfigurationName="Release" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_StartDate="2013/3/19" />
+      <UserProperties BuildVersion_StartDate="2013/3/19" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_ConfigurationName="Release" BuildVersion_IncrementBeforeBuild="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

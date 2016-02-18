@@ -807,6 +807,7 @@ namespace ComicDownloader.Engines
             try
             {
                 var fileContents = File.ReadAllText(filename);
+                fileContents = fileContents.TryFixHtml();
                 File.Delete(filename);
                 using (var stream = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
                 {

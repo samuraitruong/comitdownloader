@@ -8,23 +8,24 @@ using System.Web;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("santruyen.com", Offline = false, Language = "Truyen chu tieng viet", MenuGroup = "O-S", MetroTab = "Text Tiếng Việt", Image32 = "1364078951_insert-object")]
+    [Downloader("khotruyenhay.vn", Offline = true, Language = "Truyen chu tieng viet", MenuGroup = "O-S", MetroTab = "Text Tiếng Việt", Image32 = "1364078951_insert-object")]
 
-    public class SanTruyenDownloader : Downloader
+    //ajax post/get to get list chapter
+    public class KhoTruyenHayDownloader : Downloader
     {
         public override string Name
         {
-            get { return "[santruyen.com] - "; }
+            get { return "[khotruyenhay.vn] - "; }
         }
 
         public override string ListStoryURL
         {
-            get { return "http://santruyen.com/truyen-moi.html"; }
+            get { return "http://santruyen.com/"; }
         }
 
         public override string HostUrl
         {
-            get { return "http://santruyen.com"; }
+            get { return "http://khotruyenhay.vn/"; }
         }
 
         public override string StoryUrlPattern
@@ -35,7 +36,7 @@ namespace ComicDownloader.Engines
         {
             get
             {
-                return "http://santruyen.com/public/santruyen/images/logo.png";
+                return "http://khotruyenhay.vn/template/img/logo.png";
             }
         }
         public override List<StoryInfo> HotestStories() {
@@ -44,9 +45,15 @@ namespace ComicDownloader.Engines
         }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            return base.GetListStoriesSimple("http://santruyen.com/truyen-moi/page/{0}.html",
-                "//a[@class='c-title']",
-                forceOnline);
+            return base.GetListStoriesSimple("http://khotruyenhay.vn/truyen-doc/listNovel.htm?page={0}&status=2&cfil=&cati=&type=&style=grid&author=&psize=200",
+                "//li/a[1]",
+                forceOnline,convertFunc: (HtmlNode n)=> {
+                    return new StoryInfo()
+                    {
+                        Url = base.EnsureHostName(this.HostUrl, n.Href()),
+                        Name = n.Attr("title").Replace("Truyện chữ ", string.Empty)
+                    };
+                });
         }
         public override List<StoryInfo> OnlineSearch(string keyword)
         {
@@ -58,7 +65,7 @@ namespace ComicDownloader.Engines
         public override StoryInfo RequestInfo(string storyUrl)
         {
             var info = base.RequestInfoSimple(storyUrl,
-                "//h1/a",
+                "//h2",
                 "//div[@class='list-chap']//a", chapterExtract: (HtmlNode n) =>{
                     return new ChapterInfo()
                     {

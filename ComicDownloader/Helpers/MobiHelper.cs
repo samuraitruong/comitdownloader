@@ -15,9 +15,11 @@ namespace ComicDownloader.Helpers
         {
             var kindleGen = new Process();
             kindleGen.StartInfo.UseShellExecute = false;
+            kindleGen.StartInfo.CreateNoWindow = true;
             kindleGen.StartInfo.RedirectStandardOutput = true;
             kindleGen.StartInfo.FileName = Path.Combine(Application.StartupPath, "kindlegen.exe");
             kindleGen.StartInfo.Arguments = string.Format("\"{0}\" -c1 -verbose", filepath);
+            kindleGen.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             kindleGen.Start();
 
             var output = kindleGen.StandardOutput.ReadToEnd();

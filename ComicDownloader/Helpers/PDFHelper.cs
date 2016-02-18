@@ -266,7 +266,14 @@ namespace ComicDownloader.Helpers
             }
             finally
             {
-                pdfDoc.Close();
+                try
+                {
+                    pdfDoc.Close();
+
+                }
+                catch (Exception)
+                {
+                }
             }
         }
 
