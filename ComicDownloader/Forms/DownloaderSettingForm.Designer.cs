@@ -38,11 +38,12 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
+            this.chkMySite = new MetroFramework.Controls.MetroCheckBox();
             this.SuspendLayout();
             // 
             // metroButton1
             // 
-            this.metroButton1.Location = new System.Drawing.Point(66, 232);
+            this.metroButton1.Location = new System.Drawing.Point(69, 319);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(131, 45);
             this.metroButton1.TabIndex = 0;
@@ -51,7 +52,7 @@
             // 
             // metroButton2
             // 
-            this.metroButton2.Location = new System.Drawing.Point(225, 232);
+            this.metroButton2.Location = new System.Drawing.Point(238, 319);
             this.metroButton2.Name = "metroButton2";
             this.metroButton2.Size = new System.Drawing.Size(152, 45);
             this.metroButton2.TabIndex = 1;
@@ -90,7 +91,7 @@
             // 
             this.metroTile1.ActiveControl = null;
             this.metroTile1.ForeColor = System.Drawing.SystemColors.Control;
-            this.metroTile1.Location = new System.Drawing.Point(338, 82);
+            this.metroTile1.Location = new System.Drawing.Point(392, 82);
             this.metroTile1.Name = "metroTile1";
             this.metroTile1.Size = new System.Drawing.Size(75, 75);
             this.metroTile1.Style = MetroFramework.MetroColorStyle.Blue;
@@ -125,7 +126,7 @@
             // 
             this.txtUserName.Location = new System.Drawing.Point(115, 82);
             this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(185, 20);
+            this.txtUserName.Size = new System.Drawing.Size(236, 20);
             this.txtUserName.TabIndex = 8;
             // 
             // txtPassword
@@ -133,16 +134,27 @@
             this.txtPassword.Location = new System.Drawing.Point(115, 121);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(185, 20);
+            this.txtPassword.Size = new System.Drawing.Size(236, 20);
             this.txtPassword.TabIndex = 9;
             this.txtPassword.Text = "metroTextBox2";
+            // 
+            // chkMySite
+            // 
+            this.chkMySite.AutoSize = true;
+            this.chkMySite.Location = new System.Drawing.Point(24, 232);
+            this.chkMySite.Name = "chkMySite";
+            this.chkMySite.Size = new System.Drawing.Size(402, 15);
+            this.chkMySite.TabIndex = 10;
+            this.chkMySite.Text = "Show on my site tab (home screen will update in the next time you use )";
+            this.chkMySite.UseVisualStyleBackColor = true;
             // 
             // DownloaderSettingForm
             // 
             this.AcceptButton = this.metroButton1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(447, 300);
+            this.ClientSize = new System.Drawing.Size(550, 400);
+            this.Controls.Add(this.chkMySite);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUserName);
             this.Controls.Add(this.metroLabel3);
@@ -176,5 +188,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.TextBox txtPassword;
+        private MetroFramework.Controls.MetroCheckBox chkMySite;
     }
 }

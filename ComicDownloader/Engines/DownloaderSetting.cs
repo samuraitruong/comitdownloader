@@ -13,6 +13,7 @@ namespace ComicDownloader.Engines
         public bool UseIECookies { get; set; }
         public bool ClipboardMonitor { get; set; }
         public string LastKeyword { get;  set; }
+        public bool ShowOnMySiteTab { get;  set; }
 
         public DownloaderSetting()
         {

@@ -41,6 +41,7 @@ namespace ComicDownloader.Forms
             txtPassword.Text = this.setting.Password ;
             chkIECookie.Checked = this.setting.UseIECookies;
             toggleClipboard.Checked = this.setting.ClipboardMonitor;
+            chkMySite.Checked = this.setting.ShowOnMySiteTab;
             txtUserName.Enabled = true;
             txtUserName.ReadOnly = false;
 
@@ -52,6 +53,7 @@ namespace ComicDownloader.Forms
             this.setting.Password = txtPassword.Text;
             this.setting.UseIECookies = chkIECookie.Checked;
             this.setting.ClipboardMonitor = toggleClipboard.Checked;
+            this.setting.ShowOnMySiteTab = chkMySite.Checked;
             downloader.SaveSetting(this.setting);
             this.Close();
         }

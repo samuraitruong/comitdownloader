@@ -143,6 +143,11 @@ namespace ComicDownloader.Forms
         }
         public List<TabInfo> GetRibbonMenuTags()
         {
+            var mysite = new TabInfo()
+            {
+                Name = "My favorites"
+            };
+
             //SmartThreadPool pool = new SmartThreadPool();
             List<TabInfo> tags = new List<TabInfo>();
             foreach (var downloader in Downloader.GetAllDownloaders())
@@ -169,43 +174,7 @@ namespace ComicDownloader.Forms
                             Thread.Sleep(new Random().Next(1, 10));
                             var m = new Random(DateTime.Now.Millisecond);
                             int next = m.Next(0, int.MaxValue);
-
-                            var title = new MetroFramework.Controls.MetroTile();
-                            title.ActiveControl = null;
-                            title.Tag = downloader;
-                            title.Location = new System.Drawing.Point(20, 150);
-                            title.Cursor = System.Windows.Forms.Cursors.Hand;
-                            title.Size = new System.Drawing.Size(150, 120);
-
-                            title.CustomBackground = true;
-                            var index = next % colorArray.Length;
-                            title.BackColor = colorArray[index];
-
-                            title.CustomForeColor = true;
-                            title.ForeColor = ColorTranslator.FromHtml("#ffffff");
-
-                            title.TileTextFontSize = MetroTileTextSize.Medium;
-                            title.TileTextFontWeight = MetroTileTextWeight.Bold;
-
-                            //title.Style = (MetroFramework.MetroColorStyle)(next%13);
-                            title.TabIndex = 2;
-                            //if (title.Style == MetroColorStyle.White) title.Style = MetroColorStyle.Red;
-                            title.Text = downloader.Name;
-                            title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-                            title.Theme = MetroFramework.MetroThemeStyle.Dark;
-                            title.Click += new System.EventHandler(delegate (object sender, System.EventArgs e)
-                            {
-                                var dl = ((MetroTile)sender).Tag as Downloader;
-                                if (mainApp == null) mainApp = new AppMainForm();
-
-                                mainApp.Show();
-                                mainApp.SetDownloader(dl);
-                                mainApp.WindowState = FormWindowState.Maximized;
-
-                            });
-
-
-                            this.metroToolTip1.SetToolTip(title, downloader.Name);
+                            MetroTile title = CreateMetroTitle(downloader, next);
 
                             //pool.QueueWorkItem(delegate(object obj) {
 
@@ -232,10 +201,28 @@ namespace ComicDownloader.Forms
 
                             //tag.Titles.Add(metroTile2);
                             tag.Titles.Add(title);
+                            if (downloader.Settings.ShowOnMySiteTab)
+                            {
+                                var exist = mysite.Titles.Exists(p => p.Tag == downloader);
+                                if (!exist)
+                                {
+                                    Thread.Sleep(new Random().Next(1, 10));
+                                    m = new Random(DateTime.Now.Millisecond);
+                                    next = m.Next(0, int.MaxValue);
+
+                                    var title1 = CreateMetroTitle(downloader, next);
+                                    mysite.Titles.Add(title1);
+                                }
+                            }
+
                         });
                     }
                 }
 
+            }
+            if(mysite.Titles.Count>0)
+            {
+                tags.Add(mysite);
             }
             // pool.Start();
             tags.Sort((x, y) => {
@@ -246,6 +233,48 @@ namespace ComicDownloader.Forms
             });
             return tags;
         }
+
+        private MetroTile CreateMetroTitle(Downloader downloader, int next)
+        {
+            var title = new MetroFramework.Controls.MetroTile();
+            title.ActiveControl = null;
+            title.Tag = downloader;
+            title.Location = new System.Drawing.Point(20, 150);
+            title.Cursor = System.Windows.Forms.Cursors.Hand;
+            title.Size = new System.Drawing.Size(150, 120);
+
+            title.CustomBackground = true;
+            var index = next % colorArray.Length;
+            title.BackColor = colorArray[index];
+
+            title.CustomForeColor = true;
+            title.ForeColor = ColorTranslator.FromHtml("#ffffff");
+
+            title.TileTextFontSize = MetroTileTextSize.Medium;
+            title.TileTextFontWeight = MetroTileTextWeight.Bold;
+
+            //title.Style = (MetroFramework.MetroColorStyle)(next%13);
+            title.TabIndex = 2;
+            //if (title.Style == MetroColorStyle.White) title.Style = MetroColorStyle.Red;
+            title.Text = downloader.Name;
+            title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            title.Theme = MetroFramework.MetroThemeStyle.Dark;
+            title.Click += new System.EventHandler(delegate (object sender, System.EventArgs e)
+            {
+                var dl = ((MetroTile)sender).Tag as Downloader;
+                if (mainApp == null) mainApp = new AppMainForm();
+
+                mainApp.Show();
+                mainApp.SetDownloader(dl);
+                mainApp.WindowState = FormWindowState.Maximized;
+
+            });
+
+
+            this.metroToolTip1.SetToolTip(title, downloader.Name);
+            return title;
+        }
+
         public struct TitleLogoUpdate
         {
             public MetroTile Title { get; set; }
