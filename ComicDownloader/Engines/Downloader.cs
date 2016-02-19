@@ -237,7 +237,23 @@ namespace ComicDownloader.Engines
         }
         public abstract List<string> GetPages(string chapUrl);
 
-        public StoryInfo RequestInfoSimple(string storyUrl, string namePattern, string chapterPattern, string appendHostUrl = "", Func<HtmlNode, string> nameExtract = null, Func<HtmlNode, ChapterInfo> chapterExtract = null, Func<string, HtmlDocument, List<ChapterInfo>> customChapterExtract = null, string chapPagingPattern = "", Func<string, HtmlDocument, List<string>> customChapPagingExtract = null, Func<HtmlNode, string> chapPagingNodeExtract=null)
+        public StoryInfo RequestInfoSimple(string storyUrl, 
+            string namePattern, 
+            string chapterPattern, 
+            string appendHostUrl = "",
+            Func<HtmlNode, string> nameExtract = null,
+            
+            Func<HtmlNode, ChapterInfo> chapterExtract = null,
+            Func<string, HtmlDocument, List<ChapterInfo>> customChapterExtract = null, 
+            string chapPagingPattern = "", 
+            Func<string, HtmlDocument, List<string>> customChapPagingExtract = null,
+            Func<HtmlNode, string> chapPagingNodeExtract=null, 
+            string authorPattern="",
+            string categoryPattern="",
+            string alternativeNamePattern="",
+            string summaryPattern="",
+            string statusPattern="",
+            string coverPattern="")
         {
             Queue<string> queue = new Queue<string>();
             queue.Enqueue(storyUrl);
@@ -264,7 +280,12 @@ namespace ComicDownloader.Engines
                         info = new StoryInfo()
                         {
                             Url = storyUrl,
-                            Name = chapterName
+                            Name = chapterName,
+                            Author = htmlDoc.DocumentNode.GetNodeText(authorPattern),
+                            Categories = htmlDoc.DocumentNode.GetNodeTextAsList(categoryPattern),
+                            AltName = htmlDoc.DocumentNode.GetNodeTextAsString(alternativeNamePattern),
+                            Summary = htmlDoc.DocumentNode.GetNodeHtml(summaryPattern),
+                            CoverUrl = EnsureHostName(this.HostUrl, htmlDoc.DocumentNode.GetSingleNode(coverPattern).Attr("src"))
                         };
                     }
 
@@ -1102,10 +1123,13 @@ namespace ComicDownloader.Engines
             }
         }
 
-        public void SaveSetting(DownloaderSetting setting)
+        public void SaveSetting(DownloaderSetting setting = null)
         {
-            this.Settings = setting;
-            setting.ToFile<DownloaderSetting>(this.SettingFile, Resources.SecureKey);
+            if (setting != null)
+            {
+                this.Settings = setting;
+            }
+            this.Settings.ToFile<DownloaderSetting>(this.SettingFile, Resources.SecureKey);
         }
     }
 }

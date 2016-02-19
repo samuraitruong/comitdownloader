@@ -66,7 +66,7 @@ namespace ComicDownloader.Engines
         public string Name { get; set; }
         public string AltName { get; set; }
         public string Author { get; set; }
-        public string Categories { get; set; }
+        public List<string> Categories { get; set; }
 
         public string Url { get; set; }
         public List<ChapterInfo> Chapters { get; set; }
@@ -75,6 +75,7 @@ namespace ComicDownloader.Engines
         
         public string UrlSegment { get; set; }
         public string Summary { get; set; }
+        public string CoverUrl { get;  set; }
 
         public StoryInfo()
         {

@@ -76,9 +76,14 @@ namespace ComicDownloader.Engines
         public override StoryInfo RequestInfo(string storyUrl)
         {
             return base.RequestInfoSimple(storyUrl,
-                "//h1//a[last()]",
+                "//span[@itemprop='itemListElement']/a/span/a[last()]",
                 "//table[@id='chapter_table']//h4/a",
-                this.HostUrl
+                this.HostUrl,
+                summaryPattern: "//div[@class='manga_summary']",
+                authorPattern: "//div[@class='manga_right']//tr[2]//a",
+                categoryPattern: "//div[@class='manga_right']//tr[3]//a",
+                coverPattern: "//div[contains(@class,'cover')]//img",
+                alternativeNamePattern: "//div[@class='manga_right']//tr[4]//a"
                 );
         }
         public override List<string> GetPages(string chapUrl)

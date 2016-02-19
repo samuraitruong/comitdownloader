@@ -29,7 +29,28 @@ namespace System
             }
             return "";
         }
+        public static string GetNodeTextAsString(this HtmlNode node, string patterns, string defaultValue = "", string separator = "; ")
+        {
+            return string.Join(separator, node.GetNodeTextAsList(patterns).ToArray());
+        }
+        public static List<string> GetNodeTextAsList(this HtmlNode node, string patterns, Func<HtmlNode, string> extractTextFunc = null, Func<HtmlNode, List<string>> customExtractFunc = null)
+        {
+            var result = new List<string>() { };
 
+            if (!string.IsNullOrEmpty(patterns))
+            {
+                var nodes = node.SelectNodes(patterns);
+                if (nodes != null)
+                {
+                    result.AddRange(nodes.Select(p => extractTextFunc!= null? extractTextFunc(p): p.InnerText.Trim()));
+                }
+            }
+            if(customExtractFunc!= null)
+            {
+                result.AddRange(customExtractFunc(node));
+            }
+            return result;
+        }
         public static HtmlNode GetSingleNode(this HtmlNode node, string patterns)
         {
             string[] arr = patterns.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
@@ -40,7 +61,7 @@ namespace System
             }
             return null;
         }
-        public static string GetNodeText(this HtmlNode node, string patterns, string defaultValue="" )
+        public static string GetNodeText(this HtmlNode node, string patterns, string defaultValue="")
         {
             var a = node.GetSingleNode(patterns);
             if(a!= null)
@@ -49,6 +70,17 @@ namespace System
             }
             return defaultValue;
         }
+
+        public static string GetNodeHtml(this HtmlNode node, string patterns, string defaultValue = "")
+        {
+            var a = node.GetSingleNode(patterns);
+            if (a != null)
+            {
+                return a.InnerHtml;
+            }
+            return defaultValue;
+        }
+
 
         /// <summary>
         /// Get all node match with multiple patterns.

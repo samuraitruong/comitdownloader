@@ -23,6 +23,8 @@ namespace ComicDownloader.Forms
         
         private void button2_Click(object sender, EventArgs e)
         {
+            downloader.Settings.ClipboardMonitor = chkClipboardEnable.Checked;
+            downloader.SaveSetting();
             DialogResult = DialogResult.Cancel;
             this.Hide();
         }
@@ -30,6 +32,8 @@ namespace ComicDownloader.Forms
         private void btnOK_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
+            downloader.Settings.ClipboardMonitor = chkClipboardEnable.Checked;
+            downloader.SaveSetting();
             this.Hide();
             mainForm.SetDownloader(this.downloader, this.downloader.CurrentStory.Url, true);
             mainForm.Show();
@@ -51,20 +55,21 @@ namespace ComicDownloader.Forms
             mainForm = mdiForm;
             downloader = dl;
             SetNotification();
-            lblUrl.Text = dl.HostUrl;
-            lblName.Text = dl.Name;
-            lblMangaName.Text = dl.CurrentStory.Name;
+            lblAuthor.Text = dl.CurrentStory.Author;
             this.Text = dl.Name + "- " + dl.CurrentStory.Name;
             lnkMangaUrl.Text = dl.CurrentStory.Url;
-            lblChapters.Text = dl.CurrentStory.ChapterCount.ToString();
-            lblSumary.Text = dl.CurrentStory.Summary;
-
+            tabPageChapters.Text = string.Format("Chapters - ({0})", dl.CurrentStory.Chapters.Count);
+            htmlSummary.Text = dl.CurrentStory.Summary;
+            lblCat.Text = string.Join("; ", dl.CurrentStory.Categories);
+            lblAltName.Text = dl.CurrentStory.AltName;
+            lstChapters.SetObjects(dl.CurrentStory.Chapters);
+            tabControlChapters.SelectTab(0);
             Task.Run(() =>
             {
                 try
                 {
                     //replace by image to story
-                    pictureBox1.ImageLocation = dl.Logo;
+                    pictureBox1.ImageLocation = string.IsNullOrEmpty(dl.CurrentStory.CoverUrl)?dl.Logo :dl.CurrentStory.CoverUrl;
                     pictureBox1.Load();
                 }
                 catch (Exception ex)
