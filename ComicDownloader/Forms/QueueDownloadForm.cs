@@ -295,7 +295,7 @@ namespace ComicDownloader.Forms
                 return;
             }
             try{
-                PDFHelper.CreatePDF(chapInfo.Folder, chapInfo.PdfPath, chapInfo.Name, Settings);
+                PDFHelper.CreatePDF(chapInfo.Folder, chapInfo.PdfPath, chapInfo.Name, Settings, chapInfo.Story.CoverPdfPath);
             }
             catch (Exception ex)
             {

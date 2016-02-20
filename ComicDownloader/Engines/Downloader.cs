@@ -487,7 +487,7 @@ namespace ComicDownloader.Engines
 
                     });
                 }
-                results = results.OrderBy(p => p.Name).ToList();
+                results = results.DistinctBy(p => p.Url).OrderBy(p => p.Name).ToList();
 
                 clock.Stop();
                 this.SaveCache(results, clock.ElapsedMilliseconds);

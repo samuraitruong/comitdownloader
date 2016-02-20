@@ -23,6 +23,7 @@ namespace System
         }
         public static string Attr(this HtmlNode node, string attr)
         {
+            if (node == null) return string.Empty;
             if(node.Attributes[attr]!= null)
             {
                 return node.Attributes[attr].Value.Trim();

@@ -1,4 +1,5 @@
-﻿using System; using System.Net;
+﻿using System;
+using System.Net;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,7 @@ using ComicDownloader.Helpers;
 using Amib.Threading;
 using ComicDownloader.Extensions;
 using System.Threading.Tasks;
+using ComicDownloader.Properties;
 
 namespace ComicDownloader
 {
@@ -121,9 +123,15 @@ namespace ComicDownloader
         private void StartDownload()
         {
             //clear UI
+            var cover = Path.Combine(txtDir.Text, "cover.pdf");
+            Task.Run(()=>{
+                File.Delete(cover);
+                string html = TemplateHelper.Populate(Resources.CoverTemplate, "story", this.currentStoryInfo);
+                PDFHelper.ConvertHtmlToPdfAsFile(cover, html);
+                this.currentStoryInfo.CoverPdfPath = cover;
+            }) ;
             listHistory.Items.Clear();
             CollectChaptersToBeDownloaded();
-
             bntDownload.Enabled = false;
             bntPauseThread.Enabled = true;
             btnExitThread.Enabled = true;
@@ -131,8 +139,6 @@ namespace ComicDownloader
             downloadThread.Start();
             threads.Clear();
             threads.Add(downloadThread);
-
-
         }
 
         private Thread downloadThread;
@@ -211,7 +217,7 @@ namespace ComicDownloader
             }
             try
             {
-                PDFHelper.CreatePDF(chapInfo.Folder, chapInfo.PdfPath, chapInfo.Name, Settings);
+                PDFHelper.CreatePDF(chapInfo.Folder, chapInfo.PdfPath, chapInfo.Name, Settings, chapInfo.Story.CoverPdfPath);
 
                 this.Invoke((MethodInvoker)delegate
                 {

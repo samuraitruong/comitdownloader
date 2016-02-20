@@ -35,7 +35,6 @@ namespace ComicDownloader
             this.txtUrl = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.MaskedTextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.txtDir = new System.Windows.Forms.MaskedTextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.button1 = new System.Windows.Forms.Button();
@@ -99,7 +98,6 @@ namespace ComicDownloader
             this.ddlFilter = new System.Windows.Forms.ComboBox();
             this.loading = new MRG.Controls.UI.LoadingCircle();
             this.bntRefresh = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.bntInfo = new System.Windows.Forms.Button();
             this.ddlList = new GroupedComboBox();
@@ -152,9 +150,9 @@ namespace ComicDownloader
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(3, 109);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 13);
+            this.label3.Size = new System.Drawing.Size(50, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "TITLE";
+            this.label3.Text = "Story title";
             // 
             // txtTitle
             // 
@@ -165,20 +163,11 @@ namespace ComicDownloader
             this.txtTitle.Text = "[Story Title - unset]";
             this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 16);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "DIRECTORY";
-            // 
             // txtDir
             // 
-            this.txtDir.Location = new System.Drawing.Point(19, 32);
+            this.txtDir.Location = new System.Drawing.Point(6, 19);
             this.txtDir.Name = "txtDir";
-            this.txtDir.Size = new System.Drawing.Size(223, 20);
+            this.txtDir.Size = new System.Drawing.Size(236, 20);
             this.txtDir.TabIndex = 6;
             this.txtDir.Text = "C:\\Users\\Administrator\\Desktop\\teset";
             // 
@@ -188,7 +177,7 @@ namespace ComicDownloader
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(248, 29);
+            this.button1.Location = new System.Drawing.Point(248, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(24, 23);
             this.button1.TabIndex = 8;
@@ -285,9 +274,9 @@ namespace ComicDownloader
             // bntDownload
             // 
             this.bntDownload.Enabled = false;
-            this.bntDownload.Location = new System.Drawing.Point(17, 58);
+            this.bntDownload.Location = new System.Drawing.Point(6, 45);
             this.bntDownload.Name = "bntDownload";
-            this.bntDownload.Size = new System.Drawing.Size(70, 23);
+            this.bntDownload.Size = new System.Drawing.Size(70, 28);
             this.bntDownload.TabIndex = 11;
             this.bntDownload.Text = "Download";
             this.bntDownload.UseVisualStyleBackColor = true;
@@ -316,16 +305,16 @@ namespace ComicDownloader
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(278, 156);
+            this.tabControl1.Size = new System.Drawing.Size(278, 168);
             this.tabControl1.TabIndex = 23;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.lstChapters);
-            this.tabPage1.Location = new System.Drawing.Point(42, 4);
+            this.tabPage1.Location = new System.Drawing.Point(23, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(232, 148);
+            this.tabPage1.Size = new System.Drawing.Size(251, 160);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Chapters";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -341,7 +330,7 @@ namespace ComicDownloader
             this.lstChapters.Location = new System.Drawing.Point(3, 3);
             this.lstChapters.MultiSelect = true;
             this.lstChapters.Name = "lstChapters";
-            this.lstChapters.Size = new System.Drawing.Size(226, 142);
+            this.lstChapters.Size = new System.Drawing.Size(245, 154);
             this.lstChapters.TabIndex = 0;
             this.lstChapters.TableModel = this.tblChapters;
             this.lstChapters.CellClick += new XPTable.Events.CellMouseEventHandler(this.lstChapters_CellClick);
@@ -487,10 +476,10 @@ namespace ComicDownloader
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.flowLayoutPanel1);
-            this.tabPage2.Location = new System.Drawing.Point(42, 4);
+            this.tabPage2.Location = new System.Drawing.Point(23, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(232, 148);
+            this.tabPage2.Size = new System.Drawing.Size(251, 160);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Info";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -507,7 +496,7 @@ namespace ComicDownloader
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(226, 142);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(245, 154);
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.WrapContents = false;
             // 
@@ -642,10 +631,10 @@ namespace ComicDownloader
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.htmlSumary);
-            this.tabPage3.Location = new System.Drawing.Point(42, 4);
+            this.tabPage3.Location = new System.Drawing.Point(23, 4);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(232, 148);
+            this.tabPage3.Size = new System.Drawing.Size(251, 160);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Summary";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -653,38 +642,37 @@ namespace ComicDownloader
             // htmlSumary
             // 
             this.htmlSumary.AutoScroll = true;
-            this.htmlSumary.AutoScrollMinSize = new System.Drawing.Size(226, 18);
+            this.htmlSumary.AutoScrollMinSize = new System.Drawing.Size(245, 18);
             this.htmlSumary.BackColor = System.Drawing.SystemColors.Window;
             this.htmlSumary.Dock = System.Windows.Forms.DockStyle.Fill;
             this.htmlSumary.Location = new System.Drawing.Point(3, 3);
             this.htmlSumary.MinimumSize = new System.Drawing.Size(0, 300);
             this.htmlSumary.Name = "htmlSumary";
-            this.htmlSumary.Size = new System.Drawing.Size(226, 300);
+            this.htmlSumary.Size = new System.Drawing.Size(245, 300);
             this.htmlSumary.TabIndex = 5;
             this.htmlSumary.Text = "Summary";
             // 
             // groupDownload
             // 
             this.groupDownload.Controls.Add(this.txtDir);
-            this.groupDownload.Controls.Add(this.label4);
             this.groupDownload.Controls.Add(this.button1);
             this.groupDownload.Controls.Add(this.btnExitThread);
             this.groupDownload.Controls.Add(this.bntPauseThread);
             this.groupDownload.Controls.Add(this.bntDownload);
             this.groupDownload.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupDownload.Location = new System.Drawing.Point(0, 315);
+            this.groupDownload.Location = new System.Drawing.Point(0, 327);
             this.groupDownload.Name = "groupDownload";
-            this.groupDownload.Size = new System.Drawing.Size(278, 94);
+            this.groupDownload.Size = new System.Drawing.Size(278, 82);
             this.groupDownload.TabIndex = 21;
             this.groupDownload.TabStop = false;
-            this.groupDownload.Text = "Download";
+            this.groupDownload.Text = "Destination Folder";
             // 
             // btnExitThread
             // 
             this.btnExitThread.Enabled = false;
-            this.btnExitThread.Location = new System.Drawing.Point(172, 58);
+            this.btnExitThread.Location = new System.Drawing.Point(172, 45);
             this.btnExitThread.Name = "btnExitThread";
-            this.btnExitThread.Size = new System.Drawing.Size(70, 23);
+            this.btnExitThread.Size = new System.Drawing.Size(70, 28);
             this.btnExitThread.TabIndex = 17;
             this.btnExitThread.Text = "Stop";
             this.btnExitThread.UseVisualStyleBackColor = true;
@@ -693,9 +681,9 @@ namespace ComicDownloader
             // bntPauseThread
             // 
             this.bntPauseThread.Enabled = false;
-            this.bntPauseThread.Location = new System.Drawing.Point(93, 58);
+            this.bntPauseThread.Location = new System.Drawing.Point(96, 45);
             this.bntPauseThread.Name = "bntPauseThread";
-            this.bntPauseThread.Size = new System.Drawing.Size(70, 23);
+            this.bntPauseThread.Size = new System.Drawing.Size(70, 28);
             this.bntPauseThread.TabIndex = 13;
             this.bntPauseThread.Text = "Pause";
             this.bntPauseThread.UseVisualStyleBackColor = true;
@@ -707,7 +695,6 @@ namespace ComicDownloader
             this.groupInfo.Controls.Add(this.ddlFilter);
             this.groupInfo.Controls.Add(this.loading);
             this.groupInfo.Controls.Add(this.bntRefresh);
-            this.groupInfo.Controls.Add(this.label5);
             this.groupInfo.Controls.Add(this.label3);
             this.groupInfo.Controls.Add(this.txtTitle);
             this.groupInfo.Controls.Add(this.label1);
@@ -720,7 +707,7 @@ namespace ComicDownloader
             this.groupInfo.Size = new System.Drawing.Size(278, 159);
             this.groupInfo.TabIndex = 20;
             this.groupInfo.TabStop = false;
-            this.groupInfo.Text = "Manga Selector";
+            this.groupInfo.Text = "Select a manga to download";
             // 
             // btnSetting
             // 
@@ -772,23 +759,14 @@ namespace ComicDownloader
             this.bntRefresh.UseVisualStyleBackColor = true;
             this.bntRefresh.Click += new System.EventHandler(this.bntRefresh_Click);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(171, 13);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "select a story from  list to download";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 64);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.Size = new System.Drawing.Size(184, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "URL";
+            this.label1.Text = "Story Url (copy & paste or select above";
             // 
             // bntInfo
             // 
@@ -965,7 +943,6 @@ namespace ComicDownloader
         private System.Windows.Forms.MaskedTextBox txtUrl;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.MaskedTextBox txtTitle;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.MaskedTextBox txtDir;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button button1;
@@ -1020,7 +997,6 @@ namespace ComicDownloader
         private XPTable.Models.TextColumn txtChapIdentify;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem mnuReadOnline;
-        private System.Windows.Forms.Label label5;
         private GroupedComboBox ddlList;
         private System.Windows.Forms.ComboBox ddlFilter;
         private Button btnSetting;

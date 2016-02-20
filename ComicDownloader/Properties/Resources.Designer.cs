@@ -1426,6 +1426,35 @@ namespace ComicDownloader.Properties
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to &lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+        ///    &lt;title&gt;[[title]]&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        * {
+        ///            font-family: Calibri;
+        ///        }
+        ///
+        ///        body {
+        ///            font-family: Calibri;
+        ///        }
+        ///    &lt;/style&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;h1 style=&quot;text-align:center;font-size:28px; font-weight:bold&quot;&gt;[[title]]&lt;/h1&gt;
+        ///    [[content]]
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;.
+        /// </summary>
+        internal static string CoverTemplate
+        {
+            get
+            {
+                return ResourceManager.GetString("CoverTemplate", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Web Browser.
         /// </summary>
         internal static string DefaultBrowserTitle
@@ -1437,8 +1466,11 @@ namespace ComicDownloader.Properties
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to p{
-        ///    color:red;
+        ///   Looks up a localized string similar to h1{
+        ///    margin-bottom:50px;
+        ///}
+        ///p{
+        ///    
         ///}.
         /// </summary>
         internal static string DefaultCss
@@ -1523,6 +1555,7 @@ namespace ComicDownloader.Properties
 
         /// <summary>
         ///   Looks up a localized string similar to @charset &quot;utf-8&quot;;
+        ///@font-face { font-family : Calibri; src : url(fonts/Calibri.otf); }
         ///
         ///html
         ///{
@@ -1532,7 +1565,6 @@ namespace ComicDownloader.Properties
         ///    margin: auto 1em;
         ///    padding: 1em 0;
         ///    max-height: 28em;
-        ///    background-color: #fff4e7;
         ///}
         ///
         ///body{

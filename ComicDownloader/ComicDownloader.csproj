@@ -70,6 +70,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr4.StringTemplate, Version=4.0.6.9004, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr4.StringTemplate.4.0.6.9004\lib\net35\Antlr4.StringTemplate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>3rd\Common.Logging.dll</HintPath>
@@ -95,8 +99,9 @@
       <HintPath>..\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\Newtonsoft.Json.5.0.3\lib\net35\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -589,6 +594,9 @@
     <Compile Include="Engines\Proxies\BlogTruyenDownloaderProxy.cs" />
     <Compile Include="Engines\Text\EThuVienOnlineDownloader.cs" />
     <Compile Include="Engines\Text\KhoTruyenHayDownloader.cs" />
+    <Compile Include="Engines\Text\MaxReadingDownloader.cs" />
+    <Compile Include="Engines\Text\TruyenHaoHanCaDownloader.cs" />
+    <Compile Include="Engines\Text\ThuQuanTruyenDownloader.cs" />
     <Compile Include="Engines\Text\SanTruyenDownloader.cs" />
     <Compile Include="Engines\Text\TungHoanhDownloader.cs" />
     <Compile Include="Engines\Text\TruyenDichDownloader.cs" />
@@ -924,6 +932,7 @@
       <DependentUpon>HostProviderSupportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PDFHelper.cs" />
+    <Compile Include="Helpers\TemplateHelper.cs" />
     <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="MyLogger.cs" />
     <Compile Include="Properties\IViewSettings.Designer.cs">
@@ -1843,6 +1852,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\EpubCss.css" />
+    <None Include="Resources\CoverTemplate.html" />
     <Content Include="Resources\gtk-about.png" />
     <Content Include="3rd\HtmlAgilityPack.dll" />
     <Content Include="3rd\ObjectListView\CustomDictionary.xml" />
@@ -1916,7 +1926,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2013/3/19" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_ConfigurationName="Release" BuildVersion_IncrementBeforeBuild="True" />
+      <UserProperties BuildVersion_IncrementBeforeBuild="True" BuildVersion_ConfigurationName="Release" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.None.DeltaBaseYearDayOfYear.Increment" BuildVersion_StartDate="2013/3/19" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

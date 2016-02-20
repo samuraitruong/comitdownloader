@@ -87,8 +87,21 @@ namespace ConsoleApplication1
         }
 
 
+        public static void TestStringTemplate()
+        {
+            var remplate = File.ReadAllText("covertemplate.html");
+            Antlr4.StringTemplate.Template templator = new Antlr4.StringTemplate.Template(remplate, '$', '$');
+            templator.Add("story", new  {
+                Name="I am Truong"
+            });
+            Console.Write(templator.Render());
+        }
         static void Main(string[] args)
         {
+            TestPDFImages();
+            //TestStringTemplate();
+            return;
+
             GenereateEpubFromHtml(new string[] { "unicode.html" }, "a.epub", "unicode chap");
             Process.Start("a.epub");
 
@@ -111,6 +124,90 @@ namespace ConsoleApplication1
                 pdfDoc.Close();
             }
             Process.Start("pdffile.pdf");
+        }
+
+        private static void TestPDFImages()
+        {
+            string directoryPath = @"C:\Users\Khoaimap\Documents\Scuro\Scuro chap 1-a";
+            Document pdfDoc = new Document(PageSize.A4);
+
+            float docw = pdfDoc.PageSize.Width;
+            float doch = pdfDoc.PageSize.Width;
+
+            PdfDate st = new PdfDate(DateTime.Today);
+            Chapter chapter = new Chapter(new Paragraph("AAAAAAAAAAAAAAAA"), 1);
+            chapter.BookmarkTitle = "A B C D E F";
+
+            try
+            {
+                File.Delete("output.pdf");
+                var stream = File.Create("output.pdf");
+                var writer = PdfWriter.GetInstance(pdfDoc, stream);
+
+                pdfDoc.Open();
+             
+                DirectoryInfo di = new DirectoryInfo(directoryPath);
+                var files = di.GetFiles();
+                if (files != null)
+                {
+                    foreach (var fi in files)
+                    {
+
+                        Image img = Image.GetInstance(fi.FullName);
+                        float h = img.Height;
+                        float w = img.Width;
+
+                        float hp = doch / h;
+                        float wp = docw / w;
+                        pdfDoc.NewPage();
+                        PdfPTable nestedTable = new PdfPTable(1);
+                        PdfPCell cell = new PdfPCell(img);
+                        cell.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                        nestedTable.AddCell(cell);
+                        Section section = chapter.AddSection(0f, new Paragraph("Page xxx", new Font()
+                        {
+                            
+                            Color = BaseColor.WHITE
+                        }));
+                        if (img.Height < img.Width)
+                        {
+                            PdfPTable table = new PdfPTable(1);
+                            table.WidthPercentage = 100;
+                            PdfPCell c = new PdfPCell(img, true);
+                            c.Border = PdfPCell.NO_BORDER;
+                            c.Padding = 5;
+                            //c.Image.ScaleToFitLineWhenOverflow = true;
+                            c.Image.ScaleToFitHeight = true; /*The new line*/
+                            c.VerticalAlignment = PdfPCell.ALIGN_TOP;
+                            table.AddCell(c);
+
+                            section.Add(nestedTable);
+                        }
+                        else
+                        {
+                            var margin = 35;
+                            img.SetAbsolutePosition(margin, margin);
+                            img.ScaleToFit(pdfDoc.PageSize.Width - 2 * margin, pdfDoc.PageSize.Height - 2 * margin);
+                            section.Add(img);
+                        }
+                        
+                        //section.Add(table);
+                        pdfDoc.Add(section);
+                        //pdfDoc.NewPage();
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                //MyLogger.Log(ex);
+            }
+            finally
+            {
+                pdfDoc.Close();
+                Process.Start("output.pdf");
+            }
         }
     }
 }

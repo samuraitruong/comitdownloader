@@ -79,6 +79,15 @@ namespace ComicDownloader.Helpers
             // return  
             return Result;
         }
+        public static Stream GenerateStreamFromString(string s)
+        {
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
+        }
 
         public static ReturnValue ConvertHtmlToPdfAsBytes(string HtmlData)
         {
@@ -104,9 +113,9 @@ namespace ComicDownloader.Helpers
                             document.Open();
 
                             // read html data to StringReader  
-                            using (var html = new StringReader(HtmlData))
+                            using (var htmlStream = GenerateStreamFromString(HtmlData))
                             {
-                                XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, html);
+                                XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, htmlStream, null,Encoding.UTF8, new UnicodeFontFactory());
                             }
 
                             // close document  
@@ -141,17 +150,31 @@ namespace ComicDownloader.Helpers
             //cb.AddTemplate(page, 0, -1f, 1f, 0, 0, reader.GetPageSizeWithRotation(1).Height);
             cb.AddTemplate(page, 0, 0);
         }
-
+        private static void EmbedePDFPage(Document pdfDoc, PdfWriter writer, params string[] files)
+        {
+            foreach (var item in files)
+            {
+                try
+                {
+                    pdfDoc.NewPage();
+                    PdfReader reader = new PdfReader(item);
+                    PdfContentByte cb = writer.DirectContent;
+                    PdfImportedPage page = writer.GetImportedPage(reader, 1); ;
+                    //cb.AddTemplate(page, 0, -1f, 1f, 0, 0, reader.GetPageSizeWithRotation(1).Height);
+                    cb.AddTemplate(page, 0, 0);
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+            
+        }
         public static bool IsImageFile(string file)
         {
             try
             {
-                System.Drawing.Image imgInput = System.Drawing.Image.FromFile(file);
-                System.Drawing.Graphics gInput = System.Drawing.Graphics.FromImage(imgInput);
-                System.Drawing.Imaging.ImageFormat thisFormat = imgInput.RawFormat;
-                imgInput.Dispose();
-                gInput.Dispose();
-                return true;
+                var match = Regex.Match(file.ToLower(), @"([^\s]+(\.(?i)(jpg|png|gif|bmp))$)");
+                return match != null;
             }
             catch (Exception ex)
             {
@@ -202,7 +225,7 @@ namespace ComicDownloader.Helpers
             chapter.BookmarkTitle = match.Groups[1].Value;
             return chapter;
         }
-        internal static void CreatePDFFromHtmls(string[] htmlFiles, string pdfPath, string name, ComicDownloaderSettings settings)
+        internal static void CreatePDFFromHtmls(string[] htmlFiles, string pdfPath, string name, ComicDownloaderSettings settings, string cover="")
         {
             try
             {
@@ -227,9 +250,9 @@ namespace ComicDownloader.Helpers
                     EmbedeIntroPage(pdfDoc, writer);
                     pdfDoc.NewPage();
                 }
+                EmbedePDFPage(pdfDoc, writer, cover);
 
-
-                var instance = XMLWorkerHelper.GetInstance();
+               var instance = XMLWorkerHelper.GetInstance();
                 var cssPath = Application.StartupPath + "\\Resources\\defaultcss.css";
 
                 foreach (var item in htmlFiles)
@@ -277,9 +300,8 @@ namespace ComicDownloader.Helpers
             }
         }
 
-        public static void CreatePDF(string directoryPath, string pdfFile, string name, ComicDownloaderSettings settings)
+        public static void CreatePDF(string directoryPath, string pdfFile, string name, ComicDownloaderSettings settings, string coverPDF)
         {
-
             try
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(pdfFile));
@@ -307,9 +329,9 @@ namespace ComicDownloader.Helpers
 
                 pdfDoc.Open();
 
-                if (settings.IncludePDFIntroPage && settings.PdfIntroPagePosition == PagePosition.FirstPage)
+                if (settings.IncludePDFIntroPage && settings.PdfIntroPagePosition == PagePosition.FirstPage && string.IsNullOrEmpty(coverPDF))
                     EmbedeIntroPage(pdfDoc, writer);
-
+                EmbedePDFPage(pdfDoc, writer, coverPDF);
                 DirectoryInfo di = new DirectoryInfo(directoryPath);
                 var files = di.GetFiles();
                 if (files != null)
@@ -318,30 +340,39 @@ namespace ComicDownloader.Helpers
                     {
                         if (IsImageFile(fi.FullName))
                         {
+                            Section section = chapter.AddSection(0f, new Paragraph("", new Font()
+                            {
+                                Color = BaseColor.WHITE
+                            }));
+
                             Image img = Image.GetInstance(fi.FullName);
                             float h = img.Height;
                             float w = img.Width;
 
                             float hp = doch / h;
                             float wp = docw / w;
-
-                            ///img.ScaleToFit(docw * 1.35f, doch * 1.35f);
-                            // img.ScaleToFit(750, 550);
                             pdfDoc.NewPage();
-                            //pdfDoc.Add(img);
-                            PdfPTable nestedTable = new PdfPTable(1);
-                            PdfPCell cell = new PdfPCell(img);
-                            cell.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
-                            nestedTable.AddCell(cell);
-                            //pdfDoc.Add(nestedTable);
-
-                            Section section = chapter.AddSection(0f, new Paragraph("", new Font()
+                            if (img.Height < img.Width)
                             {
-                                Color = BaseColor.WHITE
-                            }));
-                            //section.Add(nestedTable);
-                            //pdfDoc.Add(section);
-                            pdfDoc.Add(nestedTable);
+                                PdfPTable nestedTable = new PdfPTable(1);
+                                PdfPCell cell = new PdfPCell(img, true);
+                                cell.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                                cell.Border = PdfPCell.NO_BORDER;
+                                cell.Padding = 5;
+                                cell.Image.ScaleToFitHeight = true;
+                                cell.Image.ScaleToFitLineWhenOverflow = true;
+                                nestedTable.AddCell(cell);
+                                section.Add(nestedTable);
+                            }
+                            else {
+                                //Another technique posible working for have image full -width and auto height.
+                                var margin = 35;
+                                img.SetAbsolutePosition(margin, margin);
+                                img.ScaleToFit(pdfDoc.PageSize.Width - 2 * margin, pdfDoc.PageSize.Height - 2 * margin);
+                                section.Add(img);
+                            }
+                            pdfDoc.Add(section);
+
                         }
                         else
                         {
