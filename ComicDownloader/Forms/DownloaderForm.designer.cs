@@ -50,9 +50,11 @@ namespace ComicDownloader
             this.lblTotalDownloadCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblSelected = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblStoryPDF = new System.Windows.Forms.ToolStripStatusLabel();
             this.bntDownload = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.gpbChapters = new System.Windows.Forms.GroupBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.lstChapters = new XPTable.Models.Table();
             this.columnModel1 = new XPTable.Models.ColumnModel();
             this.chkSelect = new XPTable.Models.CheckBoxColumn();
@@ -72,6 +74,23 @@ namespace ComicDownloader
             this.addOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAddandStartQueue = new System.Windows.Forms.ToolStripMenuItem();
             this.tblChapters = new XPTable.Models.TableModel();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblName = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.lblAuthor = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.lblCat = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.htmlSumary = new MetroFramework.Drawing.Html.HtmlPanel();
             this.groupDownload = new System.Windows.Forms.GroupBox();
             this.btnExitThread = new System.Windows.Forms.Button();
             this.bntPauseThread = new System.Windows.Forms.Button();
@@ -93,21 +112,30 @@ namespace ComicDownloader
             this.columnHeaderProgress = ((ComicDownloader.EXColumnHeader)(new ComicDownloader.EXColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colPDF = ((ComicDownloader.EXColumnHeader)(new ComicDownloader.EXColumnHeader()));
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.errInvalidFileName = new System.Windows.Forms.ErrorProvider(this.components);
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblStoryPDF = new System.Windows.Forms.ToolStripStatusLabel();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.errInvalidFileName = new System.Windows.Forms.ErrorProvider(this.components);
+            this.tooltip = new MetroFramework.Drawing.Html.HtmlToolTip();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.gpbChapters.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lstChapters)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabPage3.SuspendLayout();
             this.groupDownload.SuspendLayout();
             this.groupInfo.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errInvalidFileName)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errInvalidFileName)).BeginInit();
             this.SuspendLayout();
             // 
             // txtUrl
@@ -122,7 +150,7 @@ namespace ComicDownloader
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 109);
+            this.label3.Location = new System.Drawing.Point(3, 109);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 5;
@@ -130,7 +158,7 @@ namespace ComicDownloader
             // 
             // txtTitle
             // 
-            this.txtTitle.Location = new System.Drawing.Point(6, 125);
+            this.txtTitle.Location = new System.Drawing.Point(6, 128);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(232, 20);
             this.txtTitle.TabIndex = 4;
@@ -182,7 +210,7 @@ namespace ComicDownloader
             this.toolStripStatusLabel3,
             this.lblSelected,
             this.lblStoryPDF});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 358);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 409);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(949, 22);
             this.statusStrip1.TabIndex = 10;
@@ -249,6 +277,11 @@ namespace ComicDownloader
             this.lblSelected.Name = "lblSelected";
             this.lblSelected.Size = new System.Drawing.Size(0, 17);
             // 
+            // lblStoryPDF
+            // 
+            this.lblStoryPDF.Name = "lblStoryPDF";
+            this.lblStoryPDF.Size = new System.Drawing.Size(0, 17);
+            // 
             // bntDownload
             // 
             this.bntDownload.Enabled = false;
@@ -262,26 +295,40 @@ namespace ComicDownloader
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.gpbChapters);
+            this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Controls.Add(this.groupDownload);
             this.panel1.Controls.Add(this.groupInfo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(278, 358);
+            this.panel1.Size = new System.Drawing.Size(278, 409);
             this.panel1.TabIndex = 12;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // gpbChapters
+            // tabControl1
             // 
-            this.gpbChapters.Controls.Add(this.lstChapters);
-            this.gpbChapters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gpbChapters.Location = new System.Drawing.Point(0, 159);
-            this.gpbChapters.Name = "gpbChapters";
-            this.gpbChapters.Size = new System.Drawing.Size(278, 105);
-            this.gpbChapters.TabIndex = 22;
-            this.gpbChapters.TabStop = false;
-            this.gpbChapters.Text = "Select chapter(s) to download";
+            this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 159);
+            this.tabControl1.Multiline = true;
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(278, 156);
+            this.tabControl1.TabIndex = 23;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.lstChapters);
+            this.tabPage1.Location = new System.Drawing.Point(42, 4);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(232, 148);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Chapters";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // lstChapters
             // 
@@ -291,10 +338,10 @@ namespace ComicDownloader
             this.lstChapters.FullRowSelect = true;
             this.lstChapters.GridLines = XPTable.Models.GridLines.Columns;
             this.lstChapters.HideSelection = true;
-            this.lstChapters.Location = new System.Drawing.Point(3, 16);
+            this.lstChapters.Location = new System.Drawing.Point(3, 3);
             this.lstChapters.MultiSelect = true;
             this.lstChapters.Name = "lstChapters";
-            this.lstChapters.Size = new System.Drawing.Size(272, 86);
+            this.lstChapters.Size = new System.Drawing.Size(226, 142);
             this.lstChapters.TabIndex = 0;
             this.lstChapters.TableModel = this.tblChapters;
             this.lstChapters.CellClick += new XPTable.Events.CellMouseEventHandler(this.lstChapters_CellClick);
@@ -305,11 +352,11 @@ namespace ComicDownloader
             // columnModel1
             // 
             this.columnModel1.Columns.AddRange(new XPTable.Models.Column[] {
-            ((XPTable.Models.Column)(this.chkSelect)),
-            ((XPTable.Models.Column)(this.txtChapIdentify)),
-            ((XPTable.Models.Column)(this.colChapId)),
-            ((XPTable.Models.Column)(this.txtChapName)),
-            ((XPTable.Models.Column)(this.txtChapLink))});
+            this.chkSelect,
+            this.txtChapIdentify,
+            this.colChapId,
+            this.txtChapName,
+            this.txtChapLink});
             // 
             // chkSelect
             // 
@@ -329,7 +376,7 @@ namespace ComicDownloader
             // txtChapName
             // 
             this.txtChapName.Text = "Name";
-            this.txtChapName.Width = 200;
+            this.txtChapName.Width = 180;
             // 
             // txtChapLink
             // 
@@ -437,6 +484,185 @@ namespace ComicDownloader
             // 
             this.tblChapters.RowAdded += new XPTable.Events.TableModelEventHandler(this.tblChapters_RowAdded);
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.flowLayoutPanel1);
+            this.tabPage2.Location = new System.Drawing.Point(42, 4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(232, 148);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Info";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Controls.Add(this.panel3);
+            this.flowLayoutPanel1.Controls.Add(this.panel5);
+            this.flowLayoutPanel1.Controls.Add(this.panel4);
+            this.flowLayoutPanel1.Controls.Add(this.panel6);
+            this.flowLayoutPanel1.Controls.Add(this.pictureBox1);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(226, 142);
+            this.flowLayoutPanel1.TabIndex = 0;
+            this.flowLayoutPanel1.WrapContents = false;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.lblName);
+            this.panel3.Controls.Add(this.metroLabel1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(239, 29);
+            this.panel3.TabIndex = 0;
+            // 
+            // lblName
+            // 
+            this.lblName.AllowDrop = true;
+            this.lblName.Location = new System.Drawing.Point(54, 3);
+            this.lblName.MaximumSize = new System.Drawing.Size(170, 200);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(159, 19);
+            this.lblName.TabIndex = 1;
+            this.lblName.Text = "Name";
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel1.Location = new System.Drawing.Point(3, 3);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(45, 19);
+            this.metroLabel1.TabIndex = 0;
+            this.metroLabel1.Text = "Name";
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.lblAuthor);
+            this.panel5.Controls.Add(this.metroLabel4);
+            this.panel5.Location = new System.Drawing.Point(3, 38);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(239, 29);
+            this.panel5.TabIndex = 3;
+            // 
+            // lblAuthor
+            // 
+            this.lblAuthor.AllowDrop = true;
+            this.lblAuthor.Location = new System.Drawing.Point(54, 3);
+            this.lblAuthor.MaximumSize = new System.Drawing.Size(170, 200);
+            this.lblAuthor.Name = "lblAuthor";
+            this.lblAuthor.Size = new System.Drawing.Size(168, 19);
+            this.lblAuthor.TabIndex = 1;
+            this.lblAuthor.Text = "AUTHOR";
+            // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel4.Location = new System.Drawing.Point(3, 3);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(52, 19);
+            this.metroLabel4.TabIndex = 0;
+            this.metroLabel4.Text = "Author";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.lblCat);
+            this.panel4.Controls.Add(this.metroLabel3);
+            this.panel4.Location = new System.Drawing.Point(3, 73);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(239, 29);
+            this.panel4.TabIndex = 2;
+            // 
+            // lblCat
+            // 
+            this.lblCat.AllowDrop = true;
+            this.lblCat.Location = new System.Drawing.Point(54, 3);
+            this.lblCat.MaximumSize = new System.Drawing.Size(170, 200);
+            this.lblCat.Name = "lblCat";
+            this.lblCat.Size = new System.Drawing.Size(168, 19);
+            this.lblCat.TabIndex = 1;
+            this.lblCat.Text = "CAT";
+            // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel3.Location = new System.Drawing.Point(3, 3);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(30, 19);
+            this.metroLabel3.TabIndex = 0;
+            this.metroLabel3.Text = "Cat";
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.metroLabel2);
+            this.panel6.Controls.Add(this.metroLabel5);
+            this.panel6.Location = new System.Drawing.Point(3, 108);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(239, 29);
+            this.panel6.TabIndex = 3;
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AllowDrop = true;
+            this.metroLabel2.Location = new System.Drawing.Point(54, 3);
+            this.metroLabel2.MaximumSize = new System.Drawing.Size(170, 200);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(168, 19);
+            this.metroLabel2.TabIndex = 1;
+            this.metroLabel2.Text = "Unknow";
+            // 
+            // metroLabel5
+            // 
+            this.metroLabel5.AutoSize = true;
+            this.metroLabel5.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel5.Location = new System.Drawing.Point(3, 3);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(47, 19);
+            this.metroLabel5.TabIndex = 0;
+            this.metroLabel5.Text = "Status";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 143);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(239, 10);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.LoadCompleted += new System.ComponentModel.AsyncCompletedEventHandler(this.pictureBox1_LoadCompleted);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.htmlSumary);
+            this.tabPage3.Location = new System.Drawing.Point(42, 4);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(232, 148);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Summary";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // htmlSumary
+            // 
+            this.htmlSumary.AutoScroll = true;
+            this.htmlSumary.AutoScrollMinSize = new System.Drawing.Size(226, 18);
+            this.htmlSumary.BackColor = System.Drawing.SystemColors.Window;
+            this.htmlSumary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.htmlSumary.Location = new System.Drawing.Point(3, 3);
+            this.htmlSumary.MinimumSize = new System.Drawing.Size(0, 300);
+            this.htmlSumary.Name = "htmlSumary";
+            this.htmlSumary.Size = new System.Drawing.Size(226, 300);
+            this.htmlSumary.TabIndex = 5;
+            this.htmlSumary.Text = "Summary";
+            // 
             // groupDownload
             // 
             this.groupDownload.Controls.Add(this.txtDir);
@@ -446,7 +672,7 @@ namespace ComicDownloader
             this.groupDownload.Controls.Add(this.bntPauseThread);
             this.groupDownload.Controls.Add(this.bntDownload);
             this.groupDownload.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupDownload.Location = new System.Drawing.Point(0, 264);
+            this.groupDownload.Location = new System.Drawing.Point(0, 315);
             this.groupDownload.Name = "groupDownload";
             this.groupDownload.Size = new System.Drawing.Size(278, 94);
             this.groupDownload.TabIndex = 21;
@@ -600,7 +826,7 @@ namespace ComicDownloader
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(278, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(671, 358);
+            this.panel2.Size = new System.Drawing.Size(671, 409);
             this.panel2.TabIndex = 13;
             // 
             // listHistory
@@ -621,7 +847,7 @@ namespace ComicDownloader
             this.listHistory.Location = new System.Drawing.Point(0, 0);
             this.listHistory.Name = "listHistory";
             this.listHistory.OwnerDraw = true;
-            this.listHistory.Size = new System.Drawing.Size(671, 358);
+            this.listHistory.Size = new System.Drawing.Size(671, 409);
             this.listHistory.StateImageList = this.imageList1;
             this.listHistory.TabIndex = 9;
             this.listHistory.UseCompatibleStateImageBehavior = false;
@@ -663,16 +889,6 @@ namespace ComicDownloader
             this.colPDF.Text = "PDF";
             this.colPDF.Width = 25;
             // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(24, 24);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // errInvalidFileName
-            // 
-            this.errInvalidFileName.ContainerControl = this;
-            // 
             // contextMenuStrip2
             // 
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -687,16 +903,25 @@ namespace ComicDownloader
             this.openFolderToolStripMenuItem.Text = "Open Folder";
             this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
             // 
-            // lblStoryPDF
+            // imageList1
             // 
-            this.lblStoryPDF.Name = "lblStoryPDF";
-            this.lblStoryPDF.Size = new System.Drawing.Size(0, 17);
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(24, 24);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // errInvalidFileName
+            // 
+            this.errInvalidFileName.ContainerControl = this;
+            // 
+            // tooltip
+            // 
+            this.tooltip.OwnerDraw = true;
             // 
             // DownloaderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(949, 380);
+            this.ClientSize = new System.Drawing.Size(949, 431);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
@@ -707,16 +932,29 @@ namespace ComicDownloader
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.gpbChapters.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lstChapters)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabPage3.ResumeLayout(false);
             this.groupDownload.ResumeLayout(false);
             this.groupDownload.PerformLayout();
             this.groupInfo.ResumeLayout(false);
             this.groupInfo.PerformLayout();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.errInvalidFileName)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errInvalidFileName)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -754,7 +992,6 @@ namespace ComicDownloader
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button bntInfo;
         private System.Windows.Forms.Button btnExitThread;
-        private System.Windows.Forms.GroupBox gpbChapters;
         private System.Windows.Forms.GroupBox groupDownload;
         private System.Windows.Forms.GroupBox groupInfo;
         private XPTable.Models.Table lstChapters;
@@ -790,6 +1027,26 @@ namespace ComicDownloader
         private ToolStripMenuItem openFolderToolStripMenuItem;
         private ContextMenuStrip contextMenuStrip2;
         private ToolStripStatusLabel lblStoryPDF;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Panel panel3;
+        private MetroFramework.Controls.MetroLabel lblName;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private Panel panel4;
+        private MetroFramework.Controls.MetroLabel lblCat;
+        private MetroFramework.Controls.MetroLabel metroLabel3;
+        private PictureBox pictureBox1;
+        private Panel panel5;
+        private MetroFramework.Controls.MetroLabel lblAuthor;
+        private MetroFramework.Controls.MetroLabel metroLabel4;
+        private MetroFramework.Drawing.Html.HtmlToolTip tooltip;
+        private Panel panel6;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private MetroFramework.Controls.MetroLabel metroLabel5;
+        private TabPage tabPage3;
+        private MetroFramework.Drawing.Html.HtmlPanel htmlSumary;
     }
 }
 

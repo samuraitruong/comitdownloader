@@ -638,13 +638,37 @@ namespace ComicDownloader
 
                 this.Invoke(new MethodInvoker(delegate ()
                 {
+                   if(currentStoryInfo == null)
+                    {
 
+                        MessageBox.Show("Couldn't fetch this story, please check if the URL is valid  ");
+                        return;
+                    }
                     txtTitle.Text = ddlList.Text;
                     txtTitle.Text = currentStoryInfo.Name.Replace('"', ' ').Replace('.', ' ');
 
-                    this.Text = Downloader.Name + currentStoryInfo.Name;
+                    this.Text = Downloader.Name + currentStoryInfo.Name.TextBeautifier();
+                    this.lblName.Text = currentStoryInfo.Name;
+                    this.lblCat.Text = string.Join("; ", currentStoryInfo.Categories);
+                    this.htmlSumary.Text = currentStoryInfo.Summary;
+                    this.lblAuthor.Text = currentStoryInfo.Author;
+                    this.tooltip.SetToolTip(this.lblCat, this.lblCat.Text);
+                    this.tooltip.SetToolTip(this.lblAuthor, this.lblAuthor.Text);
+                    this.tooltip.SetToolTip(this.lblName, this.lblName.Text);
+                    Task.Run(() =>
+                    {
+                        this.pictureBox1.Load(this.currentStoryInfo.CoverUrl);
+                        var percent = (float) (flowLayoutPanel1.Width - 40) / pictureBox1.Image.Size.Width;
+                        var height = (int)(pictureBox1.Image.Size.Height * percent);
+                        pictureBox1.InvokeOnMainThread(() =>
+                        {
+                            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                            pictureBox1.Size = new System.Drawing.Size(flowLayoutPanel1.Width - 40, height);
+                            pictureBox1.Invalidate();
+                        });
+                    });
                     txtDir.Text = Settings.StogareFolder + "\\" + currentStoryInfo.Name.MakeSafeFilename();
-
+                    
                     tblChapters.Rows.Clear();
 
                     foreach (var item in currentStoryInfo.Chapters)
@@ -1020,6 +1044,18 @@ namespace ComicDownloader
         private void openFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\Explorer.exe", "\"" + txtDir.Text + "\"");
+        }
+
+        private void pictureBox1_LoadCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            var size = pictureBox1.Image.Size;
+
+            var percent = (float)flowLayoutPanel1.Width - 40 / size.Width;
+            var height = (int)(size.Height * percent);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.Size = new System.Drawing.Size(flowLayoutPanel1.Width - 40, height);
+            this.pictureBox1.Invalidate();
+
         }
     }
 }

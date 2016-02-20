@@ -74,7 +74,7 @@ namespace ComicDownloader.Forms
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 12);
+            this.label2.Location = new System.Drawing.Point(5, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 2;
@@ -83,7 +83,7 @@ namespace ComicDownloader.Forms
             // lblAuthor
             // 
             this.lblAuthor.AutoSize = true;
-            this.lblAuthor.Location = new System.Drawing.Point(57, 12);
+            this.lblAuthor.Location = new System.Drawing.Point(70, 12);
             this.lblAuthor.Name = "lblAuthor";
             this.lblAuthor.Size = new System.Drawing.Size(35, 13);
             this.lblAuthor.TabIndex = 3;
@@ -92,7 +92,7 @@ namespace ComicDownloader.Forms
             // lnkMangaUrl
             // 
             this.lnkMangaUrl.AutoSize = true;
-            this.lnkMangaUrl.Location = new System.Drawing.Point(70, 161);
+            this.lnkMangaUrl.Location = new System.Drawing.Point(77, 161);
             this.lnkMangaUrl.Name = "lnkMangaUrl";
             this.lnkMangaUrl.Size = new System.Drawing.Size(38, 13);
             this.lnkMangaUrl.TabIndex = 16;
@@ -102,7 +102,7 @@ namespace ComicDownloader.Forms
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 161);
+            this.label4.Location = new System.Drawing.Point(5, 161);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 12;
@@ -193,7 +193,7 @@ namespace ComicDownloader.Forms
             // lblCat
             // 
             this.lblCat.AutoSize = true;
-            this.lblCat.Location = new System.Drawing.Point(77, 82);
+            this.lblCat.Location = new System.Drawing.Point(70, 82);
             this.lblCat.MaximumSize = new System.Drawing.Size(200, 0);
             this.lblCat.Name = "lblCat";
             this.lblCat.Size = new System.Drawing.Size(40, 13);
@@ -203,7 +203,7 @@ namespace ComicDownloader.Forms
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 82);
+            this.label6.Location = new System.Drawing.Point(5, 82);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(57, 13);
             this.label6.TabIndex = 20;
@@ -222,7 +222,7 @@ namespace ComicDownloader.Forms
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 34);
+            this.label3.Location = new System.Drawing.Point(5, 34);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 13);
             this.label3.TabIndex = 18;

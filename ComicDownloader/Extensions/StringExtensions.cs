@@ -7,6 +7,7 @@ using System.Collections;
 using System.Xml.Linq;
 using System.Linq;
 using System.Globalization;
+using System.Web;
 
 namespace System
 {
@@ -29,6 +30,13 @@ namespace System
             return sss;
         
     }
+        public static string TextBeautifier(this string txt)
+        {
+            txt = HttpUtility.HtmlDecode(txt);
+            return txt.Trim();
+
+        }
+
         public static string RemoveDiacritics(this string text)
         {
             var normalizedString = text.Normalize(NormalizationForm.FormD);
