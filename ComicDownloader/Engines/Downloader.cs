@@ -533,6 +533,7 @@ namespace ComicDownloader.Engines
             string html = NetworkHelper.GetHtml(url, this.Cookies);
             if (html == "HTTP ERROR" && retry <= this.NumberRetryWhenFailed)
             {
+                retry = retry + 1;
                 return CrawlOnePage(url, matchPattern, retry++, appendHost, convertFunc, customParser, pagingCrawler);
             }
             HtmlDocument htmlDoc = new HtmlDocument();

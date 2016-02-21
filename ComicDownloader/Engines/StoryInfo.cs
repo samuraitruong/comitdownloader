@@ -67,7 +67,15 @@ namespace ComicDownloader.Engines
         public string AltName { get; set; }
         public string Author { get; set; }
         public List<string> Categories { get; set; }
-
+        
+        public string CategoriesAsString
+        {
+            get
+            {
+                if (Categories == null) return "Unknown";
+                return string.Join("; ", this.Categories);
+            }
+        }
         public string Url { get; set; }
         public List<ChapterInfo> Chapters { get; set; }
         public int ChapterCount { get; set; }
@@ -90,7 +98,7 @@ namespace ComicDownloader.Engines
 
         public void Beautifier()
         {
-            Name = Regex.Replace(Name, @"&\w{4};?", string.Empty);
+            Name = Name.TextBeautifier();// Regex.Replace(Name, @"&\w{4};?", string.Empty);
             Url = Url.Trim();
             Url = Url.TrimStart("{}[(".ToCharArray());
             Url = Url.TrimEnd("]){}".ToCharArray());

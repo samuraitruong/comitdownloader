@@ -1429,7 +1429,7 @@ namespace ComicDownloader.Properties
         ///   Looks up a localized string similar to &lt;html&gt;
         ///&lt;head&gt;
         ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
-        ///    &lt;title&gt;[[title]]&lt;/title&gt;
+        ///    &lt;title&gt;$story.Name$&lt;/title&gt;
         ///    &lt;style&gt;
         ///        * {
         ///            font-family: Calibri;
@@ -1441,10 +1441,11 @@ namespace ComicDownloader.Properties
         ///    &lt;/style&gt;
         ///&lt;/head&gt;
         ///&lt;body&gt;
-        ///    &lt;h1 style=&quot;text-align:center;font-size:28px; font-weight:bold&quot;&gt;[[title]]&lt;/h1&gt;
-        ///    [[content]]
-        ///&lt;/body&gt;
-        ///&lt;/html&gt;.
+        ///    &lt;br/&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;
+        ///    &lt;div style=&quot;padding-left:100px; padding-right:100px&quot;&gt;
+        ///        &lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot; style=&quot;max-width:800px&quot;&gt;
+        ///            &lt;thead&gt;
+        ///          [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CoverTemplate
         {
@@ -2299,6 +2300,19 @@ namespace ComicDownloader.Properties
             {
                 object obj = ResourceManager.GetObject("removable_disk_16x1611", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Html,Replace
+        ///&amp;amp;#8211;,-
+        ///.
+        /// </summary>
+        internal static string replace_tokens
+        {
+            get
+            {
+                return ResourceManager.GetString("replace_tokens", resourceCulture);
             }
         }
 

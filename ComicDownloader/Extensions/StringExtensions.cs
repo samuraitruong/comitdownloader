@@ -8,6 +8,9 @@ using System.Xml.Linq;
 using System.Linq;
 using System.Globalization;
 using System.Web;
+using HtmlAgilityPack;
+using System.Collections.Generic;
+using ComicDownloader.Helpers;
 
 namespace System
 {
@@ -24,16 +27,17 @@ namespace System
         }
         public static string ToValidFileName(this string fileName)
         {
-       
-            string sss= Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(), string.Empty));
+
+            string sss = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(), string.Empty));
             sss = sss.Replace("\"", "");
             return sss;
-        
-    }
+
+        }
         public static string TextBeautifier(this string txt)
         {
             txt = HttpUtility.HtmlDecode(txt);
-            return txt.Trim();
+            //return txt.Trim();
+            return ReplaceTokensHelper.Replace(txt.Trim());
 
         }
 
@@ -313,12 +317,38 @@ namespace System
         }
         public static string TryFixHtml(this string html)
         {
-           var newHtml = html;
+            Dictionary<string, string> replaces = new Dictionary<string, string>();
+            
+            var newHtml = HttpUtility.HtmlDecode(html);
             newHtml = newHtml.Replace("<br>", "<br/>");
             newHtml = newHtml.Replace("<p></p>", "<br/><br/>");
-            return newHtml;
-        }
 
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(newHtml);
+            System.IO.StringWriter sw = new System.IO.StringWriter();
+            System.Xml.XmlTextWriter xw = new System.Xml.XmlTextWriter(sw);
+            doc.Save(xw);
+            string result = sw.ToString();
+            result.Replace("<br>", "<br/>");
+            result = Regex.Replace(result, @"<\?xml.*\?>", "");
+
+            return ReplaceTokensHelper.Replace(result);
+            //this is not working for unicode, need investigate more. 
+            //string cleanHTML = newHtml;
+            //using (TidyManaged.Document doc = TidyManaged.Document.FromString(newHtml))
+            //{
+            //    doc.OutputBodyOnly = TidyManaged.AutoBool.Yes;
+            //    doc.InputCharacterEncoding = TidyManaged.EncodingType.Utf8;
+            //    doc.OutputCharacterEncoding = TidyManaged.EncodingType.Utf8;
+            //    doc.CharacterEncoding = TidyManaged.EncodingType.Utf8;
+            //    doc.Quiet = true;
+            //    doc.CleanAndRepair();
+            //    cleanHTML= doc.Save();
+
+            //}
+
+            //return cleanHTML;
+        }
     }
 }
 

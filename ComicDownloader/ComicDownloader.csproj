@@ -558,6 +558,26 @@
     <Compile Include="3rd\SparkleLibrary\Sprites\ShapeSprite.cs" />
     <Compile Include="3rd\SparkleLibrary\Sprites\Sprite.cs" />
     <Compile Include="3rd\SparkleLibrary\Sprites\TextSprite.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\AccessibilityCheckLevel.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\AutoBool.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\DocTypeMode.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\Document.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\DocumentAsync.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\EncodingType.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\InputSource.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\Interop\PInvoke.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\Interop\TidyEOFFunc.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\Interop\TidyGetByteFunc.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\Interop\TidyInputSource.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\Interop\TidyOptionId.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\Interop\TidyOutputSink.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\Interop\TidyPutByteFunc.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\Interop\TidyUngetByteFunc.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\NewlineType.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\OutputSink.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\RepeatedAttributeMode.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\SortStrategy.cs" />
+    <Compile Include="3rd\TidyHtml5Managed\VersionInfo.cs" />
     <Compile Include="3rd\WebServer.cs" />
     <Compile Include="ComicDownloaderSettings.cs" />
     <Compile Include="Constant.cs" />
@@ -595,6 +615,7 @@
     <Compile Include="Engines\Text\EThuVienOnlineDownloader.cs" />
     <Compile Include="Engines\Text\KhoTruyenHayDownloader.cs" />
     <Compile Include="Engines\Text\MaxReadingDownloader.cs" />
+    <Compile Include="Engines\Text\TruyenTeenVNDownloader.cs" />
     <Compile Include="Engines\Text\TruyenHaoHanCaDownloader.cs" />
     <Compile Include="Engines\Text\ThuQuanTruyenDownloader.cs" />
     <Compile Include="Engines\Text\SanTruyenDownloader.cs" />
@@ -932,6 +953,7 @@
       <DependentUpon>HostProviderSupportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PDFHelper.cs" />
+    <Compile Include="Helpers\ReplaceTokensHelper.cs" />
     <Compile Include="Helpers\TemplateHelper.cs" />
     <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="MyLogger.cs" />
@@ -1570,6 +1592,9 @@
     <EmbeddedResource Include="3rd\Metro\MetroFramework.Fonts\Resources\Open_Sans_Light.ttf" />
     <None Include="3rd\ObjectListView\FullClassDiagram.cd" />
     <None Include="3rd\ObjectListView\ObjectListView.FxCop" />
+    <None Include="3rd\tidy-5.1.25-win32\lib\tidy.lib" />
+    <None Include="3rd\tidy-5.1.25-win32\lib\tidys.lib" />
+    <None Include="3rd\tidy-5.1.25-win64\lib\tidys.lib" />
     <None Include="app.config" />
     <None Include="ComicDownloader_1_TemporaryKey.pfx" />
     <None Include="ComicDownloader_2_TemporaryKey.pfx" />
@@ -1608,6 +1633,7 @@
     <None Include="Resources\LiberationSerif-BoldItalic.ttf" />
     <None Include="Resources\LiberationSerif-Italic.ttf" />
     <None Include="Resources\LiberationSerif-Regular.ttf" />
+    <None Include="Resources\replace_tokens.csv" />
     <None Include="Resources\windows_8_wallpaper_by_joka7959-d5dtl3v.png" />
     <None Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_focus_24x241.png" />
     <Content Include="3rd\IView.NET\iView.NET Controls\Resources\aqua_button_pressed_24x24.png" />
@@ -1667,6 +1693,19 @@
     <Content Include="3rd\NLog.Extended.dll" />
     <Content Include="3rd\PagedList\PagedList.csproj" />
     <Content Include="3rd\SKGL.dll" />
+    <Content Include="3rd\tidy-5.1.25-win32\bin\tidy.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="3rd\tidy-5.1.25-win32\bin\tidy.exe" />
+    <Content Include="3rd\tidy-5.1.25-win32\include\tidy.h" />
+    <Content Include="3rd\tidy-5.1.25-win32\include\tidybuffio.h" />
+    <Content Include="3rd\tidy-5.1.25-win32\include\tidyenum.h" />
+    <Content Include="3rd\tidy-5.1.25-win32\include\tidyplatform.h" />
+    <Content Include="3rd\tidy-5.1.25-win64\bin\tidy.exe" />
+    <Content Include="3rd\tidy-5.1.25-win64\include\tidy.h" />
+    <Content Include="3rd\tidy-5.1.25-win64\include\tidybuffio.h" />
+    <Content Include="3rd\tidy-5.1.25-win64\include\tidyenum.h" />
+    <Content Include="3rd\tidy-5.1.25-win64\include\tidyplatform.h" />
     <Content Include="HTML\INDEX.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1921,8 +1960,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>copy "$(ProjectDir)3rd\tidy-5.1.25-win32\bin\tidy.dll" "$(TargetDir)tidy.dll" /Y</PostBuildEvent>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

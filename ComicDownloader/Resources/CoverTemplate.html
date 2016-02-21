@@ -13,12 +13,12 @@
     </style>
 </head>
 <body>
-    <br/><br /><br /><br /><br />
+    <br /><br /><br /><br /><br />
     <div style="padding-left:100px; padding-right:100px">
         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:800px">
             <thead>
                 <tr>
-                    <td colspan="2"><br /><h1 style="text-align:center;font-size:28px; font-weight:bold">$story.Name$</h1><br /><br /></td>
+                    <td colspan="2"><br /><h1 style="text-align:center;font-size:32px; font-weight:bold; text-transform:uppercase">$story.Name$</h1><br /><br /></td>
                 </tr>
                 <tr>
                     <td width="40%"><img src="$story.CoverUrl$" width="100%" /></td>
@@ -30,27 +30,37 @@
                             </tr>
                             <tr>
                                 <td align="left" width="30%"><strong>Categories</strong></td>
-                                <td align="left" width="70%"></td>
+                                <td align="left" width="70%">$story.CategoriesAsString$</td>
                             </tr>
                             <tr>
                                 <td align="left" width="30%"><strong>Alt Name</strong></td>
-                                <td align="left" width="70%">$story.AlrName$</td>
+                                <td align="left" width="70%">$story.AltName$</td>
                             </tr>
                             <tr>
                                 <td align="left" width="30%"><strong>Chapters</strong></td>
-                                <td align="left" width="70%">$story.ChapterCount$</td>
+                                <td align="left" width="70%">$story.Chapters.Count$</td>
                             </tr>
                         </table>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" valign="top" align="left" style="padding-top:20px">
-                        <br/>
+                        <br />
                         $story.Summary$
                     </td>
                 </tr>
             </thead>
         </table>
+        <br />
+        <br />
+        <br />
+        <br />
+        <strong>
+            This book was created by Comic Downloader, Comic downloader is a tool allow download and create ebook for <span style="color:red; font-size:20; font-weight:bolder">100+ </span> sites. please check more info on facebook page below
+            <br />
+            <br />
+            <a href="https://www.facebook.com/Comic-Downloader-137897009722629">https://www.facebook.com/Comic-Downloader-137897009722629</a>
+        </strong>
     </div>
 </body>
 </html>

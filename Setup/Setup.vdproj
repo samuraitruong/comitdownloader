@@ -11,8 +11,15 @@
 "SccLocalPath" = "8:"
 "SccAuxPath" = "8:"
 "SccProvider" = "8:"
+"BackwardsCompatibleGUIDGeneration" = "8:TRUE"
     "Hierarchy"
     {
+        "Entry"
+        {
+        "MsmKey" = "8:_01C79AB68CB25F76786002F518FD597E"
+        "OwnerKey" = "8:_BABBC22EE1DC453CA88F1E7E218E827B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
         "Entry"
         {
         "MsmKey" = "8:_0297EF7D41F6C675AFCB7ED8D20C7C8A"
@@ -41,12 +48,6 @@
         {
         "MsmKey" = "8:_46BA16CB889A45ED8D1070882831613B"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4BAEC4668B4E7A934A55F9C9EBF66C2C"
-        "OwnerKey" = "8:_BABBC22EE1DC453CA88F1E7E218E827B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -87,6 +88,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_AB24C5C51FC74977A1F936E76F7657A1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_AFC5D0EF187E4401A2EC3BD14F5BC205"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -100,6 +107,12 @@
         "Entry"
         {
         "MsmKey" = "8:_BE2FBF61CF0623CAA7A32F67BD85906B"
+        "OwnerKey" = "8:_BABBC22EE1DC453CA88F1E7E218E827B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BFB46D54E6EC520D7E3E01C2F8206846"
         "OwnerKey" = "8:_BABBC22EE1DC453CA88F1E7E218E827B"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -154,6 +167,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_01C79AB68CB25F76786002F518FD597E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_2B17EB42FC38BF4C98D438A91B2314BF"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -166,6 +185,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_BFB46D54E6EC520D7E3E01C2F8206846"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_981D071C4C1139A304EBFDB1F1CF4C29"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -173,12 +198,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_EEEC24829A11E57FDC52B6E7F280DE46"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4BAEC4668B4E7A934A55F9C9EBF66C2C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -361,6 +380,37 @@
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_01C79AB68CB25F76786002F518FD597E"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_01C79AB68CB25F76786002F518FD597E"
+                    {
+                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Newtonsoft.Json.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0297EF7D41F6C675AFCB7ED8D20C7C8A"
             {
             "AssemblyRegister" = "3:1"
@@ -437,37 +487,6 @@
                     }
                 }
             "SourcePath" = "8:MoreLinq.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4BAEC4668B4E7A934A55F9C9EBF66C2C"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_4BAEC4668B4E7A934A55F9C9EBF66C2C"
-                    {
-                    "Name" = "8:Newtonsoft.Json.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
@@ -629,6 +648,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AB24C5C51FC74977A1F936E76F7657A1"
+            {
+            "SourcePath" = "8:..\\ComicDownloader\\3rd\\tidy-5.1.25-win32\\bin\\tidy.dll"
+            "TargetName" = "8:tidy.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AFC5D0EF187E4401A2EC3BD14F5BC205"
             {
             "SourcePath" = "8:..\\ComicDownloader\\Resources\\1364394623_37693.ico"
@@ -663,6 +702,37 @@
                     }
                 }
             "SourcePath" = "8:HtmlAgilityPack.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BFB46D54E6EC520D7E3E01C2F8206846"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Antlr4.StringTemplate, Version=4.0.6.9004, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_BFB46D54E6EC520D7E3E01C2F8206846"
+                    {
+                    "Name" = "8:Antlr4.StringTemplate.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Antlr4.StringTemplate.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_16495D796CE84539AEC87DD81F268A2D"
@@ -867,7 +937,7 @@
         "UpgradeCode" = "8:{7F4E4438-E618-4DAC-8DD3-DEC09F6F24D4}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:TRUE"
+        "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:1.0.0"
@@ -877,7 +947,7 @@
         "Title" = "8:Comic Downloader Setup"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Truong Nguyen"
-        "Keywords" = "8:"
+        "Keywords" = "8:Manga;Fiction"
         "ARPCOMMENTS" = "8:Comic Downloader"
         "ARPURLINFOABOUT" = "8:http://www.facebook.com/pages/Comic-Downloader/137897009722629"
         "ARPPRODUCTICON" = "8:_AFC5D0EF187E4401A2EC3BD14F5BC205"

@@ -26,7 +26,7 @@ namespace System
             if (node == null) return string.Empty;
             if(node.Attributes[attr]!= null)
             {
-                return node.Attributes[attr].Value.Trim();
+                return node.Attributes[attr].Value.TextBeautifier();
             }
             return "";
         }
@@ -43,7 +43,7 @@ namespace System
                 var nodes = node.SelectNodes(patterns);
                 if (nodes != null)
                 {
-                    result.AddRange(nodes.Select(p => extractTextFunc!= null? extractTextFunc(p): p.InnerText.Trim()));
+                    result.AddRange(nodes.Select(p => extractTextFunc!= null? extractTextFunc(p): p.InnerText.TextBeautifier()));
                 }
             }
             if(customExtractFunc!= null)
@@ -67,7 +67,7 @@ namespace System
             var a = node.GetSingleNode(patterns);
             if(a!= null)
             {
-                return a.InnerText.Trim();
+                return a.InnerText.Trim().TextBeautifier();
             }
             return defaultValue;
         }
@@ -77,7 +77,7 @@ namespace System
             var a = node.GetSingleNode(patterns);
             if (a != null)
             {
-                return a.InnerHtml;
+                return a.InnerHtml.TextBeautifier();
             }
             return defaultValue;
         }

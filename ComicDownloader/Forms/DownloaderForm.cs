@@ -197,8 +197,10 @@ namespace ComicDownloader
             string pdfPath = rootDir + "\\PDF\\" + currentStoryInfo.Name.ConvertToValidFileName() + ".pdf";
             string epubFile = pdfPath.Replace(".pdf", ".epub");
 
-            PDFHelper.CreatePDFFromHtmls(orderedFiles, pdfPath, currentStoryInfo.Name, this.Settings);
-            EPUBHelper.GenereateEpubFromHtml(orderedFiles, epubFile, currentStoryInfo.Name);
+            PDFHelper.CreatePDFFromHtmls(orderedFiles, pdfPath, currentStoryInfo.Name, this.Settings, this.currentStoryInfo.CoverPdfPath);
+            string cover = TemplateHelper.Populate(Resources.CoverTemplate,"story",this.currentStoryInfo);
+
+            EPUBHelper.GenereateEpubFromHtml(orderedFiles, epubFile, currentStoryInfo.Name, cover);
             this.InvokeOnMainThread(() =>
             {
                 lblStoryPDF.Text = pdfPath;
@@ -660,6 +662,7 @@ namespace ComicDownloader
                     this.lblAuthor.Text = currentStoryInfo.Author;
                     this.tooltip.SetToolTip(this.lblCat, this.lblCat.Text);
                     this.tooltip.SetToolTip(this.lblAuthor, this.lblAuthor.Text);
+                    this.tabPage1.Text = "Chapters ("+ this.currentStoryInfo.Chapters.Count.ToString() +")";
                     this.tooltip.SetToolTip(this.lblName, this.lblName.Text);
                     Task.Run(() =>
                     {
