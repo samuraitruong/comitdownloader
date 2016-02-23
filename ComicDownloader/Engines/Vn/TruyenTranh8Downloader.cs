@@ -62,14 +62,20 @@ namespace ComicDownloader.Engines
             return base.RequestInfoSimple(storyUrl,
                 "//h1[@itemprop=\"name\"]",
                 "//*[@itemprop=\"itemListElement\"]",
+                coverPattern: "//img[@itemprop='image']",
+                 authorPattern: "//*[@itemprop='author']",
+                 categoryPattern: "//*[@itemprop='genre']",
+                 summaryPattern: "//*[contains(@class,'mangaDescription')]",
+
                 chapterExtract: (node) =>
                 {
                     ChapterInfo chapInfo = new ChapterInfo()
                     {
-                        Name = node.SelectSingleNode("//span[@class='hm']").InnerText.Trim() + node.SelectSingleNode("//strong").InnerText.Trim(),
-                        Url = node.Attributes["href"].Value.Trim(),
-                        ChapId = ExtractID(node.SelectSingleNode("//strong").InnerText.Trim())
+                        Name = node.Attr("title").TextBeautifier().Replace("Đọc truyện tranh ", string.Empty),
+                        Url = node.Href()
+                        //ChapId = ExtractID(node.SelectSingleNode("//strong").InnerText.Trim())
                     };
+                    chapInfo.ChapId = ExtractID(chapInfo.Name);
                     return chapInfo;
                 });
         }
