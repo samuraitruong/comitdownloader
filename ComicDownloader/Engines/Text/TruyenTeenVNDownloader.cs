@@ -12,6 +12,13 @@ namespace ComicDownloader.Engines
 
     public class TruyenTeenVNDownloader : Downloader
     {
+        public override bool IsTextEngine
+        {
+            get
+            {
+                return true;
+            }
+        }
         public override string Name
         {
             get { return "[truyenteen.vn] - "; }

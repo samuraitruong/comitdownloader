@@ -28,6 +28,8 @@ namespace ComicDownloader.Engines
         public string PdfPath { get; set; }
         public DownloadStatus Status { get; set; }
         public List<string> Pages { get; set; }
+        [XmlIgnore]
+       public List<string> DownloadedPages { get; set; }
 
         public int PageCount { get; set; }
 
@@ -41,6 +43,7 @@ namespace ComicDownloader.Engines
             DownloadedCount = 0;
             Status = DownloadStatus.Waiting;
             UniqueIdentify = new Guid();
+            DownloadedPages = new List<string>();
         }
 
         public DateTime LastModified { get; set; }
