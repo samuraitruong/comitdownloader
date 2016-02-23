@@ -57,7 +57,12 @@ namespace ComicDownloader.Engines
         {
             return base.RequestInfoSimple(storyUrl,
                 "//h1[@class='tentruyen']",
-                "//div[@id='wrapper_listchap']//a");
+                "//div[@id='wrapper_listchap']//a",
+                categoryPattern: "//p[@class='row_theloai']/a",
+                summaryPattern: "//p[@id='tomtattruyen']",
+                coverPattern: "//div[contains(@class,'wrapper_image')]//img",
+                authorPattern: "//div[contains(@class,'wrapper_info')]//p[1]"
+                );
         }
 
         public override List<string> GetPages(string chapUrl)

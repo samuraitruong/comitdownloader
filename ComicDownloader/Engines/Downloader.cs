@@ -43,6 +43,7 @@ namespace ComicDownloader.Engines
         public abstract string HostUrl { get; }
         private List<string> chapterIdPatterns = new List<string> {
             @"Chương (\d+)",
+            @"Chapter (\d*)",
             @"(\d+)$",
             @"(\d+)"
         };

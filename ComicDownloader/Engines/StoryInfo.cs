@@ -88,6 +88,7 @@ namespace ComicDownloader.Engines
         public string Summary { get; set; }
         public string CoverUrl { get;  set; }
         [XmlIgnore]
+
         public string CoverPdfPath { get;  set; }
 
         public StoryInfo()
