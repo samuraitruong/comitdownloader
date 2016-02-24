@@ -11,6 +11,10 @@ namespace ComicDownloader.Engines
 
     public class TruyenDichDownloader : Downloader
     {
+        public override bool IsTextEngine
+        {
+            get { return true; }
+        }
         public override string Name
         {
             get { return "[truyendich.com] - "; }

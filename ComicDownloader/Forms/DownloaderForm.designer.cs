@@ -115,6 +115,7 @@ namespace ComicDownloader
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.errInvalidFileName = new System.Windows.Forms.ErrorProvider(this.components);
             this.tooltip = new MetroFramework.Drawing.Html.HtmlToolTip();
+            this.openEbooksFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -870,14 +871,15 @@ namespace ComicDownloader
             // contextMenuStrip2
             // 
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openFolderToolStripMenuItem});
+            this.openFolderToolStripMenuItem,
+            this.openEbooksFolderToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(140, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(181, 70);
             // 
             // openFolderToolStripMenuItem
             // 
             this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
-            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openFolderToolStripMenuItem.Text = "Open Folder";
             this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
             // 
@@ -894,6 +896,13 @@ namespace ComicDownloader
             // tooltip
             // 
             this.tooltip.OwnerDraw = true;
+            // 
+            // openEbooksFolderToolStripMenuItem
+            // 
+            this.openEbooksFolderToolStripMenuItem.Name = "openEbooksFolderToolStripMenuItem";
+            this.openEbooksFolderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openEbooksFolderToolStripMenuItem.Text = "Open Ebooks Folder";
+            this.openEbooksFolderToolStripMenuItem.Click += new System.EventHandler(this.openEbooksFolderToolStripMenuItem_Click);
             // 
             // DownloaderForm
             // 
@@ -1023,6 +1032,7 @@ namespace ComicDownloader
         private MetroFramework.Controls.MetroLabel metroLabel5;
         private TabPage tabPage3;
         private MetroFramework.Drawing.Html.HtmlPanel htmlSumary;
+        private ToolStripMenuItem openEbooksFolderToolStripMenuItem;
     }
 }
 

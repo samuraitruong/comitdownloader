@@ -15,7 +15,10 @@ namespace ComicDownloader.Engines
         {
             get { return "[webtruyen.com] - "; }
         }
-
+        public override bool IsTextEngine
+        {
+            get { return true; }
+        }
         public override string ListStoryURL
         {
             get { return "http://webtruyen.com/all/"; }

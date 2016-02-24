@@ -19,6 +19,7 @@ namespace ComicDownloader.Engines
                 return true;
             }
         }
+       
         public override string Name
         {
             get { return "[truyenteen.vn] - "; }
