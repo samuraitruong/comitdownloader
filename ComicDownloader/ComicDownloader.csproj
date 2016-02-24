@@ -956,6 +956,7 @@
     <Compile Include="Helpers\ReplaceTokensHelper.cs" />
     <Compile Include="Helpers\TemplateHelper.cs" />
     <Compile Include="Helpers\UrlHelper.cs" />
+    <Compile Include="LimitedConcurrencyLevelTaskScheduler.cs" />
     <Compile Include="MyLogger.cs" />
     <Compile Include="Properties\IViewSettings.Designer.cs">
       <AutoGen>True</AutoGen>

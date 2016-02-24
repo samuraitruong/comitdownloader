@@ -15,7 +15,10 @@ namespace ComicDownloader.Engines
         {
             get { return "[truyenyy.com] - "; }
         }
-
+        public override bool IsTextEngine
+        {
+            get { return true; }
+        }
         public override string ListStoryURL
         {
             get { return "http://truyenyy.com/danhmuctruyen/?loai_truyen=all&the_loai=all&sap_xep=alphabet&page=1"; }

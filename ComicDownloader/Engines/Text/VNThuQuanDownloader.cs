@@ -17,7 +17,10 @@ namespace ComicDownloader.Engines
         {
             get { return "[vnthuquan.net] - "; }
         }
-
+        public override bool IsTextEngine
+        {
+            get { return true; }
+        }
         public override string ListStoryURL
         {
             get { return "http://vnthuquan.net"; }

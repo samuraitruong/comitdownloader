@@ -7,6 +7,7 @@ using ComicDownloader.Properties;
 using iTextSharp.tool.xml;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using iTextSharp.text.html.simpleparser;
 
 namespace ComicDownloader.Helpers
 {
@@ -337,11 +338,17 @@ namespace ComicDownloader.Helpers
                     EmbedeIntroPage(pdfDoc, writer);
 
                 EmbedePDFPage(pdfDoc, writer, coverPDF);
-
+                //string html = string.Format("<h1>{0}</h1>", name);
+                //foreach (IElement element in XMLWorkerHelper.ParseToElementList(html, null))
+                //{
+                //    pdfDoc.Add(element);
+                //}
                 foreach (var fi in files)
                 {
                     if (IsImageFile(fi.FullName))
                     {
+                        pdfDoc.NewPage();
+
                         Section section = chapter.AddSection(0f, new Paragraph("", new Font()
                         {
                             Color = BaseColor.WHITE
@@ -353,7 +360,6 @@ namespace ComicDownloader.Helpers
 
                         float hp = doch / h;
                         float wp = docw / w;
-                        pdfDoc.NewPage();
                         if (img.Height < img.Width)
                         {
                             PdfPTable nestedTable = new PdfPTable(1);

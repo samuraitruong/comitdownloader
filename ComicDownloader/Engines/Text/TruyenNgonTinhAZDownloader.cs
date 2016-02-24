@@ -15,7 +15,10 @@ namespace ComicDownloader.Engines
         {
             get { return "[truyenngontinhaz.com] - "; }
         }
-
+        public override bool IsTextEngine
+        {
+            get { return true; }
+        }
         public override string ListStoryURL
         {
             get { return "http://truyenngontinhaz.com/muc-luc-truyen-ngon-tinh.html"; }

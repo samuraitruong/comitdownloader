@@ -43,6 +43,7 @@ namespace ComicDownloader.Engines
         public abstract string HostUrl { get; }
         private List<string> chapterIdPatterns = new List<string> {
             @"Chương (\d+)",
+            @"Chapter (\d*)",
             @"(\d+)$",
             @"(\d+)"
         };
@@ -822,7 +823,7 @@ namespace ComicDownloader.Engines
 
             return results;
         }
-        public virtual bool IsTextEngines { get; }
+        public virtual bool IsTextEngine { get { return false; } }
         //this is 
         public virtual void AfterPageDownloadedSimple(string filename, string chapterName, string contentPattern = "", string titlePattern = "", Func<string, HtmlDocument, string> extractContent=null)
         {

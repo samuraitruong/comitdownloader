@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Collections.Generic;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
@@ -12,6 +11,10 @@ namespace ComicDownloader.Engines
 
     public class TruyenChuDownloader : Downloader
     {
+        public override bool IsTextEngine
+        {
+            get { return true; }
+        }
         public override string Name
         {
             get { return "[truyenchu.net] - "; }
@@ -29,7 +32,7 @@ namespace ComicDownloader.Engines
 
         public override string StoryUrlPattern
         {
-            get { throw new NotImplementedException(); }
+            get { return ""; }
         }
         public override string Logo
         {

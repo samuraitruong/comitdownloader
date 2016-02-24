@@ -23,9 +23,20 @@ using ComicDownloader.Properties;
 
 namespace ComicDownloader
 {
-
     public partial class DownloaderForm : MdiChildForm
     {
+        public class QueueItem
+        {
+            public ChapterInfo Chapter { get; set; }
+            public Guid Identifier { get; set; }
+        }
+        public class RowData
+        {
+            public string Folder { get; internal set; }
+            public long TotalSize { get; set; }
+        }
+
+        private Queue<QueueItem> downloadQueue = new Queue<QueueItem>();
 
         public ComicDownloaderSettings Settings { get; set; }
 
@@ -44,10 +55,10 @@ namespace ComicDownloader
             InitializeComponent();
             Settings = SettingForm.GetSetting();
             this.Downloader = dl;
-            this.Text= dl.Name;
+            this.Text = dl.Name;
             this.Downloader.OnListPageCrawled += Downloader_OnListPageCrawled;
         }
-        public DownloaderForm(Downloader dl, string startUrl , bool autoStart)
+        public DownloaderForm(Downloader dl, string startUrl, bool autoStart)
         {
             InitializeComponent();
             Settings = SettingForm.GetSetting();
@@ -102,10 +113,13 @@ namespace ComicDownloader
                 return;
             }
             StartDownload();
+            // collect chapter to download
+
+
 
         }
 
-        internal void SetDownloadStory(StoryInfo info, bool download= false)
+        internal void SetDownloadStory(StoryInfo info, bool download = false)
         {
             this.Invoke((MethodInvoker)delegate
             {
@@ -113,7 +127,7 @@ namespace ComicDownloader
                 downloadNow = download;
                 bntInfo.PerformClick();
             });
-            
+
         }
 
         private List<ChapterInfo> toBeDownloadedChapters = new List<ChapterInfo>();
@@ -124,14 +138,28 @@ namespace ComicDownloader
         {
             //clear UI
             var cover = Path.Combine(txtDir.Text, "cover.pdf");
-            Task.Run(()=>{
+            Task.Run(() =>
+            {
                 File.Delete(cover);
                 string html = TemplateHelper.Populate(Resources.CoverTemplate, "story", this.currentStoryInfo);
                 PDFHelper.ConvertHtmlToPdfAsFile(cover, html);
                 this.currentStoryInfo.CoverPdfPath = cover;
-            }) ;
-            listHistory.Items.Clear();
-            CollectChaptersToBeDownloaded();
+            });
+            //listHistory.Items.Clear();
+            var list = CollectChaptersToBeDownloaded();
+            var singleGuid = Guid.NewGuid();
+            list.ForEach((ChapterInfo p) =>
+            {
+                downloadQueue.Enqueue(new QueueItem()
+                {
+                    Chapter = p,
+                    Identifier = Downloader.IsTextEngine ? singleGuid : Guid.NewGuid()
+                });
+            });
+            if (Downloader.IsTextEngine)
+            {
+                DisplayChap(currentStoryInfo.Name, 01, list.Count, singleGuid, "", "");
+            }
             bntDownload.Enabled = false;
             bntPauseThread.Enabled = true;
             btnExitThread.Enabled = true;
@@ -139,79 +167,281 @@ namespace ComicDownloader
             downloadThread.Start();
             threads.Clear();
             threads.Add(downloadThread);
+            //TaskScheduler scheduler = TaskScheduler.Default;
         }
 
         private Thread downloadThread;
 
+        public string DownloadPage(string url, string folder, ChapterInfo chap, int retry = 1)
+        {
+            try
+            {
+                Directory.CreateDirectory(folder);
+
+            }
+            catch (Exception ex) { }
+            string filename = "";
+            try
+            {
+                int pageIndex = chap.Pages.IndexOf(url);
+                string outputName = Settings.RenamePattern.Replace("{{PAGENUM}}", pageIndex.ToString("D4"))
+                                                       .Replace("{{CHAPTER}}", chap != null ? chap.Name : "");
+
+                filename = Downloader.DownloadPage(url,
+                    outputName,
+                    folder,
+                    chap.Url,
+                    chapter: chap);
+            }
+            catch (Exception ex)
+            {
+                if (retry <= 3)
+                {
+                    retry++;
+                    return DownloadPage(url, folder, chap, retry);
+                }
+            }
+            return filename;
+
+
+        }
+        int threadCounts = 0;
+        List<Task> tasks = new List<Task>();
+        LimitedConcurrencyLevelTaskScheduler taskScheduler;
+        TaskFactory factory;
+        bool downloading = false;
         private void DownloadProcess()
         {
-            int chapterCount = 0;
-            foreach (var chapInfo in toBeDownloadedChapters)
-            {
-                try
-                {
-                    chapterCount++;
-
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        lblStatus.Text = chapInfo.Name;
-                    });
-
-                    chapInfo.Pages = Downloader.GetPages(chapInfo.Url);
-                    chapInfo.PageCount = chapInfo.Pages.Count;
-
-                    // display Info on UI
-                    DisplayChap(chapInfo, chapterCount);
-                    DownloadChapter(chapInfo);
-
-                    GeneratePDF(chapInfo);
-
-                }
-                finally
-                {
-
-                }
-            }
-            GenerateStoryEbooks(this.currentStoryInfo, toBeDownloadedChapters);
-
-
-            this.Invoke((MethodInvoker)delegate
-            {
-                bntDownload.Enabled = true;
-                lblStatus.Text = "Completed!";
-                //MessageBox.Show("Download completed!");
-            });
-
-        }
-
-        private void GenerateStoryEbooks(StoryInfo currentStoryInfo, List<ChapterInfo> toBeDownloadedChapters)
-        {
-            var dir = toBeDownloadedChapters[0].Folder;
-            var rootDir = (new DirectoryInfo(dir)).Parent.FullName;
-            var htmlFiles = Directory.GetFiles(rootDir, "*.html", SearchOption.AllDirectories);
-            if(htmlFiles.Length == 0)
+            if (downloading)
             {
                 return;
+
             }
-            var orderedFiles = htmlFiles.OrderBy(p => Path.GetFileName(p)).ToArray();
-            string pdfPath = rootDir + "\\PDF\\" + currentStoryInfo.Name.ConvertToValidFileName() + ".pdf";
-            string epubFile = pdfPath.Replace(".pdf", ".epub");
-
-            PDFHelper.CreatePDFFromHtmls(orderedFiles, pdfPath, currentStoryInfo.Name, this.Settings, this.currentStoryInfo.CoverPdfPath);
-            string cover = TemplateHelper.Populate(Resources.CoverTemplate,"story",this.currentStoryInfo);
-
-            EPUBHelper.GenereateEpubFromHtml(orderedFiles, epubFile, currentStoryInfo.Name, cover);
-            this.InvokeOnMainThread(() =>
+            //if(taskScheduler == null)
+            //{
+            //    taskScheduler = new LimitedConcurrencyLevelTaskScheduler(SettingForm.GetSetting().ConcurrentPageDownloadThreads);
+            //    factory = new TaskFactory(taskScheduler);
+            //}
+            int chapterCount = 0;
+            using (SemaphoreSlim semaphore = new SemaphoreSlim(SettingForm.GetSetting().ConcurrentPageDownloadThreads))
             {
-                lblStoryPDF.Text = pdfPath;
-                if(MessageBox.Show(string.Format( "Story {0} has been downloaded, Do you want to open pdf file?", currentStoryInfo.Name) + Environment.NewLine + "Filename: " + pdfPath, "Download finish", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                while (downloadQueue.Count > 0)
                 {
-                    Process.Start(pdfPath);
-                }
-            });
-        }
+                    downloading = true;
+                    var info = downloadQueue.Dequeue();
+                    var chapInfo = info.Chapter;
+                    try
+                    {
+                        chapterCount++;
+                        //this.Invoke((MethodInvoker)delegate
+                        //{
+                        //    lblStatus.Text = chapInfo.Name;
+                        //});
 
-        private void GeneratePDF(ChapterInfo chapInfo)
+                        chapInfo.Pages = Downloader.GetPages(chapInfo.Url);
+
+                        chapInfo.PageCount = chapInfo.Pages.Count;
+                        chapInfo.DownloadedCount = 0;
+                        if (!Downloader.IsTextEngine)
+                        {
+                            DisplayChap(chapInfo.Name, chapterCount, chapInfo.PageCount, info.Identifier, chapInfo.Folder, chapInfo.PdfPath);
+                        }
+                        foreach (var item in chapInfo.Pages)
+                        {
+                            //if (threadCounts >= SettingForm.GetSetting().ConcurrentPageDownloadThreads)
+                            //{
+                            //    Task.WaitAny(tasks.Where(p => !p.IsCompleted).ToArray());
+                            //}
+                            semaphore.Wait();
+                            var task = Task.Run(() =>
+                               {
+                                   string result = DownloadPage(item, chapInfo.Folder, chapInfo);
+                                   Thread.Sleep(10);
+                                   return result;
+
+                               }).ContinueWith((t) =>
+                               {
+                                   semaphore.Release();
+                                   lock (updateUIObj)
+                                   {
+                                       threadCounts = threadCounts - 1;
+                                       chapInfo.DownloadedCount++;
+                                       chapInfo.DownloadedPages.Add(item);
+                                       this.Invoke((MethodInvoker)delegate
+                                   {
+                                       var listItem = listHistory.Items.Cast<EXListViewItem>().FirstOrDefault(p => p.Name == info.Identifier.ToString());
+                                       //this.progess.Value = count;
+                                       //lblPageCount.Text = string.Format("{0:D2}/{1:D2}", count, chapInfo.PageCount);
+
+                                       //var listItem = listHistory.Items[listHistory.Items.Count - 1];
+                                       //lblTotalDownloadCount.Text = total.ToKB();
+                                       var subItem = listItem.SubItems[4] as EXControlListViewSubItem;
+                                       var pp = subItem.MyControl as ProgressBar;
+                                       pp.Value = pp.Value + 1;
+                                       FileInfo fi = new FileInfo(t.Result);
+                                       var refData = listItem.Tag as RowData;
+                                       refData.TotalSize += fi.Length;
+                                       listItem.SubItems[3].Text = refData.TotalSize.ToKB();
+                                   });
+                                   }
+                                   if (chapInfo.PageCount == chapInfo.DownloadedCount && !Downloader.IsTextEngine)
+                                   {
+                                       Task.Run(() =>
+                                       {
+                                           GeneratePDF(chapInfo, info.Identifier);
+                                       });
+                                   }
+
+
+                                   Task.Run(() =>
+                                   {
+
+                                       if (chapInfo.PageCount == chapInfo.DownloadedCount && Downloader.IsTextEngine)
+                                       {
+                                           var last = downloadQueue.Count > 0 ? downloadQueue.Peek() : null;
+                                           if (last == null)
+                                           {
+                                               Task.WaitAll(tasks.ToArray());
+                                               GenerateStoryEbooks(chapInfo.Story, chapInfo.Folder, info.Identifier);
+                                           }
+                                           else
+                                           {
+                                               if (last.Chapter.Story != chapInfo.Story)
+                                               {
+                                                   GenerateStoryEbooks(chapInfo.Story, chapInfo.Folder, info.Identifier);
+                                               }
+                                           }
+                                       }
+                                   });
+
+
+                                   //remove task 
+                                   lock (tasks)
+                                   {
+                                       tasks = tasks.Where(p => !p.IsCompleted).ToList();
+                                   }
+                               });
+
+                            tasks.Add(task);
+
+                            threadCounts++;
+                        }
+                        // display Info on UI
+                        // DisplayChap(chapInfo, chapterCount);
+                        //DownloadChapter(chapInfo);
+
+                        //GeneratePDF(chapInfo);
+
+                    }
+                    finally
+                    {
+
+                    }
+                }
+
+                downloading = false;
+                Task.WaitAll(tasks.ToArray());
+                //GenerateStoryEbooks(this.currentStoryInfo, toBeDownloadedChapters);
+
+
+                this.Invoke((MethodInvoker)delegate
+                {
+                    bntDownload.Enabled = true;
+                    lblStatus.Text = "Completed!";
+                    //MessageBox.Show("Download completed!");
+                });
+
+            }
+        }
+        //private void DownloadProcess1()
+        //{
+        //    int chapterCount = 0;
+        //    foreach (var chapInfo in toBeDownloadedChapters)
+        //    {
+        //        try
+        //        {
+        //            chapterCount++;
+
+        //            this.Invoke((MethodInvoker)delegate
+        //            {
+        //                lblStatus.Text = chapInfo.Name;
+        //            });
+
+        //            chapInfo.Pages = Downloader.GetPages(chapInfo.Url);
+        //            chapInfo.PageCount = chapInfo.Pages.Count;
+
+        //            // display Info on UI
+        //            DisplayChap(chapInfo, chapterCount);
+        //            DownloadChapter(chapInfo);
+
+        //            GeneratePDF(chapInfo);
+
+        //        }
+        //        finally
+        //        {
+
+        //        }
+        //    }
+        //    GenerateStoryEbooks(this.currentStoryInfo, toBeDownloadedChapters);
+
+
+        //    this.Invoke((MethodInvoker)delegate
+        //    {
+        //        bntDownload.Enabled = true;
+        //        lblStatus.Text = "Completed!";
+        //        //MessageBox.Show("Download completed!");
+        //    });
+
+        //}
+
+        public List<StoryInfo> downloadedStories = new List<StoryInfo>();
+
+        private void GenerateStoryEbooks(StoryInfo currentStoryInfo, string folder, Guid rowID)
+        {
+            lock (downloadedStories)
+            {
+                if (!downloadedStories.Contains(currentStoryInfo))
+                {
+                    var dir = folder;
+                    var rootDir = (new DirectoryInfo(dir)).Parent.FullName;
+                    var htmlFiles = Directory.GetFiles(rootDir, "*.html", SearchOption.AllDirectories);
+                    if (htmlFiles.Length == 0)
+                    {
+                        return;
+                    }
+                    var orderedFiles = htmlFiles.OrderBy(p => Path.GetFileName(p)).ToArray();
+                    string pdfPath = rootDir + "\\PDF\\" + currentStoryInfo.Name.ConvertToValidFileName() + ".pdf";
+                    string epubFile = pdfPath.Replace(".pdf", ".epub");
+
+                    PDFHelper.CreatePDFFromHtmls(orderedFiles, pdfPath, currentStoryInfo.Name, this.Settings, currentStoryInfo.CoverPdfPath);
+                    EnableInlineButton(rowID, pdfPath, 6);
+                    string cover = TemplateHelper.Populate(Resources.CoverTemplate, "story", this.currentStoryInfo);
+
+                    EPUBHelper.GenereateEpubFromHtml(orderedFiles, epubFile, currentStoryInfo.Name, cover);
+                    this.InvokeOnMainThread(() =>
+                    {
+                        lblStoryPDF.Text = pdfPath;
+                        if (MessageBox.Show(string.Format("Story {0} has been downloaded, Do you want to open pdf file?", currentStoryInfo.Name) + Environment.NewLine + "Filename: " + pdfPath, "Download finish", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                        {
+                            Process.Start(pdfPath);
+                        }
+                    });
+                }
+            }
+            downloadedStories.Add(currentStoryInfo);
+        }
+        
+        public void EnableInlineButton(Guid identify, object data, int index)
+        {
+            var listItem = listHistory.Items.Cast<EXListViewItem>().FirstOrDefault(p => p.Name == identify.ToString());
+
+            var subItem = listItem.SubItems[index] as EXControlListViewSubItem;
+            var pp = subItem.MyControl as Button;
+            pp.Enabled = true;
+            pp.Tag = data;
+
+        }
+        private void GeneratePDF(ChapterInfo chapInfo, Guid identify)
         {
             if (!Settings.CreatePDF)
             {
@@ -223,12 +453,7 @@ namespace ComicDownloader
 
                 this.Invoke((MethodInvoker)delegate
                 {
-                    var listItem = listHistory.Items[listHistory.Items.Count - 1];
-
-                    var subItem = listItem.SubItems[6] as EXControlListViewSubItem;
-                    var pp = subItem.MyControl as Button;
-                    pp.Enabled = true;
-                    pp.Tag = chapInfo.PdfPath;
+                    EnableInlineButton(identify, chapInfo.PdfPath, 6);
 
                 });
 
@@ -283,9 +508,9 @@ namespace ComicDownloader
 
                         string filename = Downloader.DownloadPage(param.PageUrl,
                             outputName,
-                            chapInfo.Folder, 
+                            chapInfo.Folder,
                             chapInfo.Url,
-                            chapter:chapInfo);
+                            chapter: chapInfo);
 
                         var file = File.Open(filename, FileMode.Open);
 
@@ -308,8 +533,6 @@ namespace ComicDownloader
                                 var subItem = listItem.SubItems[4] as EXControlListViewSubItem;
                                 var pp = subItem.MyControl as ProgressBar;
                                 pp.Value = count;
-
-
                             });
                         }
 
@@ -338,22 +561,23 @@ namespace ComicDownloader
 
         }
 
-        private void DisplayChap(ChapterInfo chapInfo, int chapCount)
+        private void DisplayChap(string name, int chapCount, int pageCount, Guid identify, string folder, string pdfPath)
         {
             this.Invoke((MethodInvoker)delegate
             {
-                this.progess.Minimum = 1;
-                this.progess.Value = 1;
-                this.progess.Maximum = chapInfo.PageCount;
+                this.progess.Minimum = 0;
+                this.progess.Value = 0;
+                this.progess.Maximum = pageCount;
                 var listItem = new EXListViewItem(chapCount.ToString());
-                listItem.SubItems.Add(chapInfo.Name.Replace('"', ' ').Replace('.', ' '));
-                listItem.SubItems.Add(chapInfo.PageCount.ToString());
+                listItem.Name = identify.ToString();
+                listItem.SubItems.Add(name.Replace('"', ' ').Replace('.', ' '));
+                listItem.SubItems.Add(pageCount.ToString());
                 listItem.SubItems.Add("0");
                 EXControlListViewSubItem cs = new EXControlListViewSubItem();
                 ProgressBar b = new ProgressBar();
                 //b.Tag = item;
                 b.Minimum = 0;
-                b.Maximum = chapInfo.PageCount;
+                b.Maximum = pageCount;
                 b.Step = 1;
 
                 listItem.SubItems.Add(cs);
@@ -379,7 +603,7 @@ namespace ComicDownloader
 
                 bntOpenFolder.Click += new EventHandler(delegate
                 {
-                    MainWindow window = new MainWindow(new string[] { chapInfo.Folder + "/dum.trick", "0" });
+                    MainWindow window = new MainWindow(new string[] { folder + "/dump.trick", "0" });
                     window.WindowState = FormWindowState.Maximized;
                     window.ShowDialog();
                     //window.SubStartSlideShow();
@@ -414,9 +638,15 @@ namespace ComicDownloader
                 listItem.SubItems.Add(pdfLinkCol);
                 listHistory.AddControlToSubItem(bntOpenPDF, pdfLinkCol);
 
-                listItem.SubItems.Add(chapInfo.PdfPath);
-                this.listHistory.Items.Add(listItem);
-                lblPageCount.Text = string.Format("{0:D2}/{1:D2}", "0", chapInfo.PageCount);
+                listItem.SubItems.Add(pdfPath);
+                this.listHistory.Items.Insert(0, listItem);
+                lblPageCount.Text = string.Format("{0:D2}/{1:D2}", "0", pageCount);
+
+                listItem.Tag = new RowData()
+                {
+                    TotalSize = 0     ,
+                    Folder = folder
+                };
 
             });
         }
@@ -481,8 +711,6 @@ namespace ComicDownloader
         {
 
         }
-
-
 
         private void bntPauseThread_Click(object sender, EventArgs e)
         {
@@ -562,7 +790,7 @@ namespace ComicDownloader
         private void DownloadForm_Load(object sender, EventArgs e)
         {
             txtDir.Text = Settings.StogareFolder;
-            
+
             if (downloadNow)
             {
                 txtUrl.Text = this.currentUrl;
@@ -578,7 +806,7 @@ namespace ComicDownloader
 
         private void LoadStoryList()
         {
-            Task.Run(()=> LockUIForStoryListLoading());
+            Task.Run(() => LockUIForStoryListLoading());
 
             var task = Task<List<StoryInfo>>.Run(() => Downloader.GetListStories(false))
                 .ContinueWith((t) =>
@@ -646,7 +874,7 @@ namespace ComicDownloader
 
                 this.Invoke(new MethodInvoker(delegate ()
                 {
-                   if(currentStoryInfo == null)
+                    if (currentStoryInfo == null)
                     {
 
                         MessageBox.Show("Couldn't fetch this story, please check if the URL is valid  ");
@@ -662,12 +890,12 @@ namespace ComicDownloader
                     this.lblAuthor.Text = currentStoryInfo.Author;
                     this.tooltip.SetToolTip(this.lblCat, this.lblCat.Text);
                     this.tooltip.SetToolTip(this.lblAuthor, this.lblAuthor.Text);
-                    this.tabPage1.Text = "Chapters ("+ this.currentStoryInfo.Chapters.Count.ToString() +")";
+                    this.tabPage1.Text = "Chapters (" + this.currentStoryInfo.Chapters.Count.ToString() + ")";
                     this.tooltip.SetToolTip(this.lblName, this.lblName.Text);
                     Task.Run(() =>
                     {
                         this.pictureBox1.Load(this.currentStoryInfo.CoverUrl);
-                        var percent = (float) (flowLayoutPanel1.Width - 40) / pictureBox1.Image.Size.Width;
+                        var percent = (float)(flowLayoutPanel1.Width - 40) / pictureBox1.Image.Size.Width;
                         var height = (int)(pictureBox1.Image.Size.Height * percent);
                         pictureBox1.InvokeOnMainThread(() =>
                         {
@@ -677,7 +905,7 @@ namespace ComicDownloader
                         });
                     });
                     txtDir.Text = Settings.StogareFolder + "\\" + currentStoryInfo.Name.MakeSafeFilename();
-                    
+
                     tblChapters.Rows.Clear();
 
                     foreach (var item in currentStoryInfo.Chapters)
@@ -702,11 +930,12 @@ namespace ComicDownloader
                 }));
 
                 ToggleControl(true);
-            }).ContinueWith((task) => {
+            }).ContinueWith((task) =>
+            {
                 if (downloadNow)
                 {
                     downloadNow = false;
-                    if(currentStoryInfo!= null && currentStoryInfo.Chapters.Count>0)
+                    if (currentStoryInfo != null && currentStoryInfo.Chapters.Count > 0)
                     {
                         bntDownload.PerformClick();
                     }
@@ -821,7 +1050,7 @@ namespace ComicDownloader
 
                     }
                     var ts = DateTime.Now - lastupdate;
-                    if (ts.TotalSeconds > this.stories.Count/500)
+                    if (ts.TotalSeconds > this.stories.Count / 500)
                     {
                         //ddlList.DataSource = this.stories; //rerender dropdown list is heavy. just render if data change after 5 secs.
                         lastupdate = DateTime.Now;
@@ -1019,7 +1248,7 @@ namespace ComicDownloader
         {
             var select = ddlFilter.Text.ToString();
             var filterSource = this.stories;
-            if(select != "All")
+            if (select != "All")
             {
                 filterSource = filterSource.Where(p => p.Group == select).ToList();
                 ddlList.Text = string.Format("Filtered , there are {0}//{1} stories display in the list", filterSource.Count, this.stories.Count);
@@ -1031,7 +1260,7 @@ namespace ComicDownloader
                 //need update status bar???
             }
             ddlList.DataSource = filterSource;
-            
+
         }
 
         private void btnSetting_Click(object sender, EventArgs e)
@@ -1052,7 +1281,10 @@ namespace ComicDownloader
 
         private void openFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\Explorer.exe", "\"" + txtDir.Text + "\"");
+            var selected = listHistory.SelectedItems[0] as EXListViewItem;
+            var data = selected.Tag as RowData;
+
+            Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\Explorer.exe", "\"" + data.Folder + "\"");
         }
 
         private void pictureBox1_LoadCompleted(object sender, AsyncCompletedEventArgs e)
@@ -1065,6 +1297,14 @@ namespace ComicDownloader
             pictureBox1.Size = new System.Drawing.Size(flowLayoutPanel1.Width - 40, height);
             this.pictureBox1.Invalidate();
 
+        }
+
+        private void openEbooksFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var selected = listHistory.SelectedItems[0] as EXListViewItem;
+            var data = selected.Tag as RowData;
+
+            Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\Explorer.exe", "\"" + data.Folder + "\\PDF\"");
         }
     }
 }

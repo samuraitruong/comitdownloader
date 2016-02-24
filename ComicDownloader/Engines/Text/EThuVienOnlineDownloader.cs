@@ -11,6 +11,13 @@ namespace ComicDownloader.Engines
 
     public class EThuVienOnlineDownloader : Downloader
     {
+        public override bool IsTextEngine
+        {
+            get
+            {
+                return true;
+            }
+        }
         public override string Name
         {
             get { return "[e-thuvienonline.com] - "; }

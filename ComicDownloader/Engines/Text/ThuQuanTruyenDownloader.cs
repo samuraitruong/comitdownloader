@@ -12,6 +12,10 @@ namespace ComicDownloader.Engines
 
     public class ThuQuanTruyenDownloader : Downloader
     {
+        public override bool IsTextEngine
+        {
+            get { return true; }
+        }
         public override string Name
         {
             get { return "[thuquantruyen.com] - "; }

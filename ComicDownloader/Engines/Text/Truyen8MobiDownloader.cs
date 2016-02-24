@@ -13,6 +13,10 @@ namespace ComicDownloader.Engines
 
     public class Truyen8MobiDownloader : Downloader
     {
+        public override bool IsTextEngine
+        {
+            get { return true; }
+        }
         public override string Name
         {
             get { return "[truyencuatui.net] - "; }

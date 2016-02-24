@@ -16,7 +16,10 @@ namespace ComicDownloader.Engines
         {
             get { return "[tunghoanh.com] - "; }
         }
-
+        public override bool IsTextEngine
+        {
+            get { return true; }
+        }
         public override string ListStoryURL
         {
             get { return "http://tunghoanh.com/truyen/moi-cap-nhat/"; }

@@ -12,6 +12,14 @@ namespace ComicDownloader.Engines
 
     public class MaxReadingDownloader : Downloader
     {
+        public override bool IsTextEngine
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         public override string Name
         {
             get { return "[maxreading.com] - "; }

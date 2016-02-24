@@ -15,7 +15,10 @@ namespace ComicDownloader.Engines
         {
             get { return "[truyenkiemhiepaz.com] - "; }
         }
-
+        public override bool IsTextEngine
+        {
+            get { return true; }
+        }
         public override string ListStoryURL
         {
             get { return "http://truyenkiemhiepaz.com/muc-luc-truyen-kiem-hiep.html"; }

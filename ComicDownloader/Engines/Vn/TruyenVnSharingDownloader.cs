@@ -48,71 +48,34 @@ namespace ComicDownloader.Engines
         public override List<StoryInfo> HotestStories() { throw new NotImplementedException(); }
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
-            string urlPattern = this.ListStoryURL + "/{0}";
-            return base.GetListStoriesSimple(urlPattern, "//li[@class='browse_result_item']/a[@class='title']", forceOnline);
+            string urlPattern = "http://truyen.vnsharing.vn/newmanga/{0}";
+            return base.GetListStoriesSimple(urlPattern, "//li[@class='browse_result_item']/a[@class='thumb_wrap']", forceOnline,
+                
+                convertFunc: (HtmlNode s) =>
+                {
+                    return new StoryInfo()
+                    {
+                        Url = s.Href(),
+                        Name = s.GetNodeText("span[@class='title']").TextBeautifier()
+                    };
+                });
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
         {
 
-            var html = NetworkHelper.GetHtml(storyUrl);
-
-            HtmlDocument htmlDoc = new HtmlDocument();
-
-            htmlDoc.LoadHtml(html);
-
-            var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//p[@class='title']");
-
-
-
-            StoryInfo info = new StoryInfo()
-            {
-                Url = storyUrl,
-                Name = nameNode.InnerText.Trim()
-            };
-
-            var chapNodes = htmlDoc.DocumentNode.SelectNodes("//li[@class='browse_result_item']/a[@class='title']");
-
-            foreach (HtmlNode node in chapNodes)
-            {
-                ChapterInfo chapInfo = new ChapterInfo()
-                {
-                    Name = node.InnerText.Trim().Trim(),
-                    Url = node.Attributes["href"].Value.Trim(),
-                    ChapId = ExtractID(node.InnerText.Trim().Trim())
-                };
-
-                info.Chapters.Add(chapInfo);
-            }
-
-            info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
-            return info;
-
+            return base.RequestInfoSimple(storyUrl,
+                "//div[@class='popup_info']//table/tbody/tr[2]//h2",
+                "//div[contains(@class,'fullist')]//a",
+                categoryPattern: "//*[@id='manga_detail']/ul/li[1]//a",
+                authorPattern: "//*[@id='manga_detail']/ul/li[4]//a",
+                coverPattern: "//img[@class='popup_manga_cover']",
+                summaryPattern: "//div[@class='info_des']");
         }
 
         public override List<string> GetPages(string chapUrl)
         {
-            List<string> pages = new List<string>();
-
-            var html = NetworkHelper.GetHtml(chapUrl);
-            HtmlDocument htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-
-            var nodes = htmlDoc.DocumentNode.SelectNodes("//img[@id='manga_page']");
-            //string pvip = "lstImagesVIP.push\\(\"(.*)\"\\)";
-
-            //string p = "lstImages.push\\(\"(.*)\"\\)";
-
-            //var matches = Regex.Matches(html, pvip);
-            //if (matches == null || matches.Count == 0)
-            //    matches = Regex.Matches(html, p);
-
-            foreach (HtmlNode node in nodes)
-            {
-                pages.Add(node.Attributes["src"].Value);
-            }
-
-            return pages;
+            return base.GetPagesSimple(chapUrl, "//*[@class='read_content']//a/img");
         }
 
         public override List<StoryInfo> GetLastestUpdates()
