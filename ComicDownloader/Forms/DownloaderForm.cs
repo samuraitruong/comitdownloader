@@ -178,17 +178,22 @@ namespace ComicDownloader
 
             }
             catch (Exception ex) { }
+            string filename = "";
+            try {
+                int pageIndex = chap.Pages.IndexOf(url);
+                string outputName = Settings.RenamePattern.Replace("{{PAGENUM}}", pageIndex.ToString("D4"))
+                                                       .Replace("{{CHAPTER}}", chap != null ? chap.Name : "");
 
-            int pageIndex = chap.Pages.IndexOf(url);
-            string outputName = Settings.RenamePattern.Replace("{{PAGENUM}}", pageIndex.ToString("D4"))
-                                                   .Replace("{{CHAPTER}}", chap != null ? chap.Name : "");
+                filename = Downloader.DownloadPage(url,
+                    outputName,
+                    folder,
+                    chap.Url,
+                    chapter: chap);
+            }
+            catch (Exception ex)
+            {
 
-            string filename = Downloader.DownloadPage(url,
-                outputName,
-                folder,
-                chap.Url,
-                chapter: chap);
-
+            }
             return filename;
 
 
