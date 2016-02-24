@@ -148,6 +148,8 @@ namespace ComicDownloader
             //listHistory.Items.Clear();
             var list = CollectChaptersToBeDownloaded();
             var singleGuid = Guid.NewGuid();
+            progess.Maximum += list.Count;
+
             list.ForEach((ChapterInfo p) =>
             {
                 downloadQueue.Enqueue(new QueueItem()
@@ -158,7 +160,7 @@ namespace ComicDownloader
             });
             if (Downloader.IsTextEngine)
             {
-                DisplayChap(currentStoryInfo.Name, 01, list.Count, singleGuid, "", "");
+                DisplayChap(currentStoryInfo.Name, 01, list.Count, singleGuid, txtDir.Text, "");
             }
             bntDownload.Enabled = false;
             bntPauseThread.Enabled = true;
@@ -210,6 +212,7 @@ namespace ComicDownloader
         LimitedConcurrencyLevelTaskScheduler taskScheduler;
         TaskFactory factory;
         bool downloading = false;
+        int count = 0;
         private void DownloadProcess()
         {
             if (downloading)
@@ -222,11 +225,13 @@ namespace ComicDownloader
             //    taskScheduler = new LimitedConcurrencyLevelTaskScheduler(SettingForm.GetSetting().ConcurrentPageDownloadThreads);
             //    factory = new TaskFactory(taskScheduler);
             //}
-            int chapterCount = 0;
             using (SemaphoreSlim semaphore = new SemaphoreSlim(SettingForm.GetSetting().ConcurrentPageDownloadThreads))
             {
                 while (downloadQueue.Count > 0)
                 {
+                    int chapterCount = 0;
+
+
                     downloading = true;
                     var info = downloadQueue.Dequeue();
                     var chapInfo = info.Chapter;
@@ -264,8 +269,8 @@ namespace ComicDownloader
                                    semaphore.Release();
                                    lock (updateUIObj)
                                    {
-                                       threadCounts = threadCounts - 1;
                                        chapInfo.DownloadedCount++;
+
                                        chapInfo.DownloadedPages.Add(item);
                                        this.Invoke((MethodInvoker)delegate
                                    {
@@ -279,13 +284,31 @@ namespace ComicDownloader
                                        var pp = subItem.MyControl as ProgressBar;
                                        pp.Value = pp.Value + 1;
                                        FileInfo fi = new FileInfo(t.Result);
+                                       total += fi.Length;
                                        var refData = listItem.Tag as RowData;
                                        refData.TotalSize += fi.Length;
                                        listItem.SubItems[3].Text = refData.TotalSize.ToKB();
                                    });
                                    }
+
+                                   if (chapInfo.PageCount == chapInfo.DownloadedCount)
+                                   {
+                                       //raise when chapter finished.
+                                       this.Invoke((MethodInvoker)delegate
+                                       {
+                                           count++;
+                                           this.progess.Value = this.progess.Value+1;
+                                           lblPageCount.Text = string.Format("{0:D2}/{1:D2}", count, this.progess.Maximum);
+                                           lblTotalDownloadCount.Text = total.ToKB();
+                                       });
+                                   }
+
+                                   
+
                                    if (chapInfo.PageCount == chapInfo.DownloadedCount && !Downloader.IsTextEngine)
                                    {
+                                       //when chapter finish
+
                                        Task.Run(() =>
                                        {
                                            GeneratePDF(chapInfo, info.Identifier);
@@ -565,9 +588,6 @@ namespace ComicDownloader
         {
             this.Invoke((MethodInvoker)delegate
             {
-                this.progess.Minimum = 0;
-                this.progess.Value = 0;
-                this.progess.Maximum = pageCount;
                 var listItem = new EXListViewItem(chapCount.ToString());
                 listItem.Name = identify.ToString();
                 listItem.SubItems.Add(name.Replace('"', ' ').Replace('.', ' '));
