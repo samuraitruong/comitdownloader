@@ -14,7 +14,7 @@ namespace ComicDownloader.Helpers
 {
     public class EPUBHelper
     {
-        public static void GenereateEpubFromHtml(string[] htmlFiles, string epubFile, string title, string coverPage="")
+        public static void GenereateEpubFromHtml(string[] htmlFiles, string epubFile, string title, string coverPage="", Action<int> afterPageProcecced = null)
         {
             var epub = new EPubDocument();
 
@@ -52,7 +52,10 @@ namespace ComicDownloader.Helpers
                     var pageName = chapTitle.RemoveDiacritics() ;
                     pageName = Regex.Replace(pageName,"[^a-zA-z0-9]", "_") + ".xhtml";
                     page = pageTemplate.Replace("[[CONTENT]]", doc.DocumentNode.SelectSingleNode("//body").InnerHtml);
-
+                     if(afterPageProcecced != null)
+                    {
+                        afterPageProcecced(navCounter);
+                    }
                     //pageTemplate.Replace("", FileStyleUriParser.)
                     epub.AddXhtmlData("html/"+pageName, page);
                     epub.AddNavPoint(chapTitle, "html/" +pageName, navCounter++);

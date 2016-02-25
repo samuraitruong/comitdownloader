@@ -32,7 +32,9 @@ namespace ComicDownloader
         }
         public class RowData
         {
+            public int DownloadedChapters { get; internal set; }
             public string Folder { get; internal set; }
+            public int SelectedChapters { get; internal set; }
             public long TotalSize { get; set; }
         }
 
@@ -160,7 +162,7 @@ namespace ComicDownloader
             });
             if (Downloader.IsTextEngine)
             {
-                DisplayChap(currentStoryInfo.Name, 01, list.Count, singleGuid, txtDir.Text, "");
+                DisplayChap(currentStoryInfo.Name, 01, list.Count, singleGuid, txtDir.Text, "", list.Count);
             }
             bntDownload.Enabled = false;
             bntPauseThread.Enabled = true;
@@ -267,6 +269,7 @@ namespace ComicDownloader
                                }).ContinueWith((t) =>
                                {
                                    semaphore.Release();
+                                   RowData refData = null;
                                    lock (updateUIObj)
                                    {
                                        chapInfo.DownloadedCount++;
@@ -285,9 +288,15 @@ namespace ComicDownloader
                                        pp.Value = pp.Value + 1;
                                        FileInfo fi = new FileInfo(t.Result);
                                        total += fi.Length;
-                                       var refData = listItem.Tag as RowData;
+                                       refData = listItem.Tag as RowData;
                                        refData.TotalSize += fi.Length;
                                        listItem.SubItems[3].Text = refData.TotalSize.ToKB();
+
+                                       if (chapInfo.PageCount == chapInfo.DownloadedCount)
+                                       {
+                                           refData.DownloadedChapters++;
+                                       }
+
                                    });
                                    }
 
@@ -297,13 +306,13 @@ namespace ComicDownloader
                                        this.Invoke((MethodInvoker)delegate
                                        {
                                            count++;
-                                           this.progess.Value = this.progess.Value+1;
+                                           this.progess.Value = this.progess.Value + 1;
                                            lblPageCount.Text = string.Format("{0:D2}/{1:D2}", count, this.progess.Maximum);
                                            lblTotalDownloadCount.Text = total.ToKB();
                                        });
                                    }
 
-                                   
+
 
                                    if (chapInfo.PageCount == chapInfo.DownloadedCount && !Downloader.IsTextEngine)
                                    {
@@ -315,28 +324,13 @@ namespace ComicDownloader
                                        });
                                    }
 
-
-                                   Task.Run(() =>
+                                   if (refData.DownloadedChapters == refData.SelectedChapters && Downloader.IsTextEngine)
                                    {
-
-                                       if (chapInfo.PageCount == chapInfo.DownloadedCount && Downloader.IsTextEngine)
+                                       Task.Run(() =>
                                        {
-                                           var last = downloadQueue.Count > 0 ? downloadQueue.Peek() : null;
-                                           if (last == null)
-                                           {
-                                               Task.WaitAll(tasks.ToArray());
-                                               GenerateStoryEbooks(chapInfo.Story, chapInfo.Folder, info.Identifier);
-                                           }
-                                           else
-                                           {
-                                               if (last.Chapter.Story != chapInfo.Story)
-                                               {
-                                                   GenerateStoryEbooks(chapInfo.Story, chapInfo.Folder, info.Identifier);
-                                               }
-                                           }
-                                       }
-                                   });
-
+                                           GenerateStoryEbooks(chapInfo.Story, chapInfo.Folder, info.Identifier);
+                                       });
+                                   }
 
                                    //remove task 
                                    lock (tasks)
@@ -423,7 +417,7 @@ namespace ComicDownloader
         {
             lock (downloadedStories)
             {
-                if (!downloadedStories.Contains(currentStoryInfo))
+                //if (!downloadedStories.Contains(currentStoryInfo))
                 {
                     var dir = folder;
                     var rootDir = (new DirectoryInfo(dir)).Parent.FullName;
@@ -436,14 +430,22 @@ namespace ComicDownloader
                     string pdfPath = rootDir + "\\PDF\\" + currentStoryInfo.Name.ConvertToValidFileName() + ".pdf";
                     string epubFile = pdfPath.Replace(".pdf", ".epub");
 
-                    PDFHelper.CreatePDFFromHtmls(orderedFiles, pdfPath, currentStoryInfo.Name, this.Settings, currentStoryInfo.CoverPdfPath);
+                    PDFHelper.CreatePDFFromHtmls(orderedFiles, pdfPath, currentStoryInfo.Name, this.Settings, currentStoryInfo.CoverPdfPath,
+                        (index) =>
+                        {
+                            DisplayStatus("PDF Generating...", orderedFiles.Length, index);
+                        });
                     EnableInlineButton(rowID, pdfPath, 6);
                     string cover = TemplateHelper.Populate(Resources.CoverTemplate, "story", this.currentStoryInfo);
 
-                    EPUBHelper.GenereateEpubFromHtml(orderedFiles, epubFile, currentStoryInfo.Name, cover);
+                    EPUBHelper.GenereateEpubFromHtml(orderedFiles, epubFile, currentStoryInfo.Name, cover,
+                         (index) =>
+                         {
+                             DisplayStatus("EPUB Generating...", orderedFiles.Length, index - 1);
+                         });
                     this.InvokeOnMainThread(() =>
                     {
-                        lblStoryPDF.Text = pdfPath;
+                        //lblStoryPDF.Text = pdfPath;
                         if (MessageBox.Show(string.Format("Story {0} has been downloaded, Do you want to open pdf file?", currentStoryInfo.Name) + Environment.NewLine + "Filename: " + pdfPath, "Download finish", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
                         {
                             Process.Start(pdfPath);
@@ -453,7 +455,17 @@ namespace ComicDownloader
             }
             downloadedStories.Add(currentStoryInfo);
         }
-        
+
+        private void DisplayStatus(string title, int length, int index)
+        {
+            this.InvokeOnMainThread(() =>
+            {
+
+                lblStoryPDF.Text = string.Format("{0} {1}/{2}", title, index, length);
+
+            });
+        }
+
         public void EnableInlineButton(Guid identify, object data, int index)
         {
             var listItem = listHistory.Items.Cast<EXListViewItem>().FirstOrDefault(p => p.Name == identify.ToString());
@@ -584,7 +596,7 @@ namespace ComicDownloader
 
         }
 
-        private void DisplayChap(string name, int chapCount, int pageCount, Guid identify, string folder, string pdfPath)
+        private void DisplayChap(string name, int chapCount, int pageCount, Guid identify, string folder, string pdfPath, int selectedChap = 1)
         {
             this.Invoke((MethodInvoker)delegate
             {
@@ -664,8 +676,10 @@ namespace ComicDownloader
 
                 listItem.Tag = new RowData()
                 {
-                    TotalSize = 0     ,
-                    Folder = folder
+                    TotalSize = 0,
+                    Folder = folder,
+                    DownloadedChapters = 0,
+                    SelectedChapters = selectedChap
                 };
 
             });

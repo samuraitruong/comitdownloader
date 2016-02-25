@@ -228,7 +228,7 @@ namespace ComicDownloader.Helpers
             chapter.BookmarkTitle = match.Groups[1].Value;
             return chapter;
         }
-        internal static void CreatePDFFromHtmls(string[] htmlFiles, string pdfPath, string name, ComicDownloaderSettings settings, string cover = "")
+        internal static void CreatePDFFromHtmls(string[] htmlFiles, string pdfPath, string name, ComicDownloaderSettings settings, string cover = "", Action<int> proccedOnePage = null)
         {
             try
             {
@@ -258,6 +258,7 @@ namespace ComicDownloader.Helpers
                 var instance = XMLWorkerHelper.GetInstance();
                 var cssPath = Application.StartupPath + "\\Resources\\defaultcss.css";
 
+                int count = 0;
                 foreach (var item in htmlFiles)
                 {
                     //var chap = CreateChapterContent(File.ReadAllText(item, Encoding.UTF8));
@@ -274,6 +275,10 @@ namespace ComicDownloader.Helpers
                             Encoding.UTF8,
                             new UnicodeFontFactory());
                         writer.NewPage();
+                        if(proccedOnePage != null)
+                        {
+                            proccedOnePage(count++);
+                        }
                         //pdfDoc.NewPage();
 
                     }
