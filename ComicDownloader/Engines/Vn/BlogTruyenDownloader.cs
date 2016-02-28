@@ -64,44 +64,12 @@ namespace ComicDownloader.Engines
 
         public override StoryInfo RequestInfo(string storyUrl)
         {
-            StoryInfo info = new StoryInfo
-            {
-                Url = storyUrl,
-            };
-
-            var html = NetworkHelper.GetHtml(storyUrl);
-            var htmlDoc = new HtmlAgilityPack.HtmlDocument();
-            htmlDoc.LoadHtml(html);
-
-            var node = htmlDoc.DocumentNode.SelectSingleNode("//h1[@class='entry-title']/a");
-            info.Name = node.InnerText.Trim().Replace("&nbsp;", string.Empty);
-
-            //var chapters = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"post\"]//a[contains(@href,'x2.blogtruyen.com')]");
-            var chapters = htmlDoc.DocumentNode.SelectNodes("//*[@id='list-chapters']/p/span[@class='title']/a");
-            //.Descendants("a")
-            //.Where(x => x.Attributes.Contains("href") &&
-            //          ( x.Attributes["href"].Value.Contains("x1.blogtruyen.com") ||
-            //            x.Attributes["href"].Value.Contains("x2.blogtruyen.com") ||
-            //            x.Attributes["href"].Value.Contains("x3.blogtruyen.com")))
-            //.ToList();
-
-            foreach (HtmlNode item in chapters)
-            {
-
-                var chapInfo = new ChapterInfo()
-                {
-                    Url = this.HostUrl + item.Attributes["href"].Value,
-                    Name = item.FirstChild.InnerText.Trim(),
-                    ChapId = ExtractID(item.FirstChild.InnerText.Trim())
-                };
-
-
-                info.Chapters.Add(chapInfo);
-
-            }
-
-            info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
-            return info;
+            return base.RequestInfoSimple(storyUrl, "//h1[@class='entry-title']/a",
+                "//*[@id='list-chapters']/p/span[@class='title']/a",
+                coverPattern: "//div[@class='thumbnail']",
+                categoryPattern: "//span[@class='category']/a",
+                summaryPattern: "//div[@class='content']",
+                authorPattern: "//a[@class='color-green']");
         }
         public static string ConvertURL(string url)
         {

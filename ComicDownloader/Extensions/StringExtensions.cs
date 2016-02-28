@@ -57,6 +57,19 @@ namespace System
 
             return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
         }
+
+        public static string SHA256(this string str)
+        {
+            System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
+            System.Text.StringBuilder hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(str), 0, Encoding.UTF8.GetByteCount(str));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
+        }
+
         public static string ToFriendlyDisplay(this TimeSpan timeSpan, int maxNrOfElements)
         {
             maxNrOfElements = Math.Max(Math.Min(maxNrOfElements, 5), 1);

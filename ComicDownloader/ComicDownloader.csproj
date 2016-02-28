@@ -64,10 +64,16 @@
     <ManifestKeyFile>ComicDownloader_2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr4.StringTemplate, Version=4.0.6.9004, Culture=neutral, processorArchitecture=MSIL">
@@ -77,6 +83,10 @@
     <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>3rd\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentCommandLineParser, Version=1.4.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentCommandLineParser.1.4.3\lib\net35\FluentCommandLineParser.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -581,8 +591,10 @@
     <Compile Include="3rd\WebServer.cs" />
     <Compile Include="ComicDownloaderSettings.cs" />
     <Compile Include="Constant.cs" />
+    <Compile Include="Engines\DataExtractor\DataExtractor.cs" />
     <Compile Include="Engines\18+\HakihomeDownloader.cs" />
     <Compile Include="Engines\18+\Manga16Downloader.cs" />
+    <Compile Include="Engines\DataExtractor\JsonDataExtractor.cs" />
     <Compile Include="Engines\DownloaderAttribute.cs" />
     <Compile Include="Engines\DownloaderSetting.cs" />
     <Compile Include="Engines\En\BatotoDownloader.cs" />
@@ -598,6 +610,7 @@
     <Compile Include="Engines\En\TaaddDownloader.cs" />
     <Compile Include="Engines\En\MangaTradersDownloader.cs" />
     <Compile Include="Engines\En\MangaVolumeDownloader.cs" />
+    <Compile Include="Engines\InfoObj.cs" />
     <Compile Include="Engines\Offline\En\MangaWallDownloader.cs" />
     <Compile Include="Engines\Offline\En\Manga4Downloader.cs" />
     <Compile Include="Engines\Offline\En\MangaAccessDownloader.cs" />
@@ -638,6 +651,8 @@
     <Compile Include="Engines\Text\ThichDocTruyenDownloader.cs" />
     <Compile Include="Engines\Text\WebTruyenDownloader.cs" />
     <Compile Include="Engines\Text\SSTruyenDownloader.cs" />
+    <Compile Include="Engines\Vn\AcademyVNDownloader.cs" />
+    <Compile Include="Engines\Vn\TuoiThoDuDoiDownloader.cs" />
     <Compile Include="Engines\Vn\GocThuGianDownloader.cs" />
     <Compile Include="Engines\Vn\UpTruyenDownloader.cs" />
     <Compile Include="Engines\Vn\TruyenTranhProDownloader.cs" />
@@ -666,6 +681,7 @@
     <Compile Include="Engines\Vn\TruyenQiQuiVNDownloader.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Extensions\HtmlDocumentExtension.cs" />
+    <Compile Include="Extensions\IOExtensions.cs" />
     <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Forms\AppMainForm.cs">
@@ -1604,6 +1620,7 @@
     <None Include="HTML\treetable\README.md" />
     <None Include="HTML\treetable\treetable.jquery.json" />
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\IViewSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>IViewSettings.Designer.cs</LastGenOutput>

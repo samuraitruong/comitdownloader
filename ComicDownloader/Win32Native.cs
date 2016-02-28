@@ -37,5 +37,11 @@ namespace ComicDownloader
         [DllImport("user32.dll", SetLastError = true)]
         public static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
 
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern int FreeConsole();
+
+        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+        public static extern bool AllocConsole();
+
     }
 }

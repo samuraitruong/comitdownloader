@@ -61,7 +61,11 @@ namespace ComicDownloader.Engines
         {
             return base.RequestInfoSimple(storyUrl,
                 "//h1[@class='title-detail']",
-                "//table[@class='list-chapter']//a");
+                "//table[@class='list-chapter']//a", 
+                authorPattern: "//li[@class='author']//a",
+                categoryPattern: "//li[@class='kind']//a",
+                coverPattern: "//div[@class='infoleft']/img",
+                summaryPattern: "//div[@class='detail-content']/p");
         }
 
         public override List<string> GetPages(string chapUrl)

@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace ComicDownloader.Engines
 {
-    public class ChapterInfo
+    public class ChapterInfo : InfoObj
     {
         public string Downloader { get; set; }
         public string Name { get; set; }
@@ -50,7 +50,7 @@ namespace ComicDownloader.Engines
         [XmlIgnore]
         public StoryInfo Story { get; internal set; }
     }
-    public class StoryInfo
+    public class StoryInfo : InfoObj
     {
         public string Group
         {
@@ -79,6 +79,7 @@ namespace ComicDownloader.Engines
                 return string.Join("; ", this.Categories);
             }
         }
+        //json file
         public string Url { get; set; }
         public List<ChapterInfo> Chapters { get; set; }
         public int ChapterCount { get; set; }
@@ -90,6 +91,7 @@ namespace ComicDownloader.Engines
         [XmlIgnore]
 
         public string CoverPdfPath { get;  set; }
+        public object Source { get; set; }
 
         public StoryInfo()
         {

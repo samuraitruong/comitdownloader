@@ -99,7 +99,9 @@ namespace ComicDownloader.Engines
                 null,
                 null,
                 null,
-                this.CustomExtractChapters
+                this.CustomExtractChapters,
+                coverPattern: "//div[@class='cvr_ara']/img",
+                summaryPattern: "//div[@class='det']/p[1]"
                 );
 
         }

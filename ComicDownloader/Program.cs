@@ -1,4 +1,5 @@
-﻿using System; using System.Net;
+﻿using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -7,19 +8,38 @@ using System.Net;
 using ComicDownloader.Forms;
 using System.Diagnostics;
 using ComicDownloader.Engines;
+using Fclp;
+using ComicDownloader.Engines.DataExtractor;
 
 namespace ComicDownloader
 {
     static class Program
     {
+        public class ApplicationArguments
+        {
+            public bool Uninstall { get; set; }
+            public bool Extract { get; set; }
+
+            public  bool Full { get; set; }
+            public bool Incremental { get; set; }
+            public string OutputFolder { get; set; }
+        }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main(string[] args){
-        
 
-            if(args.Length>0 && args[0] =="/uninstall") {
+            var p = new FluentCommandLineParser<ApplicationArguments>();
+            p.Setup(arg => arg.Extract).As('e', "extract");
+            p.Setup(arg => arg.OutputFolder).As('o', "output");
+            p.Setup(arg => arg.Full).As('f', "full");
+            p.Setup(arg => arg.Incremental).As('i', "incremental");
+            p.Setup(arg => arg.Uninstall).As('u', "uninstall");
+            var cmd = p.Parse(args);
+
+            if (args.Length>0 && args[0] =="/uninstall") {
                 Process.Start(new ProcessStartInfo()
                 {
                     Arguments = args[0] + " " + args[1],
@@ -27,6 +47,15 @@ namespace ComicDownloader
                 });
                 return;
                 }
+
+            if (p.Object.Extract)
+            {
+
+                Win32NativeMethods.AllocConsole();
+                DataExtractor.Run(p.Object);
+                return;
+            };
+
             //if (CheckInternetConnection())
             {
                 Application.ThreadException += OnThreadException;

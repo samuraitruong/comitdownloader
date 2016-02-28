@@ -7,30 +7,30 @@ using System.Text.RegularExpressions;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("Big Truyen", Offline = false, Language = "Tieng viet", MenuGroup = "A->F", MetroTab = "Tiếng Việt", Image32 = "1364078951_insert-object")]
-    public class BigTruyenDownloader : Downloader
+    [Downloader("Academy VN", Offline = false, Language = "Tieng viet", MenuGroup = "A->F", MetroTab = "Tiếng Việt", Image32 = "1364078951_insert-object")]
+    public class AcademyVNDownloader : Downloader
     {
         public override string Logo
         {
             get
             {
-                return "http://bigtruyen.net/wp-content//uploads/2015/04/logo.png";
+                return "http://truyen.academyvn.com/uploads/logo.png";
             }
         }
 
         public override string Name
         {
-            get { return "[Big Truyen] - "; }
+            get { return "[Academy VN] - "; }
         }
 
         public override string ListStoryURL
         {
-            get { return "http://bigtruyen.net/danh-sach-truyen/"; }
+            get { return "http://truyen.academyvn.com/manga/all"; }
         }
 
         public override string HostUrl
         {
-            get { return "http://bigtruyen.net"; }
+            get { return "http://truyen.academyvn.com"; }
         }
 
         public override string StoryUrlPattern
@@ -46,8 +46,8 @@ namespace ComicDownloader.Engines
         public override List<StoryInfo> GetListStories(bool forceOnline)
         {
             //GOOD Example for cleanup code.
-            return base.GetListStoriesSimple("http://bigtruyen.net/danh-sach-truyen/?trang={0}",
-                "//div[@class='list-truyen-item-wrap']/a",
+            return base.GetListStoriesSimple("http://truyen.academyvn.com/manga/all?page={0}",
+                "//div[@class='table-responsive']/table//tr/td[1]/a",
                 forceOnline
                 );
         }
@@ -55,18 +55,18 @@ namespace ComicDownloader.Engines
         public override StoryInfo RequestInfo(string storyUrl)
         {
             return base.RequestInfoSimple(storyUrl,
-                "//h1[@class='title']",
-                "//div[@class='chapter-list']//a" ,
-                coverPattern: "//div[@class='manga-info-pic']/img",
-                summaryPattern: "//div[@class='manga-info-content']",
-                authorPattern: "//ul[@class='manga-info-text']/li[3]",
-                categoryPattern: "//ul[@class='manga-info-text']/li[8]//a"
+                "//h2",
+                "//div[@class='table-scroll']/table//tr/td[1]/a",
+                coverPattern: "//div[@class='__image']/img",
+                summaryPattern: "//div[@class='__description']",
+                authorPattern: "//div[@class='__info']/p[2]/a",
+                categoryPattern: "//div[@class='__info']/p[1]/a"
                 );
         }
         public override List<string> GetPages(string chapUrl)
         {
             return base.GetPagesSimple(chapUrl,
-                "//div[@id='chapter-content']//img");
+                "//div[@class='manga-container']//img");
         }
 
         public override List<StoryInfo> GetLastestUpdates()

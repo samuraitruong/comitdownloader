@@ -28,8 +28,7 @@ namespace ComicDownloader.Engines
             return string.CompareOrdinal(x.Name, y.Name);
         }
     }
-
-
+   
     public abstract class Downloader
     {
 
@@ -47,6 +46,10 @@ namespace ComicDownloader.Engines
             @"(\d+)$",
             @"(\d+)"
         };
+        public string GetSiteDomain()
+        {
+            return new Uri(this.HostUrl).Host;
+    }
         public virtual int MaxRequestInfoChapterThread
         {
             get
@@ -534,7 +537,7 @@ namespace ComicDownloader.Engines
             string html = NetworkHelper.GetHtml(url, this.Cookies);
             if (html == "HTTP ERROR" && retry <= this.NumberRetryWhenFailed)
             {
-                retry = retry + 1;
+               retry = retry + 1;
                 return CrawlOnePage(url, matchPattern, retry++, appendHost, convertFunc, customParser, pagingCrawler);
             }
             HtmlDocument htmlDoc = new HtmlDocument();

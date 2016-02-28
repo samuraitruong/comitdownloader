@@ -61,7 +61,9 @@ namespace ComicDownloader.Engines
         {
             return base.RequestInfoSimple(url,
                 "//h1/a",
-                "//ul[@class='lst']//a[@class='lst']"
+                "//ul[@class='lst']//a[@class='lst']",
+
+                coverPattern: "//img[@class='cvr']"
                 );
         }
         public override string Name

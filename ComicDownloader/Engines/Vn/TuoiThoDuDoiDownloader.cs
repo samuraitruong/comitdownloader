@@ -10,30 +10,30 @@ using Newtonsoft.Json;
 
 namespace ComicDownloader.Engines
 {
-    [Downloader("A3 Manga", Offline = false, Language = "Tieng viet", MenuGroup = "A->F", MetroTab = "Tiếng Việt", Image32 = "1364078951_insert-object")]
-    public class A3MangaDownloader : Downloader
+    [Downloader("Tuoi tho DD", Offline = false, Language = "Tieng viet", MenuGroup = "T", MetroTab = "Tiếng Việt", Image32 = "1364078951_insert-object")]
+    public class TuoiThoDuDoiDownloader : Downloader
     {
         public override string Logo
         {
             get
             {
-                return "http://www.a3manga.com/wp-content/themes/a3manga/images/logo.png";
+                return "http://www.tuoithodudoi.com/staticres/images/logo.png";
             }
         }
 
         public override string Name
         {
-            get { return "[A3 Manga] - "; }
+            get { return "[Tuoi tho DD] - "; }
         }
 
         public override string ListStoryURL
         {
-            get { return "http://www.a3manga.com/danh-sach-truyen/"; }
+            get { return "http://www.tuoithodudoi.com/danh-sach-truyen-tranh/moi-cap-nhat.html"; }
         }
 
         public override string HostUrl
         {
-            get { return "http://www.a3manga.com"; }
+            get { return "http://www.tuoithodudoi.com"; }
         }
 
         public override string StoryUrlPattern
@@ -43,49 +43,38 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> HotestStories(){
             return base.HotestStoriesSimple(this.HostUrl,
-                "//ul[contains(@class,'most-views')]/li/a",
-                nodeConvert: (node) =>
-                {
-                    return new StoryInfo()
-                    {
-                        Url = node.Attributes["href"].Value,
-                        Name = node.SelectSingleNode("p").InnerText.Trim()
-                    };
-                });
+                "//div[@class='content-list-hot']/a");
         }
         public override List<StoryInfo> GetListStories(bool forceOnline)      
         {
-            return base.GetListStoriesSimple("http://www.a3manga.com/danh-sach-truyen/",
-                "//table//tr/td[2]/a",
+            return base.GetListStoriesUnknowPages(this.ListStoryURL,
+                "//li[@class='wrap-item-story']/div/div[contains(@class,'name')]/a",
                 forceOnline,
-                singleListPage: true
+                "//ul[@class='pagination']//a"
                 );
         }
 
         public override StoryInfo RequestInfo(string storyUrl)
         {
             return base.RequestInfoSimple(storyUrl,
-                "//h2[@class='info-title']",
-                "//table//tr/td/a",
-                authorPattern: "//div[contains(@class,'comic-info')]//span[@class='green']",
-                summaryPattern: "//div[@class='widget']/div/p",
-                coverPattern: "//div[contains(@class, 'comic-intro')]//img[@class='img-thumbnail']",
-                nameExtract: delegate (HtmlNode node)
-                {
-                    return node.InnerText.Trim().Replace(" - ", " ");
-                });
+                "//h2",
+                "//a[@class='chap-name-link']",
+                authorPattern: "//span[@class='author']",
+                categoryPattern: "//span[@class='type']",
+                summaryPattern: "//div[@class='brief-content-wrap']//p",
+                coverPattern: "//img[@class='comic-image img-thumbnail']");
 
         }
         public override List<string> GetPages(string chapUrl)
         {
             return base.GetPagesSimple(chapUrl,
-                "//section[contains(@class,'view-chapter')]//img");
+                "//div[@class='detail-list-chapter']//img");
         }
 
         public override List<StoryInfo> GetLastestUpdates()
         {
-            return base.GetLastestUpdateSimple(this.HostUrl,
-                "//div[@class='comic-title-link']/a[1]",
+            return base.GetLastestUpdateSimple(this.ListStoryURL,
+                "//li[@class='wrap-item-story']/div/div[contains(@class,'name')]/a",
                 "");
         }
 
