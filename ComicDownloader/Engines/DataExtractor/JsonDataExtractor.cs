@@ -69,15 +69,17 @@ namespace ComicDownloader.Engines.DataExtractor
         }
         public override void StoreList(List<StoryInfo> stories, Downloader dl)
         {
-            var path = GetBaseFolder(dl.HostUrl);
-            var json = JsonConvert.SerializeObject(stories);
-            var file = Path.Combine(path, "stories.json");
-            if (File.Exists(file))
+            lock (ioLocker)
             {
-                File.Delete(file);
+                var path = GetBaseFolder(dl.HostUrl);
+                var json = JsonConvert.SerializeObject(stories);
+                var file = Path.Combine(path, "stories.json");
+                if (File.Exists(file))
+                {
+                    File.Delete(file);
+                }
+                File.WriteAllText(file, json);
             }
-            File.WriteAllText(file, json);
-
         }
         public override void StoreChapter(ChapterInfo chapter, Downloader dl)
         {
