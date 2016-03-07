@@ -1,0 +1,392 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head >
+    <title>
+        đọc truyện tranh, truyện Online hay có tại hamtruyen.com
+    </title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="đọc truyện tranh các bạn có thể đọc truyện online hay mới nhất, cập nhật liên tục đọc truyện online, truyện hot nhất hiện nay tại hamtruyen.com" />
+    <meta name="Keywords" content="đọc truyện, doc truyen, doc truyen tranh, truyen hay" />
+    <meta name="copyright" content="truyen tranh cua hamtruyen.com" />
+    <meta name="google-site-verification" content="bzvuo3Ey_3j1Ajv38N3Zc4V6-DqjhkUMEOzLbHdWGB8" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link href="/vendors/bootstrap.css" rel="stylesheet" />
+    <link href="/content/css/style.css" rel="stylesheet" />
+    <link href="/content/css/jcarousel.responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/vendors/jquery-ui.min.css" />
+</head>
+<body>
+
+    <!--START HEADER-->
+    <header>
+        <div class="header_wrapper row">
+            <div id="logo_left" class="col-xs-6 col-md-4">
+                <a href="index-2.html" title="doc Truyen tranh" class="bg logo"></a>
+            </div>
+            <div id="content_right" class="col-md-8">
+                <div class="col-md-6 height_row1">
+                    <div class="wrapper_search input-group">
+                        <input type="text" class="form-control" id="txtSearchTruyen" placeholder="Tìm Kiếm" />
+                        <button class="input-group-addon bg search btnSearch" onclick="search();"></button>
+                    </div>
+                </div>
+                <div class="col-md-6 height_row1" id="login-part">
+                    <button id="btn_log" type="button" class="btn btn-default" data-toggle="modal" data-target="#login_section_wrapper">Đăng nhập</button>
+                    <!--START LOGIN-->
+                    <section id="login_section_wrapper" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="login" aria-hidden="true">
+                        <form id="login_form" method="post">
+                            <div class="modal-dialog modal-md" id="login_section">
+                                <div class="modal-content" style="border-radius:0;">
+                                    <div class="modal-header header_login">
+                                        <button type="button" class="close" data-dismiss="modal">
+                                            <span aria-hidden="true">&times;</span>
+                                            <span class="sr-only">Close</span>
+                                        </button>
+                                        <h4 class="modal-title">Đăng Nhập</h4>
+                                    </div>
+                                    <div class="login_form modal-body">
+                                        <div class="row">
+
+                                            <div class="col-lg-12">
+                                                <input type="text" class="form-control" id="login_user_name" name="login_user_name" placeholder="Tên tài khoản" />
+                                            </div>
+                                        </div>
+                                        <div class="row mgtop10">
+
+                                            <div class="col-lg-12">
+                                                <input type="password" class="form-control" id="login_password" name="login_password" placeholder="Mật khẩu đăng nhập" />
+                                            </div>
+                                        </div>
+                                        <div class="row mgtop10">
+                                            <div class="col-lg-6">
+                                                <input type="checkbox" checked="checked" id="chkRememberPass" name="remember_pass" /> Nhớ mật khẩu
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <a href="quenmatkhau.html">Quên mật khẩu</a>
+                                            </div>
+                                        </div>
+                                        <div class="row mgtop10">
+                                            <div class="col-lg-12">
+                                                <button id="btn_login" class="btn_hamtruyen">Đăng Nhập</button>
+                                                <input type="hidden" name="act_log" id="act_log" />
+                                            </div>
+                                        </div>
+                                        <div class="row mgtop" id="div_error"></div>
+                                    </div>
+                                    <div class="row description_login">
+                                        Nếu bạn chưa có nick tại hamtruyen thì xin mời <a href="dangky.html">đăng ký tại đây</a>.<br />
+                                        Hoặc đăng nhập qua tài khoản <a href="dangky8849.html?type=face">Facebook</a>.
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                    <!--END LOGIN-->
+
+
+
+                </div>
+                <div class="col-md-12 height_row2" id="big_menu_horizontal">
+                    <ul class="nav navbar-nav">
+                        <li><a href="http://truyenngay.com/">Truyện chữ</a></li>
+                        <li><a href="http://ixinh.net/">Tin hot</a></li>
+                        <li><a href="http://caro.hamtruyen.vn/">Caro online</a></li>
+                        <li><a href="index.html">Truyện tranh</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <div class="header_bottom col-xs-12 col-md-12">
+        </div>
+        <div class="menu_ngang">
+            <div class="wrapper_menu_ngang">
+                <ul class="nav navbar-nav" id="small_menu_ngang">
+                    <li><span class="left_menu"></span><a href="danhsach/index.html"><span class="text_menu">Danh Sách Truyện</span></a><span class="right_menu"></span></li>
+                    <li><span class="left_menu"></span><a href="Theloai/549f819f1788b6107431bd05/manga.html"><span class="text_menu">Manga</span></a><span class="right_menu"></span></li>
+                    <li><span class="left_menu"></span><a href="Theloai/549f819f1788b6107431bd06/manhwa.html"><span class="text_menu">Manhwa</span></a><span class="right_menu"></span></li>
+                    <li><span class="left_menu"></span><a href="Theloai/549f819f1788b6107431bd04/manhua.html"><span class="text_menu">Manhua</span></a><span class="right_menu"></span></li>
+                    <li><span class="left_menu"></span><a href="Theloai/549f819f1788b6107431bd08/huyen-huyen.html"><span class="text_menu">Huyền Huyễn</span></a><span class="right_menu"></span></li>
+                    <li><span class="left_menu"></span><a href="Theloai/549f819f1788b6107431bd2e/hamtruyen.html"><span class="text_menu">Hamtruyen</span></a><span class="right_menu"></span></li>
+                    <li><span class="left_menu"></span><a href="#"><span class="text_menu">Hài</span></a><span class="right_menu"></span></li>
+                </ul>
+                <div class="pull-right">
+                    <button class="btn-uploader" onclick="location.href='User/thong-bao-dang-nhap.html';">
+                        <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+                        Upload truyện
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--END HEADER-->
+    <!--START CONTAINTER-->
+    <section id="middle" class="container-fluid" style="background-image:url('content/images/zx.jpg'); background-attachment:fixed;background-position:top;">
+        <section id="container">
+
+            <!-- qc vng --!>
+            <img src=" https://ad.doubleclick.net/ddm/ad/N135802.1966908HAMTRUYEN/B8709353.127222161;sz=10x10;ord=[timestamp]?" width=0; height=0 />
+
+             <!-- endqc vng --!>
+
+                <!-- START GALLERY TRUYEN HOT AND BXH-->
+            <div id="wrapper_gallery_and_bxh" class="row">
+                <!--qc banner ---!>
+                <center><script type="text/javascript" src="http://goldpriceoz.net/ads/ht_head"> </script>
+                </center>
+
+                <!-- end qc banner ---!>
+
+                        <div id="gallery_truyenhot" class="col-md-9 mgtop10"><!--start gallery_truyenhot-->
+                <!--Random mangas and chapters END-->
+                <div class="">
+                    <div class="title_doctruyen moicapnhat clearfix">
+                        <div class="bg lefttbar3 fl"></div>
+                        <div class="centertext fl" style="width:655px;padding-top:3px;">
+                            Giới thiệu truyện
+                        </div>
+                        <div class="bg rightbar3 fl"></div>
+                    </div>
+                    <div class="mgtop10 clearfix">
+                        <div class="div_img_gioithieu">
+                            <a href="appleseed-1386.html">
+                                <img src="/content/images/appleseed.jpg" alt="" />
+                            </a>
+                        </div>
+
+                        <div class="div_info_gioithieu">
+
+                            <a class="manga-name" href="appleseed-1386.html">Appleseed</a>
+                            <div class="manga-info mgtop10">
+                                Cập nhật <a class="manga-lastchap" href="doc-truyen/appleseed-chapter-10-2.html">Chapter 10.2</a>
+                            </div>
+
+                            <div class="manga-info mgtop10">
+                                <span class="glyphicon glyphicon-tags"></span>
+                                <span> Thể loại: </span>
+                                <a class="label label-primary manga-type" href="Theloai/549f819f1788b6107431bd23/shounen.html">Shounen</a><a class="label label-primary manga-type" href="Theloai/549f819f1788b6107431bd19/sci-fi.html">Sci-fi</a><a class="label label-primary manga-type" href="Theloai/549f819f1788b6107431bd09/action.html">Action</a><a class="label label-primary manga-type" href="Theloai/549f819f1788b6107431bd05/manga.html">Manga</a>
+                            </div>
+
+                            <div class="manga-info mgtop10">
+                                <div class="text_desc_gioithieu">
+                                    Thế chiến thứ 3 kết thúc, Duenan Knute và đồng nghiệp cyborg Briareos cố gắng tồn tại ở các thành phố bị bỏ hoang và khu phi quân sự sau chiến tranh. Và chuyện bắt đầu xảy ra
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br class="clear" />
+            </div>
+
+            <div id="wrapper_bxh" class="col-md-3 mgtop10">
+                <!--start bxh-->
+                <div class="item_bxh old"> <span class="stt stt1">1</span><a href="dau-pha-thuong-khung-1385.html" class="name_bxh">Đấu Phá Thương Khung</a></div><div class="item_bxh even"> <span class="stt stt2">2</span><a href="dau-la-dai-luc-1385.html" class="name_bxh">Đấu La Đại Lục</a></div><div class="item_bxh old"> <span class="stt stt3">3</span><a href="tung-tien-huu-toa-linh-kiem-son-1385.html" class="name_bxh">Tung Tiền Hữu Tọa Linh Kiếm Sơn</a></div><div class="item_bxh even"> <span class="stt stt4">4</span><a href="hiep-khach-giang-ho-1387.html" class="name_bxh">Hiệp khách giang hồ</a></div><div class="item_bxh old"> <span class="stt stt5">5</span><a href="tuyet-the-duong-mon---dau-la-dai-luc-2-1385.html" class="name_bxh">Tuyệt thế Đường Môn - Đấu La Đại Lục 2</a></div><div class="item_bxh even"> <span class="stt stt6">6</span><a href="cuu-dinh-ky-1385.html" class="name_bxh">Cửu Đỉnh Ký</a></div><div class="item_bxh old"> <span class="stt stt7">7</span><a href="yeu-than-ky-1385.html" class="name_bxh">Yêu Thần Ký</a></div><div class="item_bxh even"> <span class="stt stt8">8</span><a href="ban-long-1385.html" class="name_bxh">Bàn Long</a></div><div class="item_bxh old"> <span class="stt stt9">9</span><a href="vo-dong-can-khon-1385.html" class="name_bxh">Võ Động Càn Khôn</a></div><div class="item_bxh even"> <span class="stt stt10">10</span><a href="than-an-vuong-toa-1385.html" class="name_bxh">Thần Ấn Vương Tọa</a></div>
+                <!--end bxh-->
+            </div>
+            </div>
+            <!-- END GALLERY TRUYEN HOT AND BXH-->
+            <!-- START TRUYỆN HOT TRONG NGÀY -->
+            <div id="wrapper_truyendecu">
+                <div class="title_truyennendoc">
+                    <div class="gach"></div>
+                    <span class="wrap"><h1>Truyện Hot Trong Ngày</h1></span>
+                </div>
+                <div class="jcarousel-wrapper">
+                    <div id="crsTruyenHotTrongNgay" class="carousel fdi-Carousel slide" data-ride="carousel">
+
+                        <div class="carousel-inner onebyone-carosel">
+                            <div class="item active"><div class="item_truyennendoc"><a href="vo-han-khung-bo-1385.html"><div class="wrapper_imgage"><img u="image" src="/content/images/appleseed.jpg" alt="Vô hạn khủng bố - Thực Hiện Bởi hamtruyen.com"><h5 class="tenchap_slide">Chương 33.3 - C...</h5></div><h5 class="tentruyen_slide">Vô hạn khủng bố</h5></a></div></div><div class="item"><div class="item_truyennendoc"><a href="zombie-brother---thi-huynh-1385.html"><div class="wrapper_imgage"><img u="image" src="/content/images/appleseed.jpg" alt="Zombie Brother - Thi Huynh - Thực Hiện Bởi hamtruyen.com"><h5 class="tenchap_slide">Chapter 137</h5></div><h5 class="tentruyen_slide">Zombie Brother - Thi Huynh</h5></a></div></div><div class="item"><div class="item_truyennendoc"><a href="ba-dao-1385.html"><div class="wrapper_imgage"><img u="image" src="/content/images/appleseed.jpg" alt="Bá Đao - Thực Hiện Bởi hamtruyen.com"><h5 class="tenchap_slide">Chapter 192</h5></div><h5 class="tentruyen_slide">Bá Đao</h5></a></div></div><div class="item"><div class="item_truyennendoc"><a href="nguy-thuy-nghi-van-1385.html"><div class="wrapper_imgage"><img u="image" src="/content/images/appleseed.jpg" alt="Ngụy Thủy Nghi Vân - Thực Hiện Bởi hamtruyen.com"><h5 class="tenchap_slide">Chapter 64</h5></div><h5 class="tentruyen_slide">Ngụy Thủy Nghi Vân</h5></a></div></div><div class="item"><div class="item_truyennendoc"><a href="phe-quy-gia-1385.html"><div class="wrapper_imgage"><img u="image" src="/content/images/appleseed.jpg" alt="Phệ Quy Giả - Thực Hiện Bởi hamtruyen.com"><h5 class="tenchap_slide">Chapter 44</h5></div><h5 class="tentruyen_slide">Phệ Quy Giả</h5></a></div></div><div class="item"><div class="item_truyennendoc"><a href="dau-la-dai-luc-ngoai-truyen-than-gioi-truyen-thuyet-1385.html"><div class="wrapper_imgage"><img u="image" src="/content/images/appleseed.jpg" alt="Đấu La Đại Lục Ngoại Truyện Thần Giới Truyền Thuyết - Thực Hiện Bởi hamtruyen.com"><h5 class="tenchap_slide">Chapter 32</h5></div><h5 class="tentruyen_slide">Đấu La Đại Lục Ngoại Truyện Thần Giới Truyền Thuyết</h5></a></div></div><div class="item"><div class="item_truyennendoc"><a href="truyen-nhan-atula-phan-3-1386.html"><div class="wrapper_imgage"><img u="image" src="/content/images/appleseed.jpg" alt="Truyền Nhân Atula Phần 3 - Thực Hiện Bởi hamtruyen.com"><h5 class="tenchap_slide">Chapter 43</h5></div><h5 class="tentruyen_slide">Truyền Nhân Atula Phần 3</h5></a></div></div><div class="item"><div class="item_truyennendoc"><a href="roppongi-black-cross-1386.html"><div class="wrapper_imgage"><img u="image" src="/content/images/appleseed.jpg" alt="Roppongi Black Cross - Thực Hiện Bởi hamtruyen.com"><h5 class="tenchap_slide">Chapter 63</h5></div><h5 class="tentruyen_slide">Roppongi Black Cross</h5></a></div></div><div class="item"><div class="item_truyennendoc"><a href="red-storm-1387.html"><div class="wrapper_imgage"><img u="image" src="/content/images/appleseed.jpg" alt="Red Storm - Thực Hiện Bởi hamtruyen.com"><h5 class="tenchap_slide">Chapter 187</h5></div><h5 class="tentruyen_slide">Red Storm</h5></a></div></div><div class="item"><div class="item_truyennendoc"><a href="hom-nay-bat-dau-lam-nu-than-1385.html"><div class="wrapper_imgage"><img u="image" src="/content/images/appleseed.jpg" alt="Hôm nay bắt đầu làm nữ thần - Thực Hiện Bởi hamtruyen.com"><h5 class="tenchap_slide">Chapter 83</h5></div><h5 class="tentruyen_slide">Hôm nay bắt đầu làm nữ thần</h5></a></div></div><div class="item"><div class="item_truyennendoc"><a href="the-gioi-tien-hiep-1385.html"><div class="wrapper_imgage"><img u="image" src="/content/images/appleseed.jpg" alt="Thế Giới Tiên Hiệp - Thực Hiện Bởi hamtruyen.com"><h5 class="tenchap_slide">Chapter 50 - Dự...</h5></div><h5 class="tentruyen_slide">Thế Giới Tiên Hiệp</h5></a></div></div><div class="item"><div class="item_truyennendoc"><a href="yeu-than-ky-1385.html"><div class="wrapper_imgage"><img u="image" src="../admin.hamtruyen.vn/Pictures/Truyen/Small/yeu-than-ky-(ht).jpg" alt="Yêu Thần Ký - Thực Hiện Bởi hamtruyen.com"><h5 class="tenchap_slide">Chapter 66</h5></div><h5 class="tentruyen_slide">Yêu Thần Ký</h5></a></div></div><div class="item"><div class="item_truyennendoc"><a href="ansatsu-kyoushitsu---lop-hoc-am-sat-1386.html"><div class="wrapper_imgage"><img u="image" src="/content/images/appleseed.jpg" alt="Ansatsu Kyoushitsu - Lớp Học Ám Sát - Thực Hiện Bởi hamtruyen.com"><h5 class="tenchap_slide">Chapter 178</h5></div><h5 class="tentruyen_slide">Ansatsu Kyoushitsu - Lớp Học Ám Sát</h5></a></div></div><div class="item"><div class="item_truyennendoc"><a href="dai-chua-te-1385.html"><div class="wrapper_imgage"><img u="image" src="/content/images/appleseed.jpg" alt="Đại chúa tể - Thực Hiện Bởi hamtruyen.com"><h5 class="tenchap_slide">Chapter 41</h5></div><h5 class="tentruyen_slide">Đại chúa tể</h5></a></div></div><div class="item"><div class="item_truyennendoc"><a href="the-gioi-hoan-my-1395.html"><div class="wrapper_imgage"><img u="image" src="/content/images/appleseed.jpg" alt="Thế Giới Hoàn Mỹ - Thực Hiện Bởi hamtruyen.com"><h5 class="tenchap_slide">Chapter 2</h5></div><h5 class="tentruyen_slide">Thế Giới Hoàn Mỹ</h5></a></div></div>
+                        </div>
+
+                    </div>
+                    <a class="jcarousel-control-prev" href="#crsTruyenHotTrongNgay" role="button" data-slide="prev">
+                    </a>
+                    <a class="jcarousel-control-next" href="#crsTruyenHotTrongNgay" role="button" data-slide="next">
+                    </a>
+                </div>
+            </div>
+            <!-- END TRUYỆN HOT TRONG NGÀY -->
+            <!-- START TRUYỆN MỚI CẬP NHẬT -->
+            <div class="row" id="wrapp_content_mc">
+                <div class="col-md-8 wrapper_truyemoicapnhat">
+                    <div class="title_doctruyen manga">
+                        <div class="bg left_bar fl"></div>
+                        <div class="centertext fl" style="width:655px;padding-top:3px;">
+                            Truyện Mới Cập Nhật
+
+                            <a href="danhsach/indexa1a1.html?sort=2" class="link_right"> Xem thêm &raquo;</a>
+                        </div>
+                        <div class="bg rightbar fl"></div>
+                    </div>
+                    <div class="lst_truyen_moidang">
+                        <div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="vo-han-khung-bo-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="Vô hạn khủng bố - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/vo-han-khung-bo-chuong-33-3---chien-dau-ac-liet.html"><h5 class="tenchap_slide">Chương 33.3 - C...</h5></a>  </div><a href="vo-han-khung-bo-1385.html"><h5 class="tentruyen_slide">Vô hạn khủng bố</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="zombie-brother---thi-huynh-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="Zombie Brother - Thi Huynh - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/zombie-brother---thi-huynh-chapter-137.html"><h5 class="tenchap_slide">Chapter 137</h5></a>  </div><a href="zombie-brother---thi-huynh-1385.html"><h5 class="tentruyen_slide">Zombie Brother - Thi Huynh</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="ichi-the-killer---sat-thu-so-1-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Ichi the Killer - Sát thủ số 1 - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/ichi-the-killer---sat-thu-so-1-chapter-48.html"><h5 class="tenchap_slide">Chapter 48</h5></a>  </div><a href="ichi-the-killer---sat-thu-so-1-1386.html"><h5 class="tentruyen_slide">Ichi the Killer - Sát thủ số 1</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="garfield-0.html"><img u="image" src="/content/images/appleseed.jpg" alt="Garfield - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/garfield-chapter-20.html"><h5 class="tenchap_slide">Chapter 20</h5></a>  </div><a href="garfield-0.html"><h5 class="tentruyen_slide">Garfield</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="nguoi-trong-giang-ho-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="Người Trong Giang Hồ - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/nguoi-trong-giang-ho-chapter-687.html"><h5 class="tenchap_slide">Chapter 687</h5></a>  </div><a href="nguoi-trong-giang-ho-1385.html"><h5 class="tentruyen_slide">Người Trong Giang Hồ</h5></a></div></div><div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="haikyuu%21%21-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Haikyuu!! - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/haikyuu-chapter-112.html"><h5 class="tenchap_slide">Chapter 112</h5></a>  </div><a href="haikyuu%21%21-1386.html"><h5 class="tentruyen_slide">Haikyuu!!</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="mot-nua-ranma-1386.html"><img u="image" src="../admin.hamtruyen.vn/Pictures/Truyen/Small/ranma_1_2___mot_nua_ranma.png" alt="Một Nửa Ranma - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/mot-nua-ranma-chapter-310.html"><h5 class="tenchap_slide">Chapter 310</h5></a>  </div><a href="mot-nua-ranma-1386.html"><h5 class="tentruyen_slide">Một Nửa Ranma</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="dice-1387.html"><img u="image" src="/content/images/appleseed.jpg" alt="DICE - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/dice-chapter-129.html"><h5 class="tenchap_slide">Chapter 129</h5></a>  </div><a href="dice-1387.html"><h5 class="tentruyen_slide">DICE</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="tokimeichatte-gomen-ne-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Tokimeichatte Gomen Ne? - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/tokimeichatte-gomen-ne-chapter-1.html"><h5 class="tenchap_slide">Chapter 1</h5></a>  </div><a href="tokimeichatte-gomen-ne-1386.html"><h5 class="tentruyen_slide">Tokimeichatte Gomen Ne?</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="teizokurei-monophobia-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Teizokurei Monophobia - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/teizokurei-monophobia-chapter-2.html"><h5 class="tenchap_slide">Chapter 2</h5></a>  </div><a href="teizokurei-monophobia-1386.html"><h5 class="tentruyen_slide">Teizokurei Monophobia</h5></a></div></div><div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="dna-doesnt-tell-us-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="DNA Doesnt Tell Us - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/dna-doesnt-tell-us-chapter-4.html"><h5 class="tenchap_slide">Chapter 4</h5></a>  </div><a href="dna-doesnt-tell-us-1386.html"><h5 class="tentruyen_slide">DNA Doesnt Tell Us</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="papa-no-iukoto-o-kikinasai-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Papa no Iukoto o Kikinasai! - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/papa-no-iukoto-o-kikinasai-chapter-12---end.html"><h5 class="tenchap_slide">Chapter 12 - EN...</h5></a>  </div><a href="papa-no-iukoto-o-kikinasai-1386.html"><h5 class="tentruyen_slide">Papa no Iukoto o Kikinasai!</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="thau-tinh-di-gioi-ban-0.html"><img u="image" src="/content/images/appleseed.jpg" alt="Thâu Tinh Dị Giới Bản - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/thau-tinh-di-gioi-ban-chapter-20---end.html"><h5 class="tenchap_slide">Chapter 20 - EN...</h5></a>  </div><a href="thau-tinh-di-gioi-ban-0.html"><h5 class="tentruyen_slide">Thâu Tinh Dị Giới Bản</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="mai-ball-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Mai Ball! - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/mai-ball-chapter-2.html"><h5 class="tenchap_slide">Chapter 2</h5></a>  </div><a href="mai-ball-1386.html"><h5 class="tentruyen_slide">Mai Ball!</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="karasutengu-kabuto-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Karasutengu Kabuto - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/karasutengu-kabuto-chapter-2-1.html"><h5 class="tenchap_slide">Chapter 2.1</h5></a>  </div><a href="karasutengu-kabuto-1386.html"><h5 class="tentruyen_slide">Karasutengu Kabuto</h5></a></div></div><div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="dr--frost-1387.html"><img u="image" src="/content/images/appleseed.jpg" alt="Dr. Frost - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/dr--frost-chapter-14.html"><h5 class="tenchap_slide">Chapter 14</h5></a>  </div><a href="dr--frost-1387.html"><h5 class="tentruyen_slide">Dr. Frost</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="cot-sinh-hoa-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="Cốt sinh hoa - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/cot-sinh-hoa-chapter-1.html"><h5 class="tenchap_slide">Chapter 1</h5></a>  </div><a href="cot-sinh-hoa-1385.html"><h5 class="tentruyen_slide">Cốt sinh hoa</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="doraemon-nobita-no-biohazard-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Doraemon: Nobita no Biohazard - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/doraemon-nobita-no-biohazard-chapter-9.html"><h5 class="tenchap_slide">Chapter 9</h5></a>  </div><a href="doraemon-nobita-no-biohazard-1386.html"><h5 class="tentruyen_slide">Doraemon: Nobita no Biohazard</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="ichiba-kurogane-wa-kasegitai-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Ichiba Kurogane wa Kasegitai - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/ichiba-kurogane-wa-kasegitai-chapter-3.html"><h5 class="tenchap_slide">Chapter 3</h5></a>  </div><a href="ichiba-kurogane-wa-kasegitai-1386.html"><h5 class="tentruyen_slide">Ichiba Kurogane wa Kasegitai</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="nana-to-kaoru-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Nana To Kaoru - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/nana-to-kaoru-chapter-74.html"><h5 class="tenchap_slide">Chapter 74</h5></a>  </div><a href="nana-to-kaoru-1386.html"><h5 class="tentruyen_slide">Nana To Kaoru</h5></a></div></div><div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="kyou-no-yuiko-san-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Kyou No Yuiko-san - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/kyou-no-yuiko-san-chapter-6.html"><h5 class="tenchap_slide">Chapter 6</h5></a>  </div><a href="kyou-no-yuiko-san-1386.html"><h5 class="tentruyen_slide">Kyou No Yuiko-san</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="at-each-others-throats-1387.html"><img u="image" src="/content/images/appleseed.jpg" alt="At Each Other’s Throats - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/at-each-others-throats-chapter-15.html"><h5 class="tenchap_slide">Chapter 15</h5></a>  </div><a href="at-each-others-throats-1387.html"><h5 class="tentruyen_slide">At Each Other’s Throats</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="19-tang-dia-nguc-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="19 Tầng Địa Ngục - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/19-tang-dia-nguc-chapter-3.html"><h5 class="tenchap_slide">Chapter 3</h5></a>  </div><a href="19-tang-dia-nguc-1385.html"><h5 class="tentruyen_slide">19 Tầng Địa Ngục</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="tay-dam-hac-am-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Tay Đấm Hắc Ám - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/tay-dam-hac-am-chapter-1.html"><h5 class="tenchap_slide">Chapter 1</h5></a>  </div><a href="tay-dam-hac-am-1386.html"><h5 class="tentruyen_slide">Tay Đấm Hắc Ám</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="tinh-yeu-bat-dau-tu-ngay-hom-nay-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="Tình Yêu! Bắt Đầu Từ Ngày Hôm Nay - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/tinh-yeu-bat-dau-tu-ngay-hom-nay-chapter-2.html"><h5 class="tenchap_slide">Chapter 2</h5></a>  </div><a href="tinh-yeu-bat-dau-tu-ngay-hom-nay-1385.html"><h5 class="tentruyen_slide">Tình Yêu! Bắt Đầu Từ Ngày Hôm Nay</h5></a></div></div><div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="tinh-yeu-giao-huan-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Tình Yêu Giáo Huấn - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/tinh-yeu-giao-huan-chapter-5.html"><h5 class="tenchap_slide">Chapter 5</h5></a>  </div><a href="tinh-yeu-giao-huan-1386.html"><h5 class="tentruyen_slide">Tình Yêu Giáo Huấn</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="force-of-will-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Force Of Will - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/force-of-will-chapter-4---the-seven-kings-of-the-lands.html"><h5 class="tenchap_slide">Chapter 4 - The...</h5></a>  </div><a href="force-of-will-1386.html"><h5 class="tentruyen_slide">Force Of Will</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="ba-dao-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="Bá Đao - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/ba-dao-chapter-192.html"><h5 class="tenchap_slide">Chapter 192</h5></a>  </div><a href="ba-dao-1385.html"><h5 class="tentruyen_slide">Bá Đao</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="valkyrie-agency-1387.html"><img u="image" src="/content/images/appleseed.jpg" alt="Valkyrie Agency - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/valkyrie-agency-chapter-2.html"><h5 class="tenchap_slide">Chapter 2</h5></a>  </div><a href="valkyrie-agency-1387.html"><h5 class="tentruyen_slide">Valkyrie Agency</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="kiem-si-musashi-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Kiếm Sĩ Musashi - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/kiem-si-musashi-chapter-56-149.html"><h5 class="tenchap_slide">Chapter 56 (149...</h5></a>  </div><a href="kiem-si-musashi-1386.html"><h5 class="tentruyen_slide">Kiếm Sĩ Musashi</h5></a></div></div><div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="ueki-0.html"><img u="image" src="/content/images/appleseed.jpg" alt="Ueki - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/ueki-chapter-76.html"><h5 class="tenchap_slide">Chapter 76</h5></a>  </div><a href="ueki-0.html"><h5 class="tentruyen_slide">Ueki</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="american-ghost-jack-1388.html"><img u="image" src="/content/images/appleseed.jpg" alt="American Ghost Jack - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/american-ghost-jack-chapter-26.html"><h5 class="tenchap_slide">Chapter 26</h5></a>  </div><a href="american-ghost-jack-1388.html"><h5 class="tentruyen_slide">American Ghost Jack</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="choujin-sensen-0.html"><img u="image" src="/content/images/appleseed.jpg" alt="Choujin Sensen - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/choujin-sensen-chapter-5.html"><h5 class="tenchap_slide">Chapter 5</h5></a>  </div><a href="choujin-sensen-0.html"><h5 class="tentruyen_slide">Choujin Sensen</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="chu-thoong-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="Chú Thoong - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/chu-thoong-chapter-17.html"><h5 class="tenchap_slide">Chapter 17</h5></a>  </div><a href="chu-thoong-1385.html"><h5 class="tentruyen_slide">Chú Thoong</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="pigeonhole-fantasia-2-1387.html"><img u="image" src="/content/images/appleseed.jpg" alt="Pigeonhole Fantasia 2 - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/pigeonhole-fantasia-2-chapter-44.html"><h5 class="tenchap_slide">Chapter 44</h5></a>  </div><a href="pigeonhole-fantasia-2-1387.html"><h5 class="tentruyen_slide">Pigeonhole Fantasia 2</h5></a></div></div><div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="cheese-in-the-trap-1387.html"><img u="image" src="/content/images/appleseed.jpg" alt="Cheese in the Trap - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/cheese-in-the-trap-chapter-63.html"><h5 class="tenchap_slide">Chapter 63</h5></a>  </div><a href="cheese-in-the-trap-1387.html"><h5 class="tentruyen_slide">Cheese in the Trap</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="kinh-di-khong-loi-0.html"><img u="image" src="/content/images/appleseed.jpg" alt="Kinh Dị Không Lời - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/kinh-di-khong-loi-chapter-50.html"><h5 class="tenchap_slide">Chapter 50</h5></a>  </div><a href="kinh-di-khong-loi-0.html"><h5 class="tentruyen_slide">Kinh Dị Không Lời</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="shinryaku-ika-musume-0.html"><img u="image" src="/content/images/appleseed.jpg" alt="Shinryaku Ika Musume - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/shinryaku-ika-musume-chapter-238.html"><h5 class="tenchap_slide">Chapter 238</h5></a>  </div><a href="shinryaku-ika-musume-0.html"><h5 class="tentruyen_slide">Shinryaku Ika Musume</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="nigeta-hitsuji-no-tsukamaekata-0.html"><img u="image" src="/content/images/appleseed.jpg" alt="Nigeta Hitsuji No Tsukamaekata - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/nigeta-hitsuji-no-tsukamaekata-chapter-4.html"><h5 class="tenchap_slide">Chapter 4</h5></a>  </div><a href="nigeta-hitsuji-no-tsukamaekata-0.html"><h5 class="tentruyen_slide">Nigeta Hitsuji No Tsukamaekata</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="cursor-1387.html"><img u="image" src="/content/images/appleseed.jpg" alt="Cursor - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/cursor-chapter-4.html"><h5 class="tenchap_slide">Chapter 4</h5></a>  </div><a href="cursor-1387.html"><h5 class="tentruyen_slide">Cursor</h5></a></div></div><div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="yuragi-sou-no-yuuna-san-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Yuragi-sou no Yuuna-san - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/yuragi-sou-no-yuuna-san-chapter-4.html"><h5 class="tenchap_slide">Chapter 4</h5></a>  </div><a href="yuragi-sou-no-yuuna-san-1386.html"><h5 class="tentruyen_slide">Yuragi-sou no Yuuna-san</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="co-len-nao-dai-ma-vuong%21-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="Cố Lên Nào, Đại Ma Vương! - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/co-len-nao-dai-ma-vuong-chapter-151.html"><h5 class="tenchap_slide">Chapter 151</h5></a>  </div><a href="co-len-nao-dai-ma-vuong%21-1385.html"><h5 class="tentruyen_slide">Cố Lên Nào, Đại Ma Vương!</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="xuyen-duyet-tay-nguyen-3000-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="Xuyên Duyệt Tây Nguyên 3000 - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/xuyen-duyet-tay-nguyen-3000-chapter-141.html"><h5 class="tenchap_slide">Chapter 141</h5></a>  </div><a href="xuyen-duyet-tay-nguyen-3000-1385.html"><h5 class="tentruyen_slide">Xuyên Duyệt Tây Nguyên 3000</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="tam-trao-tien-the-chi-lu-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="Tầm Trảo Tiền Thế Chi Lữ - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/tam-trao-tien-the-chi-lu-chapter-109.html"><h5 class="tenchap_slide">Chapter 109</h5></a>  </div><a href="tam-trao-tien-the-chi-lu-1385.html"><h5 class="tentruyen_slide">Tầm Trảo Tiền Thế Chi Lữ</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="to-tich-ky-quai-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Tô Tịch Kỳ Quái - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/to-tich-ky-quai-chapter-33.html"><h5 class="tenchap_slide">Chapter 33</h5></a>  </div><a href="to-tich-ky-quai-1386.html"><h5 class="tentruyen_slide">Tô Tịch Kỳ Quái</h5></a></div></div><div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="trach-thien-ky-0.html"><img u="image" src="/content/images/appleseed.jpg" alt="Trạch Thiên Ký - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/trach-thien-ky-chapter-21-2.html"><h5 class="tenchap_slide">Chapter 21.2</h5></a>  </div><a href="trach-thien-ky-0.html"><h5 class="tentruyen_slide">Trạch Thiên Ký</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="resentment-0.html"><img u="image" src="/content/images/appleseed.jpg" alt="Resentment - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/resentment-chapter-72.html"><h5 class="tenchap_slide">Chapter 72</h5></a>  </div><a href="resentment-0.html"><h5 class="tentruyen_slide">Resentment</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="adekan-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Adekan - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/adekan-chapter-42-5.html"><h5 class="tenchap_slide">Chapter 42.5</h5></a>  </div><a href="adekan-1386.html"><h5 class="tentruyen_slide">Adekan</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="hito-hitori-futari-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Hito Hitori Futari - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/hito-hitori-futari-chapter-6.html"><h5 class="tenchap_slide">Chapter 6</h5></a>  </div><a href="hito-hitori-futari-1386.html"><h5 class="tentruyen_slide">Hito Hitori Futari</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="hiep-si-nu-hoang-1387.html"><img u="image" src="/content/images/appleseed.jpg" alt="Hiệp sĩ nữ hoàng - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/hiep-si-nu-hoang-chapter-115.html"><h5 class="tenchap_slide">Chapter 115</h5></a>  </div><a href="hiep-si-nu-hoang-1387.html"><h5 class="tentruyen_slide">Hiệp sĩ nữ hoàng</h5></a></div></div><div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="bungaku-shoujo-to-shi-ni-tagari-no-douke-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="" Bungaku Shoujo" to Shi ni Tagari no Dou... - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/bungaku-shoujo-to-shi-ni-tagari-no-douke-chapter-16.html"><h5 class="tenchap_slide">Chapter 16</h5></a>  </div><a href="bungaku-shoujo-to-shi-ni-tagari-no-douke-1386.html"><h5 class="tentruyen_slide">"Bungaku Shoujo" to Shi ni Tagari no Dou...</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="busou-shoujo-machiavellianism-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Busou Shoujo Machiavellianism - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/busou-shoujo-machiavellianism-chapter-11.html"><h5 class="tenchap_slide">Chapter 11</h5></a>  </div><a href="busou-shoujo-machiavellianism-1386.html"><h5 class="tentruyen_slide">Busou Shoujo Machiavellianism</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="a-world-that-i-rule-1387.html"><img u="image" src="/content/images/appleseed.jpg" alt="A World that I Rule - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/a-world-that-i-rule-chapter-9.html"><h5 class="tenchap_slide">Chapter 9</h5></a>  </div><a href="a-world-that-i-rule-1387.html"><h5 class="tentruyen_slide">A World that I Rule</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="love-parameter-1387.html"><img u="image" src="/content/images/appleseed.jpg" alt="Love Parameter - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/love-parameter-chapter-20.html"><h5 class="tenchap_slide">Chapter 20</h5></a>  </div><a href="love-parameter-1387.html"><h5 class="tentruyen_slide">Love Parameter</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="kid-gang-ii-1387.html"><img u="image" src="../admin.hamtruyen.vn/Pictures/Truyen/Small/kid_gang_ii.png" alt="Kid Gang II - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/kid-gang-ii-chapter-49.html"><h5 class="tenchap_slide">Chapter 49</h5></a>  </div><a href="kid-gang-ii-1387.html"><h5 class="tentruyen_slide">Kid Gang II</h5></a></div></div><div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="ngoan-tay-du-0.html"><img u="image" src="/content/images/appleseed.jpg" alt="Ngoan Tây Du - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/ngoan-tay-du-chapter-6.html"><h5 class="tenchap_slide">Chapter 6</h5></a>  </div><a href="ngoan-tay-du-0.html"><h5 class="tentruyen_slide">Ngoan Tây Du</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="ore-to-ichino-no-game-doukoukai-katsudou-nisshi-0.html"><img u="image" src="/content/images/appleseed.jpg" alt="Ore to Ichino no Game Doukoukai Katsudou... - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/ore-to-ichino-no-game-doukoukai-katsudou-nisshi-chapter-4.html"><h5 class="tenchap_slide">Chapter 4</h5></a>  </div><a href="ore-to-ichino-no-game-doukoukai-katsudou-nisshi-0.html"><h5 class="tentruyen_slide">Ore to Ichino no Game Doukoukai Katsudou...</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="akuma-mo-fumu-o-osoreru-tokoro-0.html"><img u="image" src="/content/images/appleseed.jpg" alt="Akuma mo Fumu o Osoreru Tokoro - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/akuma-mo-fumu-o-osoreru-tokoro-chapter-3-3.html"><h5 class="tenchap_slide">Chapter 3.3</h5></a>  </div><a href="akuma-mo-fumu-o-osoreru-tokoro-0.html"><h5 class="tentruyen_slide">Akuma mo Fumu o Osoreru Tokoro</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="ore-to-kawazu-san-no-isekai-hourouki-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Ore to Kawazu-san no Isekai Hourouki - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/ore-to-kawazu-san-no-isekai-hourouki-chapter-9.html"><h5 class="tenchap_slide">Chapter 9</h5></a>  </div><a href="ore-to-kawazu-san-no-isekai-hourouki-1386.html"><h5 class="tentruyen_slide">Ore to Kawazu-san no Isekai Hourouki</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="ana-satsujin-1388.html"><img u="image" src="/content/images/appleseed.jpg" alt="Ana Satsujin - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/ana-satsujin-chapter-85.html"><h5 class="tenchap_slide">Chapter 85</h5></a>  </div><a href="ana-satsujin-1388.html"><h5 class="tentruyen_slide">Ana Satsujin</h5></a></div></div><div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="air-gear-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Air Gear - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/air-gear-chapter-305.html"><h5 class="tenchap_slide">Chapter 305</h5></a>  </div><a href="air-gear-1386.html"><h5 class="tentruyen_slide">Air Gear</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="hare-kon-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Hare Kon - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/hare-kon-chapter-36.html"><h5 class="tenchap_slide">Chapter 36</h5></a>  </div><a href="hare-kon-1386.html"><h5 class="tentruyen_slide">Hare Kon</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="tu-dai-danh-bo-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="Tứ Đại Danh Bổ - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/tu-dai-danh-bo-chapter-222.html"><h5 class="tenchap_slide">Chapter 222</h5></a>  </div><a href="tu-dai-danh-bo-1385.html"><h5 class="tentruyen_slide">Tứ Đại Danh Bổ</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="tinh-mong-than-tuong-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="Tinh Mộng Thần Tượng - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/tinh-mong-than-tuong-chapter-11.html"><h5 class="tenchap_slide">Chapter 11</h5></a>  </div><a href="tinh-mong-than-tuong-1385.html"><h5 class="tentruyen_slide">Tinh Mộng Thần Tượng</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="looking-for-a-father-1387.html"><img u="image" src="/content/images/appleseed.jpg" alt="Looking For A Father - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/looking-for-a-father-chapter-50.html"><h5 class="tenchap_slide">Chapter 50</h5></a>  </div><a href="looking-for-a-father-1387.html"><h5 class="tentruyen_slide">Looking For A Father</h5></a></div></div><div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="akatsuki-no-yona-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Akatsuki no Yona - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/akatsuki-no-yona-chapter-104.html"><h5 class="tenchap_slide">Chapter 104</h5></a>  </div><a href="akatsuki-no-yona-1386.html"><h5 class="tentruyen_slide">Akatsuki no Yona</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="sekai-no-owari-no-encore-0.html"><img u="image" src="/content/images/appleseed.jpg" alt="SEKAI NO OWARI NO ENCORE - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/sekai-no-owari-no-encore-chapter-5.html"><h5 class="tenchap_slide">Chapter 5</h5></a>  </div><a href="sekai-no-owari-no-encore-0.html"><h5 class="tentruyen_slide">SEKAI NO OWARI NO ENCORE</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="fullmetal-alchemist-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Fullmetal Alchemist - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/fullmetal-alchemist-chapter-47.html"><h5 class="tenchap_slide">Chapter 47</h5></a>  </div><a href="fullmetal-alchemist-1386.html"><h5 class="tentruyen_slide">Fullmetal Alchemist</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="momoiro-meloik-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Momoiro Meloik - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/momoiro-meloik-chapter-52.html"><h5 class="tenchap_slide">Chapter 52</h5></a>  </div><a href="momoiro-meloik-1386.html"><h5 class="tentruyen_slide">Momoiro Meloik</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="nguy-thuy-nghi-van-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="Ngụy Thủy Nghi Vân - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/nguy-thuy-nghi-van-chapter-64.html"><h5 class="tenchap_slide">Chapter 64</h5></a>  </div><a href="nguy-thuy-nghi-van-1385.html"><h5 class="tentruyen_slide">Ngụy Thủy Nghi Vân</h5></a></div></div>
+                        <div class="pull-right">
+                            <a href="danhsach/indexa1a1.html?sort=2">Xem thêm nhiều truyện nữa &raquo;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- START RIGHT CONTENT-->
+                <div class="col-md-4 wrapper_qc">
+
+                    <div style="margin-bottom:10px;">
+                        <div class="title_doctruyen manhua">
+                            <div class="bg leftbar1 fl"></div>
+                            <div class="centertext fl" style="width:245px;padding-top:3px;">
+                                Donate ủng hộ Hamtruyen
+                            </div>
+                            <div class="bg rightbar1 fl"></div>
+                        </div>
+
+                        <center>
+                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                <input type="hidden" name="cmd" value="_s-xclick">
+                                <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHLwYJKoZIhvcNAQcEoIIHIDCCBxwCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYCKks9pAz9EoSLbtg2LpPgLcrqmgSYqjcmq/bQ7NjpF3VdBa8WUXSyxNzYDz4Jg5jjHPKObNVplfFhdk4KyoUMe9bIXzDWW06bgu3z8mjZ3lVtrBbHMFWGNEnH6zlKxOHfChECut2T57Or2S4zkQ3kadYtWl5c6srg7k0DAbXXLCTELMAkGBSsOAwIaBQAwgawGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQI+IVQigLXspWAgYhR3izseY4RrMFNCEW9MnNOfbDj3SqxFexYIwhPmfNqsl/wuxoGbGtUWTiY9PJQI5fC3AB4znfnsKDr16vnf5qBJvPFQzR/IrlYTMWMk26h33Hkaomk8YJaUYO4g7XQTDF8UhZncUUFukV7Lx3L8xRl73IIAmcCNOcvZDUhoo5Hu/iCijI3vt2XoIIDhzCCA4MwggLsoAMCAQICAQAwDQYJKoZIhvcNAQEFBQAwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tMB4XDTA0MDIxMzEwMTMxNVoXDTM1MDIxMzEwMTMxNVowgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDBR07d/ETMS1ycjtkpkvjXZe9k+6CieLuLsPumsJ7QC1odNz3sJiCbs2wC0nLE0uLGaEtXynIgRqIddYCHx88pb5HTXv4SZeuv0Rqq4+axW9PLAAATU8w04qqjaSXgbGLP3NmohqM6bV9kZZwZLR/klDaQGo1u9uDb9lr4Yn+rBQIDAQABo4HuMIHrMB0GA1UdDgQWBBSWn3y7xm8XvVk/UtcKG+wQ1mSUazCBuwYDVR0jBIGzMIGwgBSWn3y7xm8XvVk/UtcKG+wQ1mSUa6GBlKSBkTCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb22CAQAwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOBgQCBXzpWmoBa5e9fo6ujionW1hUhPkOBakTr3YCDjbYfvJEiv/2P+IobhOGJr85+XHhN0v4gUkEDI8r2/rNk1m0GA8HKddvTjyGw/XqXa+LSTlDYkqI8OwR8GEYj4efEtcRpRYBxV8KxAW93YDWzFGvruKnnLbDAF6VR5w/cCMn5hzGCAZowggGWAgEBMIGUMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMTUxMTE4MDI0MzQ1WjAjBgkqhkiG9w0BCQQxFgQUPYdBixkFjM+bpyGvo4jXgU9O4YkwDQYJKoZIhvcNAQEBBQAEgYC/G69XWdf7Pl3wde0uHit9Mq7P+stfuPBO8rT/RE58z5vV41q3B/GMg5CKSNP2jDznC9HnLsfH7bFfucuxJtEtRueKH1Ja+9OhlzcTjbezosSccR9RTXSGCwbUNEgbSdSSn9PC+2IR8SppZrS5v3/akoRStnzmnPSdIUcPo2DFdQ==-----END PKCS7-----
+">
+                                <input type="image" src="../www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                                <img alt="" border="0" src="https://ak1s.abmr.net/is/www.paypalobjects.com?U=/en_US/i/scr/pixel.gif&amp;V=3-4L+%2fB5MCXLbd3RQ8NvmEOJXq5%2fUSNOtX26oJe1OYNe6V6ei6ZUeTU%2fMUyovM75Nx&amp;I=9935C93C2BFE74E&amp;D=paypalobjects.com&amp;01AD=1&amp;" width="1" height="1">
+                            </form>
+                        </center>
+                        <div class="mgtop10">
+                            <a href="napthe.html">
+                                <img src="Images/unghobanner.jpg" alt="Ủng hộ Hamtruyen" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="title_doctruyen manhua">
+                        <div class="bg leftbar1 fl"></div>
+                        <div class="centertext fl" style="width:245px;padding-top:3px;">
+                            Hamtruyen trên điện thoại
+                        </div>
+                        <div class="bg rightbar1 fl"></div>
+                    </div>
+
+
+                    <a href="apphamtruyen.html" title="App Hamtruyen dành cho Android trên Google Play" target="_blank">
+                        <img src="bannerqc/apphamtruyen.png" width="100%" alt="App Hamtruyen dành cho Android trên Google Play" />
+                    </a>
+
+                    <div class="row wrapper_theloai ">
+                        <div class="col-xs-12 mgtop10">
+                            <div class="title_doctruyen manhua">
+                                <div class="bg leftbar1 fl"></div>
+                                <div class="centertext fl" style="width:245px;padding-top:3px;">
+                                    Thể Loại Truyện
+                                </div>
+                                <div class="bg rightbar1 fl"></div>
+                            </div>
+                            <div class="col-xs-12 wrapper_list_theloai">
+                                <div class="col-xs-12"><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd09/action.html">Action</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd13/adult.html">Adult</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd1d/adventure.html">Adventure</a></div><div class="col-xs-12"><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd26/comedy.html">Comedy</a><a class="col-xs-4" href="Theloai/558127b41788b51898dcc2b5/comic.html">Comic</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd0a/doujinshi.html">Doujinshi</a></div><div class="col-xs-12"><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd14/drama.html">Drama</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd1e/ecchi.html">Ecchi</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd27/fantasy.html">Fantasy</a></div><div class="col-xs-12"><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd0b/gender-bender.html">Gender Bender</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd2e/hamtruyen.html">Hamtruyen</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd15/harem.html">Harem</a></div><div class="col-xs-12"><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd1f/history.html">History</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd07/horor.html">Horor</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd08/huyen-huyen.html">Huyền Huyễn</a></div><div class="col-xs-12"><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd0c/josei.html">Josei</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd16/lolicon.html">Lolicon</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd05/manga.html">Manga</a></div><div class="col-xs-12"><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd04/manhua.html">Manhua</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd06/manhwa.html">Manhwa</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd17/martial-art.html">Martial Art</a></div><div class="col-xs-12"><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd20/mature.html">Mature</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd28/mecha.html">Mecha</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd0d/mystery.html">Mystery</a></div><div class="col-xs-12"><a class="col-xs-4" href="Theloai/567d501a0ffdae0ea0fd7da0/ngon-tinh.html">Ngôn Tình</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd18/one-shot.html">One Shot</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd21/psychological.html">Psychological</a></div><div class="col-xs-12"><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd29/romance.html">Romance</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd0e/school-life.html">School Life</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd19/sci-fi.html">Sci-fi</a></div><div class="col-xs-12"><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd22/seinen.html">Seinen</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd2a/shotacon.html">Shotacon</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd0f/shoujo.html">Shoujo</a></div><div class="col-xs-12"><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd1a/shoujo-ai.html">Shoujo Ai</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd23/shounen.html">Shounen</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd2b/shounen-ai.html">Shounen Ai</a></div><div class="col-xs-12"><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd10/slice-of-life.html">Slice of Life</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd1b/smut.html">Smut</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd24/sport.html">Sport</a></div><div class="col-xs-12"><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd2c/supernatural.html">Supernatural</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd11/tragedy.html">Tragedy</a><a class="col-xs-4" href="Theloai/56879b170ffdae4df07fd533/truyen-viet.html">Truyện Việt</a></div><div class="col-xs-12"><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd1c/webtoon.html">Webtoon</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd25/yaoi.html">Yaoi</a><a class="col-xs-4" href="Theloai/549f819f1788b6107431bd2d/yuri.html">Yuri</a></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row wrapper_theloai mgtop10">
+                        <div class="col-xs-12">
+
+
+                            <div class="fb-like-box" data-href="https://www.facebook.com/hamtruyen" data-width="300" data-layout="standard" data-action="like" data-show-faces="true" data-share="false"></div>
+                            <script type="text/javascript">
+                        (function (d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id)) return;
+                            js = d.createElement(s); js.id = id;
+                            js.src = "../connect.facebook.net/en_US/all.js#xfbml=1";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));
+
+                            </script>
+
+                        </div>
+                    </div>
+                    <div class="mgtop10">
+                        <div style="position:relative;text-align:center;">
+                            <a target="_blank" href="https://play.google.com/store/apps/details?id=com.bbgames.animalrescue">
+                                <img src="bannerqc/bannerqc.gif" alt="Pet crush rescue" />
+                                <img src="images/btt2.png" style=" position absolute; bottom 10px;left 28%;" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ads-post">
+
+                </div>
+
+
+
+                <div class="row wrapper_theloai mgtop10">
+                    <div class="col-xs-12">
+                        <!-- Đặt thẻ này vào phần đầu hoặc ngay trước thẻ đóng phần nội dung của bạn. -->
+                        <script src="../apis.google.com/js/platform.js" async defer>
+                      {lang: 'vi'}
+                        </script>
+
+                        <!-- Đặt thẻ này vào nơi bạn muốn tiện ích con kết xuất. -->
+                        <!-- <div class="g-page" data-href="//plus.google.com/u/0/101084940020519350510" data-rel="publisher"></div>
+                        -->
+                    </div>
+                </div>
+            </div> <!--END RIGHT CONTENT-->
+            </div>
+            <!-- END TRUYỆN MỚI CẬP NHẬT -->
+
+            <div class="row">
+                <div class="col-md-8 wrapper_truyemoicapnhat">
+                    <div class="title_doctruyen moicapnhat">
+                        <div class="bg lefttbar3 fl"></div>
+                        <div class="centertext fl" style="width:655px;padding-top:3px;">
+                            Truyện Mới Đăng
+                        </div>
+                        <div class="bg rightbar3 fl"></div>
+                    </div>
+                    <div class="lst_truyen_moidang">
+
+                        <div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="tokimeichatte-gomen-ne-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Tokimeichatte Gomen Ne? - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/tokimeichatte-gomen-ne-chapter-1.html"><h5 class="tenchap_slide">Chapter 1</h5></a>  </div><a href="tokimeichatte-gomen-ne-1386.html"><h5 class="tentruyen_slide">Tokimeichatte Gomen Ne?</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="teizokurei-monophobia-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Teizokurei Monophobia - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/teizokurei-monophobia-chapter-2.html"><h5 class="tenchap_slide">Chapter 2</h5></a>  </div><a href="teizokurei-monophobia-1386.html"><h5 class="tentruyen_slide">Teizokurei Monophobia</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="dna-doesnt-tell-us-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="DNA Doesnt Tell Us - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/dna-doesnt-tell-us-chapter-4.html"><h5 class="tenchap_slide">Chapter 4</h5></a>  </div><a href="dna-doesnt-tell-us-1386.html"><h5 class="tentruyen_slide">DNA Doesnt Tell Us</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="papa-no-iukoto-o-kikinasai-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Papa no Iukoto o Kikinasai! - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/papa-no-iukoto-o-kikinasai-chapter-12---end.html"><h5 class="tenchap_slide">Chapter 12 - EN...</h5></a>  </div><a href="papa-no-iukoto-o-kikinasai-1386.html"><h5 class="tentruyen_slide">Papa no Iukoto o Kikinasai!</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="mai-ball-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Mai Ball! - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/mai-ball-chapter-2.html"><h5 class="tenchap_slide">Chapter 2</h5></a>  </div><a href="mai-ball-1386.html"><h5 class="tentruyen_slide">Mai Ball!</h5></a></div></div><div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="karasutengu-kabuto-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Karasutengu Kabuto - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/karasutengu-kabuto-chapter-2-1.html"><h5 class="tenchap_slide">Chapter 2.1</h5></a>  </div><a href="karasutengu-kabuto-1386.html"><h5 class="tentruyen_slide">Karasutengu Kabuto</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="dr--frost-1387.html"><img u="image" src="/content/images/appleseed.jpg" alt="Dr. Frost - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/dr--frost-chapter-14.html"><h5 class="tenchap_slide">Chapter 14</h5></a>  </div><a href="dr--frost-1387.html"><h5 class="tentruyen_slide">Dr. Frost</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="cot-sinh-hoa-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="Cốt sinh hoa - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/cot-sinh-hoa-chapter-1.html"><h5 class="tenchap_slide">Chapter 1</h5></a>  </div><a href="cot-sinh-hoa-1385.html"><h5 class="tentruyen_slide">Cốt sinh hoa</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="at-each-others-throats-1387.html"><img u="image" src="/content/images/appleseed.jpg" alt="At Each Other’s Throats - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/at-each-others-throats-chapter-15.html"><h5 class="tenchap_slide">Chapter 15</h5></a>  </div><a href="at-each-others-throats-1387.html"><h5 class="tentruyen_slide">At Each Other’s Throats</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="19-tang-dia-nguc-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="19 Tầng Địa Ngục - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/19-tang-dia-nguc-chapter-3.html"><h5 class="tenchap_slide">Chapter 3</h5></a>  </div><a href="19-tang-dia-nguc-1385.html"><h5 class="tentruyen_slide">19 Tầng Địa Ngục</h5></a></div></div><div class="row_content clearfix"><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="tay-dam-hac-am-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Tay Đấm Hắc Ám - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/tay-dam-hac-am-chapter-1.html"><h5 class="tenchap_slide">Chapter 1</h5></a>  </div><a href="tay-dam-hac-am-1386.html"><h5 class="tentruyen_slide">Tay Đấm Hắc Ám</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="tinh-yeu-bat-dau-tu-ngay-hom-nay-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="Tình Yêu! Bắt Đầu Từ Ngày Hôm Nay - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/tinh-yeu-bat-dau-tu-ngay-hom-nay-chapter-2.html"><h5 class="tenchap_slide">Chapter 2</h5></a>  </div><a href="tinh-yeu-bat-dau-tu-ngay-hom-nay-1385.html"><h5 class="tentruyen_slide">Tình Yêu! Bắt Đầu Từ Ngày Hôm Nay</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="tinh-yeu-giao-huan-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Tình Yêu Giáo Huấn - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/tinh-yeu-giao-huan-chapter-5.html"><h5 class="tenchap_slide">Chapter 5</h5></a>  </div><a href="tinh-yeu-giao-huan-1386.html"><h5 class="tentruyen_slide">Tình Yêu Giáo Huấn</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="force-of-will-1386.html"><img u="image" src="/content/images/appleseed.jpg" alt="Force Of Will - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/force-of-will-chapter-4---the-seven-kings-of-the-lands.html"><h5 class="tenchap_slide">Chapter 4 - The...</h5></a>  </div><a href="force-of-will-1386.html"><h5 class="tentruyen_slide">Force Of Will</h5></a></div><div class="item_truyennendoc"><div class="wrapper_imgage"><a href="ban-gai-cua-toi-la-rong-du-1385.html"><img u="image" src="/content/images/appleseed.jpg" alt="Bạn Gái Của Tôi Là Rồng Dữ - Thực Hiện Bởi hamtruyen.vn"></a><a href="doc-truyen/ban-gai-cua-toi-la-rong-du-chapter-2.html"><h5 class="tenchap_slide">Chapter 2</h5></a>  </div><a href="ban-gai-cua-toi-la-rong-du-1385.html"><h5 class="tentruyen_slide">Bạn Gái Của Tôi Là Rồng Dữ</h5></a></div></div>
+                    </div>
+                </div>
+                <!-- START RIGHT CONTENT-->
+                <div class="col-md-4 wrapper_qc">
+
+
+
+                </div> <!--END RIGHT CONTENT-->
+
+            </div>
+
+            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+            <script src="Scripts/jquery-1.11.0.min.js"></script>
+            <script src="Css/js/bootstrap.min.js"></script>
+            <!-- Include all compiled plugins (below), or include individual files as needed -->
+            <script src="Scripts/jquery.jcarousel.min.js"></script>
+            <script src="Scripts/index.js"></script>
+
+            <link rel="stylesheet" href="Scripts/jquery-ui.min.css" />
+            <script type="text/javascript" src="Scripts/jquery-ui.min.js"></script>
+        </section>
+    </section>
+    <!--END CONTAINTER-->
+    <!--START FOOTER-->
+
+    <footer style="background:#0d323b;">
+        <div class="menu_ngang_phu">
+            <a href="#">Đọc truyện online</a>|
+            <a href="#">Manga</a>|
+            <a href="#">Manhua</a>|
+            <a href="#">Manhwa</a>
+        </div>
+        <div class="footer row">
+            © 2014-2015 HamTruyen.com đọc truyện tranh online mới và truyện hay luôn cập nhật<br />
+            Website phiên bản thử nghiệm<br />
+            Email: hoangsakura@gmail.com - Mobile : 0989 789 533   <br />
+        </div>
+    </footer>
+</body>
+</html>

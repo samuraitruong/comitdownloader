@@ -17,12 +17,15 @@ namespace ComicDownloader
     {
         public class ApplicationArguments
         {
+            
+            public string Sites { get; set; }
             public bool Uninstall { get; set; }
             public bool Extract { get; set; }
 
             public  bool Full { get; set; }
             public bool Incremental { get; set; }
             public string OutputFolder { get; set; }
+            public bool UseLocalCache { get; set; }
         }
 
         /// <summary>
@@ -37,6 +40,8 @@ namespace ComicDownloader
             p.Setup(arg => arg.Full).As('f', "full");
             p.Setup(arg => arg.Incremental).As('i', "incremental");
             p.Setup(arg => arg.Uninstall).As('u', "uninstall");
+            p.Setup(arg => arg.Sites).As('s', "sites");
+            p.Setup(arg => arg.UseLocalCache).As('l', "localcache");
             var cmd = p.Parse(args);
 
             if (args.Length>0 && args[0] =="/uninstall") {

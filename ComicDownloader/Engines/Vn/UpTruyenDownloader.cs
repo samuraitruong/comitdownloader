@@ -67,7 +67,7 @@ namespace ComicDownloader.Engines
         {
             //GOOD Example for cleanup code.
             return base.GetListStoriesSimple("http://uptruyen.com/manga/genre/manga-moi?&page={0}&order_by=time&order_type=DESC",
-                "//h3[@class='title']/a",
+                "//span[@class='top-view-name']/a",
                 forceOnline,
                 this.HostUrl
                 );
@@ -76,15 +76,18 @@ namespace ComicDownloader.Engines
         public override StoryInfo RequestInfo(string storyUrl)
         {
             return base.RequestInfoSimple(storyUrl,
-                "//span[@itemprop='itemListElement']/a/span/a[last()]",
-                "//table[@id='chapter_table']//h4/a",
+                "//div[contains(@class,'detail-image-primary')]/a[1]",
+                "//*[@id='chapter_table']//a",
                 this.HostUrl,
-                summaryPattern: "//div[@class='manga_summary']",
-                authorPattern: "//div[@class='manga_right']//tr[2]//a",
-                categoryPattern: "//div[@class='manga_right']//tr[3]//a",
-                coverPattern: "//div[contains(@class,'cover')]//img",
-                alternativeNamePattern: "//div[@class='manga_right']//tr[4]//a"
-                );
+                summaryPattern: "//div[@class='description-story']",
+                authorPattern: "//div[contains(@class,'detail-info-story')]//p[2]//a",
+                categoryPattern: "//div[contains(@class,'detail-info-story')]//p[3]//a",
+                coverPattern: "//div[contains(@class,'detail-image-primary')]//img",
+                alternativeNamePattern: "//div[contains(@class,'detail-info-story')]//p[4]//a",
+                nameExtract: (s)=>
+                {
+                    return s.Attr("title");
+                });
         }
         public override List<string> GetPages(string chapUrl)
         {

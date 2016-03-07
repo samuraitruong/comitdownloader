@@ -11,7 +11,7 @@ namespace ComicDownloader.Engines.DataExtractor
     public class JsonDataExtractor  : DataExtractor
     {
         private string folder;
-
+        Dictionary<string, List<StoryInfo>> internalCache = new Dictionary<string, List<StoryInfo>>();
         public string IndexFile
         {
             get
@@ -24,13 +24,14 @@ namespace ComicDownloader.Engines.DataExtractor
         {
             this.folder = destination;
         }
+        private object myLocker = new object();
         public override void UpdateIndex(List<StoryInfo> list)
         {
             foreach (var item in list)
             {
                 item.JsonFileName = item.Url.SHA256() + ".json";
             }
-            lock (ioLocker)
+            lock (myLocker)
             {
                 this.allStories.AddRange(list);
                 File.WriteAllText(this.IndexFile, JsonConvert.SerializeObject(this.allStories),Encoding.UTF8);
@@ -44,12 +45,22 @@ namespace ComicDownloader.Engines.DataExtractor
             Directory.CreateDirectory(path);
             return path;
         }
+        public override bool IsStored(ChapterInfo c, Downloader dl)
+        {
+            var file = Path.Combine(this.GetBaseFolder(dl.HostUrl), c.JsonFileName);
+            return File.Exists(file);
+        }
         public override List<StoryInfo> GetList(Downloader dl)
         {
             var file = Path.Combine(this.GetBaseFolder(dl.HostUrl), "stories.json");
-
+            if(internalCache[file.SHA256()] != null)
+            {
+                return internalCache[file.SHA256()];
+            }
             var json = File.ReadAllText(file);
-            return JsonConvert.DeserializeObject<List<StoryInfo>>(json);
+            var list = JsonConvert.DeserializeObject<List<StoryInfo>>(json);
+            internalCache[file.SHA256()] = list;
+            return list;
         }
         public override void StoreStory(StoryInfo story , Downloader dl)
         {
@@ -62,23 +73,34 @@ namespace ComicDownloader.Engines.DataExtractor
             var file = Path.Combine(GetBaseFolder(dl.HostUrl), story.JsonFileName);
             File.WriteAllText(file, JsonConvert.SerializeObject(story));
 
-            var list = GetList(dl);
-            var index = list.FindIndex(p => p.Url == story.Url);
-            list[index] = story;
-            StoreList(list, dl);
+            //var list = GetList(dl);
+            //var index = list.FindIndex(p => p.Url == story.Url);
+            //lock(myLocker)
+            //{
+            //    list[index] = story;
+            //    StoreList(list, dl);
+            //}
         }
         public override void StoreList(List<StoryInfo> stories, Downloader dl)
         {
             lock (ioLocker)
             {
                 var path = GetBaseFolder(dl.HostUrl);
+                Parallel.ForEach(stories, (s) =>
+                {
+                    s.JsonFileName = s.Url.SHA256() + ".json";
+                });
                 var json = JsonConvert.SerializeObject(stories);
                 var file = Path.Combine(path, "stories.json");
-                if (File.Exists(file))
+                this.internalCache[file.SHA256()] = stories;
+                try
                 {
-                    File.Delete(file);
+                    File.WriteAllText(file, json);
                 }
-                File.WriteAllText(file, json);
+                catch(Exception ex)
+                {
+                    Log("ERROR: can't save stories list ", ConsoleColor.Black, ConsoleColor.Red);
+                }
             }
         }
         public override void StoreChapter(ChapterInfo chapter, Downloader dl)

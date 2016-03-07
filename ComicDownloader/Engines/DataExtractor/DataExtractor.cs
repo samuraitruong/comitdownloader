@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ComicDownloader.Engines.DataExtractor
@@ -17,50 +18,94 @@ namespace ComicDownloader.Engines.DataExtractor
         }
         public virtual void Log(string message, ConsoleColor bg = ConsoleColor.Black, ConsoleColor color = ConsoleColor.White)
         {
+            Console.OutputEncoding = Encoding.UTF8;
             Console.BackgroundColor = bg;
             Console.ForegroundColor = color;
             Console.WriteLine(message);
             Console.ResetColor();
-            MyLogger.Info(message);
+
+            //MyLogger.Info(message);
         }
-        public void FullExtract()
+        public void FullExtract(string site="", bool userLocalCache= false)
         {
-            var downloaders = Downloader.GetAllDownloaders();
-            Parallel.ForEach(downloaders, (dl) =>
+            var downloaders = Downloader.GetAllDownloaders(site);
+            Parallel.ForEach(downloaders, new ParallelOptions() { MaxDegreeOfParallelism=8 }, (dl) =>
             {
-                Log("Start: " + dl.Name + "...");
-                if (!IsProcessed(dl))
+                try
                 {
-                    var list = dl.GetListStories(true);
-                    this.StoreList(list, dl);
-                    list.ForEach((o) =>
-                    {
-                        o.Source = dl.GetSiteDomain();
-                    });
-                    Log("Finished: " + dl.Name + " " + list.Count.ToString() +" found.", color: ConsoleColor.Green);
-                    this.UpdateIndex(list);
-
-                    Parallel.ForEach(list, (s) =>
-                    {
-                        if (!string.IsNullOrEmpty(s.JsonFileName))
-                        {
-                            var info = dl.RequestInfo(s.Url);
-                            this.StoreStory(info, dl);
-                            Log("Info: " + info.Name);
-
-                            Parallel.ForEach(info.Chapters, (c) =>
-                            {
-                                c.JsonFileName = c.Url.SHA256() + ".json";
-                                c.Pages = dl.GetPages(c.Url);
-                                this.StoreChapter(c, dl);
-                                Log("Store Chap: " + c.Name + "\t " + c.JsonFileName, ConsoleColor.Black, ConsoleColor.Blue);
-                            });
-                        }
-                    });
+                    ProcessOneDownloader(userLocalCache, dl);
                 }
+                catch(Exception ex) { }
             });
         }
+
+        private void ProcessOneDownloader(bool userLocalCache, Downloader dl)
+        {
+            Log("Start: " + dl.Name + "...");
+            if (!IsProcessed(dl))
+            {
+                var list = dl.GetListStories(!userLocalCache);
+                this.StoreList(list, dl);
+                list.ForEach((o) =>
+                {
+                    o.Source = dl.GetSiteDomain();
+                });
+                Log("Finished: " + dl.Name + " " + list.Count.ToString() + " found.", color: ConsoleColor.Green);
+                this.UpdateIndex(list);
+
+                Parallel.ForEach(list,
+                    new ParallelOptions() { MaxDegreeOfParallelism = 8 },
+                    (s) =>
+                {
+                    try
+                    {
+                        ProcessOneStory(dl, s);
     
+                    } catch (Exception ex1) { }
+
+                });
+            }
+        }
+
+        private void ProcessOneStory(Downloader dl, StoryInfo s)
+        {
+            if (!string.IsNullOrEmpty(s.JsonFileName))
+            {
+                var info = dl.RequestInfo(s.Url);
+                this.StoreStory(info, dl);
+                Log("+-STORY: " + info.Name);
+
+                Parallel.ForEach(info.Chapters,
+                    new ParallelOptions() { MaxDegreeOfParallelism = 8 },
+                    (c) =>
+                {
+                    try
+                    {
+                        Thread.Sleep(100);
+                        ProcessOneChapter(dl, c);
+                    }
+                    catch (Exception ex) { }
+
+                });
+            }
+        }
+
+        private void ProcessOneChapter(Downloader dl, ChapterInfo c)
+        {
+            c.JsonFileName = c.Url.SHA256() + ".json";
+            if (!this.IsStored(c, dl))
+            {
+                c.Pages = dl.GetPages(c.Url);
+                this.StoreChapter(c, dl);
+                Log("|--- CHAP: " + c.Name, ConsoleColor.Black, ConsoleColor.DarkGreen);
+            }
+        }
+
+        public virtual bool IsStored(ChapterInfo c, Downloader dl)
+        {
+            return false;
+        }
+
         public virtual List<StoryInfo> GetList(Downloader dl)
         {
             return null;
@@ -90,7 +135,7 @@ namespace ComicDownloader.Engines.DataExtractor
             if(args.Full)
             {
                 var extractor = new JsonDataExtractor(args.OutputFolder);
-                extractor.FullExtract();
+                extractor.FullExtract(args.Sites, args.UseLocalCache);
 
             }
         }

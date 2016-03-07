@@ -278,7 +278,8 @@ namespace ComicDownloader.Engines
                     htmlDoc.LoadHtml(html);
 
                     var nameNode = htmlDoc.DocumentNode.GetSingleNode(namePattern);
-                    string chapterName = (nameExtract != null) ? nameExtract(nameNode) : nameNode.InnerText.TextBeautifier();
+
+                    string chapterName = (nameExtract != null) ? nameExtract(nameNode) : nameNode!= null? nameNode.InnerText.TextBeautifier() :"Unknow";
                     if (info == null)
                     {
                         info = new StoryInfo()
@@ -1055,7 +1056,7 @@ namespace ComicDownloader.Engines
             return url;
         }
 
-        public static List<Downloader> GetAllDownloaders()
+        public static List<Downloader> GetAllDownloaders(string site="")
         {
 
             if (_downloaders != null) return _downloaders;
@@ -1068,10 +1069,8 @@ namespace ComicDownloader.Engines
                     Downloader instance = (Downloader)Activator.CreateInstance(item);
 
                     var attributes = instance.GetType().GetCustomAttributes(typeof(DownloaderAttribute), true);
-                    if (attributes.Length > 0 && !((DownloaderAttribute)attributes[0]).Offline)
+                    if (attributes.Length > 0 && !((DownloaderAttribute)attributes[0]).Offline && (string.IsNullOrEmpty(site) || Regex.IsMatch(instance.HostUrl, site))) 
                     {
-
-
                         _downloaders.Add(instance);
                     }
                 }
