@@ -8,21 +8,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
-var top_story_component_1 = require('../shared/top-story.component');
-var story_carousel_component_1 = require('../shared/story-carousel.component');
-var story_list_component_1 = require('../shared/story-list.component');
-var HomeComponent = (function () {
-    function HomeComponent() {
+var StoryListComponent = (function () {
+    function StoryListComponent() {
     }
-    HomeComponent = __decorate([
+    StoryListComponent.prototype.ngAfterViewChecked = function () {
+    };
+    StoryListComponent = __decorate([
         core_1.Component({
-            selector: 'cmapp-home',
-            templateUrl: 'views/home/home.html',
-            directives: [top_story_component_1.TopStoryComponent, story_carousel_component_1.StoryCarouselComponent, story_list_component_1.StoryListComponent]
+            selector: 'cmapp-story-list',
+            templateUrl: 'views/shared/story-list.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], HomeComponent);
-    return HomeComponent;
+    ], StoryListComponent);
+    return StoryListComponent;
 })();
-exports.HomeComponent = HomeComponent;
-//# sourceMappingURL=home.component.js.map
+exports.StoryListComponent = StoryListComponent;
+//# sourceMappingURL=story-list.component.js.map

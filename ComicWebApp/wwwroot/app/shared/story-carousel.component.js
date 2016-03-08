@@ -8,21 +8,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
-var top_story_component_1 = require('../shared/top-story.component');
-var story_carousel_component_1 = require('../shared/story-carousel.component');
-var story_list_component_1 = require('../shared/story-list.component');
-var HomeComponent = (function () {
-    function HomeComponent() {
+var StoryCarouselComponent = (function () {
+    function StoryCarouselComponent() {
     }
-    HomeComponent = __decorate([
+    StoryCarouselComponent.prototype.ngAfterViewChecked = function () {
+    };
+    StoryCarouselComponent.prototype.initCarousel = function () {
+    };
+    StoryCarouselComponent = __decorate([
         core_1.Component({
-            selector: 'cmapp-home',
-            templateUrl: 'views/home/home.html',
-            directives: [top_story_component_1.TopStoryComponent, story_carousel_component_1.StoryCarouselComponent, story_list_component_1.StoryListComponent]
+            selector: 'cmapp-story-carousel',
+            templateUrl: 'views/shared/story-carousel.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], HomeComponent);
-    return HomeComponent;
+    ], StoryCarouselComponent);
+    return StoryCarouselComponent;
 })();
-exports.HomeComponent = HomeComponent;
-//# sourceMappingURL=home.component.js.map
+exports.StoryCarouselComponent = StoryCarouselComponent;
+//# sourceMappingURL=story-carousel.component.js.map

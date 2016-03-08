@@ -8,21 +8,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
-var top_story_component_1 = require('../shared/top-story.component');
-var story_carousel_component_1 = require('../shared/story-carousel.component');
-var story_list_component_1 = require('../shared/story-list.component');
-var HomeComponent = (function () {
-    function HomeComponent() {
+var TopStoryComponent = (function () {
+    function TopStoryComponent() {
     }
-    HomeComponent = __decorate([
+    TopStoryComponent = __decorate([
         core_1.Component({
-            selector: 'cmapp-home',
-            templateUrl: 'views/home/home.html',
-            directives: [top_story_component_1.TopStoryComponent, story_carousel_component_1.StoryCarouselComponent, story_list_component_1.StoryListComponent]
+            selector: 'cmapp-top-story',
+            templateUrl: 'views/shared/top-story.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], HomeComponent);
-    return HomeComponent;
+    ], TopStoryComponent);
+    return TopStoryComponent;
 })();
-exports.HomeComponent = HomeComponent;
-//# sourceMappingURL=home.component.js.map
+exports.TopStoryComponent = TopStoryComponent;
+//# sourceMappingURL=top-story.component.js.map
