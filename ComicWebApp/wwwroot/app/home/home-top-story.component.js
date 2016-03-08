@@ -8,29 +8,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
-var router_1 = require('angular2/router');
-var home_component_1 = require('./home/home.component');
-var AppComponent = (function () {
-    function AppComponent() {
+var HomeTopStoryComponent = (function () {
+    function HomeTopStoryComponent() {
     }
-    AppComponent = __decorate([
+    HomeTopStoryComponent = __decorate([
         core_1.Component({
-            selector: 'comic-app',
-            templateUrl: 'views/app.html',
-            directives: [router_1.ROUTER_DIRECTIVES],
-            providers: [router_1.ROUTER_PROVIDERS]
-        }),
-        router_1.RouteConfig([
-            {
-                path: '/home',
-                name: 'Home',
-                component: home_component_1.HomeComponent,
-                useAsDefault: true
-            }
-        ]), 
+            selector: 'cmapp-home-top-story',
+            templateUrl: 'views/home/home-top-story.html'
+        }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], HomeTopStoryComponent);
+    return HomeTopStoryComponent;
 })();
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.js.map
+exports.HomeTopStoryComponent = HomeTopStoryComponent;
+//# sourceMappingURL=home-top-story.component.js.map

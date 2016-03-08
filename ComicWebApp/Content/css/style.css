@@ -544,9 +544,9 @@ header {
     }
 
 #wrapper_bxh {
-    width: 298px;
+    /*width: 298px;
     padding-right: 0;
-    padding-left: 10px;
+    padding-left: 10px;*/
 }
 
     #wrapper_bxh .item_bxh {

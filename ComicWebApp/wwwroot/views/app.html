@@ -1,0 +1,159 @@
+    <!--START HEADER-->
+<header>
+    <div class="header_wrapper row">
+        <div id="logo_left" class="col-xs-6 col-md-4">
+            <a href="index-2.html" title="doc Truyen tranh" class="bg logo"></a>
+        </div>
+        <div id="content_right" class="col-md-8">
+            <div class="col-md-6 height_row1">
+                <div class="wrapper_search input-group">
+                    <input type="text" class="form-control" id="txtSearchTruyen" placeholder="Tìm Kiếm" />
+                    <button class="input-group-addon bg search btnSearch" onclick="search();"></button>
+                </div>
+            </div>
+            <div class="col-md-6 height_row1" id="login-part">
+                <button id="btn_log" type="button" class="btn btn-default" data-toggle="modal" data-target="#login_section_wrapper">Đăng nhập</button>
+                <!--START LOGIN-->
+                <section id="login_section_wrapper" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="login" aria-hidden="true">
+                    <form id="login_form" method="post">
+                        <div class="modal-dialog modal-md" id="login_section">
+                            <div class="modal-content" style="border-radius:0;">
+                                <div class="modal-header header_login">
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <h4 class="modal-title">Đăng Nhập</h4>
+                                </div>
+                                <div class="login_form modal-body">
+                                    <div class="row">
+
+                                        <div class="col-lg-12">
+                                            <input type="text" class="form-control" id="login_user_name" name="login_user_name" placeholder="Tên tài khoản" />
+                                        </div>
+                                    </div>
+                                    <div class="row mgtop10">
+
+                                        <div class="col-lg-12">
+                                            <input type="password" class="form-control" id="login_password" name="login_password" placeholder="Mật khẩu đăng nhập" />
+                                        </div>
+                                    </div>
+                                    <div class="row mgtop10">
+                                        <div class="col-lg-6">
+                                            <input type="checkbox" checked="checked" id="chkRememberPass" name="remember_pass" /> Nhớ mật khẩu
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <a href="quenmatkhau.html">Quên mật khẩu</a>
+                                        </div>
+                                    </div>
+                                    <div class="row mgtop10">
+                                        <div class="col-lg-12">
+                                            <button id="btn_login" class="btn_hamtruyen">Đăng Nhập</button>
+                                            <input type="hidden" name="act_log" id="act_log" />
+                                        </div>
+                                    </div>
+                                    <div class="row mgtop" id="div_error"></div>
+                                </div>
+                                <div class="row description_login">
+                                    Nếu bạn chưa có nick tại hamtruyen thì xin mời <a href="dangky.html">đăng ký tại đây</a>.<br />
+                                    Hoặc đăng nhập qua tài khoản <a href="dangky8849.html?type=face">Facebook</a>.
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <!--END LOGIN-->
+
+
+
+            </div>
+            <div class="col-md-12 height_row2" id="big_menu_horizontal">
+                <ul class="nav navbar-nav">
+                    <li><a href="http://truyenngay.com/">Truyện chữ</a></li>
+                    <li><a href="http://ixinh.net/">Tin hot</a></li>
+                    <li><a href="http://caro.hamtruyen.vn/">Caro online</a></li>
+                    <li><a href="index.html">Truyện tranh</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <div class="header_bottom col-xs-12 col-md-12">
+    </div>
+    <div class="menu_ngang">
+        <div class="wrapper_menu_ngang">
+            <ul class="nav navbar-nav" id="small_menu_ngang">
+                <li><span class="left_menu"></span><a [routerLink]="['Home']"><span class="text_menu">Home</span></a><span class="right_menu"></span></li>
+
+                <!--<li><span class="left_menu"></span><a href="danhsach/index.html"><span class="text_menu">Danh Sách Truyện</span></a><span class="right_menu"></span></li>
+                <li><span class="left_menu"></span><a href="Theloai/549f819f1788b6107431bd05/manga.html"><span class="text_menu">Manga</span></a><span class="right_menu"></span></li>
+                <li><span class="left_menu"></span><a href="Theloai/549f819f1788b6107431bd06/manhwa.html"><span class="text_menu">Manhwa</span></a><span class="right_menu"></span></li>
+                <li><span class="left_menu"></span><a href="Theloai/549f819f1788b6107431bd04/manhua.html"><span class="text_menu">Manhua</span></a><span class="right_menu"></span></li>
+                <li><span class="left_menu"></span><a href="Theloai/549f819f1788b6107431bd08/huyen-huyen.html"><span class="text_menu">Huyền Huyễn</span></a><span class="right_menu"></span></li>
+                <li><span class="left_menu"></span><a href="Theloai/549f819f1788b6107431bd2e/hamtruyen.html"><span class="text_menu">Hamtruyen</span></a><span class="right_menu"></span></li>
+                <li><span class="left_menu"></span><a href="#"><span class="text_menu">Hài</span></a><span class="right_menu"></span></li>-->
+            </ul>
+            <div class="pull-right">
+                <button class="btn-uploader" onclick="location.href='User/thong-bao-dang-nhap.html';">
+                    <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+                    Upload truyện
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+<!--END HEADER-->
+<!--START CONTAINTER-->
+<section id="middle" class="container-fluid" style="background-image:url('content/images/zx.jpg'); background-attachment:fixed;background-position:top;">
+    <section id="container">
+        <router-outlet></router-outlet>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="/vendors/jquery.js"></script>
+        <script src="/vendors/bootstrap.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="/vendors/jquery.jcarousel.min.js"></script>
+        <script src="Scripts/index.js"></script>
+        <link rel="stylesheet" href="/vendors/jquery-ui.min.css" />
+        <script type="text/javascript" src="/vendors/jquery-ui.min.js"></script>
+    </section>
+</section>
+<!--END CONTAINTER-->
+<!--START FOOTER-->
+
+<footer style="background:#0d323b;">
+    <div class="menu_ngang_phu">
+        <a href="#">Đọc truyện online</a>|
+        <a href="#">Manga</a>|
+        <a href="#">Manhua</a>|
+        <a href="#">Manhwa</a>
+    </div>
+    <div class="footer row">
+        © 2014-2015 HamTruyen.com đọc truyện tranh online mới và truyện hay luôn cập nhật<br />
+        Website phiên bản thử nghiệm<br />
+        Email: hoangsakura@gmail.com - Mobile : 0989 789 533   <br />
+    </div>
+</footer>
+<script>
+    $(document).ready(function () {
+        $('#crsTruyenHotTrongNgay').carousel({
+            interval: 10000
+        })
+        $('#crsTruyenHotTrongNgay .carousel-inner .item').each(function () {
+            var next = $(this).next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+
+            for (var i = 0; i < 5; i++) {
+                next = next.next();
+                if (!next.length) {
+                    next = $(this).siblings(':first');
+                }
+
+                next.children(':first-child').clone().appendTo($(this));
+            }
+        });
+    });
+</script>

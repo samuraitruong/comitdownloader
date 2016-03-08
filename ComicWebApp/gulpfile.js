@@ -18,7 +18,9 @@ var bowerLibs = [
        paths.bowerSrc + '/bootstrap/dist/js/bootstrap.js',
        paths.bowerSrc + '/bootstrap/dist/css/bootstrap.css',
        paths.bowerSrc + '/jQuery/dist/jquery.js',
-       paths.bowerSrc + '/jquery-ui/jquery-ui.min.js'
+       paths.bowerSrc + '/jquery-ui/jquery-ui.min.js',
+       paths.bowerSrc + '/jcarousel/dist/jquery.jcarousel.min.js',
+       paths.bowerSrc + '/jcarousel/examples/responsives/jcarousel.responsive.css'
 ];
 
 var libsToMove = [
@@ -34,6 +36,12 @@ var libsToMove = [
 gulp.task('moveToLibs', function () {
     return gulp.src(libsToMove).pipe(gulp.dest(paths.libTarget));
 });
+
+gulp.task('copyHtml', function () {
+    return gulp.src(['scripts/*.html','scripts/**/*.html']).pipe(gulp.dest("wwwroot/views"));
+});
+
+
 gulp.task('copyVendorLibs', function () {
     return gulp.src(bowerLibs).pipe(gulp.dest(paths.vendorsTarget));
 });
@@ -56,7 +64,7 @@ gulp.task('buildCopyIMG', function () {
                 .pipe(gulp.dest('wwwroot/content/images'));
 })
 
-gulp.task('copy', ['moveToLibs', 'copyViews', 'buildCopyCSS', 'buildCopyIMG','copyVendorLibs'], function () {
+gulp.task('copy', ['moveToLibs', 'copyViews', 'buildCopyCSS', 'buildCopyIMG','copyVendorLibs','copyHtml'], function () {
     
 })
 
