@@ -8,15 +8,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
+var top_story_service_1 = require('./top-story.service');
 var TopStoryComponent = (function () {
-    function TopStoryComponent() {
+    function TopStoryComponent(_storyService) {
+        this._storyService = _storyService;
+        this.classes = new Array();
     }
+    TopStoryComponent.prototype.loadTopStory = function () {
+        var _this = this;
+        this._storyService.getTopStory().
+            subscribe(function (story) {
+            _this.topStory = story;
+            _this.lastChapter = story.Chapters[story.Chapters.length - 1];
+        }, function (error) { return _this.errorMessage = error; });
+    };
+    TopStoryComponent.prototype.loadTop10Stories = function () {
+        var _this = this;
+        this._storyService.getTop10Stories().
+            subscribe(function (top10stories) {
+            _this.top10Stories = top10stories;
+            top10stories.forEach(function (s, index, list) {
+                var item = {};
+                item["stt" + (index + 1)] = true;
+                _this.classes.push(item);
+            });
+            console.log(_this.classes);
+        }, function (error) { return _this.errorMessage = error; });
+    };
+    TopStoryComponent.prototype.ngOnInit = function () {
+        this.loadTopStory();
+        this.loadTop10Stories();
+    };
     TopStoryComponent = __decorate([
         core_1.Component({
             selector: 'cmapp-top-story',
-            templateUrl: 'views/shared/top-story.html'
+            templateUrl: 'views/shared/top-story.html',
+            providers: [top_story_service_1.TopStoryService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [top_story_service_1.TopStoryService])
     ], TopStoryComponent);
     return TopStoryComponent;
 })();

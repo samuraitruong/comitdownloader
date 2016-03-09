@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "compilationOptions": {
     "emitEntryPoint": true
@@ -9,7 +9,10 @@
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
     "Microsoft.AspNet.Server.IIS": "1.0.0-*",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-*",
-    "Microsoft.AspNet.StaticFiles": "1.0.0-*"
+    "Microsoft.AspNet.StaticFiles": "1.0.0-*",
+    "ComicWeb.Core": "1.0.0-*",
+    "ComicWeb.JsonService": "1.0.0-*",
+    "Microsoft.AspNet.Mvc": "6.0.0-rc1-final"
   },
 
   "commands": {

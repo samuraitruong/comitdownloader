@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('angular2/core');
 var router_1 = require('angular2/router');
+var http_1 = require('angular2/http');
 var home_component_1 = require('./home/home.component');
 var AppComponent = (function () {
     function AppComponent() {
@@ -18,7 +19,7 @@ var AppComponent = (function () {
             selector: 'comic-app',
             templateUrl: 'views/app.html',
             directives: [router_1.ROUTER_DIRECTIVES],
-            providers: [router_1.ROUTER_PROVIDERS]
+            providers: [router_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS]
         }),
         router_1.RouteConfig([
             {

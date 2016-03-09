@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0-*",
+  "description": "ComicWeb.JsonService Class Library",
+  "authors": [ "Khoaimap" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "frameworks": {
+    "net451": {
+      "dependencies": {
+        "Newtonsoft.Json": "8.0.2"
+      }
+    },
+    "dotnet5.4": {
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.1-beta-23516",
+        "System.Collections": "4.0.11-beta-23516",
+        "System.Linq": "4.0.1-beta-23516",
+        "System.Runtime": "4.0.21-beta-23516",
+        "System.Threading": "4.0.11-beta-23516",
+        "Newtonsoft.Json": "8.0.2",
+        "System.IO": "4.0.0-beta-23019",
+        "System.IO.FileSystem": "4.0.1-beta-23516",
+        "System.Threading.Tasks.Parallel": "4.0.1-beta-23516"
+
+
+      }
+    }
+  },
+  "dependencies": {
+    "ComicWeb.Core": "1.0.0-*"
+  }
+}
