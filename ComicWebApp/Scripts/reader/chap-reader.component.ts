@@ -21,22 +21,51 @@ export class ChapReaderComponent implements OnInit, AfterContentInit {
     }
     ngOnInit() {
         this.name = this._routeParams.get("storyname");
-        console.log('storyname : ' + this.name)
         this.chapname = this._routeParams.get('chapname');
-        console.log('chapname : ' + this.chapname)
         this._service.getChapInfo(this.name, this.chapname).subscribe(res => {
             this.chapter = res;
             this.story = this.chapter.Story;
-            console.log('data callback complete.....')
+            let index = this.story.Chapters.findIndex((c) => { return c.Name === this.chapter.Name });
+            console.log('index found .............' + index);
+            if (index < this.story.Chapters.length) {
+                this.nextChapter = this.story.Chapters[index + 1]
+                this.hasNextChapter = true;
+            }
+            if (index > 0) {
+                this.hasPrevChapter = true;
+                this.prevChapter = this.story.Chapters[index -1]
+            }
+            console.log(this)
         },
             err=> {
                 this.errorMessage = <any>err;
             }
         );
     }
+    changeChap(ev: any) {
+        let selected = ev.target.value;
+        if (selected !== this.chapname) {
+            var chap = this.story.Chapters.filter((s) => {
+                return s.Name == selected;
+            })[0]
+
+            this._nav.readChapter(this.story, chap) 
+        }
+    }
+    viewStory(s: Story) {
+        this._nav.viewStory(s);
+    }
+    viewChapter(c: Chapter) {
+        console.log(this)
+        this._nav.readChapter(this.story, c);
+    }
     chapname: string;
     story: Story;
     chapter: Chapter;
+    hasNextChapter: boolean = false;
+    hasPrevChapter: boolean = false;
+    nextChapter: Chapter = null;
+    prevChapter: Chapter = null;
     errorMessage: string;
     name: string;
 }

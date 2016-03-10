@@ -16,6 +16,8 @@ export class NavigationHelper {
         let link = ['ChapReader', { storyname: encodeURIComponent(story.Name), chapname: encodeURIComponent(chapter.Name) }];
         this._router.navigate(link);
     }
+
+
     getString(name: string): string {
         return "";
         //return this._routerParams.get(name); r

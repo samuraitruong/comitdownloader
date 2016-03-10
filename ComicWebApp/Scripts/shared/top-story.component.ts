@@ -17,6 +17,9 @@ export class TopStoryComponent implements OnInit {
     lastChapter: Chapter;
     top10Stories: Story[];
     classes: Array<any> = new Array<any>();
+    viewLastChap() {
+        this._nav.readChapter(this.topStory, this.lastChapter);
+    }
     viewStory(story: Story) {
         this._nav.viewStory(story)
         //let link = ['StoryDetail', { name: story.Name }];

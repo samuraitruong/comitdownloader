@@ -8,6 +8,7 @@ using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
 using ComicWeb.Core;
 using ComicWeb.JsonService;
+using System.IO;
 
 namespace ComicWebApp
 {
@@ -28,6 +29,16 @@ namespace ComicWebApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+            //app.Use(async (ctx, next) =>
+            //{
+            //    var hostingEnvironment = app.ApplicationServices.GetService<IHostingEnvironment>();
+            //    var realPath = hostingEnvironment.WebRootPath + ctx.Request.Path.Value;
+
+            //    // so something with the file here
+
+            //    await next();
+            //});
+
             app.UseIISPlatformHandler();
 
             //app.UseIISPlatformHandler();
@@ -36,14 +47,23 @@ namespace ComicWebApp
             app.UseStaticFiles();
             app.UseMvc();
             //app.UseMiddleware<StaticFileMiddleware>(new StaticFileOptions());
-            //app.Run(context =>
-            //{
-            //    if (context.Request.Path.Value != "/app")
-            //    {
-            //        context.Response.Redirect("/");
-            //    };
-            //    return Task.FromResult<object>(null);
-            //});
+
+            app.Run(context =>
+            {
+                /* if (context.Request.Path.Value != "/app")
+                 {
+                     context.Response.Redirect("/");
+                 };
+                 */
+                var hostingEnvironment = app.ApplicationServices.GetService<IHostingEnvironment>();
+                var realPath = hostingEnvironment.WebRootPath;// + ctx.Request.Path.Value;
+
+                var indexFile = Path.Combine(realPath, "index.html");
+
+                context.Response.ContentType = "text/html";
+                context.Response.WriteAsync(File.ReadAllText(indexFile));
+                return Task.FromResult<object>(null);
+            });
 
         }
 

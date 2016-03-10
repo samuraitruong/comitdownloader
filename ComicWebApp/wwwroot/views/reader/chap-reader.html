@@ -1,11 +1,14 @@
 <section id="middle" class="row middle_doctruyen" *ngIf="chapter">
     <div id="info_story_pintop" class="info_story_pintop row">
         <div class="wrapper_listchuong col-md-5">
-            <select id="ddl_listchap">
-                <option>aaaaa</option>
-                </select>
-</div>
-        <div class="wrapper_nextchap col-md-3"> <a href="/doc-truyen/detective-conan---tham-tu-lung-danh-conan-chapter-890.html" class="btn_nextchap">Chương trước</a>  <a href="/doc-truyen/detective-conan---tham-tu-lung-danh-conan-chapter-892.html" class="btn_nextchap">Chương sau</a>  </div>
+            <select id="ddl_listchap" (change)="changeChap($event)">
+                <option *ngFor="#siblingChap of story.Chapters" [value]="siblingChap.Name" [selected]="siblingChap.Name == chapter.Name">{{siblingChap.Name}}</option>
+            </select>
+        </div>
+        <div class="wrapper_nextchap col-md-3"> 
+            <a *ngIf= "prevChapter" (click)="viewChapter(prevChapter)" class="btn_nextchap">Chương trước</a> 
+            <a *ngIf= "nextChapter" (click)="viewChapter(nextChapter)" class="btn_nextchap">Chương sau</a>  
+        </div>
         <div class="wrapper_content_like col-md-3">
             <iframe src="http://www.facebook.com/plugins/like.php?href=http://hamtruyen.vn/doc-truyen/detective-conan---tham-tu-lung-danh-conan-chapter-891.html&amp;send=true&amp;layout=button_count&amp;width=138&amp;height=20&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=60&amp;appId=537840529633958" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:138px; height:20px;" allowtransparency="true"></iframe>
             <div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1457588691685" name="I0_1457588691685" src="https://apis.google.com/u/0/se/0/_/+1/fastbutton?usegapi=1&amp;size=medium&amp;hl=vi&amp;origin=http%3A%2F%2Fhamtruyen.vn&amp;url=http%3A%2F%2Fhamtruyen.vn%2Fdoc-truyen%2Fdetective-conan---tham-tu-lung-danh-conan-chapter-891.html&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en.t_PM0i4By2E.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCMEirblzxRlPamnM-1otlo8IChKAw#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&amp;id=I0_1457588691685&amp;parent=http%3A%2F%2Fhamtruyen.vn&amp;pfname=&amp;rpctoken=70856365" data-gapiattached="true" title="+1"></iframe></div>
@@ -14,11 +17,15 @@
     </div>
     <div id="info_story_user" class="info_story_user row">
         <div class="info_story col-md-8">
-            <div><a (click)="viewStory(story)" class="link_truyen">{{story.name}}</a> <span class="link_truyen"> - </span><a href="/doc-truyen/detective-conan---tham-tu-lung-danh-conan-chapter-891.html" class="link_truyen">Chapter 891</a></div>
+            <div>
+                <a (click)="viewStory(story)" class="link_truyen">{{story.Name}}</a>
+                <span class="link_truyen"> - </span>
+                <a class="link_truyen">{{chapter.Name}}</a>
+            </div>
             <div>
                 <ul>
-                    <li>Cập nhật : 04:30 - 29/01/2016</li>
-                    <li>Đọc : 64</li>
+                    <li>Cập nhật : </li>
+                    <li>Đọc : </li>
                 </ul>
             </div>
         </div>
@@ -44,7 +51,7 @@
             </a>
         </h2>
     </div>
-    
+
     <div class="content_chap" id="content_chap">
         <section *ngFor="#page of chapter.Pages">
             <img [src]="page" [attr.alt]="chapter.Name"><br>
@@ -95,11 +102,14 @@
     <!--End Báo Lỗi -->
     <div id="div_info_bottom" style="margin-top:30px;" class="info_story_pintop row">
         <div class="wrapper_listchuong col-md-5">
-            <select id="ddl_listchap_bottom" onchange="changeurl_bottom()">
-                <option value="detective-conan---tham-tu-lung-danh-conan-chapter-1">Chapter 1</option>
+            <select id="ddl_listchap_bottom" (change)="changeChap($event)">
+                <option *ngFor="#siblingChap of story.Chapters" [value]="siblingChap.Name" [selected]="siblingChap.Name == chapter.Name">{{siblingChap.Name}}</option>
             </select>
         </div>
-        <div class="wrapper_nextchap col-md-3"> <a href="/doc-truyen/detective-conan---tham-tu-lung-danh-conan-chapter-890.html" class="btn_nextchap">Chương trước</a>  <a href="/doc-truyen/detective-conan---tham-tu-lung-danh-conan-chapter-892.html" class="btn_nextchap">Chương sau</a>  </div>
+        <div class="wrapper_nextchap col-md-3">
+            <a *ngIf="prevChapter" (click)="viewChapter(prevChapter)" class="btn_nextchap">Chương trước</a>
+            <a *ngIf="nextChapter" (click)="viewChapter(nextChapter)" class="btn_nextchap">Chương sau</a>
+        </div>
         <div class="wrapper_content_like col-md-3">
             <iframe src="http://www.facebook.com/plugins/like.php?href=http://hamtruyen.vn/doc-truyen/detective-conan---tham-tu-lung-danh-conan-chapter-891.html&amp;send=true&amp;layout=button_count&amp;width=138&amp;height=20&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=60&amp;appId=537840529633958" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:138px; height:20px;" allowtransparency="true"></iframe>
             <div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I1_1457588695090" name="I1_1457588695090" src="https://apis.google.com/u/0/se/0/_/+1/fastbutton?usegapi=1&amp;size=medium&amp;hl=vi&amp;origin=http%3A%2F%2Fhamtruyen.vn&amp;url=http%3A%2F%2Fhamtruyen.vn%2Fdoc-truyen%2Fdetective-conan---tham-tu-lung-danh-conan-chapter-891.html&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en.t_PM0i4By2E.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCMEirblzxRlPamnM-1otlo8IChKAw#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&amp;id=I1_1457588695090&amp;parent=http%3A%2F%2Fhamtruyen.vn&amp;pfname=&amp;rpctoken=31547005" data-gapiattached="true" title="+1"></iframe></div>

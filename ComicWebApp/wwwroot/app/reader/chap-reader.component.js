@@ -16,22 +16,50 @@ var ChapReaderComponent = (function () {
         this._nav = _nav;
         this._service = _service;
         this._routeParams = _routeParams;
+        this.hasNextChapter = false;
+        this.hasPrevChapter = false;
+        this.nextChapter = null;
+        this.prevChapter = null;
     }
     ChapReaderComponent.prototype.ngAfterContentInit = function () {
     };
     ChapReaderComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.name = this._routeParams.get("storyname");
-        console.log('storyname : ' + this.name);
         this.chapname = this._routeParams.get('chapname');
-        console.log('chapname : ' + this.chapname);
         this._service.getChapInfo(this.name, this.chapname).subscribe(function (res) {
             _this.chapter = res;
             _this.story = _this.chapter.Story;
-            console.log('data callback complete.....');
+            var index = _this.story.Chapters.findIndex(function (c) { return c.Name === _this.chapter.Name; });
+            console.log('index found .............' + index);
+            if (index < _this.story.Chapters.length) {
+                _this.nextChapter = _this.story.Chapters[index + 1];
+                _this.hasNextChapter = true;
+            }
+            if (index > 0) {
+                _this.hasPrevChapter = true;
+                _this.prevChapter = _this.story.Chapters[index - 1];
+            }
+            console.log(_this);
         }, function (err) {
             _this.errorMessage = err;
         });
+    };
+    ChapReaderComponent.prototype.changeChap = function (ev) {
+        var selected = ev.target.value;
+        if (selected !== this.chapname) {
+            var chap = this.story.Chapters.filter(function (s) {
+                return s.Name == selected;
+            })[0];
+            this._nav.readChapter(this.story, chap);
+        }
+    };
+    ChapReaderComponent.prototype.viewStory = function (s) {
+        this._nav.viewStory(s);
+    };
+    ChapReaderComponent.prototype.viewChapter = function (c) {
+        console.log(this);
+        this._nav.readChapter(this.story, c);
     };
     ChapReaderComponent = __decorate([
         core_1.Component({

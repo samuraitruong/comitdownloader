@@ -16,6 +16,9 @@ var TopStoryComponent = (function () {
         this._nav = _nav;
         this.classes = new Array();
     }
+    TopStoryComponent.prototype.viewLastChap = function () {
+        this._nav.readChapter(this.topStory, this.lastChapter);
+    };
     TopStoryComponent.prototype.viewStory = function (story) {
         this._nav.viewStory(story);
         //let link = ['StoryDetail', { name: story.Name }];
