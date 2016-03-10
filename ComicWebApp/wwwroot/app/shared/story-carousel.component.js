@@ -8,19 +8,48 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
+var navigation_helper_1 = require('./navigation.helper');
 var StoryCarouselComponent = (function () {
-    function StoryCarouselComponent() {
+    function StoryCarouselComponent(_nav) {
+        this._nav = _nav;
     }
-    StoryCarouselComponent.prototype.ngAfterViewChecked = function () {
+    StoryCarouselComponent.prototype.viewStory = function (s) {
+        this._nav.viewStory(s);
+    };
+    StoryCarouselComponent.prototype.ngAfterContentInit = function () {
+        this.initCarousel();
     };
     StoryCarouselComponent.prototype.initCarousel = function () {
+        $('#crsTruyenHotTrongNgay').carousel({
+            interval: 10000
+        });
+        setTimeout(function () {
+            $('.carousel .item').each(function () {
+                var next = $(this).next();
+                if (!next.length) {
+                    next = $(this).siblings(':first');
+                }
+                next.children(':first-child').clone().appendTo($(this));
+                for (var i = 0; i < 5; i++) {
+                    next = next.next();
+                    if (!next.length) {
+                        next = $(this).siblings(':first');
+                    }
+                    next.children(':first-child').clone().appendTo($(this));
+                }
+            });
+        }, 1000);
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], StoryCarouselComponent.prototype, "stories", void 0);
     StoryCarouselComponent = __decorate([
         core_1.Component({
             selector: 'cmapp-story-carousel',
-            templateUrl: 'views/shared/story-carousel.html'
+            templateUrl: 'views/shared/story-carousel.html',
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [navigation_helper_1.NavigationHelper])
     ], StoryCarouselComponent);
     return StoryCarouselComponent;
 })();

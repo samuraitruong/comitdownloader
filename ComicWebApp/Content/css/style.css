@@ -1076,6 +1076,21 @@ header {
     text-align: center;
 }
 
+#wrapper_listchap .nano {
+    max-height:400px;
+    min-height:400px;
+    height:100%;
+    overflow:hidden;
+}
+#wrapper_listchap .nano .content {
+        position: absolute;
+        overflow: scroll;
+        overflow-x: hidden;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+}
 .right_content {
     width: 300px;
     float: left;
@@ -1881,4 +1896,10 @@ ul.nav-tabs li a {
 #qcBallonleft iframe {
     margin-left: -35px;
     margin-top: -10px;
+}
+.row_theloai a:after{
+    content: ', '
+}
+.row_theloai a[last-child]:after{
+    content: ''
 }

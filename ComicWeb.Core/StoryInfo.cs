@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ComicWeb.Core
 {
-    public class ChapterInfo : InfoObj
+    public class ChapterInfo : InfoObj , IChapterInfo
     {
         public string Downloader { get; set; }
         public string Name { get; set; }
@@ -25,7 +25,7 @@ namespace ComicWeb.Core
         }
 
         public DateTime LastModified { get; set; }
-        public StoryInfo Story { get; internal set; }
+        public IStoryInfo Story { get;  set; }
     }
     public class StoryInfo : InfoObj , IStoryInfo
     {

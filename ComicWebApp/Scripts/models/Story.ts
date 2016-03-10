@@ -6,4 +6,5 @@ export class Story {
     CoverUrl: string;
     Categories: string[];
     Chapters: Chapter[]
+    Author: string;
 } 

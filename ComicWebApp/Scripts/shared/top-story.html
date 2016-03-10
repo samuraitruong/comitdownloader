@@ -1,5 +1,4 @@
-﻿
-                <!-- START GALLERY TRUYEN HOT AND BXH-->
+﻿                <!-- START GALLERY TRUYEN HOT AND BXH-->
 <div id="wrapper_gallery_and_bxh" class="row" *ngIf="topStory">
     <div class="col-md-9">
         <div class="title_doctruyen moicapnhat clearfix">
@@ -11,14 +10,14 @@
         </div>
         <div class="mgtop10 clearfix">
             <div class="div_img_gioithieu">
-                <a href="appleseed-1386.html">
+                <a (click)="viewStory(topStory)">
                     <img src="{{topStory.CoverUrl}}" alt="{{topStory.Name}}" />
                 </a>
             </div>
 
             <div class="div_info_gioithieu">
 
-                <a class="manga-name" href="appleseed-1386.html">{{topStory.Name}}</a>
+                <a class="manga-name" (click)="viewStory(topStory)">{{topStory.Name}}</a>
                 <div class="manga-info mgtop10">
                     Cập nhật <a class="manga-lastchap" href="doc-truyen/appleseed-chapter-10-2.html">{{lastChapter.Name}}</a>
                 </div>
@@ -26,7 +25,7 @@
                 <div class="manga-info mgtop10">
                     <span class="glyphicon glyphicon-tags"></span>
                     <span> Thể loại: </span>
-                    <a *ngFor="#cat of topStory.Categories" class="label label-primary manga-type" href="Theloai/549f819f1788b6107431bd23/shounen.html">{{cat}}</a>
+                    <a *ngFor="#cat of topStory.Categories" class="label label-primary manga-type" href="#">{{cat}}</a>
                 </div>
 
                 <div class="manga-info mgtop10">
@@ -41,7 +40,7 @@
     <div id="wrapper_bxh" class="col-md-3 mgtop10">
         <!--start bxh-->
         <div class="item_bxh old" *ngFor="#bxh of top10Stories; #i=index">
-            <span class="stt stt" [ngClass]="classes[i]">{{i+1}}</span><a href="#" class="name_bxh">{{bxh.Name}}</a>
+            <span class="stt stt" [ngClass]="classes[i]">{{i+1}}</span><a (click)="viewStory(bxh)" class="name_bxh">{{bxh.Name}}</a>
         </div>
         <!--end bxh-->
     </div>

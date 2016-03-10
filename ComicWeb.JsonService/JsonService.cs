@@ -14,6 +14,33 @@ namespace ComicWeb.JsonService
         {
         }
 
+        public List<IStoryInfo> GetLatestUpdatedStories(int count)
+        {
+            IEnumerable<IStoryInfo> list = GetRandomStoriesList(count);
+
+            return list.ToList(); ;
+        }
+
+        public List<IStoryInfo> GetMostPopularTodayStories(int number = 20)
+        {
+            IEnumerable<IStoryInfo> list = GetRandomStoriesList(number);
+
+            return list.ToList(); ;
+        }
+
+        private static IEnumerable<IStoryInfo> GetRandomStoriesList(int number)
+        {
+            Random random = new Random();
+            var stories = DataManager.AllStories(true);
+
+            var list = Enumerable.Range(0, number).Select(p =>
+            {
+                int index = random.Next(1, stories.Count);
+                return (IStoryInfo)stories.ElementAt(index);
+            });
+            return list;
+        }
+
         public List<IStoryInfo> GetTopStories(int number)
         {
             var list = DataManager.AllStories(true);
@@ -27,6 +54,27 @@ namespace ComicWeb.JsonService
             var index = (new Random()).Next(list.Count);
             var info = list.ElementAt(index);
             return DataManager.LoadStory(info.JsonFileName);
+        }
+
+        public List<IStoryInfo> GetLatestPostedStories(int count)
+        {
+            IEnumerable<IStoryInfo> list = GetRandomStoriesList(count);
+
+            return list.ToList();
+        }
+
+        public IStoryInfo GetStoryByName(string name)
+        {
+            return DataManager.AllStories(true).FirstOrDefault(p => p.Name.ToLower() == name.ToLower()) ;
+        }
+
+        public IChapterInfo GetChapInfo(string name, string chapName)
+        {
+            var story = GetStoryByName(name);
+            var chap = ((StoryInfo)story).Chapters.FirstOrDefault(p => p.Name.ToLower() == chapName.ToLower());
+            var fullInfo = DataManager.LoadChapter(chap.JsonFileName);
+            fullInfo.Story = story;
+            return fullInfo;
         }
     }
 }

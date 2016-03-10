@@ -1,0 +1,91 @@
+<div class="row" style="text-align:center;padding-bottom:10px;"></div>
+<div class="row" *ngIf="story">
+    <div class="col-md-8 wrapper_info_truyen">
+        <!--start left content-->
+        <div id="title_menu_part">
+            <a href="http://hamtruyen.com" style="margin-left:0;">Trang chủ</a> |
+            <a href="http://hamtruyen.vn/">Truyện tranh</a> | <a href="#" [attr.title]="story.Name">{{story.Name}}</a>
+        </div>
+        <div id="content_truyen" class="clearfix">
+            <div class="col-xs-4 wrapper_image"> <img [src]="story.CoverUrl" [attr.alt]="story.Name"> </div>
+            <div class="col-xs-8 wrapper_info">
+                <h1 class="tentruyen">{{story.name}}</h1>
+                <p style="width:280px;"><i class="bg icon_tacgia"></i>Tác giả : {{story.Author}} </p>
+                <p><i class="bg icon_nhomdich"></i>Nhóm dịch : Tổng hợp nhiều nguồn</p>
+                <p><i class="bg icon_trangthai"></i> Trạng thái : Đang tiến hành </p>
+                <p class="row_theloai"><i class="bg icon_theloai"> </i>Thể loại : 
+                    <a *ngFor ="#cat of story.Categories" >{{cat}}</a> 
+                </p>
+                <p><i class="bg icon_add"></i>Theo dõi : <span id="numbertheodoi" class="text_orange">12 người</span> đã theo dõi truyện này <br>Lượt view : 977</p>
+                <p class="no_padding"><iframe src="http://www.facebook.com/plugins/like.php?href=http://Hamtruyen.vn/truyen-kinh-di-o-toa-nha-so-44-0.html&amp;send=true&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=60&amp;appId=537840529633958" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:460px; height:25px;" allowtransparency="true"></iframe></p>
+                <div class="danhgia_truyen_chitiet danhgia_truyen">
+                    <div hasrate="no" class="lst_danhgia"><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',1);" class="bg star2" rate="1"></span><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',2);" class="bg star2" rate="2"></span><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',3);" class="bg star2" rate="3"></span><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',4);" class="bg star2" rate="4"></span><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',5);" class="bg star2" rate="5"></span></div>
+                    <div class="diem_danhgia">5.0</div>
+                </div>
+                <div class="wrapper_theodoitruyen"><button id="btn_theodoitruyen" class="bg theodoi_truyen icon_theodoi" data-follow="false" onclick="theodoitruyen('56e07ca40ffdb224f876a451','vvJy9yxMo30=',-3)"></button></div>
+                <div class="no_padding gachdotter">
+                    <p></p>
+                    <p class="no_padding"><span class="text_orange">Nội dung : </span></p>
+                    <p class="no_padding tomtat_truyen" id="tomtattruyen"> {{story.Summary}}</p>
+                    <p class="text_right"><span class="xemthem text_orange" onclick="showfullTomtat($(this))">Xem thêm</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="info_detailtruyen mgtop10" id="list_chapter_truyen" *ngIf="story.Chapters.length > 0">
+            <!--start list_chapter_truyen-->
+            <div class="title_tab">
+                <div class="tab active fl">Danh sách chương truyện</div>
+                <br class="clear">
+            </div>
+            <div id="wwrapper_lisstchap">
+                <div id="wrapper_listchap">
+                    <section class="row_chap title">
+                        <!--start row title-->
+                        <div class="col_chap tenChapter">Tên Chương</div>
+                        <div class="col_chap ngaydang"> Ngày Đăng</div>
+                        <div class="col_chap luotview"> Lượt Xem</div>
+                    </section>
+                    <!-- end row title-->
+                    <div class="nano">
+                        <div class="content" tabindex="0">
+                            <section class="row_chap" *ngFor="#chap of story.Chapters">
+                                <div class="col_chap tenChapter"><a (click)="readChapter(chap)">{{chap.Name}}</a> </div>
+                                <div class="col_chap ngaydang"></div>
+                                <div class="col_chap luotview"></div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="info_detailtruyen mgtop10">
+            <div class="title_tab">
+                <div class="tab active fl">Bình luận truyện</div>
+                <br class="clear">
+            </div>
+            <div class="wrap_binhluan">
+                <div class="fb-comments fb_iframe_widget" data-href="http://Hamtruyen.vn/truyen-kinh-di-o-toa-nha-so-44-0.html" data-width="706" data-num-posts="10" fb-xfbml-state="rendered"><span style="height: 173px; width: 706px;"><iframe id="f2345e12dc" name="f3d3afe398" scrolling="no" title="Facebook Social Plugin" class="fb_ltr" src="https://www.facebook.com/plugins/comments.php?api_key=537840529633958&amp;channel_url=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D42%23cb%3Df294b44b44%26domain%3Dhamtruyen.vn%26origin%3Dhttp%253A%252F%252Fhamtruyen.vn%252Ff36b2adc8c%26relation%3Dparent.parent&amp;href=http%3A%2F%2FHamtruyen.vn%2Ftruyen-kinh-di-o-toa-nha-so-44-0.html&amp;locale=vi_VN&amp;numposts=10&amp;sdk=joey&amp;version=v2.0&amp;width=706" style="border: none; overflow: hidden; height: 173px; width: 706px;"></iframe></span></div>
+            </div>
+        </div>
+    </div>
+    <!--end left content-->
+    <div class="col-md-4 right_content">
+        <!--start right content-->
+        <div id="wrapper_slider col-md-12">
+                <cmapp-story-genres></cmapp-story-genres>
+        </div>
+        <!--end right content-->
+    </div>
+
+    <div id="fb-root"></div>
+    <script>
+      (function (d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&appId=537840529633958&version=v2.0";
+          fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+</div>

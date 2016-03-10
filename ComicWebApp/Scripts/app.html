@@ -134,26 +134,3 @@
         Email: hoangsakura@gmail.com - Mobile : 0989 789 533   <br />
     </div>
 </footer>
-<script>
-    $(document).ready(function () {
-        $('#crsTruyenHotTrongNgay').carousel({
-            interval: 10000
-        })
-        $('#crsTruyenHotTrongNgay .carousel-inner .item').each(function () {
-            var next = $(this).next();
-            if (!next.length) {
-                next = $(this).siblings(':first');
-            }
-            next.children(':first-child').clone().appendTo($(this));
-
-            for (var i = 0; i < 5; i++) {
-                next = next.next();
-                if (!next.length) {
-                    next = $(this).siblings(':first');
-                }
-
-                next.children(':first-child').clone().appendTo($(this));
-            }
-        });
-    });
-</script>

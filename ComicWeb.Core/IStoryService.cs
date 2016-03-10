@@ -9,5 +9,10 @@ namespace ComicWeb.Core
     {
         IStoryInfo GetTopStory();
         List<IStoryInfo> GetTopStories(int number);
+        List<IStoryInfo> GetMostPopularTodayStories(int number);
+        List<IStoryInfo> GetLatestUpdatedStories(int count);
+        List<IStoryInfo> GetLatestPostedStories(int count);
+        IStoryInfo GetStoryByName(string name);
+        IChapterInfo GetChapInfo(string name, string chapName);
     }
 }

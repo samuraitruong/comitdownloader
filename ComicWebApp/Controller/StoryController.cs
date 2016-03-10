@@ -25,6 +25,19 @@ namespace ComicWebApp
             return new string[] { "value1", "value2" };
         }
 
+        [HttpGet("detail/{name}")]
+        public IStoryInfo GetStoryByName(string name)
+        {
+            return service.GetStoryByName(name);
+        }
+
+        [HttpGet("detail/{name}/{chapName}")]
+        public IChapterInfo GetChap(string name, string chapName)
+        {
+            return service.GetChapInfo(name, chapName);
+        }
+
+
         [HttpGet("top")]
         public IStoryInfo GetTop()
         {
@@ -35,6 +48,25 @@ namespace ComicWebApp
         {
             return service.GetTopStories(10);
         }
+        [HttpGet("updated")]
+        public List<IStoryInfo> UpdatedStories()
+        {
+            return service.GetLatestUpdatedStories(30);
+        }
+
+        [HttpGet("latest")]
+        public List<IStoryInfo> PostedStories()
+        {
+            return service.GetLatestPostedStories(30);
+        }
+
+        [HttpGet("toptoday")]
+        public List<IStoryInfo> GetTopToday()
+        {
+            return service.GetMostPopularTodayStories(20);
+        }
+
+
 
         // GET api/values/5
         [HttpGet("{id}")]

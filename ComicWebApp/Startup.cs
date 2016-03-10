@@ -36,10 +36,15 @@ namespace ComicWebApp
             app.UseStaticFiles();
             app.UseMvc();
             //app.UseMiddleware<StaticFileMiddleware>(new StaticFileOptions());
-            //app.Run(async (context) =>
+            //app.Run(context =>
             //{
-            //    await context.Response.WriteAsync("Hello World!");
+            //    if (context.Request.Path.Value != "/app")
+            //    {
+            //        context.Response.Redirect("/");
+            //    };
+            //    return Task.FromResult<object>(null);
             //});
+
         }
 
         // Entry point for the application.

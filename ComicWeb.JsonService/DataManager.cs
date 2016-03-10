@@ -23,37 +23,53 @@ namespace ComicWeb.JsonService
             }
             return null;
         }
+        private static object lk = new object();
         public static List<StoryInfo> AllStories(bool fullLoad = false)
         {
-            if(stories == null || stories.Count ==0)
+            lock (lk)
             {
-                stories = new List<StoryInfo>();
-                string file = Path.Combine(rootFolder, "stories.json");
-                var temp = JsonConvert.DeserializeObject<List<StoryInfo>>(File.ReadAllText(file));
-                if (fullLoad)
+                if (stories == null || stories.Count == 0)
                 {
-                    Parallel.ForEach(temp, (s) =>
+                    stories = new List<StoryInfo>();
+                    string file = Path.Combine(rootFolder, "stories.json");
+                    var temp = JsonConvert.DeserializeObject<List<StoryInfo>>(File.ReadAllText(file));
+                    if (fullLoad)
                     {
-                        var storyFile = Path.Combine(rootFolder, s.JsonFileName);
-                        if (File.Exists(storyFile))
+                        Parallel.ForEach(temp, (s) =>
                         {
-                            var fullStory = JsonConvert.DeserializeObject<StoryInfo>(File.ReadAllText(storyFile));
-                            stories.Add(fullStory);
-                        }
+                            var storyFile = Path.Combine(rootFolder, s.JsonFileName);
+                            if (File.Exists(storyFile))
+                            {
+                                var fullStory = JsonConvert.DeserializeObject<StoryInfo>(File.ReadAllText(storyFile));
+                                stories.Add(fullStory);
+                            }
 
-                    });
+                        });
 
-                    stories.Sort((x, y) =>
+                        stories.Sort((x, y) =>
+                        {
+                            return y.Chapters.Count - x.Chapters.Count;
+                        });
+                    }
+                    else
                     {
-                        return y.Chapters.Count - x.Chapters.Count;
-                    });
+                        stories = temp;
+                    }
                 }
-                else
-                {
-                    stories = temp;
-                }
+                return stories;
             }
-            return stories;
+        }
+
+        public static ChapterInfo LoadChapter(string filename)
+        {
+            var storyFile = Path.Combine(rootFolder, filename);
+            if (File.Exists(storyFile))
+            {
+                var fullChapInfo = JsonConvert.DeserializeObject<ChapterInfo>(File.ReadAllText(storyFile));
+                return fullChapInfo;
+            }
+            return null;
+
         }
     }
 }

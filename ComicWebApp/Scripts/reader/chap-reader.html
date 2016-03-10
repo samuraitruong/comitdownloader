@@ -1,0 +1,190 @@
+﻿<section id="middle" class="row middle_doctruyen" *ngIf="chapter">
+    <div id="info_story_pintop" class="info_story_pintop row">
+        <div class="wrapper_listchuong col-md-5">
+            <select id="ddl_listchap">
+                <option>aaaaa</option>
+                </select>
+</div>
+        <div class="wrapper_nextchap col-md-3"> <a href="/doc-truyen/detective-conan---tham-tu-lung-danh-conan-chapter-890.html" class="btn_nextchap">Chương trước</a>  <a href="/doc-truyen/detective-conan---tham-tu-lung-danh-conan-chapter-892.html" class="btn_nextchap">Chương sau</a>  </div>
+        <div class="wrapper_content_like col-md-3">
+            <iframe src="http://www.facebook.com/plugins/like.php?href=http://hamtruyen.vn/doc-truyen/detective-conan---tham-tu-lung-danh-conan-chapter-891.html&amp;send=true&amp;layout=button_count&amp;width=138&amp;height=20&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=60&amp;appId=537840529633958" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:138px; height:20px;" allowtransparency="true"></iframe>
+            <div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1457588691685" name="I0_1457588691685" src="https://apis.google.com/u/0/se/0/_/+1/fastbutton?usegapi=1&amp;size=medium&amp;hl=vi&amp;origin=http%3A%2F%2Fhamtruyen.vn&amp;url=http%3A%2F%2Fhamtruyen.vn%2Fdoc-truyen%2Fdetective-conan---tham-tu-lung-danh-conan-chapter-891.html&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en.t_PM0i4By2E.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCMEirblzxRlPamnM-1otlo8IChKAw#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&amp;id=I0_1457588691685&amp;parent=http%3A%2F%2Fhamtruyen.vn&amp;pfname=&amp;rpctoken=70856365" data-gapiattached="true" title="+1"></iframe></div>
+        </div>
+        <div class="wrapper_baoloi col-md-1"><button id="btnError" class="btn btn-warning" data-href="56aaeacd0ffdae3b44d98ab5" data-toggle="modal" data-target="#report_section_wrapper">Báo lỗi</button></div>
+    </div>
+    <div id="info_story_user" class="info_story_user row">
+        <div class="info_story col-md-8">
+            <div><a (click)="viewStory(story)" class="link_truyen">{{story.name}}</a> <span class="link_truyen"> - </span><a href="/doc-truyen/detective-conan---tham-tu-lung-danh-conan-chapter-891.html" class="link_truyen">Chapter 891</a></div>
+            <div>
+                <ul>
+                    <li>Cập nhật : 04:30 - 29/01/2016</li>
+                    <li>Đọc : 64</li>
+                </ul>
+            </div>
+        </div>
+        <div class="info_user col-md-4 media">
+            <div class="media-left">
+                <img src="http://hamtruyen.vn/images/logo.png" width="90" height="90">
+                <p class="chucvu">Web Admin</p>
+            </div>
+            <div class="media-body">
+                <label class="name">Administrator</label> <label>Đẳng Cấp : <span>Đạp Thiên Đế Cảnh</span></label>
+                <div class="progress" style="margin-bottom:0;position: relative;">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;background: #1687f0;"> </div>
+                    <div class="stritext">100 tỷ</div>
+                </div>
+                <label>Số bài post : <span>Vô hạn!</span></label><label>Danh hiệu : <span>Nam Việt Thần Quân</span></label><label><strong>Nhóm dịch : Hamtruyen.com</strong></label>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-info alert-dismissible thongbao_theochuong" role="alert">
+        <h2>
+            <a href="http://hamtruyen.vn/huongdandoifilehost.html">
+                Hướng dẫn sửa lỗi không xem được truyện
+            </a>
+        </h2>
+    </div>
+    
+    <div class="content_chap" id="content_chap">
+        <section *ngFor="#page of chapter.Pages">
+            <img [src]="page" [attr.alt]="chapter.Name"><br>
+        </section>
+    </div>
+    <div id="background_popup" class="background_popup" style="display:none;"></div>
+    <!--Start Báo Lỗi -->
+    <section id="report_section_wrapper" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="login" aria-hidden="true">
+        <form id="login_form" method="post">
+            <div class="modal-dialog modal-md" id="login_section">
+                <div class="modal-content" style="border-radius:0;">
+                    <div class="modal-header header_login">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">×</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title">Báo Lỗi</h4>
+                    </div>
+                    <div class="login_form modal-body">
+                        <div class="row">
+                            <h4>
+                                Bạn muốn báo lỗi chương này ? Hãy nói cho bọn mình biết chương này bị lỗi gì vào dưới đây nhé ?<br>
+                                Nếu link die toàn chap, bạn có thể làm thử theo cách này : <a href="http://hamtruyen.vn/huongdandoifilehost.html" target="_blank">Hướng dẫn sửa lỗi không xem được truyện</a><br>
+                                Nếu làm theo hướng dẫn trên mà vẫn bị lỗi thì báo với bọn mình nhé
+                            </h4>
+                            <div class="">
+                                <label>Nguyên Nhân Lỗi : </label>
+                                <textarea id="nguyennhanloi" rows="5" style="width:100%;"></textarea>
+                                <p class="help-block">Có thể là die link ảnh, hoặc up không đúng số thứ tự chương</p>
+                            </div>
+                        </div>
+                        <div class="row mgtop10">
+                            <div class="col-lg-12">
+                                <p class="help-block">Bọn mình sẽ kiểm tra chương này theo nguyên nhân bạn report. Nếu chính xác, bạn sẽ được + 35 kinh nghiệm, nếu sai thì bạn sẽ bị ban 3 ngày</p>
+                            </div>
+                        </div>
+                        <div class="row mgtop10">
+                            <div class="col-lg-12">
+                                <input type="button" id="btn_report_chap" login="0" onclick="ReportChap('56aaeacd0ffdae3b44d98ab5','d3IPCA7kh8Y=')" class="btn_hamtruyen" value="Báo Lỗi">
+                            </div>
+                        </div>
+                        <div class="row mgtop" id="div_error"></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+    <!--End Báo Lỗi -->
+    <div id="div_info_bottom" style="margin-top:30px;" class="info_story_pintop row">
+        <div class="wrapper_listchuong col-md-5">
+            <select id="ddl_listchap_bottom" onchange="changeurl_bottom()">
+                <option value="detective-conan---tham-tu-lung-danh-conan-chapter-1">Chapter 1</option>
+            </select>
+        </div>
+        <div class="wrapper_nextchap col-md-3"> <a href="/doc-truyen/detective-conan---tham-tu-lung-danh-conan-chapter-890.html" class="btn_nextchap">Chương trước</a>  <a href="/doc-truyen/detective-conan---tham-tu-lung-danh-conan-chapter-892.html" class="btn_nextchap">Chương sau</a>  </div>
+        <div class="wrapper_content_like col-md-3">
+            <iframe src="http://www.facebook.com/plugins/like.php?href=http://hamtruyen.vn/doc-truyen/detective-conan---tham-tu-lung-danh-conan-chapter-891.html&amp;send=true&amp;layout=button_count&amp;width=138&amp;height=20&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=60&amp;appId=537840529633958" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:138px; height:20px;" allowtransparency="true"></iframe>
+            <div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I1_1457588695090" name="I1_1457588695090" src="https://apis.google.com/u/0/se/0/_/+1/fastbutton?usegapi=1&amp;size=medium&amp;hl=vi&amp;origin=http%3A%2F%2Fhamtruyen.vn&amp;url=http%3A%2F%2Fhamtruyen.vn%2Fdoc-truyen%2Fdetective-conan---tham-tu-lung-danh-conan-chapter-891.html&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en.t_PM0i4By2E.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCMEirblzxRlPamnM-1otlo8IChKAw#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&amp;id=I1_1457588695090&amp;parent=http%3A%2F%2Fhamtruyen.vn&amp;pfname=&amp;rpctoken=31547005" data-gapiattached="true" title="+1"></iframe></div>
+        </div>
+        <div class="wrapper_baoloi col-md-1"><button id="btnError" class="btn btn-warning" data-href="56aaeacd0ffdae3b44d98ab5" data-toggle="modal" data-target="#report_section_wrapper">Báo lỗi</button></div>
+    </div>
+    <div class="comment info_detailtruyen mgtop10" role="tabpanel">
+        <div class="title_tab">
+            <div class="tab active fl">Bình luận của</div>
+            <span class="pull-right mgtop10" style="width:55%;">Mẹo : nếu comment facebook không load, bạn có thể click lại vào thẻ Thành Viên Trên Facebook để load lại, đừng quên click quảng cáo góc trái để ủng hộ Hamtruyen</span><br class="clear">
+        </div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#bl_hamtruyen" aria-controls="home" role="tab" data-toggle="tab">Thành Viên Hamtruyen</a></li>
+            <li role="presentation">
+                <a href="#bl_facebook" onclick="FB.XFBML.parse();" aria-controls="profile" role="tab" data-toggle="tab">
+                    Thành Viên Trên Facebook (<span class="fb-comments-count fb_comments_count_zero" data-href="http://hamtruyen.vn/doc-truyen/detective-conan---tham-tu-lung-danh-conan-chapter-891.html" fb-xfbml-state="rendered"><span class="fb_comments_count">0</span></span>    )
+                </a>
+            </li>
+        </ul>
+        <div class="commentBox list-group-item">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="taskDescription">Văn hóa bình luận: Hãy thể hiện sự văn minh đơn giản nhất bằng cách comment mang tính xây dựng</span>
+        </div>
+        <div class="wrap_binhluan_face tab-content">
+            <div id="bl_hamtruyen" class="div_comment_hamtruyen row tab-pane active" role="tabpanel">
+                <div class="khung_post_comment media clearfix">
+                    <div class="media-left media-middle user_avatar">
+                        <img class="media-object" width="100" height="100" src="http://Hamtruyen.vn/Pictures/noimage.jpg">
+                        <label></label>
+                    </div>
+                    <div class="media-body comment_content">
+                        <textarea id="txtComment" class="comment_textbox"></textarea>
+                        <div class="pull-right">
+                            <span>Chia sẻ cảm nghĩ của bạn tại đây nhé</span>
+                            <button class="btn_hamtruyen_small" onclick="showEmo($(this),1)">Emo</button>
+                            <button class="btn_hamtruyen_small" onclick="postComment('56aaeacd0ffdae3b44d98ab5','-1','','Detective Conan - Thám Tử Lừng Danh Conan - Chapter 891',0,$('#txtComment'),$(this));">Bình Luận</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="div_lstcomment_hamtruyen">
+                    <div class="media clearfix comment_item">
+                        <div class="media-left media-middle user_avatar">
+                            <img class="media-object" width="64" height="64" src="http://hamtruyen.vn/Pictures/Users/sayayuki.jpg">
+                            <label><span class="danden">Dân đen</span></label>
+                        </div>
+                        <div class="media-body comment_content" rel="div_content">
+                            <h4 class="media-heading username">
+                                SayaYuki <span class="danhhieu">
+                                    - <span class="text_orange">Bát tinh đấu giả</span>
+                                </span>
+                            </h4>
+                            <p>
+                                <img src="http://hamtruyen.vn/pictures/emo/027.gif" title=":027:"><img src="http://hamtruyen.vn/pictures/emo/027.gif" title=":027:"><img src="http://hamtruyen.vn/pictures/emo/027.gif" title=":027:"><img src="http://hamtruyen.vn/pictures/emo/027.gif" title=":027:">
+                            </p>
+                            <p class="reply_thongso">
+                                <a onclick="replyComment('56d054670ffdae1dac87d789',$(this))">Trả lời</a> -
+                                <span> 20:34 - 26/02/2016</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="bl_facebook">
+                <div class="fb-comments fb_iframe_widget fb_iframe_widget_fluid" data-href="http://hamtruyen.vn/doc-truyen/detective-conan---tham-tu-lung-danh-conan-chapter-891.html" order_by="reverse_time" data-width="100%" data-num-posts="10" fb-xfbml-state="rendered"><span style="height: 717px;"><iframe id="f24a9e4e58" name="f2f0515f3" scrolling="no" title="Facebook Social Plugin" class="fb_ltr fb_iframe_widget_lift" src="https://www.facebook.com/plugins/comments.php?api_key=537840529633958&amp;channel_url=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D42%23cb%3Df2ff045244%26domain%3Dhamtruyen.vn%26origin%3Dhttp%253A%252F%252Fhamtruyen.vn%252Ff2822203d4%26relation%3Dparent.parent&amp;href=http%3A%2F%2Fhamtruyen.vn%2Fdoc-truyen%2Fdetective-conan---tham-tu-lung-danh-conan-chapter-891.html&amp;locale=vi_VN&amp;numposts=10&amp;order_by=reverse_time&amp;sdk=joey&amp;version=v2.0&amp;width=100%25" style="border: none; overflow: hidden; height: 717px; width: 100%;"></iframe></span></div>
+            </div>
+        </div>
+    </div>
+    <div class="media clearfix comment_item" id="khung_reply" style="display:none;">
+        <div class="media-left media-middle user_avatar">
+            <img class="media-object" width="64" height="64" src="http://Hamtruyen.vn/Pictures/noimage.jpg">
+            <label></label>
+        </div>
+        <div class="media-body comment_content">
+            <textarea id="txtreplyComment" class="comment_textbox"></textarea>
+            <div class="pull-right">
+                <span>Chia sẻ cảm nghĩ của bạn tại đây nhé</span>
+                <button class="btn_hamtruyen_small" onclick="showEmo($(this),2)">Emo</button>
+                <button class="btn_hamtruyen_small" onclick="postComment('56aaeacd0ffdae3b44d98ab5','-1','','Detective Conan - Thám Tử Lừng Danh Conan - Chapter 891',parentid,$('#txtreplyComment'),$(this));">Bình Luận</button>
+            </div>
+        </div>
+    </div>
+    <div id="hiddentext" style="display:none;"></div>
+    <div id="emo_lst">
+        <div class="title_ad" onclick="$('#emo_lst').hide();">Đóng khung emo</div>
+        <img title=":93:" onclick="addEmo_comment(&quot;:93:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/93.gif"><img title=":77:" onclick="addEmo_comment(&quot;:77:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/77.gif"><img title=":72:" onclick="addEmo_comment(&quot;:72:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/72.gif"><img title=":69:" onclick="addEmo_comment(&quot;:69:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/69.gif"><img title=":68:" onclick="addEmo_comment(&quot;:68:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/68.gif"><img title=":112:" onclick="addEmo_comment(&quot;:112:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/112.gif"><img title=":124:" onclick="addEmo_comment(&quot;:124:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/124.gif"><img title=":113:" onclick="addEmo_comment(&quot;:113:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/113.gif"><img title=":89:" onclick="addEmo_comment(&quot;:89:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/89.gif"><img title=":th_4:" onclick="addEmo_comment(&quot;:th_4:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/th_4.gif"><img title=":th_8:" onclick="addEmo_comment(&quot;:th_8:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/th_8.gif"><img title=":59:" onclick="addEmo_comment(&quot;:59:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/059.gif"><img title=":cuoi_tru:" onclick="addEmo_comment(&quot;:cuoi_tru:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/103.gif"><img title=":cuot_vatva:" onclick="addEmo_comment(&quot;:cuot_vatva:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/110.gif"><img title=":full:" onclick="addEmo_comment(&quot;:full:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/full.gif"><img title=":027:" onclick="addEmo_comment(&quot;:027:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/027.gif"><img title=":029:" onclick="addEmo_comment(&quot;:029:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/029.gif"><img title=":roft:" onclick="addEmo_comment(&quot;:roft:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/rofl.gif"><img title=":018:" onclick="addEmo_comment(&quot;:018:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/018.gif"><img title=":038:" onclick="addEmo_comment(&quot;:038:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/038.gif"><img title=":045:" onclick="addEmo_comment(&quot;:045:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/045.gif"><img title=":trom:" onclick="addEmo_comment(&quot;:trom:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/n121.gif"><img title=":035:" onclick="addEmo_comment(&quot;:035:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/035.gif"><img title=":tetua:" onclick="addEmo_comment(&quot;:tetua:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/tetua.gif"><img title=":tungtung:" onclick="addEmo_comment(&quot;:tungtung:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/tungtung.gif"><img title=":1:" onclick="addEmo_comment(&quot;:1:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/1.gif"><img title=":011:" onclick="addEmo_comment(&quot;:011:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/011.gif"><img title=":chetlang:" onclick="addEmo_comment(&quot;:chetlang:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/petrified.gif"><img title=":dead:" onclick="addEmo_comment(&quot;:dead:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/dead.gif"><img title=":6:" onclick="addEmo_comment(&quot;:6:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/6.gif"><img title=":sad:" onclick="addEmo_comment(&quot;:sad:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/sad.gif"><img title=":041:" onclick="addEmo_comment(&quot;:041:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/041.gif"><img title=":051:" onclick="addEmo_comment(&quot;:051:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/051.gif"><img title=":die:" onclick="addEmo_comment(&quot;:die:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/die.gif"><img title=":hoho:" onclick="addEmo_comment(&quot;:hoho:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/hoho.gif"><img title=":00:" onclick="addEmo_comment(&quot;:00:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/00.gif"><img title=":032:" onclick="addEmo_comment(&quot;:032:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/032.gif"><img title=":stress:" onclick="addEmo_comment(&quot;:stress:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/stress.gif"><img title=":021:" onclick="addEmo_comment(&quot;:021:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/021.gif"><img title=":054:" onclick="addEmo_comment(&quot;:054:&quot;)" class="emo" src="http://hamtruyen.vn/pictures/emo/054.gif">
+    </div>
+    <div id="addexp" class="bubble x1">+1 kinh nghiệm</div>
+</section>

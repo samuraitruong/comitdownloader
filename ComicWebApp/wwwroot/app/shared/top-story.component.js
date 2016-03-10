@@ -9,11 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('angular2/core');
 var top_story_service_1 = require('./top-story.service');
+var navigation_helper_1 = require('./navigation.helper');
 var TopStoryComponent = (function () {
-    function TopStoryComponent(_storyService) {
+    function TopStoryComponent(_storyService, _nav) {
         this._storyService = _storyService;
+        this._nav = _nav;
         this.classes = new Array();
     }
+    TopStoryComponent.prototype.viewStory = function (story) {
+        this._nav.viewStory(story);
+        //let link = ['StoryDetail', { name: story.Name }];
+        //this._router.navigate(link);
+    };
     TopStoryComponent.prototype.loadTopStory = function () {
         var _this = this;
         this._storyService.getTopStory().
@@ -45,7 +52,7 @@ var TopStoryComponent = (function () {
             templateUrl: 'views/shared/top-story.html',
             providers: [top_story_service_1.TopStoryService]
         }), 
-        __metadata('design:paramtypes', [top_story_service_1.TopStoryService])
+        __metadata('design:paramtypes', [top_story_service_1.TopStoryService, navigation_helper_1.NavigationHelper])
     ], TopStoryComponent);
     return TopStoryComponent;
 })();

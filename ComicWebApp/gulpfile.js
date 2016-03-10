@@ -21,7 +21,9 @@ var bowerLibs = [
        paths.bowerSrc + '/jquery-ui/jquery-ui.min.js',
        paths.bowerSrc + '/jcarousel/dist/jquery.jcarousel.min.js',
        paths.bowerSrc + '/jcarousel/examples/responsives/jcarousel.responsive.css',
-       paths.bowerSrc + '/jquery-ui/themes/vader/jquery-ui.min.css'
+       paths.bowerSrc + '/jquery-ui/themes/vader/jquery-ui.min.css',
+       paths.bowerSrc + '/nanoscroller/bin/javascripts/jquery.nanoscroller.min.js',
+       paths.bowerSrc + '/nanoscroller/bin/css/nanoscroller.css'
        
 ];
 

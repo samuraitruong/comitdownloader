@@ -8,4 +8,9 @@ namespace ComicWeb.Core
     public interface IStoryInfo
     {
     }
+
+    public interface IChapterInfo
+    {
+
+    }
 }
