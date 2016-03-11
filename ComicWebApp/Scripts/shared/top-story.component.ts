@@ -20,6 +20,9 @@ export class TopStoryComponent implements OnInit {
     viewLastChap() {
         this._nav.readChapter(this.topStory, this.lastChapter);
     }
+    viewGenre(genre: string) {
+        this._nav.viewGenre(genre);
+    }
     viewStory(story: Story) {
         this._nav.viewStory(story)
         //let link = ['StoryDetail', { name: story.Name }];

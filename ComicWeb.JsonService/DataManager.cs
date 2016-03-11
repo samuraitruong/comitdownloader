@@ -12,7 +12,7 @@ namespace ComicWeb.JsonService
     {
         private static string rootFolder = @"D:\Data1\uptruyen.com\";
         public static List<StoryInfo> stories;
-
+        public static Dictionary<string, List<IStoryInfo>> genres = new Dictionary<string, List<IStoryInfo>>();
         public static StoryInfo LoadStory(string filename)
         {
             var storyFile = Path.Combine(rootFolder, filename);
@@ -70,6 +70,23 @@ namespace ComicWeb.JsonService
             }
             return null;
 
+        }
+
+        internal static List<IStoryInfo> GenreStories(string name)
+        {
+            if(!genres.ContainsKey(name))
+            {
+                var stories = new List<IStoryInfo>();
+                Parallel.ForEach(AllStories(true), (s) =>
+                {
+                    if(s.Categories.Any(p=>p.ToLower() == name.ToLower())) {
+                        stories.Add(s);
+                    }
+                });
+                genres.Add(name, stories);
+            }
+
+            return genres[name];
         }
     }
 }

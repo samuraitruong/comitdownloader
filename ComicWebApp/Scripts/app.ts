@@ -4,7 +4,9 @@ import {HTTP_PROVIDERS}    from 'angular2/http';
 import {HomeComponent} from './home/home.component'
 import {StoryDetailComponent}  from './story/story-detail.component'
 import {ChapReaderComponent} from './reader/chap-reader.component'
+import {GenreComponent} from './directory/genre.component'
 import {NavigationHelper} from './shared/navigation.helper'
+//import { PAGINATION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
     selector: 'comic-app',
@@ -29,9 +31,15 @@ import {NavigationHelper} from './shared/navigation.helper'
         path: '/reader/:storyname/:chapname',
         name: 'ChapReader',
         component: ChapReaderComponent,
+    },
+    {
+        path: '/genre/:genre',
+        name: 'Genre',
+        component: GenreComponent,
     }
 ])
 
-export class AppComponent { }
+export class AppComponent {
+}
 
 

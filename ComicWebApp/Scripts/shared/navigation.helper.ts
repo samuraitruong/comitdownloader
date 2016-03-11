@@ -17,6 +17,11 @@ export class NavigationHelper {
         this._router.navigate(link);
     }
 
+    viewGenre(genre:string) {
+        let link = ['Genre', { genre: genre }];
+        this._router.navigate(link);
+    }
+
 
     getString(name: string): string {
         return "";

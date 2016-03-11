@@ -25,7 +25,7 @@
                 <div class="manga-info mgtop10">
                     <span class="glyphicon glyphicon-tags"></span>
                     <span> Thể loại: </span>
-                    <a *ngFor="#cat of topStory.Categories" class="label label-primary manga-type" href="#">{{cat}}</a>
+                    <a *ngFor="#cat of topStory.Categories" class="label label-primary manga-type" (click)="viewGenre(cat)">{{cat}}</a>
                 </div>
 
                 <div class="manga-info mgtop10">

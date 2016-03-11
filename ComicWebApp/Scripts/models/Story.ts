@@ -8,3 +8,9 @@ export class Story {
     Chapters: Chapter[]
     Author: string;
 } 
+
+export class GenreRes {
+    Stories: Story[];
+    PageSize: number;
+    PageCount: number;
+}

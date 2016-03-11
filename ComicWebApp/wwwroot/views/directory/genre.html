@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-md-8 wrapper_truyemoicapnhat">
+        <div class="title_doctruyen manhua">
+            <div class="bg leftbar1 fl"></div>
+            <div class="centertext fl" style="width:655px;padding-top:3px;">
+                Truyện thuộc thể loại Manga
+                <a href="/danhsach/index.html" class="link_right">Xem thêm&gt;&gt;</a>
+            </div>
+            <div class="bg rightbar1 fl"></div>
+        </div>
+        <div class="lst_truyen_moidang">
+            <cmapp-story-list [stories]="stories"></cmapp-story-list>
+            
+            <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm"
+                        [boundaryLinks]="true" [rotate]="false" (numPages)="numPages = $event"></pagination>
+
+
+            <nav class="pagerhamtruyen">
+                <ul class="pagination">
+                    <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
+                    <li><a href="/Theloai/549f819f1788b6107431bd05/P2/manga.html">2</a></li>
+                    <li><a href="/Theloai/549f819f1788b6107431bd05/P3/manga.html">3</a></li>
+                    <li><a href="/Theloai/549f819f1788b6107431bd05/P4/manga.html">4</a></li>
+                    <li><a href="/Theloai/549f819f1788b6107431bd05/P5/manga.html">5</a></li>
+                    <li><a href="/Theloai/549f819f1788b6107431bd05/P6/manga.html">6</a></li>
+                    <li><a href="/Theloai/549f819f1788b6107431bd05/P7/manga.html">7</a></li>
+                    <li><a href="/Theloai/549f819f1788b6107431bd05/P8/manga.html">8</a></li>
+                    <li><a href="/Theloai/549f819f1788b6107431bd05/P9/manga.html">9</a></li>
+                    <li><a href="/Theloai/549f819f1788b6107431bd05/P10/manga.html">10</a>&nbsp;&nbsp;</li>
+                    <li><a href="/Theloai/549f819f1788b6107431bd05/P2/manga.html"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- START RIGHT CONTENT-->
+    <div class="col-md-4 wrapper_qc">
+        <cmapp-story-genres></cmapp-story-genres>
+    </div>
+    <!--END RIGHT CONTENT-->
+</div>

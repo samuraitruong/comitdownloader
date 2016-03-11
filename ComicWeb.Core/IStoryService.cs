@@ -14,5 +14,7 @@ namespace ComicWeb.Core
         List<IStoryInfo> GetLatestPostedStories(int count);
         IStoryInfo GetStoryByName(string name);
         IChapterInfo GetChapInfo(string name, string chapName);
+        IPagedList<IStoryInfo> GetGenreStories(string name, int page
+           );
     }
 }

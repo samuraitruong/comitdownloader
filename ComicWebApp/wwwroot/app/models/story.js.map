@@ -1,1 +1,1 @@
-{"version":3,"file":"story.js","sourceRoot":"","sources":["../../../Scripts/models/story.ts"],"names":["Story","Story.constructor"],"mappings":"AAEA;IAAAA;IAOAC,CAACA;IAADD,YAACA;AAADA,CAACA,AAPD,IAOC;AAPY,aAAK,QAOjB,CAAA"}
+{"version":3,"file":"story.js","sourceRoot":"","sources":["../../../Scripts/models/story.ts"],"names":["Story","Story.constructor","GenreRes","GenreRes.constructor"],"mappings":"AAEA;IAAAA;IAOAC,CAACA;IAADD,YAACA;AAADA,CAACA,AAPD,IAOC;AAPY,aAAK,QAOjB,CAAA;AAED;IAAAE;IAIAC,CAACA;IAADD,eAACA;AAADA,CAACA,AAJD,IAIC;AAJY,gBAAQ,WAIpB,CAAA"}

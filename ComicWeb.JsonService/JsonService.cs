@@ -76,5 +76,11 @@ namespace ComicWeb.JsonService
             fullInfo.Story = story;
             return fullInfo;
         }
+
+        public IPagedList<IStoryInfo> GetGenreStories(string name, int page)
+        {
+            var all = DataManager.GenreStories(name);
+            return all.ToPagedList(page, 25);
+        }
     }
 }

@@ -13,7 +13,9 @@ var http_1 = require('angular2/http');
 var home_component_1 = require('./home/home.component');
 var story_detail_component_1 = require('./story/story-detail.component');
 var chap_reader_component_1 = require('./reader/chap-reader.component');
+var genre_component_1 = require('./directory/genre.component');
 var navigation_helper_1 = require('./shared/navigation.helper');
+//import { PAGINATION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 var AppComponent = (function () {
     function AppComponent() {
     }
@@ -40,6 +42,11 @@ var AppComponent = (function () {
                 path: '/reader/:storyname/:chapname',
                 name: 'ChapReader',
                 component: chap_reader_component_1.ChapReaderComponent,
+            },
+            {
+                path: '/genre/:genre',
+                name: 'Genre',
+                component: genre_component_1.GenreComponent,
             }
         ]), 
         __metadata('design:paramtypes', [])
