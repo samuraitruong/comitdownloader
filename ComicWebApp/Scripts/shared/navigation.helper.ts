@@ -21,6 +21,10 @@ export class NavigationHelper {
         let link = ['Genre', { genre: genre }];
         this._router.navigate(link);
     }
+    doSearch(keyword: string) {
+        let link = ['Search', { keyword: keyword }];
+        this._router.navigate(link);
+    }
 
 
     getString(name: string): string {

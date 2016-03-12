@@ -20,6 +20,7 @@ var DirectoryComponent = (function () {
         this._nav = _nav;
         this._service = _service;
         this._routeParams = _routeParams;
+        this.filter = 'All';
         this.totalItems = 0;
         this.currentPage = 1;
         this.maxSize = 10;
@@ -30,12 +31,12 @@ var DirectoryComponent = (function () {
     };
     DirectoryComponent.prototype.ngOnInit = function () {
         this.filters = ['All', '#'].concat(this.filters);
-        this.genre = this._routeParams.get("genre");
+        //this.filter = this._routeParams.get("filter");
         this.loadStories();
     };
     DirectoryComponent.prototype.loadStories = function () {
         var _this = this;
-        this._service.getGenreStories(this.genre, this.currentPage).subscribe(function (res) {
+        this._service.getStories(this.filter, this.currentPage).subscribe(function (res) {
             _this.stories = res.Stories;
             _this.pageCount = res.PageCount;
             _this.totalItems = res.TotalItems;
@@ -44,6 +45,11 @@ var DirectoryComponent = (function () {
         }, function (err) {
             _this.errorMessage = err;
         });
+    };
+    DirectoryComponent.prototype.resetFilter = function (f) {
+        this.filter = f;
+        this.currentPage = 1;
+        this.loadStories();
     };
     DirectoryComponent.prototype.viewStory = function (s) {
         this._nav.viewStory(s);

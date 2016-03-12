@@ -30,6 +30,10 @@ var TopNavComponent = (function () {
             _this.topGenres = res.slice(0, 5);
         }, function (err) { return _this.errorMessage = err; });
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], TopNavComponent.prototype, "selectedGenre", void 0);
     TopNavComponent = __decorate([
         core_1.Component({
             selector: 'cmapp-top-nav',

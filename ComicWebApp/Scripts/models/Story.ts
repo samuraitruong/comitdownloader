@@ -19,3 +19,5 @@ export class GenreInfo {
     Name: string;
     StoriesCount: number;
 }
+export class StoryListRes extends GenreRes{
+}

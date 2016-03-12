@@ -9,7 +9,7 @@ namespace ComicWeb.Core
 {
     public static class Extensions
     {
-        public static T Clone<T>(T source)
+        public static T Clone<T>(this T source)
         {
             var serialized = JsonConvert.SerializeObject(source);
             return JsonConvert.DeserializeObject<T>(serialized);

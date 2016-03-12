@@ -19,5 +19,6 @@ namespace ComicWeb.Core
 
         void EnsureDBCache();
         IPagedList<IStoryInfo> GetListStories(string filter, int page, string v, int pageSize);
+        IPagedList<IStoryInfo> SearchStories(string keyword, int page, int pageSize);
     }
 }

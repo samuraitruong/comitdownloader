@@ -6,18 +6,12 @@ import {Observable}     from 'rxjs/Observable'
 
 @Injectable()
 
-export class DirectoryService {
-    private _apiUrl = '/api/story/genre/';
-    private _listApiUrl ='/api/story/list/'
+export class SearchService {
+    private _apiUrl = '/api/story/search/';
     constructor(private http: Http) { }
-    public getGenreStories(genre: string, page: number) {
-        return this.http.get(this._apiUrl + encodeURIComponent(genre) + '/' + page.toString())
-            .map(res => <GenreRes>res.json())
-            .catch(this.handleError)
-            .do(data=> console.log(data))
-    }
-    public getStories(filter: string, page: number, sort?:string) {
-        return this.http.get(this._listApiUrl + encodeURIComponent(filter) + '/' + page.toString())
+   
+    public search(keyword: string, page: number) {
+        return this.http.get(this._apiUrl + encodeURIComponent(keyword) + '/' + page.toString())
             .map(res => <StoryListRes>res.json())
             .catch(this.handleError)
             .do(data=> console.log(data))

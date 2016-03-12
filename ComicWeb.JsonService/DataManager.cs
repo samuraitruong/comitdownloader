@@ -82,14 +82,22 @@ namespace ComicWeb.JsonService
                             var storyFile = Path.Combine(rootFolder, s.JsonFileName);
                             if (File.Exists(storyFile))
                             {
-                                var fullStory = JsonConvert.DeserializeObject<StoryInfo>(File.ReadAllText(storyFile));
-                                stories.Add(fullStory);
+                                try
+                                {
+                                    var fullStory = JsonConvert.DeserializeObject<StoryInfo>(File.ReadAllText(storyFile));
+                                    if (fullStory != null)
+                                    {
+                                        stories.Add(fullStory);
+                                    }
+                                }
+                                catch (Exception ex) { }
                             }
 
                         });
 
                         stories.Sort((x, y) =>
                         {
+                            if (x.Chapters == null || y.Chapters == null) return 0;
                             return y.Chapters.Count - x.Chapters.Count;
                         });
                     }

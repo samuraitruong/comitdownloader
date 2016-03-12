@@ -1,4 +1,4 @@
-﻿import {Component, OnInit, AfterContentInit} from 'angular2/core';
+﻿import {Component, OnInit, AfterContentInit, Output} from 'angular2/core';
 import {TopStoryComponent} from '../shared/top-story.component'
 import {StoryCarouselComponent} from '../shared/story-carousel.component'
 import {RouteParams, Router, ROUTER_DIRECTIVES} from 'angular2/router'

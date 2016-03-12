@@ -14,14 +14,19 @@ var http_1 = require('angular2/http');
 var home_component_1 = require('./home/home.component');
 var story_detail_component_1 = require('./story/story-detail.component');
 var chap_reader_component_1 = require('./reader/chap-reader.component');
+var search_component_1 = require('./search/search.component');
 var genre_component_1 = require('./directory/genre.component');
 var directory_component_1 = require('./directory/directory.component');
 var navigation_helper_1 = require('./shared/navigation.helper');
 var topnav_component_1 = require('./shared/topnav.component');
 //test bla bla 
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(_nav) {
+        this._nav = _nav;
     }
+    AppComponent.prototype.doSearch = function () {
+        this._nav.doSearch(this.keyword);
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'comic-app',
@@ -55,9 +60,19 @@ var AppComponent = (function () {
                 path: '/directory',
                 name: 'Directory',
                 component: directory_component_1.DirectoryComponent,
+            },
+            {
+                path: '/search/:keyword',
+                name: 'Search',
+                component: search_component_1.SearchComponent,
+            },
+            {
+                path: '/search/:keyword/:page',
+                name: 'SearchPaging',
+                component: search_component_1.SearchComponent,
             }
         ]), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [navigation_helper_1.NavigationHelper])
     ], AppComponent);
     return AppComponent;
 }());

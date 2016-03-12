@@ -20,14 +20,14 @@
                 <div class="centertext fl" style="width:655px;padding-top:3px;">
                     Truyện Mới Cập Nhật
 
-                    <a href="danhsach/indexa1a1.html?sort=2" class="link_right"> Xem thêm &raquo;</a>
+                    <a [routerLink]="['Directory']" class="link_right"> Xem thêm &raquo;</a>
                 </div>
                 <div class="bg rightbar fl"></div>
             </div>
             <div class="lst_truyen_moidang">
                 <cmapp-story-list [stories]="lastestUpdateStories">loading....</cmapp-story-list>
                 <div class="pull-right">
-                    <a href="danhsach/indexa1a1.html?sort=2">Xem thêm nhiều truyện nữa &raquo;</a>
+                    <a  [routerLink]="['Directory']">Xem thêm nhiều truyện nữa &raquo;</a>
                 </div>
             </div>
             </div>

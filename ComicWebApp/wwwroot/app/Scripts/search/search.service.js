@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11,32 +10,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('angular2/core');
 var http_1 = require('angular2/http');
 var Observable_1 = require('rxjs/Observable');
-var DirectoryService = (function () {
-    function DirectoryService(http) {
+var SearchService = (function () {
+    function SearchService(http) {
         this.http = http;
-        this._apiUrl = '/api/story/genre/';
-        this._listApiUrl = '/api/story/list/';
+        this._apiUrl = '/api/story/search/';
     }
-    DirectoryService.prototype.getGenreStories = function (genre, page) {
-        return this.http.get(this._apiUrl + encodeURIComponent(genre) + '/' + page.toString())
+    SearchService.prototype.search = function (keyword, page) {
+        return this.http.get(this._apiUrl + encodeURIComponent(keyword) + '/' + page.toString())
             .map(function (res) { return res.json(); })
             .catch(this.handleError)
             .do(function (data) { return console.log(data); });
     };
-    DirectoryService.prototype.getStories = function (filter, page, sort) {
-        return this.http.get(this._listApiUrl + encodeURIComponent(filter) + '/' + page.toString())
-            .map(function (res) { return res.json(); })
-            .catch(this.handleError)
-            .do(function (data) { return console.log(data); });
-    };
-    DirectoryService.prototype.handleError = function (error) {
+    SearchService.prototype.handleError = function (error) {
         console.error(error);
         return Observable_1.Observable.throw(error.json().error || 'Server error');
     };
-    DirectoryService = __decorate([
+    SearchService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], DirectoryService);
-    return DirectoryService;
-}());
-exports.DirectoryService = DirectoryService;
+    ], SearchService);
+    return SearchService;
+})();
+exports.SearchService = SearchService;
+//# sourceMappingURL=search.service.js.map

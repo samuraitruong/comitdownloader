@@ -1,4 +1,4 @@
-﻿import {Component, OnInit} from 'angular2/core';
+﻿import {Component, OnInit, Input, Output} from 'angular2/core';
 import {GenreInfo} from '../models/story'
 import {Chapter} from '../models/chapter'
 import {StoryGenresService} from './story-genres.service'
@@ -20,7 +20,7 @@ export class TopNavComponent implements OnInit {
     viewGenre(g: GenreInfo) {
         this._nav.viewGenre(g.Name);
     }
-    selectedGenre: string;
+    @Input() selectedGenre: string;
 
     topGenres: GenreInfo[];
     errorMessage: string;

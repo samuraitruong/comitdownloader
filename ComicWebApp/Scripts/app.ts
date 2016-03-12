@@ -4,6 +4,7 @@ import {HTTP_PROVIDERS}    from 'angular2/http';
 import {HomeComponent} from './home/home.component'
 import {StoryDetailComponent}  from './story/story-detail.component'
 import {ChapReaderComponent} from './reader/chap-reader.component'
+import {SearchComponent} from './search/search.component'
 import {GenreComponent} from './directory/genre.component'
 import {DirectoryComponent} from './directory/directory.component'
 import {NavigationHelper} from './shared/navigation.helper'
@@ -45,17 +46,28 @@ import {enableProdMode} from 'angular2/core';
         path: '/directory',
         name: 'Directory',
         component: DirectoryComponent,
-    } 
-    //{
-    //     path: '/directory/:page',
-    //     name: 'DirectoryPage',
-    //     component: DirectoryComponent,
-    // }
+    }, 
+    {
+         path: '/search/:keyword',
+         name: 'Search',
+         component: SearchComponent,
+     },
+    {
+        path: '/search/:keyword/:page',
+        name: 'SearchPaging',
+        component: SearchComponent,
+    }
 
 ])
 
 export class AppComponent {
-    
+    constructor(private _nav: NavigationHelper) {
+    }
+
+    keyword: string;
+    doSearch() {
+        this._nav.doSearch(this.keyword);
+    }
 }
 
 

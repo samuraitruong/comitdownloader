@@ -1,34 +1,33 @@
-﻿import {Component, OnInit, AfterContentInit} from 'angular2/core';
+﻿import {Component, OnInit, AfterContentInit, Output} from 'angular2/core';
 import {TopStoryComponent} from '../shared/top-story.component'
 import {StoryCarouselComponent} from '../shared/story-carousel.component'
 import {RouteParams, Router, ROUTER_DIRECTIVES} from 'angular2/router'
 import {Story, GenreRes} from '../models/story'
 import {Chapter} from '../models/chapter'
 import {NavigationHelper} from '../shared/navigation.helper'
-import {DirectoryService} from './directory.service'
+import {SearchService} from './search.service'
 import {StoryListComponent} from '../shared/story-list.component'
 import {StoryGenresComponent} from  '../shared/story-genres.component'
 import { Pagination} from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
-    selector: 'cmapp-directory',
-    templateUrl: 'views/directory/directory.html',
+    selector: 'cmapp-search',
+    templateUrl: 'views/search/search.html',
     directives: [StoryListComponent, StoryGenresComponent, Pagination, ROUTER_DIRECTIVES],
-    providers: [DirectoryService]
+    providers: [SearchService]
 })
-export class DirectoryComponent implements OnInit, AfterContentInit {
-    
-    constructor(private _nav: NavigationHelper, private _service: DirectoryService, private _routeParams: RouteParams) {
+export class SearchComponent implements OnInit, AfterContentInit {
+    constructor(private _nav: NavigationHelper, private _service: SearchService, private _routeParams: RouteParams) {
+
     }
     ngAfterContentInit() {
     }
     ngOnInit() {
-        this.filters = ['All', '#'].concat(this.filters);
-        //this.filter = this._routeParams.get("filter");
+        this.keyword = this._routeParams.get("keyword");
         this.loadStories();
     }
     loadStories() {
-        this._service.getStories(this.filter, this.currentPage).subscribe(res => {
+        this._service.search(this.keyword, this.currentPage).subscribe(res => {
             this.stories = res.Stories;
             this.pageCount = res.PageCount;
             this.totalItems = res.TotalItems;
@@ -40,18 +39,12 @@ export class DirectoryComponent implements OnInit, AfterContentInit {
             }
         );
     }
-    resetFilter(f: string) {
-        this.filter = f;
-        this.currentPage = 1;
-        this.loadStories();
-    }
-
     viewStory(s: Story) {
         this._nav.viewStory(s);
     }
     stories: Story[];
     errorMessage: string;
-    filter: string = 'All';
+    keyword: string;
     pageCount: number;
 
     private totalItems: number = 0;
@@ -67,8 +60,6 @@ export class DirectoryComponent implements OnInit, AfterContentInit {
     private pageChanged(event: any): void {
         this.loadStories();
     };
-    private filters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-
 
 }
 
