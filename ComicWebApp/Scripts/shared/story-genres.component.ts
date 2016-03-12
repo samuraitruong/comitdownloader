@@ -1,20 +1,26 @@
 ﻿import {Component, OnInit} from 'angular2/core';
-import {Story} from '../models/story'
-import {Chapter} from '../models/chapter'
-import {TopStoryService} from './top-story.service'
+import {Story, GenreInfo} from '../models/story'
+import {StoryGenresService} from './story-genres.service'
 import {RouteParams, Router} from 'angular2/router'
 import {NavigationHelper} from './navigation.helper'
 
 @Component({
     selector: 'cmapp-story-genres',
     templateUrl: 'views/shared/story-genres.html',
-    providers: [TopStoryService]
+    providers: [StoryGenresService]
 })
 export class StoryGenresComponent implements OnInit {
-    constructor(private _storyService: TopStoryService,  private _nav: NavigationHelper) { }
+    constructor(private _service: StoryGenresService,  private _nav: NavigationHelper) { }
     errorMessage: string;
-    genres: string[];
+    genres: GenreInfo[];
     ngOnInit() {
+        this.loadGenres();
+    }
+    loadGenres() {
+        this._service.getGenres().subscribe(res=> this.genres = res, err=> this.errorMessage = <any>err)
+    }
+    viewGenre(genre: GenreInfo) {
+        this._nav.viewGenre(genre.Name);
     }
 }
 

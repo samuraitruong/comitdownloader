@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -15,7 +16,7 @@ var story_detail_component_1 = require('./story/story-detail.component');
 var chap_reader_component_1 = require('./reader/chap-reader.component');
 var genre_component_1 = require('./directory/genre.component');
 var navigation_helper_1 = require('./shared/navigation.helper');
-//import { PAGINATION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+//test bla bla 
 var AppComponent = (function () {
     function AppComponent() {
     }
@@ -52,6 +53,5 @@ var AppComponent = (function () {
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
-})();
+}());
 exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.js.map

@@ -13,7 +13,11 @@ namespace ComicWeb.JsonService
         public StoryService()
         {
         }
-
+        public List<GenreInfo> GetGenres()
+        {
+            return DataManager.AllGenres(false);
+            return null;
+        }
         public List<IStoryInfo> GetLatestUpdatedStories(int count)
         {
             IEnumerable<IStoryInfo> list = GetRandomStoriesList(count);
@@ -77,10 +81,15 @@ namespace ComicWeb.JsonService
             return fullInfo;
         }
 
-        public IPagedList<IStoryInfo> GetGenreStories(string name, int page)
+        public IPagedList<IStoryInfo> GetGenreStories(string name, int page, int pageSize = 20)
         {
             var all = DataManager.GenreStories(name);
-            return all.ToPagedList(page, 25);
+            return all.ToPagedList(page, pageSize);
+        }
+
+        public void EnsureDBCache()
+        {
+            DataManager.EnsureDBCache();
         }
     }
 }

@@ -10,4 +10,10 @@ var GenreRes = (function () {
     return GenreRes;
 })();
 exports.GenreRes = GenreRes;
+var GenreInfo = (function () {
+    function GenreInfo() {
+    }
+    return GenreInfo;
+})();
+exports.GenreInfo = GenreInfo;
 //# sourceMappingURL=story.js.map

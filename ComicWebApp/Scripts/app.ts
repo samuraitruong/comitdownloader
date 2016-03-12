@@ -7,7 +7,8 @@ import {ChapReaderComponent} from './reader/chap-reader.component'
 import {GenreComponent} from './directory/genre.component'
 import {NavigationHelper} from './shared/navigation.helper'
 //import { PAGINATION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
-
+import {enableProdMode} from 'angular2/core';
+ //test bla bla 
 @Component({
     selector: 'comic-app',
     templateUrl: 'views/app.html',

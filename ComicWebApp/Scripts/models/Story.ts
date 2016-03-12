@@ -13,4 +13,9 @@ export class GenreRes {
     Stories: Story[];
     PageSize: number;
     PageCount: number;
+    TotalItems: number;
+}
+export class GenreInfo {
+    Name: string;
+    StoriesCount: number;
 }

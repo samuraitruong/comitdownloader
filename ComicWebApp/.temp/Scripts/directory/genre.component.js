@@ -14,26 +14,31 @@ var navigation_helper_1 = require('../shared/navigation.helper');
 var directory_service_1 = require('./directory.service');
 var story_list_component_1 = require('../shared/story-list.component');
 var story_genres_component_1 = require('../shared/story-genres.component');
+var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
 var GenreComponent = (function () {
     function GenreComponent(_nav, _service, _routeParams) {
         this._nav = _nav;
         this._service = _service;
         this._routeParams = _routeParams;
-        this.page = 1;
-        this.totalItems = 64;
-        this.currentPage = 4;
-        this.maxSize = 5;
-        this.bigTotalItems = 175;
-        this.bigCurrentPage = 1;
+        this.totalItems = 0;
+        this.currentPage = 1;
+        this.maxSize = 10;
+        this.pageSize = 0;
     }
     GenreComponent.prototype.ngAfterContentInit = function () {
     };
     GenreComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.genre = this._routeParams.get("genre");
-        this._service.getGenreStories(this.genre, this.page).subscribe(function (res) {
+        this.loadStories();
+    };
+    GenreComponent.prototype.loadStories = function () {
+        var _this = this;
+        this._service.getGenreStories(this.genre, this.currentPage).subscribe(function (res) {
             _this.stories = res.Stories;
             _this.pageCount = res.PageCount;
+            _this.totalItems = res.TotalItems;
+            _this.pageSize = res.PageSize;
+            console.log(_this);
         }, function (err) {
             _this.errorMessage = err;
         });
@@ -46,15 +51,14 @@ var GenreComponent = (function () {
     };
     ;
     GenreComponent.prototype.pageChanged = function (event) {
-        console.log('Page changed to: ' + event.page);
-        console.log('Number items per page: ' + event.itemsPerPage);
+        this.loadStories();
     };
     ;
     GenreComponent = __decorate([
         core_1.Component({
             selector: 'cmapp-genre',
             templateUrl: 'views/directory/genre.html',
-            directives: [story_list_component_1.StoryListComponent, story_genres_component_1.StoryGenresComponent],
+            directives: [story_list_component_1.StoryListComponent, story_genres_component_1.StoryGenresComponent, ng2_bootstrap_1.Pagination],
             providers: [directory_service_1.DirectoryService]
         }), 
         __metadata('design:paramtypes', [navigation_helper_1.NavigationHelper, directory_service_1.DirectoryService, router_1.RouteParams])

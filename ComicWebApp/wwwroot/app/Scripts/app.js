@@ -15,7 +15,7 @@ var story_detail_component_1 = require('./story/story-detail.component');
 var chap_reader_component_1 = require('./reader/chap-reader.component');
 var genre_component_1 = require('./directory/genre.component');
 var navigation_helper_1 = require('./shared/navigation.helper');
-var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
+//test bla bla 
 var AppComponent = (function () {
     function AppComponent() {
     }
@@ -23,7 +23,7 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'comic-app',
             templateUrl: 'views/app.html',
-            directives: [router_1.ROUTER_DIRECTIVES, ng2_bootstrap_1.PAGINATION_DIRECTIVES],
+            directives: [router_1.ROUTER_DIRECTIVES],
             providers: [router_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, navigation_helper_1.NavigationHelper]
         }),
         router_1.RouteConfig([

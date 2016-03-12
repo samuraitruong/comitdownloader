@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -45,6 +46,5 @@ var StoryDetailComponent = (function () {
         __metadata('design:paramtypes', [router_1.RouteParams, story_service_1.StoryService, navigation_helper_1.NavigationHelper])
     ], StoryDetailComponent);
     return StoryDetailComponent;
-})();
+}());
 exports.StoryDetailComponent = StoryDetailComponent;
-//# sourceMappingURL=story-detail.component.js.map

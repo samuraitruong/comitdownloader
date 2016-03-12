@@ -11,6 +11,8 @@
 *.userprefs
 
 # Build results
+.temp
+.dist
 
 [Dd]ebug/
 [Dd]ebugPublic/

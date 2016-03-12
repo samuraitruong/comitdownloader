@@ -2,6 +2,9 @@
 /// <binding Clean='clean' />
 
 var gulp = require('gulp');
+var gulpLoadPlugins = require('gulp-load-plugins');
+var plugins = gulpLoadPlugins();
+
 //var sass = require('gulp-sass');
 
 var paths = {
@@ -11,7 +14,9 @@ var paths = {
     vendorsTarget: "./wwwroot/vendors",
     views: ["views/*.html"],
     scss: ["content/css/*.css"],
-    appFolder: 'wwwroot/app'
+    appFolder: 'wwwroot/app',
+    htmls: ['scripts/*.html', 'scripts/**/*.html'],
+    typescrips: ['scripts/*.ts', 'scripts/**/*.ts'],
 };
 
 var bowerLibs = [
@@ -36,14 +41,20 @@ var libsToMove = [
    paths.npmSrc + '/es6-shim/es6-shim.min.js',
    paths.npmSrc + 'angular2/es6/dev/src/testing/es6-shim.min.js',
    paths.npmSrc + 'angular2/bundles/router.dev.js',
-   paths.npmSrc + 'angular2/bundles/http.dev.js'
+   paths.npmSrc + 'angular2/bundles/http.dev.js',
+   paths.npmSrc + 'ng2-bootstrap/bundles/ng2-bootstrap.min.js',
+   paths.npmSrc + 'moment/moment.js'
 ];
+
+
 gulp.task('moveToLibs', function () {
     return gulp.src(libsToMove).pipe(gulp.dest(paths.libTarget));
 });
 
 gulp.task('copyHtml', function () {
-    return gulp.src(['scripts/*.html','scripts/**/*.html']).pipe(gulp.dest("wwwroot/views"));
+    return gulp.src(paths.htmls)
+        .pipe(gulp.dest("wwwroot/views"))
+        .pipe(plugins.livereload());
 });
 
 
@@ -69,9 +80,44 @@ gulp.task('buildCopyIMG', function () {
                 .pipe(gulp.dest('wwwroot/content/images'));
 })
 
-gulp.task('copy', ['moveToLibs', 'copyViews', 'buildCopyCSS', 'buildCopyIMG','copyVendorLibs','copyHtml'], function () {
-    
+gulp.task('copy', ['moveToLibs', 'copyViews', 'buildCopyCSS', 'buildCopyIMG','copyVendorLibs','copyHtml','typescript:build'], function () {
+    plugins.sequence('typescript:build')
 })
+
+gulp.task('watch', ['copy'], function () {
+    plugins.livereload.listen({ start: true });
+
+    gulp.watch(paths.htmls, ['copyHtml']);
+    gulp.watch(paths.typescrips, ['typescript:build']);
+    console.log('watching: html/typescripts')
+});
+gulp.task('typescript:compile', function () {
+    var tsProject = plugins.typescript.createProject('tsconfig.json');
+
+    //return gulp.src(['scripts/*.ts','scripts/**/*.ts'])
+	//	.pipe(plugins.typescript({
+	//	    noImplicitAny: false,
+	//	    experimentalDecorators: true,
+    //        out:'test.js',
+	//	    outDir: 'wwwroot/test'
+	//	}))
+    //	.pipe(gulp.dest('wwwroot/test'));
+
+    var tsResult = tsProject.src() // instead of gulp.src(...) 
+        .pipe(plugins.typescript(tsProject));
+    return tsResult.js.pipe(gulp.dest('.temp/'));
+});
+gulp.task('typescript:copy', function () {
+    return gulp.src(['./.temp/scripts/*.*', './.temp/scripts/**/*.*'])
+        //.pipe(plugins.replaceName(/Scripts/,'xxx'))
+        .pipe(gulp.dest('wwwroot/app/'))
+        .pipe(plugins.livereload());
+});
+
+gulp.task('typescript:build', function (cb) {
+    plugins.sequence('typescript:compile', 'typescript:copy', cb);
+});
+
 
 gulp.task('clean', function () {
 });

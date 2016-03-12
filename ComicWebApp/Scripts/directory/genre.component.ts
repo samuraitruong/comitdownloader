@@ -8,11 +8,12 @@ import {NavigationHelper} from '../shared/navigation.helper'
 import {DirectoryService} from './directory.service'
 import {StoryListComponent} from '../shared/story-list.component'
 import {StoryGenresComponent} from  '../shared/story-genres.component'
+import { Pagination} from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
     selector: 'cmapp-genre',
     templateUrl: 'views/directory/genre.html',
-    directives: [StoryListComponent, StoryGenresComponent],
+    directives: [StoryListComponent, StoryGenresComponent, Pagination],
     providers: [DirectoryService]
 })
 export class GenreComponent implements OnInit, AfterContentInit {
@@ -23,9 +24,15 @@ export class GenreComponent implements OnInit, AfterContentInit {
     }
     ngOnInit() {
         this.genre = this._routeParams.get("genre");
-        this._service.getGenreStories(this.genre, this.page).subscribe(res => {
+        this.loadStories();
+    }
+    loadStories() {
+        this._service.getGenreStories(this.genre, this.currentPage).subscribe(res => {
             this.stories = res.Stories;
             this.pageCount = res.PageCount;
+            this.totalItems = res.TotalItems;
+            this.pageSize = res.PageSize;
+            console.log(this)
         },
             err=> {
                 this.errorMessage = <any>err;
@@ -38,23 +45,20 @@ export class GenreComponent implements OnInit, AfterContentInit {
     stories: Story[];
     errorMessage: string;
     genre: string;
-    page: number = 1;
     pageCount: number;
 
-    private totalItems: number = 64;
-    private currentPage: number = 4;
+    private totalItems: number = 0;
+    private currentPage: number = 1;
 
-    private maxSize: number = 5;
-    private bigTotalItems: number = 175;
-    private bigCurrentPage: number = 1;
-
+    private maxSize: number = 10;
+    private pageSize = 0;
+    
     private setPage(pageNo: number): void {
         this.currentPage = pageNo;
     };
 
     private pageChanged(event: any): void {
-        console.log('Page changed to: ' + event.page);
-        console.log('Number items per page: ' + event.itemsPerPage);
+        this.loadStories();
     };
 
 }
