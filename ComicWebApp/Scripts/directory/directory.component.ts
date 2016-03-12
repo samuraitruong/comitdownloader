@@ -11,18 +11,19 @@ import {StoryGenresComponent} from  '../shared/story-genres.component'
 import { Pagination} from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
-    selector: 'cmapp-genre',
-    templateUrl: 'views/directory/genre.html',
+    selector: 'cmapp-directory',
+    templateUrl: 'views/directory/directory.html',
     directives: [StoryListComponent, StoryGenresComponent, Pagination, ROUTER_DIRECTIVES],
     providers: [DirectoryService]
 })
-export class GenreComponent implements OnInit, AfterContentInit {
+export class DirectoryComponent implements OnInit, AfterContentInit {
+    
     constructor(private _nav: NavigationHelper, private _service: DirectoryService, private _routeParams: RouteParams) {
-
     }
     ngAfterContentInit() {
     }
     ngOnInit() {
+        this.filters = ['All', '#'].concat(this.filters);
         this.genre = this._routeParams.get("genre");
         this.loadStories();
     }
@@ -60,6 +61,8 @@ export class GenreComponent implements OnInit, AfterContentInit {
     private pageChanged(event: any): void {
         this.loadStories();
     };
+    private filters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
 
 }
 

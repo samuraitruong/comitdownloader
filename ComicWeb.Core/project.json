@@ -1,15 +1,15 @@
-﻿{
+{
   "version": "1.0.0-*",
   "description": "ComicWeb.Core Class Library",
   "authors": [ "Khoaimap" ],
   "tags": [ "" ],
   "projectUrl": "",
   "licenseUrl": "",
-
   "frameworks": {
     "net451": {
       "dependencies": {
-        "System.Xml.XmlSerializer": "4.0.11-beta-23516"
+        "System.Xml.XmlSerializer": "4.0.11-beta-23516",
+        "Newtonsoft.Json": "8.0.2"
       }
     },
     "dotnet5.4": {
@@ -20,8 +20,12 @@
         "System.Runtime": "4.0.21-beta-23516",
         "System.Threading": "4.0.11-beta-23516",
         "System.Runtime.Serialization.Xml": "4.0.0-beta-23019",
-         "System.Text.RegularExpressions": "4.0.11-beta-23516"
+        "System.Text.RegularExpressions": "4.0.11-beta-23516",
+        "Newtonsoft.Json": "8.0.2"
       }
     }
+  },
+  "dependencies": {
+    "Newtonsoft.Json": "8.0.2"
   }
 }

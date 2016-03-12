@@ -15,6 +15,13 @@ export class DirectoryService {
             .catch(this.handleError)
             .do(data=> console.log(data))
     }
+    public getStories(genre: string, page: number) {
+        return this.http.get(this._apiUrl + encodeURIComponent(genre) + '/' + page.toString())
+            .map(res => <GenreRes>res.json())
+            .catch(this.handleError)
+            .do(data=> console.log(data))
+    }
+
     private handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');

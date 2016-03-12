@@ -14,7 +14,9 @@ var home_component_1 = require('./home/home.component');
 var story_detail_component_1 = require('./story/story-detail.component');
 var chap_reader_component_1 = require('./reader/chap-reader.component');
 var genre_component_1 = require('./directory/genre.component');
+var directory_component_1 = require('./directory/directory.component');
 var navigation_helper_1 = require('./shared/navigation.helper');
+var topnav_component_1 = require('./shared/topnav.component');
 //test bla bla 
 var AppComponent = (function () {
     function AppComponent() {
@@ -23,7 +25,7 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'comic-app',
             templateUrl: 'views/app.html',
-            directives: [router_1.ROUTER_DIRECTIVES],
+            directives: [router_1.ROUTER_DIRECTIVES, topnav_component_1.TopNavComponent],
             providers: [router_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, navigation_helper_1.NavigationHelper]
         }),
         router_1.RouteConfig([
@@ -47,6 +49,11 @@ var AppComponent = (function () {
                 path: '/genre/:genre',
                 name: 'Genre',
                 component: genre_component_1.GenreComponent,
+            },
+            {
+                path: '/directory',
+                name: 'Directory',
+                component: directory_component_1.DirectoryComponent,
             }
         ]), 
         __metadata('design:paramtypes', [])

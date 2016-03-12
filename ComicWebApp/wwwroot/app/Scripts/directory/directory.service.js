@@ -21,6 +21,12 @@ var DirectoryService = (function () {
             .catch(this.handleError)
             .do(function (data) { return console.log(data); });
     };
+    DirectoryService.prototype.getStories = function (genre, page) {
+        return this.http.get(this._apiUrl + encodeURIComponent(genre) + '/' + page.toString())
+            .map(function (res) { return res.json(); })
+            .catch(this.handleError)
+            .do(function (data) { return console.log(data); });
+    };
     DirectoryService.prototype.handleError = function (error) {
         console.error(error);
         return Observable_1.Observable.throw(error.json().error || 'Server error');

@@ -13,6 +13,19 @@ namespace ComicWeb.JsonService
         public StoryService()
         {
         }
+        public IPagedList<IStoryInfo> GetListStories(string filter, int page, string v, int pageSize = 25)
+        {
+            
+            var list = DataManager.AllStories(true);
+            var cloned = list.Clone();
+            if(filter !="all")
+            {
+                list.Where(p => p.Group == filter).ToList();
+            }
+
+            return null;
+
+        }
         public List<GenreInfo> GetGenres()
         {
             return DataManager.AllGenres(false);

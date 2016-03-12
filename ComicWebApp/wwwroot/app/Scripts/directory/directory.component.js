@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -15,8 +14,8 @@ var directory_service_1 = require('./directory.service');
 var story_list_component_1 = require('../shared/story-list.component');
 var story_genres_component_1 = require('../shared/story-genres.component');
 var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
-var GenreComponent = (function () {
-    function GenreComponent(_nav, _service, _routeParams) {
+var DirectoryComponent = (function () {
+    function DirectoryComponent(_nav, _service, _routeParams) {
         this._nav = _nav;
         this._service = _service;
         this._routeParams = _routeParams;
@@ -24,14 +23,16 @@ var GenreComponent = (function () {
         this.currentPage = 1;
         this.maxSize = 10;
         this.pageSize = 0;
+        this.filters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
     }
-    GenreComponent.prototype.ngAfterContentInit = function () {
+    DirectoryComponent.prototype.ngAfterContentInit = function () {
     };
-    GenreComponent.prototype.ngOnInit = function () {
+    DirectoryComponent.prototype.ngOnInit = function () {
+        this.filters = ['All', '#'].concat(this.filters);
         this.genre = this._routeParams.get("genre");
         this.loadStories();
     };
-    GenreComponent.prototype.loadStories = function () {
+    DirectoryComponent.prototype.loadStories = function () {
         var _this = this;
         this._service.getGenreStories(this.genre, this.currentPage).subscribe(function (res) {
             _this.stories = res.Stories;
@@ -43,26 +44,27 @@ var GenreComponent = (function () {
             _this.errorMessage = err;
         });
     };
-    GenreComponent.prototype.viewStory = function (s) {
+    DirectoryComponent.prototype.viewStory = function (s) {
         this._nav.viewStory(s);
     };
-    GenreComponent.prototype.setPage = function (pageNo) {
+    DirectoryComponent.prototype.setPage = function (pageNo) {
         this.currentPage = pageNo;
     };
     ;
-    GenreComponent.prototype.pageChanged = function (event) {
+    DirectoryComponent.prototype.pageChanged = function (event) {
         this.loadStories();
     };
     ;
-    GenreComponent = __decorate([
+    DirectoryComponent = __decorate([
         core_1.Component({
-            selector: 'cmapp-genre',
-            templateUrl: 'views/directory/genre.html',
+            selector: 'cmapp-directory',
+            templateUrl: 'views/directory/directory.html',
             directives: [story_list_component_1.StoryListComponent, story_genres_component_1.StoryGenresComponent, ng2_bootstrap_1.Pagination, router_1.ROUTER_DIRECTIVES],
             providers: [directory_service_1.DirectoryService]
         }), 
         __metadata('design:paramtypes', [navigation_helper_1.NavigationHelper, directory_service_1.DirectoryService, router_1.RouteParams])
-    ], GenreComponent);
-    return GenreComponent;
-}());
-exports.GenreComponent = GenreComponent;
+    ], DirectoryComponent);
+    return DirectoryComponent;
+})();
+exports.DirectoryComponent = DirectoryComponent;
+//# sourceMappingURL=directory.component.js.map

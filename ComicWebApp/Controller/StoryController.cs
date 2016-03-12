@@ -30,7 +30,11 @@ namespace ComicWebApp
         {
             return service.GetStoryByName(name);
         }
-
+        [HttpGet("list/{filter}/{page}")]
+        public IPagedList<IStoryInfo> GetListStories(string filter, int page)
+        {
+            return service.GetListStories(filter, page,"");
+        }
         [HttpGet("genres")]
         public List<GenreInfo> GetGenres()
         {

@@ -1,0 +1,5 @@
+<ul class="nav navbar-nav" id="small_menu_ngang">
+    <li><span class="left_menu"></span><a [routerLink]="['Home']"><span class="text_menu">Home</span></a>  </li>
+    <li><span class="left_menu"></span><a [routerLink]="['Directory']"><span class="text_menu">Danh Sách Truyện</span></a></li>
+    <li *ngFor="#genre of topGenres"><span class="left_menu"></span><a (click)="viewGenre(genre)"><span class="text_menu">{{genre.Name}}</span></a><span class="right_menu"></span></li>
+</ul>
