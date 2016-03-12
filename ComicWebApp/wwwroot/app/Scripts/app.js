@@ -23,7 +23,8 @@ var AppComponent = (function () {
     function AppComponent(_nav) {
         this._nav = _nav;
     }
-    AppComponent.prototype.doSeach = function () {
+    AppComponent.prototype.doSearch = function () {
+        this._nav.doSearch(this.keyword);
     };
     AppComponent = __decorate([
         core_1.Component({
@@ -62,6 +63,11 @@ var AppComponent = (function () {
             {
                 path: '/search/:keyword',
                 name: 'Search',
+                component: search_component_1.SearchComponent,
+            },
+            {
+                path: '/search/:keyword/:page',
+                name: 'SearchPaging',
                 component: search_component_1.SearchComponent,
             }
         ]), 

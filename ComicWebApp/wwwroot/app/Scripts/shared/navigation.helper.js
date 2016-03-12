@@ -25,6 +25,10 @@ var NavigationHelper = (function () {
         var link = ['Genre', { genre: genre }];
         this._router.navigate(link);
     };
+    NavigationHelper.prototype.doSearch = function (keyword) {
+        var link = ['Search', { keyword: keyword }];
+        this._router.navigate(link);
+    };
     NavigationHelper.prototype.getString = function (name) {
         return "";
         //return this._routerParams.get(name); r

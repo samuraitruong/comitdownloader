@@ -7,7 +7,7 @@
         <div id="content_right" class="col-md-8">
             <div class="col-md-6 height_row1">
                 <div class="wrapper_search input-group">
-                    <input type="text"  [(ngModel)]="keyword" class="form-control" id="txtSearchTruyen" placeholder="Tìm Kiếm" />
+                    <input type="text"  [(ngModel)]="keyword" class="form-control" id="txtSearchTruyen" placeholder="Tìm Kiếm"  (keyup.enter)="doSearch()"/>
                     <button class="input-group-addon bg search btnSearch" (click)="doSearch()"></button>
                 </div>
             </div>
