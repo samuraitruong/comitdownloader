@@ -31,6 +31,13 @@ namespace ComicWebApp
             return service.GetStoryByName(name);
         }
 
+        [HttpGet("genres")]
+        public List<GenreInfo> GetGenres()
+        {
+            
+            return service.GetGenres();
+        }
+
         [HttpGet("detail/{name}/{chapName}")]
         public IChapterInfo GetChap(string name, string chapName)
         {
@@ -40,11 +47,14 @@ namespace ComicWebApp
         [HttpGet("genre/{name}/{page}")]
         public object GetGenreStories(string name, int page)
         {
-            var paged = service.GetGenreStories(name, page);
+            int pageSize = 20;
+            var paged = service.GetGenreStories(name, page, pageSize);
             return new
             {
                 Stories = paged.ToList(),
-                PageCount = paged.PageCount
+                PageCount = paged.PageCount       ,
+                TotalItems = paged.TotalItemCount ,
+                PageSize  =pageSize
             };
         }
 

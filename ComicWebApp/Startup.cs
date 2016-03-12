@@ -22,8 +22,8 @@ namespace ComicWebApp
             services.AddMvc();
 
             //configure DI
-            services.AddTransient(typeof(IStoryService), typeof(StoryService));
-
+            services.AddSingleton(typeof(IStoryService), typeof(StoryService));
+            //services.AddTransient.AddSingleton(typeof(IStoryService), typeof(StoryService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

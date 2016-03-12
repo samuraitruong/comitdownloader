@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,17 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
-var AppComponent1 = (function () {
-    function AppComponent1() {
+var navigation_helper_1 = require('./navigation.helper');
+var StoryListComponent = (function () {
+    function StoryListComponent(_nav) {
+        this._nav = _nav;
     }
-    AppComponent1 = __decorate([
+    StoryListComponent.prototype.viewStory = function (story) {
+        this._nav.viewStory(story);
+    };
+    StoryListComponent.prototype.ngAfterViewChecked = function () {
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], StoryListComponent.prototype, "stories", void 0);
+    StoryListComponent = __decorate([
         core_1.Component({
-            selector: 'my-app-menu',
-            template: 'This will render menu'
+            selector: 'cmapp-story-list',
+            templateUrl: 'views/shared/story-list.html'
         }), 
-        __metadata('design:paramtypes', [])
-    ], AppComponent1);
-    return AppComponent1;
-})();
-exports.AppComponent1 = AppComponent1;
-//# sourceMappingURL=menu.js.map
+        __metadata('design:paramtypes', [navigation_helper_1.NavigationHelper])
+    ], StoryListComponent);
+    return StoryListComponent;
+}());
+exports.StoryListComponent = StoryListComponent;

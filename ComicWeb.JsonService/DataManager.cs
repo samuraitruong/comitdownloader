@@ -12,7 +12,39 @@ namespace ComicWeb.JsonService
     {
         private static string rootFolder = @"D:\Data1\uptruyen.com\";
         public static List<StoryInfo> stories;
-        public static Dictionary<string, List<IStoryInfo>> genres = new Dictionary<string, List<IStoryInfo>>();
+        private static bool dataCached = false;
+        public static Dictionary<string, GenreInfo> genres = new Dictionary<string, GenreInfo>();
+        public static void EnsureDBCache()
+        {
+            if (dataCached) return;
+            
+            var all = AllStories(true);
+            Parallel.ForEach(all, (s) =>
+            {
+                lock (genres)
+                {
+                    foreach (var cat in s.Categories)
+                    {
+                        if (!genres.ContainsKey(cat))
+                        {
+                            var key = new GenreInfo()
+                            {
+                                Name = cat,
+                                Stories = new List<IStoryInfo>(),
+                                StoriesCount = 0
+                            };
+                            genres[cat] = key;
+                        }
+
+                        var current = genres[cat];
+                        current.Stories.Add(s);
+                        current.StoriesCount++;
+                        genres[cat] = current;
+                    }
+                }
+            });
+            dataCached = true;
+        }
         public static StoryInfo LoadStory(string filename)
         {
             var storyFile = Path.Combine(rootFolder, filename);
@@ -24,6 +56,16 @@ namespace ComicWeb.JsonService
             return null;
         }
         private static object lk = new object();
+        public static List<GenreInfo> AllGenres(bool includeStories)
+        {
+            EnsureDBCache();
+            List<GenreInfo> results = new List<GenreInfo>();
+            foreach (var item in genres.Keys)
+            {
+                results.Add(includeStories?genres[item] : new GenreInfo() {  Name= genres[item].Name, StoriesCount = genres[item].StoriesCount});
+            }
+            return results;
+        }
         public static List<StoryInfo> AllStories(bool fullLoad = false)
         {
             lock (lk)
@@ -83,10 +125,17 @@ namespace ComicWeb.JsonService
                         stories.Add(s);
                     }
                 });
-                genres.Add(name, stories);
+                var info = new GenreInfo()
+                {
+                    Name = name,
+                    Stories = stories,
+                    StoriesCount = stories.Count
+                };
+
+                genres.Add(name, info);
             }
 
-            return genres[name];
+            return genres[name].Stories;
         }
     }
 }

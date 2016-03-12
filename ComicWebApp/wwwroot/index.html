@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head >
+<head>
     <base href="/" />
     <title>
         đọc truyện tranh, truyện Online hay có tại hamtruyen.com
@@ -23,14 +23,15 @@
     <script src="/vendors/bootstrap.js"></script>
     <script src="/vendors/jquery.jcarousel.min.js"></script>
     <script src="/vendors/jquery.nanoscroller.min.js"></script>
-    <script src="libs/es6-shim.min.js"></script>
-    <script src="libs/system-polyfills.js"></script>
-    <script src="libs/angular2-polyfills.js"></script>
-    <script src="libs/system.js"></script>
-    <script src="libs/rx.js"></script>
-    <script src="libs/angular2.dev.js"></script>
-    <script src="libs/router.dev.js"></script>
-    <script src="libs/http.dev.js"></script>
+    <script src="/libs/es6-shim.min.js"></script>
+    <script src="/libs/system-polyfills.js"></script>
+    <script src="/libs/angular2-polyfills.js"></script>
+    <script src="/libs/system.js"></script>
+    <script src="/libs/rx.js"></script>
+    <script src="/libs/angular2.dev.js"></script>
+    <script src="/libs/router.dev.js"></script>
+    <script src="/libs/http.dev.js"></script>
+    <script src="/libs/ng2-bootstrap.min.js"></script>
     <!-- 2. Configure SystemJS -->
     <script>
         System.config({
@@ -38,7 +39,10 @@
                 app: {
                     defaultExtension: 'js'
                 }
-            }
+            },
+            map: {
+                     moment: '/libs/moment.js'
+                }
         });
     </script>
     <script>

@@ -4,18 +4,18 @@ using System.Linq;
 
 namespace ComicWeb.Core
 {
-    public class ChapterInfo : InfoObj , IChapterInfo
+    public class ChapterInfo : InfoObj, IChapterInfo
     {
         public string Downloader { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
         public string Page { get; set; }
-        
+
         public Guid UniqueIdentify { get; set; }
 
         public int ChapId { get; set; }
         public List<string> Pages { get; set; }
-       public List<string> DownloadedPages { get; set; }
+        public List<string> DownloadedPages { get; set; }
 
         public int PageCount { get; set; }
 
@@ -25,9 +25,9 @@ namespace ComicWeb.Core
         }
 
         public DateTime LastModified { get; set; }
-        public IStoryInfo Story { get;  set; }
+        public IStoryInfo Story { get; set; }
     }
-    public class StoryInfo : InfoObj , IStoryInfo
+    public class StoryInfo : InfoObj, IStoryInfo
     {
         public string Group
         {
@@ -47,7 +47,7 @@ namespace ComicWeb.Core
         public string AltName { get; set; }
         public string Author { get; set; }
         public List<string> Categories { get; set; }
-        
+
         public string CategoriesAsString
         {
             get
@@ -61,10 +61,10 @@ namespace ComicWeb.Core
         public List<ChapterInfo> Chapters { get; set; }
         public int ChapterCount { get; set; }
 
-        
+
         public string UrlSegment { get; set; }
         public string Summary { get; set; }
-        public string CoverUrl { get;  set; }
+        public string CoverUrl { get; set; }
         public string Source { get; set; }
 
         public StoryInfo()
@@ -75,6 +75,15 @@ namespace ComicWeb.Core
         {
             return Name;
         }
+    }
+
+    public class GenreInfo{
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public int StoriesCount { get; set; }
+        public List<IStoryInfo> Stories { get; set; }
+
     }
     
 }
