@@ -30,11 +30,56 @@ namespace ComicWebApp
         {
             return service.GetStoryByName(name);
         }
+        [HttpGet("list/{filter}/{page}")]
+        public object GetListStories(string filter, int page)
+        {
+            int pageSize = 25;
+            var paged = service.GetListStories(filter, page, "", pageSize);
+            foreach (StoryInfo item in paged)
+            {
+                var last = item.Chapters.FirstOrDefault();
+                item.Chapters = new List<ChapterInfo>(); 
+                if(last!= null)
+                {
+                    item.Chapters.Add(last);
+                }
+            }
+            return new
+            {
+                Stories = paged.ToList(),
+                PageCount = paged.PageCount,
+                TotalItems = paged.TotalItemCount,
+                PageSize = pageSize
+            };
+        }
+
+        [HttpGet("search/{keyword}/{page}")]
+        public object SearchStories(string keyword, int page)
+        {
+            int pageSize = 25;
+            var paged = service.SearchStories(keyword, page,  pageSize);
+            foreach (StoryInfo item in paged)
+            {
+                var last = item.Chapters.FirstOrDefault();
+                item.Chapters = new List<ChapterInfo>();
+                if (last != null)
+                {
+                    item.Chapters.Add(last);
+                }
+            }
+            return new
+            {
+                Stories = paged.ToList(),
+                PageCount = paged.PageCount,
+                TotalItems = paged.TotalItemCount,
+                PageSize = pageSize
+            };
+        }
 
         [HttpGet("genres")]
         public List<GenreInfo> GetGenres()
         {
-            
+
             return service.GetGenres();
         }
 
@@ -52,9 +97,9 @@ namespace ComicWebApp
             return new
             {
                 Stories = paged.ToList(),
-                PageCount = paged.PageCount       ,
-                TotalItems = paged.TotalItemCount ,
-                PageSize  =pageSize
+                PageCount = paged.PageCount,
+                TotalItems = paged.TotalItemCount,
+                PageSize = pageSize
             };
         }
 

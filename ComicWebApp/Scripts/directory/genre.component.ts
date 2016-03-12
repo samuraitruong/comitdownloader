@@ -1,7 +1,7 @@
-﻿import {Component, OnInit, AfterContentInit} from 'angular2/core';
+﻿import {Component, OnInit, AfterContentInit, Output} from 'angular2/core';
 import {TopStoryComponent} from '../shared/top-story.component'
 import {StoryCarouselComponent} from '../shared/story-carousel.component'
-import {RouteParams, Router} from 'angular2/router'
+import {RouteParams, Router, ROUTER_DIRECTIVES} from 'angular2/router'
 import {Story, GenreRes} from '../models/story'
 import {Chapter} from '../models/chapter'
 import {NavigationHelper} from '../shared/navigation.helper'
@@ -13,7 +13,7 @@ import { Pagination} from 'ng2-bootstrap/ng2-bootstrap';
 @Component({
     selector: 'cmapp-genre',
     templateUrl: 'views/directory/genre.html',
-    directives: [StoryListComponent, StoryGenresComponent, Pagination],
+    directives: [StoryListComponent, StoryGenresComponent, Pagination, ROUTER_DIRECTIVES],
     providers: [DirectoryService]
 })
 export class GenreComponent implements OnInit, AfterContentInit {

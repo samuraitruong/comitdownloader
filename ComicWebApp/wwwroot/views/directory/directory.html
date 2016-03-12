@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-md-8 wrapper_left_danhsach">
+        <div class="title_doctruyen manga">
+            <div class="bg left_bar fl"></div>
+            <div class="centertext fl" style="width:632px;padding-top:3px;">
+                Danh Sách Truyện
+                <label class="label_right">
+                    Sắp xếp :
+                    <a id="sort1" onclick="sort(1)">Tên</a> | <a id="sort2" onclick="sort(2)">Mới Cập Nhật</a> | <a id="sort3" onclick="sort(3)">Lượt xem</a>
+                </label>
+            </div>
+            <div class="bg rightbar fl"></div>
+        </div>
+
+        <!--start list abc search-->
+
+        <div class="col-md-12" id="list_kw">
+            <a (click)="resetFilter(filter)" *ngFor="#filter of filters">{{filter}}</a> 
+        </div>
+
+        <div id="type_hot" class="col-md-12 mgtop10">
+            <span class="fl displayblock background icon_hay mgright5"></span><span class="fl magright25">Truyện hay</span>
+            <span class="fl displayblock background icon_hot mgright5"></span><span class="fl magright25">Truyện được yêu thích</span>
+            <span class="fl displayblock background icon_full mgright5"></span><span class="fl magright25">Truyện đã hoàn thành</span>
+        </div>
+
+        <div class="list_truyen_timkiem lst_truyen_moidang">
+            <cmapp-story-list [stories]="stories"></cmapp-story-list>
+            <nav class="pagerhamtruyen">
+                <pagination [totalItems]="totalItems" [itemsPerPage]="pageSize" [(ngModel)]="currentPage" [maxSize]="maxSize" (pageChanged)="pageChanged($event)" class="pagination-sm"
+                            [boundaryLinks]="true" [rotate]="false" (numPages)="numPages = $event"></pagination>
+            </nav>
+
+
+        </div>
+
+    </div>
+    <div class="col-md-4 wrapper_right_danhsach">
+        <div class="row wrapper_theloai">
+            <div class="col-xs-12">
+                <div class="title_doctruyen manhua">
+                    <div class="bg leftbar1 fl"></div>
+                    <div class="centertext fl" style="width:245px;padding-top:3px;">
+                        Trạng Thái
+                    </div>
+                    <div class="bg rightbar1 fl"></div>
+                </div>
+                <div class="col-xs-12 wrapper_list_trangthai">
+                    <a href="/trangthai/dang-tien-hanh/index.html">Truyện đang tiến hành</a>
+                    <a href="/trangthai/hoan-thanh/index.html">Truyện hoàn thành</a>
+                    <a href="/Users/UserInfo.aspx?Style=3">Truyện đang theo dõi</a>
+                </div>
+            </div>
+        </div>
+
+        <cmapp-story-genres></cmapp-story-genres>
+
+    </div>
+</div>
+

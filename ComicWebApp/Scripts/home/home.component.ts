@@ -5,11 +5,12 @@ import {StoryListComponent} from '../shared/story-list.component'
 import {HomeService} from './home.service'
 import {Story} from '../models/story'
 import {StoryGenresComponent} from  '../shared/story-genres.component'
+import {ROUTER_DIRECTIVES} from 'angular2/router'
 
 @Component({
     selector: 'cmapp-home',
     templateUrl: 'views/home/home.html',
-    directives: [TopStoryComponent, StoryCarouselComponent, StoryListComponent, StoryGenresComponent],
+    directives: [TopStoryComponent, StoryCarouselComponent, StoryListComponent, StoryGenresComponent, ROUTER_DIRECTIVES],
     providers: [HomeService]
 })
 export class HomeComponent implements OnInit {

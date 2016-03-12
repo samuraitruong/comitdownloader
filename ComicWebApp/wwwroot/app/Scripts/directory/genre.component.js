@@ -57,7 +57,7 @@ var GenreComponent = (function () {
         core_1.Component({
             selector: 'cmapp-genre',
             templateUrl: 'views/directory/genre.html',
-            directives: [story_list_component_1.StoryListComponent, story_genres_component_1.StoryGenresComponent, ng2_bootstrap_1.Pagination],
+            directives: [story_list_component_1.StoryListComponent, story_genres_component_1.StoryGenresComponent, ng2_bootstrap_1.Pagination, router_1.ROUTER_DIRECTIVES],
             providers: [directory_service_1.DirectoryService]
         }), 
         __metadata('design:paramtypes', [navigation_helper_1.NavigationHelper, directory_service_1.DirectoryService, router_1.RouteParams])

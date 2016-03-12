@@ -14,6 +14,7 @@ var story_carousel_component_1 = require('../shared/story-carousel.component');
 var story_list_component_1 = require('../shared/story-list.component');
 var home_service_1 = require('./home.service');
 var story_genres_component_1 = require('../shared/story-genres.component');
+var router_1 = require('angular2/router');
 var HomeComponent = (function () {
     function HomeComponent(_homeService) {
         this._homeService = _homeService;
@@ -48,7 +49,7 @@ var HomeComponent = (function () {
         core_1.Component({
             selector: 'cmapp-home',
             templateUrl: 'views/home/home.html',
-            directives: [top_story_component_1.TopStoryComponent, story_carousel_component_1.StoryCarouselComponent, story_list_component_1.StoryListComponent, story_genres_component_1.StoryGenresComponent],
+            directives: [top_story_component_1.TopStoryComponent, story_carousel_component_1.StoryCarouselComponent, story_list_component_1.StoryListComponent, story_genres_component_1.StoryGenresComponent, router_1.ROUTER_DIRECTIVES],
             providers: [home_service_1.HomeService]
         }), 
         __metadata('design:paramtypes', [home_service_1.HomeService])
