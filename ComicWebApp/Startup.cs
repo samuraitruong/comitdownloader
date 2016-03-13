@@ -23,12 +23,18 @@ namespace ComicWebApp
 
             //configure DI
             services.AddSingleton(typeof(IStoryService), typeof(StoryService));
+            services.AddSingleton(typeof(IUserService), typeof(UserService));
             //services.AddTransient.AddSingleton(typeof(IStoryService), typeof(StoryService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+            IUserService service = new UserService();
+            var hostingEnvironment = app.ApplicationServices.GetService<IHostingEnvironment>();
+            var realPath = hostingEnvironment.WebRootPath;// + ctx.Request.Path.Value;
+
+            service.SetDataFolder(realPath +"\\app_data");
             //app.Use(async (ctx, next) =>
             //{
             //    var hostingEnvironment = app.ApplicationServices.GetService<IHostingEnvironment>();
@@ -55,8 +61,8 @@ namespace ComicWebApp
                      context.Response.Redirect("/");
                  };
                  */
-                var hostingEnvironment = app.ApplicationServices.GetService<IHostingEnvironment>();
-                var realPath = hostingEnvironment.WebRootPath;// + ctx.Request.Path.Value;
+                hostingEnvironment = app.ApplicationServices.GetService<IHostingEnvironment>();
+                realPath = hostingEnvironment.WebRootPath;// + ctx.Request.Path.Value;
 
                 var indexFile = Path.Combine(realPath, "index.html");
 

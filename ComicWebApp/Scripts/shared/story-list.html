@@ -1,14 +1,14 @@
 ﻿<div class="row_content clearfix" *ngIf="stories">
     <div class="item_truyennendoc" *ngFor="#story of stories; #i=index">
         <div class="wrapper_imgage">
-            <a (click)="viewStory(story)">
+            <a (click)="viewStory(story)" [title]="story.Name">
                 <img u="image" [src]="story.CoverUrl" [attr.alt]="story.Name">
             </a>
-            <a href="doc-truyen/tokimeichatte-gomen-ne-chapter-1.html" *ngIf="story.Chapters.length> 0">
+            <a (click)="viewLatestChap(story)" *ngIf="story.Chapters.length> 0">
                 <h5 class="tenchap_slide">{{story.Chapters[story.Chapters.length -1].Name}}</h5>
             </a>
         </div>
-        <a (click)="viewStory(story)">
+        <a (click)="viewStory(story)" [title]="story.Name">
             <h5 class="tentruyen_slide">{{story.Name}}</h5>
         </a>
     </div>

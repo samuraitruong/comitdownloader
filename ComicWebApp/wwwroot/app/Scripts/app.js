@@ -18,10 +18,12 @@ var genre_component_1 = require('./directory/genre.component');
 var directory_component_1 = require('./directory/directory.component');
 var navigation_helper_1 = require('./shared/navigation.helper');
 var topnav_component_1 = require('./shared/topnav.component');
+var register_component_1 = require('./user/register.component');
 //test bla bla 
 var AppComponent = (function () {
     function AppComponent(_nav) {
         this._nav = _nav;
+        this.siteName = 'my site name';
     }
     AppComponent.prototype.doSearch = function () {
         this._nav.doSearch(this.keyword);
@@ -30,7 +32,7 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'comic-app',
             templateUrl: 'views/app.html',
-            directives: [router_1.ROUTER_DIRECTIVES, topnav_component_1.TopNavComponent],
+            directives: [router_1.ROUTER_DIRECTIVES, topnav_component_1.TopNavComponent, register_component_1.RegisterComponent],
             providers: [router_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, navigation_helper_1.NavigationHelper]
         }),
         router_1.RouteConfig([
@@ -69,6 +71,12 @@ var AppComponent = (function () {
                 path: '/search/:keyword/:page',
                 name: 'SearchPaging',
                 component: search_component_1.SearchComponent,
+            },
+            ,
+            {
+                path: '/register',
+                name: 'Register',
+                component: register_component_1.RegisterComponent,
             }
         ]), 
         __metadata('design:paramtypes', [navigation_helper_1.NavigationHelper])

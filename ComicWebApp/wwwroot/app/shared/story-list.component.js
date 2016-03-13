@@ -17,6 +17,11 @@ var StoryListComponent = (function () {
     StoryListComponent.prototype.viewStory = function (story) {
         this._nav.viewStory(story);
     };
+    StoryListComponent.prototype.viewLatestChap = function (story) {
+        if (story.Chapters.length > 0) {
+            this._nav.readChapter(story, story.Chapters[story.Chapters.length - 1]);
+        }
+    };
     StoryListComponent.prototype.ngAfterViewChecked = function () {
     };
     __decorate([

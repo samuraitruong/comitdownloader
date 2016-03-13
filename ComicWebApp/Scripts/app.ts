@@ -9,6 +9,8 @@ import {GenreComponent} from './directory/genre.component'
 import {DirectoryComponent} from './directory/directory.component'
 import {NavigationHelper} from './shared/navigation.helper'
 import {TopNavComponent} from './shared/topnav.component'
+import {RegisterComponent} from './user/register.component'
+
 
 //import { PAGINATION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 import {enableProdMode} from 'angular2/core';
@@ -16,7 +18,7 @@ import {enableProdMode} from 'angular2/core';
 @Component({
     selector: 'comic-app',
     templateUrl: 'views/app.html',
-    directives: [ROUTER_DIRECTIVES, TopNavComponent],
+    directives: [ROUTER_DIRECTIVES, TopNavComponent, RegisterComponent],
     providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, NavigationHelper]
 })
 
@@ -56,6 +58,12 @@ import {enableProdMode} from 'angular2/core';
         path: '/search/:keyword/:page',
         name: 'SearchPaging',
         component: SearchComponent,
+    },
+        ,
+    {
+        path: '/register',
+        name: 'Register',
+        component: RegisterComponent,
     }
 
 ])
@@ -65,6 +73,7 @@ export class AppComponent {
     }
 
     keyword: string;
+    siteName: string = 'my site name';
     doSearch() {
         this._nav.doSearch(this.keyword);
     }

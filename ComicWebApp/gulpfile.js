@@ -13,10 +13,10 @@ var paths = {
     libTarget: "./wwwroot/libs/",
     vendorsTarget: "./wwwroot/vendors",
     views: ["views/*.html"],
-    scss: ["content/css/*.css"],
+    scss: ["content/css/*.scss","content/css/**/*.scss"],
     appFolder: 'wwwroot/app',
     htmls: ['scripts/*.html', 'scripts/**/*.html'],
-    typescrips: ['scripts/*.ts', 'scripts/**/*.ts'],
+    typescripts: ['scripts/*.ts', 'scripts/**/*.ts'],
 };
 
 var bowerLibs = [
@@ -68,10 +68,22 @@ gulp.task('copyViews', function () {
                 .pipe(gulp.dest(paths.appFolder + '/views'));
 })
 
-gulp.task('buildCopyCSS', function () {
+gulp.task('css:build', function () {
     return gulp.src(paths.scss)
-                 //.pipe(sass())
-                .pipe(gulp.dest('wwwroot/content/css'));
+                .pipe(plugins.sass())
+                .pipe(plugins.autoprefixer({
+                    browsers: ['last 2 versions'],
+                    cascade: false
+                }))
+                .pipe(plugins.csso())
+                .pipe(plugins.size())
+                .pipe(gulp.dest('wwwroot/content/css'))
+                .pipe(plugins.livereload())
+                .pipe(plugins.concatCss('all.min.css'))
+                .pipe(plugins.csso())
+                .pipe(plugins.size())
+                .pipe(gulp.dest('wwwroot/content/css/'))
+                .pipe(plugins.livereload());
 })
 
 gulp.task('buildCopyIMG', function () {
@@ -80,15 +92,17 @@ gulp.task('buildCopyIMG', function () {
                 .pipe(gulp.dest('wwwroot/content/images'));
 })
 
-gulp.task('copy', ['moveToLibs', 'copyViews', 'buildCopyCSS', 'buildCopyIMG','copyVendorLibs','copyHtml','typescript:build'], function () {
+gulp.task('copy', ['moveToLibs', 'copyViews', 'css:build', 'buildCopyIMG', 'copyVendorLibs', 'copyHtml', 'typescript:build'], function () {
     plugins.sequence('typescript:build')
 })
 
 gulp.task('watch', ['copy'], function () {
     plugins.livereload.listen({ start: true });
 
-    gulp.watch(paths.htmls, ['copyHtml']);
-    gulp.watch(paths.typescrips, ['typescript:build']);
+    gulp.watch(paths.htmls, ['copyHtml']).on('ready', function () { console.log('watching html: ' + paths.htmls.join()) });;
+    gulp.watch(paths.typescripts, ['typescript:build']).on('ready', function () { console.log('watching typescript: ' + paths.typescripts.join()) });;
+    gulp.watch(paths.scss, ['css:build']).on('ready', function () { console.log('watching: ' + paths.scss.join()) });
+    
     console.log('watching: html/typescripts')
 });
 gulp.task('typescript:compile', function () {

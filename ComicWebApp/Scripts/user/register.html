@@ -1,0 +1,90 @@
+﻿<div class="info_detailtruyen mgtop10">
+    <div class="title_tab"><div class="tab active fl">Đăng Ký Thành Viên Hamtruyen.com</div><br class="clear"> </div>
+    <div class="form-horizontal" *ngIf="!submitted">
+        <form id="register_form" method="post" [ngFormModel]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-group has-feedback">
+                <label for="txtNickName" class="col-sm-2 control-label">Nick name:</label>
+                <div class="col-sm-6" [class.has-error]="!username.valid  && username.touched">
+                    <input type="text" class="form-control" name="txtNickName" id="txtNickName" placeholder="User Name" [(ngModel)]="user.Username" required minLength="6" [ngFormControl]="username">
+                    <span class="glyphicon  form-control-feedback" [class.glyphicon-remove]="!username.valid && username.touched" [class.glyphicon-ok]="username.valid"></span>
+                    <label class="ui-state-error-text" *ngIf="!username.valid && username.touched">Tên đăng nhập phải dài hơn 5 ký tự và phải bắt đầu bằng chữ. Chỉ cho phép dùng các chữ cái A-Z và số 0-9. chấp nhận ký tự đặt biệt "." và "-"(ví dụ: love123.Manga).</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtEmail" class="col-sm-2 control-label">Email:</label>
+                <div class="col-sm-6" [class.has-error]="!email.valid && email.touched">
+                    <input type="email" [(ngModel)]="user.Email" class="form-control" name="txtEmail" id="txtEmail" placeholder="Email" [ngFormControl]="email">
+                    <label class="ui-state-error-text" *ngIf="!email.valid && email.touched">Vui lòng nhập địa chỉ email hợp lệ.</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtPassword" class="col-sm-2 control-label">Mật khẩu:</label>
+                <div class="col-sm-6" [class.has-error]="!password.valid && password.touched">
+                    <input [(ngModel)]="user.Password" type="password" class="form-control" name="txtPassword" id="txtPassword" placeholder="Mật khẩu" [ngFormControl]="password">
+                    <label class="ui-state-error-text" *ngIf="!password.valid && password.touched ">Mật khẩu của bạn quá dễ đoán, vui lòng nhập mật khâu theo yêu cầu sau: bao gồm chữ thường và chữ hóa, ít nhật một chữ số và một trong các ký tự đặc biệt sau : ! @ # $ & * </label>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtNhapLapMatKhau" class="col-sm-2 control-label">Nhập lại mật khẩu:</label>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" name="txtNhapLapMatKhau" id="txtNhapLapMatKhau" placeholder="Nhập lại mật khẩu">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Giới tính:</label>
+                <div class="col-sm-6">
+                    <input type="radio" class="form-control" name="chkGioiTinh" id="chkNam" checked="checked" value="Nam" (click)="user.Genre = $event.target.value"> Nam
+                    <input type="radio" class="form-control" name="chkGioiTinh" id="chkNu" value="Nữ" (click)="user.Genre = $event.target.value">Nữ
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtPhone" class="col-sm-2 control-label">Điện thoại:</label>
+                <div class="col-sm-6">
+                    <input [(ngModel)]="user.Phone" type="text" class="form-control" name="txtPhone" id="txtPhone" placeholder="Điện thoại">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtBirthDay" class="col-sm-2 control-label">Ngày sinh:</label>
+                <div class="col-sm-6 input-group date input-group-overwrite" id='datetimepicker1'>
+                    <input type="text" class="form-control hasDatepicker" name="txtBirthDay" id="txtBirthDay" placeholder="Ngày Sinh">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+
+                </div>
+            </div>
+            <div class="form-group hide">
+                <label for="txtCheckImage" class="col-sm-2 control-label">Mã Xác Nhận:</label>
+                <div class="col-sm-6">
+                    <img src="/ImageCheck.aspx" width="120" height="30">
+                    <br>
+                    <input type="text" id="txtCheckImage" class="textbox_imgage" name="txtCheckImage">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">&nbsp;</label>
+                <div class="col-sm-6">
+                    <input type="checkbox" class="form-control" checked="checked" id="chkCheck" required [ngFormControl]="registerForm.controls['toc']" #toc="ngForm"> Bạn đã đọc và hoàn toàn đồng ý với các <a href="#">điều khoản của hamtruyen.com</a>
+                    <label class="ui-state-error-text" *ngIf="!toc.control.valid && toc.control.touched ">Vui lòng đọc và đồng ý các điều khoản sử dụng.</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">&nbsp;</label>
+                <div class="col-sm-6">
+                    <button id="btn_register" class="btn_hamtruyen" [class.disabled]="!registerForm.valid" [disabled]="!registerForm.valid">Đăng Ký</button>
+                    <button id="btn_cancel" [routerLink]="['Home']" class="btn_hamtruyen">Hủy Bỏ</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="alert alert-success" *ngIf="submitted">
+        <br/><br />
+        Xin chúc mừng {{user.Username}}, Tài khoản của bạn đã được đắng kí thành công
+        <br/>
+        <a class="btn btn-default" data-toggle="modal" data-target="##login_section_wrapper">Đăng nhập</a>
+
+        <a class="btn btn-default" [routerLink]="['Home']">Trang chủ</a>
+    </div>
+
+</div>

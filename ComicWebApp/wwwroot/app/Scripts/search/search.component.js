@@ -50,6 +50,7 @@ var SearchComponent = (function () {
     };
     ;
     SearchComponent.prototype.pageChanged = function (event) {
+        this.currentPage = event.page;
         this.loadStories();
     };
     ;

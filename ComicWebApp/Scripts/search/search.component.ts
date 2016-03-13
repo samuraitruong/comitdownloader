@@ -58,6 +58,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
     };
 
     private pageChanged(event: any): void {
+        this.currentPage = event.page;
         this.loadStories();
     };
 

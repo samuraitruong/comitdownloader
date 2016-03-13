@@ -54,11 +54,8 @@ var DirectoryComponent = (function () {
     DirectoryComponent.prototype.viewStory = function (s) {
         this._nav.viewStory(s);
     };
-    DirectoryComponent.prototype.setPage = function (pageNo) {
-        this.currentPage = pageNo;
-    };
-    ;
     DirectoryComponent.prototype.pageChanged = function (event) {
+        this.currentPage = event.page;
         this.loadStories();
     };
     ;

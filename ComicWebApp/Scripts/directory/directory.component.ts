@@ -59,12 +59,9 @@ export class DirectoryComponent implements OnInit, AfterContentInit {
 
     private maxSize: number = 10;
     private pageSize = 0;
-    
-    private setPage(pageNo: number): void {
-        this.currentPage = pageNo;
-    };
 
     private pageChanged(event: any): void {
+        this.currentPage = event.page;
         this.loadStories();
     };
     private filters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');

@@ -13,7 +13,11 @@ export class StoryListComponent implements AfterViewChecked {
     viewStory(story: Story) {
         this._nav.viewStory(story)
     }
-
+    viewLatestChap(story: Story) {
+        if (story.Chapters.length > 0) {
+            this._nav.readChapter(story, story.Chapters[story.Chapters.length -1])
+        }
+    }
     @Input() stories: Story[];
     ngAfterViewChecked() {
     }
