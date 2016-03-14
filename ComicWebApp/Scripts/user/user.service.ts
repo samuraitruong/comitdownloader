@@ -31,7 +31,6 @@ export class UserService {
         var http = injector.get(Http);
 
         return http.post(this._apiCheckUser, JSON.stringify({ Username: username }), options)
-            .deb
             .map(res => <any>res.json())
             .catch((error: Response) => {
                 return Observable.throw(error.json().message || 'Unknow error');

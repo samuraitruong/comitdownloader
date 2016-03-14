@@ -28,7 +28,8 @@ var RegisterComponent = (function () {
         this.submitted = false;
         this.user = new user_1.User("", "", "", "", "", "", new Date());
         this.registerForm = _formBuilder.group({
-            username: ['', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.pattern("[a-zA-Z][a-zA-Z0-9.-]{4,19}"), this.usernameTaken])],
+            // username: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-Z][a-zA-Z0-9.-]{4,19}")])],
+            username: ['', common_1.Validators.required, this.usernameTaken],
             email: ['', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.pattern("^[a-zA-Z].+@[^\.].*\.[a-z0-9]{2,}$")])],
             password: ['', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.pattern("^(?=.*[A-Z])(?=.*[!@#$&*^])(?=.*[0-9])(?=.*[a-z]).{6,20}$")])],
             toc: ['', this.requiredCheckbox]
@@ -56,24 +57,25 @@ var RegisterComponent = (function () {
         console.log(event);
     };
     RegisterComponent.prototype.usernameTaken = function (control) {
-        //return this._service.checkUsernameExist(control.value).toPromise();
-        var q = new Promise(function (resolve, reject) {
-            //resolve({ 'userExist': true });
-            //resolve(null)
-            //this._service.checkUsernameExist(control.value).subscribe(
-            //    res=> {
-            //        alert('aaa')
-            //    console.log('ajax result...')
-            //        if (res.exist) {
-            //            resolve({ 'userExist': true });
-            //        } else {
-            //            resolve(null);
-            //        }
-            //    },
-            //    err=> { alert(err) }
-            // )
+        var p = new Promise(function (resolve, reject) {
+            //control.valueChanges.debounceTime(400)
+            //    .distinctUntilChanged()
+            //    .subscribe(d=> {
+            //        if (d == control.value) {
+            user_service_1.UserService.checkUsernameExist(control.value)
+                .subscribe(function (res) {
+                console.log(res);
+                if (res.exist) {
+                    resolve({ 'userExist': true });
+                }
+                else {
+                    return resolve(null);
+                }
+            }, function (err) { alert(err); });
         });
-        return q;
+        //});
+        //});
+        return p;
     };
     RegisterComponent.prototype.uniqueDataValidator = function (property) {
         return function (control) {

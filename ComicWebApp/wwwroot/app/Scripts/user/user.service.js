@@ -15,7 +15,6 @@ var UserService = (function () {
         this.http = http;
         this._apiUrl = '/api/user/';
         this._apiLoginUrl = '/api/user/login';
-        this._apiCheckUser = '/api/user/check';
     }
     UserService.prototype.requestOptions = function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
@@ -29,10 +28,16 @@ var UserService = (function () {
             .catch(this.handleError)
             .do(function (data) { return console.log(data); });
     };
-    UserService.prototype.checkUsernameExist = function (username) {
-        return this.http.post(this._apiCheckUser, JSON.stringify({ Username: username }), this.requestOptions())
+    UserService.checkUsernameExist = function (username) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        var injector = core_1.Injector.resolveAndCreate([http_1.HTTP_PROVIDERS]);
+        var http = injector.get(http_1.Http);
+        return http.post(this._apiCheckUser, JSON.stringify({ Username: username }), options)
             .map(function (res) { return res.json(); })
-            .catch(this.handleError);
+            .catch(function (error) {
+            return Observable_1.Observable.throw(error.json().message || 'Unknow error');
+        });
     };
     UserService.prototype.login = function (username, password, remember) {
         var body = JSON.stringify({
@@ -48,6 +53,7 @@ var UserService = (function () {
         console.error(error);
         return Observable_1.Observable.throw(error.json().message || 'Unknow error');
     };
+    UserService._apiCheckUser = '/api/user/check';
     UserService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

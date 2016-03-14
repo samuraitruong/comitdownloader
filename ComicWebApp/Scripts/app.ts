@@ -83,16 +83,15 @@ export class AppComponent {
         this._nav.doSearch(this.keyword);
     }
     public onLogin() {
-        console.log(this.user)
         this._userService.login(this.user.Username, this.user.Password, this.rememberMe).subscribe(res=> {
             this.logged = true;
             this.user = res;
             this.errorMessage = null;
-            $("#login_form").modal('hide');
+            $("#login_section_wrapper").modal('hide');
         },
-            err=> {
-                this.errorMessage = <any>err;
-            });
+        err=> {
+            this.errorMessage = <any>err;
+        });
     }
 }
 

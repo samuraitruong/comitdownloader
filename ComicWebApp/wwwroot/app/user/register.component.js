@@ -58,14 +58,25 @@ var RegisterComponent = (function () {
         console.log(event);
     };
     RegisterComponent.prototype.usernameTaken = function (control) {
-        return user_service_1.UserService.checkUsernameExist(control.value).toPromise().then(function (res) {
-            if (res.exist) {
-                return { 'userExist': true };
-            }
-            else {
-                return null;
-            }
-        }, function (err) { alert(err); });
+        var p = new Promise(function (resolve, reject) {
+            //control.valueChanges.debounceTime(400)
+            //    .distinctUntilChanged()
+            //    .subscribe(d=> {
+            //        if (d == control.value) {
+            user_service_1.UserService.checkUsernameExist(control.value)
+                .subscribe(function (res) {
+                console.log(res);
+                if (res.exist) {
+                    resolve({ 'userExist': true });
+                }
+                else {
+                    return resolve(null);
+                }
+            }, function (err) { alert(err); });
+        });
+        //});
+        //});
+        return p;
     };
     RegisterComponent.prototype.uniqueDataValidator = function (property) {
         return function (control) {

@@ -35,12 +35,11 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.onLogin = function () {
         var _this = this;
-        console.log(this.user);
         this._userService.login(this.user.Username, this.user.Password, this.rememberMe).subscribe(function (res) {
             _this.logged = true;
             _this.user = res;
             _this.errorMessage = null;
-            $("#login_form").modal('hide');
+            $("#login_section_wrapper").modal('hide');
         }, function (err) {
             _this.errorMessage = err;
         });
