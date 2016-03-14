@@ -89,6 +89,10 @@ namespace ComicWeb.JsonService
                                     {
                                         stories.Add(fullStory);
                                     }
+                                    else
+                                    {
+                                        stories.Add(s);
+                                    }
                                 }
                                 catch (Exception ex) { }
                             }
@@ -97,7 +101,8 @@ namespace ComicWeb.JsonService
 
                         stories.Sort((x, y) =>
                         {
-                            if (x.Chapters == null || y.Chapters == null) return 0;
+
+                            if (x== null || y == null || x.Chapters == null || y.Chapters == null) return 0;
                             return y.Chapters.Count - x.Chapters.Count;
                         });
                     }

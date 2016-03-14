@@ -9,6 +9,7 @@ using ComicWeb.Core;
 
 namespace ComicWebApp
 {
+    
     [Route("api/[controller]")]
     public class UserController : Microsoft.AspNet.Mvc.Controller
     {
@@ -37,6 +38,40 @@ namespace ComicWebApp
         {
             return service.CreateUser(user);
         }
+
+        [HttpPost("check")]
+        public IActionResult CheckUser([FromBody]User model)
+        {
+            bool isExist = false;
+
+            if(!string.IsNullOrEmpty(model.Username) && service.GetUserByUserName(model.Username) != null)
+            {
+                isExist = true;
+            }
+
+            if (!string.IsNullOrEmpty(model.Email) && service.GetUserByEmail(model.Email) != null)
+            {
+                isExist = true;
+            }
+
+            return new ObjectResult( new { exist = isExist });
+        }
+
+        [HttpPost("login")]
+        public IActionResult PostLogin([FromBody]User user)
+        {
+            var logged = service.Login(user.Username, user.Password);
+            if (logged != null)
+            {
+                return new ObjectResult(logged);
+            }
+            return HttpNotFound(new
+            {
+                code = "NOTFOUND",
+                message = "username or password incorect"
+            });
+        }
+
 
         // PUT api/values/5
         [HttpPut("{id}")]

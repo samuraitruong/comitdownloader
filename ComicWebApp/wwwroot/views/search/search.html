@@ -10,7 +10,7 @@
         </div>
         <div class="lst_truyen_moidang">
             <cmapp-story-list [stories]="stories"></cmapp-story-list>
-            <nav class="pagerhamtruyen">
+            <nav class="pagerhamtruyen" >
                 <pagination [totalItems]="totalItems" [itemsPerPage]="pageSize" [(ngModel)]="currentPage" [maxSize]="maxSize" (pageChanged)="pageChanged($event)" class="pagination-sm"
                             [boundaryLinks]="true" [rotate]="false" (numPages)="numPages = $event"></pagination>
             </nav>

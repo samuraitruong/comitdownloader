@@ -14,17 +14,39 @@ var UserService = (function () {
     function UserService(http) {
         this.http = http;
         this._apiUrl = '/api/user/';
+        this._apiLoginUrl = '/api/user/login';
+        this._apiCheckUser = '/api/user/check';
     }
+    UserService.prototype.requestOptions = function () {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return options;
+    };
     UserService.prototype.register = function (user) {
         var body = JSON.stringify(user);
-        return this.http.post(this._apiUrl, body)
+        return this.http.post(this._apiUrl, body, this.requestOptions())
             .map(function (res) { return res.json(); })
             .catch(this.handleError)
             .do(function (data) { return console.log(data); });
     };
+    UserService.prototype.checkUsernameExist = function (username) {
+        return this.http.post(this._apiCheckUser, JSON.stringify({ Username: username }), this.requestOptions())
+            .map(function (res) { return res.json(); })
+            .catch(this.handleError);
+    };
+    UserService.prototype.login = function (username, password, remember) {
+        var body = JSON.stringify({
+            Username: username,
+            Password: password,
+            Remember: remember
+        });
+        return this.http.post(this._apiLoginUrl, body, this.requestOptions())
+            .map(function (res) { return res.json(); })
+            .catch(this.handleError);
+    };
     UserService.prototype.handleError = function (error) {
         console.error(error);
-        return Observable_1.Observable.throw(error.json().error || 'Server error');
+        return Observable_1.Observable.throw(error.json().message || 'Unknow error');
     };
     UserService = __decorate([
         core_1.Injectable(), 

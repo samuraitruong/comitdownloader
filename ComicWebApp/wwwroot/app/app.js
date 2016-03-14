@@ -20,21 +20,38 @@ var directory_component_1 = require('./directory/directory.component');
 var navigation_helper_1 = require('./shared/navigation.helper');
 var topnav_component_1 = require('./shared/topnav.component');
 var register_component_1 = require('./user/register.component');
+var user_1 = require('./models/user');
+var user_service_1 = require('./user/user.service');
 //test bla bla 
 var AppComponent = (function () {
-    function AppComponent(_nav) {
+    function AppComponent(_nav, _userService) {
         this._nav = _nav;
+        this._userService = _userService;
+        this.user = new user_1.User("", "", "", "", "", "");
         this.siteName = 'my site name';
+        this.logged = false;
     }
     AppComponent.prototype.doSearch = function () {
         this._nav.doSearch(this.keyword);
+    };
+    AppComponent.prototype.onLogin = function () {
+        var _this = this;
+        console.log(this.user);
+        this._userService.login(this.user.Username, this.user.Password, this.rememberMe).subscribe(function (res) {
+            _this.logged = true;
+            _this.user = res;
+            _this.errorMessage = null;
+            $("#login_form").modal('hide');
+        }, function (err) {
+            _this.errorMessage = err;
+        });
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'comic-app',
             templateUrl: 'views/app.html',
             directives: [router_1.ROUTER_DIRECTIVES, topnav_component_1.TopNavComponent, register_component_1.RegisterComponent],
-            providers: [router_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, navigation_helper_1.NavigationHelper]
+            providers: [router_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, navigation_helper_1.NavigationHelper, user_service_1.UserService]
         }),
         router_1.RouteConfig([
             {
@@ -80,7 +97,7 @@ var AppComponent = (function () {
                 component: register_component_1.RegisterComponent,
             }
         ]), 
-        __metadata('design:paramtypes', [navigation_helper_1.NavigationHelper])
+        __metadata('design:paramtypes', [navigation_helper_1.NavigationHelper, user_service_1.UserService])
     ], AppComponent);
     return AppComponent;
 }());

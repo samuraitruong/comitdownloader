@@ -13,6 +13,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('angular2/core');
 var common_1 = require('angular2/common');
 var router_1 = require('angular2/router');
+var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
 var user_1 = require('../models/user');
 var navigation_helper_1 = require('../shared/navigation.helper');
 var user_service_1 = require('./user.service');
@@ -22,19 +23,24 @@ var RegisterComponent = (function () {
         this._service = _service;
         this._routeParams = _routeParams;
         this._formBuilder = _formBuilder;
+        this.dt = new Date();
+        this.minDate = null;
         this.submitted = false;
         this.user = new user_1.User("", "", "", "", "", "", new Date());
         this.registerForm = _formBuilder.group({
-            username: ['', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.pattern("[a-zA-Z][a-zA-Z0-9.-]{4,19}")])],
+            username: ['', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.pattern("[a-zA-Z][a-zA-Z0-9.-]{4,19}"), this.usernameTaken])],
             email: ['', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.pattern("^[a-zA-Z].+@[^\.].*\.[a-z0-9]{2,}$")])],
             password: ['', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.pattern("^(?=.*[A-Z])(?=.*[!@#$&*^])(?=.*[0-9])(?=.*[a-z]).{6,20}$")])],
-            toc: ['', common_1.Validators.required]
+            toc: ['', this.requiredCheckbox]
         });
         this.username = this.registerForm.controls['username'];
         this.email = this.registerForm.controls['email'];
         this.password = this.registerForm.controls['password'];
     }
     RegisterComponent.prototype.ngAfterContentInit = function () {
+        setTimeout(function () {
+            //$('#datetimepicker1').datetimepicker();
+        }, 1000);
     };
     RegisterComponent.prototype.ngOnInit = function () {
     };
@@ -49,6 +55,40 @@ var RegisterComponent = (function () {
     RegisterComponent.prototype.log = function (event) {
         console.log(event);
     };
+    RegisterComponent.prototype.usernameTaken = function (control) {
+        //return this._service.checkUsernameExist(control.value).toPromise();
+        var q = new Promise(function (resolve, reject) {
+            //resolve({ 'userExist': true });
+            //resolve(null)
+            //this._service.checkUsernameExist(control.value).subscribe(
+            //    res=> {
+            //        alert('aaa')
+            //    console.log('ajax result...')
+            //        if (res.exist) {
+            //            resolve({ 'userExist': true });
+            //        } else {
+            //            resolve(null);
+            //        }
+            //    },
+            //    err=> { alert(err) }
+            // )
+        });
+        return q;
+    };
+    RegisterComponent.prototype.uniqueDataValidator = function (property) {
+        return function (control) {
+            var obj = {};
+            obj[property] = true;
+            return obj;
+        };
+    };
+    RegisterComponent.prototype.requiredCheckbox = function (control) {
+        if (!control.value) {
+            return {
+                required: true
+            };
+        }
+    };
     RegisterComponent.prototype.usernameValidator = function (control) {
         if (control.value.match(/^123/)) {
             return { invalidUsername: true };
@@ -58,7 +98,7 @@ var RegisterComponent = (function () {
         core_1.Component({
             selector: 'cmapp-user-register',
             templateUrl: 'views/user/register.html',
-            directives: [router_1.ROUTER_DIRECTIVES, common_1.FORM_DIRECTIVES],
+            directives: [ng2_bootstrap_1.DATEPICKER_DIRECTIVES, router_1.ROUTER_DIRECTIVES, common_1.FORM_DIRECTIVES],
             providers: [user_service_1.UserService]
         }), 
         __metadata('design:paramtypes', [navigation_helper_1.NavigationHelper, user_service_1.UserService, router_1.RouteParams, common_1.FormBuilder])

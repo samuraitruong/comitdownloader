@@ -20,15 +20,17 @@ namespace ComicWeb.JsonService
         }
         List<User> AllUsers()
         {
-            if (cachedUser != null) return cachedUser;
+            if (cachedUser != null && cachedUser.Count >0) return cachedUser;
 
             string file = Path.Combine(dataFolder, "users.json");
             if(File.Exists(file))
             {
                 cachedUser = JsonConvert.DeserializeObject<List<User>>(File.ReadAllText(file));
             }
-
-            cachedUser= new List<User>();
+            else
+            {
+                cachedUser = new List<User>();
+            }
             return cachedUser;
         }
         public User CreateUser(User user)
@@ -46,6 +48,20 @@ namespace ComicWeb.JsonService
             var stringObj = JsonConvert.SerializeObject(list);
             string file = Path.Combine(dataFolder, "users.json");
             File.WriteAllText(file,stringObj);
+        }
+
+        public User Login(string username, string password)
+        {
+            return AllUsers().FirstOrDefault(p => p.Username.ToLower() == username && p.Password == password);
+        }
+
+        public User GetUserByUserName(string username)
+        {
+            return AllUsers().FirstOrDefault(p => p.Username.ToLower() == username);
+        }
+        public User GetUserByEmail(string email)
+        {
+            return AllUsers().FirstOrDefault(p => p.Email.ToLower() == email);
         }
     }
 }

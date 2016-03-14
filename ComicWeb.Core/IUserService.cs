@@ -24,7 +24,10 @@ namespace ComicWeb.Core
     }
     public interface IUserService
     {
-            User CreateUser(User user);
+        User CreateUser(User user);
         void SetDataFolder(string path);
+        User Login(string username, string password);
+        User GetUserByUserName(string username);
+        User GetUserByEmail(string email);
     }
 }

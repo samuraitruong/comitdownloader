@@ -10,6 +10,8 @@ import {DirectoryComponent} from './directory/directory.component'
 import {NavigationHelper} from './shared/navigation.helper'
 import {TopNavComponent} from './shared/topnav.component'
 import {RegisterComponent} from './user/register.component'
+import {User} from './models/user'
+import {UserService} from './user/user.service'
 
 
 //import { PAGINATION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
@@ -19,7 +21,7 @@ import {enableProdMode} from 'angular2/core';
     selector: 'comic-app',
     templateUrl: 'views/app.html',
     directives: [ROUTER_DIRECTIVES, TopNavComponent, RegisterComponent],
-    providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, NavigationHelper]
+    providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, NavigationHelper, UserService]
 })
 
 @RouteConfig([
@@ -69,13 +71,28 @@ import {enableProdMode} from 'angular2/core';
 ])
 
 export class AppComponent {
-    constructor(private _nav: NavigationHelper) {
+    constructor(private _nav: NavigationHelper, private _userService: UserService) {
     }
-
-    keyword: string;
-    siteName: string = 'my site name';
-    doSearch() {
+    public user: User = new User("","","","","","");
+    public keyword: string;
+    public siteName: string = 'my site name';
+    public rememberMe: boolean;
+    public errorMessage: string;
+    public logged: boolean = false;
+    public doSearch() {
         this._nav.doSearch(this.keyword);
+    }
+    public onLogin() {
+        console.log(this.user)
+        this._userService.login(this.user.Username, this.user.Password, this.rememberMe).subscribe(res=> {
+            this.logged = true;
+            this.user = res;
+            this.errorMessage = null;
+            $("#login_form").modal('hide');
+        },
+            err=> {
+                this.errorMessage = <any>err;
+            });
     }
 }
 

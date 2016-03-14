@@ -29,7 +29,8 @@ var RegisterComponent = (function () {
         this.submitted = false;
         this.user = new user_1.User("", "", "", "", "", "", new Date());
         this.registerForm = _formBuilder.group({
-            username: ['', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.pattern("[a-zA-Z][a-zA-Z0-9.-]{4,19}")])],
+            // username: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-Z][a-zA-Z0-9.-]{4,19}")])],
+            username: ['', common_1.Validators.required, this.usernameTaken],
             email: ['', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.pattern("^[a-zA-Z].+@[^\.].*\.[a-z0-9]{2,}$")])],
             password: ['', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.pattern("^(?=.*[A-Z])(?=.*[!@#$&*^])(?=.*[0-9])(?=.*[a-z]).{6,20}$")])],
             toc: ['', this.requiredCheckbox]
@@ -55,6 +56,23 @@ var RegisterComponent = (function () {
     };
     RegisterComponent.prototype.log = function (event) {
         console.log(event);
+    };
+    RegisterComponent.prototype.usernameTaken = function (control) {
+        return user_service_1.UserService.checkUsernameExist(control.value).toPromise().then(function (res) {
+            if (res.exist) {
+                return { 'userExist': true };
+            }
+            else {
+                return null;
+            }
+        }, function (err) { alert(err); });
+    };
+    RegisterComponent.prototype.uniqueDataValidator = function (property) {
+        return function (control) {
+            var obj = {};
+            obj[property] = true;
+            return obj;
+        };
     };
     RegisterComponent.prototype.requiredCheckbox = function (control) {
         if (!control.value) {

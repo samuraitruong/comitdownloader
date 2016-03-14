@@ -1,5 +1,5 @@
-﻿import {Injectable} from 'angular2/core'
-import {Http, Response, Headers, RequestOptions} from 'angular2/http'
+﻿import {Injectable, Injector} from 'angular2/core'
+import {Http, Response, Headers, RequestOptions, ConnectionBackend, HTTP_PROVIDERS} from 'angular2/http'
 import {Observable}     from 'rxjs/Observable'
 import {User} from '../models/user'
 
@@ -7,22 +7,50 @@ import {User} from '../models/user'
 
 export class UserService {
     private _apiUrl = '/api/user/';
-    constructor(private http: Http) { }
+    private _apiLoginUrl = '/api/user/login';
+    private static _apiCheckUser = '/api/user/check';
 
-    public register(user: User) {
+    constructor(private http: Http) { }
+    public requestOptions(): RequestOptions {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-
+        return options;
+    }
+    public register(user: User) {
         let body = JSON.stringify(user)
-        return this.http.post(this._apiUrl, body, options)
+        return this.http.post(this._apiUrl, body, this.requestOptions())
             .map(res => <any>res.json())       
             .catch(this.handleError)
             .do(data=> console.log(data))
     }
+    static checkUsernameExist(username: string) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        var injector = Injector.resolveAndCreate([HTTP_PROVIDERS]);
+
+        var http = injector.get(Http);
+
+        return http.post(this._apiCheckUser, JSON.stringify({ Username: username }), options)
+            .deb
+            .map(res => <any>res.json())
+            .catch((error: Response) => {
+                return Observable.throw(error.json().message || 'Unknow error');
+            });
+    }
+    public login(username: string, password: string, remember: boolean) {
+        let body = JSON.stringify({
+            Username: username,
+            Password: password,
+            Remember: remember
+        });
+        return this.http.post(this._apiLoginUrl, body, this.requestOptions())
+            .map(res => <User>res.json())
+            .catch(this.handleError)
+    }
 
     private handleError(error: Response) {
         console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
+        return Observable.throw(error.json().message || 'Unknow error');
     }
 
 }

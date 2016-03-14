@@ -7,14 +7,14 @@ import {NgForm, FORM_DIRECTIVES, FormBuilder, Validators, ControlGroup, Abstract
 import {RouteParams, Router, ROUTER_DIRECTIVES } from 'angular2/router'
 import * as moment from 'moment';
 import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-import {User} from '../models/user'
+import {User, ValidationResult} from '../models/user'
 import {NavigationHelper} from '../shared/navigation.helper'
 import {UserService} from './user.service'
 
 @Component({
     selector: 'cmapp-user-register',
     templateUrl: 'views/user/register.html',
-    directives: [DATEPICKER_DIRECTIVES,ROUTER_DIRECTIVES, FORM_DIRECTIVES],
+    directives: [DATEPICKER_DIRECTIVES, ROUTER_DIRECTIVES, FORM_DIRECTIVES],
     providers: [UserService]
 })
 export class RegisterComponent implements OnInit, AfterContentInit {
@@ -23,7 +23,8 @@ export class RegisterComponent implements OnInit, AfterContentInit {
         private _routeParams: RouteParams,
         private _formBuilder: FormBuilder) {
         this.registerForm = _formBuilder.group({
-            username: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-Z][a-zA-Z0-9.-]{4,19}")])],
+           // username: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-Z][a-zA-Z0-9.-]{4,19}")])],
+            username: ['', Validators.required, this.usernameTaken],
             email: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z].+@[^\.].*\.[a-z0-9]{2,}$")])],
             password: ['', Validators.compose([Validators.required, Validators.pattern("^(?=.*[A-Z])(?=.*[!@#$&*^])(?=.*[0-9])(?=.*[a-z]).{6,20}$")])],
             toc: ['', this.requiredCheckbox]
@@ -42,7 +43,7 @@ export class RegisterComponent implements OnInit, AfterContentInit {
     public dt: Date = new Date();
     private minDate: Date = null;
 
-    submitted=false;
+    submitted = false;
     registerForm: ControlGroup;
     username: AbstractControl;
     email: AbstractControl;
@@ -58,7 +59,29 @@ export class RegisterComponent implements OnInit, AfterContentInit {
     }
     log(event: any) {
         console.log(event)
-    } 
+    }
+   
+    public usernameTaken(control: AbstractControl): Promise<any> {
+        return UserService.checkUsernameExist(control.value).toPromise().then( 
+                (res)=> {
+                    if (res.exist) {
+                        return { 'userExist': true };
+                    } else {
+                        return null;
+                    }
+                },
+                (err)=> { alert(err) }
+            );
+    }
+
+    public uniqueDataValidator(property: string): Function {
+        return (control: AbstractControl): { [s: string]: boolean } => {
+
+            var obj = {};
+            obj[property] = true
+            return <{ [s: string]: boolean }>obj;
+        }
+    }
 
     public requiredCheckbox(control: AbstractControl): { [s: string]: boolean } {
         if (!control.value) {
@@ -74,7 +97,7 @@ export class RegisterComponent implements OnInit, AfterContentInit {
     }
 
     user: User = new User("", "", "", "", "", "", new Date());
-    
+
     errorMessage: string;
 
 }
