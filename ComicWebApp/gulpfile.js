@@ -1,4 +1,4 @@
-﻿/// <binding AfterBuild='copy' />
+/// <binding />
 /// <binding Clean='clean' />
 
 var gulp = require('gulp');

@@ -75,55 +75,6 @@
                     <!--END LOGIN-->
                 </div>
 
-                <div class="wrapper_dadangnhap" *ngIf="logged">
-                    <a href="/User/Thongtinthanhvien.html"><img src="/content/images/avatar.png" width="37" height="37" alt="{{user.Username}}" class="img_avatar fl"></a>
-                    <div class="wrapper_info_dangnhap dropdown fl">
-                        <button id="btnMenu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{user.Username}}
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="btnMenu">
-
-                            <li><a href="/User/Thongtinthanhvien.html" target="_blank">Thông tin thành viên</a></li>
-                            <li><a href="/User/doi-mat-khau.html" target="_blank">Đổi mật khẩu</a></li>
-                            <li>
-                                <a href="/User/danhsachtruyen.html" target="_blank">Đăng truyện của bạn</a>
-                            </li>
-                            <li>
-                                <a href="/User/Truyen-Theo-Doi.html">Truyện đang theo dõi</a>
-                            </li>
-                            <li><a href="/User/Logout.html?Logout=1">Đăng xuất</a></li>
-                        </ul>
-                    </div>
-                    <div class="notify_wrapper dropdown fl">
-                        <button id="btnnotify" type="button" onclick="updateNoti('56e5ee480ffdae1bc815941a')" class="bg thongbao_icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span id="number_notify" class="number_notify">0</span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="btnnotify">
-                            <li>Bạn chưa có thông báo hệ thống nào!</li>
-                            <li>
-                                <a class="pull-left" href="/User/thong-bao-he-thong.html">Xem tất cả</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="storyfollow_wrapper dropdown fl">
-                        <button id="btnStoryFollow_dc" title="top 10 truyện bạn theo dõi mới cập nhật chương" class="bg truyentheodoi" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span id="number_truyentheodoi" class="number_notify">0</span>
-                        </button>
-
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="btnStoryFollow_dc">
-
-                            <li>Bạn chưa theo dõi truyện nào!</li>
-                            <li class="row">
-                                <div class="col-md-12">
-                                    <a class="pull-left" href="/User/truyen-theo-doi.html">Xem tất cả</a>
-                                    <a class="pull-right" style="cursor:pointer;" onclick="updateStatusTruyenDaDoc('56e5ee480ffdae1bc815941a')">Reset về 0</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
             </div>
             <div class="col-md-12 height_row2" id="big_menu_horizontal">
                 <ul class="nav navbar-nav">
