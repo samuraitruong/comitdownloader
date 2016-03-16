@@ -17,8 +17,11 @@ var UserService = (function () {
         this._apiUrl = '/api/user/';
         this._apiLoginUrl = '/api/user/login';
     }
-    UserService.prototype.requestOptions = function () {
+    UserService.prototype.requestOptions = function (authToken) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        if (authToken) {
+            headers['Authorization'] = 'Beare ' + authToken;
+        }
         var options = new http_1.RequestOptions({ headers: headers });
         return options;
     };
@@ -40,13 +43,14 @@ var UserService = (function () {
             return Observable_1.Observable.throw(error.json().message || 'Unknow error');
         });
     };
-    UserService.prototype.login = function (username, password, remember) {
+    UserService.prototype.login = function (username, password, remember, authToken) {
         var body = JSON.stringify({
             Username: username,
             Password: password,
-            Remember: remember
+            Remember: remember,
+            AuthToken: authToken
         });
-        return this.http.post(this._apiLoginUrl, body, this.requestOptions())
+        return this.http.post(this._apiLoginUrl, body, this.requestOptions(authToken))
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
     };

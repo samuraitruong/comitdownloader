@@ -13,4 +13,10 @@ export class User {
         public Genre: string,
         public DOB?: Date
     ) { };
+
 } 
+
+export class LoginRes {
+    public AuthToken: string;
+    public User: User
+}

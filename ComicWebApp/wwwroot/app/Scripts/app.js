@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('angular2/core');
 var router_1 = require('angular2/router');
+//import {LocalStorage} from "angular2-localstorage/LocalStorage";
 var http_1 = require('angular2/http');
 var home_component_1 = require('./home/home.component');
 var story_detail_component_1 = require('./story/story-detail.component');
@@ -29,16 +30,33 @@ var AppComponent = (function () {
         this.user = new user_1.User("", "", "", "", "", "");
         this.siteName = 'my site name';
         this.logged = false;
+        //this.authToken = Cookie.getCookie('auth_token');
+        //this.autoLogin();
     }
     AppComponent.prototype.doSearch = function () {
         this._nav.doSearch(this.keyword);
     };
+    AppComponent.prototype.postLogin = function (res) {
+        this.logged = true;
+        this.user = res.User;
+        this.authToken = res.AuthToken;
+        //Cookie.setCookie('auth_token', this.authToken, 0);
+        this.errorMessage = null;
+    };
+    AppComponent.prototype.autoLogin = function () {
+        var _this = this;
+        if (this.authToken) {
+            this._userService.login("", "", true, this.authToken).subscribe(function (res) {
+                _this.postLogin(res);
+            }, function (err) {
+                _this.errorMessage = err;
+            });
+        }
+    };
     AppComponent.prototype.onLogin = function () {
         var _this = this;
         this._userService.login(this.user.Username, this.user.Password, this.rememberMe).subscribe(function (res) {
-            _this.logged = true;
-            _this.user = res;
-            _this.errorMessage = null;
+            _this.postLogin(res);
             $("#login_section_wrapper").modal('hide');
         }, function (err) {
             _this.errorMessage = err;

@@ -1,4 +1,4 @@
-/// <binding />
+/// <binding AfterBuild='copy' />
 /// <binding Clean='clean' />
 
 var gulp = require('gulp');
@@ -44,6 +44,7 @@ var libsToMove = [
    paths.npmSrc + 'angular2/bundles/http.dev.js',
    paths.npmSrc + 'ng2-bootstrap/bundles/ng2-bootstrap.min.js',
    paths.npmSrc + 'moment/moment.js'
+
 ];
 
 

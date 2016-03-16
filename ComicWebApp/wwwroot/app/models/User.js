@@ -13,3 +13,9 @@ var User = (function () {
     return User;
 }());
 exports.User = User;
+var LoginRes = (function () {
+    function LoginRes() {
+    }
+    return LoginRes;
+}());
+exports.LoginRes = LoginRes;
