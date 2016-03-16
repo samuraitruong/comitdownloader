@@ -22,16 +22,17 @@ var topnav_component_1 = require('./shared/topnav.component');
 var register_component_1 = require('./user/register.component');
 var user_1 = require('./models/user');
 var user_service_1 = require('./user/user.service');
-//test bla bla 
+var cookie_1 = require('./shared/cookie');
 var AppComponent = (function () {
     function AppComponent(_nav, _userService) {
         this._nav = _nav;
         this._userService = _userService;
+        this.AUTH_COOKIE_NAME = 'auth_token';
         this.user = new user_1.User("", "", "", "", "", "");
         this.siteName = 'my site name';
         this.logged = false;
-        //this.authToken = Cookie.getCookie('auth_token');
-        //this.autoLogin();
+        this.authToken = cookie_1.Cookie.getCookie(this.AUTH_COOKIE_NAME);
+        this.autoLogin();
     }
     AppComponent.prototype.doSearch = function () {
         this._nav.doSearch(this.keyword);
@@ -40,7 +41,7 @@ var AppComponent = (function () {
         this.logged = true;
         this.user = res.User;
         this.authToken = res.AuthToken;
-        //Cookie.setCookie('auth_token', this.authToken, 0);
+        cookie_1.Cookie.setCookie(this.AUTH_COOKIE_NAME, this.authToken, 0);
         this.errorMessage = null;
     };
     AppComponent.prototype.autoLogin = function () {

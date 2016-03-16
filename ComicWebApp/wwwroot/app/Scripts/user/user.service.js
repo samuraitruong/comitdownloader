@@ -19,7 +19,8 @@ var UserService = (function () {
     UserService.prototype.requestOptions = function (authToken) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         if (authToken) {
-            headers['Authorization'] = 'Beare ' + authToken;
+            //headers['Authorization'] = 'Beare ' + authToken;
+            headers.append('Authorization', 'Bearer ' + authToken);
         }
         var options = new http_1.RequestOptions({ headers: headers });
         return options;

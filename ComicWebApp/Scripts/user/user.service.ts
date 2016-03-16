@@ -14,7 +14,8 @@ export class UserService {
     public requestOptions(authToken?:string): RequestOptions {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         if (authToken) {
-            headers['Authorization'] = 'Beare ' + authToken;
+            //headers['Authorization'] = 'Beare ' + authToken;
+            headers.append('Authorization', 'Bearer ' + authToken)
         }
         let options = new RequestOptions({ headers: headers });
         return options;
@@ -46,6 +47,7 @@ export class UserService {
             Remember: remember,
             AuthToken: authToken
         });
+
         return this.http.post(this._apiLoginUrl, body, this.requestOptions(authToken))
             .map(res => <LoginRes>res.json())
             .catch(this.handleError)

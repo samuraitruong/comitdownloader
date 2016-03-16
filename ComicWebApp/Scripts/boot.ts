@@ -4,5 +4,5 @@ import 'rxjs/Rx';
 //import {LocalStorageSubscriber} from 'angular2-localstorage/LocalStorageEmitter';
 //var appPromise =
 bootstrap(AppComponent);
-alert('loaded...')
+
 //LocalStorageSubscriber(appPromise)

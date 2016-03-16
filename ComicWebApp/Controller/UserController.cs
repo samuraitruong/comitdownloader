@@ -73,7 +73,7 @@ namespace ComicWebApp
             // Here, you should create or look up an identity for the user which is being authenticated.
             // For now, just creating a simple generic identity.
 
-            ClaimsIdentity identity = new ClaimsIdentity(new GenericIdentity(user.Username, "TokenAuth"),
+            ClaimsIdentity identity = new ClaimsIdentity(new GenericIdentity(user.Username, "TokenAuth1"),
                 new[] {
                     new Claim(ClaimTypes.Sid, user.Id.ToString(), ClaimValueTypes.Sid),
                     new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.Email)
@@ -99,7 +99,7 @@ namespace ComicWebApp
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            return "values...";
         }
 
         // POST api/values
@@ -138,7 +138,7 @@ namespace ComicWebApp
                 var restoreUser = service.GetUserByEmail(email);
                 return new ObjectResult(new
                 {
-                    AuthToken = GetToken(restoreUser, DateTime.Now.AddMinutes(120)),
+                    AuthToken = GetToken(restoreUser, DateTime.Now.AddMinutes(2)),
                     User = restoreUser
                 });
             }
@@ -148,7 +148,7 @@ namespace ComicWebApp
                 {
                     var authenticated = new
                     {
-                        AuthToken = GetToken(logged, DateTime.Now.AddMinutes(120)),
+                        AuthToken = GetToken(logged, DateTime.Now.AddMinutes(2)),
                         User = logged
                     };
                     return new ObjectResult(authenticated);

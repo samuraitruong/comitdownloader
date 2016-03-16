@@ -2,7 +2,6 @@
 * Class Cookie - Holds static functions to deal with Cookies
 */
 export class Cookie {
-
 	/**
 	 * Retrieves a single cookie by it's name
 	 *

@@ -13,11 +13,9 @@ import {TopNavComponent} from './shared/topnav.component'
 import {RegisterComponent} from './user/register.component'
 import {User, LoginRes} from './models/user'
 import {UserService} from './user/user.service'
-//import {Cookie} from './shared/cookie'
-
+import {Cookie} from './shared/cookie'
 //import { PAGINATION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 import {enableProdMode} from 'angular2/core';
- //test bla bla 
 @Component({
     selector: 'comic-app',
     templateUrl: 'views/app.html',
@@ -73,10 +71,10 @@ import {enableProdMode} from 'angular2/core';
 
 export class AppComponent {
     constructor(private _nav: NavigationHelper, private _userService: UserService) {
-        //this.authToken = Cookie.getCookie('auth_token');
-        //this.autoLogin();
+        this.authToken = Cookie.getCookie(this.AUTH_COOKIE_NAME);
+        this.autoLogin();
     }
-
+    private AUTH_COOKIE_NAME :string = 'auth_token';
     //@LocalStorage()
     public authToken: string
 
@@ -93,7 +91,7 @@ export class AppComponent {
         this.logged = true;
         this.user = res.User;
         this.authToken = res.AuthToken;
-        //Cookie.setCookie('auth_token', this.authToken, 0);
+        Cookie.setCookie(this.AUTH_COOKIE_NAME, this.authToken, 0);
         this.errorMessage = null;
     }
     public autoLogin() {
