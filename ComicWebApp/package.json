@@ -4,8 +4,11 @@
   "private": true,
   "dependencies": {
     "angular2": "2.0.0-beta.8",
+    "body-parser": "^1.15.0",
     "es6-promise": "3.1.2",
     "es6-shim": "0.35.0",
+    "express": "^4.13.4",
+    "jade": "^1.9.2",
     "ng2-bootstrap": "^1.0.6",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
@@ -32,10 +35,13 @@
     "gulp-clean-css": "^2.0.3",
     "gulp-csso": "^1.1.0",
     "gulp-size": "^2.1.0",
-    "gulp-concat-css": "^2.2.0"
-
+    "gulp-concat-css": "^2.2.0",
+    "mocha": "^2.2.4",
+    "should": "^6.0.1"
   },
   "scripts": {
-    "postinstall": "typings install"
+    "postinstall": "typings install",
+    "start": "node server/server.js",
+    "test": "node_modules/.bin/mocha tests/**"
   }
 }
