@@ -8,7 +8,6 @@ router.get('/', function(req, res) {
 })
 router.route('/:group/:page')
 .get(function(req, res){
-	//res.json({genre:req.params.genre})
 	stories.all(req.params.group, req.params.page, function(err, data) {
 		res.json(data);
 	});

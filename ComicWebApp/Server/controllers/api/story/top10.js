@@ -4,7 +4,7 @@ var express = require('express')
 
 
 router.get('/', function(req, res) {
-	stories.randoms(10,function(err, data ) {
+	stories.getTop10(10, function(err, data ) {
 		res.json( data);	
 	})
 })

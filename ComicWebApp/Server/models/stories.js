@@ -19,6 +19,8 @@ function readStories(cb) {
 				for (var i = stories.length - 1; i > 0; i--) {
 					 fq.readFile(data_root + stories[i].JsonFileName, {encoding: 'utf8'}, function(err, fileContent) {
 					 	var s = JSON.parse(fileContent.toString('utf8').replace(/^\uFEFF/, ''));
+					 	s.ChapterCount = s.Chapters.length;
+
 				      	fullStories.push(s);
 
 				    });
@@ -134,6 +136,21 @@ exports.random = function(cb) {
   	var index = Math.round(data.length * Math.random());
   	var story = data[index];
   	readStoryInfo(story.JsonFileName, cb);
+  })
+  
+}
+
+exports.getTop10 = function(number, cb) {
+  readStories(function(err, data) {
+  	var sorted = data.sort(function(x,y) {
+  			return y.ChapterCount - x.ChapterCount;
+
+  	}).slice(1, number);
+  	sorted.forEach(function(s) {
+  		s = readStoryInfoSync(s.JsonFileName);
+  	})
+
+  	cb(null,sorted);
   })
   
 }

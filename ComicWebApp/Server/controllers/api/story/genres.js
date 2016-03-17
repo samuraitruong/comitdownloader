@@ -5,8 +5,6 @@ var express = require('express')
 
 router.get('/', function(req, res) {
 	stories.genres(function(err, data ) {
-		console.log('restrning data')
-		console.log(data)
 		res.json(data);	
 	})
 })
