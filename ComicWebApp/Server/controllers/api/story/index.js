@@ -11,7 +11,7 @@ router.use('/genre', require('./genre'))
 router.use('/list', require('./list'))
 
 router.get('/', function(req, res) {
- 	res.json( {'Top':'top'});
+ 	res.json( {'story':'OK'});
 })
 
 router.route('/detail/:storyName')

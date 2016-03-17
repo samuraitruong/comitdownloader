@@ -20,7 +20,6 @@ function readStories(cb) {
 					 fq.readFile(data_root + stories[i].JsonFileName, {encoding: 'utf8'}, function(err, fileContent) {
 					 	var s = JSON.parse(fileContent.toString('utf8').replace(/^\uFEFF/, ''));
 					 	s.ChapterCount = s.Chapters.length;
-
 				      	fullStories.push(s);
 
 				    });

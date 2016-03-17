@@ -15,7 +15,7 @@ export class StoryService {
             .catch(this.handleError)
     }
     private handleError(error: Response) {
-        console.error(error);
+        console.error(error.json());
         return Observable.throw(error.json().error || 'Server error');
     }
 }
