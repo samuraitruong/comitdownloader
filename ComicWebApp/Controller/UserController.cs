@@ -7,6 +7,7 @@ using ComicWeb.Core;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
+using Microsoft.AspNet.Authorization;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,7 +26,8 @@ namespace ComicWebApp
     public class UserController : Microsoft.AspNet.Mvc.Controller
     {
         private IUserService service;
-        private TokenAuthOptions tokenOptions;
+        private readonly TokenAuthOptions tokenOptions;
+
 
         public class AppUser : ClaimsPrincipal
         {
@@ -73,9 +75,10 @@ namespace ComicWebApp
             // Here, you should create or look up an identity for the user which is being authenticated.
             // For now, just creating a simple generic identity.
 
-            ClaimsIdentity identity = new ClaimsIdentity(new GenericIdentity(user.Username, "TokenAuth1"),
+            ClaimsIdentity identity = new ClaimsIdentity(new GenericIdentity(user.Username, "TokenAuth"),
                 new[] {
                     new Claim(ClaimTypes.Sid, user.Id.ToString(), ClaimValueTypes.Sid),
+                    //new Claim("EntityID", "1", ClaimValueTypes.Integer)
                     new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.Email)
                 });
 
@@ -108,6 +111,33 @@ namespace ComicWebApp
         {
             return service.CreateUser(user);
         }
+        [HttpGet("test")]
+        [Authorize("Bearer")]
+        public dynamic Get1()
+        {
+            bool authenticated = false;
+            string user = null;
+            int entityId = -1;
+            string token = null;
+            DateTime? tokenExpires = default(DateTime?);
+
+
+            var currentUser = HttpContext.User;
+            if (currentUser != null)
+            {
+                authenticated = currentUser.Identity.IsAuthenticated;
+                if (authenticated)
+                {
+                    user = currentUser.Identity.Name;
+                    foreach (Claim c in currentUser.Claims) if (c.Type == "EntityID") entityId = Convert.ToInt32(c.Value);
+                    //tokenExpires = DateTime.UtcNow.AddMinutes(2);
+                    //token = GetToken(currentUser.Identity.Name, tokenExpires);
+                }
+            }
+            return new { authenticated = authenticated, user = user, entityId = entityId, token = "token", tokenExpires = tokenExpires };
+
+        }
+
 
         [HttpPost("check")]
         public IActionResult CheckUser([FromBody]User model)

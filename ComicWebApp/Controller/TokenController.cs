@@ -126,7 +126,9 @@ namespace ComicWebApp
 
             // Here, you should create or look up an identity for the user which is being authenticated.
             // For now, just creating a simple generic identity.
-            ClaimsIdentity identity = new ClaimsIdentity(new GenericIdentity(user, "TokenAuth"), new[] { new Claim("EntityID", "1", ClaimValueTypes.Integer) });
+            ClaimsIdentity identity = new ClaimsIdentity(new GenericIdentity(user, "TokenAuth"), new[] {
+                new Claim("EntityID", "1", ClaimValueTypes.Integer)
+            });
 
             var securityToken = handler.CreateToken(
                 issuer: tokenOptions.Issuer,

@@ -18,11 +18,10 @@ var StoryService = (function () {
     StoryService.prototype.getStoryByName = function (name) {
         return this._http.get(this._storyDetailAPI + encodeURIComponent(name))
             .map(function (r) { return r.json(); })
-            .catch(this.handleError)
-            .do(function (d) { return function () { console.log('ajax resulr........................'); console.log(d); }; });
+            .catch(this.handleError);
     };
     StoryService.prototype.handleError = function (error) {
-        console.error(error);
+        console.error(error.json());
         return Observable_1.Observable.throw(error.json().error || 'Server error');
     };
     StoryService = __decorate([
