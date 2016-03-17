@@ -9,9 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('angular2/core');
 var navigation_helper_1 = require('./navigation.helper');
+var ngResize_1 = require('../directives/ngResize');
+var window_service_1 = require('./window.service');
 var StoryCarouselComponent = (function () {
-    function StoryCarouselComponent(_nav) {
+    function StoryCarouselComponent(_nav, win) {
         this._nav = _nav;
+        this.win = win;
+        console.log('on carousel class');
+        console.log(win.nativeWindow);
+        win.nativeWindow.onresize = function (ev) {
+            console.log('resize............');
+        };
     }
     StoryCarouselComponent.prototype.viewStory = function (s) {
         this._nav.viewStory(s);
@@ -48,8 +56,9 @@ var StoryCarouselComponent = (function () {
         core_1.Component({
             selector: 'cmapp-story-carousel',
             templateUrl: 'views/shared/story-carousel.html',
+            directives: [ngResize_1.AutoResize]
         }), 
-        __metadata('design:paramtypes', [navigation_helper_1.NavigationHelper])
+        __metadata('design:paramtypes', [navigation_helper_1.NavigationHelper, window_service_1.WINDOW])
     ], StoryCarouselComponent);
     return StoryCarouselComponent;
 })();

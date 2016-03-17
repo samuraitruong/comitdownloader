@@ -23,16 +23,19 @@ var register_component_1 = require('./user/register.component');
 var user_1 = require('./models/user');
 var user_service_1 = require('./user/user.service');
 var cookie_1 = require('./shared/cookie');
+var window_service_1 = require('./shared/window.service');
 var AppComponent = (function () {
-    function AppComponent(_nav, _userService) {
+    function AppComponent(_nav, _userService, win) {
         this._nav = _nav;
         this._userService = _userService;
+        this.win = win;
         this.AUTH_COOKIE_NAME = 'auth_token';
         this.user = new user_1.User("", "", "", "", "", "");
         this.siteName = 'my site name';
         this.logged = false;
         this.authToken = cookie_1.Cookie.getCookie(this.AUTH_COOKIE_NAME);
-        this.autoLogin();
+        this.refreshToken();
+        //console.log(this.win.nativeWindow)
     }
     AppComponent.prototype.doSearch = function () {
         this._nav.doSearch(this.keyword);
@@ -44,12 +47,14 @@ var AppComponent = (function () {
         cookie_1.Cookie.setCookie(this.AUTH_COOKIE_NAME, this.authToken, 0);
         this.errorMessage = null;
     };
-    AppComponent.prototype.autoLogin = function () {
+    AppComponent.prototype.refreshToken = function () {
         var _this = this;
         if (this.authToken) {
-            this._userService.login("", "", true, this.authToken).subscribe(function (res) {
+            this._userService.refreshToken(this.authToken).subscribe(function (res) {
                 _this.postLogin(res);
             }, function (err) {
+                _this.authToken = null;
+                cookie_1.Cookie.deleteCookie(_this.AUTH_COOKIE_NAME);
                 _this.errorMessage = err;
             });
         }
@@ -68,7 +73,7 @@ var AppComponent = (function () {
             selector: 'comic-app',
             templateUrl: 'views/app.html',
             directives: [router_1.ROUTER_DIRECTIVES, topnav_component_1.TopNavComponent, register_component_1.RegisterComponent],
-            providers: [router_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, navigation_helper_1.NavigationHelper, user_service_1.UserService]
+            providers: [router_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, navigation_helper_1.NavigationHelper, user_service_1.UserService, window_service_1.WINDOW_PROVIDERS]
         }),
         router_1.RouteConfig([
             {
@@ -114,7 +119,7 @@ var AppComponent = (function () {
                 component: register_component_1.RegisterComponent,
             }
         ]), 
-        __metadata('design:paramtypes', [navigation_helper_1.NavigationHelper, user_service_1.UserService])
+        __metadata('design:paramtypes', [navigation_helper_1.NavigationHelper, user_service_1.UserService, window_service_1.WINDOW])
     ], AppComponent);
     return AppComponent;
 })();
