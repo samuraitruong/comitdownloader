@@ -9,6 +9,7 @@ export class UserService {
     private _apiUrl = '/api/user/';
     private _apiLoginUrl = '/api/user/login';
     private static _apiCheckUser = '/api/user/check';
+    private _apiTokenUrl = '/api/user/refresh-token';
 
     constructor(private http: Http) { }
     public requestOptions(authToken?:string): RequestOptions {
@@ -49,6 +50,13 @@ export class UserService {
         });
 
         return this.http.post(this._apiLoginUrl, body, this.requestOptions(authToken))
+            .map(res => <LoginRes>res.json())
+            .catch(this.handleError)
+    }
+
+    public refreshToken(authToken: string) {
+        
+        return this.http.get(this._apiTokenUrl,  this.requestOptions(authToken))
             .map(res => <LoginRes>res.json())
             .catch(this.handleError)
     }

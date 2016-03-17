@@ -1,6 +1,8 @@
 ﻿import {Component, Input} from 'angular2/core';
 import {Story} from '../models/story'
 import {NavigationHelper} from './navigation.helper'
+import {AutoResize} from '../directives/ngResize'
+import {WINDOW_PROVIDERS, WINDOW} from './window.service';
 
 import {
 OnChanges, SimpleChange,
@@ -15,10 +17,17 @@ OnDestroy
 @Component({
     selector: 'cmapp-story-carousel',
     templateUrl: 'views/shared/story-carousel.html',
+    directives: [AutoResize]
 })
 export class StoryCarouselComponent implements AfterContentInit {
     @Input() stories: Story[];
-    constructor(private _nav: NavigationHelper) { }
+    constructor(private _nav: NavigationHelper, private win: WINDOW) {
+        console.log('on carousel class')
+        console.log(win.nativeWindow)
+        win.nativeWindow.onresize  = (ev: UIEvent) => {
+            console.log('resize............')
+        };
+    }
     viewStory(s: Story) {
         this._nav.viewStory(s)
     }

@@ -16,6 +16,7 @@ var UserService = (function () {
         this.http = http;
         this._apiUrl = '/api/user/';
         this._apiLoginUrl = '/api/user/login';
+        this._apiTokenUrl = '/api/user/refresh-token';
     }
     UserService.prototype.requestOptions = function (authToken) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
@@ -52,6 +53,11 @@ var UserService = (function () {
             AuthToken: authToken
         });
         return this.http.post(this._apiLoginUrl, body, this.requestOptions(authToken))
+            .map(function (res) { return res.json(); })
+            .catch(this.handleError);
+    };
+    UserService.prototype.refreshToken = function (authToken) {
+        return this.http.get(this._apiTokenUrl, this.requestOptions(authToken))
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
     };

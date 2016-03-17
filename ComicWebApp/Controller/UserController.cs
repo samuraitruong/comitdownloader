@@ -111,30 +111,23 @@ namespace ComicWebApp
         {
             return service.CreateUser(user);
         }
-        [HttpGet("test")]
+        [HttpGet("refresh-token")]
         [Authorize("Bearer")]
-        public dynamic Get1()
+        public IActionResult TokenRefresh()
         {
-            bool authenticated = false;
-            string user = null;
-            int entityId = -1;
-            string token = null;
-            DateTime? tokenExpires = default(DateTime?);
-
-
             var currentUser = HttpContext.User;
-            if (currentUser != null)
+            if (currentUser != null && currentUser.Identity.IsAuthenticated)
             {
-                authenticated = currentUser.Identity.IsAuthenticated;
-                if (authenticated)
+                var email = currentUser.Claims.First(p => p.Type == ClaimTypes.Email).Value;
+                var restoreUser = service.GetUserByEmail(email);
+                return new ObjectResult(new
                 {
-                    user = currentUser.Identity.Name;
-                    foreach (Claim c in currentUser.Claims) if (c.Type == "EntityID") entityId = Convert.ToInt32(c.Value);
-                    //tokenExpires = DateTime.UtcNow.AddMinutes(2);
-                    //token = GetToken(currentUser.Identity.Name, tokenExpires);
-                }
+                    AuthToken = GetToken(restoreUser, DateTime.Now.AddMinutes(120)),
+                    User = restoreUser
+                });
             }
-            return new { authenticated = authenticated, user = user, entityId = entityId, token = "token", tokenExpires = tokenExpires };
+
+            return new HttpStatusCodeResult(401);
 
         }
 
@@ -160,29 +153,15 @@ namespace ComicWebApp
         [HttpPost("login")]
         public IActionResult PostLogin([FromBody] AuthRequest user)
         {
-            var currentUser = HttpContext.User;
-
-            if (currentUser!= null && currentUser.Identity.IsAuthenticated)
+            var logged = service.Login(user.Username, user.Password);
+            if (logged != null)
             {
-                var email = currentUser.Claims.First(p => p.Type == ClaimTypes.Email).Value;
-                var restoreUser = service.GetUserByEmail(email);
-                return new ObjectResult(new
+                var authenticated = new
                 {
-                    AuthToken = GetToken(restoreUser, DateTime.Now.AddMinutes(2)),
-                    User = restoreUser
-                });
-            }
-            else {
-                var logged = service.Login(user.Username, user.Password);
-                if (logged != null)
-                {
-                    var authenticated = new
-                    {
-                        AuthToken = GetToken(logged, DateTime.Now.AddMinutes(2)),
-                        User = logged
-                    };
-                    return new ObjectResult(authenticated);
-                }
+                    AuthToken = GetToken(logged, DateTime.Now.AddMinutes(120)),
+                    User = logged
+                };
+                return new ObjectResult(authenticated);
             }
             return HttpNotFound(new
             {

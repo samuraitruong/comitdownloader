@@ -14,13 +14,15 @@ import {RegisterComponent} from './user/register.component'
 import {User, LoginRes} from './models/user'
 import {UserService} from './user/user.service'
 import {Cookie} from './shared/cookie'
+import {WINDOW_PROVIDERS, WINDOW} from './shared/window.service';
+
 //import { PAGINATION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 import {enableProdMode} from 'angular2/core';
 @Component({
     selector: 'comic-app',
     templateUrl: 'views/app.html',
     directives: [ROUTER_DIRECTIVES, TopNavComponent, RegisterComponent],
-    providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, NavigationHelper, UserService]
+    providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, NavigationHelper, UserService, WINDOW_PROVIDERS]
 })
 
 @RouteConfig([
@@ -70,11 +72,13 @@ import {enableProdMode} from 'angular2/core';
 ])
 
 export class AppComponent {
-    constructor(private _nav: NavigationHelper, private _userService: UserService) {
+    constructor(private _nav: NavigationHelper, private _userService: UserService, private win: WINDOW) {
         this.authToken = Cookie.getCookie(this.AUTH_COOKIE_NAME);
-        this.autoLogin();
+        this.refreshToken();
+        //console.log(this.win.nativeWindow)
     }
-    private AUTH_COOKIE_NAME :string = 'auth_token';
+
+    private AUTH_COOKIE_NAME: string = 'auth_token';
     //@LocalStorage()
     public authToken: string
 
@@ -94,12 +98,14 @@ export class AppComponent {
         Cookie.setCookie(this.AUTH_COOKIE_NAME, this.authToken, 0);
         this.errorMessage = null;
     }
-    public autoLogin() {
+    public refreshToken() {
         if (this.authToken) {
-            this._userService.login("", "", true, this.authToken).subscribe(res=> {
+            this._userService.refreshToken(this.authToken).subscribe(res=> {
                 this.postLogin(res);
             },
                 err=> {
+                    this.authToken = null;
+                    Cookie.deleteCookie(this.AUTH_COOKIE_NAME)
                     this.errorMessage = <any>err;
                 });
         }
