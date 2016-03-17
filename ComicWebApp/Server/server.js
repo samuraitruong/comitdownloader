@@ -12,7 +12,11 @@ app.use(express.static('E:\\COMICDOWNLOADER\\comitdownloader\\ComicWebApp\\wwwro
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(require('./controllers'))
-
+/*
+app.use(function(req,res){
+    res.render('E:\\COMICDOWNLOADER\\comitdownloader\\ComicWebApp\\wwwroot\\index.html');
+});
+*/
 app.listen(port, function() {
 	console.log('static file from :../wwwroot')
   console.log('Listening on port ' + port)

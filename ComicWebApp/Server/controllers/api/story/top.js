@@ -1,13 +1,13 @@
-var express = require('express')
-  , router = express.Router()
-  data = require('../../../models/stories')
-
+var express = require('express'),
+    stories = require('../../../models/stories'),
+    router = express.Router();
 
 router.get('/', function(req, res) {
-	data.random(function(err, data) {
+	stories.random(function(err, data) {
 		res.json( data);	
 	})
-})
+});
+
 router.route('/:id')
 .get(function(req, res){
 	res.json({id:req.params.id})

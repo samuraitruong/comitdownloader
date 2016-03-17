@@ -13,7 +13,6 @@ export class StoryService {
         return this._http.get(this._storyDetailAPI + encodeURIComponent(name))
             .map(r=> <Story>r.json())
             .catch(this.handleError)
-            .do (d=> ()=>{ console.log('ajax resulr........................'); console.log(d) })
     }
     private handleError(error: Response) {
         console.error(error);
