@@ -7,6 +7,7 @@ export class Story {
     Categories: string[];
     Chapters: Chapter[]
     Author: string;
+    Rating: number;
 } 
 
 export class GenreRes {

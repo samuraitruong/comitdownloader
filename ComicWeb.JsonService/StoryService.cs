@@ -10,8 +10,6 @@ namespace ComicWeb.JsonService
     // To enable this option, right-click on the project and select the Properties menu item. In the Build tab select "Produce outputs on build".
     public class StoryService   : IStoryService
     {
-
-
         public StoryService()
         {
         }
@@ -110,6 +108,26 @@ namespace ComicWeb.JsonService
         public void EnsureDBCache()
         {
             DataManager.EnsureDBCache();
+        }
+
+        public float RateStory(string name, StoryInfo.UserRate value)
+        {
+            var story = GetStoryByName(name) as StoryInfo; 
+            var index =story.RatingUsers.FindIndex(p => p.UserId == value.UserId);
+
+            if (index >= 0)
+            {
+                story.RatingUsers[index] = value;
+            }
+            else
+            {
+                story.RatingUsers.Add(value);
+            }
+            var avg = story.RatingUsers.Average(p => p.RateValue);
+            story.Rating = (float)avg;
+            DataManager.Update(story);
+            return story.Rating;
+
         }
     }
 }

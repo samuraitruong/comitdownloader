@@ -4,11 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using ComicWeb.Core;
+using Microsoft.AspNet.Authorization;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ComicWebApp
 {
+    public class RateRequest{
+        public string Name { get; set; }
+        public int RateValue { get; set; }
+    }
     [Route("api/[controller]")]
     public class StoryController : Microsoft.AspNet.Mvc.Controller
     {
@@ -24,6 +30,27 @@ namespace ComicWebApp
         {
             return new string[] { "value1", "value2" };
         }
+
+        [HttpPost("Rate")]
+        [Authorize("Bearer")]
+        public IActionResult PostRateStory([FromBody]RateRequest rate)
+        {
+
+            var currentUser = HttpContext.User;
+            if (currentUser != null && currentUser.Identity.IsAuthenticated)
+            {
+                var userId= new Guid(currentUser.Claims.First(p => p.Type == ClaimTypes.Sid).Value);
+                return new ObjectResult(service.RateStory(rate.Name, new StoryInfo.UserRate()
+                {
+                    UserId = userId,
+                    RateValue = rate.RateValue
+                }));
+                
+            }
+            return HttpBadRequest();
+
+        }
+
 
         [HttpGet("detail/{name}")]
         public IStoryInfo GetStoryByName(string name)

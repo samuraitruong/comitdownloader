@@ -115,6 +115,15 @@ namespace ComicWeb.JsonService
             }
         }
 
+        internal static void Update(StoryInfo story)
+        {
+            var fileName = Path.Combine(rootFolder, story.JsonFileName);
+
+            var index = stories.FindIndex(p => p.Name == story.Name);
+            stories[index] = story;
+            File.WriteAllText(fileName,JsonConvert.SerializeObject(story));
+        }
+
         public static ChapterInfo LoadChapter(string filename)
         {
             var storyFile = Path.Combine(rootFolder, filename);

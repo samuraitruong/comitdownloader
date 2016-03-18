@@ -863,9 +863,12 @@ header {
     .lst_danhgia span {
         display: block;
         float: left;
-        color:orange;
+        color:orange;  
+        outline:none;
         i{
             font-size:25px;
+        }
+        .allow-rating{
             cursor:pointer;
         }
     }
@@ -987,6 +990,7 @@ header {
                 font: 700 18px $font_7;
                 color: $color_elephant_approx;
                 margin-top: 5px;
+                padding-left:30px;
             }
         }
     }

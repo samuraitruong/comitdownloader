@@ -32,7 +32,10 @@ var StoryService = (function () {
             .catch(this.handleError);
     };
     StoryService.prototype.rateStory = function (story, rateValue) {
-        var data = {};
+        var data = {
+            Name: story.Name,
+            RateValue: rateValue
+        };
         return this._authHttp.post(this._storyRateAPI, JSON.stringify(data), this.requestOptions())
             .map(function (r) { return r.json(); })
             .catch(this.handleError);

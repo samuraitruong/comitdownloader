@@ -19,8 +19,7 @@ var StoryGenresService = (function () {
     StoryGenresService.prototype.getGenres = function () {
         return this.http.get(this._apiURL)
             .map(function (res) { return res.json(); })
-            .catch(this.handleError)
-            .do(function (data) { return console.log(data); });
+            .catch(this.handleError);
     };
     StoryGenresService.prototype.handleError = function (error) {
         return Observable_1.Observable.throw(error.json().error || 'Server error');

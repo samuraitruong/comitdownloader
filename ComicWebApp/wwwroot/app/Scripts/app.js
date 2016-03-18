@@ -24,7 +24,6 @@ var topnav_component_1 = require('./shared/topnav.component');
 var register_component_1 = require('./user/register.component');
 var user_1 = require('./models/user');
 var user_service_1 = require('./user/user.service');
-var cookie_1 = require('./shared/cookie');
 var window_service_1 = require('./shared/window.service');
 var AppComponent = (function () {
     function AppComponent(_nav, _userService, win) {
@@ -56,7 +55,8 @@ var AppComponent = (function () {
                 _this.postLogin(res);
             }, function (err) {
                 _this.authToken = null;
-                cookie_1.Cookie.deleteCookie(_this.AUTH_COOKIE_NAME);
+                //Cookie.deleteCookie(this.AUTH_COOKIE_NAME)
+                localStorage.removeItem(_this.AUTH_COOKIE_NAME);
                 _this.errorMessage = err;
             });
         }

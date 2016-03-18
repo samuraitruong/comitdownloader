@@ -9,7 +9,7 @@
         <div id="content_truyen" class="clearfix">
             <div class="col-xs-4 wrapper_image"> <img [src]="story.CoverUrl" [attr.alt]="story.Name"> </div>
             <div class="col-xs-8 wrapper_info">
-                <h1 class="tentruyen">{{story.name}}</h1>
+                <h1 class="tentruyen">{{story.Name}}</h1>
                 <p style="width:280px;"><i class="bg icon_tacgia"></i>Tác giả : {{story.Author}} </p>
                 <p><i class="bg icon_nhomdich"></i>Nhóm dịch : Tổng hợp nhiều nguồn</p>
                 <p><i class="bg icon_trangthai"></i> Trạng thái : Đang tiến hành </p>
@@ -21,11 +21,11 @@
                 <div class="danhgia_truyen_chitiet danhgia_truyen">
                     <div hasrate="no" class="lst_danhgia">
                     <!--<span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',1);" class="bg star2" rate="1"></span><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',2);" class="bg star2" rate="2"></span><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',3);" class="bg star2" rate="3"></span><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',4);" class="bg star2" rate="4"></span><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',5);" class="bg star2" rate="5"></span>-->
-                        <rating [(ngModel)]="rate" [max]="max" [readonly]="true" 
+                        <rating [(ngModel)]="rate" [max]="max" [readonly]="!allowRating" [class.allow-rating]="allowRating"
                                 (onHover)="hoveringOver($event)" (onLeave)="rateStory($event)"
-                                [titles]="['one','two','three']"></rating>
+                                [titles]="['1','2','3']"></rating>
                     </div>
-                    <div class="diem_danhgia">{{story.Rating}}</div>
+                    <div class="diem_danhgia" *ngIf ="story.Rating > 0">{{story.Rating | number:"1.1-2"}}</div>
                 </div>
                 <div class="wrapper_theodoitruyen"><button id="btn_theodoitruyen" class="bg theodoi_truyen icon_theodoi" data-follow="false" onclick="theodoitruyen('56e07ca40ffdb224f876a451','vvJy9yxMo30=',-3)"></button></div>
                 <div class="no_padding gachdotter">

@@ -35,7 +35,7 @@ var StoryService = (function () {
     StoryService.prototype.rateStory = function (story, rateValue) {
         var data = {
             Name: story.Name,
-            Rate: rateValue
+            RateValue: rateValue
         };
         return this._authHttp.post(this._storyRateAPI, JSON.stringify(data), this.requestOptions())
             .map(function (r) { return r.json(); })

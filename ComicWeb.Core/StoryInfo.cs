@@ -19,6 +19,8 @@ namespace ComicWeb.Core
 
         public int PageCount { get; set; }
 
+        public float Rating { get; set; }
+
         public ChapterInfo() {
             UniqueIdentify = new Guid();
             DownloadedPages = new List<string>();
@@ -29,6 +31,11 @@ namespace ComicWeb.Core
     }
     public class StoryInfo : InfoObj, IStoryInfo
     {
+        public class UserRate
+        {
+            public Guid  UserId { get; set; }
+            public int RateValue { get; set; }
+        }
         public string Group
         {
             get
@@ -43,6 +50,9 @@ namespace ComicWeb.Core
                 return "#";
             }
         }
+        public List<UserRate> RatingUsers { get; set; }
+
+
         public string Name { get; set; }
         public string AltName { get; set; }
         public string Author { get; set; }
@@ -66,10 +76,13 @@ namespace ComicWeb.Core
         public string Summary { get; set; }
         public string CoverUrl { get; set; }
         public string Source { get; set; }
+        public float Rating { get; set; }
 
         public StoryInfo()
         {
             Chapters = new List<ChapterInfo>();
+            RatingUsers = new List<UserRate>();
+            
         }
         public override string ToString()
         {

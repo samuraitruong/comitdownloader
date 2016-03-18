@@ -115,7 +115,8 @@ export class AppComponent {
             },
                 err=> {
                     this.authToken = null;
-                    Cookie.deleteCookie(this.AUTH_COOKIE_NAME)
+                    //Cookie.deleteCookie(this.AUTH_COOKIE_NAME)
+                    localStorage.removeItem(this.AUTH_COOKIE_NAME)
                     this.errorMessage = <any>err;
                 });
         }

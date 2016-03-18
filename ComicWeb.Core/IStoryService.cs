@@ -7,6 +7,7 @@ namespace ComicWeb.Core
 {
     public interface IStoryService
     {
+        float RateStory(string name, StoryInfo.UserRate value);
         IStoryInfo GetTopStory();
         List<IStoryInfo> GetTopStories(int number);
         List<IStoryInfo> GetMostPopularTodayStories(int number);

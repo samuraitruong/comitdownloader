@@ -9,17 +9,18 @@ import {StoryService} from './story.service'
 import {StoryGenresComponent} from  '../shared/story-genres.component'
 import {NavigationHelper} from '../shared/navigation.helper'
 import { Rating } from 'ng2-bootstrap/ng2-bootstrap';
-
+import {tokenNotExpired, JwtHelper} from 'angular2-jwt';
 
 @Component({
     selector: 'cmapp-story-detail',
     templateUrl: 'views/story/story-detail.html',
     directives: [StoryGenresComponent, Rating, RouterLink],
-    providers: [StoryService ]
+    providers: [StoryService]
 })
 export class StoryDetailComponent implements OnInit, AfterContentInit {
     constructor(private _routeParams: RouteParams, private _storyService: StoryService, private _nav: NavigationHelper) {
         this.currentRating = 0;
+        this.allowRating = tokenNotExpired('auth_token');
     }
     ngAfterContentInit() {
         setTimeout(() => {
@@ -32,7 +33,10 @@ export class StoryDetailComponent implements OnInit, AfterContentInit {
     ngOnInit() {
         this.name = this._routeParams.get('name');
         this._storyService.getStoryByName(this.name)
-            .subscribe(d=> { this.story = d },
+            .subscribe(d=> {
+                this.story = d;
+                this.rate = this.story.Rating;
+            },
             err=> { this.errorMessage = <any>err });
     }
     readChapter(chapter: Chapter) {
@@ -42,21 +46,24 @@ export class StoryDetailComponent implements OnInit, AfterContentInit {
         //console.log(value)
     };
     private rateStory(value: number): void {
-        //console.log(value);
-        if (value != this.currentRating) {
-            console.log('call rating service....');
+        if (this.allowRating && value != this.currentRating) {
             this._storyService.rateStory(this.story, value)
                 .subscribe(
-                res=> { },
+                res=> {
+                    this.rate = <number>res,
+                        this.currentRating = value
+                        this.story.Rating = this.rate;
+                },
                 err=> { });
         }
     }
+    private allowRating: boolean = tokenNotExpired();
     private currentRating: number;
     story: Story;
     errorMessage: string;
     name: string;
     private max: number = 5;
-    private rate: number = 4;
+    private rate: number = 0;
 
 }
 

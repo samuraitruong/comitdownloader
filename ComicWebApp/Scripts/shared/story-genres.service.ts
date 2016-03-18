@@ -13,7 +13,6 @@ export class StoryGenresService {
         return this.http.get(this._apiURL)
             .map(res => <GenreInfo[]>res.json())
             .catch(this.handleError)
-            .do (data=> console.log(data) )
     }
   
     private handleError(error: Response) {

@@ -31,11 +31,11 @@ export class StoryService {
     rateStory(story: Story, rateValue: number) {
         var data = {
             Name: story.Name,
-            Rate: rateValue
+            RateValue: rateValue
         };
-        
-        return this._authHttp.post(this._storyRateAPI, JSON.stringify(data), this.requestOptions() ) 
-            .map(r=> <Story>r.json())
+
+        return this._authHttp.post(this._storyRateAPI, JSON.stringify(data), this.requestOptions())
+            .map(r=> <any>r.json())
             .catch(this.handleError)
     }
     private handleError(error: Response) {
