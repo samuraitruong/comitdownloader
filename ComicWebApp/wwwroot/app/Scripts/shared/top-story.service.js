@@ -19,19 +19,16 @@ var TopStoryService = (function () {
     TopStoryService.prototype.getTopStory = function () {
         return this.http.get(this._topStoryAPI)
             .map(function (res) { return res.json(); })
-            .catch(this.handleError)
-            .do(function (data) { return console.log(data); });
+            .catch(this.handleError);
     };
     TopStoryService.prototype.getTop10Stories = function () {
         return this.http.get(this._top10StoryAPI)
             .map(function (res) { return res.json(); })
-            .catch(this.handleError)
-            .do(function (data) { return console.log(data); });
+            .catch(this.handleError);
     };
     TopStoryService.prototype.handleError = function (error) {
         // in a real world app, we may send the error to some remote logging infrastructure
         // instead of just logging it to the console
-        console.error(error);
         return Observable_1.Observable.throw(error.json().error || 'Server error');
     };
     TopStoryService = __decorate([

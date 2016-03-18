@@ -14,13 +14,11 @@ export class DirectoryService {
         return this.http.get(this._apiUrl + encodeURIComponent(genre) + '/' + page.toString())
             .map(res => <GenreRes>res.json())
             .catch(this.handleError)
-            .do(data=> console.log(data))
     }
     public getStories(filter: string, page: number, sort?:string) {
         return this.http.get(this._listApiUrl + encodeURIComponent(filter) + '/' + page.toString())
             .map(res => <StoryListRes>res.json())
-            .catch(this.handleError)
-            .do(data=> console.log(data))
+            .catch(this.handleError);
     }
 
     private handleError(error: Response) {

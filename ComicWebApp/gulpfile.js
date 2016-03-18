@@ -28,7 +28,9 @@ var bowerLibs = [
        paths.bowerSrc + '/jcarousel/examples/responsives/jcarousel.responsive.css',
        paths.bowerSrc + '/jquery-ui/themes/vader/jquery-ui.min.css',
        paths.bowerSrc + '/nanoscroller/bin/javascripts/jquery.nanoscroller.min.js',
-       paths.bowerSrc + '/nanoscroller/bin/css/nanoscroller.css'
+       paths.bowerSrc + '/nanoscroller/bin/css/nanoscroller.css',
+       paths.bowerSrc + '/bxslider-4/dist/jquery.bxslider.min.css',
+       paths.bowerSrc + '/bxslider-4/dist/jquery.bxslider.min.js'
        
 ];
 
@@ -43,8 +45,9 @@ var libsToMove = [
    paths.npmSrc + 'angular2/bundles/router.dev.js',
    paths.npmSrc + 'angular2/bundles/http.dev.js',
    paths.npmSrc + 'ng2-bootstrap/bundles/ng2-bootstrap.min.js',
-   paths.npmSrc + 'moment/moment.js'
-
+   paths.npmSrc + 'moment/moment.js',
+   paths.npmSrc + 'angular2-jwt/angular2-jwt.js',
+   paths.npmSrc + 'angular2-jwt/angular2-jwt.js.map'
 ];
 
 

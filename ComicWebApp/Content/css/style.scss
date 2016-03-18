@@ -707,7 +707,7 @@ header {
 
 .item_truyennendoc {
     float: left;
-
+    width:134px;
     .wrapper_imgage {
         height: 160px;
         overflow: hidden;
@@ -863,6 +863,11 @@ header {
     .lst_danhgia span {
         display: block;
         float: left;
+        color:orange;
+        i{
+            font-size:25px;
+            cursor:pointer;
+        }
     }
 }
 
@@ -948,11 +953,11 @@ header {
         .wrapper_info {
             padding: 0;
 
-            i {
+            /*i {
                 display: inline-block;
                 position: absolute;
                 left: 0;
-            }
+            }*/
 
             p {
                 padding-left: 30px;

@@ -19,14 +19,12 @@ var DirectoryService = (function () {
     DirectoryService.prototype.getGenreStories = function (genre, page) {
         return this.http.get(this._apiUrl + encodeURIComponent(genre) + '/' + page.toString())
             .map(function (res) { return res.json(); })
-            .catch(this.handleError)
-            .do(function (data) { return console.log(data); });
+            .catch(this.handleError);
     };
     DirectoryService.prototype.getStories = function (filter, page, sort) {
         return this.http.get(this._listApiUrl + encodeURIComponent(filter) + '/' + page.toString())
             .map(function (res) { return res.json(); })
-            .catch(this.handleError)
-            .do(function (data) { return console.log(data); });
+            .catch(this.handleError);
     };
     DirectoryService.prototype.handleError = function (error) {
         console.error(error);

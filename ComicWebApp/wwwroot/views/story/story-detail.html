@@ -3,8 +3,8 @@
     <div class="col-md-8 wrapper_info_truyen">
         <!--start left content-->
         <div id="title_menu_part">
-            <a href="http://hamtruyen.com" style="margin-left:0;">Trang chủ</a> |
-            <a href="http://hamtruyen.vn/">Truyện tranh</a> | <a href="#" [attr.title]="story.Name">{{story.Name}}</a>
+            <a [routerLink]="['Home']" style="margin-left:0;">Trang chủ</a> |
+            <a [routerLink]="['Directory']">Truyện tranh</a> | <a [attr.title]="story.Name">{{story.Name}}</a>
         </div>
         <div id="content_truyen" class="clearfix">
             <div class="col-xs-4 wrapper_image"> <img [src]="story.CoverUrl" [attr.alt]="story.Name"> </div>
@@ -14,13 +14,18 @@
                 <p><i class="bg icon_nhomdich"></i>Nhóm dịch : Tổng hợp nhiều nguồn</p>
                 <p><i class="bg icon_trangthai"></i> Trạng thái : Đang tiến hành </p>
                 <p class="row_theloai"><i class="bg icon_theloai"> </i>Thể loại : 
-                    <a *ngFor ="#cat of story.Categories" >{{cat}}</a> 
+                    <a *ngFor ="#cat of story.Categories" [routerLink]="['Genre', {genre : cat}]" >{{cat}}</a> 
                 </p>
                 <p><i class="bg icon_add"></i>Theo dõi : <span id="numbertheodoi" class="text_orange">12 người</span> đã theo dõi truyện này <br>Lượt view : 977</p>
                 <p class="no_padding"><iframe src="http://www.facebook.com/plugins/like.php?href=http://Hamtruyen.vn/truyen-kinh-di-o-toa-nha-so-44-0.html&amp;send=true&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=60&amp;appId=537840529633958" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:460px; height:25px;" allowtransparency="true"></iframe></p>
                 <div class="danhgia_truyen_chitiet danhgia_truyen">
-                    <div hasrate="no" class="lst_danhgia"><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',1);" class="bg star2" rate="1"></span><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',2);" class="bg star2" rate="2"></span><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',3);" class="bg star2" rate="3"></span><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',4);" class="bg star2" rate="4"></span><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',5);" class="bg star2" rate="5"></span></div>
-                    <div class="diem_danhgia">5.0</div>
+                    <div hasrate="no" class="lst_danhgia">
+                    <!--<span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',1);" class="bg star2" rate="1"></span><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',2);" class="bg star2" rate="2"></span><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',3);" class="bg star2" rate="3"></span><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',4);" class="bg star2" rate="4"></span><span onclick="RateStory('fkshedoow','56e07ca40ffdb224f876a451',5);" class="bg star2" rate="5"></span>-->
+                        <rating [(ngModel)]="rate" [max]="max" [readonly]="true" 
+                                (onHover)="hoveringOver($event)" (onLeave)="rateStory($event)"
+                                [titles]="['one','two','three']"></rating>
+                    </div>
+                    <div class="diem_danhgia">{{story.Rating}}</div>
                 </div>
                 <div class="wrapper_theodoitruyen"><button id="btn_theodoitruyen" class="bg theodoi_truyen icon_theodoi" data-follow="false" onclick="theodoitruyen('56e07ca40ffdb224f876a451','vvJy9yxMo30=',-3)"></button></div>
                 <div class="no_padding gachdotter">

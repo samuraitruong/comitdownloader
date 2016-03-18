@@ -1,3 +1,5 @@
+//AUTH: https://auth0.com/blog/2015/05/14/creating-your-first-real-world-angular-2-app-from-authentication-to-calling-an-api-and-everything-in-between/
+//https://github.com/auth0/angular2-jwt
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -34,9 +36,8 @@ var AppComponent = (function () {
         this.user = new user_1.User("", "", "", "", "", "");
         this.siteName = 'my site name';
         this.logged = false;
-        this.authToken = cookie_1.Cookie.getCookie(this.AUTH_COOKIE_NAME);
+        this.authToken = localStorage.getItem(this.AUTH_COOKIE_NAME); // Cookie.getCookie(this.AUTH_COOKIE_NAME);
         this.refreshToken();
-        //console.log(this.win.nativeWindow)
     }
     AppComponent.prototype.doSearch = function () {
         this._nav.doSearch(this.keyword);
@@ -45,7 +46,8 @@ var AppComponent = (function () {
         this.logged = true;
         this.user = res.User;
         this.authToken = res.AuthToken;
-        cookie_1.Cookie.setCookie(this.AUTH_COOKIE_NAME, this.authToken, 0);
+        //Cookie.setCookie(this.AUTH_COOKIE_NAME, this.authToken, 0);
+        localStorage.setItem(this.AUTH_COOKIE_NAME, this.authToken);
         this.errorMessage = null;
     };
     AppComponent.prototype.refreshToken = function () {
@@ -74,7 +76,12 @@ var AppComponent = (function () {
             selector: 'comic-app',
             templateUrl: 'views/app.html',
             directives: [router_1.ROUTER_DIRECTIVES, topnav_component_1.TopNavComponent, register_component_1.RegisterComponent],
-            providers: [router_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, navigation_helper_1.NavigationHelper, user_service_1.UserService, window_service_1.WINDOW_PROVIDERS]
+            providers: [router_1.ROUTER_PROVIDERS,
+                http_1.HTTP_PROVIDERS,
+                navigation_helper_1.NavigationHelper,
+                user_service_1.UserService,
+                window_service_1.WINDOW_PROVIDERS
+            ]
         }),
         router_1.RouteConfig([
             {

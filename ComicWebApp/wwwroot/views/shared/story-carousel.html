@@ -5,18 +5,32 @@
                 <div class="item_truyennendoc">
                     <a (click)="viewStory(story)">
                         <div class="wrapper_imgage">
-                            <img u="image" [attr.src] ="story.CoverUrl" [attr.alt]="story.name">
-                            <h5 class="tenchap_slide" *ngIf="story.Chapters.length> 0">{{story.Chapters[story.Chapters.length  -1 ].Name}}</h5>
+                            <img u="image" [attr.src]="story.CoverUrl" [attr.alt]="story.name">
+                            <h5 class="tenchap_slide" *ngIf="story.Chapters.length> 0" ><A (click)="readChapter(story)">{{story.Chapters[story.Chapters.length  -1 ].Name}}</A></h5>
                         </div>
-                        <h5 class="tentruyen_slide" ><a (click)="viewStory(story)">{{story.Name}}</a></h5>
+                        <h5 class="tentruyen_slide"><a (click)="viewStory(story)">{{story.Name}}</a></h5>
                     </a>
                 </div>
             </div>
-            
+
         </div>
     </div>
     <a class="jcarousel-control-prev" href="#crsTruyenHotTrongNgay" role="button" data-slide="prev">
     </a>
     <a class="jcarousel-control-next" href="#crsTruyenHotTrongNgay" role="button" data-slide="next">
     </a>
+</div>
+
+<div class="bxslider">
+    <div class="item slide" *ngFor="#story of stories; #i=index" [class.active]="i<1">
+        <div class="item_truyennendoc">
+            <a (click)="viewStory(story)">
+                <div class="wrapper_imgage">
+                    <img u="image" [attr.src]="story.CoverUrl" [attr.alt]="story.name">
+                    <h5 class="tenchap_slide" *ngIf="story.Chapters.length> 0">{{story.Chapters[story.Chapters.length  -1 ].Name}}</h5>
+                </div>
+                <h5 class="tentruyen_slide"><a (click)="viewStory(story)">{{story.Name}}</a></h5>
+            </a>
+        </div>
+    </div>
 </div>

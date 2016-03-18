@@ -6,6 +6,7 @@
     "jquery": "2.2.1",
     "jquery-ui": "1.11.4",
     "jcarousel": "0.3.4",
-    "nanoscroller": "0.8.7"
+    "nanoscroller": "0.8.7",
+    "bxslider-4": "^4.2.5"
   }
 }

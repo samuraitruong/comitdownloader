@@ -15,14 +15,15 @@ var StoryCarouselComponent = (function () {
     function StoryCarouselComponent(_nav, win) {
         this._nav = _nav;
         this.win = win;
-        console.log('on carousel class');
-        console.log(win.nativeWindow);
         win.nativeWindow.onresize = function (ev) {
-            console.log('resize............');
         };
     }
     StoryCarouselComponent.prototype.viewStory = function (s) {
         this._nav.viewStory(s);
+    };
+    StoryCarouselComponent.prototype.readChapter = function (s) {
+        var chapter = s.Chapters[s.Chapters.length - 1];
+        this._nav.readChapter(s, chapter);
     };
     StoryCarouselComponent.prototype.ngAfterContentInit = function () {
         this.initCarousel();
@@ -32,6 +33,15 @@ var StoryCarouselComponent = (function () {
             interval: 10000
         });
         setTimeout(function () {
+            $('.bxslider').bxSlider({
+                slideWidth: 134,
+                minSlides: 2,
+                maxSlides: 7,
+                slideMargin: 15,
+                preloadImages: 'visible',
+                auto: true,
+                autoStart: true
+            });
             $('.carousel .item').each(function () {
                 var next = $(this).next();
                 if (!next.length) {

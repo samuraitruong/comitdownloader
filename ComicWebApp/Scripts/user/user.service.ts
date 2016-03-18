@@ -2,6 +2,7 @@
 import {Http, Response, Headers, RequestOptions, ConnectionBackend, HTTP_PROVIDERS} from 'angular2/http'
 import {Observable}     from 'rxjs/Observable'
 import {User, LoginRes} from '../models/user'
+import {AuthHttp, AuthConfig} from 'angular2-jwt';
 
 @Injectable()
 
@@ -11,7 +12,9 @@ export class UserService {
     private static _apiCheckUser = '/api/user/check';
     private _apiTokenUrl = '/api/user/refresh-token';
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private _authHttp: AuthHttp) {
+        console.log(this._authHttp)
+    }
     public requestOptions(authToken?:string): RequestOptions {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         if (authToken) {
@@ -55,8 +58,9 @@ export class UserService {
     }
 
     public refreshToken(authToken: string) {
-        
-        return this.http.get(this._apiTokenUrl,  this.requestOptions(authToken))
+        var myHeader = new Headers();
+        myHeader.append('Content-Type', 'application/json');
+        return this._authHttp.get(this._apiTokenUrl, { headers: myHeader } )
             .map(res => <LoginRes>res.json())
             .catch(this.handleError)
     }

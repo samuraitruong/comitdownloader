@@ -32,7 +32,6 @@ export class GenreComponent implements OnInit, AfterContentInit {
             this.pageCount = res.PageCount;
             this.totalItems = res.TotalItems;
             this.pageSize = res.PageSize;
-            console.log(this)
         },
             err=> {
                 this.errorMessage = <any>err;

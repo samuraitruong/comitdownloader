@@ -1,4 +1,7 @@
-﻿import {Component} from 'angular2/core';
+﻿//AUTH: https://auth0.com/blog/2015/05/14/creating-your-first-real-world-angular-2-app-from-authentication-to-calling-an-api-and-everything-in-between/
+//https://github.com/auth0/angular2-jwt
+
+import {Component, provide} from 'angular2/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 //import {LocalStorage} from "angular2-localstorage/LocalStorage";
 import {HTTP_PROVIDERS}    from 'angular2/http';
@@ -13,8 +16,10 @@ import {TopNavComponent} from './shared/topnav.component'
 import {RegisterComponent} from './user/register.component'
 import {User, LoginRes} from './models/user'
 import {UserService} from './user/user.service'
+import {RequestOptions, Headers} from 'angular2/http';
 import {Cookie} from './shared/cookie'
 import {WINDOW_PROVIDERS, WINDOW} from './shared/window.service';
+import {AuthHttp, AuthConfig, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 
 //import { PAGINATION_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 import {enableProdMode} from 'angular2/core';
@@ -22,7 +27,12 @@ import {enableProdMode} from 'angular2/core';
     selector: 'comic-app',
     templateUrl: 'views/app.html',
     directives: [ROUTER_DIRECTIVES, TopNavComponent, RegisterComponent],
-    providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, NavigationHelper, UserService, WINDOW_PROVIDERS]
+    providers: [ROUTER_PROVIDERS,
+        HTTP_PROVIDERS,
+        NavigationHelper,
+        UserService,
+        WINDOW_PROVIDERS
+    ]
 })
 
 @RouteConfig([
@@ -73,9 +83,8 @@ import {enableProdMode} from 'angular2/core';
 
 export class AppComponent {
     constructor(private _nav: NavigationHelper, private _userService: UserService, private win: WINDOW) {
-        this.authToken = Cookie.getCookie(this.AUTH_COOKIE_NAME);
+        this.authToken = localStorage.getItem(this.AUTH_COOKIE_NAME)// Cookie.getCookie(this.AUTH_COOKIE_NAME);
         this.refreshToken();
-        //console.log(this.win.nativeWindow)
     }
 
     private AUTH_COOKIE_NAME: string = 'auth_token';
@@ -95,7 +104,8 @@ export class AppComponent {
         this.logged = true;
         this.user = res.User;
         this.authToken = res.AuthToken;
-        Cookie.setCookie(this.AUTH_COOKIE_NAME, this.authToken, 0);
+        //Cookie.setCookie(this.AUTH_COOKIE_NAME, this.authToken, 0);
+        localStorage.setItem(this.AUTH_COOKIE_NAME, this.authToken);
         this.errorMessage = null;
     }
     public refreshToken() {

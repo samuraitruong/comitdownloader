@@ -38,7 +38,6 @@ var GenreComponent = (function () {
             _this.pageCount = res.PageCount;
             _this.totalItems = res.TotalItems;
             _this.pageSize = res.PageSize;
-            console.log(_this);
         }, function (err) {
             _this.errorMessage = err;
         });

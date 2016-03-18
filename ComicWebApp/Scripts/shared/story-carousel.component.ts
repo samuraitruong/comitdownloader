@@ -22,14 +22,15 @@ OnDestroy
 export class StoryCarouselComponent implements AfterContentInit {
     @Input() stories: Story[];
     constructor(private _nav: NavigationHelper, private win: WINDOW) {
-        console.log('on carousel class')
-        console.log(win.nativeWindow)
         win.nativeWindow.onresize  = (ev: UIEvent) => {
-            console.log('resize............')
         };
     }
     viewStory(s: Story) {
         this._nav.viewStory(s)
+    }
+    readChapter(s: Story) {
+        let chapter = s.Chapters[s.Chapters.length - 1];
+        this._nav.readChapter(s, chapter)
     }
     ngAfterContentInit() {
         this.initCarousel()
@@ -39,6 +40,17 @@ export class StoryCarouselComponent implements AfterContentInit {
             interval: 10000
         })
         setTimeout(() => {
+            $('.bxslider').bxSlider(
+                {
+                    slideWidth: 134,
+                    minSlides: 2,
+                    maxSlides: 7,
+                    slideMargin: 15,
+                    preloadImages: 'visible',
+                    auto: true,
+                    autoStart: true
+                }
+            );
             $('.carousel .item').each(function () {
                 var next = $(this).next();
                 if (!next.length) {
