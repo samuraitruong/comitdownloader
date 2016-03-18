@@ -8,6 +8,7 @@ export class Story {
     Chapters: Chapter[]
     Author: string;
     Rating: number;
+    ViewCounts: number
 } 
 
 export class GenreRes {

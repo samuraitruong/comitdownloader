@@ -17,7 +17,7 @@ namespace ComicWeb.JsonService
         {
             var list = DataManager.AllStories(true);
             var results = list.Where(p => p.Name.ToLower().Contains(keyword.ToLower()));
-            return results.ToPagedList(page, pageSize);
+            return results.ToPagedList(page-1, pageSize);
         }
         public IPagedList<IStoryInfo> GetListStories(string filter, int page, string v, int pageSize)
         {
@@ -29,7 +29,7 @@ namespace ComicWeb.JsonService
                 cloned= cloned.Where(p => p.Group == filter).ToList().Clone();
             }
 
-            return cloned.ToPagedList(page, pageSize);
+            return cloned.ToPagedList(page-1, pageSize);
         }
         public List<GenreInfo> GetGenres()
         {
@@ -102,7 +102,7 @@ namespace ComicWeb.JsonService
         public IPagedList<IStoryInfo> GetGenreStories(string name, int page, int pageSize = 20)
         {
             var all = DataManager.GenreStories(name);
-            return all.ToPagedList(page, pageSize);
+            return all.ToPagedList(page-1, pageSize);
         }
 
         public void EnsureDBCache()
@@ -127,7 +127,11 @@ namespace ComicWeb.JsonService
             story.Rating = (float)avg;
             DataManager.Update(story);
             return story.Rating;
-
+        }
+        public void UpdateStory(StoryInfo story)
+        {
+            DataManager.Update(story);
         }
     }
+
 }

@@ -21,6 +21,8 @@ namespace ComicWeb.Core
 
         public float Rating { get; set; }
 
+        public int ViewCounts { get; set; }
+
         public ChapterInfo() {
             UniqueIdentify = new Guid();
             DownloadedPages = new List<string>();
@@ -77,11 +79,13 @@ namespace ComicWeb.Core
         public string CoverUrl { get; set; }
         public string Source { get; set; }
         public float Rating { get; set; }
+        public int ViewCounts { get; set; }
 
         public StoryInfo()
         {
             Chapters = new List<ChapterInfo>();
             RatingUsers = new List<UserRate>();
+            ViewCounts = 0;
             
         }
         public override string ToString()

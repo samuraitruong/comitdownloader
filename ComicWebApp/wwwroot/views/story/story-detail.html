@@ -16,7 +16,7 @@
                 <p class="row_theloai"><i class="bg icon_theloai"> </i>Thể loại : 
                     <a *ngFor ="#cat of story.Categories" [routerLink]="['Genre', {genre : cat}]" >{{cat}}</a> 
                 </p>
-                <p><i class="bg icon_add"></i>Theo dõi : <span id="numbertheodoi" class="text_orange">12 người</span> đã theo dõi truyện này <br>Lượt view : 977</p>
+                <p><i class="bg icon_add"></i>Theo dõi : <span id="numbertheodoi" class="text_orange">12 người</span> đã theo dõi truyện này <br>Lượt view : {{story.ViewCounts}}</p>
                 <p class="no_padding"><iframe src="http://www.facebook.com/plugins/like.php?href=http://Hamtruyen.vn/truyen-kinh-di-o-toa-nha-so-44-0.html&amp;send=true&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=60&amp;appId=537840529633958" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:460px; height:25px;" allowtransparency="true"></iframe></p>
                 <div class="danhgia_truyen_chitiet danhgia_truyen">
                     <div hasrate="no" class="lst_danhgia">

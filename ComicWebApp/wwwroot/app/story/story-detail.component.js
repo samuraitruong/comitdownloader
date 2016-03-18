@@ -13,11 +13,18 @@ var router_1 = require('angular2/router');
 var story_service_1 = require('./story.service');
 var story_genres_component_1 = require('../shared/story-genres.component');
 var navigation_helper_1 = require('../shared/navigation.helper');
+var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
+var angular2_jwt_1 = require('angular2-jwt');
 var StoryDetailComponent = (function () {
     function StoryDetailComponent(_routeParams, _storyService, _nav) {
         this._routeParams = _routeParams;
         this._storyService = _storyService;
         this._nav = _nav;
+        this.allowRating = angular2_jwt_1.tokenNotExpired();
+        this.max = 5;
+        this.rate = 0;
+        this.currentRating = 0;
+        this.allowRating = angular2_jwt_1.tokenNotExpired('auth_token');
     }
     StoryDetailComponent.prototype.ngAfterContentInit = function () {
         setTimeout(function () {
@@ -31,16 +38,34 @@ var StoryDetailComponent = (function () {
         var _this = this;
         this.name = this._routeParams.get('name');
         this._storyService.getStoryByName(this.name)
-            .subscribe(function (d) { _this.story = d; }, function (err) { _this.errorMessage = err; });
+            .subscribe(function (d) {
+            _this.story = d;
+            _this.rate = _this.story.Rating;
+        }, function (err) { _this.errorMessage = err; });
     };
     StoryDetailComponent.prototype.readChapter = function (chapter) {
         this._nav.readChapter(this.story, chapter);
+    };
+    StoryDetailComponent.prototype.hoveringOver = function (value) {
+        //console.log(value)
+    };
+    ;
+    StoryDetailComponent.prototype.rateStory = function (value) {
+        var _this = this;
+        if (this.allowRating && value != this.currentRating) {
+            this._storyService.rateStory(this.story, value)
+                .subscribe(function (res) {
+                _this.rate = res,
+                    _this.currentRating = value;
+                _this.story.Rating = _this.rate;
+            }, function (err) { });
+        }
     };
     StoryDetailComponent = __decorate([
         core_1.Component({
             selector: 'cmapp-story-detail',
             templateUrl: 'views/story/story-detail.html',
-            directives: [story_genres_component_1.StoryGenresComponent],
+            directives: [story_genres_component_1.StoryGenresComponent, ng2_bootstrap_1.Rating, router_1.RouterLink],
             providers: [story_service_1.StoryService]
         }), 
         __metadata('design:paramtypes', [router_1.RouteParams, story_service_1.StoryService, navigation_helper_1.NavigationHelper])

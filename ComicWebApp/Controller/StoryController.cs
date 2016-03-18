@@ -55,7 +55,11 @@ namespace ComicWebApp
         [HttpGet("detail/{name}")]
         public IStoryInfo GetStoryByName(string name)
         {
-            return service.GetStoryByName(name);
+            var story= service.GetStoryByName(name) as StoryInfo;
+
+            story.ViewCounts++;
+            service.UpdateStory(story);
+            return story;
         }
         [HttpGet("list/{filter}/{page}")]
         public object GetListStories(string filter, int page)
