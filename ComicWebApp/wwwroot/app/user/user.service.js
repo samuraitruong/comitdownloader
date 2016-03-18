@@ -11,15 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('angular2/core');
 var http_1 = require('angular2/http');
 var Observable_1 = require('rxjs/Observable');
-var angular2_jwt_1 = require('angular2-jwt');
 var UserService = (function () {
-    function UserService(http, _authHttp) {
+    function UserService(http) {
         this.http = http;
-        this._authHttp = _authHttp;
         this._apiUrl = '/api/user/';
         this._apiLoginUrl = '/api/user/login';
         this._apiTokenUrl = '/api/user/refresh-token';
-        console.log(this._authHttp);
     }
     UserService.prototype.requestOptions = function (authToken) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
@@ -60,9 +57,7 @@ var UserService = (function () {
             .catch(this.handleError);
     };
     UserService.prototype.refreshToken = function (authToken) {
-        var myHeader = new http_1.Headers();
-        myHeader.append('Content-Type', 'application/json');
-        return this._authHttp.get(this._apiTokenUrl, { headers: myHeader })
+        return this.http.get(this._apiTokenUrl, this.requestOptions(authToken))
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
     };
@@ -73,7 +68,7 @@ var UserService = (function () {
     UserService._apiCheckUser = '/api/user/check';
     UserService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http, angular2_jwt_1.AuthHttp])
+        __metadata('design:paramtypes', [http_1.Http])
     ], UserService);
     return UserService;
 }());
