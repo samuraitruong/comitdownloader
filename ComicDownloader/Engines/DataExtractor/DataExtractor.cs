@@ -35,8 +35,12 @@ namespace ComicDownloader.Engines.DataExtractor
                 {
                     ProcessOneDownloader(userLocalCache, dl);
                 }
-                catch(Exception ex) { }
+                catch(Exception ex) {
+                    Log(ex.Message, ConsoleColor.Red);
+                }
             });
+
+            Console.Read();
         }
 
         private void ProcessOneDownloader(bool userLocalCache, Downloader dl)
@@ -61,7 +65,9 @@ namespace ComicDownloader.Engines.DataExtractor
                     {
                         ProcessOneStory(dl, s);
     
-                    } catch (Exception ex1) { }
+                    } catch (Exception ex1) {
+                        Log(ex1.Message, ConsoleColor.Red);
+                    }
 
                 });
             }

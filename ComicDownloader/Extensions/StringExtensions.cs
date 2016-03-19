@@ -33,6 +33,11 @@ namespace System
             return sss;
 
         }
+        public static string ToValidUrl(this string fileName)
+        {
+            var temp = fileName.RemoveDiacritics();
+            return Regex.Replace(temp, "[^a-zA-Z0-9]", "-");
+        }
         public static string TextBeautifier(this string txt)
         {
             txt = HttpUtility.HtmlDecode(txt);

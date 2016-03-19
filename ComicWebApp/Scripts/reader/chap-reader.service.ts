@@ -13,7 +13,6 @@ export class ChapReaderService {
         return this.http.get(this._apiUrl + encodeURIComponent(storyName) + '/' + encodeURIComponent(chapName))
             .map(res => <Chapter>res.json())
             .catch(this.handleError)
-            .do(data=> console.log(data))
     }
     private handleError(error: Response) {
         console.error(error);

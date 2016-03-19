@@ -290,7 +290,8 @@ namespace ComicDownloader.Engines
                             Categories = htmlDoc.DocumentNode.GetNodeTextAsList(categoryPattern),
                             AltName = htmlDoc.DocumentNode.GetNodeTextAsString(alternativeNamePattern),
                             Summary = htmlDoc.DocumentNode.GetNodeHtml(summaryPattern),
-                            CoverUrl = EnsureHostName(this.HostUrl, htmlDoc.DocumentNode.GetSingleNode(coverPattern).Attr("src"))
+                            CoverUrl = EnsureHostName(this.HostUrl, htmlDoc.DocumentNode.GetSingleNode(coverPattern).Attr("src")),
+                            Status = htmlDoc.DocumentNode.GetNodeTextAsString(statusPattern)
                         };
                     }
 
@@ -305,7 +306,9 @@ namespace ComicDownloader.Engines
                                 Url = EnsureHostName(appendHostUrl, node.Attributes["href"].Value.Trim()),
                             };
                             chapInfo.ChapId = ExtractID(chapInfo.Name);
+                            chapInfo.AliasName = chapInfo.Name.ToValidUrl();
                             info.Chapters.Add(chapInfo);
+                            
                         }
 
                         info.Chapters = info.Chapters.OrderBy(p => p.ChapId).ToList();
@@ -357,6 +360,8 @@ namespace ComicDownloader.Engines
                 });
             }
             info.Chapters = info.Chapters.DistinctBy(p => p.Url).ToList();
+            info.AliasName = info.Name.ToValidUrl();
+            info.Updated = DateTime.Now;
             return info;
         }
 
@@ -582,6 +587,7 @@ namespace ComicDownloader.Engines
                             };
                         }
                         info.Beautifier();
+                        info.AliasName = info.Name.ToValidUrl();
                         results1.Add(info);
                     }
                 }
@@ -649,6 +655,9 @@ namespace ComicDownloader.Engines
                 //sort result 
                 results = results.DistinctBy(p => p.Url).ToList();
                 results = results.OrderBy(p => p.Name).ToList();
+                //results.ForEach((s) => {
+                //    s.AliasName = s.Name.RemoveDiacritics();
+                //});
                 clock.Stop();
                 this.SaveCache(results, clock.ElapsedMilliseconds);
             }
@@ -1081,23 +1090,6 @@ namespace ComicDownloader.Engines
 
 
         public abstract List<StoryInfo> GetListStories(bool forceOnline);
-        //{
-        //    //if (force)
-        //    //{
-        //    //    File.Delete(this.CachedFile);
-        //    //    return GetListStories();
-        //    //}
-        //    //else
-        //    //{
-        //    //    if (!File.Exists(CachedFile)) return new List<StoryInfo>();
-
-
-        //    //}
-
-        //    //return ReloadChachedData();
-
-        //}
-
         public Downloader()
         {
             this.Cookies = GetUriCookieContainer(new Uri(this.HostUrl));

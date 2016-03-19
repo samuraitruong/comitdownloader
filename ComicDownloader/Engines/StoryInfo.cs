@@ -24,7 +24,7 @@ namespace ComicDownloader.Engines
         public string FolderName { get; set; }
 
         public string PdfFileName { get; set; }
-
+        public string AliasName { get; set; }
         public string PdfPath { get; set; }
         public DownloadStatus Status { get; set; }
         public List<string> Pages { get; set; }
@@ -48,7 +48,7 @@ namespace ComicDownloader.Engines
 
         public DateTime LastModified { get; set; }
         [XmlIgnore]
-        public StoryInfo Story { get; internal set; }
+        public StoryInfo Story { get;  set; }
     }
     public class StoryInfo : InfoObj
     {
@@ -92,6 +92,9 @@ namespace ComicDownloader.Engines
 
         public string CoverPdfPath { get;  set; }
         public object Source { get; set; }
+        public string Status { get; set; }
+        public string AliasName { get; set; }
+        public DateTime Updated { get; set; }
 
         public StoryInfo()
         {
@@ -105,6 +108,7 @@ namespace ComicDownloader.Engines
         public void Beautifier()
         {
             Name = Name.TextBeautifier();// Regex.Replace(Name, @"&\w{4};?", string.Empty);
+            AliasName = Name.ToValidUrl();
             Url = Url.Trim();
             Url = Url.TrimStart("{}[(".ToCharArray());
             Url = Url.TrimEnd("]){}".ToCharArray());

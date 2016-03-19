@@ -10,25 +10,28 @@ namespace ComicDownloader.Helpers
     public class ReplaceTokensHelper
     {
         private static List<KeyValuePair<string, string>> tokens = null;
+        private static object locker = new object();
         public static List<KeyValuePair<string, string>> GetTokens()
         {
-
-            if(tokens == null)
+            lock (locker)
             {
-                tokens = new List<KeyValuePair<string, string>>();
-                var result = Resources.replace_tokens.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                tokens.AddRange(result.Skip(1).Select(p => 
+                if (tokens == null)
                 {
-                    var arr = p.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                    return new KeyValuePair<string, string>(arr[0], arr[1]);
-                }));
+                    tokens = new List<KeyValuePair<string, string>>();
+                    var result = Resources.replace_tokens.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    tokens.AddRange(result.Skip(1).Select(p =>
+                    {
+                        var arr = p.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                        return new KeyValuePair<string, string>(arr[0], arr[1]);
+                    }));
 
-                tokens.Sort((a, b) =>
-                {
-                    return b.Key.Length - a.Key.Length;
-                });
-             }
+                    tokens.Sort((a, b) =>
+                    {
+                        return b.Key.Length - a.Key.Length;
+                    });
+                }
 
+            }
             return tokens;
         }
         /// <summary>
@@ -46,7 +49,7 @@ namespace ComicDownloader.Helpers
             }
 
             return replacedSrc;
-            
+
         }
     }
 }

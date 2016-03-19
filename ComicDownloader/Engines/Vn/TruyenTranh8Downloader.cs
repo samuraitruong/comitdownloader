@@ -66,6 +66,7 @@ namespace ComicDownloader.Engines
                  authorPattern: "//*[@itemprop='author']",
                  categoryPattern: "//*[@itemprop='genre']",
                  summaryPattern: "//*[contains(@class,'mangaDescription')]",
+                 statusPattern: "//ul[@class='mangainfo']/li[6]/a",
 
                 chapterExtract: (node) =>
                 {

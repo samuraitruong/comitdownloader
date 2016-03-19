@@ -10,7 +10,7 @@ namespace ComicWeb.JsonService
 {
     public class DataManager
     {
-        private static string rootFolder = @"D:\Data1\uptruyen.com\";
+        private static string rootFolder = @"D:\Data1\truyentranh8.net\";
         public static List<StoryInfo> stories;
         private static bool dataCached = false;
         public static Dictionary<string, GenreInfo> genres = new Dictionary<string, GenreInfo>();
@@ -62,6 +62,10 @@ namespace ComicWeb.JsonService
             List<GenreInfo> results = new List<GenreInfo>();
             foreach (var item in genres.Keys)
             {
+                if (genres[item].StoriesCount <10)
+                {
+                    continue;
+                }
                 results.Add(includeStories?genres[item] : new GenreInfo() {  Name= genres[item].Name, StoriesCount = genres[item].StoriesCount});
             }
             return results;
@@ -120,8 +124,12 @@ namespace ComicWeb.JsonService
             var fileName = Path.Combine(rootFolder, story.JsonFileName);
 
             var index = stories.FindIndex(p => p.Name == story.Name);
-            stories[index] = story;
-            File.WriteAllText(fileName,JsonConvert.SerializeObject(story));
+            var oginalStory = LoadStory(story.JsonFileName);
+            oginalStory.ViewCounts = story.ViewCounts;
+            oginalStory.RatingUsers = story.RatingUsers;
+            oginalStory.Rating = story.Rating;
+           stories[index] = oginalStory;
+            File.WriteAllText(fileName,JsonConvert.SerializeObject(oginalStory));
         }
 
         public static ChapterInfo LoadChapter(string filename)

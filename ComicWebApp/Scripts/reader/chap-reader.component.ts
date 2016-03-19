@@ -26,7 +26,6 @@ export class ChapReaderComponent implements OnInit, AfterContentInit {
             this.chapter = res;
             this.story = this.chapter.Story;
             let index = this.story.Chapters.findIndex((c) => { return c.Name === this.chapter.Name });
-            console.log('index found .............' + index);
             if (index < this.story.Chapters.length) {
                 this.nextChapter = this.story.Chapters[index + 1]
                 this.hasNextChapter = true;
@@ -35,7 +34,6 @@ export class ChapReaderComponent implements OnInit, AfterContentInit {
                 this.hasPrevChapter = true;
                 this.prevChapter = this.story.Chapters[index -1]
             }
-            console.log(this)
         },
             err=> {
                 this.errorMessage = <any>err;
@@ -56,7 +54,6 @@ export class ChapReaderComponent implements OnInit, AfterContentInit {
         this._nav.viewStory(s);
     }
     viewChapter(c: Chapter) {
-        console.log(this)
         this._nav.readChapter(this.story, c);
     }
     chapname: string;
