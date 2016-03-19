@@ -3,6 +3,7 @@ import {Story} from '../models/story'
 import {NavigationHelper} from './navigation.helper'
 import {AutoResize} from '../directives/ngResize'
 import {WINDOW_PROVIDERS, WINDOW} from './window.service';
+import {BXSliderDirective} from '../directives/myBXSlider.directive';
 
 import {
 OnChanges, SimpleChange,
@@ -17,12 +18,12 @@ OnDestroy
 @Component({
     selector: 'cmapp-story-carousel',
     templateUrl: 'views/shared/story-carousel.html',
-    directives: [AutoResize]
+    directives: [AutoResize, BXSliderDirective]
 })
 export class StoryCarouselComponent implements AfterContentInit {
     @Input() stories: Story[];
     constructor(private _nav: NavigationHelper, private win: WINDOW) {
-        win.nativeWindow.onresize  = (ev: UIEvent) => {
+        win.nativeWindow.onresize = (ev: UIEvent) => {
         };
     }
     viewStory(s: Story) {
@@ -36,10 +37,8 @@ export class StoryCarouselComponent implements AfterContentInit {
         this.initCarousel()
     }
     initCarousel() {
-        $('#crsTruyenHotTrongNgay').carousel({
-            interval: 10000
-        })
         setTimeout(() => {
+
             $('.bxslider').bxSlider(
                 {
                     slideWidth: 134,
@@ -51,24 +50,6 @@ export class StoryCarouselComponent implements AfterContentInit {
                     autoStart: true
                 }
             );
-            $('.carousel .item').each(function () {
-                var next = $(this).next();
-                if (!next.length) {
-                    next = $(this).siblings(':first');
-                }
-                next.children(':first-child').clone().appendTo($(this));
-
-                for (var i = 0; i < 5; i++) {
-                    next = next.next();
-                    if (!next.length) {
-                        next = $(this).siblings(':first');
-                    }
-
-                    next.children(':first-child').clone().appendTo($(this));
-                }
-            });
-        }, 1000);
-
+        });
     }
-}
-
+ }

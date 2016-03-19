@@ -30,7 +30,9 @@ var bowerLibs = [
        paths.bowerSrc + '/nanoscroller/bin/javascripts/jquery.nanoscroller.min.js',
        paths.bowerSrc + '/nanoscroller/bin/css/nanoscroller.css',
        paths.bowerSrc + '/bxslider-4/dist/jquery.bxslider.min.css',
-       paths.bowerSrc + '/bxslider-4/dist/jquery.bxslider.min.js'
+       paths.bowerSrc + '/bxslider-4/dist/jquery.bxslider.min.js',
+       paths.bowerSrc + '/tooltipster/js/jquery.tooltipster.min.js',
+       paths.bowerSrc + '/tooltipster/css/tooltipster.css'
        
 ];
 
@@ -109,8 +111,17 @@ gulp.task('watch', ['copy'], function () {
     
     console.log('watching: html/typescripts')
 });
+
+gulp.task("typescript:tslint", () =>
+    gulp.src(['scripts/*.ts', 'scripts/**/*.ts'])
+        .pipe(plugins.tslint())
+        .pipe(plugins.tslint.report("verbose"))
+);
+
 gulp.task('typescript:compile', function () {
-    var tsProject = plugins.typescript.createProject('tsconfig.json');
+    var tsProject = plugins.typescript.createProject('tsconfig.json', {
+        noEmitOnError:false
+    });
 
     //return gulp.src(['scripts/*.ts','scripts/**/*.ts'])
 	//	.pipe(plugins.typescript({
@@ -133,9 +144,17 @@ gulp.task('typescript:copy', function () {
 });
 
 gulp.task('typescript:build', function (cb) {
+
     plugins.sequence('typescript:compile', 'typescript:copy', cb);
 });
 
 
 gulp.task('clean', function () {
 });
+gulp.task('main-bower-files', function() {
+    return gulp.src('./bower.json')
+        .pipe(plugins.mainBowerFiles())
+        .pipe(plugins.flatten())
+        .pipe(gulp.dest('./wwwwroot/vendors'));
+});
+

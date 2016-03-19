@@ -1,4 +1,4 @@
-﻿                <!-- START GALLERY TRUYEN HOT AND BXH-->
+﻿<!-- START GALLERY TRUYEN HOT AND BXH-->
 <div id="wrapper_gallery_and_bxh" class="row" *ngIf="topStory">
     <div class="col-md-9">
         <div class="title_doctruyen moicapnhat clearfix">
@@ -25,6 +25,7 @@
                 <div class="manga-info mgtop10">
                     <span class="glyphicon glyphicon-tags"></span>
                     <span> Thể loại: </span>
+                    <!--<a [myGenreTooltip]="cat" tooltipContainer="#genreTooltip" (onTooltipShown)="onTooltip($event)" *ngFor="#cat of topStory.Categories" class="label label-primary manga-type" (click)="viewGenre(cat)">{{cat}}</a>-->
                     <a *ngFor="#cat of topStory.Categories" class="label label-primary manga-type" (click)="viewGenre(cat)">{{cat}}</a>
                 </div>
 
@@ -46,3 +47,13 @@
     </div>
 </div>
 <!-- END GALLERY TRUYEN HOT AND BXH-->
+
+<div class="hide">
+    <div id="genreTooltip">
+        <div *ngIf="hoveringGenre">
+            <h4>Genre : {{hoveringGenre}} </h4>
+            <br/>
+            <a (click)="test()">AAAAAAAAA</a>
+        </div>
+    </div>
+</div>

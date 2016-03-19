@@ -1,5 +1,5 @@
 ﻿
-/// <reference path="../jquery/jquery.d.ts" />
+/// <reference path="../jquery/index.d.ts" />
 
 declare module JQueryNanoScroller {
     export interface JQueryNanoScrollerOptions {
