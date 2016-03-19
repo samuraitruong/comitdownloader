@@ -23,6 +23,11 @@ namespace ComicDownloader.Helpers
                     return match.Groups[1].Value;
                 }
             }
+
+            if(url.Contains("blogspot.com"))
+            {
+                url = url.Replace("https://", "http://");
+            }
             return url;
 
         }

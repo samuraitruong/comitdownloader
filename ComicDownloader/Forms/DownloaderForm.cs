@@ -287,10 +287,12 @@ namespace ComicDownloader
                                        var pp = subItem.MyControl as ProgressBar;
                                        pp.Value = pp.Value + 1;
                                        FileInfo fi = new FileInfo(t.Result);
-                                       total += fi.Length;
                                        refData = listItem.Tag as RowData;
-                                       refData.TotalSize += fi.Length;
-                                       listItem.SubItems[3].Text = refData.TotalSize.ToKB();
+                                       if (fi.Exists) { 
+                                           total += fi.Length;
+                                           refData.TotalSize += fi.Length;
+                                           listItem.SubItems[3].Text = refData.TotalSize.ToKB();
+                                        }
 
                                        if (chapInfo.PageCount == chapInfo.DownloadedCount)
                                        {

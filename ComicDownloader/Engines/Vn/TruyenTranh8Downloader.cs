@@ -1,9 +1,11 @@
-﻿using System; using System.Net;
+﻿using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace ComicDownloader.Engines
 {
@@ -56,6 +58,24 @@ namespace ComicDownloader.Engines
                 });
         }
 
+        //public override bool InitCookie()
+        //{
+        //    Task.Run(() =>
+        //    {
+
+        //        base.InitCookieFromUrl(this.HostUrl);
+
+        //        if (this.Cookies != null)
+        //        {
+        //            Uri target = new Uri(this.HostUrl);
+
+        //            this.Cookies.Add(new Cookie("tt8_Server", "picasa") { Domain = target.Host });
+        //        }
+
+        //    });
+        //    return base.InitCookie();
+        //}
+
         public override StoryInfo RequestInfo(string storyUrl)
         {
 
@@ -85,14 +105,14 @@ namespace ComicDownloader.Engines
         {
             List<string> pages = new List<string>();
 
-            var html = NetworkHelper.GetHtml(chapUrl);
+            var html = NetworkHelper.GetHtml(chapUrl, this.Cookies);
             string pvip = "lstImagesVIP.push\\(\"(.*)\"\\)";
 
             string p = "lstImages.push\\(\"(.*)\"\\)";
 
-            var matches = Regex.Matches(html, pvip);
+            var matches = Regex.Matches(html, p);
             if (matches == null || matches.Count == 0)
-                matches = Regex.Matches(html, p);
+                matches = Regex.Matches(html, pvip);
 
             foreach (Match match in matches)
             {

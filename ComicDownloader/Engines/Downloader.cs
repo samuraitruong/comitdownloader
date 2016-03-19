@@ -6,7 +6,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Reflection;
 using System.IO;
-using System.Net;
 using ComicDownloader.Properties;
 using HtmlAgilityPack;
 using System.Runtime.InteropServices;
@@ -43,6 +42,7 @@ namespace ComicDownloader.Engines
         private List<string> chapterIdPatterns = new List<string> {
             @"Chương (\d+)",
             @"Chapter (\d*)",
+            @"Chap (\d*)",
             @"(\d+)$",
             @"(\d+)"
         };
@@ -61,7 +61,7 @@ namespace ComicDownloader.Engines
         {
             return true;
         }
-        public bool InitCookieFromUrl(string url="", string initcookies="")
+        public virtual bool InitCookieFromUrl(string url="", string initcookies="")
         {
             if(string.IsNullOrEmpty(url))
             {
@@ -667,7 +667,7 @@ namespace ComicDownloader.Engines
         public List<string> GetPagesSimple(string chapUrl, string pattern, Func<string, List<string>> customExtractor = null, string hostExpanded = "", Func<HtmlNode, string> imgExtract = null, string imgAttrName = "src")
         {
             List<string> pages = new List<string>();
-            var html = NetworkHelper.GetHtml(chapUrl);
+            var html = NetworkHelper.GetHtml(chapUrl, this.Cookies);
             var htmlDoc = new HtmlAgilityPack.HtmlDocument();
             htmlDoc.LoadHtml(html);
             var nodes = htmlDoc.DocumentNode.SelectNodes(pattern);
@@ -889,7 +889,8 @@ namespace ComicDownloader.Engines
         }
         public ResolveImageOnPage ResolveImageInHtmlPage { get; set; }
         public StoryInfo CurrentStory { get; private set; }
-        public virtual string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer, CookieContainer cc = null, string originalUrl = null, ChapterInfo chapter = null)
+        public virtual string DownloadPage(string pageUrl, string renamePattern, string folder, string httpReferer, 
+            CookieContainer cc = null, string originalUrl = null, ChapterInfo chapter = null)
         {
             if (this.ResolveImageInHtmlPage != null)
             {
