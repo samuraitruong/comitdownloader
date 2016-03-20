@@ -243,3 +243,4 @@ _Pvt_Extensions
 .fake/
 ComicWebApp/wwwroot/app/*
 ComicWebApp/wwwroot/views/*
+ComicWebApp/wwwroot/content/css/
