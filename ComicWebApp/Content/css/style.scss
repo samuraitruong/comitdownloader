@@ -2091,6 +2091,11 @@ a {
     a {
         padding: 5px;
         color: $color_mine_shaft_approx;
+        &.current{
+            background: $color_azure_radiance_approx;
+            color: $white;
+            font-weight: bolder;
+        }
     }
 }
 

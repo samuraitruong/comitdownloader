@@ -99,9 +99,19 @@ namespace ComicWeb.JsonService
             return fullInfo;
         }
 
-        public IPagedList<IStoryInfo> GetGenreStories(string name, int page, int pageSize = 20)
+        public IPagedList<IStoryInfo> GetGenreStories(string name, int page, int pageSize = 20, SortTypes sortType = SortTypes.Name)
         {
             var all = DataManager.GenreStories(name);
+            all.Sort((x, y) =>
+            {
+                if (x == null || y == null) return 0;
+                if (sortType == SortTypes.Chapters)
+                {
+                    return y.Chapters.Count - x.Chapters.Count;
+                }
+
+                return string.CompareOrdinal(x.Name, y.Name);
+            });
             return all.ToPagedList(page-1, pageSize);
         }
 

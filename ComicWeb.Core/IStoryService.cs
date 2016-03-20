@@ -5,6 +5,12 @@ using System.Threading.Tasks;
 
 namespace ComicWeb.Core
 {
+    public enum SortTypes
+    {
+        Chapters,
+        Updated,
+        Name
+    }
     public interface IStoryService
     {
         float RateStory(string name, StoryInfo.UserRate value);
@@ -15,7 +21,7 @@ namespace ComicWeb.Core
         List<IStoryInfo> GetLatestPostedStories(int count);
         IStoryInfo GetStoryByName(string name);
         IChapterInfo GetChapInfo(string name, string chapName);
-        IPagedList<IStoryInfo> GetGenreStories(string name, int page, int pageSize = 20);
+        IPagedList<IStoryInfo> GetGenreStories(string name, int page, int pageSize = 20, SortTypes sortTye = SortTypes.Name);
         List<GenreInfo> GetGenres();
 
         void EnsureDBCache();

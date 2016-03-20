@@ -32,6 +32,7 @@ var bowerLibs = [
        paths.bowerSrc + '/bxslider-4/dist/jquery.bxslider.min.css',
        paths.bowerSrc + '/bxslider-4/dist/jquery.bxslider.min.js',
        paths.bowerSrc + '/tooltipster/js/jquery.tooltipster.min.js',
+       paths.bowerSrc + '/tooltipster/css/tooltipster.css',
        paths.bowerSrc + '/tooltipster/css/tooltipster.css'
        
 ];

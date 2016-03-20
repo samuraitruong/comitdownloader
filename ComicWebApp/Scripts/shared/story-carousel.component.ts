@@ -50,6 +50,6 @@ export class StoryCarouselComponent implements AfterContentInit {
                     autoStart: true
                 }
             );
-        });
+        },1000);
     }
  }

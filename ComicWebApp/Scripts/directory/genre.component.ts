@@ -13,7 +13,7 @@ import { Pagination} from 'ng2-bootstrap/ng2-bootstrap';
 @Component({
     selector: 'cmapp-genre',
     templateUrl: 'views/directory/genre.html',
-    directives: [StoryListComponent, StoryGenresComponent, Pagination, ROUTER_DIRECTIVES],
+    directives: [StoryListComponent, StoryGenresComponent, Pagination, ROUTER_DIRECTIVES, StoryCarouselComponent],
     providers: [DirectoryService]
 })
 export class GenreComponent implements OnInit, AfterContentInit {
@@ -37,11 +37,21 @@ export class GenreComponent implements OnInit, AfterContentInit {
                 this.errorMessage = <any>err;
             }
         );
+
+        this._service.getGenreTopStories(this.genre).subscribe(res => {
+            this.carouselItems = res;
+        },
+            err=> {
+                this.errorMessage = <any>err;
+            }
+        );
+
     }
     viewStory(s: Story) {
         this._nav.viewStory(s);
     }
     stories: Story[];
+    carouselItems: Story[]
     errorMessage: string;
     genre: string;
     pageCount: number;

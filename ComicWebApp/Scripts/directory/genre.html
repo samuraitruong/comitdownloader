@@ -1,4 +1,18 @@
 ﻿<div class="row">
+    <div class="col-md-12">
+        <div class="title_doctruyen manhua">
+            <div class="bg leftbar1 fl"></div>
+            <div class="centertext fl">
+                Truyện hot thuộc thể loại {{genre | uppercase}}
+                <a [routerLink]="['Directory']" class="link_right"><i class="glyphicon glyphicon-chevron-right"></i></a>
+            </div>
+            <div class="bg rightbar1 fl"></div>
+        </div>
+        <div style="clear:both"> </div>
+        <cmapp-story-carousel [stories]="carouselItems"></cmapp-story-carousel>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-8 wrapper_truyemoicapnhat">
         <div class="title_doctruyen manhua">
             <div class="bg leftbar1 fl"></div>

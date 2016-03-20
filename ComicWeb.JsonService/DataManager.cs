@@ -14,35 +14,42 @@ namespace ComicWeb.JsonService
         public static List<StoryInfo> stories;
         private static bool dataCached = false;
         public static Dictionary<string, GenreInfo> genres = new Dictionary<string, GenreInfo>();
+        public static object threadLocker = new object();
         public static void EnsureDBCache()
         {
             if (dataCached) return;
             
-            var all = AllStories(true);
-            Parallel.ForEach(all, (s) =>
+            lock(threadLocker)
             {
-                lock (genres)
+                var all = AllStories(true);
+                Parallel.ForEach(all, (s) =>
                 {
-                    foreach (var cat in s.Categories)
+                    lock (genres)
                     {
-                        if (!genres.ContainsKey(cat))
+                        if (s.Categories != null)
                         {
-                            var key = new GenreInfo()
+                            foreach (var cat in s.Categories)
                             {
-                                Name = cat,
-                                Stories = new List<IStoryInfo>(),
-                                StoriesCount = 0
-                            };
-                            genres[cat] = key;
-                        }
+                                if (!genres.ContainsKey(cat))
+                                {
+                                    var key = new GenreInfo()
+                                    {
+                                        Name = cat,
+                                        Stories = new List<IStoryInfo>(),
+                                        StoriesCount = 0
+                                    };
+                                    genres[cat] = key;
+                                }
 
-                        var current = genres[cat];
-                        current.Stories.Add(s);
-                        current.StoriesCount++;
-                        genres[cat] = current;
+                                var current = genres[cat];
+                                current.Stories.Add(s);
+                                current.StoriesCount++;
+                                genres[cat] = current;
+                            }
+                        }
                     }
-                }
-            });
+                });
+            }
             dataCached = true;
         }
         public static StoryInfo LoadStory(string filename)

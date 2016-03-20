@@ -1,4 +1,4 @@
-﻿import {Component, OnInit} from 'angular2/core';
+﻿import {Component, OnInit, Injector} from 'angular2/core';
 import {Story, GenreInfo} from '../models/story'
 import {StoryGenresService} from './story-genres.service'
 import {RouteParams, Router} from 'angular2/router'
@@ -10,8 +10,11 @@ import {NavigationHelper} from './navigation.helper'
     providers: [StoryGenresService]
 })
 export class StoryGenresComponent implements OnInit {
-    constructor(private _service: StoryGenresService,  private _nav: NavigationHelper) { }
+    constructor(private _service: StoryGenresService, private _nav: NavigationHelper, private _routeParams: RouteParams) {
+        this.currentGenre = this._routeParams.get('genre');
+    }
     errorMessage: string;
+    currentGenre: string;
     genres: GenreInfo[];
     ngOnInit() {
         this.loadGenres();

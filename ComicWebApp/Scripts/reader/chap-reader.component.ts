@@ -23,15 +23,11 @@ export class ChapReaderComponent implements OnInit, AfterContentInit {
         this.name = this._routeParams.get("storyname");
         this.chapname = this._routeParams.get('chapname');
         this._service.getChapInfo(this.name, this.chapname).subscribe(res => {
-
             //ensure http protocal
             res.Pages.forEach((url, index, arr) => {
                 url = url.replace("https", "http");
-                console.log(url)
                 arr[index] = url;
             });
-
-            console.log(res.Pages);
             this.chapter = res;
             this.story = this.chapter.Story;
             let index = this.story.Chapters.findIndex((c) => { return c.Name === this.chapter.Name });
@@ -55,7 +51,6 @@ export class ChapReaderComponent implements OnInit, AfterContentInit {
             var chap = this.story.Chapters.filter((s) => {
                 return s.Name == selected;
             })[0]
-
             this._nav.readChapter(this.story, chap) 
         }
     }

@@ -119,6 +119,14 @@ namespace ComicWebApp
         {
             return service.GetChapInfo(name, chapName);
         }
+        [HttpGet("genre/{name}/top")]
+        public object GetGenreTopStories(string name, int page)
+        {
+            int pageSize = 30;
+            var paged = service.GetGenreStories(name, 1, pageSize, SortTypes.Chapters);
+            return paged;
+        }
+
 
         [HttpGet("genre/{name}/{page}")]
         public object GetGenreStories(string name, int page)

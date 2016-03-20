@@ -7,6 +7,8 @@ namespace ComicWeb.Core
 {
     public interface IStoryInfo
     {
+        List<ChapterInfo> Chapters { get; set; }
+        string Name { get; set; }
     }
 
     public interface IChapterInfo

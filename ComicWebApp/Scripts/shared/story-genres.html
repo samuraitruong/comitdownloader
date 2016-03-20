@@ -1,5 +1,5 @@
 ﻿<div class="row wrapper_theloai">
-    <div class="col-xs-12 mgtop10">
+    <div class="col-xs-12">
         <div class="title_doctruyen manhua">
             <div class="bg leftbar1 fl"></div>
             <div class="centertext fl" style="width:245px;padding-top:3px;">
@@ -9,7 +9,7 @@
         </div>
         <div class="col-xs-12 wrapper_list_theloai">
             <div class="col-xs-12">
-                <a class="col-xs-4" (click)="viewGenre(genre)" *ngFor="#genre of genres">{{genre.Name}}</a>
+                <a class="col-xs-4" (click)="viewGenre(genre)" *ngFor="#genre of genres" [class.current]="genre.Name == currentGenre">{{genre.Name}}</a>
             </div>
         </div>
 

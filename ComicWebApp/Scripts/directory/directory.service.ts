@@ -10,11 +10,17 @@ export class DirectoryService {
     private _apiUrl = '/api/story/genre/';
     private _listApiUrl ='/api/story/list/'
     constructor(private http: Http) { }
+    public getGenreTopStories(genre: string) {
+        return this.http.get(this._apiUrl + encodeURIComponent(genre) + '/top')
+            .map(res => <Story[]>res.json())
+            .catch(this.handleError)
+    }
     public getGenreStories(genre: string, page: number) {
         return this.http.get(this._apiUrl + encodeURIComponent(genre) + '/' + page.toString())
             .map(res => <GenreRes>res.json())
             .catch(this.handleError)
     }
+
     public getStories(filter: string, page: number, sort?:string) {
         return this.http.get(this._listApiUrl + encodeURIComponent(filter) + '/' + page.toString())
             .map(res => <StoryListRes>res.json())
