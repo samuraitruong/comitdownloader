@@ -57,11 +57,22 @@ import {enableProdMode} from 'angular2/core';
         name: 'Genre',
         component: GenreComponent,
     },
+    {
+        path: '/genre/:genre/:page',
+        name: 'GenrePaging',
+        component: GenreComponent,
+    },
      {
         path: '/directory',
         name: 'Directory',
         component: DirectoryComponent,
     }, 
+     {
+         path: '/directory/:page',
+         name: 'DirectoryPaging',
+         component: DirectoryComponent,
+     }, 
+
     {
          path: '/search/:keyword',
          name: 'Search',

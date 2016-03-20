@@ -24,6 +24,10 @@ export class GenreComponent implements OnInit, AfterContentInit {
     }
     ngOnInit() {
         this.genre = this._routeParams.get("genre");
+        var pageQueryString = this._routeParams.get("page");
+        if (pageQueryString) {
+            this.currentPage = parseInt(pageQueryString, 10);
+        }
         this.loadStories();
     }
     loadStories() {

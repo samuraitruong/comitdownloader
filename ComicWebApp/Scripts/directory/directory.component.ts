@@ -23,6 +23,11 @@ export class DirectoryComponent implements OnInit, AfterContentInit {
     ngAfterContentInit() {
     }
     ngOnInit() {
+        var pageQueryString = this._routeParams.get("page");
+        if (pageQueryString) {
+            this.currentPage = parseInt(pageQueryString, 10);
+        }
+
         this.filters = ['All', '#'].concat(this.filters);
         //this.filter = this._routeParams.get("filter");
         this.loadStories();

@@ -17,14 +17,14 @@
         <div class="title_doctruyen manhua">
             <div class="bg leftbar1 fl"></div>
             <div class="centertext fl" style="width:655px;padding-top:3px;">
-                Truyện thuộc thể loại {{genre | uppercase}}
+                Truyện thuộc thể loại {{genre | uppercase}} - <span class="ui-state-error-text">[{{totalItems}}]</span>
                 <a [routerLink]="['Directory']" class="link_right">Xem thêm&gt;&gt;</a>
             </div>
             <div class="bg rightbar1 fl"></div>
         </div>
         <div class="lst_truyen_moidang">
             <cmapp-story-list [stories]="stories"></cmapp-story-list>
-            <nav class="pagerhamtruyen">
+            <nav class="pagerhamtruyen" *ngIf="pageCount >1">
                 <pagination [totalItems]="totalItems" [itemsPerPage]="pageSize" [(ngModel)]="currentPage" [maxSize]="maxSize" (pageChanged)="pageChanged($event)" class="pagination-sm"
                             [boundaryLinks]="true" [rotate]="false" (numPages)="numPages = $event"></pagination>
             </nav>
