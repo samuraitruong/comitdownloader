@@ -1,20 +1,33 @@
-﻿import { Directive, ElementRef, Input, Output} from 'angular2/core';
+﻿import { Directive, ElementRef, Input, Output, AfterContentInit} from 'angular2/core';
 
 @Directive({
     selector: '[myBxSlider]',
     //host: { '(window:resize)': 'onResize()' } // Window resize listener
 })
 
-export class BXSliderDirective {
+export class BXSliderDirective implements AfterContentInit {
 
     element: ElementRef; // Element that associated to attribute.
     $window: any;
 
     constructor(_element: ElementRef) {
         this.element = _element;
-        console.log('init bxslider.................')
-        console.log(this.element)
         //this.onResize();
+    }
+    public ngAfterContentInit() {
+
+        //$(this.element).bxSlider(
+        //    {
+        //        slideWidth: 134,
+        //        minSlides: 2,
+        //        maxSlides: 7,
+        //        slideMargin: 15,
+        //        preloadImages: 'visible',
+        //        auto: true,
+        //        autoStart: true
+        //    }
+        //);
+
     }
 
     //// Adjust height of element.

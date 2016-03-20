@@ -1,10 +1,12 @@
 ﻿/*this include all override css for default vendor css*/
 /* OVERRIDE CSS FOR BX SLIDER*/
 .bx-wrapper {
-    margin-bottom:30px;
+    margin-bottom: 30px;
+
     .bx-next {
         background: url(../images/d03.png) -63px -33px no-repeat !important;
     }
+
     .bx-prev {
         background: url(../images/d03.png) -3px -33px no-repeat !important;
     }
@@ -18,12 +20,23 @@
     }
 }
 
-/* TOOLTIPTSER CSS*/
-.tooltipster-base{
-    pointer-events:all;
+.bx-loading {
+    min-height: 50px;
+    background: url(../images/loading.gif) center center no-repeat #fff !important;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2000;
 }
 
-.nano > .nano-pane > .nano-slider
-{
+
+/* TOOLTIPTSER CSS*/
+.tooltipster-base {
+    pointer-events: all;
+}
+
+.nano > .nano-pane > .nano-slider {
     background: rgba(11,115,162,.8);
 }
