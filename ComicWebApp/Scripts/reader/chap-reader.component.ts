@@ -6,11 +6,12 @@ import {Story} from '../models/story'
 import {Chapter} from '../models/chapter'
 import {NavigationHelper} from '../shared/navigation.helper'
 import {ChapReaderService} from './chap-reader.service'
+import {LazyLoadImageDirective} from '../directives/lazyload-image.directive';
 
 @Component({
     selector: 'cmapp-chap-reader',
     templateUrl: 'views/reader/chap-reader.html',
-    directives: [],
+    directives: [LazyLoadImageDirective],
     providers: [ChapReaderService]
 })
 export class ChapReaderComponent implements OnInit, AfterContentInit {
@@ -60,6 +61,7 @@ export class ChapReaderComponent implements OnInit, AfterContentInit {
     viewChapter(c: Chapter) {
         this._nav.readChapter(this.story, c);
     }
+    defaultImage: string = 'http://www.conservatoiredehuy.be/images/loading.gif';
     chapname: string;
     story: Story;
     chapter: Chapter;
