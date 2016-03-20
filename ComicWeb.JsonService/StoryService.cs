@@ -87,13 +87,13 @@ namespace ComicWeb.JsonService
 
         public IStoryInfo GetStoryByName(string name)
         {
-            return DataManager.AllStories(true).FirstOrDefault(p => p.Name.ToLower() == name.ToLower()) ;
+            return DataManager.AllStories(true).FirstOrDefault(p => p.Name.ToLower() == name.ToLower() || p.AliasName.ToLower() == name.ToLower()) ;
         }
 
         public IChapterInfo GetChapInfo(string name, string chapName)
         {
             var story = GetStoryByName(name);
-            var chap = ((StoryInfo)story).Chapters.FirstOrDefault(p => p.Name.ToLower() == chapName.ToLower());
+            var chap = ((StoryInfo)story).Chapters.FirstOrDefault(p => p.Name.ToLower() == chapName.ToLower() || p.AliasName.ToLower() == chapName.ToLower());
             var fullInfo = DataManager.LoadChapter(chap.JsonFileName);
             fullInfo.Story = story;
             return fullInfo;

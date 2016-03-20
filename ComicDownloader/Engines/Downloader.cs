@@ -577,6 +577,7 @@ namespace ComicDownloader.Engines
                         if (convertFunc != null)
                         {
                             info = convertFunc(node);
+                            info.AliasName = info.Name.ToValidUrl();
                         }
                         else
                         {

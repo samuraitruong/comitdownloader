@@ -2,6 +2,7 @@
 
 export class Story {
     Name: string;
+    AliasName: string;
     Summary: string;
     CoverUrl: string;
     Categories: string[];

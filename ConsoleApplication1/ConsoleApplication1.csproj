@@ -49,6 +49,10 @@
       <HintPath>..\packages\itextsharp.xmlworker.5.5.8\lib\itextsharp.xmlworker.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -90,6 +94,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ComicDownloader\ComicDownloader.csproj">
+      <Project>{e3bb4f32-9c5c-4f11-bf27-f79eed48ae21}</Project>
+      <Name>ComicDownloader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DotNetEpub-master\dotNetEpub\dotNetEpub.csproj">
       <Project>{382299de-6c02-4587-864f-2218bd3a1935}</Project>
       <Name>dotNetEpub</Name>

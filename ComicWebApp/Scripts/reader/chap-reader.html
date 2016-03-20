@@ -54,7 +54,7 @@
 
     <div class="content_chap" id="content_chap">
         <section *ngFor="#page of chapter.Pages">
-            <img [src]="defaultImage" [lazyLoad]="page" [offset]="100" [attr.alt]="chapter.Name">
+            <img [src]="defaultImage" [lazyLoad]="page" [offset]="0" [attr.alt]="chapter.Name">
             <br/>
         </section>
     </div>

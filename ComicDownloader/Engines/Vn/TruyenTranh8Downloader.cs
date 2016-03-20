@@ -97,6 +97,7 @@ namespace ComicDownloader.Engines
                         //ChapId = ExtractID(node.SelectSingleNode("//strong").InnerText.Trim())
                     };
                     chapInfo.ChapId = ExtractID(chapInfo.Name);
+                    chapInfo.AliasName = Name.ToValidUrl();
                     return chapInfo;
                 });
         }

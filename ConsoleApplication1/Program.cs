@@ -1,7 +1,9 @@
-﻿using HtmlAgilityPack;
+﻿using ComicDownloader.Engines;
+using HtmlAgilityPack;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -98,32 +100,50 @@ namespace ConsoleApplication1
         }
         static void Main(string[] args)
         {
-            TestPDFImages();
-            //TestStringTemplate();
-            return;
+            string file = @"d:\Data1\truyentranh8.net\stories.json";
+            var root = @"d:\Data1\truyentranh8.net\";
+            var list = JsonConvert.DeserializeObject<List<StoryInfo>>(File.ReadAllText(file));
+            Console.WriteLine(list.Count);
+            Parallel.ForEach(list, (s)=> {
+                try
+                {
+                    var newFile = Path.Combine(root, s.JsonFileName);
+                    var actual = JsonConvert.DeserializeObject<StoryInfo>(File.ReadAllText(newFile));
+                    actual.AliasName = actual.Name.ToValidUrl();
 
-            GenereateEpubFromHtml(new string[] { "unicode.html" }, "a.epub", "unicode chap");
-            Process.Start("a.epub");
+                    File.WriteAllText(newFile, JsonConvert.SerializeObject(actual));
+                    Console.WriteLine(actual.Name + " -> " + actual.Name.ToValidUrl());
 
-            return;
-            Document pdfDoc = new Document(PageSize.A4);
-            File.Delete("pdfFile.pdf");
-            using (var stream = File.Create("pdfFile.pdf"))
-            {
-                var writer = PdfWriter.GetInstance(pdfDoc, stream);
-                pdfDoc.Open();
+                }
+                catch(Exception ex) { }
+            });
 
-                var instance = XMLWorkerHelper.GetInstance();
-                instance.ParseXHtml(writer,
-                                    pdfDoc,
-                                    File.OpenRead("01.html"),
-                                    File.OpenRead("a.css"),
-                                    Encoding.UTF8,
-                                    new UnicodeFontFactory());
+            //TestPDFImages();
+            ////TestStringTemplate();
+            //return;
 
-                pdfDoc.Close();
-            }
-            Process.Start("pdffile.pdf");
+            //GenereateEpubFromHtml(new string[] { "unicode.html" }, "a.epub", "unicode chap");
+            //Process.Start("a.epub");
+
+            //return;
+            //Document pdfDoc = new Document(PageSize.A4);
+            //File.Delete("pdfFile.pdf");
+            //using (var stream = File.Create("pdfFile.pdf"))
+            //{
+            //    var writer = PdfWriter.GetInstance(pdfDoc, stream);
+            //    pdfDoc.Open();
+
+            //    var instance = XMLWorkerHelper.GetInstance();
+            //    instance.ParseXHtml(writer,
+            //                        pdfDoc,
+            //                        File.OpenRead("01.html"),
+            //                        File.OpenRead("a.css"),
+            //                        Encoding.UTF8,
+            //                        new UnicodeFontFactory());
+
+            //    pdfDoc.Close();
+            //}
+            //Process.Start("pdffile.pdf");
         }
 
         private static void TestPDFImages()

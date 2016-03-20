@@ -8,6 +8,7 @@ namespace ComicWeb.Core
     {
         public string Downloader { get; set; }
         public string Name { get; set; }
+        public string AliasName{ get; set; }
         public string Url { get; set; }
         public string Page { get; set; }
 
@@ -56,6 +57,7 @@ namespace ComicWeb.Core
 
 
         public string Name { get; set; }
+        public string AliasName { get; set; }
         public string AltName { get; set; }
         public string Author { get; set; }
         public List<string> Categories { get; set; }
