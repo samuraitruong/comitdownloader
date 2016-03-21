@@ -14,6 +14,7 @@ export class StoryService {
 
     _storyDetailAPI: string = '/api/story/detail/';
     _storyRateAPI: string = '/api/story/rate';
+    _storyFollowAPI: string = '/api/story/follow';
 
     //better to use DI as single value?? or factory here
     public requestOptions(): RequestOptions {
@@ -22,7 +23,15 @@ export class StoryService {
         let options = new RequestOptions({ headers: headers });
         return options;
     }
+    public followStory(s: Story) {
+        var data = {
+            Name: s.AliasName || s.Name
+        };
 
+        return this._http.post(this._storyFollowAPI, JSON.stringify(data), this.requestOptions())
+            .map(r=> <boolean>r.json())
+            .catch(this.handleError)
+    }
     getStoryByName(name: string) {
         return this._http.get(this._storyDetailAPI + encodeURIComponent(name))
             .map(r=> <Story>r.json())

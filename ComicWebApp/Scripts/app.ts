@@ -2,7 +2,7 @@
 //https://github.com/auth0/angular2-jwt
 
 import {Component, provide} from 'angular2/core';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import { RouteParams, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 //import {LocalStorage} from "angular2-localstorage/LocalStorage";
 import {HTTP_PROVIDERS}    from 'angular2/http';
 import {HomeComponent} from './home/home.component'
@@ -140,6 +140,12 @@ export class AppComponent {
         err=> {
             this.errorMessage = <any>err;
         });
+    }
+    public logout() {
+        this.logged = false;
+        this.user = <User>{};
+        localStorage.removeItem(this.AUTH_COOKIE_NAME);
+
     }
 }
 

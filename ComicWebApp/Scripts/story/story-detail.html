@@ -27,7 +27,10 @@
                     </div>
                     <div class="diem_danhgia" *ngIf ="story.Rating > 0">{{story.Rating | number:"1.1-2"}}</div>
                 </div>
-                <div class="wrapper_theodoitruyen"><button id="btn_theodoitruyen" class="bg theodoi_truyen icon_theodoi" data-follow="false" onclick="theodoitruyen('56e07ca40ffdb224f876a451','vvJy9yxMo30=',-3)"></button></div>
+                <div class="wrapper_theodoitruyen">
+                    <button id="btn_theodoitruyen" 
+                            class="bg theodoi_truyen"  [class.icon_theodoi]="!followed" [class.icon_botheodoi]="followed"
+                            (click)="toggleFollow()"></button></div>
                 <div class="no_padding gachdotter">
                     <p></p>
                     <p class="no_padding"><span class="text_orange">Nội dung : </span></p>

@@ -9,32 +9,36 @@
             <div class="bg rightbar3 fl"></div>
         </div>
         <div class="mgtop10 clearfix">
-            <div class="div_img_gioithieu">
-                <a (click)="viewStory(topStory)">
-                    <img src="{{topStory.CoverUrl}}" alt="{{topStory.Name}}" />
-                </a>
-            </div>
+            <ul class="slider" myBxSlider>
+               <li>
+                   <div class="div_img_gioithieu">
+                       <a (click)="viewStory(topStory)">
+                           <img src="{{topStory.CoverUrl}}" alt="{{topStory.Name}}" />
+                       </a>
+                   </div>
+                   <div class="div_info_gioithieu">
 
-            <div class="div_info_gioithieu">
+                       <a class="manga-name" (click)="viewStory(topStory)">{{topStory.Name}}</a>
+                       <div class="manga-info mgtop10">
+                           Cập nhật <a class="manga-lastchap" (click)="viewLastChap()">{{lastChapter.Name}}</a>
+                       </div>
 
-                <a class="manga-name" (click)="viewStory(topStory)">{{topStory.Name}}</a>
-                <div class="manga-info mgtop10">
-                    Cập nhật <a class="manga-lastchap" (click)="viewLastChap()">{{lastChapter.Name}}</a>
-                </div>
+                       <div class="manga-info mgtop10">
+                           <span class="glyphicon glyphicon-tags"></span>
+                           <span> Thể loại: </span>
+                           <!--<a [myGenreTooltip]="cat" tooltipContainer="#genreTooltip" (onTooltipShown)="onTooltip($event)" *ngFor="#cat of topStory.Categories" class="label label-primary manga-type" (click)="viewGenre(cat)">{{cat}}</a>-->
+                           <a *ngFor="#cat of topStory.Categories" class="label label-primary manga-type" (click)="viewGenre(cat)">{{cat}}</a>
+                       </div>
 
-                <div class="manga-info mgtop10">
-                    <span class="glyphicon glyphicon-tags"></span>
-                    <span> Thể loại: </span>
-                    <!--<a [myGenreTooltip]="cat" tooltipContainer="#genreTooltip" (onTooltipShown)="onTooltip($event)" *ngFor="#cat of topStory.Categories" class="label label-primary manga-type" (click)="viewGenre(cat)">{{cat}}</a>-->
-                    <a *ngFor="#cat of topStory.Categories" class="label label-primary manga-type" (click)="viewGenre(cat)">{{cat}}</a>
-                </div>
-
-                <div class="manga-info mgtop10">
-                    <div class="text_desc_gioithieu">
-                        {{topStory.Summary}}
-                    </div>
-                </div>
-            </div>
+                       <div class="manga-info mgtop10">
+                           <div class="text_desc_gioithieu">
+                               {{topStory.Summary}}
+                           </div>
+                       </div>
+                   </div>
+               </li>
+            </ul>
+            
         </div>
     </div>
 

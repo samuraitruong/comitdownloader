@@ -57,6 +57,16 @@ export class StoryDetailComponent implements OnInit, AfterContentInit {
                 err=> { });
         }
     }
+    private toggleFollow() {
+        this._storyService.followStory(this.story)
+            .subscribe(
+            res=> {
+                this.followed = <boolean>res
+            },
+            err=> { });
+
+    }
+    private followed: boolean = false;
     private allowRating: boolean = tokenNotExpired();
     private currentRating: number;
     story: Story;

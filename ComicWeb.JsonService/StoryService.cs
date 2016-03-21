@@ -67,6 +67,11 @@ namespace ComicWeb.JsonService
         {
             var list = DataManager.AllStories(true);
 
+            list.Sort((x, y) =>
+            {
+                if (x == null || y == null) return 1;
+                return y.Chapters.Count - x.Chapters.Count;
+            });
             return list.Take(number).Select(p => (IStoryInfo)p).ToList();
         }
 

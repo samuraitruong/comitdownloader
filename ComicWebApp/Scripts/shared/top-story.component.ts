@@ -5,13 +5,14 @@ import {TopStoryService} from './top-story.service'
 import {RouteParams, Router} from 'angular2/router'
 import {NavigationHelper} from './navigation.helper'
 import {GenreTooltipDirective} from '../directives/myGenreTooltip.directive'
+import {BXSliderDirective} from '../directives/mybxslider.directive'
 
 
 @Component({
     selector: 'cmapp-top-story',
     templateUrl: 'views/shared/top-story.html',
     providers: [TopStoryService],
-    directives: [GenreTooltipDirective]
+    directives: [GenreTooltipDirective, BXSliderDirective]
 })
 export class TopStoryComponent implements OnInit {
     constructor(private _storyService: TopStoryService,  private _nav: NavigationHelper) { }

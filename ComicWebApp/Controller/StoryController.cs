@@ -186,6 +186,13 @@ namespace ComicWebApp
         {
         }
 
+        [HttpPost("follow")]
+        public bool PostFollow([FromBody]string value)
+        {
+            return true;
+        }
+
+
         // PUT api/values/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)

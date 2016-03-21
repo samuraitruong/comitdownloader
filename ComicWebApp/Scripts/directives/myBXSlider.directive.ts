@@ -15,18 +15,17 @@ export class BXSliderDirective implements AfterContentInit {
         //this.onResize();
     }
     public ngAfterContentInit() {
-
-        //$(this.element).bxSlider(
-        //    {
-        //        slideWidth: 134,
-        //        minSlides: 2,
-        //        maxSlides: 7,
-        //        slideMargin: 15,
-        //        preloadImages: 'visible',
-        //        auto: true,
-        //        autoStart: true
-        //    }
-        //);
+        $(this.element.nativeElement).bxSlider(
+            {
+                //slideWidth: 655,
+                minSlides: 1,
+                maxSlides: 1,
+                slideMargin: 15,
+                preloadImages: 'visible',
+                auto: true,
+                autoStart: true
+            }
+        );
 
     }
 
