@@ -26,30 +26,51 @@ namespace ComicDownloader.Engines.DataExtractor
 
             //MyLogger.Info(message);
         }
-        public void FullExtract(string site="", bool userLocalCache= false)
+        public void FullExtract(string site="", bool userLocalCache= false, bool incremental = false)
         {
             var downloaders = Downloader.GetAllDownloaders(site);
             Parallel.ForEach(downloaders, new ParallelOptions() { MaxDegreeOfParallelism=8 }, (dl) =>
             {
                 try
                 {
-                    ProcessOneDownloader(userLocalCache, dl);
+                    ProcessOneDownloader(userLocalCache, dl, incremental);
                 }
                 catch(Exception ex) {
                     Log(ex.Message, ConsoleColor.Red);
                 }
             });
 
-            Console.Read();
+            Console.WriteLine("FINISHED.");
         }
 
-        private void ProcessOneDownloader(bool userLocalCache, Downloader dl)
+        private void ProcessOneDownloader(bool userLocalCache, Downloader dl, bool incremental =false)
         {
             Log("Start: " + dl.Name + "...");
             if (!IsProcessed(dl))
             {
-                var list = dl.GetListStories(!userLocalCache);
-                this.StoreList(list, dl);
+                var storiesList = new List<StoryInfo>();
+                var list = new List<StoryInfo>();
+
+                if (incremental)
+                {
+                    storiesList = dl.GetListStories(false);
+                    list = dl.GetLastestUpdates();
+                    list.ForEach((s) =>
+                    {
+                        if (!storiesList.Exists(p => p.Url == s.Url))
+                        {
+                            storiesList.Add(s);
+                        }
+                    });
+                    
+                }
+                else
+                {
+                    storiesList =  dl.GetListStories(!userLocalCache);
+                    list = storiesList;
+
+                }
+                this.StoreList(storiesList, dl);
                 list.ForEach((o) =>
                 {
                     o.Source = dl.GetSiteDomain();
@@ -63,7 +84,7 @@ namespace ComicDownloader.Engines.DataExtractor
                 {
                     try
                     {
-                        ProcessOneStory(dl, s);
+                        ProcessOneStory(dl, s, incremental);
     
                     } catch (Exception ex1) {
                         Log(ex1.Message, ConsoleColor.Red);
@@ -73,9 +94,9 @@ namespace ComicDownloader.Engines.DataExtractor
             }
         }
 
-        private void ProcessOneStory(Downloader dl, StoryInfo s)
+        private void ProcessOneStory(Downloader dl, StoryInfo s, bool incremental = false)
         {
-            if (!string.IsNullOrEmpty(s.JsonFileName))
+            if (!string.IsNullOrEmpty(s.JsonFileName) || incremental)
             {
                 var info = dl.RequestInfo(s.Url);
                 this.StoreStory(info, dl);
@@ -88,7 +109,7 @@ namespace ComicDownloader.Engines.DataExtractor
                     try
                     {
                         Thread.Sleep(100);
-                        ProcessOneChapter(dl, c);
+                        ProcessOneChapter(dl, c, incremental);
                     }
                     catch (Exception ex) { }
 
@@ -96,7 +117,7 @@ namespace ComicDownloader.Engines.DataExtractor
             }
         }
 
-        private void ProcessOneChapter(Downloader dl, ChapterInfo c)
+        private void ProcessOneChapter(Downloader dl, ChapterInfo c, bool incremental = false)
         {
             c.JsonFileName = c.Url.SHA256() + ".json";
             if (!this.IsStored(c, dl))
@@ -105,10 +126,15 @@ namespace ComicDownloader.Engines.DataExtractor
                 this.StoreChapter(c, dl);
                 Log("|--- CHAP: " + c.Name, ConsoleColor.Black, ConsoleColor.DarkGreen);
             }
+            else
+            {
+                Log("|--- IGNORED CHAP: " + c.Name, ConsoleColor.Black, ConsoleColor.Magenta);
+            }
         }
 
         public virtual bool IsStored(ChapterInfo c, Downloader dl)
         {
+            
             return false;
         }
 
@@ -143,6 +169,11 @@ namespace ComicDownloader.Engines.DataExtractor
                 var extractor = new JsonDataExtractor(args.OutputFolder);
                 extractor.FullExtract(args.Sites, args.UseLocalCache);
 
+            }
+            if (args.Incremental)
+            {
+                var extractor = new JsonDataExtractor(args.OutputFolder);
+                extractor.FullExtract(args.Sites, args.UseLocalCache, true);
             }
         }
     }

@@ -124,40 +124,49 @@ namespace ComicDownloader.Engines
 
         public override List<StoryInfo> GetLastestUpdates()
         {
-            string lastestUpdateUrl = HostUrl;
-            List<StoryInfo> stories = new List<StoryInfo>();
-            var html = NetworkHelper.GetHtml(lastestUpdateUrl);
-
-            var htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-
-            var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"product\"]/div[@class=\"list-chap\"]/ul/li[position()=1]/a");
-
-            foreach (HtmlNode node in nodes)
-            {
-                StoryInfo info = new StoryInfo()
+            return base.GetLastestUpdateSimple("http://truyentranh8.net/vechai/page={0}", "//*[@id='tblChap']//tr/td[@class='tit']/a", "", (node) => {
+                var st= new StoryInfo()
                 {
-                    Url = HostUrl + "/" + node.Attributes["href"].Value,
-                    Name = node.FirstChild.InnerText.Trim().Trim(),
+                    Name = node.FirstChild.InnerText.TextBeautifier(),
                     Chapters = new List<ChapterInfo>(),
+                    Url = node.Href(),
+                    Updated = DateTime.Now
                 };
-                var chapters = node.ParentNode.ParentNode.SelectNodes("li[position()=3]/ul/h3/a");
-                if (chapters != null)
-                {
-                    foreach (HtmlNode chap in chapters)
-                    {
-                        info.Chapters.Add(new ChapterInfo()
-                        {
-                            Name = chap.InnerText.Trim().Trim(),
-                            Url = HostUrl + "/" + chap.Attributes["href"].Value,
-                        });
-                    }
-                }
 
-                stories.Add(info);
-            }
+                st.AliasName = st.Name.ToValidUrl();
 
-            return stories;
+                return st;
+
+            }, 5);
+            //string lastestUpdateUrl = HostUrl;
+            //List<StoryInfo> stories = new List<StoryInfo>();
+            //var html = NetworkHelper.GetHtml(lastestUpdateUrl);
+
+            //var htmlDoc = new HtmlDocument();
+            //htmlDoc.LoadHtml(html);
+
+            //var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class=\"product\"]/div[@class=\"list-chap\"]/ul/li[position()=1]/a");
+
+            //foreach (HtmlNode node in nodes)
+            //{
+            //    
+            //    var chapters = node.ParentNode.ParentNode.SelectNodes("li[position()=3]/ul/h3/a");
+            //    if (chapters != null)
+            //    {
+            //        foreach (HtmlNode chap in chapters)
+            //        {
+            //            info.Chapters.Add(new ChapterInfo()
+            //            {
+            //                Name = chap.InnerText.Trim().Trim(),
+            //                Url = HostUrl + "/" + chap.Attributes["href"].Value,
+            //            });
+            //        }
+            //    }
+
+            //    stories.Add(info);
+            //}
+
+            //return stories;
         }
 
         public override List<StoryInfo> OnlineSearch(string keyword)
