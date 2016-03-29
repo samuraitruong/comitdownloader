@@ -1,4 +1,5 @@
-var express = require('express')
+var express = require('express'),
+ 	path = require("path")
   , app = express()
   , bodyParser = require('body-parser')
   , port = process.env.PORT || 3000
@@ -7,8 +8,9 @@ app.set('views', __dirname + '/views')
 app.engine('jade', require('jade').__express)
 app.set('view engine', 'jade')
 
+var wwwROOT  = path.join(__dirname,'../','wwwroot');
 //app.use(express.static(__dirname + '/public'))
-app.use(express.static('E:\\COMICDOWNLOADER\\comitdownloader\\ComicWebApp\\wwwroot'))
+app.use(express.static(wwwROOT))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(require('./controllers'))

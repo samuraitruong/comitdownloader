@@ -129,7 +129,7 @@ namespace ComicDownloader.Engines
                 {
                     Name = node.FirstChild.InnerText.TextBeautifier(),
                     Chapters = new List<ChapterInfo>(),
-                    Url = node.Href(),
+                    Url = "http:"+ node.Href(),
                     Updated = DateTime.Now
                 };
 

@@ -16,7 +16,10 @@
     "System.IdentityModel.Tokens": "5.0.0-rc1-211161024",
     "System.IdentityModel.Tokens.Jwt": "5.0.0-rc1-211161024",
     "Microsoft.AspNet.Authentication.JwtBearer": "1.0.0-rc1-final",
-    "Microsoft.AspNet.Diagnostics": "1.0.0-rc1-final"
+    "Microsoft.AspNet.Diagnostics": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Mvc.Core": "6.0.0-rc1-final",
+    "Microsoft.AspNet.Authorization": "1.0.0-rc1-final"
+
   },
 
   "commands": {

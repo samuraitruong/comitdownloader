@@ -21,8 +21,10 @@ export class DirectoryService {
             .catch(this.handleError)
     }
 
-    public getStories(filter: string, page: number, sort?:string) {
-        return this.http.get(this._listApiUrl + encodeURIComponent(filter) + '/' + page.toString())
+    public getStories(filter: string, page: number, sort?: string) {
+        sort = sort || "Name";
+        var url = this._listApiUrl + encodeURIComponent(filter) +  '/' + encodeURIComponent(sort) + '/' + page.toString()
+        return this.http.get(url)
             .map(res => <StoryListRes>res.json())
             .catch(this.handleError);
     }

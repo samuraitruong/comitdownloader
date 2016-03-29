@@ -61,11 +61,11 @@ namespace ComicWebApp
             service.UpdateStory(story);
             return story;
         }
-        [HttpGet("list/{filter}/{page}")]
-        public object GetListStories(string filter, int page)
+        [HttpGet("list/{filter}/{sortType}/{page}")]
+        public object GetListStories(string filter, int page, string sortType)
         {
             int pageSize = 25;
-            var paged = service.GetListStories(filter, page, "", pageSize);
+            var paged = service.GetListStories(filter, page, sortType, pageSize);
             foreach (StoryInfo item in paged)
             {
                 var last = item.Chapters.FirstOrDefault();

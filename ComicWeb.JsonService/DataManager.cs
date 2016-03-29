@@ -10,7 +10,7 @@ namespace ComicWeb.JsonService
 {
     public class DataManager
     {
-        private static string rootFolder = @"D:\Data1\truyentranh8.net\";
+        private static string rootFolder = @"C:\Users\Truong.Nguyen\Desktop\Data\truyentranh8.net\";
         public static List<StoryInfo> stories;
         private static bool dataCached = false;
         public static Dictionary<string, GenreInfo> genres = new Dictionary<string, GenreInfo>();

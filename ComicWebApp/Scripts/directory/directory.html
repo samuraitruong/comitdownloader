@@ -6,7 +6,7 @@
                 Danh Sách Truyện  [<span class="">{{totalItems}}</span>]
                 <label class="label_right">
                     Sắp xếp :
-                    <a id="sort1" onclick="sort(1)">Tên</a> | <a id="sort2" onclick="sort(2)">Mới Cập Nhật</a> | <a id="sort3" onclick="sort(3)">Lượt xem</a>
+                    <a (click)="changeSort('Name')" [class.active]="orderBy=='Name'">Tên</a> | <a [class.active]="orderBy=='Updated'" (click)="changeSort('Updated')">Mới Cập Nhật</a> | <a  [class.active]="orderBy=='View'" (click)="changeSort('View')">Lượt xem</a>
                 </label>
             </div>
             <div class="bg rightbar fl"></div>

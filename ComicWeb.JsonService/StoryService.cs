@@ -19,7 +19,7 @@ namespace ComicWeb.JsonService
             var results = list.Where(p => p.Name.ToLower().Contains(keyword.ToLower()));
             return results.ToPagedList(page-1, pageSize);
         }
-        public IPagedList<IStoryInfo> GetListStories(string filter, int page, string v, int pageSize)
+        public IPagedList<IStoryInfo> GetListStories(string filter, int page, string sorted, int pageSize)
         {
             
             var list = DataManager.AllStories(true);
@@ -27,6 +27,21 @@ namespace ComicWeb.JsonService
             if(filter.ToLower() !="all")
             {
                 cloned= cloned.Where(p => p.Group == filter).ToList().Clone();
+            }
+
+            if(sorted == "Name")
+            {
+                cloned = cloned.OrderBy(p => p.Name).ToList();
+            }
+
+            if (sorted == "Updated")
+            {
+                cloned = cloned.OrderByDescending(p => p.Updated).ToList();
+            }
+
+            if (sorted == "View")
+            {
+                cloned = cloned.OrderByDescending(p => p.ViewCounts).ToList();
             }
 
             return cloned.ToPagedList(page-1, pageSize);
@@ -38,9 +53,12 @@ namespace ComicWeb.JsonService
         }
         public List<IStoryInfo> GetLatestUpdatedStories(int count)
         {
-            IEnumerable<IStoryInfo> list = GetRandomStoriesList(count);
+            var all = DataManager.AllStories(true);
+            return all.OrderByDescending(p => p.Updated).Take(count).Cast<IStoryInfo>().ToList();
 
-            return list.ToList(); ;
+            //IEnumerable<IStoryInfo> list = GetRandomStoriesList(count);
+
+            //return list.ToList(); ;
         }
 
         public List<IStoryInfo> GetMostPopularTodayStories(int number = 20)

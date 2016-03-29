@@ -10,6 +10,7 @@ namespace ComicWeb.Core
         List<ChapterInfo> Chapters { get; set; }
         string Name { get; set; }
         string AliasName { get; set; }
+        DateTime Updated { get; set; }
     }
 
     public interface IChapterInfo

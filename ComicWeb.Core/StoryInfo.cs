@@ -12,6 +12,7 @@ namespace ComicWeb.Core
         public string Url { get; set; }
         public string Page { get; set; }
 
+        public DateTime Updated { get; set; }
         public Guid UniqueIdentify { get; set; }
 
         public int ChapId { get; set; }
@@ -82,6 +83,13 @@ namespace ComicWeb.Core
         public string Source { get; set; }
         public float Rating { get; set; }
         public int ViewCounts { get; set; }
+
+        public DateTime Updated
+        {
+            get;
+
+            set;
+        }
 
         public StoryInfo()
         {

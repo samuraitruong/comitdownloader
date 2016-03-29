@@ -19,6 +19,8 @@ import { Pagination} from 'ng2-bootstrap/ng2-bootstrap';
 export class DirectoryComponent implements OnInit, AfterContentInit {
     
     constructor(private _nav: NavigationHelper, private _service: DirectoryService, private _routeParams: RouteParams) {
+        this.orderBy  = "Name";
+
     }
     ngAfterContentInit() {
     }
@@ -32,13 +34,17 @@ export class DirectoryComponent implements OnInit, AfterContentInit {
         //this.filter = this._routeParams.get("filter");
         this.loadStories();
     }
+    changeSort(sort: string) {
+        this.orderBy = sort;
+        this.loadStories();
+    }
+
     loadStories() {
-        this._service.getStories(this.filter, this.currentPage).subscribe(res => {
+        this._service.getStories(this.filter, this.currentPage, this.orderBy).subscribe(res => {
             this.stories = res.Stories;
             this.pageCount = res.PageCount;
             this.totalItems = res.TotalItems;
             this.pageSize = res.PageSize;
-            console.log(this)
         },
             err=> {
                 this.errorMessage = <any>err;
@@ -58,7 +64,7 @@ export class DirectoryComponent implements OnInit, AfterContentInit {
     errorMessage: string;
     filter: string = 'All';
     pageCount: number;
-
+    orderBy: string;
     private totalItems: number = 0;
     private currentPage: number = 1;
 

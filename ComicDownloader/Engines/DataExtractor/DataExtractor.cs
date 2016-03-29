@@ -12,6 +12,7 @@ namespace ComicDownloader.Engines.DataExtractor
     {
         public object ioLocker = new object();
         public List<StoryInfo> allStories = new List<StoryInfo>();
+        
         public virtual void UpdateIndex(List<StoryInfo> list)
         {
 
@@ -55,8 +56,10 @@ namespace ComicDownloader.Engines.DataExtractor
                 {
                     storiesList = dl.GetListStories(false);
                     list = dl.GetLastestUpdates();
+
                     list.ForEach((s) =>
                     {
+                        s.Updated = DateTime.Now;
                         if (!storiesList.Exists(p => p.Url == s.Url))
                         {
                             storiesList.Add(s);
@@ -128,7 +131,7 @@ namespace ComicDownloader.Engines.DataExtractor
             }
             else
             {
-                Log("|--- IGNORED CHAP: " + c.Name, ConsoleColor.Black, ConsoleColor.Magenta);
+                //Log("|--- IGNORED CHAP: " + c.Name, ConsoleColor.Black, ConsoleColor.Magenta);
             }
         }
 

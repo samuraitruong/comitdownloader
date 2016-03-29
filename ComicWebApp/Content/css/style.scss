@@ -1485,6 +1485,10 @@ div {
         color: $white;
         cursor: pointer;
         font-weight: 700;
+        &.active,
+        &:hover{
+            color: $color_azure_radiance_approx;    
+        }
     }
 }
 

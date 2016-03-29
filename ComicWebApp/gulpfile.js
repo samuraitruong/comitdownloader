@@ -113,11 +113,11 @@ gulp.task('watch', ['copy'], function () {
     console.log('watching: html/typescripts')
 });
 
-gulp.task("typescript:tslint", () =>
-    gulp.src(['scripts/*.ts', 'scripts/**/*.ts'])
-        .pipe(plugins.tslint())
-        .pipe(plugins.tslint.report("verbose"))
-);
+//gulp.task("typescript:tslint", () =>
+//    gulp.src(['scripts/*.ts', 'scripts/**/*.ts'])
+//        .pipe(plugins.tslint())
+//        .pipe(plugins.tslint.report("verbose"))
+//);
 
 gulp.task('typescript:compile', function () {
     var tsProject = plugins.typescript.createProject('tsconfig.json', {
